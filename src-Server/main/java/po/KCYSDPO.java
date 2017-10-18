@@ -1,0 +1,60 @@
+package po;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class KCYSDPO implements Serializable {
+
+    private String name; //单据名称
+    private String ID; //单据的编号
+    private String userID; //操作员的编号
+    private int state; //单据状态
+    private String time; //单据建立时间
+    private ArrayList<String> goodsName; //溢损单中商品名称
+    private ArrayList<Integer> numInRepository; //溢损单中商品库存数量
+    private ArrayList<Integer> actualNum; //溢损单中商品实际数量
+
+    public KCYSDPO(String name, String ID, String userID, int state, String time,
+                   ArrayList<String> goodsName, ArrayList<Integer> numInRepository, ArrayList<Integer> actualNum) {
+        this.name = name;
+        this.ID = ID;
+        this.userID = userID;
+        this.state = state;
+        this.time = time;
+        this.goodsName = goodsName;
+        this.numInRepository = numInRepository;
+        this.actualNum = actualNum;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public ArrayList<String> getGoodsName() {
+        return goodsName;
+    }
+
+    public ArrayList<Integer> getNumInRepository() {
+        return numInRepository;
+    }
+
+    public ArrayList<Integer> getActualNum() {
+        return actualNum;
+    }
+}
