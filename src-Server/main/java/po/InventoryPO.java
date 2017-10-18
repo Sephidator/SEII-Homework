@@ -2,19 +2,20 @@ package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class InventoryPO implements Serializable {
 
     private ArrayList<String> goodsName;//库存中的商品名称
-    private String outDate;//出库时间
-    private String inDate;//入库时间
+    private Date outDate;//出库时间
+    private Date inDate;//入库时间
     private int outNumber;//出库数量
     private int inNumber;//入库数量
     private double outMoney;//出库金额
     private double inMoney;//入库金额
 
-    public InventoryPO(ArrayList<String> goodsName, String outDate,
-                       String inDate, int outNumber, int inNumber,
+    public InventoryPO(ArrayList<String> goodsName, Date outDate,
+                       Date inDate, int outNumber, int inNumber,
                        double outMoney, double inMoney) {
         this.goodsName = goodsName;
         this.outDate = outDate;
@@ -29,11 +30,11 @@ public class InventoryPO implements Serializable {
         return goodsName;
     }
 
-    public String getOutDate() {
+    public Date getOutDate() {
         return outDate;
     }
 
-    public String getInDate() {
+    public Date getInDate() {
         return inDate;
     }
 

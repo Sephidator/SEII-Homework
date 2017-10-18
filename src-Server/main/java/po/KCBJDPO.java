@@ -7,17 +7,15 @@ public class KCBJDPO implements Serializable {
 
     private String name; //单据名称
     private String ID; //单据的编号
-    private String userID; //操作员的编号
     private int state; //单据状态
     private String time; //单据建立时间
     private ArrayList<String> goodsName; //报警单中商品名称
     private ArrayList<Integer> alarmNum;//报警单中商品报警数量
 
-    public KCBJDPO(String name, String ID, String userID, int state,
+    public KCBJDPO(String name, String ID, int state,
                    String time, ArrayList<String> goodsName, ArrayList<Integer> alarmNum) {
         this.name = name;
         this.ID = ID;
-        this.userID = userID;
         this.state = state;
         this.time = time;
         this.goodsName = goodsName;
@@ -30,10 +28,6 @@ public class KCBJDPO implements Serializable {
 
     public String getID() {
         return ID;
-    }
-
-    public String getUserID() {
-        return userID;
     }
 
     public int getState() {

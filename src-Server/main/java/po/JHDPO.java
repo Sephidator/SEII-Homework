@@ -2,6 +2,8 @@ package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 进货单PO类
@@ -11,18 +13,19 @@ public class JHDPO implements Serializable {
     private String clientID; // 客户信息
     private String repositoryID; // 仓库
     private String operatorID; // 操作员
-    private ArrayList<String> goodsID;// 入库商品列表
+    private HashMap<String, Integer> goodslist=new HashMap();
     private double totalAmount; // 总额
     private String comment; // 备注
     private int state;// 单据状态，0为草稿，1待审批，2为审批通过，3为审批不通过
+    private Date time; //单据建立时间
 
     public JHDPO(String ID,String clientID,String repositoryID,String operatorID,
-                 ArrayList<String> goodsID,double totalAmount,String comment,int state){
+                 HashMap<String, Integer> goodsList,double totalAmount,String comment,int state){
         this.ID=ID;
         this.clientID=clientID;
         this.repositoryID=repositoryID;
         this.operatorID=operatorID;
-        this.goodsID=goodsID;
+        this.goodslist=goodsList;
         this.totalAmount=totalAmount;
         this.comment=comment;
         this.state=state;
@@ -44,8 +47,8 @@ public class JHDPO implements Serializable {
         return operatorID;
     }
 
-    public ArrayList<String> getGoodsID(){
-        return goodsID;
+    public HashMap<String,Integer> getGoodslist(){
+        return goodslist;
     }
 
     public double getTotalAmount(){
@@ -63,4 +66,6 @@ public class JHDPO implements Serializable {
     public void setState(int state){
         this.state=state;
     }
+
+    public Date getTime(){ return time; }
 }

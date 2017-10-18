@@ -2,8 +2,8 @@ package po;
 
 //帐号对象
 public class UserPO {
-    //帐号ID
-    private int id;
+    //帐号身份
+    private int category;
     //员工年龄
     private int age;
     //是否为最高权限
@@ -11,24 +11,24 @@ public class UserPO {
     //员工姓名
     private String name;
     //帐号名称
-    private String user;
+    private String ID;
     //帐号密码
     private String passport;
     //帐号通知消息
     private String[] notice;
 
-    public UserPO(int id, int age, boolean top, String name, String user, String passport, String[] notice) {
-        this.id = id;
+    public UserPO(int category, int age, boolean top, String name, String ID, String passport, String[] notice) {
+        this.category = category;
         this.age = age;
         this.top = top;
         this.name = name;
-        this.user = user;
+        this.ID = ID;
         this.passport = passport;
         this.notice = notice;
     }
 
-    public int getId() {
-        return id;
+    public int getCategory() {
+        return category;
     }
 
     public int getAge() {
@@ -43,8 +43,8 @@ public class UserPO {
         return name;
     }
 
-    public String getUser() {
-        return user;
+    public String getID() {
+        return ID;
     }
 
     public String getPassport() {

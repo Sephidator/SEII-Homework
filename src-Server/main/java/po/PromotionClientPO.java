@@ -8,11 +8,11 @@ import java.util.Date;
 public class PromotionClientPO extends PromotionPO {
     //客户等级
     private int clientLevel;
-//代金券
+    //代金券
     private int voucher;
-//折让
+    //折让
     private double discount;
-   //赠品编号及数量
+    //赠品编号及数量
     private HashMap<String, Integer> gift = new HashMap();
 
     public PromotionClientPO(int id, Date start, Date end, int clientLevel, int voucher, double discount, HashMap<String, Integer> gift) {
