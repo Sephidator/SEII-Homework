@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version:
  */
 
-public class FKDPO implements Serializable{
+public class PaymentBillPO implements Serializable{
 
     private String FKDNumber;//单据编号
 
@@ -28,7 +28,7 @@ public class FKDPO implements Serializable{
     private int FKD_status;//0为草稿，1为待审批，2为审批通过，3为审批不通过
 
     /*构造函数*/
-    public FKDPO(String n, String fc, String ftb, double ftt, String ftc, double ft, String fo) {
+    public PaymentBillPO(String n, String fc, String ftb, double ftt, String ftc, double ft, String fo) {
         newFKD(n, fc, ftb, ftt, ftc, ft, fo);
     }
 

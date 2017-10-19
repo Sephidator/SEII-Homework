@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version:
  */
 
-public class SKDPO implements Serializable{
+public class ReceiptBillPO implements Serializable{
 
     private String SKDNumber;//单据编号
 
@@ -28,7 +28,7 @@ public class SKDPO implements Serializable{
     private int SKD_status;//0为草稿，1为待审批，2为审批通过，3为审批不通过
 
     /*构造函数*/
-    public SKDPO(String n, String sc, String stb, double stt, String stc, double st, String so) {
+    public ReceiptBillPO(String n, String sc, String stb, double stt, String stc, double st, String so) {
         newSKD(n, sc, stb, stt, stc, st, so);
     }
 

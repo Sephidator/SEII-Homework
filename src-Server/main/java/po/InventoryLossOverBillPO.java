@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class KCYSDPO implements Serializable {
+public class InventoryLossOverBillPO implements Serializable {
 
     private String ID; //单据的编号
     private String userID; //操作员的编号
@@ -13,8 +13,8 @@ public class KCYSDPO implements Serializable {
     private ArrayList<Integer> numInRepository; //溢损单中商品库存数量
     private ArrayList<Integer> actualNum; //溢损单中商品实际数量
 
-    public KCYSDPO(String ID, String userID, int state, String time,
-                   ArrayList<String> goodsName, ArrayList<Integer> numInRepository, ArrayList<Integer> actualNum) {
+    public InventoryLossOverBillPO(String ID, String userID, int state, String time,
+                                   ArrayList<String> goodsName, ArrayList<Integer> numInRepository, ArrayList<Integer> actualNum) {
         this.ID = ID;
         this.userID = userID;
         this.state = state;
@@ -22,7 +22,7 @@ public class KCYSDPO implements Serializable {
         this.goodName = goodsName;
         this.numInRepository = numInRepository;
         this.actualNum = actualNum;
-        KCZSDPO po = new KCZSDPO();
+        InventoryGiftBillPO po = new InventoryGiftBillPO();
     }
 
     public String getID() {

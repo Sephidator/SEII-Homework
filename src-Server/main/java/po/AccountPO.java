@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version:
  */
 
-public class AccountManagePO implements Serializable{
+public class AccountPO implements Serializable{
 
     private String bankAccount;//账户银行账号
 
@@ -19,7 +19,7 @@ public class AccountManagePO implements Serializable{
 
     private boolean viewStatus = true;//删除账户时，账户不可用
     /*构造函数*/
-    public AccountManagePO(String bankAcc, String name, double rem) {
+    public AccountPO(String bankAcc, String name, double rem) {
         newAccount(bankAcc, name, rem);
     }
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * 进货单PO类
  * */
-public class JHDPO implements Serializable {
+public class PurchaseRefundBillPO implements Serializable {
     private String ID; // 单据ID
     private String clientID; // 客户信息
     private String repositoryID; // 仓库
@@ -19,8 +19,8 @@ public class JHDPO implements Serializable {
     private int state;// 单据状态，0为草稿，1待审批，2为审批通过，3为审批不通过
     private Date time; //单据建立时间
 
-    public JHDPO(String ID,String clientID,String repositoryID,String operatorID,
-                 HashMap<String, Integer> goodsList,double totalAmount,String comment,int state){
+    public PurchaseRefundBillPO(String ID, String clientID, String repositoryID, String operatorID,
+                                HashMap<String, Integer> goodsList, double totalAmount, String comment, int state){
         this.ID=ID;
         this.clientID=clientID;
         this.repositoryID=repositoryID;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version:
  */
 
-public class XJFYDPO implements Serializable{
+public class CashBillPO implements Serializable{
 
     private String XJFYDNumber;//单据编号
 
@@ -28,7 +28,7 @@ public class XJFYDPO implements Serializable{
     private int XJFYD_status;//0为草稿，1为待审批，2为审批通过，3为审批不通过
 
     /*构造函数*/
-    public XJFYDPO(String n, String xb, String xii, double xim, String xic, double xt, String xo) {
+    public CashBillPO(String n, String xb, String xii, double xim, String xic, double xt, String xo) {
         newXJFYD(n, xb, xii, xim, xic, xt, xo);
     }
 

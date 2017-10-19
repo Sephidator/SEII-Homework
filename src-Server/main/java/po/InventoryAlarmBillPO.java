@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class KCBJDPO implements Serializable {
+public class InventoryAlarmBillPO implements Serializable {
 
     private String name; //单据名称
     private String ID; //单据的编号
@@ -12,8 +12,8 @@ public class KCBJDPO implements Serializable {
     private ArrayList<String> goodsName; //报警单中商品名称
     private ArrayList<Integer> alarmNum;//报警单中商品报警数量
 
-    public KCBJDPO(String name, String ID, int state,
-                   String time, ArrayList<String> goodsName, ArrayList<Integer> alarmNum) {
+    public InventoryAlarmBillPO(String name, String ID, int state,
+                                String time, ArrayList<String> goodsName, ArrayList<Integer> alarmNum) {
         this.name = name;
         this.ID = ID;
         this.state = state;
