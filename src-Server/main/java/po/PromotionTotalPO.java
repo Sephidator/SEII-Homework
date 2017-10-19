@@ -10,10 +10,13 @@ public class PromotionTotalPO extends PromotionPO {
     //代金券
     private int voucher;
     //赠品编号及数量
-    private HashMap<String, Integer> gift = new HashMap();
+    private HashMap<String, Integer> gift = new HashMap<>();
 
-    public PromotionTotalPO(int id, Date start, Date end, int total, int voucher, HashMap<String, Integer> gift) {
-        super(id, start, end);
+    public PromotionTotalPO(String ID, int type, Date start, Date end, int total, int voucher, HashMap<String, Integer> gift) {
+        this.ID = ID;
+        this.type = type;
+        this.start = start;
+        this.end = end;
         this.total = total;
         this.voucher = voucher;
         this.gift = gift;

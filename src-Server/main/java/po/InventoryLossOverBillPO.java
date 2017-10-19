@@ -19,7 +19,6 @@ public class InventoryLossOverBillPO extends InventoryBillPO {
         this.goodName = goodsName;
         this.numInRepository = numInRepository;
         this.actualNum = actualNum;
-        InventoryGiftBillPO po = new InventoryGiftBillPO();
     }
 
     public String getID() {

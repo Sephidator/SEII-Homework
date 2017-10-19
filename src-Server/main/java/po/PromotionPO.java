@@ -1,24 +1,27 @@
 package po;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
+import java.io.Serializable;
 import java.util.Date;
 
 //促销策略对象
-public class PromotionPO {
+public class PromotionPO implements Serializable {
+    //促销策略编号
+    protected String ID;
     //促销策略ID
-    private int ID;
+    protected int type;
     //促销策略起始时间
-    private Date start;
+    protected Date start;
     //促销策略截止时间
-    private Date end;
+    protected Date end;
 
-    public PromotionPO(int id, Date start, Date end) {
-        this.ID = ID;
-        this.start = start;
-        this.end = end;
+    public String getID() {
+        return ID;
     }
 
-    public int getId() {
-        return ID;
+    public int getType() {
+        return type;
     }
 
     public Date getStart() {
