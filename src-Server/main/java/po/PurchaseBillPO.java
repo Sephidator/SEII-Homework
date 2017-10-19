@@ -8,16 +8,7 @@ import java.util.HashMap;
 /**
  * 进货退货单PO类
  * */
-public class PurchaseBillPO implements Serializable {
-    private String ID; // 单据ID
-    private String clientID; // 客户信息
-    private String repositoryID; // 仓库
-    private String operatorID; // 操作员
-    private HashMap<String, Integer> goodslist=new HashMap();
-    private double totalAmount; // 总额
-    private String comment; // 备注
-    private int state;// 单据状态，0为草稿，1待审批，2为审批通过，3为审批不通过
-    private Date time; //单据建立时间
+public class PurchaseBillPO extends PurchasePO {
 
     public PurchaseBillPO(String ID, String clientID, String repositoryID, String operatorID,
                           HashMap<String, Integer> goodslist, double totalAmount, String comment, int state, Date time) {
@@ -32,37 +23,4 @@ public class PurchaseBillPO implements Serializable {
         this.time=time;
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public String getClientID() {
-        return clientID;
-    }
-
-    public String getRepositoryID() {
-        return repositoryID;
-    }
-
-    public String getOperatorID() {
-        return operatorID;
-    }
-
-    public HashMap<String, Integer> getGoodslist() {
-        return goodslist;
-    }
-
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public Date getTime(){ return time; }
 }

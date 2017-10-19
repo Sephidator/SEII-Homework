@@ -8,20 +8,11 @@ import java.util.HashMap;
 /**
  * 销售单PO类
  * */
-public class SaleBillPO implements Serializable{
-    private String ID; // 单据ID
-    private String clientID; // 客户信息
-    private String repositoryID; // 仓库
-    private String salesmanID; // 业务员
-    private String operatorID; // 操作员
-    private HashMap<String, Integer> goodslist=new HashMap();
+public class SaleBillPO extends SalePO{
     private double beforeDiscount; // 折让前总额
     private double discount; // 折让金额
     private double amountOfCoupon; // 代金卷金额
     private double afterDiscount; // 折让后总额
-    private String comment; // 备注
-    private int state;// 单据状态，0为草稿，1待审批，2为审批通过，3为审批不通过
-    private Date time; //单据建立时间
 
     public SaleBillPO(String ID, String clientID, String repositoryID, String salesmanID,
                       String operatorID, HashMap<String, Integer> goodslist,
@@ -42,30 +33,6 @@ public class SaleBillPO implements Serializable{
         this.time=time;
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public String getClientID() {
-        return clientID;
-    }
-
-    public String getRepositoryID() {
-        return repositoryID;
-    }
-
-    public String getSalesmanID() {
-        return salesmanID;
-    }
-
-    public String getOperatorID() {
-        return operatorID;
-    }
-
-    public HashMap<String, Integer> getGoodslist() {
-        return goodslist;
-    }
-
     public double getBeforeDiscount() {
         return beforeDiscount;
     }
@@ -82,13 +49,4 @@ public class SaleBillPO implements Serializable{
         return afterDiscount;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public Date getTime(){ return time; }
 }
