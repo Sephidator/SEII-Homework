@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class InventoryAlarmBillPO extends BillPO {
+public class InventoryAlarmBillPO extends InventoryBillPO {
     private HashMap<String,Integer> alarmGoods; //报警单中商品名称和实际数量
 
     public InventoryAlarmBillPO(String ID, int state,

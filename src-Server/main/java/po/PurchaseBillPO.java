@@ -1,26 +1,37 @@
 package po;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-/**
- * 进货退货单PO类
- * */
-public class PurchaseBillPO extends PurchasePO {
+public class PurchaseBillPO extends BillPO {
+    protected String clientID; // 客户信息
+    protected String repositoryID; // 仓库
+    protected String operatorID; // 操作员
+    protected HashMap<String, Integer> goodsList=new HashMap();
+    protected double totalAmount; // 总额
+    protected String comment; // 备注
 
-    public PurchaseBillPO(String ID, String clientID, String repositoryID, String operatorID,
-                          HashMap<String, Integer> goodslist, double totalAmount, String comment, int state, Date time) {
-        this.ID = ID;
-        this.clientID = clientID;
-        this.repositoryID = repositoryID;
-        this.operatorID = operatorID;
-        this.goodslist = goodslist;
-        this.totalAmount = totalAmount;
-        this.comment = comment;
-        this.state = state;
-        this.time=time;
+    public String getClientID() {
+        return clientID;
     }
 
+    public String getRepositoryID() {
+        return repositoryID;
+    }
+
+    public String getOperatorID() {
+        return operatorID;
+    }
+
+    public HashMap<String, Integer> getGoodsList() {
+        return goodsList;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 }

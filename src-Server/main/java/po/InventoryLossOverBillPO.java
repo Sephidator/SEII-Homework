@@ -4,17 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InventoryLossOverBillPO implements Serializable {
-
-    private String ID; //单据的编号
+public class InventoryLossOverBillPO extends InventoryBillPO {
     private String userID; //操作员的编号
-    private int state; //单据状态
-    private Date time; //单据建立时间
     private ArrayList<String> goodName; //溢损单中商品名称
     private ArrayList<Integer> numInRepository; //溢损单中商品库存数量
     private ArrayList<Integer> actualNum; //溢损单中商品实际数量
 
-    public InventoryLossOverBillPO(String ID, String userID, int state, String time,
+    public InventoryLossOverBillPO(String ID, String userID, int state, Date time,
                                    ArrayList<String> goodsName, ArrayList<Integer> numInRepository, ArrayList<Integer> actualNum) {
         this.ID = ID;
         this.userID = userID;
@@ -38,7 +34,7 @@ public class InventoryLossOverBillPO implements Serializable {
         return state;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 

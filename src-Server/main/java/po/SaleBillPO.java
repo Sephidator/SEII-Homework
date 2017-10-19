@@ -1,52 +1,36 @@
 package po;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-/**
- * 销售单PO类
- * */
-public class SaleBillPO extends SalePO{
-    private double beforeDiscount; // 折让前总额
-    private double discount; // 折让金额
-    private double amountOfCoupon; // 代金卷金额
-    private double afterDiscount; // 折让后总额
+public class SaleBillPO extends BillPO {
+    protected String clientID; // 客户信息
+    protected String repositoryID; // 仓库
+    protected String salesmanID; // 业务员
+    protected String operatorID; // 操作员
+    protected HashMap<String, Integer> goodsList=new HashMap();
+    protected String comment; // 备注
 
-    public SaleBillPO(String ID, String clientID, String repositoryID, String salesmanID,
-                      String operatorID, HashMap<String, Integer> goodslist,
-                      double beforeDiscount, double discount, double amountOfCoupon,
-                      double afterDiscount, String comment, int state, Date time) {
-        this.ID = ID;
-        this.clientID = clientID;
-        this.repositoryID = repositoryID;
-        this.salesmanID = salesmanID;
-        this.operatorID = operatorID;
-        this.goodslist = goodslist;
-        this.beforeDiscount = beforeDiscount;
-        this.discount = discount;
-        this.amountOfCoupon = amountOfCoupon;
-        this.afterDiscount = afterDiscount;
-        this.comment = comment;
-        this.state = state;
-        this.time=time;
+    public String getClientID() {
+        return clientID;
     }
 
-    public double getBeforeDiscount() {
-        return beforeDiscount;
+    public String getRepositoryID() {
+        return repositoryID;
     }
 
-    public double getDiscount() {
-        return discount;
+    public String getSalesmanID() {
+        return salesmanID;
     }
 
-    public double getAmountOfCoupon() {
-        return amountOfCoupon;
+    public String getOperatorID() {
+        return operatorID;
     }
 
-    public double getAfterDiscount() {
-        return afterDiscount;
+    public HashMap<String, Integer> getGoodsList() {
+        return goodsList;
     }
 
+    public String getComment() {
+        return comment;
+    }
 }

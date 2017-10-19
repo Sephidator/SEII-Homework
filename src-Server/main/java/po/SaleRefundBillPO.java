@@ -1,13 +1,12 @@
 package po;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
 /**
  * 销售退货单PO类
  * */
-public class SaleRefundBillPO extends SalePO{
+public class SaleRefundBillPO extends SaleBillPO {
     private double totalAmount; // 总额
 
     public SaleRefundBillPO(String ID, String clientID, String repositoryID, String salesmanID,
