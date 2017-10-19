@@ -13,10 +13,9 @@ public class PromotionClientPO extends PromotionPO {
     //折让
     private double discount;
     //赠品编号及数量
-    private HashMap<String, Integer> gift = new HashMap();
+    private HashMap<String, Integer> gift = new HashMap<>();
 
-    public PromotionClientPO(int id, Date start, Date end, int clientLevel, int voucher, double discount, HashMap<String, Integer> gift) {
-        super(id, start, end);
+    public PromotionClientPO(String ID, int type, Date start, Date end, int clientLevel, int voucher, double discount, HashMap<String, Integer> gift) {
         this.clientLevel = clientLevel;
         this.voucher = voucher;
         this.discount = discount;
