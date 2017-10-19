@@ -1,40 +1,15 @@
 package po;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-/**
- * 进货退货单PO类
- * */
-public class PurchaseBillPO implements Serializable {
-    private String ID; // 单据ID
-    private String clientID; // 客户信息
-    private String repositoryID; // 仓库
-    private String operatorID; // 操作员
-    private HashMap<String, Integer> goodslist=new HashMap();
-    private double totalAmount; // 总额
-    private String comment; // 备注
-    private int state;// 单据状态，0为草稿，1待审批，2为审批通过，3为审批不通过
-    private Date time; //单据建立时间
-
-    public PurchaseBillPO(String ID, String clientID, String repositoryID, String operatorID,
-                          HashMap<String, Integer> goodslist, double totalAmount, String comment, int state, Date time) {
-        this.ID = ID;
-        this.clientID = clientID;
-        this.repositoryID = repositoryID;
-        this.operatorID = operatorID;
-        this.goodslist = goodslist;
-        this.totalAmount = totalAmount;
-        this.comment = comment;
-        this.state = state;
-        this.time=time;
-    }
-
-    public String getID() {
-        return ID;
-    }
+public class PurchaseBillPO extends BillPO {
+    protected String clientID; // 客户信息
+    protected String repositoryID; // 仓库
+    protected String operatorID; // 操作员
+    protected HashMap<String, Integer> goodsList=new HashMap();
+    protected double totalAmount; // 总额
+    protected String comment; // 备注
 
     public String getClientID() {
         return clientID;
@@ -48,8 +23,8 @@ public class PurchaseBillPO implements Serializable {
         return operatorID;
     }
 
-    public HashMap<String, Integer> getGoodslist() {
-        return goodslist;
+    public HashMap<String, Integer> getGoodsList() {
+        return goodsList;
     }
 
     public double getTotalAmount() {
@@ -59,10 +34,4 @@ public class PurchaseBillPO implements Serializable {
     public String getComment() {
         return comment;
     }
-
-    public int getState() {
-        return state;
-    }
-
-    public Date getTime(){ return time; }
 }

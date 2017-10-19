@@ -1,29 +1,17 @@
 package po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
-public class InventoryAlarmBillPO implements Serializable {
+public class InventoryAlarmBillPO extends InventoryBillPO {
+    private HashMap<String,Integer> alarmGoods; //报警单中商品名称和实际数量
 
-    private String name; //单据名称
-    private String ID; //单据的编号
-    private int state; //单据状态
-    private String time; //单据建立时间
-    private ArrayList<String> goodsName; //报警单中商品名称
-    private ArrayList<Integer> alarmNum;//报警单中商品报警数量
-
-    public InventoryAlarmBillPO(String name, String ID, int state,
-                                String time, ArrayList<String> goodsName, ArrayList<Integer> alarmNum) {
-        this.name = name;
+    public InventoryAlarmBillPO(String ID, int state,
+                                Date time, HashMap<String,Integer> alarmGoods) {
         this.ID = ID;
         this.state = state;
         this.time = time;
-        this.goodsName = goodsName;
-        this.alarmNum = alarmNum;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getID() {
@@ -34,15 +22,11 @@ public class InventoryAlarmBillPO implements Serializable {
         return state;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public ArrayList<String> getGoodsName() {
-        return goodsName;
-    }
-
-    public ArrayList<Integer> getAlarmNum() {
-        return alarmNum;
+    public HashMap<String, Integer> getAlarmGoods() {
+        return alarmGoods;
     }
 }
