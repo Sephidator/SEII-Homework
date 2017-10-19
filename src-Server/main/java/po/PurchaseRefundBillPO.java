@@ -1,5 +1,6 @@
 package po;
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -8,7 +9,8 @@ import java.util.HashMap;
 public class PurchaseRefundBillPO extends PurchaseBillPO {
 
     public PurchaseRefundBillPO(String ID, String clientID, String repositoryID, String operatorID,
-                                HashMap<String, Integer> goodsList, double totalAmount, String comment, int state){
+                                HashMap<String, Integer> goodsList, double totalAmount, String comment,
+                                int state, Date time){
         this.ID=ID;
         this.clientID=clientID;
         this.repositoryID=repositoryID;
@@ -17,6 +19,7 @@ public class PurchaseRefundBillPO extends PurchaseBillPO {
         this.totalAmount=totalAmount;
         this.comment=comment;
         this.state=state;
+        this.time=time;
     }
 
 }

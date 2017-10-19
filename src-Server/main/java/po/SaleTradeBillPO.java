@@ -9,12 +9,12 @@ import java.util.HashMap;
 public class SaleTradeBillPO extends SaleBillPO {
     private double beforeDiscount; // 折让前总额
     private double discount; // 折让金额
-    private double amountOfCoupon; // 代金卷金额
+    private double amountOfVoucher; // 代金卷金额
     private double afterDiscount; // 折让后总额
 
     public SaleTradeBillPO(String ID, String clientID, String repositoryID, String salesmanID,
                            String operatorID, HashMap<String, Integer> goodsList,
-                           double beforeDiscount, double discount, double amountOfCoupon,
+                           double beforeDiscount, double discount, double amountOfVoucher,
                            double afterDiscount, String comment, int state, Date time) {
         this.ID = ID;
         this.clientID = clientID;
@@ -24,7 +24,7 @@ public class SaleTradeBillPO extends SaleBillPO {
         this.goodsList = goodsList;
         this.beforeDiscount = beforeDiscount;
         this.discount = discount;
-        this.amountOfCoupon = amountOfCoupon;
+        this.amountOfVoucher = amountOfVoucher;
         this.afterDiscount = afterDiscount;
         this.comment = comment;
         this.state = state;
@@ -40,7 +40,7 @@ public class SaleTradeBillPO extends SaleBillPO {
     }
 
     public double getAmountOfCoupon() {
-        return amountOfCoupon;
+        return amountOfVoucher;
     }
 
     public double getAfterDiscount() {
