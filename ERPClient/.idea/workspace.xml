@@ -15,7 +15,7 @@
       <file leaf-file-name="JHDdataservice.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHDdataservice.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="190">
               <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -65,7 +65,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-28" />
     <option name="y" value="4" />
     <option name="width" value="2696" />
@@ -87,9 +87,8 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -97,10 +96,22 @@
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -113,11 +124,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\presentation" />
+      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\dataservice" />
+      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\businesslogicservice" />
+      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\businesslogic" />
       <recent name="C:\Users\Sephi\Documents\ERPnju\src-Client\main\java\businesslogic\financebl" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\src-Client\main\java\presentation\financeui" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\src-Client\main\java\businesslogicservice\financeblservice" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\src-Client\main\java\dataservice\financedataservice" />
-      <recent name="C:\Users\Sephi\workspace-IDEA\src-Client\main\java\ui\mainui" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -244,14 +255,16 @@
       <workItem from="1508378545603" duration="160000" />
       <workItem from="1508427903720" duration="57000" />
       <workItem from="1508427971106" duration="126000" />
+      <workItem from="1508592896291" duration="685000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5014000" />
+    <option name="totallyTimeSpent" value="5699000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
+    <frame x="-6" y="-6" width="1381" height="885" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -293,6 +306,26 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHDdataservice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHTHDdataservice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHDdataservice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -395,7 +428,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHDdataservice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="190">
           <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
