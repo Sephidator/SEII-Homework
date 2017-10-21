@@ -14,18 +14,6 @@ public class InventoryAlarmBillPO extends InventoryBillPO {
         this.time = time;
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
     public HashMap<String, Integer> getAlarmList() {
         return alarmList;
     }
