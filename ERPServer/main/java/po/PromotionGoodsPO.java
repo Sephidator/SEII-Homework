@@ -8,7 +8,7 @@ public class PromotionGoodsPO extends PromotionPO {
     //商品编号及数量
     private HashMap<String, Integer> goods = new HashMap<>();
     //总价
-    private int total;
+    private double total;
 
     public PromotionGoodsPO(String ID, int type, Date start, Date end, HashMap<String, Integer> goods, int total) {
         this.ID = ID;
@@ -23,7 +23,7 @@ public class PromotionGoodsPO extends PromotionPO {
         return goods;
     }
 
-    public int total() {
+    public double total() {
         return total;
     }
 }

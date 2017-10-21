@@ -11,60 +11,34 @@ import java.util.ArrayList;
 
 public class InitialPO implements Serializable{
 
-    private int initYear = 0;//每一个账都有一个年标签,格式Init-xxxx，xxxx为年份
+    private int initYear;//每一个账都有一个年标签,格式Init-xxxx，xxxx为年份
 
-    private ArrayList<String> init_goodsID;//每一个商品都有一个ID
+    private ArrayList<String> goodsInfo;//商品信息
 
-    private ArrayList<String> init_clientID;//每一个客户都有一个ID
+    private ArrayList<String> clientInfo;//客户信息
 
-    private ArrayList<String> init_accountID;//每一个账户都有一个ID
+    private ArrayList<String> accountInfo;//账户信息
 
-    /*构造函数*/
-    public InitialPO(String g, String c, String a) {
-        init(g, c, a);
+    public InitialPO(int initYear, ArrayList<String> goodsInfo, ArrayList<String> clientInfo, ArrayList<String> accountInfo) {
+        this.initYear = initYear;
+        this.goodsInfo = goodsInfo;
+        this.clientInfo = clientInfo;
+        this.accountInfo = accountInfo;
     }
 
-    /*建立新账，成功返回true*/
-    public boolean init(String g, String c, String a) {
-        //init methods
-        setGoodsID(g);
-        setClientID(c);
-        setAccountID(a);
-        return true;
+    public int getInitYear() {
+        return initYear;
     }
 
-    /*返回商品的ID*/
-    public ArrayList<String> getGoodsID() {
-        return init_goodsID;
+    public ArrayList<String> getGoodsInfo() {
+        return goodsInfo;
     }
 
-    /*返回客户的ID*/
-    public ArrayList<String> getClientID() {
-        return init_clientID;
+    public ArrayList<String> getClientInfo() {
+        return clientInfo;
     }
 
-    /*返回账户的ID*/
-    public ArrayList<String> getAccountID() {
-        return init_accountID;
-    }
-
-    /***********************添加客户、商品、账户ID***************************/
-
-    /*添加商品的ID，成功返回true*/
-    public boolean setGoodsID(String g) {
-        init_goodsID.add(g);
-        return true;
-    }
-
-    /*添加客户的ID，成功返回true*/
-    public boolean setClientID(String c) {
-        init_clientID.add(c);
-        return true;
-    }
-
-    /*添加账户的ID，成功返回true*/
-    public boolean setAccountID(String a) {
-        init_accountID.add(a);
-        return true;
+    public ArrayList<String> getAccountInfo() {
+        return accountInfo;
     }
 }

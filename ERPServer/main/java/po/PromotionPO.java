@@ -9,7 +9,7 @@ import java.util.Date;
 public class PromotionPO implements Serializable {
     //促销策略编号
     protected String ID;
-    //促销策略ID
+    //促销策略类型
     protected int type;
     //促销策略起始时间
     protected Date start;

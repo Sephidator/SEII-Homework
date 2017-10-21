@@ -9,7 +9,7 @@ public class PromotionClientPO extends PromotionPO {
     //客户等级
     private int clientLevel;
     //代金券
-    private int voucher;
+    private double voucher;
     //折让
     private double discount;
     //赠品编号及数量
@@ -26,7 +26,7 @@ public class PromotionClientPO extends PromotionPO {
         return clientLevel;
     }
 
-    public int getVoucher() {
+    public double getVoucher() {
         return voucher;
     }
 

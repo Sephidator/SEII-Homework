@@ -17,7 +17,7 @@ public class AccountPO implements Serializable{
 
     private double remaining;//账户余额
 
-    private boolean viewStatus = true;//删除账户时，账户不可用
+    private boolean viewState = true;//删除账户时，账户不可用
     /*构造函数*/
     public AccountPO(String bankAcc, String name, double rem) {
         newAccount(bankAcc, name, rem);
@@ -54,13 +54,13 @@ public class AccountPO implements Serializable{
     }
 
     /*返回账户的可见性*/
-    public boolean getViewStatus() {
-        return this.viewStatus;
+    public boolean getViewState() {
+        return this.viewState;
     }
 
     /*删除对应账户，成功返回true*/
     public boolean delAccount() {
-        this.viewStatus = false;
+        this.viewState = false;
         return true;
     }
 

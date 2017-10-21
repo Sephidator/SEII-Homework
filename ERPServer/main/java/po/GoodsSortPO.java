@@ -11,20 +11,19 @@ public class GoodsSortPO implements Serializable {
 
     private String ID; //商品分类编号
     private String name; //商品分类名称
-    private String fatherName; //商品分类母类名称
+    private String fatherID; //商品分类母类名称
     private ArrayList<String> childrenID; //该商品分类的子分类
-    private ArrayList<String> goodsName; //商品分类下的商品名称
-    private String note; //商品分类备注
+    private ArrayList<String> goodsList; //商品分类下的商品列表
+    private String comment; //商品分类备注
 
-    public GoodsSortPO(String ID, String name,
-                       String fatherNameame, ArrayList<String> childrenID,
-                       ArrayList<String> goodsName, String note) {
+    public GoodsSortPO(String ID, String name, String fatherID,
+                       ArrayList<String> childrenID, ArrayList<String> goodsList, String comment) {
         this.ID = ID;
         this.name = name;
-        this.fatherName = fatherName;
+        this.fatherID = fatherID;
         this.childrenID = childrenID;
-        this.goodsName = goodsName;
-        this.note = note;
+        this.goodsList = goodsList;
+        this.comment = comment;
     }
 
     public String getID() {
@@ -35,19 +34,19 @@ public class GoodsSortPO implements Serializable {
         return name;
     }
 
-    public String getFathername() {
-        return fatherName;
+    public String getFatherID() {
+        return fatherID;
     }
 
     public ArrayList<String> getChildrenID() {
         return childrenID;
     }
 
-    public ArrayList<String> getGoodsname() {
-        return goodsName;
+    public ArrayList<String> getGoodsList() {
+        return goodsList;
     }
 
-    public String getNote() {
-        return note;
+    public String getComment() {
+        return comment;
     }
 }

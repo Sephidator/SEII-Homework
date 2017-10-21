@@ -6,9 +6,9 @@ import java.util.HashMap;
 //针对不同总价的促销策略对象
 public class PromotionTotalPO extends PromotionPO {
     //总价
-    private int total;
+    private double total;
     //代金券
-    private int voucher;
+    private double voucher;
     //赠品编号及数量
     private HashMap<String, Integer> gift = new HashMap<>();
 
@@ -22,11 +22,11 @@ public class PromotionTotalPO extends PromotionPO {
         this.gift = gift;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public int getVoucher() {
+    public double getVoucher() {
         return voucher;
     }
 
