@@ -27,38 +27,6 @@ public class RepositoryVO {
     }
 
 
-    public ArrayList<String> getGoodsName() {
-        return goodsName;
-    }
-
-    public Date getOutDate() {
-        return outDate;
-    }
-
-    public Date getInDate() {
-        return inDate;
-    }
-
-    public int getOutNumber() {
-        return outNumber;
-    }
-
-    public int getInNumber() {
-        return inNumber;
-    }
-
-    public double getOutMoney() {
-        return outMoney;
-    }
-
-    public double getInMoney() {
-        return inMoney;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
     public String checkToString(){
         return "[出库时间："+outDate+"，出库数量："+outNumber+"，出库金额"+outMoney
                 +"入库时间："+inDate+"，入库数量："+inNumber+"，入库金额"+inMoney+"，库存数量合计："+total+"]";

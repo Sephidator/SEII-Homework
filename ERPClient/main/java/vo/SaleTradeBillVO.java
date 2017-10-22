@@ -7,7 +7,6 @@ import java.util.HashMap;
  * 销售单PO类
  * */
 public class SaleTradeBillVO extends SaleBillVO {
-    private PromotionVO promotion; // 适用的促销策略
     private double totalBeforeDiscount; // 折让前总额
     private double discount; // 折让金额
     private double amountOfVoucher; // 代金卷金额
@@ -16,7 +15,7 @@ public class SaleTradeBillVO extends SaleBillVO {
     public SaleTradeBillVO(String ID, ClientVO client, String repositoryID, UserVO salesman,
                            UserVO operator, HashMap<GoodsVO, Integer> goodsList,
                            double totalBeforeDiscount, double discount, double amountOfVoucher,
-                           double totalAfterDiscount, String comment, int state, Date time, PromotionVO promotion) {
+                           double totalAfterDiscount, String comment, int state, Date time) {
         this.ID = ID;
         this.client = client;
         this.repositoryID = repositoryID;
@@ -30,7 +29,6 @@ public class SaleTradeBillVO extends SaleBillVO {
         this.comment = comment;
         this.state = state;
         this.time=time;
-        this.promotion=promotion;
     }
 
     public SaleTradeBillVO(){
@@ -50,9 +48,5 @@ public class SaleTradeBillVO extends SaleBillVO {
 
     public double getTotalAfterDiscount() {
         return totalAfterDiscount;
-    }
-
-    public PromotionVO getPromotion(){
-        return promotion;
     }
 }

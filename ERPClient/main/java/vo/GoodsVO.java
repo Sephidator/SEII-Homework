@@ -31,53 +31,6 @@ public class GoodsVO {
         this.comment = comment;
     }
 
-    public GoodsVO(){
-
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSortID() {
-        return sortID;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public double getRetail() {
-        return retail;
-    }
-
-    public double getLatestCost() {
-        return latestCost;
-    }
-
-    public double getLatestRetail() {
-        return latestRetail;
-    }
-
-    public int getAlarmNum() {
-        return alarmNum;
-    }
-
-    public String getComment() {
-        return comment;
-    }
 
     public String toString() {
         return " [商品ID:" + ID + ", 商品名称:" + name + ", 商品类型:" + model + ", 商品分类ID:"

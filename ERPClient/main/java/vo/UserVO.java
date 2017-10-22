@@ -16,7 +16,7 @@ public class UserVO {
     //帐号通知消息
     public String[] notice;
 
-    public UserVO(){
+    public UserVO() {
 
     }
 
@@ -30,31 +30,8 @@ public class UserVO {
         this.notice = notice;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public boolean isTop() {
-        return top;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public String getPassport() {
-        return passport;
-    }
-
-    public String[] getNotice() {
-        return notice;
+    @Override
+    public String toString() {
+        return "[ID=" + ID + "]";
     }
 }

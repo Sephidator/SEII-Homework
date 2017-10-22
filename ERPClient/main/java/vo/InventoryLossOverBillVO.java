@@ -20,22 +20,6 @@ public class InventoryLossOverBillVO extends InventoryBillVO{
         this.actualNum = actualNum;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public ArrayList<String> getGoodName() {
-        return goodName;
-    }
-
-    public ArrayList<Integer> getNumInRepository() {
-        return numInRepository;
-    }
-
-    public ArrayList<Integer> getActualNum() {
-        return actualNum;
-    }
-
     public String toString() {
         return "[单据类型："+repository+"，单据ID：" + ID +", 单据状态：" + state+"，操作员编号："+userID
                 + ", 单据建立时间：" + time + ", 商品名称：" + goodName +"，商品库存数量："+numInRepository

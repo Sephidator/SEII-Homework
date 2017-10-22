@@ -33,23 +33,6 @@ public class InitialVO implements Serializable{
         return true;
     }
 
-
-    public int getInitYear() {
-        return initYear;
-    }
-
-    public ArrayList<String> getInit_goodsID() {
-        return init_goodsID;
-    }
-
-    public ArrayList<String> getInit_clientID() {
-        return init_clientID;
-    }
-
-    public ArrayList<String> getInit_accountID() {
-        return init_accountID;
-    }
-
     /***********************添加客户、商品、账户ID***************************/
 
     /*添加商品的ID，成功返回true*/
