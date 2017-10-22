@@ -3,7 +3,10 @@ package client_presentationdriver.clientblservicedriver;
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.clientblservice.ClientBlService;
 import client_blservicestub.clientblservicestub.ClientBlServiceStub;
+import vo.ClientVO;
 import vo.UserVO;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +15,7 @@ public class ClientBlServiceDriver {
 
     @org.junit.Test
     public void searchClient() throws Exception {
+        assertEquals(service.searchClient("教师").size(),2,0.1);
     }
 
     @org.junit.Test
