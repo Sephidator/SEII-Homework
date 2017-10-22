@@ -1,11 +1,11 @@
-package stub_driver.Server.test.java;
+package server_bldriver.accountdataservicedriver;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.accountdataservice.AccountDataService;
 import org.junit.Test;
 import po.AccountPO;
 import po.UserPO;
-import stub_driver.Server.main.java.AccountDataServiceStub;
+import server_dataservicestub.accountdataservicestub.AccountDataServiceStub;
 
 import static org.junit.Assert.*;
 
@@ -42,7 +42,7 @@ public class AccountDataServiceDriver {
 
     @Test
     public void init() throws Exception {
-        assertEquals(accountDataService.init(),ResultMessage.success);
+        assertEquals(accountDataService.init(), ResultMessage.success);
     }
 
     @Test

@@ -1,7 +1,7 @@
 package businesslogicservice.accountblservice;
 
 /**
- * ÕË»§ÏêÇéÏÔÊ¾ÕË»§µÄÊôĞÔ£¬Ìá¹©¶Ô¸ÃÕË»§µÄĞŞ¸ÄÈ¨ÏŞ
+ * è´¦æˆ·è¯¦æƒ…æ˜¾ç¤ºè´¦æˆ·çš„å±æ€§ï¼Œæä¾›å¯¹è¯¥è´¦æˆ·çš„ä¿®æ”¹æƒé™
  * Created by wangn on 2017.10.18.
  */
 public interface AccountInfoBlService {
@@ -10,12 +10,12 @@ public interface AccountInfoBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*ĞŞ¸ÄÕË»§ÊôĞÔ£¬³É¹¦·µ»Øtrue*/
+    /*ä¿®æ”¹è´¦æˆ·å±æ€§ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage mockAccountName(String accountID, String newName);
 
-    /*É¾³ıÕË»§£¬³É¹¦·µ»Øtrue*/
+    /*åˆ é™¤è´¦æˆ·ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage delAccount(String accountID);
 
-    /*¸üĞÂÕË»§µÄÃûµ¥ÁĞ±í£¬±ÈÈçĞŞ¸ÄÕË»§»òÕßÉ¾³ıÕË»§ÒÔºóË¢ĞÂ½çÃæ*/
+    /*æ›´æ–°è´¦æˆ·çš„åå•åˆ—è¡¨ï¼Œæ¯”å¦‚ä¿®æ”¹è´¦æˆ·æˆ–è€…åˆ é™¤è´¦æˆ·ä»¥ååˆ·æ–°ç•Œé¢*/
     public ResultMessage updateAccount();
 }

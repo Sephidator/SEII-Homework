@@ -1,6 +1,6 @@
 package dataservice.purchasedataservice;
 
-import data.datautility.ResultMessage;
+import businesslogic.blutility.ResultMessage;
 import po.PurchaseRefundBillPO;
 import po.PurchaseTradeBillPO;
 

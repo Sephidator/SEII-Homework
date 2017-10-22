@@ -1,8 +1,8 @@
-package stub_driver.Server.test.java;
+package server_bldriver.accountdataservicedriver;
 
 import dataservice.accountdataservice.AccountInfoDataService;
 import org.junit.Test;
-import stub_driver.Server.main.java.AccountInfoDataServiceStub;
+import server_dataservicestub.accountdataservicestub.AccountInfoDataServiceStub;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package stub_driver.Client.main.java;
+package client_blservicestub.financeblservicestub;
 
 import businesslogicservice.financeblservice.ReceiptBillBlService;
 import po.UserPO;
@@ -27,7 +27,7 @@ public class ReceiptBillBlServiceStub implements ReceiptBillBlService{
     public ReceiptBillVO showReceiptBill(String DocID) {
         HashMap map = new HashMap<String,Double>();
         map.put("6212262402017123456",10000);
-        ReceiptBillVO receiptBillVO = new ReceiptBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        ReceiptBillVO receiptBillVO = new ReceiptBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››",map);
         return receiptBillVO;
     }
 

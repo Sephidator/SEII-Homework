@@ -1,4 +1,5 @@
-package stub_driver.Client.main.java;
+package client_blservicestub.accountblservicestub;
+
 import businesslogicservice.accountblservice.AccountBlService;
 import po.UserPO;
 import vo.AccountVO;

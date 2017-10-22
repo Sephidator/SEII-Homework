@@ -1,6 +1,6 @@
 package dataservice.saledataservice;
 
-import data.datautility.ResultMessage;
+import businesslogic.blutility.ResultMessage;
 import po.SaleTradeBillPO;
 
 import java.rmi.RemoteException;

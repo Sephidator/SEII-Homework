@@ -1,7 +1,7 @@
 package dataservice.financedataservice;
 
-import po.CashBillPO;
 import businesslogic.blutility.ResultMessage;
+import po.CashBillPO;
 
 import java.rmi.RemoteException;
 
@@ -10,24 +10,24 @@ import java.rmi.RemoteException;
  */
 public interface CashBillDataService {
 
-    /*ÉÏ´«Ò»¸öpo*/
+    /*ä¸Šä¼ ä¸€ä¸ªpo*/
     public ResultMessage submitDoc(CashBillPO po) throws RemoteException;
 
-    /*±£´æÒ»¸öpo*/
+    /*ä¿å­˜ä¸€ä¸ªpo*/
     public ResultMessage saveDoc(CashBillPO po) throws RemoteException;
 
-    /*¸ù¾İÏÖ½ğ·ÑÓÃ¿îµ¥ID²éÕÒ²¢·µ»ØÏàÓ¦µÄCashBillPO½á¹û*/
+    /*æ ¹æ®ç°é‡‘è´¹ç”¨æ¬¾å•IDæŸ¥æ‰¾å¹¶è¿”å›ç›¸åº”çš„CashBillPOç»“æœ*/
     public CashBillPO find(String docID) throws RemoteException;
 
-    /*ÔÚ³Ö¾Ã»¯Êı¾İÖĞ²åÈëÒ»¸öpo¼ÇÂ¼*/
+    /*åœ¨æŒä¹…åŒ–æ•°æ®ä¸­æ’å…¥ä¸€ä¸ªpoè®°å½•*/
     public ResultMessage insert(CashBillPO po) throws RemoteException;
 
-    /*¸üĞÂÒ»¸öpo*/
+    /*æ›´æ–°ä¸€ä¸ªpo*/
     public ResultMessage update(CashBillPO po) throws RemoteException;
 
-    /*	³õÊ¼»¯³Ö¾Ã»¯Êı¾İ¿â*/
+    /*	åˆå§‹åŒ–æŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage init() throws RemoteException;
 
-    /*½áÊø³Ö¾Ã»¯Êı¾İ¿â*/
+    /*ç»“æŸæŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage finish() throws RemoteException;
 }

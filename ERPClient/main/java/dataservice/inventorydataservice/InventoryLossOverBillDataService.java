@@ -1,7 +1,6 @@
 package dataservice.inventorydataservice;
 
-
-import data.datautility.ResultMessage;
+import businesslogic.blutility.ResultMessage;
 import po.GoodsPO;
 import po.InventoryLossOverBillPO;
 

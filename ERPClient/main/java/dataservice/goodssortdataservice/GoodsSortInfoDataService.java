@@ -1,7 +1,6 @@
 package dataservice.goodssortdataservice;
 
 import po.GoodsSortPO;
-import data.datautility.ResultMessage;
 import java.rmi.RemoteException;
 
 public interface GoodsSortInfoDataService {

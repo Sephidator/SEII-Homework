@@ -5,10 +5,10 @@ package dataservice.accountdataservice;
  */
 public interface AccountInfoDataService {
 
-    /*根据账户查找并返回相应的账户名字*/
+    /*鏍规嵁璐︽埛鏌ユ壘骞惰繑鍥炵浉搴旂殑璐︽埛鍚嶅瓧*/
     public String getAccountName(String accountID);
 
-    /*根据账户查找并返回相应的账户余额*/
+    /*鏍规嵁璐︽埛鏌ユ壘骞惰繑鍥炵浉搴旂殑璐︽埛浣欓*/
     public double getAccountRem(String accountID);
 
 }

@@ -1,10 +1,10 @@
-package stub_driver.Server.test.java;
+package server_bldriver.logdataservicedriver;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.logdataservice.LogDataService;
 import org.junit.Test;
 import po.LogPO;
-import stub_driver.Server.main.java.LogDataServiceStub;
+import server_dataservicestub.logdataservicestub.LogDataServiceStub;
 
 import java.util.Date;
 
@@ -38,7 +38,7 @@ public class LogDataServiceDriver {
 
     @Test
     public void init() throws Exception {
-        assertEquals(logDataService.init(),ResultMessage.success);
+        assertEquals(logDataService.init(), ResultMessage.success);
     }
 
     @Test

@@ -1,8 +1,9 @@
 package dataservice.initialdataservice;
 
 import java.rmi.RemoteException;
+
+import data.datautility.ResultMessage;
 import po.InitialPO;
-import businesslogic.blutility.ResultMessage;
 
 /**
  * Created by wangn on 2017.10.21.

@@ -1,4 +1,4 @@
-package stub_driver.Client.main.java;
+package client_blservicestub.logblservicestub;
 
 import businesslogicservice.logblservice.LogBlService;
 import vo.LogVO;

@@ -1,33 +1,32 @@
 package dataservice.financedataservice;
 
+import businesslogic.blutility.ResultMessage;
 import po.ReceiptBillPO;
 
 import java.rmi.RemoteException;
-import businesslogic.blutility.ResultMessage;
-
 /**
  * Created by wangn on 2017.10.21.
  */
 public interface ReceiptBillDataService {
 
-    /*ÉÏ´«Ò»¸öpo*/
+    /*ä¸Šä¼ ä¸€ä¸ªpo*/
     public ResultMessage submitDoc(ReceiptBillPO po) throws RemoteException;
 
-    /*±£´æÒ»¸öpo*/
+    /*ä¿å­˜ä¸€ä¸ªpo*/
     public ResultMessage saveDoc(ReceiptBillPO po) throws RemoteException;
 
-    /*¸ù¾İÊÕ¿îµ¥ID²éÕÒ²¢·µ»ØÏàÓ¦µÄReceiptBillPO½á¹û*/
+    /*æ ¹æ®æ”¶æ¬¾å•IDæŸ¥æ‰¾å¹¶è¿”å›ç›¸åº”çš„ReceiptBillPOç»“æœ*/
     public ReceiptBillPO find(String docID) throws RemoteException;
 
-    /*ÔÚ³Ö¾Ã»¯Êı¾İÖĞ²åÈëÒ»¸öpo¼ÇÂ¼*/
+    /*åœ¨æŒä¹…åŒ–æ•°æ®ä¸­æ’å…¥ä¸€ä¸ªpoè®°å½•*/
     public ResultMessage insert(ReceiptBillPO po) throws RemoteException;
 
-    /*¸üĞÂÒ»¸öpo*/
+    /*æ›´æ–°ä¸€ä¸ªpo*/
     public ResultMessage update(ReceiptBillPO po) throws RemoteException;
 
-    /*	³õÊ¼»¯³Ö¾Ã»¯Êı¾İ¿â*/
+    /*	åˆå§‹åŒ–æŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage init() throws RemoteException;
 
-    /*½áÊø³Ö¾Ã»¯Êı¾İ¿â*/
+    /*ç»“æŸæŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage finish() throws RemoteException;
 }

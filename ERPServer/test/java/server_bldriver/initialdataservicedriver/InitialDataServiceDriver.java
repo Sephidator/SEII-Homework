@@ -1,10 +1,10 @@
-package stub_driver.Server.test.java;
+package server_bldriver.initialdataservicedriver;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.initialdataservice.InitialDataService;
 import org.junit.Test;
 import po.InitialPO;
-import stub_driver.Server.main.java.InitialDataServiceStub;
+import server_dataservicestub.initialdataservicestub.InitialDataServiceStub;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class InitialDataServiceDriver {
 
     @Test
     public void finish() throws Exception {
-        assertEquals(initialDataService.finish(),ResultMessage.success);
+        assertEquals(initialDataService.finish(), ResultMessage.success);
     }
 
 }

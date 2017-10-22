@@ -1,8 +1,8 @@
-package stub_driver.Client.test.java;
+package client_presentationdriver.accountblservicedriver;
 
 import businesslogicservice.accountblservice.AccountBlService;
+import client_blservicestub.accountblservicestub.AccountBlServiceStub;
 import po.UserPO;
-import stub_driver.Client.main.java.AccountBlServiceStub;
 import vo.AccountVO;
 
 import static org.junit.Assert.*;

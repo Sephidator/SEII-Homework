@@ -1,6 +1,6 @@
-package stub_driver.Server.main.java;
+package server_dataservicestub.financedataservicestub;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.financedataservice.CashBillDataService;
 import po.CashBillPO;
 

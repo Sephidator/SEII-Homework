@@ -1,67 +1,55 @@
-package stub_driver.Server.test.java;
+package server_bldriver.financedataservicedriver;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.financedataservice.ReceiptBillDataService;
 import org.junit.Test;
-import po.ReceiptBillPO;
-import stub_driver.Server.main.java.ReceiptBillDataServiceStub;
+import po.CashBillPO;
+import server_dataservicestub.financedataservicestub.ReceiptBillDataServiceStub;
 
 import java.util.Date;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by wangn on 2017.10.22.
- */
 public class ReceiptBillDataServiceDriver {
+    ReceiptBillDataService service=new ReceiptBillDataServiceStub();
 
-    ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
     @Test
     public void submitDoc() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("6212262402017123456",10000);
-        ReceiptBillPO receiptBillPO = new ReceiptBillPO("SKD-2017-10-22-12345",0,new Date(),1000,"finance","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillDataService.submitDoc(receiptBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.submitDoc(null));
     }
 
     @Test
     public void saveDoc() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("6212262402017123456",10000);
-        ReceiptBillPO receiptBillPO = new ReceiptBillPO("SKD-2017-10-22-12345",0,new Date(),1000,"finance","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillDataService.saveDoc(receiptBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.saveDoc(null));
     }
 
     @Test
     public void find() throws Exception {
-        assertEquals(receiptBillDataService.find("SKD-2017-10-22-12345").getComment(),"");
+        HashMap map = new HashMap<String, Double>();
+        map.put("lampX",10000);
+        CashBillPO cashBillPO = new CashBillPO("233",0,new Date(),10000,"finance","",map);
+        assertEquals(cashBillPO.getID(),service.find("233").getID());
     }
 
     @Test
     public void insert() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("6212262402017123456",10000);
-        ReceiptBillPO receiptBillPO = new ReceiptBillPO("SKD-2017-10-22-12345",0,new Date(),1000,"finance","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillDataService.insert(receiptBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.insert(null));
     }
 
     @Test
     public void update() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("6212262402017123456",10000);
-        ReceiptBillPO receiptBillPO = new ReceiptBillPO("SKD-2017-10-22-12345",0,new Date(),1000,"finance","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillDataService.update(receiptBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.update(null));
     }
 
     @Test
     public void init() throws Exception {
-        assertEquals(receiptBillDataService.init(),ResultMessage.success);
+        assertEquals(ResultMessage.success,service.init());
     }
 
     @Test
     public void finish() throws Exception {
-        assertEquals(receiptBillDataService.init(),ResultMessage.success);
+        assertEquals(ResultMessage.success,service.finish());
     }
 
 }

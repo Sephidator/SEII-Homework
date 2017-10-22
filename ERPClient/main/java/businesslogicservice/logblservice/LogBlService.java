@@ -5,7 +5,7 @@ import java.util.Date;
 import vo.LogVO;
 
 /**
- * 提供操作日志查看
+ * 鎻愪緵鎿嶄綔鏃ュ織鏌ョ湅
  * Created by wangn on 2017.10.19.
  */
 public interface LogBlService {
@@ -14,9 +14,9 @@ public interface LogBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*返回时间区间内的操作日志*/
+    /*杩斿洖鏃堕棿鍖洪棿鍐呯殑鎿嶄綔鏃ュ織*/
     public ArrayList<LogVO> getLog(Date from, Date to);
 
-    /*记录操作日志，成功返回true*/
+    /*璁板綍鎿嶄綔鏃ュ織锛屾垚鍔熻繑鍥瀟rue*/
     public ResultMessage writeLog(String operator, String action, Date date);
 }

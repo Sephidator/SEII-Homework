@@ -1,4 +1,4 @@
-package stub_driver.Client.main.java;
+package client_blservicestub.initialblservicestub;
 
 import businesslogicservice.initialblservice.InitialBlService;
 import po.AccountPO;
@@ -21,7 +21,7 @@ public class InitialBlServiceStub implements InitialBlService{
     @Override
     public ArrayList<GoodsPO> getLastYearGoods(Date current) {
         ArrayList<GoodsPO> goodsPOArrayList = new ArrayList<GoodsPO>();
-        goodsPOArrayList.add(new GoodsPO("SP", "wang", "M", 1,
+        goodsPOArrayList.add(new GoodsPO("SP", "wang", "123","M", 1,
                 10, 10, 10,
                 10, 0, ""));
         return goodsPOArrayList;

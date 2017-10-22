@@ -17,7 +17,7 @@ public class SaleDetailBlServiceDriver {
 
     @Test
     public void filter() throws Exception {
-        vos.add(new SaleTradeBillVO("XSD-20170723-11132", null, "仓库一号", null, null, new HashMap<>(), 1000, 200, 100, 800, "合理", 1, new Date()));
+        vos.add(new SaleTradeBillVO("XSD-20170723-11132", null, "仓库一号", null, null, new HashMap<>(), 1000, 200, 100, 800, "合理", 1, new Date(),null));
         assertEquals(saleDetailBlService.filter(1, null, null, null, null, null, "仓库一号").toString(), vos.toString());
         vos.clear();
 

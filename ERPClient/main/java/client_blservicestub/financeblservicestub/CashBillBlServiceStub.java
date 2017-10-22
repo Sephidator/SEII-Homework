@@ -1,4 +1,4 @@
-package stub_driver.Client.main.java;
+package client_blservicestub.financeblservicestub;
 
 import businesslogicservice.financeblservice.CashBillBlService;
 import po.UserPO;

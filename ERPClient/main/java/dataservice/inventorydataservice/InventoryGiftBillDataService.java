@@ -1,6 +1,6 @@
 package dataservice.inventorydataservice;
 
-import data.datautility.ResultMessage;
+import businesslogic.blutility.ResultMessage;
 import po.InventoryGiftBillPO;
 
 import java.rmi.RemoteException;

@@ -1,67 +1,55 @@
-package stub_driver.Server.test.java;
+package server_bldriver.financedataservicedriver;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.financedataservice.CashBillDataService;
 import org.junit.Test;
 import po.CashBillPO;
-import stub_driver.Server.main.java.CashBillDataServiceStub;
+import server_dataservicestub.financedataservicestub.CashBillDataServiceStub;
 
 import java.util.Date;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by wangn on 2017.10.22.
- */
 public class CashBillDataServiceDriver {
+    CashBillDataService service=new CashBillDataServiceStub();
 
-    CashBillDataService cashBillDataService = new CashBillDataServiceStub();
     @Test
     public void submitDoc() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("lampX",10000);
-        CashBillPO cashBillPO = new CashBillPO("XJFYD-2017-10-21-111222",0,new Date(),1000,"finance","",map);
-        assertEquals(cashBillDataService.submitDoc(cashBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.submitDoc(null));
     }
 
     @Test
     public void saveDoc() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("lampX",10000);
-        CashBillPO cashBillPO = new CashBillPO("XJFYD-2017-10-21-111222",0,new Date(),1000,"finance","",map);
-        assertEquals(cashBillDataService.saveDoc(cashBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.saveDoc(null));
     }
 
     @Test
     public void find() throws Exception {
-        assertEquals(cashBillDataService.find("XJFYD-2017-10-21-111222").getComment(),"");
+        HashMap map = new HashMap<String, Double>();
+        map.put("lampX",10000);
+        CashBillPO cashBillPO = new CashBillPO("233",0,new Date(),10000,"finance","",map);
+        assertEquals(cashBillPO.getID(),service.find("233").getID());
     }
 
     @Test
     public void insert() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("lampX",10000);
-        CashBillPO cashBillPO = new CashBillPO("XJFYD-2017-10-21-111222",0,new Date(),1000,"finance","",map);
-        assertEquals(cashBillDataService.insert(cashBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.insert(null));
     }
 
     @Test
     public void update() throws Exception {
-        HashMap map = new HashMap<String, Double>();
-        map.put("lampX",10000);
-        CashBillPO cashBillPO = new CashBillPO("XJFYD-2017-10-21-111222",0,new Date(),1000,"finance","",map);
-        assertEquals(cashBillDataService.update(cashBillPO), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.update(null));
     }
 
     @Test
     public void init() throws Exception {
-        assertEquals(cashBillDataService.init(),ResultMessage.success);
+        assertEquals(ResultMessage.success,service.init());
     }
 
     @Test
     public void finish() throws Exception {
-        assertEquals(cashBillDataService.finish(),ResultMessage.success);
+        assertEquals(ResultMessage.success,service.finish());
     }
 
 }

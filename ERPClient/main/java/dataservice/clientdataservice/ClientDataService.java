@@ -1,6 +1,6 @@
 package dataservice.clientdataservice;
 
-import data.datautility.ResultMessage;
+import businesslogic.blutility.ResultMessage;
 import po.ClientPO;
 
 import java.rmi.RemoteException;

@@ -1,13 +1,9 @@
-package stub_driver.Server.main.java;
+package server_dataservicestub.financedataservicestub;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.financedataservice.ReceiptBillDataService;
 import po.ReceiptBillPO;
-import po.UserPO;
-import vo.ReceiptBillVO;
-
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -30,7 +26,7 @@ public class ReceiptBillDataServiceStub implements ReceiptBillDataService {
     public ReceiptBillPO find(String docID) throws RemoteException {
         HashMap map = new HashMap<String, Double>();
         map.put("6212262402017123456",10000);
-        ReceiptBillPO receiptBillPO = new ReceiptBillPO(docID,0,new Date(),1000,"finance","","¾­ÏúÉÌ£ºÕÅÈý£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        ReceiptBillPO receiptBillPO = new ReceiptBillPO(docID,0,new Date(),1000,"finance","","ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½",map);
         return receiptBillPO;
     }
 

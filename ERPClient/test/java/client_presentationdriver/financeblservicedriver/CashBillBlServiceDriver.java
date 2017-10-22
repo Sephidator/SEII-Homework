@@ -1,8 +1,8 @@
-package stub_driver.Client.test.java;
+package client_presentationdriver.financeblservicedriver;
 
 import businesslogicservice.financeblservice.CashBillBlService;
+import client_blservicestub.financeblservicestub.CashBillBlServiceStub;
 import org.junit.Test;
-import stub_driver.Client.main.java.CashBillBlServiceStub;
 import vo.CashBillVO;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class CashBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         CashBillVO cashBillVO = new CashBillVO("XJFYD-2017-10-22-12345",0, new Date(), 0,"wang","",map);
-        assertEquals(cashBillBlService.getCashBillID(cashBillVO),"XJFYD-2017-10-22-12345");
+        assertEquals(cashBillBlService.getCashBillID(cashBillVO),"XJFYD-2017-10-22-123456");
     }
 
     @Test
@@ -32,7 +32,7 @@ public class CashBillBlServiceDriver {
 
     @Test
     public void showCashBill() throws Exception {
-        assertEquals(cashBillBlService.showCashBill("XJFYD-2017-10-21-12345").getID(),"XJFYD-2017-10-21-12345");
+        assertEquals(cashBillBlService.showCashBill("XJFYD-2017-10-22-123456").getID(),"XJFYD-2017-10-22-123456");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CashBillBlServiceDriver {
     public void getCashBillTotal() throws Exception {
         ArrayList<Double> list = new ArrayList<Double>();
         list.add(0.0);
-        assertEquals(cashBillBlService.getCashBillTotal(list),0.0);
+        assertEquals(cashBillBlService.getCashBillTotal(list),0.0,0.1);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package stub_driver.Client.main.java;
+package client_blservicestub.financeblservicestub;
 
 import businesslogicservice.financeblservice.CashBillBlService;
 import businesslogicservice.financeblservice.PaymentBillBlService;
@@ -29,7 +29,7 @@ public class PaymentBillBlServiceStub implements PaymentBillBlService{
     public PaymentBillVO showPaymentBill(String DocID) {
         HashMap map = new HashMap<String,Double>();
         map.put("6212262402017123456",10000);
-        PaymentBillVO paymentBillVO = new PaymentBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        PaymentBillVO paymentBillVO = new PaymentBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››",map);
         return paymentBillVO;
     }
 

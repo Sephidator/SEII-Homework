@@ -1,6 +1,6 @@
-package stub_driver.Server.main.java;
+package server_dataservicestub.logdataservicestub;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.logdataservice.LogDataService;
 import po.LogPO;
 

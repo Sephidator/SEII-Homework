@@ -1,8 +1,8 @@
-package stub_driver.Client.test.java;
+package client_presentationdriver.logblservicedriver;
 
 import businesslogicservice.logblservice.LogBlService;
+import client_blservicestub.logblservicestub.LogBlServiceStub;
 import org.junit.Test;
-import stub_driver.Client.main.java.LogBlServiceStub;
 
 import java.util.Date;
 

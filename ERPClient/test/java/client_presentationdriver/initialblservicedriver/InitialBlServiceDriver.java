@@ -1,8 +1,8 @@
-package stub_driver.Client.test.java;
+package client_presentationdriver.initialblservicedriver;
 
 import businesslogicservice.initialblservice.InitialBlService;
+import client_blservicestub.initialblservicestub.InitialBlServiceStub;
 import org.junit.Test;
-import stub_driver.Client.main.java.InitialBlServiceStub;
 import vo.AccountVO;
 import vo.ClientVO;
 import vo.GoodsVO;

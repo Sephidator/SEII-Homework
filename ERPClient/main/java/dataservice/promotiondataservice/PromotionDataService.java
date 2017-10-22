@@ -1,6 +1,6 @@
 package dataservice.promotiondataservice;
 
-import data.datautility.ResultMessage;
+import businesslogic.blutility.ResultMessage;
 import po.PromotionPO;
 import po.UserPO;
 

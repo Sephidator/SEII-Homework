@@ -11,7 +11,7 @@ import vo.GoodsVO;
 import vo.InitialVO;
 
 /**
- * ÆÚ³õ ½¨ÕË ÒÔ¼°ÕËÄ¿µÄ²é¿´
+ * æœŸåˆ å»ºè´¦ ä»¥åŠè´¦ç›®çš„æŸ¥çœ‹
  * Created by wangn on 2017.10.19.
  */
 public interface InitialBlService {
@@ -20,21 +20,21 @@ public interface InitialBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*·µ»ØÉÌÆ·Ààµ¥¾İĞÅÏ¢£¬°üÀ¨£ºÉÌÆ··ÖÀà£¬Ä³Ò»ÉÌÆ·µÄÃû³Æ£¬Àà±ğ£¬ĞÍºÅ£¬½ø¼Û/ÊÛ¼Û£¨Ä¬ÈÏÎªÈ¥ÄêÆ½¾ù£©£¬×î½ü½ø¼ÛºÍ×î½üÊÛ¼ÛÁô¿Õ*/
+    /*è¿”å›å•†å“ç±»å•æ®ä¿¡æ¯ï¼ŒåŒ…æ‹¬ï¼šå•†å“åˆ†ç±»ï¼ŒæŸä¸€å•†å“çš„åç§°ï¼Œç±»åˆ«ï¼Œå‹å·ï¼Œè¿›ä»·/å”®ä»·ï¼ˆé»˜è®¤ä¸ºå»å¹´å¹³å‡ï¼‰ï¼Œæœ€è¿‘è¿›ä»·å’Œæœ€è¿‘å”®ä»·ç•™ç©º*/
     public ArrayList<GoodsPO> getLastYearGoods(Date current);
 
-    /*·µ»Ø¿Í»§Ààµ¥¾İĞÅÏ¢£¬°üÀ¨£º¿Í»§·ÖÀà£¬Ä³Ò»¸ö¿Í»§µÄÃû³Æ£¬ÁªÏµ·½Ê½µÈ£¬Ó¦ÊÕÓ¦¸¶(Ö®Ç°ÒÅÁô)*/
+    /*è¿”å›å®¢æˆ·ç±»å•æ®ä¿¡æ¯ï¼ŒåŒ…æ‹¬ï¼šå®¢æˆ·åˆ†ç±»ï¼ŒæŸä¸€ä¸ªå®¢æˆ·çš„åç§°ï¼Œè”ç³»æ–¹å¼ç­‰ï¼Œåº”æ”¶åº”ä»˜(ä¹‹å‰é—ç•™)*/
     public ArrayList<ClientPO> getLastYearClient(Date current);
 
-    /*·µ»ØÕË»§Ààµ¥¾İĞÅÏ¢£¬°üÀ¨£ºÃû³Æ£¬Óà¶î*/
+    /*è¿”å›è´¦æˆ·ç±»å•æ®ä¿¡æ¯ï¼ŒåŒ…æ‹¬ï¼šåç§°ï¼Œä½™é¢*/
     public ArrayList<AccountPO> getLastYearAccount(Date current);
 
-    /*½¨Á¢ÆÚ³õĞÅÏ¢£¬³É¹¦·µ»Øtrue*/
+    /*å»ºç«‹æœŸåˆä¿¡æ¯ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage establishInitial(ArrayList<GoodsVO> goods, ArrayList<ClientVO> client, ArrayList<AccountVO> account);
 
-    /*Ìá¹©²é¿´Ä³Ò»ÄêÕËÄ¿µÄ¹¦ÄÜ*/
+    /*æä¾›æŸ¥çœ‹æŸä¸€å¹´è´¦ç›®çš„åŠŸèƒ½*/
     public ArrayList<InitialVO> getInitial(int year);
 
-    /*¿ØÖÆ°´Å¥µÄ³ÊÏÖ*/
+    /*æ§åˆ¶æŒ‰é’®çš„å‘ˆç°*/
     public ResultMessage showButton(int year);
 }

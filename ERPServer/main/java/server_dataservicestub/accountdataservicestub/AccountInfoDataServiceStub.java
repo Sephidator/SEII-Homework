@@ -1,5 +1,4 @@
-package stub_driver.Server.main.java;
-
+package server_dataservicestub.accountdataservicestub;
 
 import dataservice.accountdataservice.AccountInfoDataService;
 

@@ -1,11 +1,11 @@
 package businesslogicservice.accountblservice;
-import po.UserPO;//TODO Íê³É°üµÄÂ·¾¶
+import po.UserPO;//TODO å®ŒæˆåŒ…çš„è·¯å¾„
 import vo.AccountVO;
 
 import java.util.ArrayList;
 
 /**
- * ÕË»§¹ÜÀíÉæ¼°ÕË»§µÄÔöÉ¾¸Ä²é£¬
+ * è´¦æˆ·ç®¡ç†æ¶‰åŠè´¦æˆ·çš„å¢åˆ æ”¹æŸ¥ï¼Œ
  * Created by wangn on 2017.10.18.
  */
 public interface AccountBlService {
@@ -14,25 +14,25 @@ public interface AccountBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*ÑéÖ¤ÓÃ»§µÄÈ¨ÏŞÇé¿ö£¬×î¸ßÈ¨ÏŞ·µ»Øtrue*/
+    /*éªŒè¯ç”¨æˆ·çš„æƒé™æƒ…å†µï¼Œæœ€é«˜æƒé™è¿”å›true*/
     public ResultMessage isPrimeRight(UserPO po);
 
-    /*ÔöÌíĞÂÕË»§£¬³É¹¦·µ»Øtrue*/
+    /*å¢æ·»æ–°è´¦æˆ·ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage addAccount(String accountID, String name);
 
-    /*²é¿´Ò»¸öÃ»ÓĞ±»É¾³ıµÄÕË»§ÏêÏ¸ĞÅÏ¢£¬´ò¿ªÏêÇé½çÃæAccountDetailBlService*/
+    /*æŸ¥çœ‹ä¸€ä¸ªæ²¡æœ‰è¢«åˆ é™¤çš„è´¦æˆ·è¯¦ç»†ä¿¡æ¯ï¼Œæ‰“å¼€è¯¦æƒ…ç•Œé¢AccountDetailBlService*/
     public AccountVO showAccount(String accountID);
 
-    /*»ñÈ¡µã»÷ÕË»§µÄÕË»§±àºÅ£¬ĞèÒª´«Èë¶ÔÏó*/
+    /*è·å–ç‚¹å‡»è´¦æˆ·çš„è´¦æˆ·ç¼–å·ï¼Œéœ€è¦ä¼ å…¥å¯¹è±¡*/
     public String getAccountID(AccountVO vo);
 
-    /*»ñÈ¡µã»÷ÕË»§µÄÕË»§Ãû³Æ£¬ĞèÒª´«Èë¶ÔÏó*/
+    /*è·å–ç‚¹å‡»è´¦æˆ·çš„è´¦æˆ·åç§°ï¼Œéœ€è¦ä¼ å…¥å¯¹è±¡*/
     public String getAccountName(String accountID);
 
-    /*»ñÈ¡µã»÷ÕË»§µÄÕË»§Óà¶î£¬ĞèÒª´«Èë¶ÔÏó*/
+    /*è·å–ç‚¹å‡»è´¦æˆ·çš„è´¦æˆ·ä½™é¢ï¼Œéœ€è¦ä¼ å…¥å¯¹è±¡*/
     public double getAccountRem(String accountID);
 
-    /*ÊäÈë¹Ø¼ü×Ö£¬·µ»ØÄ£ºı²éÕÒÆ¥ÅäµÄÕË»§µÄID*/
+    /*è¾“å…¥å…³é”®å­—ï¼Œè¿”å›æ¨¡ç³ŠæŸ¥æ‰¾åŒ¹é…çš„è´¦æˆ·çš„ID*/
     public ArrayList<AccountVO> searchAccount(String keyWords);
 
 }

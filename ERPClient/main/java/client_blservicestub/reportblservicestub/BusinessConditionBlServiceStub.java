@@ -25,7 +25,7 @@ public class BusinessConditionBlServiceStub implements BusinessConditionBlServic
 
     @Override
     public double[] filter(Date start, Date end, int state) {
-        if (state == 1 && (start.getTime() <= vo.time.getTime()) && (vo.time.getTime() <= end.getTime())) {
+        if (state == 1 && (start.getTime() <= vo.getTime().getTime()) && (vo.getTime().getTime() <= end.getTime())) {
             result[0] += 0;
             result[1] += 0;
             result[2] += 456;

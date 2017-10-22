@@ -2,11 +2,11 @@ package server_bldriver.inventorydataservicedriver;
 
 import data.datautility.ResultMessage;
 import dataservice.inventorydataservice.InventoryGiftBillDataService;
-;
+
 import org.junit.Test;
 import po.InventoryBillPO;
 import po.InventoryGiftBillPO;
-import server_dataservicestub.goodssortdataservicestub.InventorygiftBillDataServiceStub;
+import server_dataservicestub.inventorydataservicestub.InventoryGiftBillDataServiceStub;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
 public class InventoryGiftBillDataServiceDriver {
-    InventoryGiftBillDataService inventoryGiftBillDataService = new InventorygiftBillDataServiceStub();
+    InventoryGiftBillDataService inventoryGiftBillDataService = new InventoryGiftBillDataServiceStub();
     ArrayList<InventoryBillPO> pos = new ArrayList<>();
     InventoryBillPO po = new InventoryGiftBillPO("KCZSD-20140516-64525", 1, new Date(), null, "赵四", null);
 

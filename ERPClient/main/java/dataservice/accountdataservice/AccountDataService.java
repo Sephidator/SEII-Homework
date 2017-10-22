@@ -1,9 +1,10 @@
 package dataservice.accountdataservice;
 
 import java.rmi.RemoteException;
+
+import businesslogic.blutility.ResultMessage;
 import po.UserPO;
 import po.AccountPO;
-import businesslogic.blutility.ResultMessage;
 
 
 /**
@@ -12,25 +13,25 @@ import businesslogic.blutility.ResultMessage;
 public interface AccountDataService {
 
 
-    /*²éÕÒÓÃ»§ÊÇ·ñÎª×î¸ßÈ¨ÏŞ*/
+    /*æŸ¥æ‰¾ç”¨æˆ·æ˜¯å¦ä¸ºæœ€é«˜æƒé™*/
     public String rightControl(UserPO po) throws RemoteException;
 
-    /*¸ù¾İÕË»§ID²éÕÒ²¢·µ»ØÏàÓ¦µÄAccountPO*/
+    /*æ ¹æ®è´¦æˆ·IDæŸ¥æ‰¾å¹¶è¿”å›ç›¸åº”çš„AccountPO*/
     public AccountPO find(String accountID) throws RemoteException;
 
-    /*ÔÚ³Ö¾Ã»¯Êı¾İÖĞ²åÈëÒ»¸öpo¼ÇÂ¼*/
+    /*åœ¨æŒä¹…åŒ–æ•°æ®ä¸­æ’å…¥ä¸€ä¸ªpoè®°å½•*/
     public ResultMessage insert(AccountPO po) throws RemoteException;
 
-    /*É¾³ıÒ»¸öpo*/
+    /*åˆ é™¤ä¸€ä¸ªpo*/
     public ResultMessage delete(AccountPO po) throws RemoteException;
 
-    /*¸üĞÂÒ»¸öpo*/
+    /*æ›´æ–°ä¸€ä¸ªpo*/
     public ResultMessage update(AccountPO po) throws RemoteException;
 
-    /*³õÊ¼»¯³Ö¾Ã»¯Êı¾İ¿â*/
+    /*åˆå§‹åŒ–æŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage init() throws RemoteException;
 
-    /*½áÊø³Ö¾Ã»¯Êı¾İ¿â*/
+    /*ç»“æŸæŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage finish() throws RemoteException;
 
 }

@@ -1,6 +1,6 @@
-package stub_driver.Server.main.java;
+package server_dataservicestub.financedataservicestub;
 
-import businesslogic.blutility.ResultMessage;
+import data.datautility.ResultMessage;
 import dataservice.financedataservice.PaymentBillDataService;
 import po.PaymentBillPO;
 
@@ -28,7 +28,7 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService{
     public PaymentBillPO find(String docID) throws RemoteException {
         HashMap map = new HashMap<String, Double>();
         map.put("6212262402017123456",10000);
-        PaymentBillPO paymentBillPO = new PaymentBillPO(docID,0,new Date(),1000,"finance","","¾­ÏúÉÌ£ºÕÅÈý£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        PaymentBillPO paymentBillPO = new PaymentBillPO(docID,0,new Date(),1000,"finance","","ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½",map);
         return paymentBillPO;
     }
 

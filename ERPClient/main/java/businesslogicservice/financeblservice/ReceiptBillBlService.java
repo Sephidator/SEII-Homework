@@ -6,7 +6,7 @@ import po.UserPO;//TODO
 
 
 /**
- * ÊÕ¿îµ¥µÄ²é¿´¡¢ĞÂ½¨ÒÔ¼°ĞŞ¸Ä£¬ºì³å
+ * æ”¶æ¬¾å•çš„æŸ¥çœ‹ã€æ–°å»ºä»¥åŠä¿®æ”¹ï¼Œçº¢å†²
  * Created by wangn on 2017.10.19.
  */
 public interface ReceiptBillBlService {
@@ -15,36 +15,36 @@ public interface ReceiptBillBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*·µ»ØÊÕ¿îµ¥µÄ±àºÅ*/
+    /*è¿”å›æ”¶æ¬¾å•çš„ç¼–å·*/
     public String getReceiptBillID(ReceiptBillVO vo);
 
-    /*ĞÂ½¨ÊÕ¿îµ¥£¬³É¹¦¸Ä±äµ¥¾İ×´Ì¬£¬·µ»Øtrue*/
+    /*æ–°å»ºæ”¶æ¬¾å•ï¼ŒæˆåŠŸæ”¹å˜å•æ®çŠ¶æ€ï¼Œè¿”å›true*/
     public ResultMessage newReceiptBill(String DocID, ArrayList<String> client,ArrayList<String> transList, String total, String operator);
 
-    /*²é¿´ÊÕ¿îµ¥£¬·µ»ØĞÅÏ¢£¬listÀïÃæÒÀ´Î°üº¬ËùÓĞĞÅÏ¢*/
+    /*æŸ¥çœ‹æ”¶æ¬¾å•ï¼Œè¿”å›ä¿¡æ¯ï¼Œlisté‡Œé¢ä¾æ¬¡åŒ…å«æ‰€æœ‰ä¿¡æ¯*/
     public ReceiptBillVO showReceiptBill(String DocID);
 
-    /*ĞŞ¸ÄÊÕ¿îµ¥£¬³É¹¦¸Ä±äµ¥¾İ×´Ì¬£¬·µ»Øtrue*/
+    /*ä¿®æ”¹æ”¶æ¬¾å•ï¼ŒæˆåŠŸæ”¹å˜å•æ®çŠ¶æ€ï¼Œè¿”å›true*/
     public ResultMessage mockReceiptBill(String DocID, ArrayList<String> client,ArrayList<String> transList, String total, String operator);
 
-    /*¸Ä±äµ¥¾İ×´Ì¬£¬³É¹¦·µ»Øtrue*/
+    /*æ”¹å˜å•æ®çŠ¶æ€ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage mockReceiptBillStatus(String DocID);
 
-    /*×Ô¶¯¼ÆËã×Ü¶î*/
+    /*è‡ªåŠ¨è®¡ç®—æ€»é¢*/
     public double getReceiptBillTotal(ArrayList<Double> list);
 
-    /*»ñÈ¡²Ù×÷Ô±*/
+    /*è·å–æ“ä½œå‘˜*/
     public UserPO getOperator();
 
-    /*ºì³å£¬³É¹¦·µ»Øtrue*/
+    /*çº¢å†²ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage reverseReceiptBill(ReceiptBillVO vo);
 
-    /*¿ØÖÆ°´Å¥³öÏÖ£¬±ÈÈçºì³åºÍĞÂ½¨°´Å¥*/
+    /*æ§åˆ¶æŒ‰é’®å‡ºç°ï¼Œæ¯”å¦‚çº¢å†²å’Œæ–°å»ºæŒ‰é’®*/
     public ResultMessage showButton(String DocID);
 
-    /*ÉÏ´«µ¥¾İ,³É¹¦·µ»Øtrue*/
+    /*ä¸Šä¼ å•æ®,æˆåŠŸè¿”å›true*/
     public ResultMessage submitDoc(ReceiptBillVO vo);
 
-    /*±£´æµ¥¾İ,³É¹¦·µ»Øtrue*/
+    /*ä¿å­˜å•æ®,æˆåŠŸè¿”å›true*/
     public ResultMessage saveDoc(ReceiptBillVO vo);
 }

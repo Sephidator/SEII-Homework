@@ -1,8 +1,8 @@
-package stub_driver.Client.test.java;
+package client_presentationdriver.accountblservicedriver;
 
 import businesslogicservice.accountblservice.AccountInfoBlService;
+import client_blservicestub.accountblservicestub.AccountInfoBlServiceStub;
 import org.junit.Test;
-import stub_driver.Client.main.java.AccountInfoBlServiceStub;
 
 import static org.junit.Assert.*;
 

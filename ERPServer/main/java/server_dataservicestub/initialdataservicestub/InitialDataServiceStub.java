@@ -1,10 +1,8 @@
-package stub_driver.Server.main.java;
+package server_dataservicestub.initialdataservicestub;
 
-import businesslogic.blutility.ResultMessage;
+
+import data.datautility.ResultMessage;
 import dataservice.initialdataservice.InitialDataService;
-import po.AccountPO;
-import po.ClientPO;
-import po.GoodsPO;
 import po.InitialPO;
 
 import java.rmi.RemoteException;

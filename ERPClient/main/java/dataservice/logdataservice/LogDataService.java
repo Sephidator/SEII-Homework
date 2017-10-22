@@ -1,30 +1,30 @@
 package dataservice.logdataservice;
 
+import businesslogic.blutility.ResultMessage;
 import po.LogPO;
 
 import java.rmi.RemoteException;
-import businesslogic.blutility.ResultMessage;
 
 /**
  * Created by wangn on 2017.10.21.
  */
 public interface LogDataService {
 
-    /*¸ù¾İÄê·İyear²éÕÒ²¢·µ»ØÏàÓ¦µÄLogPO½á¹û*/
+    /*æ ¹æ®å¹´ä»½yearæŸ¥æ‰¾å¹¶è¿”å›ç›¸åº”çš„LogPOç»“æœ*/
     public LogPO find(int year) throws RemoteException;
 
-    /*ÔÚ³Ö¾Ã»¯Êı¾İÖĞ²åÈëÒ»¸öpo¼ÇÂ¼*/
+    /*åœ¨æŒä¹…åŒ–æ•°æ®ä¸­æ’å…¥ä¸€ä¸ªpoè®°å½•*/
     public ResultMessage insert(LogPO po) throws RemoteException;
 
-    /*É¾³ıÒ»¸öpo*/
+    /*åˆ é™¤ä¸€ä¸ªpo*/
     public ResultMessage delete(LogPO po) throws RemoteException;
 
-    /*¸üĞÂÒ»¸öpo*/
+    /*æ›´æ–°ä¸€ä¸ªpo*/
     public ResultMessage update(LogPO po) throws RemoteException;
 
-    /*³õÊ¼»¯³Ö¾Ã»¯Êı¾İ¿â*/
+    /*åˆå§‹åŒ–æŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage init() throws RemoteException;
 
-    /*½áÊø³Ö¾Ã»¯Êı¾İ¿â*/
+    /*ç»“æŸæŒä¹…åŒ–æ•°æ®åº“*/
     public ResultMessage finish() throws RemoteException;
 }

@@ -5,7 +5,7 @@ import vo.CashBillVO;
 import po.UserPO; //TODO
 
 /**
- * ÏÖ½ğ·ÑÓÃµ¥µÄ²é¿´¡¢ĞÂ½¨ÒÔ¼°ĞŞ¸Ä£¬ºì³å
+ * ç°é‡‘è´¹ç”¨å•çš„æŸ¥çœ‹ã€æ–°å»ºä»¥åŠä¿®æ”¹ï¼Œçº¢å†²
  * Created by wangn on 2017.10.19.
  */
 public interface CashBillBlService {
@@ -14,38 +14,37 @@ public interface CashBillBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*·µ»ØÏÖ½ğ·ÑÓÃµ¥µÄ±àºÅ£¬¸ñÊ½ÎªXJFYD-yyyyMMdd-xxxxx*/
+    /*è¿”å›ç°é‡‘è´¹ç”¨å•çš„ç¼–å·ï¼Œæ ¼å¼ä¸ºXJFYD-yyyyMMdd-xxxxx*/
     public String getCashBillID(CashBillVO vo);
 
-    /*ĞÂ½¨ÏÖ½ğ·ÑÓÃµ¥£¬³É¹¦¸Ä±äµ¥¾İ×´Ì¬£¬·µ»Øtrue*/
+    /*æ–°å»ºç°é‡‘è´¹ç”¨å•ï¼ŒæˆåŠŸæ”¹å˜å•æ®çŠ¶æ€ï¼Œè¿”å›true*/
     public ResultMessage newCashBill(String DocID, ArrayList<String> bankAccount,ArrayList<String> itemList,
                                      String total, String operator);
-    /*²é¿´ÏÖ½ğ·ÑÓÃµ¥£¬·µ»ØĞÅÏ¢£¬listÀïÃæÒÀ´Î°üº¬ËùÓĞĞÅÏ¢*/
+    /*æŸ¥çœ‹ç°é‡‘è´¹ç”¨å•ï¼Œè¿”å›ä¿¡æ¯ï¼Œlisté‡Œé¢ä¾æ¬¡åŒ…å«æ‰€æœ‰ä¿¡æ¯*/
     public CashBillVO showCashBill(String DocID);
 
-    /*ĞŞ¸ÄÏÖ½ğ·ÑÓÃµ¥£¬³É¹¦¸Ä±äµ¥¾İ×´Ì¬£¬·µ»Øtrue*/
+    /*ä¿®æ”¹ç°é‡‘è´¹ç”¨å•ï¼ŒæˆåŠŸæ”¹å˜å•æ®çŠ¶æ€ï¼Œè¿”å›true*/
     public ResultMessage mockCashBill(String DocID, ArrayList<String> bankAccount,ArrayList<String> itemList,
                                       String total, String operator);
 
-    /*¸Ä±äµ¥¾İ×´Ì¬£¬³É¹¦·µ»Øtrue*/
+    /*æ”¹å˜å•æ®çŠ¶æ€ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage mockCashBillStatus(String DocID);
 
-    /*×Ô¶¯¼ÆËã×Ü¶î*/
+    /*è‡ªåŠ¨è®¡ç®—æ€»é¢*/
     public double getCashBillTotal(ArrayList<Double> list);
 
-    /*»ñÈ¡²Ù×÷Ô±*/
+    /*è·å–æ“ä½œå‘˜*/
     public UserPO getOperator();
 
-    /*ºì³å£¬³É¹¦·µ»Øtrue*/
+    /*çº¢å†²ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage reverseCashBill(CashBillVO vo);
 
-    /*¿ØÖÆ°´Å¥³öÏÖ£¬±ÈÈçºì³åºÍĞÂ½¨°´Å¥*/
+    /*æ§åˆ¶æŒ‰é’®å‡ºç°ï¼Œæ¯”å¦‚çº¢å†²å’Œæ–°å»ºæŒ‰é’®*/
     public ResultMessage showButton(String DocID);
 
-    /*ÉÏ´«µ¥¾İ,³É¹¦·µ»Øtrue*/
+    /*ä¸Šä¼ å•æ®,æˆåŠŸè¿”å›true*/
     public ResultMessage submitDoc(CashBillVO vo);
 
-    /*±£´æµ¥¾İ,³É¹¦·µ»Øtrue*/
+    /*ä¿å­˜å•æ®,æˆåŠŸè¿”å›true*/
     public ResultMessage saveDoc(CashBillVO vo);
 }
-

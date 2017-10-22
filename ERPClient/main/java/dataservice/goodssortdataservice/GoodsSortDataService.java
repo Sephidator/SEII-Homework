@@ -1,7 +1,7 @@
 package dataservice.goodssortdataservice;
 
+import businesslogic.blutility.ResultMessage;
 import po.GoodsSortPO;
-import data.datautility.ResultMessage;
 import java.rmi.RemoteException;
 
 public interface GoodsSortDataService {

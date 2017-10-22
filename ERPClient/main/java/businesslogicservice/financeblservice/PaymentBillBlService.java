@@ -5,7 +5,7 @@ import vo.PaymentBillVO;
 import po.UserPO;//TODO
 
 /**
- * ¸¶¿îµ¥µÄ²é¿´¡¢ĞÂ½¨ÒÔ¼°ĞŞ¸Ä£¬ºì³å
+ * ä»˜æ¬¾å•çš„æŸ¥çœ‹ã€æ–°å»ºä»¥åŠä¿®æ”¹ï¼Œçº¢å†²
  * Created by wangn on 2017.10.19.
  */
 public interface PaymentBillBlService {
@@ -14,37 +14,36 @@ public interface PaymentBillBlService {
     public enum ResultMessage{True, False, Success};
     /*****************************/
 
-    /*·µ»Ø¸¶¿îµ¥µÄ±àºÅ£¬¸ñÊ½ÎªFKD-yyyyMMdd-xxxxx*/
+    /*è¿”å›ä»˜æ¬¾å•çš„ç¼–å·ï¼Œæ ¼å¼ä¸ºFKD-yyyyMMdd-xxxxx*/
     public String getPaymentBillID(PaymentBillVO vo);
 
-    /*ĞÂ½¨¸¶¿îµ¥£¬³É¹¦¸Ä±äµ¥¾İ×´Ì¬£¬·µ»Øtrue*/
+    /*æ–°å»ºä»˜æ¬¾å•ï¼ŒæˆåŠŸæ”¹å˜å•æ®çŠ¶æ€ï¼Œè¿”å›true*/
     public ResultMessage newPaymentBill(String DocID, ArrayList<String> client,ArrayList<String> transList, String total, String operator);
 
-    /*²é¿´¸¶¿îµ¥£¬·µ»ØĞÅÏ¢£¬listÀïÃæÒÀ´Î°üº¬ËùÓĞĞÅÏ¢*/
+    /*æŸ¥çœ‹ä»˜æ¬¾å•ï¼Œè¿”å›ä¿¡æ¯ï¼Œlisté‡Œé¢ä¾æ¬¡åŒ…å«æ‰€æœ‰ä¿¡æ¯*/
     public PaymentBillVO showPaymentBill(String DocID);
 
-    /*ĞŞ¸Ä¸¶¿îµ¥£¬³É¹¦¸Ä±äµ¥¾İ×´Ì¬£¬·µ»Øtrue*/
+    /*ä¿®æ”¹ä»˜æ¬¾å•ï¼ŒæˆåŠŸæ”¹å˜å•æ®çŠ¶æ€ï¼Œè¿”å›true*/
     public ResultMessage mockPaymentBill(String DocID, ArrayList<String> client,ArrayList<String> transList, String total, String operator);
 
-    /*¸Ä±äµ¥¾İ×´Ì¬£¬³É¹¦·µ»Øtrue*/
+    /*æ”¹å˜å•æ®çŠ¶æ€ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage mockPaymentBillStatus(String DocID);
 
-    /*×Ô¶¯¼ÆËã×Ü¶î*/
+    /*è‡ªåŠ¨è®¡ç®—æ€»é¢*/
     public double getPaymentBillTotal(ArrayList<Double> list);
 
-    /*»ñÈ¡²Ù×÷Ô±*/
+    /*è·å–æ“ä½œå‘˜*/
     public UserPO getOperator();
 
-    /*ºì³å£¬³É¹¦·µ»Øtrue*/
+    /*çº¢å†²ï¼ŒæˆåŠŸè¿”å›true*/
     public ResultMessage reversePaymentBill(PaymentBillVO vo);
 
-    /*¿ØÖÆ°´Å¥³öÏÖ£¬±ÈÈçºì³åºÍĞÂ½¨°´Å¥*/
+    /*æ§åˆ¶æŒ‰é’®å‡ºç°ï¼Œæ¯”å¦‚çº¢å†²å’Œæ–°å»ºæŒ‰é’®*/
     public ResultMessage showButton(String DocID);
 
-    /*ÉÏ´«µ¥¾İ,³É¹¦·µ»Øtrue*/
+    /*ä¸Šä¼ å•æ®,æˆåŠŸè¿”å›true*/
     public ResultMessage submitDoc(PaymentBillVO vo);
 
-    /*±£´æµ¥¾İ,³É¹¦·µ»Øtrue*/
+    /*ä¿å­˜å•æ®,æˆåŠŸè¿”å›true*/
     public ResultMessage saveDoc(PaymentBillVO vo);
 }
-

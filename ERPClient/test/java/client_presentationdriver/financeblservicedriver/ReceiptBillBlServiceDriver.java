@@ -1,8 +1,8 @@
-package stub_driver.Client.test.java;
+package client_presentationdriver.financeblservicedriver;
 
 import businesslogicservice.financeblservice.ReceiptBillBlService;
+import client_blservicestub.financeblservicestub.ReceiptBillBlServiceStub;
 import org.junit.Test;
-import stub_driver.Client.main.java.ReceiptBillBlServiceStub;
 import vo.ReceiptBillVO;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class ReceiptBillBlServiceDriver {
     public void getReceiptBillID() throws Exception {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
-        ReceiptBillVO receiptBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        ReceiptBillVO receiptBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››",map);
         assertEquals(receiptBillBlService.getReceiptBillID(receiptBillVO),"SKD-2017-10-22-12345");
     }
 
@@ -33,7 +33,7 @@ public class ReceiptBillBlServiceDriver {
 
     @Test
     public void showReceiptBill() throws Exception {
-        assertEquals(receiptBillBlService.showReceiptBill("SKD-2017-10-21-12345").getClient(),"¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ");
+        assertEquals(receiptBillBlService.showReceiptBill("SKD-2017-10-21-12345").getClient(),"ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ReceiptBillBlServiceDriver {
 
     @Test
     public void getReceiptBillTotal() throws Exception {
-        assertEquals(receiptBillBlService.getReceiptBillTotal(new ArrayList<Double>()),0);
+        assertEquals(receiptBillBlService.getReceiptBillTotal(new ArrayList<Double>()),0,0.1);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ReceiptBillBlServiceDriver {
     public void reverseReceiptBill() throws Exception {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
-        ReceiptBillVO paymentBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        ReceiptBillVO paymentBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››",map);
         assertEquals(receiptBillBlService.reverseReceiptBill(paymentBillVO), ReceiptBillBlService.ResultMessage.Success);
     }
 
@@ -74,7 +74,7 @@ public class ReceiptBillBlServiceDriver {
     public void submitDoc() throws Exception {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
-        ReceiptBillVO paymentBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        ReceiptBillVO paymentBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››",map);
         assertEquals(receiptBillBlService.submitDoc(paymentBillVO), ReceiptBillBlService.ResultMessage.Success);
     }
 
@@ -82,7 +82,7 @@ public class ReceiptBillBlServiceDriver {
     public void saveDoc() throws Exception {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
-        ReceiptBillVO paymentBillVO = new ReceiptBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","¾­ÏúÉÌ£ºÕÅÈı£¬¹©Ó¦ÉÌ£ºÀîËÄ",map);
+        ReceiptBillVO paymentBillVO = new ReceiptBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","ç»é”€å•†ï¼šå¼ ä¸‰ï¼Œä¾›åº”å•†ï¼šæå››",map);
         assertEquals(receiptBillBlService.saveDoc(paymentBillVO), ReceiptBillBlService.ResultMessage.Success);
     }
 
