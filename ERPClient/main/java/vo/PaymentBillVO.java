@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class PaymentBillVO extends FinanceBillVO {
 
-    private String client;//付款单的客户，包括供应商和销售商组成的字符
+    public String client;//付款单的客户，包括供应商和销售商组成的字符
 
-    private HashMap<String,Double> transList;//付款单转账列表的银行账户和金额
+    public HashMap<String,Double> transList;//付款单转账列表的银行账户和金额
 
     public PaymentBillVO(String ID, int state, Date time, double total, String operator,
                          String comment, String client, HashMap<String,Double> transList){
@@ -41,7 +41,7 @@ public class PaymentBillVO extends FinanceBillVO {
     }
 
     /**
-     * @see Object#toString()
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {

@@ -10,7 +10,7 @@ public class FinanceBillVO extends BillVO {
     protected String comment;//财务单据的备注
 
     /**
-     * @see Object#toString()
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {

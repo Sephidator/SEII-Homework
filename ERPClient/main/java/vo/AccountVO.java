@@ -10,13 +10,13 @@ import java.io.Serializable;
 
 public class AccountVO implements Serializable{
 
-    private String bankAccount;//账户银行账号
+    public String bankAccount;//账户银行账号
 
-    private String accountName;//账户名字
+    public String accountName;//账户名字
 
-    private double remaining;//账户余额
+    public double remaining;//账户余额
 
-    private boolean viewStatus = true;//删除账户时，账户不可用
+    public boolean viewStatus = true;//删除账户时，账户不可用
     /*构造函数*/
     public AccountVO(String bankAcc, String name, double rem) {
         newAccount(bankAcc, name, rem);
@@ -31,7 +31,7 @@ public class AccountVO implements Serializable{
     }
 
     /**
-     * @see Object#toString()
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
