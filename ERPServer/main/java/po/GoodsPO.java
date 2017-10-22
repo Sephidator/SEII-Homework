@@ -10,6 +10,7 @@ public class GoodsPO implements Serializable {
 
     private String ID; //商品编号
     private String name; //商品名称
+    private String sortID;//商品所在的商品分类的ID
     private String model; //商品型号
     private int number; //商品数量
     private double cost; //商品进价
@@ -19,11 +20,12 @@ public class GoodsPO implements Serializable {
     private int alarmNum; //商品报警数量
     private String comment; //商品的备注
 
-    public GoodsPO(String ID, String name, String model, int number,
+    public GoodsPO(String ID, String name,String sortID, String model, int number,
                    double cost, double retail, double latestCost,
                    double latestRetail, int alarmNum, String comment) {
         this.ID = ID;
         this.name = name;
+        this.sortID=sortID;
         this.model = model;
         this.number = number;
         this.cost = cost;
@@ -40,6 +42,10 @@ public class GoodsPO implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getSortID(){
+        return sortID;
     }
 
     public String getModel() {
