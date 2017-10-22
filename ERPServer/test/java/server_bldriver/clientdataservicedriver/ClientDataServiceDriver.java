@@ -11,8 +11,8 @@ public class ClientDataServiceDriver {
     ClientDataService service=new ClientDataServiceStub();
 
     @org.junit.Test
-    public void add() throws Exception {
-        assertEquals(service.add(new ClientPO()), ResultMessage.success);
+    public void insert() throws Exception {
+        assertEquals(ResultMessage.success,service.insert(new ClientPO()));
     }
 
     @org.junit.Test
@@ -22,12 +22,12 @@ public class ClientDataServiceDriver {
 
     @org.junit.Test
     public void delete() throws Exception {
-        assertEquals(service.delete(new ClientPO()), ResultMessage.success);
+        assertEquals(ResultMessage.success,service.delete(new ClientPO()));
     }
 
     @org.junit.Test
     public void update() throws Exception {
-        assertEquals(service.update(new ClientPO()), ResultMessage.success);
+        assertEquals(ResultMessage.success, service.update(new ClientPO()));
     }
 
 }

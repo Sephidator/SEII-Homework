@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ClientDataServiceStub implements ClientDataService{
 
     @Override
-    public ResultMessage add(ClientPO clientpo) throws RemoteException {
+    public ResultMessage insert(ClientPO clientpo) throws RemoteException {
         return ResultMessage.success;
     }
 
