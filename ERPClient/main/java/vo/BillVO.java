@@ -3,15 +3,25 @@ package vo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BillVO implements Serializable {
+public class BillVO {
     protected String ID; //单据编号
     protected int state; //单据状态
     protected Date time; //创建时间
 
-    public String getID(){return this.ID;}
+    public String getID() {
+        return ID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public Date getTime() {
+        return time;
+    }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     @Override
     public String toString() {

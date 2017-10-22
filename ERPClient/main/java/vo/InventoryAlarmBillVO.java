@@ -12,6 +12,10 @@ public class InventoryAlarmBillVO extends InventoryBillVO{
         this.time = time;
     }
 
+    public HashMap<String, Integer> getAlarmGoods() {
+        return alarmGoods;
+    }
+
     public String toString() {
         return "[单据类型："+repository+"，单据ID：" + ID +", 单据状态：" + state
                 + ", 单据建立时间：" + time + ", 商品列表：" + alarmGoods  +  "]";

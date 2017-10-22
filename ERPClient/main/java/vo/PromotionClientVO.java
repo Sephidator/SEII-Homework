@@ -18,4 +18,20 @@ public class PromotionClientVO extends PromotionVO{
         this.discount = discount;
         this.gift = gift;
     }
+
+    public int getClientLevel() {
+        return clientLevel;
+    }
+
+    public double getVoucher() {
+        return voucher;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public HashMap<String, Integer> getGift() {
+        return gift;
+    }
 }

@@ -39,6 +39,8 @@ public class ClientPO implements Serializable {
         this.salesmanID = salesmanID;
     }
 
+    public ClientPO(){}
+
     public String getID(){
         return ID;
     }

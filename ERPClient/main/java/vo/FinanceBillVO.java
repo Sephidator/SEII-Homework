@@ -9,8 +9,20 @@ public class FinanceBillVO extends BillVO {
 
     protected String comment;//财务单据的备注
 
+    public double getTotal() {
+        return total;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     @Override
     public String toString() {

@@ -91,8 +91,4 @@ public class ClientVO {
         return salesman;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return true;
-    }
 }

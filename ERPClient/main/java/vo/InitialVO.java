@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class InitialVO implements Serializable{
 
-    public int initYear = 0;//每一个账都有一个年标签,格式Init-xxxx，xxxx为年份
+    private int initYear = 0;//每一个账都有一个年标签,格式Init-xxxx，xxxx为年份
 
-    public ArrayList<String> init_goodsID;//每一个商品都有一个ID
+    private ArrayList<String> init_goodsID;//每一个商品都有一个ID
 
-    public ArrayList<String> init_clientID;//每一个客户都有一个ID
+    private ArrayList<String> init_clientID;//每一个客户都有一个ID
 
-    public ArrayList<String> init_accountID;//每一个账户都有一个ID
+    private ArrayList<String> init_accountID;//每一个账户都有一个ID
 
     /*构造函数*/
     public InitialVO(String goods, String client, String account) {
@@ -31,6 +31,23 @@ public class InitialVO implements Serializable{
         setClientID(client);
         setAccountID(account);
         return true;
+    }
+
+
+    public int getInitYear() {
+        return initYear;
+    }
+
+    public ArrayList<String> getInit_goodsID() {
+        return init_goodsID;
+    }
+
+    public ArrayList<String> getInit_clientID() {
+        return init_clientID;
+    }
+
+    public ArrayList<String> getInit_accountID() {
+        return init_accountID;
     }
 
     /***********************添加客户、商品、账户ID***************************/
@@ -69,7 +86,7 @@ public class InitialVO implements Serializable{
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     @Override
     public String toString() {

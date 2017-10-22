@@ -7,6 +7,7 @@ import java.util.HashMap;
  * 销售单PO类
  * */
 public class SaleTradeBillPO extends SaleBillPO {
+    private String promotionInfo;   // 促销策略信息
     private double totalBeforeDiscount; // 折让前总额
     private double discount; // 折让金额
     private double amountOfVoucher; // 代金卷金额
@@ -15,7 +16,7 @@ public class SaleTradeBillPO extends SaleBillPO {
     public SaleTradeBillPO(String ID, String clientID, String repositoryID, String salesmanID,
                            String operatorID, HashMap<String, Integer> goodsList,
                            double totalBeforeDiscount, double discount, double amountOfVoucher,
-                           double totalAfterDiscount, String comment, int state, Date time) {
+                           double totalAfterDiscount, String comment, int state, Date time, String promotionInfo) {
         this.ID = ID;
         this.clientID = clientID;
         this.repositoryID = repositoryID;
@@ -29,6 +30,7 @@ public class SaleTradeBillPO extends SaleBillPO {
         this.comment = comment;
         this.state = state;
         this.time=time;
+        this.promotionInfo=promotionInfo;
     }
 
     public double getTotalBeforeDiscount() {
@@ -45,5 +47,9 @@ public class SaleTradeBillPO extends SaleBillPO {
 
     public double getTotalAfterDiscount() {
         return totalAfterDiscount;
+    }
+
+    public String getPromotionInfo(){
+        return promotionInfo;
     }
 }

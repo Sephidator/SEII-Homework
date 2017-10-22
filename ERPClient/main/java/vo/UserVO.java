@@ -29,4 +29,32 @@ public class UserVO {
         this.passport = passport;
         this.notice = notice;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean isTop() {
+        return top;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public String[] getNotice() {
+        return notice;
+    }
 }
