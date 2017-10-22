@@ -37,10 +37,6 @@ public class CashBillVO extends FinanceBillVO {
         return total;
     }
 
-    public HashMap<String, Double> getItemList() {
-        return itemList;
-    }
-
     /**
      * @see Object#toString()
      */

@@ -17,14 +17,6 @@ public class InventoryGiftBillVO extends InventoryBillVO{
         this.gift = gift;
     }
 
-    public String getClientID() {
-        return clientID;
-    }
-
-    public HashMap<String, Integer> getGift() {
-        return gift;
-    }
-
     public String toString() {
         return "[单据类型："+repository+"，单据ID：" + ID +", 单据状态：" + state + ", 单据建立时间：" + time
                 + ", 客户信息：" + clientID +"，赠品编码及数量："+gift

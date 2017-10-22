@@ -30,22 +30,6 @@ public class AccountVO implements Serializable{
         return true;
     }
 
-    public String getBankAccount() {
-        return bankAccount;
-    }
-
-    public String getAccountName() {
-        return accountName;
-    }
-
-    public double getRemaining() {
-        return remaining;
-    }
-
-    public boolean isViewStatus() {
-        return viewStatus;
-    }
-
     /**
      * @see Object#toString()
      */

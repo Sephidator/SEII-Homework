@@ -12,19 +12,8 @@ public class PromotionVO {
     //促销策略截止时间
     public Date end;
 
-    public String getID() {
-        return ID;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public Date getEnd() {
-        return end;
+    @Override
+    public String toString() {
+        return "[ID=" + ID;
     }
 }

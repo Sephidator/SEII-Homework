@@ -25,18 +25,6 @@ public class LogVO implements Serializable{
         addTime(t);
     }
 
-    public ArrayList<String> getOperatorList() {
-        return operatorList;
-    }
-
-    public ArrayList<String> getActionList() {
-        return actionList;
-    }
-
-    public ArrayList<Date> getTimeList() {
-        return timeList;
-    }
-
     /********************添加日志信息***********************/
 
     /*添加操作人员，成功为true*/
