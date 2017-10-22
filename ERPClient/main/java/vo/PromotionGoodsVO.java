@@ -17,4 +17,12 @@ public class PromotionGoodsVO extends PromotionVO {
         this.goods = goods;
         this.total = total;
     }
+
+    public HashMap<String, Integer> getGoods() {
+        return goods;
+    }
+
+    public double getTotal() {
+        return total;
+    }
 }

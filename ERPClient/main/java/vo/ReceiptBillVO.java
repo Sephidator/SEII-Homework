@@ -29,6 +29,14 @@ public class ReceiptBillVO extends FinanceBillVO {
         this.transList=transList;
     }
 
+    public String getClient() {
+        return client;
+    }
+
+    public HashMap<String, Double> getTransList() {
+        return transList;
+    }
+
     /*根据条目清单中的每一个条目的金额的总额*/
     public double calcTotal(HashMap<String, Double> itemList){
         double total = 0;

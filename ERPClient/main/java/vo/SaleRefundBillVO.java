@@ -23,6 +23,8 @@ public class SaleRefundBillVO extends SaleBillVO {
         this.state = state;
     }
 
+    public SaleRefundBillVO(){}
+
     public double getTotalAmount() {
         return totalAmount;
     }

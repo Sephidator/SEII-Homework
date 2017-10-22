@@ -4,9 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class BillVO {
-    public String ID; //单据编号
-    public int state; //单据状态
-    public Date time; //创建时间
+    protected String ID; //单据编号
+    protected int state; //单据状态
+    protected Date time; //创建时间
+
+    public String getID() {
+        return ID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public Date getTime() {
+        return time;
+    }
 
     /**
      * @see Object#toString()

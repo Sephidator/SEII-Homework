@@ -12,37 +12,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-<<<<<<< HEAD
-      <file leaf-file-name="BusinessHistoryBlServiceDiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/BusinessHistoryBlServiceDiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="21" column="102" lean-forward="true" selection-start-line="21" selection-start-column="102" selection-end-line="21" selection-end-column="102" />
-=======
       <file leaf-file-name="ClientBlServiceDriver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/clientblservicedriver/ClientBlServiceDriver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-19">
               <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-      <file leaf-file-name="SaleDetailBlServiceDriver.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/SaleDetailBlServiceDriver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="23" column="117" lean-forward="false" selection-start-line="23" selection-start-column="117" selection-end-line="23" selection-end-column="117" />
-=======
       <file leaf-file-name="PurchaseTradeBillBlServiceDriver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/purchaseblservicedriver/PurchaseTradeBillBlServiceDriver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-158">
               <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
               <folding />
             </state>
           </provider>
@@ -55,74 +39,17 @@
       <projects_view />
     </option>
   </component>
-<<<<<<< HEAD
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHDdataservice.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/purchaseblservice/JHTHDdataservice.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogic/blutility/ResultMessage.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/clientblservice/ClientBlService.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/clientblservice/ClientInfoBlservice.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/clientblservicestub/ClientBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/ClientVO.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/clientuidriver/ClientBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/client_blservicedriver/clientuidriver/ClientBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/client_blservicedriver/clientblservicedriver/ClientBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/clientblservicedriver/ClientBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/CashBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/PurchaseBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/PurchaseTradeBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/PurchaseRefundBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/SaleBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/SaleRefundBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/reportblservice/SaleDetailBlService.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/reportblservicestub/SaleDetailBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/test/java/client_blservicestub/reportblservicestub/BusinessConditionBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/SaleDetailBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/reportblservicestub/BusinessConditionBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/BillVO.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/BusinessHistoryBlServiceDiver.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/BusinessConditionBlServiceStubTest.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/approvalblservice/Approval.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/reportblservicestub/BusinessHistoryBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/SaleTradeBillVO.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/approvalblservice/ApprovalBlService.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/approvalblservicestub/ApprovalBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/promotionblservice/PromotionBlService.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/promotionblservicestub/PromotionBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/promotionblservicedriver/PromotionBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/PromotionClientVO.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/PromotionVO.java" />
-        <option value="$PROJECT_DIR$/main/java/businesslogicservice/userblservice/UserBlService.java" />
-        <option value="$PROJECT_DIR$/main/java/client_blservicestub/userblservicestub/UserBlServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/vo/UserVO.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/userblservicedriver/UserBlServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/client_presentationdriver/approvalblservicedriver/ApprovalBlServiceDriver.java" />
-      </list>
-    </option>
-  </component>
-=======
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-<<<<<<< HEAD
-  <component name="ProjectFrameBounds">
-    <option name="x" value="167" />
-    <option name="y" value="59" />
-    <option name="width" value="1280" />
-    <option name="height" value="712" />
-=======
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-28" />
     <option name="y" value="4" />
     <option name="width" value="2696" />
     <option name="height" value="1584" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -139,13 +66,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-=======
       <pane id="AndroidView" />
       <pane id="Scope" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -173,40 +95,20 @@
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="client_blservicestub" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="out" type="462c0819:PsiDirectoryNode" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
             </path>
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="client_blservicestub" type="462c0819:PsiDirectoryNode" />
-              <item name="promotionblservicestub" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="out" type="462c0819:PsiDirectoryNode" />
               <item name="production" type="462c0819:PsiDirectoryNode" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
             </path>
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="client_blservicestub" type="462c0819:PsiDirectoryNode" />
-              <item name="userblservicestub" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="out" type="462c0819:PsiDirectoryNode" />
               <item name="production" type="462c0819:PsiDirectoryNode" />
               <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
             </path>
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
@@ -218,26 +120,6 @@
               <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="vo" type="462c0819:PsiDirectoryNode" />
-=======
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
-            </path>
-            <path>
-              <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-            </path>
-            <path>
-              <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ERPClient" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-=======
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="client_presentationdriver" type="462c0819:PsiDirectoryNode" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
             </path>
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
@@ -245,7 +127,6 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="client_presentationdriver" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
             </path>
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
@@ -253,10 +134,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="client_presentationdriver" type="462c0819:PsiDirectoryNode" />
-              <item name="approvalblservicedriver" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="clientblservicedriver" type="462c0819:PsiDirectoryNode" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
             </path>
             <path>
               <item name="ERPClient" type="b2602c69:ProjectViewProjectNode" />
@@ -264,62 +142,19 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="client_presentationdriver" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
-              <item name="reportblservicedriver" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="purchaseblservicedriver" type="462c0819:PsiDirectoryNode" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-<<<<<<< HEAD
-      <pane id="AndroidView" />
-=======
       <pane id="PackagesPane" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-<<<<<<< HEAD
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="create.test.in.the.same.root" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/test/java/client_presentationdriver/userblservicedriver" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="client_presentationdriver.userblservicedriver" />
-      <recent name="client_presentationdriver.promotionblservicedriver" />
-      <recent name="client_presentationdriver.approvalblservicedriver" />
-      <recent name="client_presentationdriver.reportblservicedriver" />
-      <recent name="client_blservicestub.reportblservicestub" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\vo" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\test\java" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\presentation" />
-      <recent name="C:\Users\Sephi\Documents\ERPnju\ERPClient\main\java\dataservice" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/main/java/businesslogicservice/reportblservice" />
-    </key>
-=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ERPServer" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -333,19 +168,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ApprovalBlServiceDriver.show">
-    <configuration name="ApprovalBlServiceDriver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ClientBlServiceDriver">
+    <configuration name="ClientBlServiceDriver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="client_presentationdriver.approvalblservicedriver.*" />
+          <option name="PATTERN" value="client_presentationdriver.clientblservicedriver.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="ERPClient" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="client_presentationdriver.approvalblservicedriver" />
-      <option name="MAIN_CLASS_NAME" value="client_presentationdriver.approvalblservicedriver.ApprovalBlServiceDriver" />
+      <option name="PACKAGE_NAME" value="client_presentationdriver.clientblservicedriver" />
+      <option name="MAIN_CLASS_NAME" value="client_presentationdriver.clientblservicedriver.ClientBlServiceDriver" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -359,109 +194,6 @@
       <envs />
       <patterns />
     </configuration>
-<<<<<<< HEAD
-    <configuration name="ApprovalBlServiceDriver.show" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="client_presentationdriver.approvalblservicedriver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ERPClient" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="client_presentationdriver.approvalblservicedriver" />
-      <option name="MAIN_CLASS_NAME" value="client_presentationdriver.approvalblservicedriver.ApprovalBlServiceDriver" />
-      <option name="METHOD_NAME" value="show" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="PromotionBlServiceDriver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="client_presentationdriver.promotionblservicedriver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ERPClient" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="client_presentationdriver.promotionblservicedriver" />
-      <option name="MAIN_CLASS_NAME" value="client_presentationdriver.promotionblservicedriver.PromotionBlServiceDriver" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="PromotionBlServiceDriver.show" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="client_presentationdriver.promotionblservicedriver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ERPClient" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="client_presentationdriver.promotionblservicedriver" />
-      <option name="MAIN_CLASS_NAME" value="client_presentationdriver.promotionblservicedriver.PromotionBlServiceDriver" />
-      <option name="METHOD_NAME" value="show" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="UserBlServiceDriver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="client_presentationdriver.userblservicedriver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ERPClient" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="client_presentationdriver.userblservicedriver" />
-      <option name="MAIN_CLASS_NAME" value="client_presentationdriver.userblservicedriver.UserBlServiceDriver" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-=======
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -543,26 +275,9 @@
       <properties />
       <listeners />
     </configuration>
-<<<<<<< HEAD
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.ApprovalBlServiceDriver.show" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ApprovalBlServiceDriver" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.PromotionBlServiceDriver" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.PromotionBlServiceDriver.show" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.UserBlServiceDriver" />
-    </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ApprovalBlServiceDriver.show" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.UserBlServiceDriver" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.PromotionBlServiceDriver.show" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.PromotionBlServiceDriver" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ApprovalBlServiceDriver" />
-=======
     <recent_temporary>
       <list size="1">
         <item index="0" class="java.lang.String" itemvalue="JUnit.ClientBlServiceDriver" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
       </list>
     </recent_temporary>
   </component>
@@ -575,69 +290,12 @@
       <created>1508662432089</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-<<<<<<< HEAD
-      <updated>1508254060526</updated>
-      <workItem from="1508254064698" duration="693000" />
-      <workItem from="1508307313063" duration="2458000" />
-      <workItem from="1508330500681" duration="861000" />
-      <workItem from="1508336156961" duration="659000" />
-      <workItem from="1508378545603" duration="160000" />
-      <workItem from="1508427903720" duration="57000" />
-      <workItem from="1508427971106" duration="126000" />
-      <workItem from="1508592896291" duration="685000" />
-      <workItem from="1508639229733" duration="8304000" />
-      <workItem from="1508648406093" duration="239000" />
-      <workItem from="1508648648013" duration="1054000" />
-      <workItem from="1508655619264" duration="8832000" />
-      <workItem from="1508664800963" duration="700000" />
-      <workItem from="1508665676461" duration="217000" />
-=======
       <updated>1508662432089</updated>
       <workItem from="1508662438365" duration="1359000" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-<<<<<<< HEAD
-    <history-entry file="ApprovalBlServiceDriver_show - 2017.10.22 at 17h 48m 33s.xml">
-      <configuration name="ApprovalBlServiceDriver.show" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApprovalBlServiceDriver_show - 2017.10.22 at 17h 50m 16s.xml">
-      <configuration name="ApprovalBlServiceDriver.show" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApprovalBlServiceDriver_show - 2017.10.22 at 17h 51m 24s.xml">
-      <configuration name="ApprovalBlServiceDriver.show" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PromotionBlServiceDriver - 2017.10.22 at 17h 07m 38s.xml">
-      <configuration name="PromotionBlServiceDriver" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PromotionBlServiceDriver - 2017.10.22 at 17h 09m 14s.xml">
-      <configuration name="PromotionBlServiceDriver" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PromotionBlServiceDriver - 2017.10.22 at 17h 09m 44s.xml">
-      <configuration name="PromotionBlServiceDriver" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PromotionBlServiceDriver - 2017.10.22 at 17h 12m 45s.xml">
-      <configuration name="PromotionBlServiceDriver" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PromotionBlServiceDriver - 2017.10.22 at 17h 17m 17s.xml">
-      <configuration name="PromotionBlServiceDriver" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PromotionBlServiceDriver_show - 2017.10.22 at 17h 18m 25s.xml">
-      <configuration name="PromotionBlServiceDriver.show" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="UserBlServiceDriver - 2017.10.22 at 17h 44m 11s.xml">
-      <configuration name="UserBlServiceDriver" configurationId="JUnit" />
-    </history-entry>
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25918000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="167" y="59" width="1280" height="712" extended-state="0" />
-    <editor active="true" />
-=======
     <history-entry file="ClientBlServiceDriver - 2017.10.22 at 16h 54m 53s.xml">
       <configuration name="ClientBlServiceDriver" configurationId="JUnit" />
     </history-entry>
@@ -647,31 +305,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.190625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-=======
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -691,16 +327,10 @@
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-=======
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -712,522 +342,25 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="4" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/clientblservice/ClientInfoBlservice.java" />
-    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/clientblservice/ClientBlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/clientblservicestub/ClientBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/clientblservicedriver/ClientBlServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="35" column="1" lean-forward="false" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/InventoryBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/InventoryBillPO.java" />
-    <entry file="file://$PROJECT_DIR$/main/java/vo/InventoryLossOverBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/InventoryGiftBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/InitialVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/InventoryAlarmBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/ClientVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="95" column="20" lean-forward="false" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
-          <folding>
-            <element signature="e#2057#2058#0" expanded="false" />
-            <element signature="e#2084#2085#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PurchaseBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PurchaseTradeBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PurchaseRefundBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/CashBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/AccountVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/reportblservice/SaleDetailBlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/GoodsSortVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/GoodsVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_blservicestub/reportblservicestub/BusinessConditionBlServiceDriver.java" />
-    <entry file="file://$PROJECT_DIR$/main/java/vo/FinanceBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/jdk/internal/reflect/DelegatingMethodAccessorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/reflect/Method.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="563" column="0" lean-forward="false" selection-start-line="563" selection-start-column="0" selection-end-line="563" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PaymentBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-307">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/SaleRefundBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="31" lean-forward="false" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/SaleTradeBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/SaleBillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding>
-            <element signature="e#509#510#0" expanded="false" />
-            <element signature="e#540#541#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/approvalblservice/ApprovalBlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/reportblservicestub/BusinessConditionBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/reportblservicestub/BusinessHistoryBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/reportblservicestub/SaleDetailBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="152" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/approvalblservicestub/ApprovalBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="244" column="18" lean-forward="false" selection-start-line="244" selection-start-column="18" selection-end-line="244" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PromotionTotalVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PromotionGoodsVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/promotionblservicedriver/PromotionBlServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="30" column="9" lean-forward="true" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PromotionClientVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="19" column="5" lean-forward="false" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/BillVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/promotionblservicestub/PromotionBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="14" column="80" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="80" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#870#871#0" expanded="true" />
-            <element signature="e#914#915#0" expanded="true" />
-            <element signature="e#979#980#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
-            <element signature="e#1088#1089#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/userblservicedriver/UserBlServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/client_blservicestub/userblservicestub/UserBlServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="76" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#662#663#0" expanded="true" />
-            <element signature="e#706#707#0" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#810#811#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/userblservice/UserBlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-=======
     <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/clientblservicedriver/ClientBlServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-19">
           <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/main/java/vo/UserVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#661#662#0" expanded="true" />
-            <element signature="e#701#702#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/vo/PromotionVO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding>
-            <element signature="e#251#252#0" expanded="true" />
-            <element signature="e#285#286#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/businesslogicservice/promotionblservice/PromotionBlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/BusinessHistoryBlServiceDiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="21" column="102" lean-forward="true" selection-start-line="21" selection-start-column="102" selection-end-line="21" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/BusinessConditionBlServiceStubTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="32" column="24" lean-forward="false" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-=======
     <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/purchaseblservicedriver/PurchaseTradeBillBlServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-158">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/org/junit/Assert.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="333" column="0" lean-forward="false" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/approvalblservicedriver/ApprovalBlServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="28" column="61" lean-forward="true" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/client_presentationdriver/reportblservicedriver/SaleDetailBlServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="23" column="117" lean-forward="false" selection-start-line="23" selection-start-column="117" selection-end-line="23" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>9.0</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>ERPClient</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
-=======
->>>>>>> 2befcdffb479061d4d07203012f7e73e655b5678
   </component>
 </project>

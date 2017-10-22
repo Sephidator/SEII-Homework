@@ -20,4 +20,16 @@ public class PromotionTotalVO extends PromotionVO {
         this.voucher = voucher;
         this.gift = gift;
     }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public double getVoucher() {
+        return voucher;
+    }
+
+    public HashMap<String, Integer> getGift() {
+        return gift;
+    }
 }
