@@ -2,6 +2,7 @@ package dataservice.goodsdataservice;
 
 import businesslogic.blutility.ResultMessage;
 import po.GoodsPO;
+
 import java.rmi.RemoteException;
 
 public interface GoodsDataService {

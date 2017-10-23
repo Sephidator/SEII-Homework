@@ -19,7 +19,7 @@ public class AccountInfoDataServiceDriver {
 
     @Test
     public void getAccountRem() throws Exception {
-        assertEquals(accountInfoDataService.getAccountRem("621226240201712345"),0);
+        assertEquals(accountInfoDataService.getAccountRem("621226240201712345"),0,0.1);
     }
 
 }

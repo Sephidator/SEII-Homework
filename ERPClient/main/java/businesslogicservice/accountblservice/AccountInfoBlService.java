@@ -1,14 +1,12 @@
 package businesslogicservice.accountblservice;
 
+import businesslogic.blutility.ResultMessage;
+
 /**
  * 账户详情显示账户的属性，提供对该账户的修改权限
  * Created by wangn on 2017.10.18.
  */
 public interface AccountInfoBlService {
-
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
 
     /*修改账户属性，成功返回true*/
     public ResultMessage mockAccountName(String accountID, String newName);

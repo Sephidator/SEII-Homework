@@ -1,10 +1,8 @@
 package businesslogicservice.editbillblservice;
-import businesslogic.blutility.ResultMessage;
+import vo.InventoryBillVO;
+
+import java.util.ArrayList;
+
 public interface EditInventoryBillBlService {
-
-
-
-    public ResultMessage choose(String ID);
-
-    public ResultMessage getBill(int state);
+    public ArrayList<InventoryBillVO> getInventoryBill(int state);
 }

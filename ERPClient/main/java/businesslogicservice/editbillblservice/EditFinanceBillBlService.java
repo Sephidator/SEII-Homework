@@ -1,30 +1,8 @@
 package businesslogicservice.editbillblservice;
+import vo.FinanceBillVO;
 
-/**
- *
- * Created by wangn on 2017.10.19.
- */
+import java.util.ArrayList;
+
 public interface EditFinanceBillBlService {
-
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
-
-
-    public String getNotAcDocID();
-
-
-    public String getDraftDocID();
-
-
-    public String getSelectDocID(Object clickObj);
-
-
-    public void mockDoc();
-
-
-    public void updateDocStatus();
-
-
-    public String getCheckMessage();
+    public ArrayList<FinanceBillVO> getFinanceBill(int state);
 }

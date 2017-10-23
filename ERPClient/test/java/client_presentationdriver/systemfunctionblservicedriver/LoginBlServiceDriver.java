@@ -11,7 +11,7 @@ public class LoginBlServiceDriver {
 
     @Test
     public void findClient() throws Exception {
-        assertEquals(service.findClient("123","123").getID(),"123");
+        assertEquals(service.findClient("123","123").getID(),null);
     }
 
 }

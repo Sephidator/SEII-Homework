@@ -1,5 +1,6 @@
 package client_blservicestub.accountblservicestub;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.accountblservice.AccountBlService;
 import po.UserPO;
 import vo.AccountVO;
@@ -9,19 +10,19 @@ import java.util.ArrayList;
 /**
  * Created by wangn on 2017.10.21.
  */
-public class AccountBlServiceStub implements AccountBlService{
+public class AccountBlServiceStub implements AccountBlService {
 
     @Override
     public ResultMessage isPrimeRight(UserPO po) {
         if(po.isTop())
-            return ResultMessage.Success;
+            return ResultMessage.success;
         else
-            return ResultMessage.Success;
+            return ResultMessage.success;
     }
 
     @Override
     public ResultMessage addAccount(String accountID, String name) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override

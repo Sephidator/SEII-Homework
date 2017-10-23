@@ -3,21 +3,21 @@ package po;
 import java.io.Serializable;
 
 /**
- * ÉÌÆ··ÖÀàÖµ¶ÔÏó
+ * å•†å“åˆ†ç±»å€¼å¯¹è±¡
  */
 public class GoodsPO implements Serializable {
 
-    private String ID; //ÉÌÆ·±àºÅ
-    private String name; //ÉÌÆ·Ãû³Æ
-    private String sortID;//ÉÌÆ·ËùÔÚµÄÉÌÆ··ÖÀàµÄID
-    private String model; //ÉÌÆ·ĞÍºÅ
-    private int number; //ÉÌÆ·ÊıÁ¿
-    private double cost; //ÉÌÆ·½ø¼Û
-    private double retail; //ÉÌÆ·ÁãÊÛ¼Û
-    private double latestCost; //ÉÌÆ·×î½ü½ø¼Û
-    private double latestRetail; //ÉÌÆ·×î½üÁãÊÛ¼Û
-    private int alarmNum; //ÉÌÆ·±¨¾¯ÊıÁ¿
-    private String comment; //ÉÌÆ·µÄ±¸×¢
+    private String ID; //å•†å“ç¼–å·
+    private String name; //å•†å“åç§°
+    private String sortID;//å•†å“æ‰€åœ¨çš„å•†å“åˆ†ç±»çš„ID
+    private String model; //å•†å“å‹å·
+    private int number; //å•†å“æ•°é‡
+    private double cost; //å•†å“è¿›ä»·
+    private double retail; //å•†å“é›¶å”®ä»·
+    private double latestCost; //å•†å“æœ€è¿‘è¿›ä»·
+    private double latestRetail; //å•†å“æœ€è¿‘é›¶å”®ä»·
+    private int alarmNum; //å•†å“æŠ¥è­¦æ•°é‡
+    private String comment; //å•†å“çš„å¤‡æ³¨
 
     public GoodsPO(String ID, String name,String sortID, String model, int number,
                    double cost, double retail, double latestCost,

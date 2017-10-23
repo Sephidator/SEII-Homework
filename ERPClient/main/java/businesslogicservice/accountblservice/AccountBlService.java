@@ -1,4 +1,5 @@
 package businesslogicservice.accountblservice;
+import businesslogic.blutility.ResultMessage;
 import po.UserPO;//TODO 完成包的路径
 import vo.AccountVO;
 
@@ -9,10 +10,6 @@ import java.util.ArrayList;
  * Created by wangn on 2017.10.18.
  */
 public interface AccountBlService {
-
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
 
     /*验证用户的权限情况，最高权限返回true*/
     public ResultMessage isPrimeRight(UserPO po);
