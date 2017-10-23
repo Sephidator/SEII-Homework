@@ -16,7 +16,7 @@ public class UserVO {
     //帐号通知消息
     public String[] notice;
 
-    public UserVO(){
+    public UserVO() {
 
     }
 
@@ -56,5 +56,9 @@ public class UserVO {
 
     public String[] getNotice() {
         return notice;
+    }
+
+    public String toString() {
+        return "ID=" + ID;
     }
 }
