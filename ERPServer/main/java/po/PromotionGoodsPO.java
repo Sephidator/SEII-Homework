@@ -1,7 +1,7 @@
 package po;
 
-import java.util.HashMap;
 import java.util.Date;
+import java.util.HashMap;
 
 //组合特价包的促销策略对象
 public class PromotionGoodsPO extends PromotionPO {

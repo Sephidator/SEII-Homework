@@ -1,5 +1,6 @@
 package client_presentationdriver.financeblservicedriver;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.financeblservice.CashBillBlService;
 import client_blservicestub.financeblservicestub.CashBillBlServiceStub;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class CashBillBlServiceDriver {
 
     @Test
     public void newCashBill() throws Exception {
-        assertEquals(cashBillBlService.newCashBill("XJFYD-2017-10-21-12345",new ArrayList<String>(){},new ArrayList<String>(){},"0","finance"), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.newCashBill("XJFYD-2017-10-21-12345",new ArrayList<String>(){},new ArrayList<String>(){},"0","finance"), ResultMessage.success);
     }
 
     @Test
@@ -37,12 +38,12 @@ public class CashBillBlServiceDriver {
 
     @Test
     public void mockCashBill() throws Exception {
-        assertEquals(cashBillBlService.mockCashBill("XJFYD-2017-10-21-12345",new ArrayList<String>(){},new ArrayList<String>(){},"0","finance"), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.mockCashBill("XJFYD-2017-10-21-12345",new ArrayList<String>(){},new ArrayList<String>(){},"0","finance"), ResultMessage.success);
     }
 
     @Test
     public void mockCashBillStatus() throws Exception {
-        assertEquals(cashBillBlService.mockCashBillStatus("XJFYD-2017-10-21-12345"), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.mockCashBillStatus("XJFYD-2017-10-21-12345"), ResultMessage.success);
     }
 
     @Test
@@ -62,12 +63,12 @@ public class CashBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         CashBillVO cashBillVO = new CashBillVO("XJFYD-2017-10-22-12345",0, new Date(), 0,"wang","",map);
-        assertEquals(cashBillBlService.reverseCashBill(cashBillVO), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.reverseCashBill(cashBillVO), ResultMessage.success);
     }
 
     @Test
     public void showButton() throws Exception {
-        assertEquals(cashBillBlService.showButton("XJFYD-2017-10-22-12345"), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.showButton("XJFYD-2017-10-22-12345"), ResultMessage.success);
     }
 
     @Test
@@ -75,7 +76,7 @@ public class CashBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         CashBillVO cashBillVO = new CashBillVO("XJFYD-2017-10-22-12345",0, new Date(), 0,"wang","",map);
-        assertEquals(cashBillBlService.submitDoc(cashBillVO), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.submitDoc(cashBillVO), ResultMessage.success);
     }
 
     @Test
@@ -83,7 +84,7 @@ public class CashBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         CashBillVO cashBillVO = new CashBillVO("XJFYD-2017-10-22-12345",0, new Date(), 0,"wang","",map);
-        assertEquals(cashBillBlService.saveDoc(cashBillVO), CashBillBlService.ResultMessage.Success);
+        assertEquals(cashBillBlService.saveDoc(cashBillVO), ResultMessage.success);
     }
 
 }

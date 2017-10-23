@@ -12,7 +12,7 @@ public class UserVO {
     //帐号名称
     public String ID;
     //帐号密码
-    public String passport;
+    public String password;
     //帐号通知消息
     public String[] notice;
 
@@ -20,13 +20,13 @@ public class UserVO {
 
     }
 
-    public UserVO(int type, int age, boolean top, String name, String ID, String passport, String[] notice) {
+    public UserVO(int type, int age, boolean top, String name, String ID, String password, String[] notice) {
         this.type = type;
         this.age = age;
         this.top = top;
         this.name = name;
         this.ID = ID;
-        this.passport = passport;
+        this.password = password;
         this.notice = notice;
     }
 
@@ -50,8 +50,8 @@ public class UserVO {
         return ID;
     }
 
-    public String getPassport() {
-        return passport;
+    public String getPassword() {
+        return password;
     }
 
     public String[] getNotice() {

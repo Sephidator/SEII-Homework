@@ -15,17 +15,17 @@ public class UserPO implements Serializable{
     //帐号名称
     private String ID;
     //帐号密码
-    private String passport;
+    private String password;
     //帐号通知消息
     private String[] notice;
 
-    public UserPO(int type, int age, boolean top, String name, String ID, String passport, String[] notice) {
+    public UserPO(int type, int age, boolean top, String name, String ID, String password, String[] notice) {
         this.type = type;
         this.age = age;
         this.top = top;
         this.name = name;
         this.ID = ID;
-        this.passport = passport;
+        this.password = password;
         this.notice = notice;
     }
 
@@ -49,8 +49,8 @@ public class UserPO implements Serializable{
         return ID;
     }
 
-    public String getPassport() {
-        return passport;
+    public String getPassword() {
+        return password;
     }
 
     public String[] getNotice() {

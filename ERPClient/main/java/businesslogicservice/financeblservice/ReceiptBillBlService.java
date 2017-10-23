@@ -1,6 +1,8 @@
 package businesslogicservice.financeblservice;
 
 import java.util.ArrayList;
+
+import businesslogic.blutility.ResultMessage;
 import vo.ReceiptBillVO;
 import po.UserPO;//TODO
 
@@ -11,15 +13,11 @@ import po.UserPO;//TODO
  */
 public interface ReceiptBillBlService {
 
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
-
     /*返回收款单的编号*/
     public String getReceiptBillID(ReceiptBillVO vo);
 
     /*新建收款单，成功改变单据状态，返回true*/
-    public ResultMessage newReceiptBill(String DocID, ArrayList<String> client,ArrayList<String> transList, String total, String operator);
+    public ResultMessage newReceiptBill(String DocID, ArrayList<String> client, ArrayList<String> transList, String total, String operator);
 
     /*查看收款单，返回信息，list里面依次包含所有信息*/
     public ReceiptBillVO showReceiptBill(String DocID);

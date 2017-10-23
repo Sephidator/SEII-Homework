@@ -12,20 +12,20 @@ import java.util.Date;
 
 public class LogVO implements Serializable{
 
-    private ArrayList<String> operatorList;//执行动作的操作人
+    private ArrayList<UserVO> operatorList;//执行动作的操作人
 
     private ArrayList<String> actionList;//发生的动作
 
     private ArrayList<Date> timeList;//执行动作的时间
 
     /*构造函数，添加日志信息*/
-    public LogVO(String o, String a, Date t) {
-        addOperator(o);
-        addAction(a);
-        addTime(t);
+    public LogVO(ArrayList<UserVO> operatorList,ArrayList<String> actionList, ArrayList<Date> timeList) {
+        this.operatorList=operatorList;
+        this.actionList=actionList;
+        this.timeList=timeList;
     }
 
-    public ArrayList<String> getOperatorList() {
+    public ArrayList<UserVO> getOperatorList() {
         return operatorList;
     }
 
@@ -40,7 +40,7 @@ public class LogVO implements Serializable{
     /********************添加日志信息***********************/
 
     /*添加操作人员，成功为true*/
-    public boolean addOperator(String operator) {
+    public boolean addOperator(UserVO operator) {
         operatorList.add(operator);
         return true;
     }

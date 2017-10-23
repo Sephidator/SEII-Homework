@@ -3,6 +3,7 @@ package businesslogicservice.initialblservice;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslogic.blutility.ResultMessage;
 import po.ClientPO;
 import po.AccountPO;
 import po.GoodsPO;
@@ -16,10 +17,6 @@ import vo.InitialVO;
  * Created by wangn on 2017.10.19.
  */
 public interface InitialBlService {
-
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
 
     /*返回商品类单据信息，包括：商品分类，某一商品的名称，类别，型号，进价/售价（默认为去年平均），最近进价和最近售价留空*/
     public ArrayList<GoodsPO> getLastYearGoods(Date current);

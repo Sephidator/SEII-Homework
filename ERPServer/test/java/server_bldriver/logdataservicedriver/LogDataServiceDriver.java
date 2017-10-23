@@ -6,6 +6,7 @@ import org.junit.Test;
 import po.LogPO;
 import server_dataservicestub.logdataservicestub.LogDataServiceStub;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -18,22 +19,24 @@ public class LogDataServiceDriver {
     LogDataService logDataService = new LogDataServiceStub();
     @Test
     public void find() throws Exception {
-        assertEquals(logDataService.find(2017).getOperator(),"finance");
+        ArrayList<String> list=new ArrayList<>();
+        list.add("finance");
+        assertEquals(list,logDataService.find(2017).getOperatorList());
     }
 
     @Test
     public void insert() throws Exception {
-        assertEquals(logDataService.insert(new LogPO("finance","add new CashBill",new Date())), ResultMessage.success);
+        assertEquals(logDataService.insert(new LogPO(null,null,null)), ResultMessage.success);
     }
 
     @Test
     public void delete() throws Exception {
-        assertEquals(logDataService.delete(new LogPO("finance","add new CashBill",new Date())),ResultMessage.success);
+        assertEquals(logDataService.delete(new LogPO(null,null,null)),ResultMessage.success);
     }
 
     @Test
     public void update() throws Exception {
-        assertEquals(logDataService.update(new LogPO("finance","add new CashBill",new Date())),ResultMessage.success);
+        assertEquals(logDataService.update(new LogPO(null,null,null)),ResultMessage.success);
     }
 
     @Test

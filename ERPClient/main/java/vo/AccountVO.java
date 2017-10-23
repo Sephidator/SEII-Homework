@@ -16,18 +16,13 @@ public class AccountVO implements Serializable{
 
     private double remaining;//账户余额
 
-    private boolean viewStatus = true;//删除账户时，账户不可用
-    /*构造函数*/
-    public AccountVO(String bankAcc, String name, double rem) {
-        newAccount(bankAcc, name, rem);
-    }
+    private boolean viewState = true;//删除账户时，账户不可用
 
-    /*传入账号和名字以及余额，建立新账户，成功返回true*/
-    public boolean newAccount(String bankAcc, String name, double rem) {
-        this.bankAccount = bankAcc;
-        this.accountName = name;
-        this.remaining = rem;
-        return true;
+    public AccountVO(String bankAccount, String accountName, double remaining, boolean viewState) {
+        this.bankAccount = bankAccount;
+        this.accountName = accountName;
+        this.remaining = remaining;
+        this.viewState = viewState;
     }
 
     public String getBankAccount() {
@@ -43,7 +38,7 @@ public class AccountVO implements Serializable{
     }
 
     public boolean isViewStatus() {
-        return viewStatus;
+        return viewState;
     }
 
     /**
@@ -52,6 +47,6 @@ public class AccountVO implements Serializable{
     @Override
     public String toString() {
         return "[账号=" + this.bankAccount + ", " + "账号名称=" + this.accountName + ", 账户余额=" + this.remaining
-                + ", 可见状态=" + this.viewStatus + "]";
+                + ", 可见状态=" + this.viewState + "]";
     }
 }

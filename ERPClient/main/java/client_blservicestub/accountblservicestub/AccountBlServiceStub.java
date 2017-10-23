@@ -27,7 +27,7 @@ public class AccountBlServiceStub implements AccountBlService {
 
     @Override
     public AccountVO showAccount(String accountID) {
-        return new AccountVO("6212262402017123456","wang",0);
+        return new AccountVO("6212262402017123456","wang",0,true);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class AccountBlServiceStub implements AccountBlService {
     @Override
     public ArrayList<AccountVO> searchAccount(String keyWords) {
         ArrayList<AccountVO> accountVOArrayList = new ArrayList<AccountVO>();
-        accountVOArrayList.add(new AccountVO("6212262402017123456","wang",0));
+        accountVOArrayList.add(new AccountVO("6212262402017123456","wang",0,true));
         return accountVOArrayList;
     }
 }

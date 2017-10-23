@@ -1,8 +1,7 @@
 package po;
 
-import java.util.HashMap;
-
 import java.util.Date;
+import java.util.HashMap;
 
 //针对不同级别用户的促销策略对象
 public class PromotionClientPO extends PromotionPO {

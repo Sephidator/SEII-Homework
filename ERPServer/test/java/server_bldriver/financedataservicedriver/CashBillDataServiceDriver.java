@@ -28,7 +28,7 @@ public class CashBillDataServiceDriver {
     public void find() throws Exception {
         HashMap map = new HashMap<String, Double>();
         map.put("lampX",10000);
-        CashBillPO cashBillPO = new CashBillPO("233",0,new Date(),10000,"finance","",map);
+        CashBillPO cashBillPO = new CashBillPO("XJFYD-2017-10-22-12345",0,new Date(),10000,"finance","",map);
         assertEquals(cashBillPO.getID(),service.find("233").getID());
     }
 

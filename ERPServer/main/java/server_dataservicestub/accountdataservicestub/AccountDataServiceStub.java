@@ -22,7 +22,7 @@ public class AccountDataServiceStub implements AccountDataService{
 
     @Override
     public AccountPO find(String accountID) throws RemoteException {
-        return new AccountPO("6212262402017123456","wang",0);
+        return new AccountPO("6212262402017123456","wang",0,true);
     }
 
     @Override

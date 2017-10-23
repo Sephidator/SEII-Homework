@@ -19,24 +19,24 @@ public class LogPO implements Serializable{
     private ArrayList<Date> timeList;//执行动作的时间
 
     /*构造函数，添加日志信息*/
-    public LogPO(String o, String a, Date t) {
-        addOperator(o);
-        addAction(a);
-        addTime(t);
+    public LogPO(ArrayList<String> operatorList, ArrayList<String> actionList, ArrayList<Date> timeList) {
+        this.operatorList=operatorList;
+        this.actionList=actionList;
+        this.timeList=timeList;
     }
 
     /*返回日志中操作人员*/
-    public ArrayList<String> getOperator() {
+    public ArrayList<String> getOperatorList() {
         return operatorList;
     }
 
     /*返回日志中动作*/
-    public ArrayList<String> getAction() {
+    public ArrayList<String> getActionList() {
         return actionList;
     }
 
     /*返回日志中时间*/
-    public ArrayList<Date> getTime() {
+    public ArrayList<Date> getTimeList() {
         return timeList;
     }
 

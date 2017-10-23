@@ -1,6 +1,8 @@
 package businesslogicservice.financeblservice;
 
 import java.util.ArrayList;
+
+import businesslogic.blutility.ResultMessage;
 import vo.PaymentBillVO;
 import po.UserPO;//TODO
 
@@ -10,15 +12,11 @@ import po.UserPO;//TODO
  */
 public interface PaymentBillBlService {
 
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
-
     /*返回付款单的编号，格式为FKD-yyyyMMdd-xxxxx*/
     public String getPaymentBillID(PaymentBillVO vo);
 
     /*新建付款单，成功改变单据状态，返回true*/
-    public ResultMessage newPaymentBill(String DocID, ArrayList<String> client,ArrayList<String> transList, String total, String operator);
+    public ResultMessage newPaymentBill(String DocID, ArrayList<String> client, ArrayList<String> transList, String total, String operator);
 
     /*查看付款单，返回信息，list里面依次包含所有信息*/
     public PaymentBillVO showPaymentBill(String DocID);

@@ -27,17 +27,17 @@ public class AccountDataServiceDriver {
 
     @Test
     public void insert() throws Exception {
-        assertEquals(accountDataService.insert(new AccountPO("621226240201712345","wang",0)), ResultMessage.success);
+        assertEquals(accountDataService.insert(new AccountPO("621226240201712345","wang",0,true)), ResultMessage.success);
     }
 
     @Test
     public void delete() throws Exception {
-        assertEquals(accountDataService.delete(new AccountPO("621226240201712345","wang",0)),ResultMessage.success);
+        assertEquals(accountDataService.delete(new AccountPO("621226240201712345","wang",0,true)),ResultMessage.success);
     }
 
     @Test
     public void update() throws Exception {
-        assertEquals(accountDataService.update(new AccountPO("621226240201712345","wang",0)),ResultMessage.success);
+        assertEquals(accountDataService.update(new AccountPO("621226240201712345","wang",0,true)),ResultMessage.success);
     }
 
     @Test

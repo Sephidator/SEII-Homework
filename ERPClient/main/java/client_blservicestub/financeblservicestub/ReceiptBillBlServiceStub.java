@@ -1,5 +1,6 @@
 package client_blservicestub.financeblservicestub;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.financeblservice.ReceiptBillBlService;
 import po.UserPO;
 import vo.ReceiptBillVO;
@@ -20,7 +21,7 @@ public class ReceiptBillBlServiceStub implements ReceiptBillBlService{
 
     @Override
     public ResultMessage newReceiptBill(String DocID, ArrayList<String> client, ArrayList<String> transList, String total, String operator) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
@@ -33,12 +34,12 @@ public class ReceiptBillBlServiceStub implements ReceiptBillBlService{
 
     @Override
     public ResultMessage mockReceiptBill(String DocID, ArrayList<String> client, ArrayList<String> transList, String total, String operator) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage mockReceiptBillStatus(String DocID) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
@@ -56,21 +57,21 @@ public class ReceiptBillBlServiceStub implements ReceiptBillBlService{
 
     @Override
     public ResultMessage reverseReceiptBill(ReceiptBillVO vo) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage showButton(String DocID) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage submitDoc(ReceiptBillVO vo) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage saveDoc(ReceiptBillVO vo) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 }

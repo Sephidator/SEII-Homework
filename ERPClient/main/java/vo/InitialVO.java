@@ -19,20 +19,12 @@ public class InitialVO implements Serializable{
 
     private ArrayList<String> init_accountID;//每一个账户都有一个ID
 
-    /*构造函数*/
-    public InitialVO(String goods, String client, String account) {
-        init(goods, client, account);
+    public InitialVO(int initYear, ArrayList<String> init_goodsID, ArrayList<String> init_clientID, ArrayList<String> init_accountID) {
+        this.initYear = initYear;
+        this.init_goodsID = init_goodsID;
+        this.init_clientID = init_clientID;
+        this.init_accountID = init_accountID;
     }
-
-    /*建立新账，成功返回true*/
-    public boolean init(String goods, String client, String account) {
-        //init methods
-        setGoodsID(goods);
-        setClientID(client);
-        setAccountID(account);
-        return true;
-    }
-
 
     public int getInitYear() {
         return initYear;

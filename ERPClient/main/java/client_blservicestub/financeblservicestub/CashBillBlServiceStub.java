@@ -1,5 +1,6 @@
 package client_blservicestub.financeblservicestub;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.financeblservice.CashBillBlService;
 import po.UserPO;
 import vo.CashBillVO;
@@ -21,7 +22,7 @@ public class CashBillBlServiceStub implements CashBillBlService{
 
     @Override
     public ResultMessage newCashBill(String DocID, ArrayList<String> bankAccount, ArrayList<String> itemList, String total, String operator) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
@@ -34,12 +35,12 @@ public class CashBillBlServiceStub implements CashBillBlService{
 
     @Override
     public ResultMessage mockCashBill(String DocID, ArrayList<String> bankAccount, ArrayList<String> itemList, String total, String operator) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage mockCashBillStatus(String DocID) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
@@ -57,21 +58,21 @@ public class CashBillBlServiceStub implements CashBillBlService{
 
     @Override
     public ResultMessage reverseCashBill(CashBillVO vo) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage showButton(String DocID) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage submitDoc(CashBillVO vo) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage saveDoc(CashBillVO vo) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 }

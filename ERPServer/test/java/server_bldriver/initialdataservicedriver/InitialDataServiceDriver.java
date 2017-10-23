@@ -23,7 +23,7 @@ public class InitialDataServiceDriver {
 
     @Test
     public void insert() throws Exception {
-        assertEquals(initialDataService.insert(new InitialPO(2017, new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>())),2017);
+        assertEquals(initialDataService.insert(new InitialPO(2017, new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>())),ResultMessage.success);
     }
 
     @Test

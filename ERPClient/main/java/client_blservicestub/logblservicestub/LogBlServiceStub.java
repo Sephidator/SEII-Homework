@@ -1,7 +1,10 @@
 package client_blservicestub.logblservicestub;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.logblservice.LogBlService;
+import vo.InitialVO;
 import vo.LogVO;
+import vo.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,13 +16,17 @@ public class LogBlServiceStub implements LogBlService{
 
     @Override
     public ArrayList<LogVO> getLog(Date from, Date to) {
+        ArrayList<UserVO> list=new ArrayList<>();
+        UserVO user=new UserVO(0, 23, true, "LiuQin", "ID", "123", null);
+        list.add(user);
+
         ArrayList<LogVO> logVOArrayList = new ArrayList<LogVO>();
-        logVOArrayList.add(new LogVO("finance","addCashBill",new Date()));
+        logVOArrayList.add(new LogVO(list,null,null));
         return logVOArrayList;
     }
 
     @Override
     public ResultMessage writeLog(String operator, String action, Date date) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 }

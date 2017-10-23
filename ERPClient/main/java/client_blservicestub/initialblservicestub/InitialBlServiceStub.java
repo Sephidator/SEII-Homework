@@ -1,5 +1,6 @@
 package client_blservicestub.initialblservicestub;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.initialblservice.InitialBlService;
 import po.AccountPO;
 import po.ClientPO;
@@ -38,24 +39,29 @@ public class InitialBlServiceStub implements InitialBlService{
     @Override
     public ArrayList<AccountPO> getLastYearAccount(Date current) {
         ArrayList<AccountPO> accountPOArrayList = new ArrayList<AccountPO>();
-        accountPOArrayList.add(new AccountPO("6212262402017123456","wang",0));
+        accountPOArrayList.add(new AccountPO("6212262402017123456","wang",0,true));
         return accountPOArrayList;
     }
 
     @Override
     public ResultMessage establishInitial(ArrayList<GoodsVO> goods, ArrayList<ClientVO> client, ArrayList<AccountVO> account) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 
     @Override
     public ArrayList<InitialVO> getInitial(int year) {
         ArrayList<InitialVO> initialVOArrayList = new ArrayList<InitialVO>();
-        initialVOArrayList.add(new InitialVO("SP","KH","6212262402017123456"));
+        ArrayList<String> list=new ArrayList<>();
+        list.add("SP");
+        list.add("KH");
+        list.add("6212262402017123456");
+
+        initialVOArrayList.add(new InitialVO(2017,list,list,list));
         return initialVOArrayList;
     }
 
     @Override
     public ResultMessage showButton(int year) {
-        return ResultMessage.Success;
+        return ResultMessage.success;
     }
 }

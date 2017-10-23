@@ -1,6 +1,8 @@
 package businesslogicservice.financeblservice;
 
 import java.util.ArrayList;
+
+import businesslogic.blutility.ResultMessage;
 import vo.CashBillVO;
 import po.UserPO; //TODO
 
@@ -10,15 +12,11 @@ import po.UserPO; //TODO
  */
 public interface CashBillBlService {
 
-    /******************************/
-    public enum ResultMessage{True, False, Success};
-    /*****************************/
-
     /*返回现金费用单的编号，格式为XJFYD-yyyyMMdd-xxxxx*/
     public String getCashBillID(CashBillVO vo);
 
     /*新建现金费用单，成功改变单据状态，返回true*/
-    public ResultMessage newCashBill(String DocID, ArrayList<String> bankAccount,ArrayList<String> itemList,
+    public ResultMessage newCashBill(String DocID, ArrayList<String> bankAccount, ArrayList<String> itemList,
                                      String total, String operator);
     /*查看现金费用单，返回信息，list里面依次包含所有信息*/
     public CashBillVO showCashBill(String DocID);

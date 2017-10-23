@@ -17,17 +17,12 @@ public class AccountPO implements Serializable{
     private double remaining;//账户余额
 
     private boolean viewState = true;//删除账户时，账户不可用
-    /*构造函数*/
-    public AccountPO(String bankAcc, String name, double rem) {
-        newAccount(bankAcc, name, rem);
-    }
 
-    /*传入账号和名字以及余额，建立新账户，成功返回true*/
-    public boolean newAccount(String bankAcc, String name, double rem) {
-        this.bankAccount = bankAcc;
-        this.accountName = name;
-        this.remaining = rem;//TODO 这里会有账户余额的初始值0.0，所以新建的时候允许输入余额吗？
-        return true;
+    public AccountPO(String bankAccount, String accountName, double remaining, boolean viewState) {
+        this.bankAccount = bankAccount;
+        this.accountName = accountName;
+        this.remaining = remaining;
+        this.viewState = viewState;
     }
 
     /*返回账户的账号*/

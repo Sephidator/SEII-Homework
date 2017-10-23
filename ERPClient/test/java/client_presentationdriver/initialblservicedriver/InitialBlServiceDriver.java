@@ -1,11 +1,13 @@
 package client_presentationdriver.initialblservicedriver;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.initialblservice.InitialBlService;
 import client_blservicestub.initialblservicestub.InitialBlServiceStub;
 import org.junit.Test;
 import vo.AccountVO;
 import vo.ClientVO;
 import vo.GoodsVO;
+import vo.InitialVO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,17 +37,22 @@ public class InitialBlServiceDriver {
 
     @Test
     public void establishInitial() throws Exception {
-        assertEquals(initialBlService.establishInitial(new ArrayList<GoodsVO>(),new ArrayList<ClientVO>(),new ArrayList<AccountVO>()), InitialBlService.ResultMessage.Success);
+        assertEquals(initialBlService.establishInitial(new ArrayList<GoodsVO>(),new ArrayList<ClientVO>(),new ArrayList<AccountVO>()), ResultMessage.success);
     }
 
     @Test
     public void getInitial() throws Exception {
-        assertEquals(initialBlService.getInitial(2017).get(0).getInit_goodsID(),"SP");
+        ArrayList<InitialVO> initialVOArrayList = new ArrayList<InitialVO>();
+        ArrayList<String> list=new ArrayList<>();
+        list.add("SP");
+        list.add("KH");
+        list.add("6212262402017123456");
+        assertEquals(initialBlService.getInitial(2017).get(0).getInit_goodsID(),list);
     }
 
     @Test
     public void showButton() throws Exception {
-        assertEquals(initialBlService.showButton(2017), InitialBlService.ResultMessage.Success);
+        assertEquals(initialBlService.showButton(2017), ResultMessage.success);
     }
 
 }

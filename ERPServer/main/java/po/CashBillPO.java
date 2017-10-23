@@ -1,7 +1,5 @@
 package po;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -11,7 +9,7 @@ import java.util.HashMap;
  * @version:
  */
 
-public class CashBillPO extends FinanceBillPO{
+public class CashBillPO extends FinanceBillPO {
 
     private HashMap<String,Double> itemList;//现金费用单条目清单的条目名和金额
 

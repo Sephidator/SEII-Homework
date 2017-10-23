@@ -26,12 +26,12 @@ public class AccountBlServiceDriver {
 
     @Test
     public void showAccount() throws Exception {
-        assertEquals(accountBlService.showAccount("6212262402017123456").toString(), "[账号=6212262402017123456, 账号名称=wang, 账户余额=0, 可见状态=true]");
+        assertEquals(accountBlService.showAccount("6212262402017123456").toString(), "[账号=6212262402017123456, 账号名称=wang, 账户余额=0.0, 可见状态=true]");
     }
 
     @Test
     public void getAccountID() throws Exception {
-        assertEquals(accountBlService.getAccountID(new AccountVO("6212262402017123456","wang",0)),"6212262402017123456");
+        assertEquals(accountBlService.getAccountID(new AccountVO("6212262402017123456","wang",0,true)),"6212262402017123456");
     }
 
     @Test
@@ -41,12 +41,12 @@ public class AccountBlServiceDriver {
 
     @Test
     public void getAccountRem() throws Exception {
-        assertEquals(accountBlService.getAccountRem("6212262402017123456"),0);
+        assertEquals(accountBlService.getAccountRem("6212262402017123456"),0,0.1);
     }
 
     @Test
     public void searchAccount() throws Exception {
-        assertEquals(accountBlService.searchAccount("wang").get(0).toString(),"[账号=6212262402017123456, 账号名称=wang, 账户余额=0, 可见状态=true]");
+        assertEquals(accountBlService.searchAccount("wang").get(0).toString(),"[账号=6212262402017123456, 账号名称=wang, 账户余额=0.0, 可见状态=true]");
     }
 
 }

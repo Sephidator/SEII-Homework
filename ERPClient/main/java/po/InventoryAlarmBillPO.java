@@ -7,10 +7,11 @@ public class InventoryAlarmBillPO extends InventoryBillPO {
     private HashMap<String,Integer> alarmList; //报警单中商品名称和实际数量
 
     public InventoryAlarmBillPO(String ID, int state,
-                                Date time, HashMap<String,Integer> alarmGoods) {
+                                Date time, HashMap<String,Integer> alarmList) {
         this.ID = ID;
         this.state = state;
         this.time = time;
+        this.alarmList=alarmList;
     }
 
     public HashMap<String, Integer> getAlarmList() {

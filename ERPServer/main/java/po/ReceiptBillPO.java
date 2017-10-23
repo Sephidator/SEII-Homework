@@ -1,7 +1,5 @@
 package po;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -11,7 +9,7 @@ import java.util.HashMap;
  * @version:
  */
 
-public class ReceiptBillPO extends FinanceBillPO{
+public class ReceiptBillPO extends FinanceBillPO {
 
     private String client;//付款单的客户，包括供应商和销售商组成的字符
 

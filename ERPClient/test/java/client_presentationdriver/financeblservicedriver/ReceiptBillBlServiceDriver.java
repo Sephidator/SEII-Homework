@@ -1,5 +1,6 @@
 package client_presentationdriver.financeblservicedriver;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.financeblservice.ReceiptBillBlService;
 import client_blservicestub.financeblservicestub.ReceiptBillBlServiceStub;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class ReceiptBillBlServiceDriver {
 
     @Test
     public void newReceiptBill() throws Exception {
-        assertEquals(receiptBillBlService.newReceiptBill("SKD-2017-10-21-12345",new ArrayList<String>(){},new ArrayList<String>(){},"0","finance"), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.newReceiptBill("SKD-2017-10-21-12345",new ArrayList<String>(){},new ArrayList<String>(){},"0","finance"), ResultMessage.success);
 
     }
 
@@ -38,12 +39,12 @@ public class ReceiptBillBlServiceDriver {
 
     @Test
     public void mockReceiptBill() throws Exception {
-        assertEquals(receiptBillBlService.mockReceiptBillStatus("SKD-2017-10-21-12345"), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.mockReceiptBillStatus("SKD-2017-10-21-12345"), ResultMessage.success);
     }
 
     @Test
     public void mockReceiptBillStatus() throws Exception {
-        assertEquals(receiptBillBlService.mockReceiptBillStatus("SKD-2017-10-21-12345"), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.mockReceiptBillStatus("SKD-2017-10-21-12345"), ResultMessage.success);
 
     }
 
@@ -62,12 +63,12 @@ public class ReceiptBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         ReceiptBillVO paymentBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillBlService.reverseReceiptBill(paymentBillVO), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.reverseReceiptBill(paymentBillVO), ResultMessage.success);
     }
 
     @Test
     public void showButton() throws Exception {
-        assertEquals(receiptBillBlService.showButton(""), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.showButton(""), ResultMessage.success);
     }
 
     @Test
@@ -75,7 +76,7 @@ public class ReceiptBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         ReceiptBillVO paymentBillVO = new ReceiptBillVO("SKD-2017-10-22-12345",0, new Date(), 0,"wang","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillBlService.submitDoc(paymentBillVO), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.submitDoc(paymentBillVO), ResultMessage.success);
     }
 
     @Test
@@ -83,7 +84,7 @@ public class ReceiptBillBlServiceDriver {
         HashMap map = new HashMap<String,Double>();
         map.put("lamp",1000);
         ReceiptBillVO paymentBillVO = new ReceiptBillVO("FKD-2017-10-22-12345",0, new Date(), 0,"wang","","经销商：张三，供应商：李四",map);
-        assertEquals(receiptBillBlService.saveDoc(paymentBillVO), ReceiptBillBlService.ResultMessage.Success);
+        assertEquals(receiptBillBlService.saveDoc(paymentBillVO), ResultMessage.success);
     }
 
 }

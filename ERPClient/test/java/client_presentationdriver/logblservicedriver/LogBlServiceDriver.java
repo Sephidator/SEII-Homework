@@ -1,5 +1,6 @@
 package client_presentationdriver.logblservicedriver;
 
+import businesslogic.blutility.ResultMessage;
 import businesslogicservice.logblservice.LogBlService;
 import client_blservicestub.logblservicestub.LogBlServiceStub;
 import org.junit.Test;
@@ -16,12 +17,12 @@ public class LogBlServiceDriver {
     LogBlService logBlService = new LogBlServiceStub();
     @Test
     public void getLog() throws Exception {
-        assertEquals(logBlService.getLog(new Date(),new Date()).get(0).getOperatorList().get(0),"finance");
+        assertEquals(logBlService.getLog(new Date(),new Date()).get(0).getOperatorList().get(0).getName(),"LiuQin");
     }
 
     @Test
     public void writeLog() throws Exception {
-        assertEquals(logBlService.writeLog("","",new Date()), LogBlService.ResultMessage.Success);
+        assertEquals(logBlService.writeLog("","",new Date()), ResultMessage.success);
     }
 
 }
