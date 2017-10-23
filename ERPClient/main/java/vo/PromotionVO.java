@@ -27,4 +27,9 @@ public class PromotionVO {
     public Date getEnd() {
         return end;
     }
+
+    @Override
+    public String toString() {
+        return "ID" + ID;
+    }
 }
