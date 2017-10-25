@@ -2,257 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc7db88f-6199-47ec-9245-fb74841187c8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/CashBillBlService$ResultMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/PaymentBillBlService$ResultMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/ReceiptBillBlService$ResultMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/initialblservice/InitialBlService$ResultMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/logblservice/LogBlService$ResultMessage.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogic/blutility/ResultMessage.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogic/blutility/ResultMessage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/accountblservice/AccountBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/accountblservice/AccountBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/accountblservice/AccountInfoBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/accountblservice/AccountInfoBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/approvalblservice/ApprovalBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/approvalblservice/ApprovalBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/clientblservice/ClientBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/clientblservice/ClientBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/clientblservice/ClientInfoBlservice.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/clientblservice/ClientInfoBlservice.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/editbillblservice/EditFinanceBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/editbillblservice/EditFinanceBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/editbillblservice/EditInventoryBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/editbillblservice/EditInventoryBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/editbillblservice/EditPurchaseSaleBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/editbillblservice/EditPurchaseSaleBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/CashBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/CashBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/PaymentBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/PaymentBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/ReceiptBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/financeblservice/ReceiptBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodsblservice/GoodsBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodsblservice/GoodsBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodsblservice/GoodsInfoBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodsblservice/GoodsInfoBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodssortblservice/GoodsSortBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodssortblservice/GoodsSortBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodssortblservice/GoodsSortInfoBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/goodssortblservice/GoodsSortInfoBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/initialblservice/InitialBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/initialblservice/InitialBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/inventoryblservice/InventoryCheckBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/inventoryblservice/InventoryCheckBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/inventoryblservice/InventoryLossOverBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/inventoryblservice/InventoryLossOverBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/inventoryblservice/InventoryVerificationBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/inventoryblservice/InventoryVerificationBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/logblservice/LogBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/logblservice/LogBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/promotionblservice/PromotionBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/promotionblservice/PromotionBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/purchaseblservice/PurchaseRefundBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/purchaseblservice/PurchaseRefundBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/purchaseblservice/PurchaseTradeBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/purchaseblservice/PurchaseTradeBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/reportblservice/BusinessConditionBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/reportblservice/BusinessConditionBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/reportblservice/BusinessHistoryBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/reportblservice/BusinessHistoryBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/reportblservice/SaleDetailBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/reportblservice/SaleDetailBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/saleblservice/SaleRefundBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/saleblservice/SaleRefundBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/saleblservice/SaleTradeBillBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/saleblservice/SaleTradeBillBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/AdministratorPanelBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/AdministratorPanelBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/FinancePanelBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/FinancePanelBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/InventoryPanelBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/InventoryPanelBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/LoginBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/LoginBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/ManagerPanelBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/ManagerPanelBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/PurchaseSalePanelBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/systemfunctionicservice/PurchaseSalePanelBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/userblservice/UserBlService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogicservice/userblservice/UserBlService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/accountblservicestub/AccountBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/accountblservicestub/AccountBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/accountblservicestub/AccountInfoBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/accountblservicestub/AccountInfoBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/approvalblservicestub/ApprovalBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/approvalblservicestub/ApprovalBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/clientblservicestub/ClientBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/clientblservicestub/ClientBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/clientblservicestub/ClientInfoBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/clientblservicestub/ClientInfoBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/editbillblservicestub/EditFinanceBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/editbillblservicestub/EditFinanceBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/editbillblservicestub/EditInventoryBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/editbillblservicestub/EditInventoryBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/editbillblservicestub/EditPurchaseSaleBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/editbillblservicestub/EditPurchaseSaleBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/financeblservicestub/CashBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/financeblservicestub/CashBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/financeblservicestub/PaymentBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/financeblservicestub/PaymentBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/financeblservicestub/ReceiptBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/financeblservicestub/ReceiptBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodsblservicestub/GoodsBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodsblservicestub/GoodsBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodsblservicestub/GoodsInfoBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodsblservicestub/GoodsInfoBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodssortblservicestub/GoodsSortBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodssortblservicestub/GoodsSortBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodssortblservicestub/GoodsSortInfoBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/goodssortblservicestub/GoodsSortInfoBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/initialblservicestub/InitialBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/initialblservicestub/InitialBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/inventoryblservicestub/InventoryCheckBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/inventoryblservicestub/InventoryCheckBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/inventoryblservicestub/InventoryLossOverBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/inventoryblservicestub/InventoryLossOverBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/inventoryblservicestub/InventoryVerificationBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/inventoryblservicestub/InventoryVerificationBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/logblservicestub/LogBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/logblservicestub/LogBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/promotionblservicestub/PromotionBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/promotionblservicestub/PromotionBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/purchaseblservicestub/PurchaseRefundBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/purchaseblservicestub/PurchaseRefundBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/purchaseblservicestub/PurchaseTradeBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/purchaseblservicestub/PurchaseTradeBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/reportblservicestub/BusinessConditionBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/reportblservicestub/BusinessConditionBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/reportblservicestub/BusinessHistoryBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/reportblservicestub/BusinessHistoryBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/reportblservicestub/SaleDetailBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/reportblservicestub/SaleDetailBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/saleblservicestub/SaleRefundBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/saleblservicestub/SaleRefundBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/saleblservicestub/SaleTradeBillBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/saleblservicestub/SaleTradeBillBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/AdministratorPanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/AdministratorPanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/FinancePanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/FinancePanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/InventoryPanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/InventoryPanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/LoginBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/LoginBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/ManagerPanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/ManagerPanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/PurchaseSalePanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/PurchaseSalePanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/userblservicestub/UserBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/userblservicestub/UserBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/accountblservicedriver/AccountBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/accountblservicedriver/AccountBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/accountblservicedriver/AccountInfoBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/accountblservicedriver/AccountInfoBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/approvalblservicedriver/ApprovalBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/approvalblservicedriver/ApprovalBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/clientblservicedriver/ClientBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/clientblservicedriver/ClientBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/clientblservicedriver/ClientInfoBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/clientblservicedriver/ClientInfoBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/editbillblservicedriver/EditInventoryBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/editbillblservicedriver/EditInventoryBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/editbillblservicedriver/EditPurchaseSaleBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/editbillblservicedriver/EditPurchaseSaleBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$1.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$2.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$3.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$4.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$1.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$2.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$3.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$4.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver$1.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver$2.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodsblservicedriver/GoodsBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodsblservicedriver/GoodsBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodsblservicedriver/GoodsInfoBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodsblservicedriver/GoodsInfoBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodssortblservicedriver/GoodsSortBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodssortblservicedriver/GoodsSortBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodssortblservicedriver/GoodsSortInfoBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/goodssortblservicedriver/GoodsSortInfoBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/initialblservicedriver/InitialBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/initialblservicedriver/InitialBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/inventoryblservicedriver/InventoryCheckBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/inventoryblservicedriver/InventoryCheckBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/inventoryblservicedriver/InventoryLossOverBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/inventoryblservicedriver/InventoryLossOverBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/inventoryblservicedriver/InventoryVerificationBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/inventoryblservicedriver/InventoryVerificationBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/logblservicedriver/LogBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/logblservicedriver/LogBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/promotionblservicedriver/PromotionBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/promotionblservicedriver/PromotionBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/purchaseblservicedriver/PurchaseRefundBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/purchaseblservicedriver/PurchaseRefundBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/purchaseblservicedriver/PurchaseTradeBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/purchaseblservicedriver/PurchaseTradeBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/reportblservicedriver/BusinessConditionBlServiceStubTest.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/reportblservicedriver/BusinessConditionBlServiceStubTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/reportblservicedriver/BusinessHistoryBlServiceDiver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/reportblservicedriver/BusinessHistoryBlServiceDiver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/reportblservicedriver/SaleDetailBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/reportblservicedriver/SaleDetailBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/saleblservicedriver/SaleRefundBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/saleblservicedriver/SaleRefundBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/saleblservicedriver/SaleTradeBillBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/saleblservicedriver/SaleTradeBillBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/AdministratorPanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/AdministratorPanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/FinancePanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/FinancePanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/InventoryPanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/InventoryPanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/LoginBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/LoginBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/ManagerPanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/ManagerPanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/PurchaseSalePanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/PurchaseSalePanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/userblservicedriver/UserBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/userblservicedriver/UserBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/accountdataservice/AccountDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/accountdataservice/AccountDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/accountdataservice/AccountInfoDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/accountdataservice/AccountInfoDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/clientdataservice/ClientDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/clientdataservice/ClientDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/clientdataservice/ClientInfoDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/clientdataservice/ClientInfoDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/financedataservice/CashBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/financedataservice/CashBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/financedataservice/PaymentBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/financedataservice/PaymentBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/financedataservice/ReceiptBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/financedataservice/ReceiptBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodsdataservice/GoodsDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodsdataservice/GoodsDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodsdataservice/GoodsInfoDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodsdataservice/GoodsInfoDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodssortdataservice/GoodsSortDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodssortdataservice/GoodsSortDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodssortdataservice/GoodsSortInfoDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/goodssortdataservice/GoodsSortInfoDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/initialdataservice/InitialDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/initialdataservice/InitialDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryCheckDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryCheckDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryGiftBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryGiftBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryLossOverBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryLossOverBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryVerificationDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/inventorydataservice/InventoryVerificationDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/logdataservice/LogDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/logdataservice/LogDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/promotiondataservice/PromotionDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/promotiondataservice/PromotionDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/purchasedataservice/PurchaseRefundBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/purchasedataservice/PurchaseRefundBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/purchasedataservice/PurchaseTradeBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/purchasedataservice/PurchaseTradeBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/saledataservice/SaleRefundBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/saledataservice/SaleRefundBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/saledataservice/SaleTradeBillDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/saledataservice/SaleTradeBillDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/userdataservice/UserDataService.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/dataservice/userdataservice/UserDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/AccountPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/AccountPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/BillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/BillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/CashBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/CashBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/ClientPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/ClientPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/FinanceBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/FinanceBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/GoodsPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/GoodsPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/GoodsSortPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/GoodsSortPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InitialPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InitialPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryAlarmBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryAlarmBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryGiftBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryGiftBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryLossOverBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/InventoryLossOverBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/LogPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/LogPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/MessagePO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/MessagePO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PaymentBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PaymentBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionClientPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionClientPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionGoodsPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionGoodsPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionTotalPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PromotionTotalPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PurchaseBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PurchaseBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PurchaseRefundBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PurchaseRefundBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PurchaseTradeBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/PurchaseTradeBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/ReceiptBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/ReceiptBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/RepositoryPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/RepositoryPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/SaleBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/SaleBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/SaleRefundBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/SaleRefundBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/SaleTradeBillPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/SaleTradeBillPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/UserPO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/po/UserPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/AccountVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/AccountVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/BillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/BillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/CashBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/CashBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/ClientVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/ClientVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/FinanceBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/FinanceBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/GoodsSortVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/GoodsSortVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/GoodsVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/GoodsVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InitialVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InitialVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryAlarmBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryAlarmBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryGiftBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryGiftBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryLossOverBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/InventoryLossOverBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/LogVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/LogVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/MessageVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/MessageVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PaymentBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PaymentBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionClientVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionClientVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionGoodsVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionGoodsVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionTotalVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionTotalVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PromotionVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PurchaseBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PurchaseBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PurchaseRefundBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PurchaseRefundBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PurchaseTradeBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/PurchaseTradeBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/ReceiptBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/ReceiptBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/RepositoryVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/RepositoryVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/SaleBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/SaleBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/SaleRefundBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/SaleRefundBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/SaleTradeBillVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/SaleTradeBillVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/UserVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/UserVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ERPServer/po/LogPO.class" afterPath="$PROJECT_DIR$/out/production/ERPServer/po/LogPO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ERPServer/server_bldriver/financedataservicedriver/CashBillDataServiceDriver.class" afterPath="$PROJECT_DIR$/out/production/ERPServer/server_bldriver/financedataservicedriver/CashBillDataServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ERPServer/server_bldriver/initialdataservicedriver/InitialDataServiceDriver.class" afterPath="$PROJECT_DIR$/out/production/ERPServer/server_bldriver/initialdataservicedriver/InitialDataServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ERPServer/server_bldriver/logdataservicedriver/LogDataServiceDriver.class" afterPath="$PROJECT_DIR$/out/production/ERPServer/server_bldriver/logdataservicedriver/LogDataServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ERPServer/server_dataservicestub/logdataservicestub/LogDataServiceStub.class" afterPath="$PROJECT_DIR$/out/production/ERPServer/server_dataservicestub/logdataservicestub/LogDataServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/.idea/misc.xml" afterPath="$PROJECT_DIR$/../ERPClient/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../ERPClient/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/CashBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/CashBillBlService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/PaymentBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/PaymentBillBlService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/ReceiptBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/ReceiptBillBlService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/initialblservice/InitialBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/initialblservice/InitialBlService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/logblservice/LogBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/logblservice/LogBlService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/accountblservicestub/AccountBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/accountblservicestub/AccountBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/CashBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/CashBillBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/PaymentBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/PaymentBillBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/ReceiptBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/ReceiptBillBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/initialblservicestub/InitialBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/initialblservicestub/InitialBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/logblservicestub/LogBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/logblservicestub/LogBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/AccountPO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/po/AccountPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/InventoryAlarmBillPO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/po/InventoryAlarmBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/LogPO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/po/LogPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/UserPO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/po/UserPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/AccountVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/AccountVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/InitialVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/InitialVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/LogVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/LogVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/UserVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/UserVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/accountblservicedriver/AccountBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/accountblservicedriver/AccountBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/financeblservicedriver/CashBillBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/financeblservicedriver/PaymentBillBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/financeblservicedriver/ReceiptBillBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/initialblservicedriver/InitialBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/initialblservicedriver/InitialBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/logblservicedriver/LogBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/logblservicedriver/LogBlServiceDriver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/AccountPO.java" afterPath="$PROJECT_DIR$/main/java/po/AccountPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/CashBillPO.java" afterPath="$PROJECT_DIR$/main/java/po/CashBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/GoodsPO.java" afterPath="$PROJECT_DIR$/main/java/po/GoodsPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/InventoryAlarmBillPO.java" afterPath="$PROJECT_DIR$/main/java/po/InventoryAlarmBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/InventoryGiftBillPO.java" afterPath="$PROJECT_DIR$/main/java/po/InventoryGiftBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/InventoryLossOverBillPO.java" afterPath="$PROJECT_DIR$/main/java/po/InventoryLossOverBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/LogPO.java" afterPath="$PROJECT_DIR$/main/java/po/LogPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/PaymentBillPO.java" afterPath="$PROJECT_DIR$/main/java/po/PaymentBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/PromotionClientPO.java" afterPath="$PROJECT_DIR$/main/java/po/PromotionClientPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/PromotionGoodsPO.java" afterPath="$PROJECT_DIR$/main/java/po/PromotionGoodsPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/PromotionPO.java" afterPath="$PROJECT_DIR$/main/java/po/PromotionPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/ReceiptBillPO.java" afterPath="$PROJECT_DIR$/main/java/po/ReceiptBillPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/UserPO.java" afterPath="$PROJECT_DIR$/main/java/po/UserPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/server_dataservicestub/accountdataservicestub/AccountDataServiceStub.java" afterPath="$PROJECT_DIR$/main/java/server_dataservicestub/accountdataservicestub/AccountDataServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/server_dataservicestub/logdataservicestub/LogDataServiceStub.java" afterPath="$PROJECT_DIR$/main/java/server_dataservicestub/logdataservicestub/LogDataServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountDataServiceDriver.java" afterPath="$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountDataServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/CashBillDataServiceDriver.java" afterPath="$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/CashBillDataServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/server_bldriver/initialdataservicedriver/InitialDataServiceDriver.java" afterPath="$PROJECT_DIR$/test/java/server_bldriver/initialdataservicedriver/InitialDataServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java" afterPath="$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -267,7 +18,7 @@
       <file leaf-file-name="LogDataServiceDriver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
+            <state relative-caret-position="247">
               <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
               <folding />
             </state>
@@ -297,7 +48,7 @@
       <file leaf-file-name="AccountDataServiceStub.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/accountdataservicestub/AccountDataServiceStub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
+            <state relative-caret-position="361">
               <caret line="24" column="64" lean-forward="false" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
               <folding />
             </state>
@@ -307,8 +58,8 @@
       <file leaf-file-name="AccountDataServiceDriver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountDataServiceDriver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+            <state relative-caret-position="665">
+              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -317,7 +68,7 @@
       <file leaf-file-name="CashBillPO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/java/po/CashBillPO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3">
+            <state relative-caret-position="19">
               <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
@@ -327,7 +78,7 @@
       <file leaf-file-name="InitialPO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/java/po/InitialPO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
+            <state relative-caret-position="190">
               <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
@@ -454,8 +205,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -858,8 +607,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1148,14 +899,12 @@
       <workItem from="1508682126316" duration="7125000" />
       <workItem from="1508723992209" duration="1593000" />
       <workItem from="1508725854714" duration="5846000" />
-      <workItem from="1508763019316" duration="1882000" />
+      <workItem from="1508763019316" duration="1967000" />
+      <workItem from="1508770558466" duration="63000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GoodsSortInfoDataServiceDriver - 2017.10.23 at 10h 35m 28s.xml">
-      <configuration name="GoodsSortInfoDataServiceDriver" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="LogDataServiceDriver - 2017.10.23 at 21h 06m 13s.xml">
       <configuration name="LogDataServiceDriver" configurationId="JUnit" />
     </history-entry>
@@ -1183,9 +932,12 @@
     <history-entry file="server_bldriver_in_ERPServer - 2017.10.23 at 21h 53m 36s.xml">
       <configuration name="server_bldriver in ERPServer" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="server_bldriver_in_ERPServer - 2017.10.23 at 21h 55m 18s.xml">
+      <configuration name="server_bldriver in ERPServer" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19570000" />
+    <option name="totallyTimeSpent" value="19718000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
@@ -1193,29 +945,29 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.4973545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32891247" sideWeight="0.50566894" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32891247" sideWeight="0.49433106" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.49433106" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25774753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26152682" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.4973545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1603,7 +1355,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
+        <state relative-caret-position="247">
           <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
           <folding />
         </state>
@@ -1619,7 +1371,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/po/InitialPO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
+        <state relative-caret-position="190">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
@@ -1635,7 +1387,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/accountdataservicestub/AccountDataServiceStub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
+        <state relative-caret-position="361">
           <caret line="24" column="64" lean-forward="false" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
           <folding />
         </state>
@@ -1643,15 +1395,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountDataServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+        <state relative-caret-position="665">
+          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/po/CashBillPO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
+        <state relative-caret-position="19">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
