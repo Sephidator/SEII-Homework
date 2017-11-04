@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class MessageVO {
     private UserVO receiver;
     private UserVO sender;
-    private ArrayList<String> messageList;
+    private String message;
 
-    public MessageVO(UserVO receiver, UserVO sender, ArrayList<String> messageList) {
+    public MessageVO(UserVO receiver, UserVO sender, String message) {
         this.receiver = receiver;
         this.sender = sender;
-        this.messageList = messageList;
+        this.message = message;
     }
 
     public UserVO getReceiver() {
@@ -21,8 +21,8 @@ public class MessageVO {
         return sender;
     }
 
-    public ArrayList<String> getMessageList() {
-        return messageList;
+    public String getMessage() {
+        return message;
     }
 }
 

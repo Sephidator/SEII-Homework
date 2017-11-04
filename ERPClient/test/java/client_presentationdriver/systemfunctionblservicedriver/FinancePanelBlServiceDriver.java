@@ -11,7 +11,7 @@ public class FinancePanelBlServiceDriver {
 
     @Test
     public void getMessageList() throws Exception {
-        assertEquals("message",service.getMessage(null).getMessageList().get(0));
+        assertEquals("message",service.getMessage(null).getMessage());
     }
 
 }

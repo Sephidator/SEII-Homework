@@ -17,7 +17,7 @@ public class LogBlServiceDriver {
     LogBlService logBlService = new LogBlServiceStub();
     @Test
     public void getLog() throws Exception {
-        assertEquals(logBlService.getLog(new Date(),new Date()).get(0).getOperatorList().get(0).getName(),"LiuQin");
+        assertEquals(logBlService.getLog(new Date(),new Date()).get(0).getOperator().getName(),"LiuQin");
     }
 
     @Test

@@ -16,12 +16,10 @@ public class LogBlServiceStub implements LogBlService{
 
     @Override
     public ArrayList<LogVO> getLog(Date from, Date to) {
-        ArrayList<UserVO> list=new ArrayList<>();
         UserVO user=new UserVO(0, 23, true, "LiuQin", "ID", "123", null);
-        list.add(user);
 
         ArrayList<LogVO> logVOArrayList = new ArrayList<LogVO>();
-        logVOArrayList.add(new LogVO(list,null,null));
+        logVOArrayList.add(new LogVO(user,null,null));
         return logVOArrayList;
     }
 

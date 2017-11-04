@@ -10,8 +10,7 @@ public class PurchaseSalePanelBlServiceStub implements PurchaseSalePanelBlServic
 
     @Override
     public MessageVO getMessage(UserVO user) {
-        ArrayList<String> list=new ArrayList<>();
-        list.add("message");
-        return new MessageVO(user,user,list);
+        String message="message";
+        return new MessageVO(user,user,message);
     }
 }

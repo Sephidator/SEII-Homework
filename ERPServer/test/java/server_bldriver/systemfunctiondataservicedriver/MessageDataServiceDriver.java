@@ -11,7 +11,7 @@ public class MessageDataServiceDriver {
 
     @Test
     public void getMessage() throws Exception {
-        assertEquals(service.getMessage(null).getMessageList().get(0), "message");
+        assertEquals(service.getMessage(null).getMessage(), "message");
     }
 
 }

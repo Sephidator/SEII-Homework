@@ -12,58 +12,33 @@ import java.util.Date;
 
 public class LogVO implements Serializable{
 
-    private ArrayList<UserVO> operatorList;//执行动作的操作人
+    private UserVO operator;//执行动作的操作人
 
-    private ArrayList<String> actionList;//发生的动作
+    private String action;//发生的动作
 
-    private ArrayList<Date> timeList;//执行动作的时间
+    private Date time;//执行动作的时间
 
-    /*构造函数，添加日志信息*/
-    public LogVO(ArrayList<UserVO> operatorList,ArrayList<String> actionList, ArrayList<Date> timeList) {
-        this.operatorList=operatorList;
-        this.actionList=actionList;
-        this.timeList=timeList;
+    public LogVO(UserVO operator, String action, Date time) {
+        this.operator = operator;
+        this.action = action;
+        this.time = time;
     }
 
-    public ArrayList<UserVO> getOperatorList() {
-        return operatorList;
+    public UserVO getOperator() {
+        return operator;
     }
 
-    public ArrayList<String> getActionList() {
-        return actionList;
+    public void setOperator(UserVO operator) {
+        this.operator = operator;
     }
 
-    public ArrayList<Date> getTimeList() {
-        return timeList;
+    public String getAction() {
+        return action;
     }
 
-    /********************添加日志信息***********************/
-
-    /*添加操作人员，成功为true*/
-    public boolean addOperator(UserVO operator) {
-        operatorList.add(operator);
-        return true;
-    }
-
-    /*添加动作，成功为true*/
-    public boolean addAction(String action) {
-        actionList.add(action);
-        return true;
-    }
-
-    /*添加时间，成功为true*/
-    public boolean addTime(Date time) {
-        timeList.add(time);
-        return true;
-    }
-
-    /**
-     * 以#分开各个ArrayList
-     * @see Object#toString()
-     */
     @Override
     public String toString() {
-        return "[操作员=" + this.operatorList + "# 行为=" + this.actionList +"# 时间=" + this.timeList +"]";
+        return "[操作员=" + this.operator + "# 行为=" + this.action +"# 时间=" + this.time +"]";
     }
 
 }

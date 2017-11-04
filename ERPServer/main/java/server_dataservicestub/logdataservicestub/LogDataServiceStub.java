@@ -15,8 +15,7 @@ public class LogDataServiceStub implements LogDataService{
 
     @Override
     public LogPO find(int year) throws RemoteException {
-        ArrayList<String> list=new ArrayList<>();
-        list.add("finance");
+        String list="finance";
         return new LogPO(list,null,null);
     }
 

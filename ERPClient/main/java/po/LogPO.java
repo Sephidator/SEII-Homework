@@ -12,53 +12,28 @@ import java.util.Date;
 
 public class LogPO implements Serializable{
 
-    private ArrayList<String> operatorList;//执行动作的操作人
+    private String operator;//执行动作的操作人
 
-    private ArrayList<String> actionList;//发生的动作
+    private String action;//发生的动作
 
-    private ArrayList<Date> timeList;//执行动作的时间
+    private Date time;//执行动作的时间
 
-    /*构造函数，添加日志信息*/
-    public LogPO(ArrayList<String> operatorList, ArrayList<String> actionList, ArrayList<Date> timeList) {
-        this.operatorList=operatorList;
-        this.actionList=actionList;
-        this.timeList=timeList;
+    public LogPO(String operator, String action, Date time) {
+        this.operator = operator;
+        this.action = action;
+        this.time = time;
     }
 
-    /*返回日志中操作人员*/
-    public ArrayList<String> getOperatorList() {
-        return operatorList;
+    public String getOperator() {
+        return operator;
     }
 
-    /*返回日志中动作*/
-    public ArrayList<String> getActionList() {
-        return actionList;
+    public String getAction() {
+        return action;
     }
 
-    /*返回日志中时间*/
-    public ArrayList<Date> getTimeList() {
-        return timeList;
+    public Date getTime() {
+        return time;
     }
-
-    /********************添加日志信息***********************/
-
-    /*添加操作人员，成功为true*/
-    public boolean addOperator(String operator) {
-        operatorList.add(operator);
-        return true;
-    }
-
-    /*添加动作，成功为true*/
-    public boolean addAction(String action) {
-        actionList.add(action);
-        return true;
-    }
-
-    /*添加时间，成功为true*/
-    public boolean addTime(Date time) {
-        timeList.add(time);
-        return true;
-    }
-
 }
 

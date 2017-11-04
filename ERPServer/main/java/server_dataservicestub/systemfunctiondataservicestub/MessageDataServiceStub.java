@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class MessageDataServiceStub implements MessageDataService{
     @Override
     public MessagePO getMessage(UserPO user) {
-        ArrayList<String> list=new ArrayList<>();
-        list.add("message");
+        String list="message";
         return new MessagePO("cx","cx",list);
     }
 }

@@ -19,9 +19,8 @@ public class LogDataServiceDriver {
     LogDataService logDataService = new LogDataServiceStub();
     @Test
     public void find() throws Exception {
-        ArrayList<String> list=new ArrayList<>();
-        list.add("finance");
-        assertEquals(list,logDataService.find(2017).getOperatorList());
+        String list= "finance";
+        assertEquals(list,logDataService.find(2017).getOperator());
     }
 
     @Test
