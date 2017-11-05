@@ -2,9 +2,9 @@ package client_blservicestub.approvalblservicestub;
 
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.approvalblservice.ApprovalBlService;
-import vo.BillVO;
-import vo.PaymentBillVO;
-import vo.ReceiptBillVO;
+import vo.bill.BillVO;
+import vo.bill.financebill.PaymentBillVO;
+import vo.bill.financebill.ReceiptBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -4,7 +4,7 @@ import businesslogic.blutility.ResultMessage;
 import businesslogicservice.userblservice.UserBlService;
 import client_blservicestub.userblservicestub.UserBlServiceStub;
 import org.junit.Test;
-import vo.UserVO;
+import vo.user.UserVO;
 
 import java.util.ArrayList;
 

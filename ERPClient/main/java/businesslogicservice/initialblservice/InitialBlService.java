@@ -7,10 +7,10 @@ import businesslogic.blutility.ResultMessage;
 import po.ClientPO;
 import po.AccountPO;
 import po.GoodsPO;
-import vo.AccountVO;
-import vo.ClientVO;
-import vo.GoodsVO;
-import vo.InitialVO;
+import vo.account.AccountVO;
+import vo.client.ClientVO;
+import vo.goods.GoodsVO;
+import vo.initial.InitialVO;
 
 /**
  * 期初 建账 以及账目的查看

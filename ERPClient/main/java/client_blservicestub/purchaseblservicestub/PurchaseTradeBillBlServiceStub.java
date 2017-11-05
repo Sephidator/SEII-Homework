@@ -2,7 +2,7 @@ package client_blservicestub.purchaseblservicestub;
 
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
-import vo.GoodsVO;
+import vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

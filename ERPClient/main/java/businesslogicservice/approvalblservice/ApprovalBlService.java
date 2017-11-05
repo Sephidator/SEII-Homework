@@ -1,7 +1,7 @@
 package businesslogicservice.approvalblservice;
 
 import businesslogic.blutility.ResultMessage;
-import vo.BillVO;
+import vo.bill.BillVO;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,5 @@
 package businesslogicservice.editbillblservice;
-import vo.FinanceBillVO;
+import vo.bill.financebill.FinanceBillVO;
 
 import java.util.ArrayList;
 

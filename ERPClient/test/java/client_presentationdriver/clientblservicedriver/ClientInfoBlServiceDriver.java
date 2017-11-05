@@ -1,10 +1,8 @@
 package client_presentationdriver.clientblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
 import businesslogicservice.clientblservice.ClientInfoBlservice;
 import client_blservicestub.clientblservicestub.ClientInfoBlServiceStub;
 import org.junit.Test;
-import vo.UserVO;
 
 import static org.junit.Assert.*;
 

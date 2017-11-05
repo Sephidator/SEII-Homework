@@ -1,8 +1,6 @@
 package businesslogicservice.goodsblservice;
 
-import vo.GoodsVO;
 import businesslogic.blutility.ResultMessage;
-import java.util.ArrayList;
 
 public interface GoodsBlService {
 

@@ -1,8 +1,8 @@
 package businesslogicservice.purchaseblservice;
 
 import businesslogic.blutility.ResultMessage;
-import vo.GoodsVO;
-import vo.PurchaseTradeBillVO;
+import vo.goods.GoodsVO;
+import vo.bill.purchasebill.PurchaseTradeBillVO;
 
 import java.util.ArrayList;
 

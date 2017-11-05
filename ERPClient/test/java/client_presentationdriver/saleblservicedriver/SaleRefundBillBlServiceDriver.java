@@ -4,8 +4,8 @@ import businesslogic.blutility.ResultMessage;
 import businesslogicservice.saleblservice.SaleRefundBillBlService;
 import client_blservicestub.saleblservicestub.SaleRefundBillBlServiceStub;
 import org.junit.Test;
-import vo.GoodsVO;
-import vo.SaleRefundBillVO;
+import vo.goods.GoodsVO;
+import vo.bill.salebill.SaleRefundBillVO;
 
 import java.util.ArrayList;
 

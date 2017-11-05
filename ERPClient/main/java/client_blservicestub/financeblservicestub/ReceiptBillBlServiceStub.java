@@ -3,7 +3,7 @@ package client_blservicestub.financeblservicestub;
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.financeblservice.ReceiptBillBlService;
 import po.UserPO;
-import vo.ReceiptBillVO;
+import vo.bill.financebill.ReceiptBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

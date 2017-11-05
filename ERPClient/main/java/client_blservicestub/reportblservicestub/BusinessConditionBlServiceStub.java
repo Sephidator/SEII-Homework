@@ -1,7 +1,7 @@
 package client_blservicestub.reportblservicestub;
 
 import businesslogicservice.reportblservice.BusinessConditionBlService;
-import vo.PaymentBillVO;
+import vo.bill.financebill.PaymentBillVO;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

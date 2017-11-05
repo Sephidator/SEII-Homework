@@ -1,9 +1,6 @@
 package businesslogicservice.inventoryblservice;
 
-import vo.GoodsVO;
-import vo.InventoryLossOverBillVO;
 import businesslogic.blutility.ResultMessage;
-import java.util.ArrayList;
 
 public interface InventoryLossOverBillBlService {
 

@@ -3,7 +3,7 @@ package businesslogicservice.financeblservice;
 import java.util.ArrayList;
 
 import businesslogic.blutility.ResultMessage;
-import vo.CashBillVO;
+import vo.bill.financebill.CashBillVO;
 import po.UserPO; //TODO
 
 /**

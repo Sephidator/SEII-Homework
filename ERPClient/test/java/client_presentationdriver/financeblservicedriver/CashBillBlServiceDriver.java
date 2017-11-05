@@ -4,7 +4,7 @@ import businesslogic.blutility.ResultMessage;
 import businesslogicservice.financeblservice.CashBillBlService;
 import client_blservicestub.financeblservicestub.CashBillBlServiceStub;
 import org.junit.Test;
-import vo.CashBillVO;
+import vo.bill.financebill.CashBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

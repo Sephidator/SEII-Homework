@@ -3,7 +3,7 @@ package client_presentationdriver.reportblservicedriver;
 import businesslogicservice.reportblservice.SaleDetailBlService;
 import client_blservicestub.reportblservicestub.SaleDetailBlServiceStub;
 import org.junit.Test;
-import vo.SaleTradeBillVO;
+import vo.bill.salebill.SaleTradeBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

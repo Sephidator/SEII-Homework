@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import businesslogic.blutility.ResultMessage;
-import vo.LogVO;
+import vo.log.LogVO;
 
 /**
  * 提供操作日志查看

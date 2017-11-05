@@ -1,7 +1,7 @@
 package businesslogicservice.userblservice;
 
 import businesslogic.blutility.ResultMessage;
-import vo.UserVO;
+import vo.user.UserVO;
 
 import java.util.ArrayList;
 

@@ -3,10 +3,9 @@ package client_presentationdriver.purchaseblservicedriver;
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
 import client_blservicestub.purchaseblservicestub.PurchaseRefundBillBlServiceStub;
-import org.junit.Assert;
 import org.junit.Test;
-import vo.GoodsVO;
-import vo.PurchaseTradeBillVO;
+import vo.goods.GoodsVO;
+import vo.bill.purchasebill.PurchaseTradeBillVO;
 
 import java.util.ArrayList;
 

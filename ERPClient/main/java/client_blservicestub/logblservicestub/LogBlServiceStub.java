@@ -2,9 +2,8 @@ package client_blservicestub.logblservicestub;
 
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.logblservice.LogBlService;
-import vo.InitialVO;
-import vo.LogVO;
-import vo.UserVO;
+import vo.log.LogVO;
+import vo.user.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,7 +1,7 @@
 package businesslogicservice.systemfunctionicservice;
 
-import vo.MessageVO;
-import vo.UserVO;
+import vo.message.MessageVO;
+import vo.user.UserVO;
 
 public interface PurchaseSalePanelBlService {
     public MessageVO getMessage(UserVO receiver);

@@ -1,7 +1,7 @@
 package client_blservicestub.editbillblservicestub;
 
 import businesslogicservice.editbillblservice.EditFinanceBillBlService;
-import vo.FinanceBillVO;
+import vo.bill.financebill.FinanceBillVO;
 
 import java.util.ArrayList;
 

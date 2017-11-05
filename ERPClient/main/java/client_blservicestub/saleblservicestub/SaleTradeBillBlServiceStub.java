@@ -2,7 +2,9 @@ package client_blservicestub.saleblservicestub;
 
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.saleblservice.SaleTradeBillBlService;
-import vo.*;
+import vo.bill.salebill.SaleTradeBillVO;
+import vo.goods.GoodsVO;
+import vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 
