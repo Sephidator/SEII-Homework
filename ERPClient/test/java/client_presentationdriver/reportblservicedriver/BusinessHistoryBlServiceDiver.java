@@ -3,8 +3,8 @@ package client_presentationdriver.reportblservicedriver;
 import businesslogicservice.reportblservice.BusinessHistoryBlService;
 import client_blservicestub.reportblservicestub.BusinessHistoryBlServiceStub;
 import org.junit.Test;
-import vo.BillVO;
-import vo.PaymentBillVO;
+import vo.bill.BillVO;
+import vo.bill.financebill.PaymentBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

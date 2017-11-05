@@ -1,10 +1,8 @@
 package client_blservicestub.systemfunctionblservicestub;
 
 import businesslogicservice.systemfunctionicservice.InventoryPanelBlService;
-import vo.MessageVO;
-import vo.UserVO;
-
-import java.util.ArrayList;
+import vo.message.MessageVO;
+import vo.user.UserVO;
 
 public class InventoryPanelBlServiceStub implements InventoryPanelBlService {
 

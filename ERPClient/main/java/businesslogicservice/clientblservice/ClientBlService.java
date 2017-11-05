@@ -1,8 +1,8 @@
 package businesslogicservice.clientblservice;
 
 import businesslogic.blutility.ResultMessage;
-import vo.ClientVO;
-import vo.UserVO;
+import vo.client.ClientVO;
+import vo.user.UserVO;
 
 import java.util.ArrayList;
 

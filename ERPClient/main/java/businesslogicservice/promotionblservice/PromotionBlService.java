@@ -1,7 +1,7 @@
 package businesslogicservice.promotionblservice;
 
 import businesslogic.blutility.ResultMessage;
-import vo.PromotionVO;
+import vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 

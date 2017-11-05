@@ -1,8 +1,8 @@
 package client_blservicestub.clientblservicestub;
 
 import businesslogicservice.clientblservice.ClientInfoBlservice;
-import vo.ClientVO;
-import vo.UserVO;
+import vo.client.ClientVO;
+import vo.user.UserVO;
 
 public class ClientInfoBlServiceStub implements ClientInfoBlservice{
     @Override

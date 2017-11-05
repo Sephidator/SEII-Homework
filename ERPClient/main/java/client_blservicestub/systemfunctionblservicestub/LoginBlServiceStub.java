@@ -1,7 +1,7 @@
 package client_blservicestub.systemfunctionblservicestub;
 
 import businesslogicservice.systemfunctionicservice.LoginBlService;
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public class LoginBlServiceStub implements LoginBlService{
 

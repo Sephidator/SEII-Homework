@@ -3,7 +3,7 @@ package client_blservicestub.accountblservicestub;
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.accountblservice.AccountBlService;
 import po.UserPO;
-import vo.AccountVO;
+import vo.account.AccountVO;
 
 import java.util.ArrayList;
 

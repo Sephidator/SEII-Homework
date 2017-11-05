@@ -1,9 +1,7 @@
 package client_blservicestub.reportblservicestub;
 
 import businesslogicservice.reportblservice.SaleDetailBlService;
-import vo.BillVO;
-import vo.SaleTradeBillVO;
-import vo.UserVO;
+import vo.bill.salebill.SaleTradeBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

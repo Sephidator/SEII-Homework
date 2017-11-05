@@ -4,10 +4,10 @@ import businesslogic.blutility.ResultMessage;
 import businesslogicservice.approvalblservice.ApprovalBlService;
 import client_blservicestub.approvalblservicestub.ApprovalBlServiceStub;
 import org.junit.Test;
-import vo.BillVO;
-import vo.PaymentBillVO;
-import vo.ReceiptBillVO;
-import vo.SaleTradeBillVO;
+import vo.bill.BillVO;
+import vo.bill.financebill.PaymentBillVO;
+import vo.bill.financebill.ReceiptBillVO;
+import vo.bill.salebill.SaleTradeBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,7 +1,7 @@
 package client_blservicestub.editbillblservicestub;
 
 import businesslogicservice.editbillblservice.EditInventoryBillBlService;
-import vo.InventoryBillVO;
+import vo.bill.inventorybill.InventoryBillVO;
 
 import java.util.ArrayList;
 

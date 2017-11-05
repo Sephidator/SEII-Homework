@@ -5,10 +5,10 @@ import businesslogicservice.initialblservice.InitialBlService;
 import po.AccountPO;
 import po.ClientPO;
 import po.GoodsPO;
-import vo.AccountVO;
-import vo.ClientVO;
-import vo.GoodsVO;
-import vo.InitialVO;
+import vo.account.AccountVO;
+import vo.client.ClientVO;
+import vo.goods.GoodsVO;
+import vo.initial.InitialVO;
 
 import java.util.ArrayList;
 import java.util.Date;

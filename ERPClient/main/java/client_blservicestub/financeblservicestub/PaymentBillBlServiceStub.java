@@ -1,10 +1,9 @@
 package client_blservicestub.financeblservicestub;
 
 import businesslogic.blutility.ResultMessage;
-import businesslogicservice.financeblservice.CashBillBlService;
 import businesslogicservice.financeblservice.PaymentBillBlService;
 import po.UserPO;
-import vo.PaymentBillVO;
+import vo.bill.financebill.PaymentBillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

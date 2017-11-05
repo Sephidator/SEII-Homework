@@ -4,9 +4,9 @@ import businesslogic.blutility.ResultMessage;
 import businesslogicservice.saleblservice.SaleTradeBillBlService;
 import client_blservicestub.saleblservicestub.SaleTradeBillBlServiceStub;
 import org.junit.Test;
-import vo.GoodsVO;
-import vo.PromotionVO;
-import vo.SaleTradeBillVO;
+import vo.goods.GoodsVO;
+import vo.promotion.PromotionVO;
+import vo.bill.salebill.SaleTradeBillVO;
 
 import java.util.ArrayList;
 

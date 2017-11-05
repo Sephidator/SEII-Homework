@@ -1,8 +1,6 @@
 package businesslogicservice.goodssortblservice;
 
-import vo.GoodsSortVO;
 import businesslogic.blutility.ResultMessage;
-import java.util.ArrayList;
 
 public interface GoodsSortBlService {
 

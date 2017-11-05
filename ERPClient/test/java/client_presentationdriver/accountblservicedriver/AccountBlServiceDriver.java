@@ -5,7 +5,7 @@ import businesslogicservice.accountblservice.AccountBlService;
 import client_blservicestub.accountblservicestub.AccountBlServiceStub;
 import org.junit.Test;
 import po.UserPO;
-import vo.AccountVO;
+import vo.account.AccountVO;
 import static org.junit.Assert.*;
 
 /**

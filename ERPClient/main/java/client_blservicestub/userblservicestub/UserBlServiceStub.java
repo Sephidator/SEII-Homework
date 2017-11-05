@@ -2,7 +2,7 @@ package client_blservicestub.userblservicestub;
 
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.userblservice.UserBlService;
-import vo.UserVO;
+import vo.user.UserVO;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package businesslogicservice.clientblservice;
 
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public interface ClientInfoBlservice {
     public ClientVO getClient(String ID);

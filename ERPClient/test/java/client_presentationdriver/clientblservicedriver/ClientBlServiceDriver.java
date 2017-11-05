@@ -3,10 +3,7 @@ package client_presentationdriver.clientblservicedriver;
 import businesslogic.blutility.ResultMessage;
 import businesslogicservice.clientblservice.ClientBlService;
 import client_blservicestub.clientblservicestub.ClientBlServiceStub;
-import vo.ClientVO;
-import vo.UserVO;
-
-import java.util.ArrayList;
+import vo.user.UserVO;
 
 import static org.junit.Assert.*;
 

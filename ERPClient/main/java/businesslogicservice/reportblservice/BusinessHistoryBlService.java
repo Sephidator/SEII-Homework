@@ -1,6 +1,6 @@
 package businesslogicservice.reportblservice;
 
-import vo.BillVO;
+import vo.bill.BillVO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,6 +1,6 @@
 package businesslogicservice.editbillblservice;
-import vo.PurchaseBillVO;
-import vo.SaleBillVO;
+import vo.bill.purchasebill.PurchaseBillVO;
+import vo.bill.salebill.SaleBillVO;
 
 import java.util.ArrayList;
 

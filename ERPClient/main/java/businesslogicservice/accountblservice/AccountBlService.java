@@ -1,7 +1,7 @@
 package businesslogicservice.accountblservice;
 import businesslogic.blutility.ResultMessage;
 import po.UserPO;//TODO 完成包的路径
-import vo.AccountVO;
+import vo.account.AccountVO;
 
 import java.util.ArrayList;
 

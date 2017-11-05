@@ -4,9 +4,9 @@ import businesslogic.blutility.ResultMessage;
 import businesslogicservice.promotionblservice.PromotionBlService;
 import client_blservicestub.promotionblservicestub.PromotionBlServiceStub;
 import org.junit.Test;
-import vo.PromotionGoodsVO;
-import vo.PromotionTotalVO;
-import vo.PromotionVO;
+import vo.promotion.PromotionGoodsVO;
+import vo.promotion.PromotionTotalVO;
+import vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 import java.util.Date;
