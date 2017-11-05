@@ -1,8 +1,6 @@
 package vo.log;
 
 import vo.user.UserVO;
-
-import java.io.Serializable;
 import java.util.Date;
 
 /*
@@ -11,13 +9,16 @@ import java.util.Date;
  * @version:
  */
 
-public class LogVO implements Serializable{
+public class LogVO{
 
     private UserVO operator;//执行动作的操作人
 
     private String action;//发生的动作
 
     private Date time;//执行动作的时间
+
+    public LogVO() {
+    }
 
     public LogVO(UserVO operator, String action, Date time) {
         this.operator = operator;
@@ -29,18 +30,24 @@ public class LogVO implements Serializable{
         return operator;
     }
 
-    public void setOperator(UserVO operator) {
-        this.operator = operator;
-    }
-
     public String getAction() {
         return action;
     }
 
-    @Override
-    public String toString() {
-        return "[操作员=" + this.operator + "# 行为=" + this.action +"# 时间=" + this.time +"]";
+    public Date getTime() {
+        return time;
     }
 
+    public void setOperator(UserVO operator) {
+        this.operator = operator;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 }
 

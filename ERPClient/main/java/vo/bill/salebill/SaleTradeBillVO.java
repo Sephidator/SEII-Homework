@@ -1,16 +1,15 @@
 package vo.bill.salebill;
 
-import vo.bill.salebill.SaleBillVO;
 import vo.client.ClientVO;
-import vo.goods.GoodsVO;
+import vo.promotion.GoodsItemVO;
 import vo.promotion.PromotionVO;
 import vo.user.UserVO;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
- * 销售单PO类
+ * 销售单VO类
  * */
 public class SaleTradeBillVO extends SaleBillVO {
     private PromotionVO promotion; // 适用的促销策略
@@ -19,24 +18,21 @@ public class SaleTradeBillVO extends SaleBillVO {
     private double amountOfVoucher; // 代金卷金额
     private double totalAfterDiscount; // 折让后总额
 
-    public SaleTradeBillVO(String ID, ClientVO client, String repositoryID, UserVO salesman,
-                           UserVO operator, HashMap<GoodsVO, Integer> goodsList,
-                           double totalBeforeDiscount, double discount, double amountOfVoucher,
-                           double totalAfterDiscount, String comment, int state, Date time, PromotionVO promotion) {
+    public SaleTradeBillVO(String ID, String state, Date time, String type, UserVO operator, String comment, ClientVO client, UserVO salesman, ArrayList<GoodsItemVO> saleList, PromotionVO promotion, double totalBeforeDiscount, double discount, double amountOfVoucher, double totalAfterDiscount) {
         this.ID = ID;
-        this.client = client;
-        this.repositoryID = repositoryID;
-        this.salesman = salesman;
-        this.operator = operator;
-        this.goodsList = goodsList;
-        this.totalBeforeDiscount = totalBeforeDiscount;
-        this.discount = discount;
-        this.amountOfVoucher = amountOfVoucher;
-        this.totalAfterDiscount = totalAfterDiscount;
-        this.comment = comment;
         this.state = state;
-        this.time=time;
+        this.time = time;
+        this.type = type;
+        this.operator = operator;
+        this.comment = comment;
+        this.client=client;
+        this.salesman=salesman;
+        this.saleList=saleList;
         this.promotion=promotion;
+        this.totalBeforeDiscount=totalBeforeDiscount;
+        this.discount=discount;
+        this.amountOfVoucher=amountOfVoucher;
+        this.totalAfterDiscount=totalAfterDiscount;
     }
 
     public SaleTradeBillVO(){
@@ -60,5 +56,25 @@ public class SaleTradeBillVO extends SaleBillVO {
 
     public PromotionVO getPromotion(){
         return promotion;
+    }
+
+    public void setPromotion(PromotionVO promotion) {
+        this.promotion = promotion;
+    }
+
+    public void setTotalBeforeDiscount(double totalBeforeDiscount) {
+        this.totalBeforeDiscount = totalBeforeDiscount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public void setAmountOfVoucher(double amountOfVoucher) {
+        this.amountOfVoucher = amountOfVoucher;
+    }
+
+    public void setTotalAfterDiscount(double totalAfterDiscount) {
+        this.totalAfterDiscount = totalAfterDiscount;
     }
 }

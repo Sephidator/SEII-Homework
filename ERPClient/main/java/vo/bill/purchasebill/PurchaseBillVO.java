@@ -2,40 +2,37 @@ package vo.bill.purchasebill;
 
 import vo.bill.BillVO;
 import vo.client.ClientVO;
-import vo.goods.GoodsVO;
-import vo.user.UserVO;
+import vo.promotion.GoodsItemVO;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class PurchaseBillVO extends BillVO {
     protected ClientVO client; // 客户信息
-    protected String repositoryID; // 仓库
-    protected UserVO operator; // 操作员
-    protected HashMap<GoodsVO, Integer> goodsList=new HashMap();
-    protected double totalAmount; // 总额
-    protected String comment; // 备注
+    protected ArrayList<GoodsItemVO> purchaseList; //入库商品列表/出库商品列表
+    protected double total; // 总额
 
     public ClientVO getClient() {
         return client;
     }
 
-    public String getRepositoryID() {
-        return repositoryID;
+    public ArrayList<GoodsItemVO> getPurchaseList() {
+        return purchaseList;
     }
 
-    public UserVO getOperator() {
-        return operator;
+    public double getTotal() {
+        return total;
     }
 
-    public HashMap<GoodsVO, Integer> getGoodsList() {
-        return goodsList;
+    public void setClient(ClientVO client) {
+        this.client = client;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public void setPurchaseList(ArrayList<GoodsItemVO> purchaseList) {
+        purchaseList = purchaseList;
     }
 
-    public String getComment() {
-        return comment;
+    public void setTotalAmount(double total) {
+        this.total = total;
     }
+
 }

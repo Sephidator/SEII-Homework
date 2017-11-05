@@ -2,40 +2,37 @@ package vo.bill.salebill;
 
 import vo.bill.BillVO;
 import vo.client.ClientVO;
-import vo.goods.GoodsVO;
+import vo.promotion.GoodsItemVO;
 import vo.user.UserVO;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class SaleBillVO extends BillVO {
     protected ClientVO client; // 客户信息
-    protected String repositoryID; // 仓库
     protected UserVO salesman; // 业务员
-    protected UserVO operator; // 操作员
-    protected HashMap<GoodsVO, Integer> goodsList=new HashMap();
-    protected String comment; // 备注
+    protected ArrayList<GoodsItemVO> saleList;// 出货商品清单/退货商品清单
 
     public ClientVO getClient() {
         return client;
-    }
-
-    public String getRepositoryID() {
-        return repositoryID;
     }
 
     public UserVO getSalesman() {
         return salesman;
     }
 
-    public UserVO getOperator() {
-        return operator;
+    public ArrayList<GoodsItemVO> getSaleList() {
+        return saleList;
     }
 
-    public HashMap<GoodsVO, Integer> getGoodsList() {
-        return goodsList;
+    public void setClient(ClientVO client) {
+        this.client = client;
     }
 
-    public String getComment() {
-        return comment;
+    public void setSalesman(UserVO salesman) {
+        this.salesman = salesman;
+    }
+
+    public void setSaleList(ArrayList<GoodsItemVO> saleList) {
+        this.saleList = saleList;
     }
 }

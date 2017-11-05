@@ -2,47 +2,146 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc7db88f-6199-47ec-9245-fb74841187c8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogic/clientbl/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/businesslogic/clientbl/.gitkeep" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/logblservicestub/LogBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/logblservicestub/LogBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/AdministratorPanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/AdministratorPanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/FinancePanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/FinancePanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/InventoryPanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/InventoryPanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/ManagerPanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/ManagerPanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/PurchaseSalePanelBlServiceStub.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_blservicestub/systemfunctionblservicestub/PurchaseSalePanelBlServiceStub.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/logblservicedriver/LogBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/logblservicedriver/LogBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/AdministratorPanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/AdministratorPanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/FinancePanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/FinancePanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/InventoryPanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/InventoryPanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/ManagerPanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/ManagerPanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/PurchaseSalePanelBlServiceDriver.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/client_presentationdriver/systemfunctionblservicedriver/PurchaseSalePanelBlServiceDriver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/LogVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/LogVO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/MessageVO.class" afterPath="$PROJECT_DIR$/../ERPClient/out/production/ERPClient/vo/MessageVO.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogic/editbillbl/.gitkeep" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogic/systemfunctionbl/.gitkeep" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/AccountPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/BillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/CashBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/ClientPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/FinanceBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/GoodsPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/GoodsSortPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/InitialPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/InventoryAlarmBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/InventoryBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/InventoryGiftBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/InventoryLossOverBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/LogPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/MessagePO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PaymentBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PromotionClientPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PromotionGoodsPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PromotionPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PromotionTotalPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PurchaseBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PurchaseRefundBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/PurchaseTradeBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/ReceiptBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/RepositoryPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/SaleBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/SaleRefundBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/SaleTradeBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/UserPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryAlarmBillVO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/AccountPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/BillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/CashBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/ClientPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/FinanceBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/GoodsPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/GoodsSortPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/InitialPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/InventoryAlarmBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/InventoryBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/InventoryGiftBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/InventoryLossOverBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/LogPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/MessagePO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PaymentBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PromotionClientPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PromotionGoodsPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PromotionPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PromotionTotalPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PurchaseBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PurchaseRefundBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/PurchaseTradeBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/ReceiptBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/RepositoryPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/SaleBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/SaleRefundBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/SaleTradeBillPO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/java/po/UserPO.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../ERPClient/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/accountblservice/AccountBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/accountblservice/AccountBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/clientblservice/ClientBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/clientblservice/ClientBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/clientblservice/ClientInfoBlservice.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/clientblservice/ClientInfoBlservice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/CashBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/CashBillBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/PaymentBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/PaymentBillBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/ReceiptBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/financeblservice/ReceiptBillBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/initialblservice/InitialBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/initialblservice/InitialBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/logblservice/LogBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/logblservice/LogBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/promotionblservice/PromotionBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/promotionblservice/PromotionBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/saleblservice/SaleTradeBillBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/saleblservice/SaleTradeBillBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/systemfunctionicservice/LoginBlService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/businesslogicservice/systemfunctionicservice/LoginBlService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/accountblservicestub/AccountBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/accountblservicestub/AccountBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/clientblservicestub/ClientBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/clientblservicestub/ClientBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/clientblservicestub/ClientInfoBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/clientblservicestub/ClientInfoBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/CashBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/CashBillBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/PaymentBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/PaymentBillBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/ReceiptBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/financeblservicestub/ReceiptBillBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/initialblservicestub/InitialBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/initialblservicestub/InitialBlServiceStub.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/logblservicestub/LogBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/logblservicestub/LogBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/AdministratorPanelBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/AdministratorPanelBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/FinancePanelBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/FinancePanelBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/InventoryPanelBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/InventoryPanelBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/ManagerPanelBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/ManagerPanelBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/PurchaseSalePanelBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/PurchaseSalePanelBlServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/LogPO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/po/LogPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/po/MessagePO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/po/MessagePO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/LogVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/LogVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/MessageVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/MessageVO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/logblservicedriver/LogBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/logblservicedriver/LogBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/AdministratorPanelBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/AdministratorPanelBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/FinancePanelBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/FinancePanelBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/InventoryPanelBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/InventoryPanelBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/ManagerPanelBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/ManagerPanelBlServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/PurchaseSalePanelBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/systemfunctionblservicedriver/PurchaseSalePanelBlServiceDriver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/promotionblservicestub/PromotionBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/promotionblservicestub/PromotionBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/saleblservicestub/SaleTradeBillBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/saleblservicestub/SaleTradeBillBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/LoginBlServiceStub.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/client_blservicestub/systemfunctionblservicestub/LoginBlServiceStub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/accountdataservice/AccountDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/accountdataservice/AccountDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/clientdataservice/ClientDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/clientdataservice/ClientDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/clientdataservice/ClientInfoDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/clientdataservice/ClientInfoDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/editbilldataservice/EditFinanceBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/editbilldataservice/EditFinanceBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/editbilldataservice/EditInventoryBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/editbilldataservice/EditInventoryBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/editbilldataservice/EditPurchaseSaleBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/editbilldataservice/EditPurchaseSaleBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/financedataservice/CashBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/financedataservice/CashBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/financedataservice/PaymentBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/financedataservice/PaymentBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/financedataservice/ReceiptBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/financedataservice/ReceiptBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodsdataservice/GoodsDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodsdataservice/GoodsDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodsdataservice/GoodsInfoDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodsdataservice/GoodsInfoDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodssortdataservice/GoodsSortDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodssortdataservice/GoodsSortDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodssortdataservice/GoodsSortInfoDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/goodssortdataservice/GoodsSortInfoDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/initialdataservice/InitialDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/initialdataservice/InitialDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryCheckDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryCheckDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryGiftBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryGiftBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryLossOverBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryLossOverBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryVerificationDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/inventorydataservice/InventoryVerificationDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/logdataservice/LogDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/logdataservice/LogDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/promotiondataservice/PromotionDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/promotiondataservice/PromotionDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/purchasedataservice/PurchaseRefundBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/purchasedataservice/PurchaseRefundBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/purchasedataservice/PurchaseTradeBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/purchasedataservice/PurchaseTradeBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/saledataservice/SaleRefundBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/saledataservice/SaleRefundBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/saledataservice/SaleTradeBillDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/saledataservice/SaleTradeBillDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/systemfunctiondataservice/LoginDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/systemfunctiondataservice/LoginDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/systemfunctiondataservice/MessageDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/systemfunctiondataservice/MessageDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/userdataservice/UserDataService.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/dataservice/userdataservice/UserDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/account/AccountVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/account/AccountVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/BillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/BillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/CashBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/CashBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/FinanceBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/FinanceBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/PaymentBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/PaymentBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/ReceiptBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/financebill/ReceiptBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryGiftBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryGiftBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryLossOverBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/inventorybill/InventoryLossOverBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/purchasebill/PurchaseBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/purchasebill/PurchaseBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/purchasebill/PurchaseRefundBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/purchasebill/PurchaseRefundBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/purchasebill/PurchaseTradeBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/purchasebill/PurchaseTradeBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/salebill/SaleBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/salebill/SaleBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/salebill/SaleRefundBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/salebill/SaleRefundBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/salebill/SaleTradeBillVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/bill/salebill/SaleTradeBillVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/client/ClientVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/client/ClientVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/goods/GoodsSortVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/goods/GoodsSortVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/goods/GoodsVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/goods/GoodsVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/initial/InitialVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/initial/InitialVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/log/LogVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/log/LogVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/message/MessageVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/message/MessageVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionClientVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionClientVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionGoodsVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionGoodsVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionTotalVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionTotalVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/promotion/PromotionVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/main/java/vo/user/UserVO.java" afterPath="$PROJECT_DIR$/../ERPClient/main/java/vo/user/UserVO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/accountblservicedriver/AccountBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/accountblservicedriver/AccountBlServiceDriver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/initialblservicedriver/InitialBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/initialblservicedriver/InitialBlServiceDriver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/promotionblservicedriver/PromotionBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/promotionblservicedriver/PromotionBlServiceDriver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/saleblservicedriver/SaleTradeBillBlServiceDriver.java" afterPath="$PROJECT_DIR$/../ERPClient/test/java/client_presentationdriver/saleblservicedriver/SaleTradeBillBlServiceDriver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/LogPO.java" afterPath="$PROJECT_DIR$/main/java/po/LogPO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/po/MessagePO.java" afterPath="$PROJECT_DIR$/main/java/po/MessagePO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/server_dataservicestub/logdataservicestub/LogDataServiceStub.java" afterPath="$PROJECT_DIR$/main/java/server_dataservicestub/logdataservicestub/LogDataServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/java/server_dataservicestub/systemfunctiondataservicestub/MessageDataServiceStub.java" afterPath="$PROJECT_DIR$/main/java/server_dataservicestub/systemfunctiondataservicestub/MessageDataServiceStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java" afterPath="$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/MessageDataServiceDriver.java" afterPath="$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/MessageDataServiceDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../doc/md/详细设计文档/详细设计文档.md" afterPath="$PROJECT_DIR$/../doc/md/详细设计文档/详细设计文档.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,113 +156,103 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LogDataServiceDriver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogDataServiceStub.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/logdataservicestub/LogDataServiceStub.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="18" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageDataServiceStub.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/systemfunctiondataservicestub/MessageDataServiceStub.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="12" column="8" lean-forward="true" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageDataServiceDriver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/MessageDataServiceDriver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientPO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/po/ClientPO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogPO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/po/LogPO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-              <folding>
-                <element signature="e#512#513#0" expanded="true" />
-                <element signature="e#545#546#0" expanded="true" />
-                <element signature="e#574#575#0" expanded="true" />
-                <element signature="e#603#604#0" expanded="true" />
-                <element signature="e#630#631#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MessagePO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/po/MessagePO.java">
+        <entry file="file://$PROJECT_DIR$/main/java/po/message/MessagePO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+            <state relative-caret-position="38">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GiftItemPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/GiftItemPO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GoodsItemPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/GoodsItemPO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PromotionClientPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionClientPO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PromotionGoodsPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionGoodsPO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
-                <element signature="e#380#381#0" expanded="true" />
-                <element signature="e#415#416#0" expanded="true" />
-                <element signature="e#446#447#0" expanded="true" />
-                <element signature="e#480#481#0" expanded="true" />
-                <element signature="e#510#511#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountDataServiceDriver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountDataServiceDriver.java">
+      <file leaf-file-name="PromotionPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionPO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+            <state relative-caret-position="133">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CashBillPO.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/java/po/CashBillPO.java">
+      <file leaf-file-name="PromotionQueryPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionQueryPO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="76">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserPO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/java/po/UserPO.java">
+      <file leaf-file-name="PromotionTotalPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionTotalPO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="76">
               <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserQueryPO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/java/po/user/UserQueryPO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserPO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/java/po/user/UserPO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -207,39 +296,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main/java/dataservice/saledataservice/SaleTradeBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/saledataservicestub/SaleTradeBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/saledataservicestub/SaleRefundBillDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/saledataservice/SaleRefundBillDataService.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/purchasedataservicedriver/PurchaseTradeBillDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/saledataservicedriver/SaleRefundBillDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/saledataservicedriver/SaleTradeBillDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/accountdataservice/AccountDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/accountdataservice/AccountInfoDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/financedataservice/CashBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/financedataservice/PaymentBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/financedataservice/ReceiptBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/initialdataservice/InitialDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/logdataservice/LogDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/accountdataservicestub/AccountInfoDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/financedataservicestub/CashBillDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/financedataservicestub/PaymentBillDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/financedataservicestub/ReceiptBillDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/initialdataservicestub/InitialDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/inventorydataservicestub/InventoryGiftBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/inventorydataservicestub/InventorygiftBillDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/inventorydataservicedriver/InventoryGiftBillDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/ReceiptBillDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/PaymentBillDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/po/GoodsPO.java" />
-        <option value="$PROJECT_DIR$/main/java/po/RepositoryPO.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountInfoDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/systemfunctiondataservice/LoginDataService.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/messagedataservicedriver/MessageDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/server_dataservicestub/systemfunctiondataservicestub/LoginDataServiceStub.java" />
-        <option value="$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/LoginDataServiceDriver.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/editbilldataservice/EditInventoryBillDataService.java" />
-        <option value="$PROJECT_DIR$/main/java/dataservice/editbilldataservice/EditFinanceBillDataService.java" />
         <option value="$PROJECT_DIR$/main/java/dataservice/editbilldataservice/EditPurchaseSaleBillDataService.java" />
         <option value="$PROJECT_DIR$/main/java/server_dataservicestub/editbilldataservicestub/EditInventoryBillDataServiceStub.java" />
         <option value="$PROJECT_DIR$/main/java/server_dataservicestub/editbilldataservicestub/EditFinanceBillDataServiceStub.java" />
@@ -258,6 +314,39 @@
         <option value="$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/MessageDataServiceDriver.java" />
         <option value="$PROJECT_DIR$/main/java/po/LogPO.java" />
         <option value="$PROJECT_DIR$/main/java/po/MessagePO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/goods/GoodsQueryPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/promotion/PromotionQueryPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/promotion/PromotionPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/promotion/PromotionGoodsPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/promotion/PromotionTotalPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/user/UserQueryPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/user/UserVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/BillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/BillQueryVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/BillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/salebill/SaleBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/salebill/SaleRefundBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/salebill/SaleRefundBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/salebill/SaleTradeBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/salebill/SaleTradeBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseRefundBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/inventorybill/LossOverItemPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryGiftBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryGiftBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryLossOverBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/CashBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/CashItemPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/TransItemPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/FinanceBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/CashBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/PaymentBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/financebill/ReceiptBillPO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseTradeBillVO.java" />
+        <option value="$PROJECT_DIR$/main/java/po/user/UserPO.java" />
       </list>
     </option>
   </component>
@@ -267,7 +356,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="width" value="2736" />
     <option name="height" value="1824" />
   </component>
@@ -289,10 +378,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -322,6 +409,114 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="po" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="account" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="bill" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="bill" type="462c0819:PsiDirectoryNode" />
+              <item name="financebill" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="bill" type="462c0819:PsiDirectoryNode" />
+              <item name="inventorybill" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="bill" type="462c0819:PsiDirectoryNode" />
+              <item name="purchasebill" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="bill" type="462c0819:PsiDirectoryNode" />
+              <item name="salebill" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="goods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="initial" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="message" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="promotion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ERPServer" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="po" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ERPServer" type="b2602c69:ProjectViewProjectNode" />
@@ -457,6 +652,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -743,6 +940,7 @@
       <workItem from="1508763019316" duration="1967000" />
       <workItem from="1508770558466" duration="63000" />
       <workItem from="1509628278560" duration="1619000" />
+      <workItem from="1509888693575" duration="1854000" />
     </task>
     <servers />
   </component>
@@ -779,40 +977,48 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21337000" />
+    <option name="totallyTimeSpent" value="23191000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1381" height="885" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.49130765" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.4973545" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32891247" sideWeight="0.5086924" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5026455" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.49130765" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32955405" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26530612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2690854" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.49130765" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32955405" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -826,340 +1032,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/goodssortdataservicedriver/GoodsSortInfoDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/inventorydataservicestub/InventoryGiftBillDataService.java" />
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/inventorydataservicestub/InventoryVerificationDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/inventorydataservicestub/InventoryLossOverBillDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/inventorydataservicedriver/InventoryCheckDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/inventorydataservicedriver/InventoryLossOverBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/inventorydataservicedriver/InventoryVerificationDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/promotiondataservicedriver/PromotionDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/purchasedataservicedriver/PurchaseRefundBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/purchasedataservicedriver/PurchaseTradeBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/saledataservicedriver/SaleRefundBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/userdataservicedriver/UserDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/inventorydataservicestub/InventoryGiftBillDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/inventorydataservicedriver/InventoryGiftBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="16" column="82" lean-forward="false" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/ReceiptBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/PaymentBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/po/GoodsPO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/po/RepositoryPO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="48" column="5" lean-forward="false" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-          <folding>
-            <element signature="e#1179#1180#0" expanded="false" />
-            <element signature="e#1210#1211#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountInfoDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="85" lean-forward="false" selection-start-line="21" selection-start-column="85" selection-end-line="21" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/clientdataservicedriver/ClientDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/clientdataservicedriver/ClientInfoDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/goodsdataservicedriver/GoodsDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/saledataservicedriver/SaleTradeBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/systemfunctiondataservicestub/LoginDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#284#285#0" expanded="false" />
-            <element signature="e#321#322#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/LoginDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/dataservice/systemfunctiondataservice/LoginDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/editbilldataservicestub/EditInventoryBillDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/editbilldataservicestub/EditPurchaseSaleBillDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/editbilldataservicestub/EditFinanceBillDataServiceStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/editbilldataservicedriver/EditFinanceBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/editbilldataservicedriver/EditInventoryBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="13" column="43" lean-forward="false" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/editbilldataservicedriver/EditPurchaseSaleBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="9" column="64" lean-forward="false" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/dataservice/editbilldataservice/EditFinanceBillDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/dataservice/editbilldataservice/EditInventoryBillDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/dataservice/editbilldataservice/EditPurchaseSaleBillDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/dataservice/systemfunctiondataservice/MessageDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/dataservice/financedataservice/CashBillDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/initialdataservicedriver/InitialDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="25" column="162" lean-forward="false" selection-start-line="25" selection-start-column="162" selection-end-line="25" selection-end-column="162" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/financedataservicedriver/CashBillDataServiceDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="30" column="70" lean-forward="false" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/po/InitialPO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/accountdataservicestub/AccountDataServiceStub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -1170,7 +1042,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/accountdataservicedriver/AccountDataServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
+        <state relative-caret-position="415">
           <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
           <folding />
         </state>
@@ -1186,7 +1058,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/logdataservicedriver/LogDataServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="228">
           <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
           <folding />
         </state>
@@ -1194,7 +1066,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/logdataservicestub/LogDataServiceStub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
+        <state relative-caret-position="209">
           <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="18" selection-end-column="41" />
           <folding />
         </state>
@@ -1203,43 +1075,31 @@
     <entry file="file://$PROJECT_DIR$/main/java/server_dataservicestub/systemfunctiondataservicestub/MessageDataServiceStub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="12" column="8" lean-forward="true" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/po/LogPO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
+        <state relative-caret-position="456">
           <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-          <folding>
-            <element signature="e#512#513#0" expanded="true" />
-            <element signature="e#545#546#0" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#603#604#0" expanded="true" />
-            <element signature="e#630#631#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/po/MessagePO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="247">
           <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-          <folding>
-            <element signature="e#380#381#0" expanded="true" />
-            <element signature="e#415#416#0" expanded="true" />
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#480#481#0" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/systemfunctiondataservicedriver/MessageDataServiceDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1256,6 +1116,351 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/clientdataservicedriver/ClientInfoDataServiceDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/java/server_bldriver/clientdataservicedriver/ClientDataServiceDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/account/AccountPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/account/AccountQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/financebill/CashBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding>
+            <element signature="e#772#773#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/financebill/CashItemPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/financebill/FinanceBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/financebill/PaymentBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/financebill/ReceiptBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="34" column="46" lean-forward="false" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+          <folding>
+            <element signature="e#938#939#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/financebill/TransItemPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="39" lean-forward="false" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryGiftBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="21" lean-forward="false" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/inventorybill/InventoryLossOverBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/inventorybill/LossOverItemPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseRefundBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#604#605#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/purchasebill/PurchaseTradeBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="15" lean-forward="false" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/salebill/SaleRefundBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/salebill/SaleBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/BillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/salebill/SaleTradeBillPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="58" column="52" lean-forward="false" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1732#1733#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/bill/BillQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="23" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/client/ClientPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/client/ClientQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/goods/GoodsPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/goods/GoodsQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/goods/GoodsSortPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/goods/GoodsSortQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/initial/InitialPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/log/LogPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/message/MessagePO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/GiftItemPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/GoodsItemPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionClientPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionGoodsPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/promotion/PromotionTotalPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/user/UserQueryPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/po/user/UserPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding />
         </state>
       </provider>

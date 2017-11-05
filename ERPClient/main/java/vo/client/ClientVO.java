@@ -18,14 +18,12 @@ public class ClientVO {
     private double payable; // 客户应付
     private double receivableLimit;// 客户应收额度
     private UserVO salesman; // 默认业务员
+    private boolean visible=true; //客户是否存在
 
     public ClientVO() {
 
     }
 
-    /**
-     * 设置客户的所有信息
-     */
     public ClientVO(String ID, String category, int level, String name,
                     String phone, String address, String post, String email,
                     double receivable, double payable, double receivableLimit, UserVO salesman) {
@@ -91,4 +89,59 @@ public class ClientVO {
         return salesman;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setReceivable(double receivable) {
+        this.receivable = receivable;
+    }
+
+    public void setPayable(double payable) {
+        this.payable = payable;
+    }
+
+    public void setReceivableLimit(double receivableLimit) {
+        this.receivableLimit = receivableLimit;
+    }
+
+    public void setSalesman(UserVO salesman) {
+        this.salesman = salesman;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }

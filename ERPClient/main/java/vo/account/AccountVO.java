@@ -1,52 +1,64 @@
 package vo.account;
 
-import java.io.Serializable;
+public class AccountVO{
 
-/*
- * 账户数据
- * @author:
- * @version:
- */
-
-public class AccountVO implements Serializable{
+    private String ID;//账户ID
 
     private String bankAccount;//账户银行账号
 
-    private String accountName;//账户名字
+    private String name;//账户名字
 
     private double remaining;//账户余额
 
-    private boolean viewState = true;//删除账户时，账户不可用
+    private boolean visible = true;//账户是否存在
 
-    public AccountVO(String bankAccount, String accountName, double remaining, boolean viewState) {
+    public AccountVO() {
+    }
+
+    public AccountVO(String ID, String bankAccount, String name, double remaining) {
+        this.ID = ID;
         this.bankAccount = bankAccount;
-        this.accountName = accountName;
+        this.name = name;
         this.remaining = remaining;
-        this.viewState = viewState;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getBankAccount() {
         return bankAccount;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getName() {
+        return name;
     }
 
     public double getRemaining() {
         return remaining;
     }
 
-    public boolean isViewStatus() {
-        return viewState;
+    public boolean isVisible() {
+        return visible;
     }
 
-    /**
-     * @see Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "[账号=" + this.bankAccount + ", " + "账号名称=" + this.accountName + ", 账户余额=" + this.remaining
-                + ", 可见状态=" + this.viewState + "]";
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRemaining(double remaining) {
+        this.remaining = remaining;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

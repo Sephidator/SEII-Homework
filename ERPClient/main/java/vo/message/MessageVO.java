@@ -24,5 +24,17 @@ public class MessageVO {
     public String getMessage() {
         return message;
     }
+
+    public void setReceiver(UserVO receiver) {
+        this.receiver = receiver;
+    }
+
+    public void setSender(UserVO sender) {
+        this.sender = sender;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
 

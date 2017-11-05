@@ -1,12 +1,9 @@
 package vo.goods;
 
 public class GoodsVO {
-    /**
-     * 商品分类值对象
-     */
     private String ID; //商品编号
     private String name; //商品名称
-    private String sortID;//商品所在商品分类的ID
+    private GoodsSortVO goodsSort;//商品所在商品分类
     private String model; //商品型号
     private int number; //商品数量
     private double cost; //商品进价
@@ -15,12 +12,16 @@ public class GoodsVO {
     private double latestRetail; //商品最近零售价
     private int alarmNum; //商品报警数量
     private String comment; //商品的备注
+    private boolean visible;// 商品是否存在
 
-    public GoodsVO(String ID, String name,String sortID, String model, int number,double cost,
-                   double retail, double latestCost, double latestRetail, int alarmNum, String comment) {
+    public GoodsVO(){
+
+    }
+
+    public GoodsVO(String ID, String name, GoodsSortVO goodsSort, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment, boolean visible) {
         this.ID = ID;
         this.name = name;
-        this.sortID=sortID;
+        this.goodsSort = goodsSort;
         this.model = model;
         this.number = number;
         this.cost = cost;
@@ -29,10 +30,7 @@ public class GoodsVO {
         this.latestRetail = latestRetail;
         this.alarmNum = alarmNum;
         this.comment = comment;
-    }
-
-    public GoodsVO(){
-
+        this.visible = visible;
     }
 
     public String getID() {
@@ -43,8 +41,8 @@ public class GoodsVO {
         return name;
     }
 
-    public String getSortID() {
-        return sortID;
+    public GoodsSortVO getGoodsSort() {
+        return goodsSort;
     }
 
     public String getModel() {
@@ -79,15 +77,55 @@ public class GoodsVO {
         return comment;
     }
 
-    public String toString() {
-        return " [商品ID:" + ID + ", 商品名称:" + name + ", 商品类型:" + model + ", 商品分类ID:"
-                + sortID + ", 库存数量:" + number + ", 商品进价:"
-                + cost + ", 商品零售价:" + retail + "，商品最近进价:"+latestCost
-                +"，商品最近零售价:"+latestRetail+"，备注："+comment+"]";
+    public boolean isVisible() {
+        return visible;
     }
 
-    public String alarmToString(){
-        return " [商品ID:" + ID + ", 商品名称:" + name+"，商品报警数量:"+alarmNum+"]";
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGoodsSort(GoodsSortVO goodsSort) {
+        this.goodsSort = goodsSort;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public void setRetail(double retail) {
+        this.retail = retail;
+    }
+
+    public void setLatestCost(double latestCost) {
+        this.latestCost = latestCost;
+    }
+
+    public void setLatestRetail(double latestRetail) {
+        this.latestRetail = latestRetail;
+    }
+
+    public void setAlarmNum(int alarmNum) {
+        this.alarmNum = alarmNum;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }

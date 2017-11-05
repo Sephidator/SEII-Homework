@@ -1,88 +1,78 @@
 package vo.initial;
 
-import java.io.Serializable;
+import vo.account.AccountVO;
+import vo.client.ClientVO;
+import vo.goods.GoodsSortVO;
+import vo.goods.GoodsVO;
+
 import java.util.ArrayList;
-//import GoodsVO
+//import GoodsPO
 /*
  * 期初建账数据
  * @author:
  * @version:
  */
 
-public class InitialVO implements Serializable{
+public class InitialVO{
 
-    private int initYear = 0;//每一个账都有一个年标签,格式Init-xxxx，xxxx为年份
+    private int year;//每一个账都有一个年份
 
-    private ArrayList<String> init_goodsID;//每一个商品都有一个ID
+    private ArrayList<GoodsVO> goodsList;//每一个商品都有一个ID
 
-    private ArrayList<String> init_clientID;//每一个客户都有一个ID
+    private ArrayList<GoodsSortVO> goodsSortList;//每一个商品分类都有一个ID
 
-    private ArrayList<String> init_accountID;//每一个账户都有一个ID
+    private ArrayList<ClientVO> clientList;//每一个客户都有一个ID
 
-    public InitialVO(int initYear, ArrayList<String> init_goodsID, ArrayList<String> init_clientID, ArrayList<String> init_accountID) {
-        this.initYear = initYear;
-        this.init_goodsID = init_goodsID;
-        this.init_clientID = init_clientID;
-        this.init_accountID = init_accountID;
+    private ArrayList<AccountVO> accountList;//每一个账户都有一个ID
+
+    public InitialVO() {
     }
 
-    public int getInitYear() {
-        return initYear;
+    public InitialVO(int year, ArrayList<GoodsVO> goodsList, ArrayList<GoodsSortVO> goodsSortList, ArrayList<ClientVO> clientList, ArrayList<AccountVO> accountList) {
+        this.year = year;
+        this.goodsList = goodsList;
+        this.goodsSortList = goodsSortList;
+        this.clientList = clientList;
+        this.accountList = accountList;
     }
 
-    public ArrayList<String> getInit_goodsID() {
-        return init_goodsID;
+    public int getYear() {
+        return year;
     }
 
-    public ArrayList<String> getInit_clientID() {
-        return init_clientID;
+    public ArrayList<GoodsVO> getGoodsList() {
+        return goodsList;
     }
 
-    public ArrayList<String> getInit_accountID() {
-        return init_accountID;
+    public ArrayList<GoodsSortVO> getGoodsSortList() {
+        return goodsSortList;
     }
 
-    /***********************添加客户、商品、账户ID***************************/
-
-    /*添加商品的ID，成功返回true*/
-    public boolean setGoodsID(String goods) {
-        init_goodsID.add(goods);
-        return true;
+    public ArrayList<ClientVO> getClientList() {
+        return clientList;
     }
 
-    /*添加客户的ID，成功返回true*/
-    public boolean setClientID(String client) {
-        init_clientID.add(client);
-        return true;
+    public ArrayList<AccountVO> getAccountList() {
+        return accountList;
     }
 
-    /*添加账户的ID，成功返回true*/
-    public boolean setAccountID(String account) {
-        init_accountID.add(account);
-        return true;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-
-    /*根据商品的平均进价*/
-    public double calcInAve(ArrayList<String> goodsListID){
-        double ave = 0;
-        //TODO 处理GoodsVO
-        return ave;
+    public void setGoodsList(ArrayList<GoodsVO> goodsList) {
+        this.goodsList = goodsList;
     }
 
-    /*根据商品的平均售价*/
-    public double calcOutAve(ArrayList<String> goodsListID){
-        double ave = 0;
-        //TODO 处理GoodsVO
-        return ave;
+    public void setGoodsSortList(ArrayList<GoodsSortVO> goodsSortList) {
+        this.goodsSortList = goodsSortList;
     }
 
-    /**
-     * @see Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "[商品编号=" + this.init_goodsID + "， 账户编号=" + this.init_accountID + "， 客户编号=" + this.init_clientID +
-                "， 商品进价="+ this.calcInAve(init_goodsID)+"， 商品售价="+ this.calcOutAve(init_goodsID)+"]";
+    public void setClientList(ArrayList<ClientVO> clientList) {
+        this.clientList = clientList;
+    }
+
+    public void setAccountList(ArrayList<AccountVO> accountList) {
+        this.accountList = accountList;
     }
 }

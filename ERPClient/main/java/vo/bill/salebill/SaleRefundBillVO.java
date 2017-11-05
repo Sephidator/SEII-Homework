@@ -1,37 +1,38 @@
 package vo.bill.salebill;
 
-import vo.bill.salebill.SaleBillVO;
 import vo.client.ClientVO;
-import vo.goods.GoodsVO;
+import vo.promotion.GoodsItemVO;
 import vo.user.UserVO;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * 销售退货单PO类
  * */
 public class SaleRefundBillVO extends SaleBillVO {
-    private double totalAmount; // 总额
+    private double total; // 总额
 
-    public SaleRefundBillVO(String ID, ClientVO client, String repositoryID, UserVO salesman,
-                            UserVO operator, HashMap<GoodsVO, Integer> goodsList, double totalAmount,
-                            String comment, int state, Date time) {
+    public SaleRefundBillVO(String ID, String state, Date time, String type, UserVO operator, String comment, ClientVO client, UserVO salesman, ArrayList<GoodsItemVO> saleList, double total) {
         this.ID = ID;
-        this.client = client;
-        this.repositoryID = repositoryID;
-        this.salesman = salesman;
-        this.operator = operator;
-        this.goodsList = goodsList;
-        this.totalAmount = totalAmount;
-        this.comment = comment;
         this.state = state;
+        this.time = time;
+        this.type = type;
+        this.operator = operator;
+        this.comment = comment;
+        this.client=client;
+        this.salesman=salesman;
+        this.saleList=saleList;
+        this.total=total;
     }
 
     public SaleRefundBillVO(){}
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getTotal() {
+        return total;
     }
 
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

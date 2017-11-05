@@ -3,20 +3,20 @@ package vo.promotion;
 import java.util.Date;
 
 public class PromotionVO {
-    //促销策略编号
-    public String ID;
-    //促销策略类型
-    public int type;
-    //促销策略起始时间
-    public Date start;
-    //促销策略截止时间
-    public Date end;
+
+    protected String ID;//促销策略编号
+
+    protected String type;//促销策略类型
+
+    protected Date start;//促销策略起始时间
+
+    protected Date end;//促销策略截止时间
 
     public String getID() {
         return ID;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
@@ -28,8 +28,19 @@ public class PromotionVO {
         return end;
     }
 
-    @Override
-    public String toString() {
-        return "ID" + ID;
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 }

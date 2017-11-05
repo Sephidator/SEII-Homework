@@ -1,35 +1,43 @@
 package vo.bill.inventorybill;
 
-import vo.bill.inventorybill.InventoryBillVO;
+import vo.client.ClientVO;
+import vo.promotion.GiftItemVO;
+import vo.user.UserVO;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class InventoryGiftBillVO extends InventoryBillVO {
-    private String clientID;////客户信息
-    private HashMap<String, Integer> gift = new HashMap<>();//赠品编码及数量
+    private ClientVO client;////客户信息
+    private ArrayList<GiftItemVO> giftList;// 赠品列表
 
-    public InventoryGiftBillVO(String ID, int state, Date time,
-                               String repository, String clientID, HashMap<String, Integer> gift) {
+    public InventoryGiftBillVO() {
+    }
+
+    public InventoryGiftBillVO(String ID, String state, Date time, String type, UserVO operator, String comment, double total, ArrayList<GiftItemVO> giftList){
         this.ID = ID;
         this.state = state;
         this.time = time;
-        this.repository = repository;
-        this.clientID = clientID;
-        this.gift = gift;
+        this.type = type;
+        this.operator = operator;
+        this.comment = comment;
+        this.client=client;
+        this.giftList=giftList;
     }
 
-    public String getClientID() {
-        return clientID;
+    public ClientVO getClient() {
+        return client;
     }
 
-    public HashMap<String, Integer> getGift() {
-        return gift;
+    public ArrayList<GiftItemVO> getGiftList() {
+        return giftList;
     }
 
-    public String toString() {
-        return "[单据类型："+repository+"，单据ID：" + ID +", 单据状态：" + state + ", 单据建立时间：" + time
-                + ", 客户信息：" + clientID +"，赠品编码及数量："+gift
-                + "]";
+    public void setClient(ClientVO client) {
+        this.client = client;
+    }
+
+    public void setGiftList(ArrayList<GiftItemVO> giftList) {
+        this.giftList = giftList;
     }
 }

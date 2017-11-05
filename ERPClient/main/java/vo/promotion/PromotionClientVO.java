@@ -1,22 +1,27 @@
 package vo.promotion;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
-public class PromotionClientVO extends PromotionVO {
-    private int clientLevel;
-    //代金券
-    private double voucher;
-    //折让
-    private double discount;
-    //赠品编号及数量
-    private HashMap<String, Integer> gift = new HashMap<>();
+public class PromotionClientVO extends vo.promotion.PromotionVO {
+    private int clientLevel; // 客户等级
 
-    public PromotionClientVO(String ID, int type, Date start, Date end, int clientLevel, int voucher, double discount, HashMap<String, Integer> gift) {
+    private double voucher;//代金券
+
+    private ArrayList<vo.promotion.GiftItemVO> giftList; // 赠品列表
+
+    PromotionClientVO(){
+
+    }
+
+    public PromotionClientVO(String ID, String type, Date start, Date end, int clientLevel, int voucher, ArrayList<GiftItemVO> giftList) {
+        this.ID=ID;
+        this.type=type;
+        this.start=start;
+        this.end=end;
         this.clientLevel = clientLevel;
         this.voucher = voucher;
-        this.discount = discount;
-        this.gift = gift;
+        this.giftList = giftList;
     }
 
     public int getClientLevel() {
@@ -27,11 +32,19 @@ public class PromotionClientVO extends PromotionVO {
         return voucher;
     }
 
-    public double getDiscount() {
-        return discount;
+    public ArrayList<GiftItemVO> getGiftList() {
+        return giftList;
     }
 
-    public HashMap<String, Integer> getGift() {
-        return gift;
+    public void setClientLevel(int clientLevel) {
+        this.clientLevel = clientLevel;
+    }
+
+    public void setVoucher(double voucher) {
+        this.voucher = voucher;
+    }
+
+    public void setGiftList(ArrayList<GiftItemVO> giftList) {
+        this.giftList = giftList;
     }
 }

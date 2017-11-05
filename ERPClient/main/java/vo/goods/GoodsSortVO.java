@@ -8,20 +8,24 @@ import java.util.ArrayList;
 public class GoodsSortVO {
     private String ID; //商品分类编号
     private String name; //商品分类名称
-    private String fatherID; //商品分类父类ID
-    private ArrayList<String> childrenID; //该商品分类的子分类
-    private ArrayList<String> goodsName; //商品分类下的商品名称
-    private String note; //商品分类备注
+    private GoodsSortVO father; //商品分类父类
+    private ArrayList<GoodsSortVO> children; //该商品分类的子分类
+    private ArrayList<GoodsVO> goodsName; //商品分类下的商品名称
+    private String comment; //商品分类备注
+    private boolean visible = true; //商品分类是否存在
 
-    public GoodsSortVO(String ID, String name,
-                       String fatherID, ArrayList<String> childrenID,
-                       ArrayList<String> goodsName, String note) {
+    public GoodsSortVO() {
+
+    }
+
+    public GoodsSortVO(String ID, String name, GoodsSortVO father, ArrayList<GoodsSortVO> children, ArrayList<GoodsVO> goodsName, String comment, boolean visible) {
         this.ID = ID;
         this.name = name;
-        this.fatherID = fatherID;
-        this.childrenID = childrenID;
+        this.father = father;
+        this.children = children;
         this.goodsName = goodsName;
-        this.note = note;
+        this.comment = comment;
+        this.visible = visible;
     }
 
     public String getID() {
@@ -32,29 +36,51 @@ public class GoodsSortVO {
         return name;
     }
 
-    public String getFatherID() {
-        return fatherID;
+    public GoodsSortVO getFather() {
+        return father;
     }
 
-    public ArrayList<String> getChildrenID() {
-        return childrenID;
+    public ArrayList<GoodsSortVO> getChildren() {
+        return children;
     }
 
-    public ArrayList<String> getGoodsName() {
+    public ArrayList<GoodsVO> getGoodsName() {
         return goodsName;
     }
 
-    public String getNote() {
-        return note;
+    public String getComment() {
+        return comment;
     }
 
-    public String toString(){
-        return " [商品分类编号："+ID+"，商品名称分类："+name+"，商品分类父类编号："+fatherID
-                +"，子分类编号："+childrenID+"，商品分类备注："+note+"]";
+    public boolean isVisible() {
+        return visible;
     }
 
-    public String goodsToString(){
-        return " [商品分类编号："+ID+"，商品名称分类："+name+"，商品分类下的商品名称："+goodsName+"]";
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFather(GoodsSortVO father) {
+        this.father = father;
+    }
+
+    public void setChildren(ArrayList<GoodsSortVO> children) {
+        this.children = children;
+    }
+
+    public void setGoodsName(ArrayList<GoodsVO> goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }

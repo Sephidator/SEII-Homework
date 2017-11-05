@@ -1,28 +1,40 @@
 package vo.promotion;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class PromotionGoodsVO extends PromotionVO {
-    //商品编号及数量
-    public HashMap<String, Integer> goods = new HashMap<>();
-    //总价
-    public double total;
 
-    public PromotionGoodsVO(String ID, int type, Date start, Date end, HashMap<String, Integer> goods, int total) {
-        this.ID = ID;
-        this.type = type;
-        this.start = start;
-        this.end = end;
-        this.goods = goods;
+    private ArrayList<GoodsItemVO> goodsList; //组合降价的商品列表
+
+    private double total; //总价
+
+    PromotionGoodsVO(){
+
+    }
+
+    public PromotionGoodsVO(String ID, String type, Date start, Date end, ArrayList<GoodsItemVO> goodsList, double total) {
+        this.ID=ID;
+        this.type=type;
+        this.start=start;
+        this.end=end;
+        this.goodsList = goodsList;
         this.total = total;
     }
 
-    public HashMap<String, Integer> getGoods() {
-        return goods;
+    public ArrayList<GoodsItemVO> getGoodsList() {
+        return goodsList;
     }
 
     public double getTotal() {
         return total;
+    }
+
+    public void setGoodsList(ArrayList<GoodsItemVO> goodsList) {
+        this.goodsList = goodsList;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 }

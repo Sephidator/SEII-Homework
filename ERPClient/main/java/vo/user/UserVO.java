@@ -1,36 +1,36 @@
 package vo.user;
 
 public class UserVO {
-    //帐号身份
-    public int type;
-    //员工年龄
-    public int age;
-    //是否为最高权限
-    public boolean top;
-    //员工姓名
-    public String name;
-    //帐号名称
-    public String ID;
-    //帐号密码
-    public String password;
-    //帐号通知消息
-    public String[] notice;
+
+    public String type; //帐号身份
+
+    public int age;//员工年龄
+
+    public boolean top=false;//是否为最高权限
+
+    public String name;//员工姓名
+
+    public String ID;//帐号名称
+
+    public String password;//帐号密码
+
+    public boolean visible=true;// 用户是否存在
 
     public UserVO() {
 
     }
 
-    public UserVO(int type, int age, boolean top, String name, String ID, String password, String[] notice) {
+    public UserVO(String type, int age, boolean top, String name, String ID, String password, boolean visible) {
         this.type = type;
         this.age = age;
         this.top = top;
         this.name = name;
         this.ID = ID;
         this.password = password;
-        this.notice = notice;
+        this.visible = visible;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
@@ -54,11 +54,35 @@ public class UserVO {
         return password;
     }
 
-    public String[] getNotice() {
-        return notice;
+    public boolean isVisible() {
+        return visible;
     }
 
-    public String toString() {
-        return "ID=" + ID;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setTop(boolean top) {
+        this.top = top;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }
