@@ -7,6 +7,9 @@ public class MessageVO {
     private UserVO sender;
     private String message;
 
+    public MessageVO() {
+    }
+
     public MessageVO(UserVO receiver, UserVO sender, String message) {
         this.receiver = receiver;
         this.sender = sender;

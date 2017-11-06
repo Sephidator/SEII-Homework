@@ -2,19 +2,19 @@ package vo.user;
 
 public class UserVO {
 
-    public String type; //帐号身份
+    private String type; //帐号身份
 
-    public int age;//员工年龄
+    private int age;//员工年龄
 
-    public boolean top=false;//是否为最高权限
+    private boolean top=false;//是否为最高权限
 
-    public String name;//员工姓名
+    private String name;//员工姓名
 
-    public String ID;//帐号名称
+    private String ID;//帐号名称
 
-    public String password;//帐号密码
+    private String password;//帐号密码
 
-    public boolean visible=true;// 用户是否存在
+    private boolean visible=true;// 用户是否存在
 
     public UserVO() {
 

@@ -1,6 +1,6 @@
 package po.promotion;
 
 public class GoodsItemPO {
-    String goodsID;
-    int number;
+    public String goodsID;
+    public int number;
 }

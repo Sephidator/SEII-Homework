@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class PromotionTotalVO extends PromotionVO {
 
-    public double total;//总价
+    private double total;//总价
 
-    public double voucher;//代金券
+    private double voucher;//代金券
 
     private ArrayList<GiftItemVO> giftList; // 赠品列表
 
