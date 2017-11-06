@@ -16,4 +16,7 @@ public class SaleDetailQueryVO {
         this.client = client;
         this.salesman = salesman;
     }
+
+    public SaleDetailQueryVO() {
+    }
 }

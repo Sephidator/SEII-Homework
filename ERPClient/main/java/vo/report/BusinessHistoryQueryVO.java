@@ -16,4 +16,8 @@ public class BusinessHistoryQueryVO {
         this.client = client;
         this.operator = operator;
     }
+
+    public BusinessHistoryQueryVO() {
+    }
+
 }
