@@ -1,11 +1,11 @@
-package server_bldriver.promotiondataservicedriver;
+package test.java.server_bldriver.promotiondataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.promotiondataservice.PromotionDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.promotiondataservice.PromotionDataService;
 import org.junit.Test;
-import po.promotion.PromotionPO;
-import po.promotion.PromotionQueryPO;
-import server_bldriver.promotiondataservicestub.PromotionDataServiceStub;
+import main.java.po.promotion.PromotionPO;
+import main.java.po.promotion.PromotionQueryPO;
+import main.java.server_dataservicestub.promotiondataservicestub.PromotionDataServiceStub;
 
 import static org.junit.Assert.*;
 

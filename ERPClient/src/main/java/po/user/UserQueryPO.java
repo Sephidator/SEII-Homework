@@ -1,4 +1,4 @@
-package po.user;
+package main.java.po.user;
 
 public class UserQueryPO {
     public String ID;

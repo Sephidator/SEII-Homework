@@ -1,8 +1,8 @@
-package client_presentationdriver.saleblservicedriver;
+package test.java.client_presentationdriver.saleblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.saleblservice.SaleTradeBillBlService;
-import client_blservicestub.saleblservicestub.SaleTradeBillBlStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
+import main.java.client_blservicestub.saleblservicestub.SaleTradeBillBlStub;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

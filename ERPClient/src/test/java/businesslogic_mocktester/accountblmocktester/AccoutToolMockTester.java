@@ -1,8 +1,8 @@
-package businesslogic_mocktester.accountblmocktester;
+package test.java.businesslogic_mocktester.accountblmocktester;
 
-import businesslogic.accountbl.AccountTool;
-import businesslogic.blutility.ResultMessage;
-import businesslogic_mock.accountblmock.AccountToolMock;
+import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic_mock.accountblmock.AccountToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

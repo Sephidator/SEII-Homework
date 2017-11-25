@@ -1,7 +1,7 @@
-package businesslogicservice.goodssortblservice;
+package main.java.businesslogicservice.goodssortblservice;
 
-import vo.goods.GoodsSortQueryVO;
-import vo.goods.GoodsSortVO;
+import main.java.vo.goods.GoodsSortQueryVO;
+import main.java.vo.goods.GoodsSortVO;
 
 import java.util.ArrayList;
 

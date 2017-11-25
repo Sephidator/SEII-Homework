@@ -1,8 +1,8 @@
-package businesslogic_mocktester.purchaseblmocktester;
+package test.java.businesslogic_mocktester.purchaseblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.purchasebl.PurchaseTradeBillTool;
-import businesslogic_mock.purchaseblmock.PurchaseTradeBillToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
+import main.java.businesslogic_mock.purchaseblmock.PurchaseTradeBillToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

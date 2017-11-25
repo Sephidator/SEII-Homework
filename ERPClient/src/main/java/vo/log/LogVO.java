@@ -1,6 +1,6 @@
-package vo.log;
+package main.java.vo.log;
 
-import vo.user.UserVO;
+import main.java.vo.user.UserVO;
 import java.util.Date;
 
 /*

@@ -1,7 +1,7 @@
-package businesslogic_mocktester.goodssortblmocktester;
+package test.java.businesslogic_mocktester.goodssortblmocktester;
 
-import businesslogic.goodssortbl.GoodsSortTool;
-import businesslogic_mock.goodssortblmock.GoodsSortToolMock;
+import main.java.businesslogic.goodssortbl.GoodsSortTool;
+import main.java.businesslogic_mock.goodssortblmock.GoodsSortToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

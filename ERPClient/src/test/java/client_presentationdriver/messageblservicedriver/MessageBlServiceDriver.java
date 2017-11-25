@@ -1,7 +1,7 @@
-package client_presentationdriver.messageblservicedriver;
+package test.java.client_presentationdriver.messageblservicedriver;
 
-import businesslogicservice.messageblservice.MessageBlService;
-import client_blservicestub.messageblservicestub.MessageBlServiceStub;
+import main.java.businesslogicservice.messageblservice.MessageBlService;
+import main.java.client_blservicestub.messageblservicestub.MessageBlServiceStub;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,8 +1,8 @@
-package businesslogic_mocktester.messageblmocktester;
+package test.java.businesslogic_mocktester.messageblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.messagebl.MessageTool;
-import businesslogic_mock.messageblmock.MessageBlMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.messagebl.MessageTool;
+import main.java.businesslogic_mock.messageblmock.MessageBlMock;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

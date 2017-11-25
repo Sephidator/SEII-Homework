@@ -1,7 +1,7 @@
-package businesslogicservice.accountblservice;
+package main.java.businesslogicservice.accountblservice;
 
-import businesslogic.blutility.ResultMessage;
-import vo.account.AccountVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.account.AccountVO;
 
 public interface AccountBlService {
 

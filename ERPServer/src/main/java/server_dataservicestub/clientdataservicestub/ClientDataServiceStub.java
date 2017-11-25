@@ -1,9 +1,9 @@
-package server_dataservicestub.clientdataservicestub;
+package main.java.server_dataservicestub.clientdataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.clientdataservice.ClientDataService;
-import po.client.ClientPO;
-import po.client.ClientQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.clientdataservice.ClientDataService;
+import main.java.po.client.ClientPO;
+import main.java.po.client.ClientQueryPO;
 
 import java.util.ArrayList;
 

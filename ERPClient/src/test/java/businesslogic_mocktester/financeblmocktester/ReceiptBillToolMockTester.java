@@ -1,10 +1,10 @@
-package businesslogic_mocktester.financeblmocktester;
+package test.java.businesslogic_mocktester.financeblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.financebl.ReceiptBillTool;
-import businesslogic_mock.financeblmock.ReceiptBillToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.financebl.ReceiptBillTool;
+import main.java.businesslogic_mock.financeblmock.ReceiptBillToolMock;
 import org.junit.Test;
-import vo.bill.financebill.ReceiptBillVO;
+import main.java.vo.bill.financebill.ReceiptBillVO;
 
 import javax.xml.transform.Result;
 

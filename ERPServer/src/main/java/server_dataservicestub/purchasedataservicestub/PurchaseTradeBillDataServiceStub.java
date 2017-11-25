@@ -1,9 +1,9 @@
-package server_dataservicestub.purchasedataservicestub;
+package main.java.server_dataservicestub.purchasedataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.purchasedataservice.PurchaseTradeBillDataService;
-import po.bill.BillQueryPO;
-import po.bill.purchasebill.PurchaseTradeBillPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.purchasedataservice.PurchaseTradeBillDataService;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.purchasebill.PurchaseTradeBillPO;
 
 import java.util.ArrayList;
 

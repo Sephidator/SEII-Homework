@@ -1,13 +1,13 @@
-package businesslogic.purchasebl;
+package main.java.businesslogic.purchasebl;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
-import vo.bill.BillQueryVO;
-import vo.bill.purchasebill.PurchaseRefundBillVO;
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package vo.bill;
+package main.java.vo.bill;
 
-import vo.user.UserVO;
+import main.java.vo.user.UserVO;
 
 import java.util.Date;
 

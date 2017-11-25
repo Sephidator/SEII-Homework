@@ -1,9 +1,9 @@
-package server_bldriver.messagedataservicedriver;
+package test.java.server_bldriver.messagedataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.messagedataservice.MessageDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.messagedataservice.MessageDataService;
 import org.junit.Test;
-import server_dataservicestub.messagedataservicestub.MessageDataServiceStub;
+import main.java.server_dataservicestub.messagedataservicestub.MessageDataServiceStub;
 
 import static org.junit.Assert.*;
 

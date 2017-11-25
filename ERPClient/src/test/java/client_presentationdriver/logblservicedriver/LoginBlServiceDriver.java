@@ -1,7 +1,7 @@
-package client_presentationdriver.logblservicedriver;
+package test.java.client_presentationdriver.logblservicedriver;
 
-import businesslogicservice.loginblservice.LoginBlService;
-import client_blservicestub.logblservicestub.LoginBlServiceStub;
+import main.java.businesslogicservice.loginblservice.LoginBlService;
+import main.java.client_blservicestub.logblservicestub.LoginBlServiceStub;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

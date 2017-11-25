@@ -1,8 +1,8 @@
-package dataservice.promotiondataservice;
+package main.java.dataservice.promotiondataservice;
 
-import data.datautility.ResultMessage;
-import po.promotion.PromotionPO;
-import po.promotion.PromotionQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.po.promotion.PromotionPO;
+import main.java.po.promotion.PromotionQueryPO;
 
 import java.util.ArrayList;
 

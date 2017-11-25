@@ -1,9 +1,9 @@
-package server_dataservicestub.goodsdataservicestub;
+package main.java.server_dataservicestub.goodsdataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.goodsdataservice.GoodsDataService;
-import po.goods.GoodsPO;
-import po.goods.GoodsQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.goodsdataservice.GoodsDataService;
+import main.java.po.goods.GoodsPO;
+import main.java.po.goods.GoodsQueryPO;
 
 public class GoodsDataServiceStub implements GoodsDataService {
     @Override

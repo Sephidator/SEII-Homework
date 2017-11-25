@@ -1,4 +1,4 @@
-package vo.initial;
+package main.java.vo.initial;
 
 public class InitialQueryVO {
 

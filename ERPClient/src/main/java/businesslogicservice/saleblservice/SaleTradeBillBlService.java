@@ -1,14 +1,14 @@
-package businesslogicservice.saleblservice;
+package main.java.businesslogicservice.saleblservice;
 
-import businesslogic.blutility.ResultMessage;
-import vo.bill.BillQueryVO;
-import vo.bill.salebill.SaleTradeBillVO;
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
-import vo.promotion.PromotionQueryVO;
-import vo.promotion.PromotionVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.salebill.SaleTradeBillVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
+import main.java.vo.promotion.PromotionQueryVO;
+import main.java.vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 

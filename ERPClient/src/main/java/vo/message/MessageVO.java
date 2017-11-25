@@ -1,6 +1,6 @@
-package vo.message;
+package main.java.vo.message;
 
-import vo.user.UserVO;
+import main.java.vo.user.UserVO;
 
 public class MessageVO {
     private UserVO receiver;

@@ -1,11 +1,11 @@
-package server_bldriver.userdataservicedriver;
+package test.java.server_bldriver.userdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.userdataservice.UserDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.userdataservice.UserDataService;
 import org.junit.Test;
-import po.user.UserPO;
-import po.user.UserQueryPO;
-import server_bldriver.userdataservicestub.UserDataServiceStub;
+import main.java.po.user.UserPO;
+import main.java.po.user.UserQueryPO;
+import main.java.server_dataservicestub.userdataservicestub.UserDataServiceStub;
 
 import static org.junit.Assert.*;
 

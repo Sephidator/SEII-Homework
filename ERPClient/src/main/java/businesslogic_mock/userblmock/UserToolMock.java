@@ -1,8 +1,8 @@
-package businesslogic_mock.userblmock;
+package main.java.businesslogic_mock.userblmock;
 
-import businesslogic.userbl.UserTool;
-import vo.user.UserQueryVO;
-import vo.user.UserVO;
+import main.java.businesslogic.userbl.UserTool;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

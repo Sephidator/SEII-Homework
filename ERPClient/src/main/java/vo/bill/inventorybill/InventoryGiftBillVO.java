@@ -1,8 +1,8 @@
-package vo.bill.inventorybill;
+package main.java.vo.bill.inventorybill;
 
-import vo.client.ClientVO;
-import vo.promotion.GiftItemVO;
-import vo.user.UserVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.promotion.GiftItemVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;

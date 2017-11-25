@@ -1,13 +1,13 @@
-package client_presentationdriver.inventoryblservicedriver;
+package test.java.client_presentationdriver.inventoryblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.inventoryblservice.InventoryGiftBillBLService;
-import client_blservicestub.inventoryblservicestub.InventoryGiftBillBLServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBLService;
+import main.java.client_blservicestub.inventoryblservicestub.InventoryGiftBillBLServiceStub;
+import main.java.vo.goods.GoodsQueryVO;
 import org.junit.Test;
-import vo.bill.BillQueryVO;
-import vo.bill.inventorybill.InventoryGiftBillVO;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

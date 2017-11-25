@@ -1,7 +1,7 @@
-package businesslogicservice.inventoryblservice;
+package main.java.businesslogicservice.inventoryblservice;
 
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

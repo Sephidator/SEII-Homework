@@ -1,14 +1,14 @@
-package client_presentationdriver.initialblservicedriver;
+package test.java.client_presentationdriver.initialblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.initialblservice.InitialBlService;
-import client_blservicestub.initialblservicestub.InitialBlServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.initialblservice.InitialBlService;
+import main.java.client_blservicestub.initialblservicestub.InitialBlServiceStub;
 import org.junit.Test;
-import vo.account.AccountQueryVO;
-import vo.client.ClientQueryVO;
-import vo.goods.GoodsQueryVO;
-import vo.initial.InitialQueryVO;
-import vo.initial.InitialVO;
+import main.java.vo.account.AccountQueryVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.initial.InitialQueryVO;
+import main.java.vo.initial.InitialVO;
 
 import static org.junit.Assert.*;
 

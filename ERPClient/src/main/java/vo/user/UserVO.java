@@ -1,4 +1,4 @@
-package vo.user;
+package main.java.vo.user;
 
 public class UserVO {
 

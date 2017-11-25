@@ -1,4 +1,4 @@
-package vo.report;
+package main.java.vo.report;
 
 import java.util.Date;
 

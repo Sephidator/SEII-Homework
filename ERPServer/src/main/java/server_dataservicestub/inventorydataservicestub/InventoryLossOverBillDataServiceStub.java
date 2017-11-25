@@ -1,9 +1,9 @@
-package server_dataservicestub.inventorydataservicestub;
+package main.java.server_dataservicestub.inventorydataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.inventorydataservice.InventoryLossOverBillDataService;
-import po.bill.BillQueryPO;
-import po.bill.inventorybill.InventoryLossOverBillPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataService;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 
 public class InventoryLossOverBillDataServiceStub implements InventoryLossOverBillDataService {
     @Override

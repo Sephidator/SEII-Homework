@@ -1,6 +1,6 @@
-package vo.client;
+package main.java.vo.client;
 
-import vo.user.UserVO;
+import main.java.vo.user.UserVO;
 
 /**
  * 客户VO类

@@ -1,7 +1,7 @@
-package businesslogic.loginbl;
+package main.java.businesslogic.loginbl;
 
-import businesslogicservice.loginblservice.LoginBlService;
-import vo.user.UserVO;
+import main.java.businesslogicservice.loginblservice.LoginBlService;
+import main.java.vo.user.UserVO;
 
 public class LoginBl implements LoginBlService{
     @Override

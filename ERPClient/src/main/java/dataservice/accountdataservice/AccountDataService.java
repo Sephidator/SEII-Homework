@@ -1,12 +1,13 @@
-package dataservice.accountdataservice;
+package main.java.dataservice.accountdataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.account.AccountPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.account.AccountPO;
+import main.java.po.account.AccountQueryPO;
 
 public interface AccountDataService {
 
     /*根据筛选条件进行查找账户*/
-    public AccountPO find(po.account.AccountQueryPO query);
+    public AccountPO find(AccountQueryPO query);
 
     /*取得账户ID*/
     public String getID();

@@ -1,8 +1,8 @@
-package businesslogic_mocktester.logblmocktester;
+package test.java.businesslogic_mocktester.logblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.logbl.LogTool;
-import businesslogic_mock.logblmock.LogToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.logbl.LogTool;
+import main.java.businesslogic_mock.logblmock.LogToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

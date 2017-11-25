@@ -1,9 +1,9 @@
-package businesslogic_mock.purchaseblmock;
+package main.java.businesslogic_mock.purchaseblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.purchasebl.PurchaseRefundBillTool;
-import vo.bill.BillQueryVO;
-import vo.bill.purchasebill.PurchaseRefundBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.purchasebl.PurchaseRefundBillTool;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 
 import java.util.ArrayList;
 

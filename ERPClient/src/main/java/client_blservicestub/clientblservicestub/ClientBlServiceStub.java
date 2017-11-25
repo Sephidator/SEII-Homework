@@ -1,9 +1,9 @@
-package client_blservicestub.clientblservicestub;
+package main.java.client_blservicestub.clientblservicestub;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.clientblservice.ClientBlService;
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.clientblservice.ClientBlService;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
 
 import java.util.ArrayList;
 

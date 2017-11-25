@@ -1,6 +1,6 @@
-package vo.bill.inventorybill;
+package main.java.vo.bill.inventorybill;
 
-import vo.goods.GoodsVO;
+import main.java.vo.goods.GoodsVO;
 
 public class LossOverItemVO {
     public GoodsVO goods;// 报溢损的商品

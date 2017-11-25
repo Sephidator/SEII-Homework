@@ -1,10 +1,10 @@
-package server_dataservicestub.financedataservicestub;
+package main.java.server_dataservicestub.financedataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.financedataservice.PaymentBillDataService;
-import po.bill.BillQueryPO;
-import po.bill.financebill.PaymentBillPO;
-import po.bill.financebill.TransItemPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.financedataservice.PaymentBillDataService;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.financebill.PaymentBillPO;
+import main.java.po.bill.financebill.TransItemPO;
 
 import java.util.Date;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package po.bill;
+package main.java.po.bill;
 
 import java.util.Date;
 

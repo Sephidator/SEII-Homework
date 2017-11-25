@@ -1,4 +1,4 @@
-package businesslogicservice.inventoryblservice;
+package main.java.businesslogicservice.inventoryblservice;
 
 import java.util.Date;
 

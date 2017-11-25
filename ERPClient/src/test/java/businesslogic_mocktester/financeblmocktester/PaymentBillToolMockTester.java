@@ -1,8 +1,8 @@
-package businesslogic_mocktester.financeblmocktester;
+package test.java.businesslogic_mocktester.financeblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.financebl.PaymentBillTool;
-import businesslogic_mock.financeblmock.PaymentBillToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.financebl.PaymentBillTool;
+import main.java.businesslogic_mock.financeblmock.PaymentBillToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

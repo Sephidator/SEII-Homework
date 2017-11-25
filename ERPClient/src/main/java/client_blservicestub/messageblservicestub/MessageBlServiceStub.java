@@ -1,8 +1,8 @@
-package client_blservicestub.messageblservicestub;
+package main.java.client_blservicestub.messageblservicestub;
 
-import businesslogicservice.messageblservice.MessageBlService;
-import vo.message.MessageVO;
-import vo.user.UserVO;
+import main.java.businesslogicservice.messageblservice.MessageBlService;
+import main.java.vo.message.MessageVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

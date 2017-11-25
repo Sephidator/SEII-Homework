@@ -1,8 +1,8 @@
-package dataservice.goodssortdataservice;
+package main.java.dataservice.goodssortdataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.goods.GoodsSortPO;
-import po.goods.GoodsSortQueryPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.goods.GoodsSortPO;
+import main.java.po.goods.GoodsSortQueryPO;
 
 public interface GoodsSortDataService {
 

@@ -1,9 +1,9 @@
-package server_dataservicestub.accountdataservicestub;
+package main.java.server_dataservicestub.accountdataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.accountdataservice.AccountDataService;
-import po.account.AccountPO;
-import po.account.AccountQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.accountdataservice.AccountDataService;
+import main.java.po.account.AccountPO;
+import main.java.po.account.AccountQueryPO;
 
 public class AccountDataServiceStub implements AccountDataService{
     @Override

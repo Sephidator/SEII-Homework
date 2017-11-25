@@ -1,4 +1,4 @@
-package po.bill.financebill;
+package main.java.po.bill.financebill;
 
 import java.util.*;
 

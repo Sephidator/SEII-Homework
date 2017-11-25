@@ -1,9 +1,9 @@
-package businesslogic_mocktester.promotionblmocktester;
+package test.java.businesslogic_mocktester.promotionblmocktester;
 
-import businesslogic.promotionbl.PromotionTool;
-import businesslogic_mock.promotionblmock.PromotionToolMock;
+import main.java.businesslogic.promotionbl.PromotionTool;
+import main.java.businesslogic_mock.promotionblmock.PromotionToolMock;
 import org.junit.Test;
-import vo.promotion.PromotionQueryVO;
+import main.java.vo.promotion.PromotionQueryVO;
 
 import static org.junit.Assert.*;
 

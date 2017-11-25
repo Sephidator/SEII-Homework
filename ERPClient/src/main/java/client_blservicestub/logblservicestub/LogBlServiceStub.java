@@ -1,9 +1,9 @@
-package client_blservicestub.logblservicestub;
+package main.java.client_blservicestub.logblservicestub;
 
-import businesslogicservice.logblservice.LogBlService;
-import vo.log.LogQueryVO;
-import vo.log.LogVO;
-import vo.user.UserVO;
+import main.java.businesslogicservice.logblservice.LogBlService;
+import main.java.vo.log.LogQueryVO;
+import main.java.vo.log.LogVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package po.user;
+package main.java.po.user;
 
 public class UserPO {
 
@@ -16,7 +16,7 @@ public class UserPO {
 
     private boolean visible=true;// 用户是否存在
 
-    private UserPO() {
+    public UserPO() {
 
     }
 

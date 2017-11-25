@@ -1,6 +1,6 @@
-package businesslogicservice.reportblservice;
+package main.java.businesslogicservice.reportblservice;
 
-import vo.report.BusinessConditionQueryVO;
+import main.java.vo.report.BusinessConditionQueryVO;
 
 import java.util.ArrayList;
 

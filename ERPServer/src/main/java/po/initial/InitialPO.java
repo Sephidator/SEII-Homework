@@ -1,4 +1,4 @@
-package po.initial;
+package main.java.po.initial;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
-package dataservice.logdataservice;
+package main.java.dataservice.logdataservice;
 
-import data.datautility.ResultMessage;
-import po.log.LogPO;
-import po.log.LogQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.po.log.LogPO;
+import main.java.po.log.LogQueryPO;
 
 import java.util.ArrayList;
 

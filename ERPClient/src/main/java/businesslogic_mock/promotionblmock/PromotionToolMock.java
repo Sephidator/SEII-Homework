@@ -1,8 +1,8 @@
-package businesslogic_mock.promotionblmock;
+package main.java.businesslogic_mock.promotionblmock;
 
-import businesslogic.promotionbl.PromotionTool;
-import vo.promotion.PromotionQueryVO;
-import vo.promotion.PromotionVO;
+import main.java.businesslogic.promotionbl.PromotionTool;
+import main.java.vo.promotion.PromotionQueryVO;
+import main.java.vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 

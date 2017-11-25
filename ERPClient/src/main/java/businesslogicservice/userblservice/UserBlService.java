@@ -1,8 +1,8 @@
-package businesslogicservice.userblservice;
+package main.java.businesslogicservice.userblservice;
 
-import businesslogic.blutility.ResultMessage;
-import vo.user.UserQueryVO;
-import vo.user.UserVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

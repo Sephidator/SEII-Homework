@@ -1,7 +1,7 @@
-package businesslogic.messagebl;
+package main.java.businesslogic.messagebl;
 
-import businesslogic.blutility.ResultMessage;
-import vo.message.MessageVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.message.MessageVO;
 
 public interface MessageTool {
     public ResultMessage addMessage(MessageVO message);

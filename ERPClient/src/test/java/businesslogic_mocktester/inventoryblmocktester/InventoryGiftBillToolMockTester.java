@@ -1,8 +1,8 @@
-package businesslogic_mocktester.inventoryblmocktester;
+package test.java.businesslogic_mocktester.inventoryblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.inventorybl.InventoryGiftBillTool;
-import businesslogic_mock.inventoryblmock.InventoryGiftBillToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.inventorybl.InventoryGiftBillTool;
+import main.java.businesslogic_mock.inventoryblmock.InventoryGiftBillToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

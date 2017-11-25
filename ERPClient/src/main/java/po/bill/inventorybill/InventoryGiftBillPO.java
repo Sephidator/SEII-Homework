@@ -1,7 +1,7 @@
-package po.bill.inventorybill;
+package main.java.po.bill.inventorybill;
 
-import po.client.ClientPO;
-import po.promotion.GiftItemPO;
+import main.java.po.client.ClientPO;
+import main.java.po.promotion.GiftItemPO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,9 +1,9 @@
-package client_presentationdriver.reportblservicedriver;
+package test.java.client_presentationdriver.reportblservicedriver;
 
-import businesslogicservice.reportblservice.SaleDetailBlService;
-import client_blservicestub.reportblservicestub.SaleDetailBlServiceStub;
+import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
+import main.java.client_blservicestub.reportblservicestub.SaleDetailBlServiceStub;
 import org.junit.Test;
-import vo.report.SaleDetailQueryVO;
+import main.java.vo.report.SaleDetailQueryVO;
 
 import static org.junit.Assert.*;
 

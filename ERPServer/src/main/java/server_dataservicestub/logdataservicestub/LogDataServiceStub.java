@@ -1,9 +1,9 @@
-package server_dataservicestub.logdataservicestub;
+package main.java.server_dataservicestub.logdataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.logdataservice.LogDataService;
-import po.log.LogPO;
-import po.log.LogQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.logdataservice.LogDataService;
+import main.java.po.log.LogPO;
+import main.java.po.log.LogQueryPO;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,9 +1,9 @@
-package server_bldriver.clientdataservicedriver;
+package test.java.server_bldriver.clientdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.clientdataservice.ClientDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.clientdataservice.ClientDataService;
 import org.junit.Test;
-import server_dataservicestub.clientdataservicestub.ClientDataServiceStub;
+import main.java.server_dataservicestub.clientdataservicestub.ClientDataServiceStub;
 
 import static org.junit.Assert.*;
 

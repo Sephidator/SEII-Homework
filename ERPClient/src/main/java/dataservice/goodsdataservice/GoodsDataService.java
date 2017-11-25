@@ -1,8 +1,8 @@
-package dataservice.goodsdataservice;
+package main.java.dataservice.goodsdataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.goods.GoodsPO;
-import po.goods.GoodsQueryPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.goods.GoodsPO;
+import main.java.po.goods.GoodsQueryPO;
 
 public interface GoodsDataService {
 

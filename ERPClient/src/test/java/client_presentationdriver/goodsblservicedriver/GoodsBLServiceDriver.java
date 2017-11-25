@@ -1,11 +1,11 @@
-package client_presentationdriver.goodsblservicedriver;
+package test.java.client_presentationdriver.goodsblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.goodsblservice.GoodsBLService;
-import client_blservicestub.goodsblservicestub.GoodsBLServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.goodsblservice.GoodsBLService;
+import main.java.client_blservicestub.goodsblservicestub.GoodsBLServiceStub;
 import org.junit.Test;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

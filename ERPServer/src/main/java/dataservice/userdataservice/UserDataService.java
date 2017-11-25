@@ -1,8 +1,8 @@
-package dataservice.userdataservice;
+package main.java.dataservice.userdataservice;
 
-import data.datautility.ResultMessage;
-import po.user.UserPO;
-import po.user.UserQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.po.user.UserPO;
+import main.java.po.user.UserQueryPO;
 
 import java.util.ArrayList;
 

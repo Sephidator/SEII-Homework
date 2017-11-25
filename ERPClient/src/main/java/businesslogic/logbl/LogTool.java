@@ -1,7 +1,7 @@
-package businesslogic.logbl;
+package main.java.businesslogic.logbl;
 
-import businesslogic.blutility.ResultMessage;
-import vo.log.LogVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.log.LogVO;
 
 public interface LogTool {
 

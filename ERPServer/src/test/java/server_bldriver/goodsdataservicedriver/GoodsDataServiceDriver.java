@@ -1,10 +1,10 @@
-package server_bldriver.goodsdataservicedriver;
+package test.java.server_bldriver.goodsdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.goodsdataservice.GoodsDataService;
-import po.goods.GoodsPO;
-import po.goods.GoodsQueryPO;
-import server_dataservicestub.goodsdataservicestub.GoodsDataServiceStub;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.goodsdataservice.GoodsDataService;
+import main.java.po.goods.GoodsPO;
+import main.java.po.goods.GoodsQueryPO;
+import main.java.server_dataservicestub.goodsdataservicestub.GoodsDataServiceStub;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package vo.promotion;
+package main.java.vo.promotion;
 
 import java.util.ArrayList;
 import java.util.Date;

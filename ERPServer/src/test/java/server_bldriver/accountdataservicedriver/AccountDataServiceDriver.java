@@ -1,11 +1,11 @@
-package server_bldriver.accountdataservicedriver;
+package test.java.server_bldriver.accountdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.accountdataservice.AccountDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.accountdataservice.AccountDataService;
 import org.junit.Test;
-import po.account.AccountPO;
-import po.account.AccountQueryPO;
-import server_dataservicestub.accountdataservicestub.AccountDataServiceStub;
+import main.java.po.account.AccountPO;
+import main.java.po.account.AccountQueryPO;
+import main.java.server_dataservicestub.accountdataservicestub.AccountDataServiceStub;
 
 import static org.junit.Assert.*;
 

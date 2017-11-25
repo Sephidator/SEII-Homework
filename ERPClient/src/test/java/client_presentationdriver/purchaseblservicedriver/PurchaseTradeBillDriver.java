@@ -1,8 +1,8 @@
-package client_presentationdriver.purchaseblservicedriver;
+package test.java.client_presentationdriver.purchaseblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
-import client_blservicestub.purchaseblservicestub.PurchaseTradeBillBlStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.client_blservicestub.purchaseblservicestub.PurchaseTradeBillBlStub;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

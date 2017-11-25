@@ -1,8 +1,8 @@
-package businesslogic_mock.messageblmock;
+package main.java.businesslogic_mock.messageblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.messagebl.MessageTool;
-import vo.message.MessageVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.messagebl.MessageTool;
+import main.java.vo.message.MessageVO;
 
 public class MessageBlMock implements MessageTool{
     @Override

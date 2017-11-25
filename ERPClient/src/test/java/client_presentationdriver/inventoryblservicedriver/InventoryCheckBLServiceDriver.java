@@ -1,7 +1,7 @@
-package client_presentationdriver.inventoryblservicedriver;
+package test.java.client_presentationdriver.inventoryblservicedriver;
 
-import businesslogicservice.inventoryblservice.InventoryCheckBLService;
-import client_blservicestub.inventoryblservicestub.InventoryCheckBLServiceStuub;
+import main.java.businesslogicservice.inventoryblservice.InventoryCheckBLService;
+import main.java.client_blservicestub.inventoryblservicestub.InventoryCheckBLServiceStuub;
 import org.junit.Test;
 
 import java.text.DateFormat;

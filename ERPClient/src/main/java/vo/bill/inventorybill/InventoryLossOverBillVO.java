@@ -1,6 +1,6 @@
-package vo.bill.inventorybill;
+package main.java.vo.bill.inventorybill;
 
-import vo.user.UserVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;

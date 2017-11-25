@@ -1,4 +1,4 @@
-package po.promotion;
+package main.java.po.promotion;
 
 public class GiftItemPO {
     public String goodsID;

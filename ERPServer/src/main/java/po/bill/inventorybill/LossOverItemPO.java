@@ -1,4 +1,4 @@
-package po.bill.inventorybill;
+package main.java.po.bill.inventorybill;
 
 public class LossOverItemPO {
     public String goodsID;// 报溢损的商品

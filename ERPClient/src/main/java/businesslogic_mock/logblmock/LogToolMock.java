@@ -1,8 +1,8 @@
-package businesslogic_mock.logblmock;
+package main.java.businesslogic_mock.logblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.logbl.LogTool;
-import vo.log.LogVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.logbl.LogTool;
+import main.java.vo.log.LogVO;
 
 public class LogToolMock implements LogTool{
     @Override

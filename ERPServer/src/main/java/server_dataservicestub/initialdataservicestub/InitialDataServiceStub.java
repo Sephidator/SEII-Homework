@@ -1,9 +1,9 @@
-package server_dataservicestub.initialdataservicestub;
+package main.java.server_dataservicestub.initialdataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.initialdataservice.InitialDataService;
-import po.initial.InitialPO;
-import po.initial.InitialQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.initialdataservice.InitialDataService;
+import main.java.po.initial.InitialPO;
+import main.java.po.initial.InitialQueryPO;
 
 import java.util.ArrayList;
 

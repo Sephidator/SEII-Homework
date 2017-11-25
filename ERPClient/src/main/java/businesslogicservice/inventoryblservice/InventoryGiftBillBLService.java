@@ -1,10 +1,10 @@
-package businesslogicservice.inventoryblservice;
+package main.java.businesslogicservice.inventoryblservice;
 
-import businesslogic.blutility.ResultMessage;
-import vo.bill.BillQueryVO;
-import vo.bill.inventorybill.InventoryGiftBillVO;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

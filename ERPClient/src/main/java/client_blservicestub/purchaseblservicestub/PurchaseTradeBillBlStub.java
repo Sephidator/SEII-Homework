@@ -1,13 +1,13 @@
-package client_blservicestub.purchaseblservicestub;
+package main.java.client_blservicestub.purchaseblservicestub;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
-import vo.bill.BillQueryVO;
-import vo.bill.purchasebill.PurchaseTradeBillVO;
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

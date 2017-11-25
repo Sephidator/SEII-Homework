@@ -1,9 +1,9 @@
-package businesslogic.logbl;
+package main.java.businesslogic.logbl;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.logblservice.LogBlService;
-import vo.log.LogQueryVO;
-import vo.log.LogVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.logblservice.LogBlService;
+import main.java.vo.log.LogQueryVO;
+import main.java.vo.log.LogVO;
 
 import java.util.ArrayList;
 

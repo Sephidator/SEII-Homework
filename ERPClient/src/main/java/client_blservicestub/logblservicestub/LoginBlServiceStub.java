@@ -1,7 +1,7 @@
-package client_blservicestub.logblservicestub;
+package main.java.client_blservicestub.logblservicestub;
 
-import businesslogicservice.loginblservice.LoginBlService;
-import vo.user.UserVO;
+import main.java.businesslogicservice.loginblservice.LoginBlService;
+import main.java.vo.user.UserVO;
 
 public class LoginBlServiceStub implements LoginBlService{
     @Override

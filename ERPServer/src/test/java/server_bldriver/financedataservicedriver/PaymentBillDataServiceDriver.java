@@ -1,11 +1,11 @@
-package server_bldriver.financedataservicedriver;
+package test.java.server_bldriver.financedataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.financedataservice.PaymentBillDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.financedataservice.PaymentBillDataService;
 import org.junit.Test;
-import po.bill.BillQueryPO;
-import po.bill.financebill.PaymentBillPO;
-import server_dataservicestub.financedataservicestub.PaymentBillDataServiceStub;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.financebill.PaymentBillPO;
+import main.java.server_dataservicestub.financedataservicestub.PaymentBillDataServiceStub;
 
 import static org.junit.Assert.*;
 

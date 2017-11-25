@@ -1,7 +1,7 @@
-package businesslogicservice.messageblservice;
+package main.java.businesslogicservice.messageblservice;
 
-import vo.message.MessageVO;
-import vo.user.UserVO;
+import main.java.vo.message.MessageVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

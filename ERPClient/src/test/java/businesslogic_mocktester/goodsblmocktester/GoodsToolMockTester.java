@@ -1,8 +1,8 @@
-package businesslogic_mocktester.goodsblmocktester;
+package test.java.businesslogic_mocktester.goodsblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.goodsbl.GoodsTool;
-import businesslogic_mock.goodsblmock.GoodsToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.goodsbl.GoodsTool;
+import main.java.businesslogic_mock.goodsblmock.GoodsToolMock;
 
 import static org.junit.Assert.*;
 

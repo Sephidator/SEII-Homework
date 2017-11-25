@@ -1,4 +1,4 @@
-package po.goods;
+package main.java.po.goods;
 
 import java.util.ArrayList;
 

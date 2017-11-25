@@ -1,7 +1,7 @@
-package businesslogic.promotionbl;
+package main.java.businesslogic.promotionbl;
 
-import vo.promotion.PromotionQueryVO;
-import vo.promotion.PromotionVO;
+import main.java.vo.promotion.PromotionQueryVO;
+import main.java.vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 

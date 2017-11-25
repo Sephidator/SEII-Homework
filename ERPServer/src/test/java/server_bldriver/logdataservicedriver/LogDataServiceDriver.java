@@ -1,11 +1,11 @@
-package server_bldriver.logdataservicedriver;
+package test.java.server_bldriver.logdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.logdataservice.LogDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.logdataservice.LogDataService;
 import org.junit.Test;
-import po.log.LogPO;
-import po.log.LogQueryPO;
-import server_dataservicestub.logdataservicestub.LogDataServiceStub;
+import main.java.po.log.LogPO;
+import main.java.po.log.LogQueryPO;
+import main.java.server_dataservicestub.logdataservicestub.LogDataServiceStub;
 
 import static org.junit.Assert.*;
 

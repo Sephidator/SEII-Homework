@@ -1,8 +1,8 @@
-package client_presentationdriver.clientblservicedriver;
+package test.java.client_presentationdriver.clientblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.clientblservice.ClientBlService;
-import client_blservicestub.clientblservicestub.ClientBlServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.clientblservice.ClientBlService;
+import main.java.client_blservicestub.clientblservicestub.ClientBlServiceStub;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

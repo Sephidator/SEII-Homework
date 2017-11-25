@@ -1,11 +1,11 @@
-package client_presentationdriver.approvalblservicedriver;
+package test.java.client_presentationdriver.approvalblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.approvalblservice.ApprovalBlService;
-import client_blservicestub.approvalblservicestub.ApprovalBlServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.approvalblservice.ApprovalBlService;
+import main.java.client_blservicestub.approvalblservicestub.ApprovalBlServiceStub;
 import org.junit.Test;
-import vo.bill.BillQueryVO;
-import vo.bill.BillVO;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.BillVO;
 
 import java.util.ArrayList;
 

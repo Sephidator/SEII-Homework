@@ -1,4 +1,4 @@
-package po.goods;
+package main.java.po.goods;
 
 public class GoodsQueryPO {
     public String ID; //商品编号

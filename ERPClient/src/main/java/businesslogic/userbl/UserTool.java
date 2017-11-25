@@ -1,7 +1,7 @@
-package businesslogic.userbl;
+package main.java.businesslogic.userbl;
 
-import vo.user.UserQueryVO;
-import vo.user.UserVO;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

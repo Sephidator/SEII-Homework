@@ -1,11 +1,11 @@
-package client_presentationdriver.promotionblservicedriver;
+package test.java.client_presentationdriver.promotionblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.promotionblservice.PromotionBlService;
-import client_blservicestub.promotionblservicestub.PromotionBlServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.promotionblservice.PromotionBlService;
+import main.java.client_blservicestub.promotionblservicestub.PromotionBlServiceStub;
 import org.junit.Test;
-import vo.promotion.PromotionQueryVO;
-import vo.promotion.PromotionVO;
+import main.java.vo.promotion.PromotionQueryVO;
+import main.java.vo.promotion.PromotionVO;
 
 import static org.junit.Assert.*;
 

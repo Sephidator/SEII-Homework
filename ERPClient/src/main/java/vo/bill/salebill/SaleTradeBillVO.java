@@ -1,9 +1,9 @@
-package vo.bill.salebill;
+package main.java.vo.bill.salebill;
 
-import vo.client.ClientVO;
-import vo.promotion.GoodsItemVO;
-import vo.promotion.PromotionVO;
-import vo.user.UserVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.promotion.GoodsItemVO;
+import main.java.vo.promotion.PromotionVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;

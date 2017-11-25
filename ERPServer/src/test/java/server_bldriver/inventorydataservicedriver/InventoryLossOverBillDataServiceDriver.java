@@ -1,11 +1,11 @@
-package server_bldriver.inventorydataservicedriver;
+package test.java.server_bldriver.inventorydataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.inventorydataservice.InventoryLossOverBillDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataService;
 import org.junit.Test;
-import po.bill.BillQueryPO;
-import po.bill.inventorybill.InventoryLossOverBillPO;
-import server_dataservicestub.inventorydataservicestub.InventoryLossOverBillDataServiceStub;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
+import main.java.server_dataservicestub.inventorydataservicestub.InventoryLossOverBillDataServiceStub;
 
 import static org.junit.Assert.*;
 

@@ -1,9 +1,9 @@
-package businesslogic_mock.accountblmock;
+package main.java.businesslogic_mock.accountblmock;
 
-import businesslogic.accountbl.AccountTool;
-import businesslogic.blutility.ResultMessage;
-import vo.account.AccountQueryVO;
-import vo.account.AccountVO;
+import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.account.AccountQueryVO;
+import main.java.vo.account.AccountVO;
 
 import java.util.ArrayList;
 

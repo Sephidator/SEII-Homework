@@ -1,7 +1,7 @@
-package businesslogic.clientbl;
+package main.java.businesslogic.clientbl;
 
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
 
 import java.util.ArrayList;
 

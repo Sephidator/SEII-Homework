@@ -1,12 +1,12 @@
-package client_presentationdriver.financeblservicedriver;
+package test.java.client_presentationdriver.financeblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.financeblservice.ReceiptBillBlService;
-import client_blservicestub.financeblservicestub.ReceiptBillBlServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
+import main.java.client_blservicestub.financeblservicestub.ReceiptBillBlServiceStub;
 import org.junit.Test;
-import vo.account.AccountQueryVO;
-import vo.bill.financebill.ReceiptBillVO;
-import vo.client.ClientQueryVO;
+import main.java.vo.account.AccountQueryVO;
+import main.java.vo.bill.financebill.ReceiptBillVO;
+import main.java.vo.client.ClientQueryVO;
 
 import static org.junit.Assert.*;
 

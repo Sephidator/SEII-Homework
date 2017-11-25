@@ -1,4 +1,4 @@
-package po.message;
+package main.java.po.message;
 
 public class MessagePO {
     private String receiverID;

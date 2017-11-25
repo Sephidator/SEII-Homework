@@ -1,8 +1,8 @@
-package businesslogic_mocktester.saleblmocktester;
+package test.java.businesslogic_mocktester.saleblmocktester;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.salebl.SaleRefundBillTool;
-import businesslogic_mock.saleblmock.SaleRefundBillToolMock;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.salebl.SaleRefundBillTool;
+import main.java.businesslogic_mock.saleblmock.SaleRefundBillToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

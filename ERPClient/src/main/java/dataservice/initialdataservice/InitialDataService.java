@@ -1,8 +1,8 @@
-package dataservice.initialdataservice;
+package main.java.dataservice.initialdataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.initial.InitialPO;
-import po.initial.InitialQueryPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.initial.InitialPO;
+import main.java.po.initial.InitialQueryPO;
 
 import java.util.ArrayList;
 

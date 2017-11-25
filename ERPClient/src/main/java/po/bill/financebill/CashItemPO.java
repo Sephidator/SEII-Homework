@@ -1,4 +1,4 @@
-package po.bill.financebill;
+package main.java.po.bill.financebill;
 
 public class CashItemPO {
     public String ItemName;// 条目名

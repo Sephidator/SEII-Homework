@@ -1,9 +1,9 @@
-package vo.initial;
+package main.java.vo.initial;
 
-import vo.account.AccountVO;
-import vo.client.ClientVO;
-import vo.goods.GoodsSortVO;
-import vo.goods.GoodsVO;
+import main.java.vo.account.AccountVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.goods.GoodsSortVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 //import GoodsPO

@@ -1,6 +1,6 @@
-package dataservice.logindataservice;
+package main.java.dataservice.logindataservice;
 
-import po.user.UserPO;
+import main.java.po.user.UserPO;
 
 public interface LoginDataService {
     public UserPO login(String ID, String password);

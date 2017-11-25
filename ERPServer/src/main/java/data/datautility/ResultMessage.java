@@ -1,4 +1,4 @@
-package data.datautility;
+package main.java.data.datautility;
 
 public enum ResultMessage {
     success,

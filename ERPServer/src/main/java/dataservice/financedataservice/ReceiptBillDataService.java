@@ -1,8 +1,8 @@
-package dataservice.financedataservice;
+package main.java.dataservice.financedataservice;
 
-import data.datautility.ResultMessage;
-import po.bill.BillQueryPO;
-import po.bill.financebill.ReceiptBillPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.financebill.ReceiptBillPO;
 
 import java.util.ArrayList;
 

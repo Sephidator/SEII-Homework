@@ -1,4 +1,4 @@
-package vo.log;
+package main.java.vo.log;
 
 import java.util.Date;
 

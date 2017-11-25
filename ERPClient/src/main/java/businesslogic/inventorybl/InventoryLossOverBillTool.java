@@ -1,8 +1,8 @@
-package businesslogic.inventorybl;
+package main.java.businesslogic.inventorybl;
 
-import businesslogic.blutility.ResultMessage;
-import vo.bill.BillQueryVO;
-import vo.bill.inventorybill.InventoryLossOverBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
 
 import java.util.ArrayList;
 

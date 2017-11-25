@@ -1,4 +1,4 @@
-package po.bill.inventorybill;
+package main.java.po.bill.inventorybill;
 
 import java.util.ArrayList;
 import java.util.Date;

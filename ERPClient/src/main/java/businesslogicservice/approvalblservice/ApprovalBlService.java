@@ -1,8 +1,8 @@
-package businesslogicservice.approvalblservice;
+package main.java.businesslogicservice.approvalblservice;
 
-import businesslogic.blutility.ResultMessage;
-import vo.bill.BillQueryVO;
-import vo.bill.BillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.BillVO;
 
 import java.util.ArrayList;
 

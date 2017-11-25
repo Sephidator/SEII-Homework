@@ -1,8 +1,8 @@
-package businesslogic.financebl;
+package main.java.businesslogic.financebl;
 
-import businesslogic.blutility.ResultMessage;
-import vo.bill.BillQueryVO;
-import vo.bill.financebill.PaymentBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.financebill.PaymentBillVO;
 
 import java.util.ArrayList;
 

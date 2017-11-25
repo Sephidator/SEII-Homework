@@ -1,6 +1,6 @@
-package po.bill.inventorybill;
+package main.java.po.bill.inventorybill;
 
-import po.bill.BillPO;
+import main.java.po.bill.BillPO;
 
 public class InventoryBillPO extends BillPO {
 }

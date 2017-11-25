@@ -1,8 +1,8 @@
-package dataservice.goodssortdataservice;
+package main.java.dataservice.goodssortdataservice;
 
-import data.datautility.ResultMessage;
-import po.goods.GoodsSortPO;
-import po.goods.GoodsSortQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.po.goods.GoodsSortPO;
+import main.java.po.goods.GoodsSortQueryPO;
 
 public interface GoodsSortDataService {
 

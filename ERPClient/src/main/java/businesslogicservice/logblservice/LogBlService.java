@@ -1,7 +1,7 @@
-package businesslogicservice.logblservice;
+package main.java.businesslogicservice.logblservice;
 
-import vo.log.LogQueryVO;
-import vo.log.LogVO;
+import main.java.vo.log.LogQueryVO;
+import main.java.vo.log.LogVO;
 
 import java.util.ArrayList;
 

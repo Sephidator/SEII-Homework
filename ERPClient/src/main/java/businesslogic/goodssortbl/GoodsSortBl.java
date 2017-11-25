@@ -1,9 +1,9 @@
-package businesslogic.goodssortbl;
+package main.java.businesslogic.goodssortbl;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.goodssortblservice.GoodsSortBLService;
-import vo.goods.GoodsSortQueryVO;
-import vo.goods.GoodsSortVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
+import main.java.vo.goods.GoodsSortQueryVO;
+import main.java.vo.goods.GoodsSortVO;
 
 import java.util.ArrayList;
 

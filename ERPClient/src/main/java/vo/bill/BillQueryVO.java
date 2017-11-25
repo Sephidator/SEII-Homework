@@ -1,4 +1,4 @@
-package vo.bill;
+package main.java.vo.bill;
 
 import java.util.Date;
 

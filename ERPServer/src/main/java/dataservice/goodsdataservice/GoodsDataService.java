@@ -1,8 +1,8 @@
-package dataservice.goodsdataservice;
+package main.java.dataservice.goodsdataservice;
 
-import data.datautility.ResultMessage;
-import po.goods.GoodsPO;
-import po.goods.GoodsQueryPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.po.goods.GoodsPO;
+import main.java.po.goods.GoodsQueryPO;
 
 public interface GoodsDataService {
 

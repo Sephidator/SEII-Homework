@@ -1,4 +1,4 @@
-package po.account;
+package main.java.po.account;
 
 public class AccountQueryPO {
     public String ID;//账户ID

@@ -1,4 +1,4 @@
-package vo.client;
+package main.java.vo.client;
 
 public class ClientQueryVO {
     public String ID;

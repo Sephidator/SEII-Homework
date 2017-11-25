@@ -1,4 +1,4 @@
-package vo.goods;
+package main.java.vo.goods;
 
 public class GoodsSortQueryVO {
     public String ID; //商品分类编号

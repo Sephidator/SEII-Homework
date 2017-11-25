@@ -1,6 +1,6 @@
-package po.bill.financebill;
+package main.java.po.bill.financebill;
 
-import po.bill.BillPO;
+import main.java.po.bill.BillPO;
 
 public class FinanceBillPO extends BillPO {
     protected double total;// 财务账单的总金额

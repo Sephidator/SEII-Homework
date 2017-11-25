@@ -1,6 +1,6 @@
-package client_blservicestub.inventoryblservicestub;
+package main.java.client_blservicestub.inventoryblservicestub;
 
-import businesslogicservice.inventoryblservice.InventoryCheckBLService;
+import main.java.businesslogicservice.inventoryblservice.InventoryCheckBLService;
 
 import java.util.Date;
 

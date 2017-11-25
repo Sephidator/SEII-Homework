@@ -1,8 +1,8 @@
-package dataservice.messagedataservice;
+package main.java.dataservice.messagedataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.message.MessagePO;
-import po.user.UserPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.message.MessagePO;
+import main.java.po.user.UserPO;
 
 import java.util.ArrayList;
 

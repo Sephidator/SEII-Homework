@@ -1,7 +1,7 @@
-package businesslogic_mocktester.clientblmocktester;
+package test.java.businesslogic_mocktester.clientblmocktester;
 
-import businesslogic.clientbl.ClientTool;
-import businesslogic_mock.clientblmock.ClientToolMock;
+import main.java.businesslogic.clientbl.ClientTool;
+import main.java.businesslogic_mock.clientblmock.ClientToolMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

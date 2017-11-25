@@ -1,4 +1,4 @@
-package vo.bill.financebill;
+package main.java.vo.bill.financebill;
 
 public class TransItemVO {
     public String bankAccount;//银行账户

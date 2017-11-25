@@ -1,11 +1,11 @@
 package client_presentationdriver.goodssortblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.goodssortblservice.GoodsSortBLService;
-import client_blservicestub.goodssortblservicestub.GoodsSortBLServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
+import main.java.client_blservicestub.goodssortblservicestub.GoodsSortBLServiceStub;
 import org.junit.Test;
-import vo.goods.GoodsSortQueryVO;
-import vo.goods.GoodsSortVO;
+import main.java.vo.goods.GoodsSortQueryVO;
+import main.java.vo.goods.GoodsSortVO;
 
 import java.util.ArrayList;
 

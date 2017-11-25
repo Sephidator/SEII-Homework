@@ -1,8 +1,8 @@
-package businesslogic.purchasebl;
+package main.java.businesslogic.purchasebl;
 
-import businesslogic.blutility.ResultMessage;
-import vo.bill.BillQueryVO;
-import vo.bill.purchasebill.PurchaseTradeBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 
 import java.util.ArrayList;
 

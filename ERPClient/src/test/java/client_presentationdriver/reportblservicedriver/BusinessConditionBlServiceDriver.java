@@ -1,9 +1,9 @@
-package client_presentationdriver.reportblservicedriver;
+package test.java.client_presentationdriver.reportblservicedriver;
 
-import businesslogicservice.reportblservice.BusinessConditionBlService;
-import client_blservicestub.reportblservicestub.BusinessConditionBlServiceStub;
+import main.java.businesslogicservice.reportblservice.BusinessConditionBlService;
+import main.java.client_blservicestub.reportblservicestub.BusinessConditionBlServiceStub;
 import org.junit.Test;
-import vo.report.BusinessConditionQueryVO;
+import main.java.vo.report.BusinessConditionQueryVO;
 
 import java.util.ArrayList;
 

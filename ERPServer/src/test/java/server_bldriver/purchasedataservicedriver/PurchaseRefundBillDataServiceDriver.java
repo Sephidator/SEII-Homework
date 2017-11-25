@@ -1,9 +1,9 @@
-package server_bldriver.purchasedataservicedriver;
+package test.java.server_bldriver.purchasedataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.purchasedataservice.PurchaseRefundBillDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.purchasedataservice.PurchaseRefundBillDataService;
 import org.junit.Test;
-import server_dataservicestub.purchasedataservicestub.PurchaseRefundBillDataServiceStub;
+import main.java.server_dataservicestub.purchasedataservicestub.PurchaseRefundBillDataServiceStub;
 
 import static org.junit.Assert.*;
 

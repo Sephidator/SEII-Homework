@@ -1,9 +1,9 @@
-package businesslogic_mock.inventoryblmock;
+package main.java.businesslogic_mock.inventoryblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.inventorybl.InventoryGiftBillTool;
-import vo.bill.BillQueryVO;
-import vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.inventorybl.InventoryGiftBillTool;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
 
 import java.util.ArrayList;
 

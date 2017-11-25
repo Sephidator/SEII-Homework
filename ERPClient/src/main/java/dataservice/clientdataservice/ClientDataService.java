@@ -1,8 +1,8 @@
-package dataservice.clientdataservice;
+package main.java.dataservice.clientdataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.client.ClientPO;
-import po.client.ClientQueryPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.client.ClientPO;
+import main.java.po.client.ClientQueryPO;
 
 import java.util.ArrayList;
 

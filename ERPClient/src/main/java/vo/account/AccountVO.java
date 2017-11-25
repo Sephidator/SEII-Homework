@@ -1,4 +1,4 @@
-package vo.account;
+package main.java.vo.account;
 
 public class AccountVO{
 

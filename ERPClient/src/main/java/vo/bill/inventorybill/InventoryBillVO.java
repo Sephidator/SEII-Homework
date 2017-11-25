@@ -1,6 +1,6 @@
-package vo.bill.inventorybill;
+package main.java.vo.bill.inventorybill;
 
-import vo.bill.BillVO;
+import main.java.vo.bill.BillVO;
 
 public class InventoryBillVO extends BillVO {
 }

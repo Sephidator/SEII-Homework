@@ -1,7 +1,7 @@
-package businesslogicservice.reportblservice;
+package main.java.businesslogicservice.reportblservice;
 
-import vo.report.SaleDetailQueryVO;
-import vo.report.SaleRecordVO;
+import main.java.vo.report.SaleDetailQueryVO;
+import main.java.vo.report.SaleRecordVO;
 
 import java.util.ArrayList;
 

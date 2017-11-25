@@ -1,9 +1,9 @@
-package businesslogic_mock.saleblmock;
+package main.java.businesslogic_mock.saleblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.salebl.SaleTradeBillTool;
-import vo.bill.BillQueryVO;
-import vo.bill.salebill.SaleTradeBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.salebl.SaleTradeBillTool;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.salebill.SaleTradeBillVO;
 
 import java.util.ArrayList;
 

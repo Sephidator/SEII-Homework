@@ -1,8 +1,8 @@
-package dataservice.promotiondataservice;
+package main.java.dataservice.promotiondataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.promotion.PromotionPO;
-import po.promotion.PromotionQueryPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.promotion.PromotionPO;
+import main.java.po.promotion.PromotionQueryPO;
 
 import java.util.ArrayList;
 

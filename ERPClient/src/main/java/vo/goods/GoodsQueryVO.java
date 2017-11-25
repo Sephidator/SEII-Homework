@@ -1,4 +1,4 @@
-package vo.goods;
+package main.java.vo.goods;
 
 public class GoodsQueryVO {
     private String ID; //商品编号

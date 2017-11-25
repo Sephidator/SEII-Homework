@@ -1,9 +1,9 @@
-package businesslogic_mock.goodsblmock;
+package main.java.businesslogic_mock.goodsblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.goodsbl.GoodsTool;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.goodsbl.GoodsTool;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

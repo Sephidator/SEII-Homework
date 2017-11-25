@@ -1,8 +1,8 @@
-package businesslogic_mock.clientblmock;
+package main.java.businesslogic_mock.clientblmock;
 
-import businesslogic.clientbl.ClientTool;
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
+import main.java.businesslogic.clientbl.ClientTool;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
 
 import java.util.ArrayList;
 

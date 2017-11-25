@@ -1,11 +1,11 @@
-package client_presentationdriver.userblservicedriver;
+package test.java.client_presentationdriver.userblservicedriver;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.userblservice.UserBlService;
-import client_blservicestub.userblservicestub.UserBlServiceStub;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.userblservice.UserBlService;
+import main.java.client_blservicestub.userblservicestub.UserBlServiceStub;
 import org.junit.Test;
-import vo.user.UserQueryVO;
-import vo.user.UserVO;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import static org.junit.Assert.*;
 

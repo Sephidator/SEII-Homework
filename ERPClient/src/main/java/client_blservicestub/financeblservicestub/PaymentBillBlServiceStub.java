@@ -1,13 +1,13 @@
-package client_blservicestub.financeblservicestub;
+package main.java.client_blservicestub.financeblservicestub;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.financeblservice.PaymentBilllBlService;
-import vo.account.AccountQueryVO;
-import vo.account.AccountVO;
-import vo.bill.financebill.PaymentBillVO;
-import vo.client.ClientQueryVO;
-import vo.client.ClientVO;
-import vo.user.UserVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.financeblservice.PaymentBilllBlService;
+import main.java.vo.account.AccountQueryVO;
+import main.java.vo.account.AccountVO;
+import main.java.vo.bill.financebill.PaymentBillVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

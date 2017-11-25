@@ -1,4 +1,4 @@
-package po.client;
+package main.java.po.client;
 
 public class ClientQueryPO {
     public String ID;

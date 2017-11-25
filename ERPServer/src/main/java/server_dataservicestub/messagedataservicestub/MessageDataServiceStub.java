@@ -1,9 +1,9 @@
-package server_dataservicestub.messagedataservicestub;
+package main.java.server_dataservicestub.messagedataservicestub;
 
-import data.datautility.ResultMessage;
-import dataservice.messagedataservice.MessageDataService;
-import po.message.MessagePO;
-import po.user.UserPO;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.messagedataservice.MessageDataService;
+import main.java.po.message.MessagePO;
+import main.java.po.user.UserPO;
 
 import java.util.ArrayList;
 

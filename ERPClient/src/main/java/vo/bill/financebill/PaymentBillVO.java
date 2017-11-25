@@ -1,7 +1,7 @@
-package vo.bill.financebill;
+package main.java.vo.bill.financebill;
 
-import vo.client.ClientVO;
-import vo.user.UserVO;
+import main.java.vo.client.ClientVO;
+import main.java.vo.user.UserVO;
 
 import java.util.*;
 

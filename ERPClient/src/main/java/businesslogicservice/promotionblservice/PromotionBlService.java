@@ -1,8 +1,8 @@
-package businesslogicservice.promotionblservice;
+package main.java.businesslogicservice.promotionblservice;
 
-import businesslogic.blutility.ResultMessage;
-import vo.promotion.PromotionQueryVO;
-import vo.promotion.PromotionVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.vo.promotion.PromotionQueryVO;
+import main.java.vo.promotion.PromotionVO;
 
 import java.util.ArrayList;
 

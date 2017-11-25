@@ -1,8 +1,8 @@
-package dataservice.saledataservice;
+package main.java.dataservice.saledataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.bill.BillQueryPO;
-import po.bill.salebill.SaleTradeBillPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.salebill.SaleTradeBillPO;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
-package dataservice.logdataservice;
+package main.java.dataservice.logdataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.log.LogPO;
-import po.log.LogQueryPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.log.LogPO;
+import main.java.po.log.LogQueryPO;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package vo.goods;
+package main.java.vo.goods;
 
 import java.util.ArrayList;
 

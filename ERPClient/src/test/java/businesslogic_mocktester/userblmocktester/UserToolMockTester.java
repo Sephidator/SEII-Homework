@@ -1,9 +1,9 @@
-package businesslogic_mocktester.userblmocktester;
+package test.java.businesslogic_mocktester.userblmocktester;
 
-import businesslogic.userbl.UserTool;
-import businesslogic_mock.userblmock.UserToolMock;
+import main.java.businesslogic.userbl.UserTool;
+import main.java.businesslogic_mock.userblmock.UserToolMock;
 import org.junit.Test;
-import vo.user.UserQueryVO;
+import main.java.vo.user.UserQueryVO;
 
 import static org.junit.Assert.*;
 

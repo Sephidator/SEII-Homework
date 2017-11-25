@@ -1,9 +1,9 @@
-package server_bldriver.saledataservicedriver;
+package test.java.server_bldriver.saledataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.saledataservice.SaleRefundBillDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.saledataservice.SaleRefundBillDataService;
 import org.junit.Test;
-import server_dataservicestub.saledataservicestub.SaleRefundBillDataServiceStub;
+import main.java.server_dataservicestub.saledataservicestub.SaleRefundBillDataServiceStub;
 
 import static org.junit.Assert.assertEquals;
 

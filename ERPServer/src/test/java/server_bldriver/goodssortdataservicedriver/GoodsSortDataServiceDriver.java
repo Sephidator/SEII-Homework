@@ -1,11 +1,11 @@
-package server_bldriver.goodssortdataservicedriver;
+package test.java.server_bldriver.goodssortdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.goodssortdataservice.GoodsSortDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import org.junit.Test;
-import po.goods.GoodsSortPO;
-import po.goods.GoodsSortQueryPO;
-import server_dataservicestub.goodssortdataservicestub.GoodsSortDataServiceStub;
+import main.java.po.goods.GoodsSortPO;
+import main.java.po.goods.GoodsSortQueryPO;
+import main.java.server_dataservicestub.goodssortdataservicestub.GoodsSortDataServiceStub;
 
 import static org.junit.Assert.*;
 

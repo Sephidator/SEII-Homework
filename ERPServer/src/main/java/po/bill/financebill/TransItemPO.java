@@ -1,4 +1,4 @@
-package po.bill.financebill;
+package main.java.po.bill.financebill;
 
 public class TransItemPO {
     public String bankAccount;//银行账户

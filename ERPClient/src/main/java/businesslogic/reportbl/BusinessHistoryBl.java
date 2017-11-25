@@ -1,8 +1,8 @@
-package businesslogic.reportbl;
+package main.java.businesslogic.reportbl;
 
-import businesslogicservice.reportblservice.BusinessHistoryBlService;
-import vo.bill.BillVO;
-import vo.report.BusinessHistoryQueryVO;
+import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
+import main.java.vo.bill.BillVO;
+import main.java.vo.report.BusinessHistoryQueryVO;
 
 import java.util.ArrayList;
 

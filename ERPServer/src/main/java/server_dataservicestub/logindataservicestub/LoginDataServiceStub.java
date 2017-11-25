@@ -1,7 +1,7 @@
-package server_dataservicestub.logindataservicestub;
+package main.java.server_dataservicestub.logindataservicestub;
 
-import dataservice.logindataservice.LoginDataService;
-import po.user.UserPO;
+import main.java.dataservice.logindataservice.LoginDataService;
+import main.java.po.user.UserPO;
 
 public class LoginDataServiceStub implements LoginDataService{
     @Override

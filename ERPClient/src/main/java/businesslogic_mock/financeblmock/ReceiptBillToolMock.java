@@ -1,9 +1,9 @@
-package businesslogic_mock.financeblmock;
+package main.java.businesslogic_mock.financeblmock;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogic.financebl.ReceiptBillTool;
-import vo.bill.BillQueryVO;
-import vo.bill.financebill.ReceiptBillVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.financebl.ReceiptBillTool;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.financebill.ReceiptBillVO;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,9 @@
-package businesslogic.messagebl;
+package main.java.businesslogic.messagebl;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.messageblservice.MessageBlService;
-import vo.message.MessageVO;
-import vo.user.UserVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.messageblservice.MessageBlService;
+import main.java.vo.message.MessageVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation_FXML.loginui.LoginUI">
+   <children>
+      <JFXButton alignment="CENTER" layoutX="181.0" layoutY="482.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #3F51B5; -fx-text-fill: #FFFFFF;" text="登陆">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton alignment="CENTER" layoutX="444.0" layoutY="482.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #d31d21; -fx-text-fill: #FFFFFF;" text="取消">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="157.0" layoutY="240.0" prefHeight="60.0" prefWidth="450.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="60.0">
+               <image>
+                  <Image url="@../../pics/user-shape.png" />
+               </image>
+            </ImageView>
+            <JFXTextField prefHeight="60.0" prefWidth="370.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="157.0" layoutY="335.0" prefHeight="60.0" prefWidth="450.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="60.0">
+               <image>
+                  <Image url="@../../pics/keyboard.png" />
+               </image>
+            </ImageView>
+            <JFXTextField prefHeight="60.0" prefWidth="370.0" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="263.0" layoutY="101.0" prefHeight="87.0" prefWidth="275.0" text="灯具进销存管理系统">
+         <font>
+            <Font size="27.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

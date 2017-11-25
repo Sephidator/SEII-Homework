@@ -1,8 +1,8 @@
-package businesslogic_mock.goodssortblmock;
+package main.java.businesslogic_mock.goodssortblmock;
 
-import businesslogic.goodssortbl.GoodsSortTool;
-import vo.goods.GoodsSortQueryVO;
-import vo.goods.GoodsSortVO;
+import main.java.businesslogic.goodssortbl.GoodsSortTool;
+import main.java.vo.goods.GoodsSortQueryVO;
+import main.java.vo.goods.GoodsSortVO;
 
 import java.util.ArrayList;
 

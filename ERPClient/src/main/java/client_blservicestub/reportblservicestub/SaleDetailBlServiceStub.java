@@ -1,9 +1,9 @@
-package client_blservicestub.reportblservicestub;
+package main.java.client_blservicestub.reportblservicestub;
 
-import businesslogicservice.reportblservice.SaleDetailBlService;
-import vo.bill.salebill.SaleTradeBillVO;
-import vo.report.SaleDetailQueryVO;
-import vo.report.SaleRecordVO;
+import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
+import main.java.vo.bill.salebill.SaleTradeBillVO;
+import main.java.vo.report.SaleDetailQueryVO;
+import main.java.vo.report.SaleRecordVO;
 
 import java.util.ArrayList;
 

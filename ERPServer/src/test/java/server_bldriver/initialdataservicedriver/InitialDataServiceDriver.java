@@ -1,11 +1,11 @@
-package server_bldriver.initialdataservicedriver;
+package test.java.server_bldriver.initialdataservicedriver;
 
-import data.datautility.ResultMessage;
-import dataservice.initialdataservice.InitialDataService;
+import main.java.data.datautility.ResultMessage;
+import main.java.dataservice.initialdataservice.InitialDataService;
 import org.junit.Test;
-import po.initial.InitialPO;
-import po.initial.InitialQueryPO;
-import server_dataservicestub.initialdataservicestub.InitialDataServiceStub;
+import main.java.po.initial.InitialPO;
+import main.java.po.initial.InitialQueryPO;
+import main.java.server_dataservicestub.initialdataservicestub.InitialDataServiceStub;
 
 import static org.junit.Assert.*;
 

@@ -1,6 +1,6 @@
-package businesslogic.inventorybl;
+package main.java.businesslogic.inventorybl;
 
-import businesslogicservice.inventoryblservice.InventoryCheckBLService;
+import main.java.businesslogicservice.inventoryblservice.InventoryCheckBLService;
 
 import java.util.Date;
 

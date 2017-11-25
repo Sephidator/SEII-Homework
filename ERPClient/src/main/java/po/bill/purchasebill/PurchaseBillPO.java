@@ -1,7 +1,7 @@
-package po.bill.purchasebill;
+package main.java.po.bill.purchasebill;
 
-import po.bill.BillPO;
-import po.promotion.GoodsItemPO;
+import main.java.po.bill.BillPO;
+import main.java.po.promotion.GoodsItemPO;
 
 import java.util.ArrayList;
 

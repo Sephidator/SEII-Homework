@@ -1,4 +1,4 @@
-package po.log;
+package main.java.po.log;
 
 import java.util.Date;
 

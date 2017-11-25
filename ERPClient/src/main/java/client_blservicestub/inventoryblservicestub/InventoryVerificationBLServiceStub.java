@@ -1,8 +1,8 @@
-package client_blservicestub.inventoryblservicestub;
+package main.java.client_blservicestub.inventoryblservicestub;
 
-import businesslogicservice.inventoryblservice.InventoryVerificationBLService;
-import vo.goods.GoodsQueryVO;
-import vo.goods.GoodsVO;
+import main.java.businesslogicservice.inventoryblservice.InventoryVerificationBLService;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
-package server_bldriver.logindataservicedriver;
+package test.java.server_bldriver.logindataservicedriver;
 
-import dataservice.logindataservice.LoginDataService;
+import main.java.dataservice.logindataservice.LoginDataService;
 import org.junit.Test;
-import server_dataservicestub.logindataservicestub.LoginDataServiceStub;
+import main.java.server_dataservicestub.logindataservicestub.LoginDataServiceStub;
 
 import static org.junit.Assert.*;
 

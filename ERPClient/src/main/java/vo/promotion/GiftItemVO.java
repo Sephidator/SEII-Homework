@@ -1,6 +1,6 @@
-package vo.promotion;
+package main.java.vo.promotion;
 
-import vo.goods.GoodsVO;
+import main.java.vo.goods.GoodsVO;
 
 public class GiftItemVO {
     public GoodsVO goods;

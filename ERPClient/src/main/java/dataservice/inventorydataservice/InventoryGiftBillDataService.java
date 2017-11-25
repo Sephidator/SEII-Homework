@@ -1,8 +1,8 @@
-package dataservice.inventorydataservice;
+package main.java.dataservice.inventorydataservice;
 
-import businesslogic.blutility.ResultMessage;
-import po.bill.BillQueryPO;
-import po.bill.inventorybill.InventoryGiftBillPO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.po.bill.BillQueryPO;
+import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 
 public interface InventoryGiftBillDataService {
 

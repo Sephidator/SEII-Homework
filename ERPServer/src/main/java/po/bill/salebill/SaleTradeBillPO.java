@@ -1,6 +1,6 @@
-package po.bill.salebill;
+package main.java.po.bill.salebill;
 
-import po.promotion.GoodsItemPO;
+import main.java.po.promotion.GoodsItemPO;
 
 import java.util.ArrayList;
 import java.util.Date;

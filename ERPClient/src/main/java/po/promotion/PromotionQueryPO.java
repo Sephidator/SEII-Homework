@@ -1,4 +1,4 @@
-package po.promotion;
+package main.java.po.promotion;
 
 import java.util.Date;
 

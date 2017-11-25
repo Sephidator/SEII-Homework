@@ -1,8 +1,8 @@
-package client_blservicestub.accountblservicestub;
+package main.java.client_blservicestub.accountblservicestub;
 
-import businesslogic.blutility.ResultMessage;
-import businesslogicservice.accountblservice.AccountBlService;
-import vo.account.AccountVO;
+import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogicservice.accountblservice.AccountBlService;
+import main.java.vo.account.AccountVO;
 
 public class AccountBlServiceStub implements AccountBlService{
     @Override

@@ -1,14 +1,14 @@
-package vo.promotion;
+package main.java.vo.promotion;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PromotionClientVO extends vo.promotion.PromotionVO {
+public class PromotionClientVO extends PromotionVO {
     private int clientLevel; // 客户等级
 
     private double voucher;//代金券
 
-    private ArrayList<vo.promotion.GiftItemVO> giftList; // 赠品列表
+    private ArrayList<GiftItemVO> giftList; // 赠品列表
 
     PromotionClientVO(){
 
