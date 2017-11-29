@@ -1,49 +1,40 @@
+package main.java;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import main.java.presentation.loginui.LoginUIController;
 
 import java.io.IOException;
 
 public class MainApp extends Application {
 
-    private Stage primaryStage;
-    private Scene scene;
+    private Stage stage;
 
-
+    public Stage getPrimaryStage() {
+        return stage;
+    }
 
     @Override
-    public void start(Stage primaryStage) {
-        this.primaryStage=primaryStage;
-        this.primaryStage.setTitle("BF-IDE");
+    public void start(Stage stage) {
+        this.stage=stage;
+        this.stage.setTitle("灯具进销存管理系统");
 
-        initLoginPane();
+        getLoginPane();
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        // 设置关闭界面时做什么
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
             }
         });
     }
 
-    public void initLoginPane(){
-        getLoginPane();
-    }
-
     public void getLoginPane(){
-        try{
-            // 加载登陆界面
-            FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getClassLoader().getResource("LoginUI.fxml"));
-
-            scene=new Scene(loader.load());
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-        }catch(IOException e){
-        }
+        LoginUIController.init(stage);
     }
 
 
