@@ -1,22 +1,19 @@
 package main.java.dataservice.financedataservice;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface CashBillDataService {
-
+public interface CashBillDataService extends Remote {
     /*根据筛选条件获取现金费用单列表*/
-    public ArrayList<CashBillPO> find(BillQueryPO query);
-
-    /*得到新的现金费用单ID*/
-    public String getID();
+    ArrayList<CashBillPO> find(BillQueryPO query) throws RemoteException;
 
     /*添加现金费用单*/
-    public ResultMessage insert(CashBillPO po);
+    String insert(CashBillPO po);
 
     /*更新现金费用单信息*/
-    public ResultMessage update(CashBillPO po);
+    void update(CashBillPO po);
 }

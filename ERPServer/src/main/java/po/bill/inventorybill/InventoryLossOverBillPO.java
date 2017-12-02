@@ -9,14 +9,13 @@ public class InventoryLossOverBillPO extends InventoryBillPO {
     public InventoryLossOverBillPO() {
     }
 
-    public InventoryLossOverBillPO(String ID, String state, Date time, String type, String operatorID, String comment, ArrayList<LossOverItemPO> lossOverList){
-        this.ID = ID;
+    public InventoryLossOverBillPO(String state, Date time, String operatorID, String comment, ArrayList<LossOverItemPO> lossOverList) {
         this.state = state;
         this.time = time;
-        this.type = type;
+        type = "库存溢损单";
         this.operatorID = operatorID;
         this.comment = comment;
-        this.lossOverList=lossOverList;
+        this.lossOverList = lossOverList;
     }
 
     public ArrayList<LossOverItemPO> getLossOverList() {

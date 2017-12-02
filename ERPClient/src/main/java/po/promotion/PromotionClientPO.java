@@ -1,24 +1,27 @@
 package main.java.po.promotion;
 
+import main.java.po.goods.GiftItemPO;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PromotionClientPO extends PromotionPO {
     private int clientLevel; // 客户等级
 
-    private double voucher;//代金券
+    private double voucher; // 代金券
 
     private ArrayList<GiftItemPO> giftList; // 赠品列表
 
-    PromotionClientPO(){
+    public PromotionClientPO() {
 
     }
 
-    public PromotionClientPO(String ID, String type, Date start, Date end, int clientLevel, int voucher, ArrayList<GiftItemPO> giftList) {
-        this.ID=ID;
-        this.type=type;
-        this.start=start;
-        this.end=end;
+    public PromotionClientPO(String ID, String name, Date start, Date end, int clientLevel, double voucher, ArrayList<GiftItemPO> giftList) {
+        this.ID = ID;
+        this.name = name;
+        type = "客户促销策略";
+        this.start = start;
+        this.end = end;
         this.clientLevel = clientLevel;
         this.voucher = voucher;
         this.giftList = giftList;
@@ -28,20 +31,20 @@ public class PromotionClientPO extends PromotionPO {
         return clientLevel;
     }
 
-    public double getVoucher() {
-        return voucher;
-    }
-
-    public ArrayList<GiftItemPO> getGiftList() {
-        return giftList;
-    }
-
     public void setClientLevel(int clientLevel) {
         this.clientLevel = clientLevel;
     }
 
+    public double getVoucher() {
+        return voucher;
+    }
+
     public void setVoucher(double voucher) {
         this.voucher = voucher;
+    }
+
+    public ArrayList<GiftItemPO> getGiftList() {
+        return giftList;
     }
 
     public void setGiftList(ArrayList<GiftItemPO> giftList) {

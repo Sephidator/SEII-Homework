@@ -1,14 +1,19 @@
 package main.java.dataservice.saledataservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.salebill.SaleRefundBillPO;
+import main.java.po.bill.salebill.SaleTradeBillQueryPO;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface SaleRefundBillDataService {
-    public ArrayList<SaleRefundBillPO> find(BillQueryPO query);
-    public String getID();
-    public ResultMessage insert(SaleRefundBillPO po);
-    public ResultMessage update(SaleRefundBillPO po);
+public interface SaleRefundBillDataService extends Remote {
+    ArrayList<SaleRefundBillPO> find(BillQueryPO query) throws RemoteException;
+
+    ArrayList<SaleRefundBillPO> find(SaleTradeBillQueryPO query) throws RemoteException;
+
+    String insert(SaleRefundBillPO po) throws RemoteException;
+
+    String update(SaleRefundBillPO po) throws RemoteException;
 }

@@ -1,19 +1,18 @@
 package main.java.dataservice.promotiondataservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.po.promotion.PromotionPO;
 import main.java.po.promotion.PromotionQueryPO;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface PromotionDataService {
-    public ArrayList<PromotionPO> find(PromotionQueryPO query);
+public interface PromotionDataService extends Remote {
+    ArrayList<PromotionPO> find(PromotionQueryPO query) throws RemoteException;
 
-    public ResultMessage insert(PromotionPO po);
+    String insert(PromotionPO po) throws RemoteException;
 
-    public ResultMessage delete(PromotionPO po);
+    void delete(String PromotionID) throws RemoteException;
 
-    public ResultMessage update(PromotionPO po);
-
-    public String getPromotionID();
+    void update(PromotionPO po) throws RemoteException;
 }

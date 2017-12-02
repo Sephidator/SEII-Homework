@@ -1,34 +1,40 @@
 package main.java.server_dataservicestub.accountdataservicestub;
 
+
 import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 
-public class AccountDataServiceStub implements AccountDataService{
-    @Override
-    public AccountPO find(AccountQueryPO query) {
-        AccountPO accountPO = new AccountPO("Account-20171106-00001","6212262402011111111","公司甲帐",10000);
-        return accountPO;
-    }
+import java.util.ArrayList;
+
+
+public class AccountDataServiceStub implements AccountDataService {
 
     @Override
-    public String getID() {
-        return "Account-20171106-00001";
+    public ArrayList<AccountPO> find(AccountQueryPO query) {
+        ArrayList<AccountPO> list = new ArrayList<>();
+        list.add(new AccountPO());
+        return list;
     }
 
     @Override
     public ResultMessage insert(AccountPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage delete(AccountPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage update(AccountPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public String getAccountID() {
+        return "Account00000004";
     }
 }

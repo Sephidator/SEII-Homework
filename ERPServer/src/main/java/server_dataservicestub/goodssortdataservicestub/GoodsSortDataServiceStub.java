@@ -5,31 +5,34 @@ import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
 import main.java.po.goods.GoodsSortQueryPO;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 public class GoodsSortDataServiceStub implements GoodsSortDataService {
     @Override
-    public GoodsSortPO find(GoodsSortQueryPO query) {
-        GoodsSortPO goodsSortPO=new GoodsSortPO();
-        goodsSortPO.setComment("1");
-        return goodsSortPO;
+    public ArrayList<GoodsSortPO> find(GoodsSortQueryPO query) throws RemoteException {
+        ArrayList<GoodsSortPO> list = new ArrayList<>();
+        list.add(new GoodsSortPO());
+        return list;
     }
 
     @Override
     public ResultMessage insert(GoodsSortPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage delete(GoodsSortPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage update(GoodsSortPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
-    public ResultMessage getGoodsSortID() {
-        return ResultMessage.success;
+    public String getGoodsSortID() {
+        return "GoodsSort00000004";
     }
 }

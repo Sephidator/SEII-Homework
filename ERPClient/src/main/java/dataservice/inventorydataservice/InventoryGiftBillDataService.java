@@ -1,14 +1,17 @@
 package main.java.dataservice.inventorydataservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 
-public interface InventoryGiftBillDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
-    public InventoryGiftBillPO find(BillQueryPO query);
+public interface InventoryGiftBillDataService extends Remote {
 
-    public ResultMessage insert(InventoryGiftBillPO bill);
+    ArrayList<InventoryGiftBillPO> find(BillQueryPO query) throws RemoteException;
 
-    public ResultMessage update(InventoryGiftBillPO bill);
+    String insert(InventoryGiftBillPO bill) throws RemoteException;
+
+    void update(InventoryGiftBillPO bill) throws RemoteException;
 }

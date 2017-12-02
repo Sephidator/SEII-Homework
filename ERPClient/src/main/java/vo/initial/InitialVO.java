@@ -1,7 +1,21 @@
 package main.java.vo.initial;
 
+import main.java.businesslogic.accountbl.AccountBl;
+import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.clientbl.ClientBl;
+import main.java.businesslogic.clientbl.ClientTool;
+import main.java.businesslogic.goodsbl.GoodsBl;
+import main.java.businesslogic.goodsbl.GoodsTool;
+import main.java.businesslogic.goodssortbl.GoodsSortBl;
+import main.java.businesslogic.goodssortbl.GoodsSortTool;
+import main.java.po.goods.GoodsPO;
+import main.java.po.initial.InitialPO;
+import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
+import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsSortQueryVO;
 import main.java.vo.goods.GoodsSortVO;
 import main.java.vo.goods.GoodsVO;
 
@@ -74,5 +88,50 @@ public class InitialVO{
 
     public void setAccountList(ArrayList<AccountVO> accountList) {
         this.accountList = accountList;
+    }
+
+    /*不需要将VO转成PO*/
+
+    /*将PO转换成VO*/
+    public InitialVO(InitialPO initialPO){
+        /*得到ArrayList<GoodsVO>*/
+        ArrayList<GoodsVO> goodsVOArrayList = new ArrayList<>();
+        GoodsTool goodsTool = new GoodsBl();
+        GoodsQueryVO goodsQueryVO = new GoodsQueryVO();
+        for(String id : initialPO.getGoodsIDList()){
+            goodsQueryVO.ID = id;
+            goodsVOArrayList.add(goodsTool.getGoodsList(goodsQueryVO).get(0));//取得查询返回的商品的第一个
+        }
+        this.goodsList = goodsVOArrayList;
+
+        /*得到ArrayList<GoodsSortVO>*/
+        ArrayList<GoodsSortVO> goodsSortVOArrayList = new ArrayList<>();
+        GoodsSortTool goodsSortTool = new GoodsSortBl();
+        GoodsSortQueryVO goodsSortQueryVO = new GoodsSortQueryVO();
+        for(String id : initialPO.getGoodsSortIDList()){
+            goodsSortQueryVO.ID = id;
+            goodsSortVOArrayList.add(goodsSortTool.getGoodsSortList(goodsSortQueryVO).get(0));//取得查询返回的商品分类的第一个
+        }
+        this.goodsSortList = goodsSortVOArrayList;
+
+        /*得到ArrayList<ClientVO>*/
+        ArrayList<ClientVO> clientVOArrayList = new ArrayList<>();
+        ClientTool ClientTool = new ClientBl();
+        ClientQueryVO clientQueryVO = new ClientQueryVO();
+        for(String id : initialPO.getClientIDList()){
+            clientQueryVO.ID = id;
+            clientVOArrayList.add(ClientTool.getClientList(clientQueryVO).get(0));//取得查询返回的客户的第一个
+        }
+        this.clientList = clientVOArrayList;
+
+        /*得到ArrayList<AccountVO>*/
+        ArrayList<AccountVO> accountVOArrayList = new ArrayList<>();
+        AccountTool accountTool = new AccountBl();
+        AccountQueryVO accountQueryVO = new AccountQueryVO();
+        for(String id : initialPO.getAccountIDList()){
+            accountQueryVO.ID = id;
+            accountVOArrayList.add(accountTool.getAccountList(accountQueryVO).get(0));//取得查询返回的银行账户的第一个
+        }
+        this.accountList = accountVOArrayList;
     }
 }

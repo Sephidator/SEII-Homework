@@ -1,16 +1,16 @@
 package main.java.dataservice.initialdataservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface InitialDataService {
+public interface InitialDataService extends Remote {
+    /*获取持久化对象列表*/
+    ArrayList<InitialPO> find(InitialQueryPO query) throws RemoteException;
 
     /*添加起初信息*/
-    public ResultMessage insert(InitialPO po);
-
-    /*获取持久化对象列表*/
-    public ArrayList<InitialPO> find(InitialQueryPO query);
+    String insert(InitialPO po) throws RemoteException;
 }

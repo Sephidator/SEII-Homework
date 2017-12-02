@@ -1,8 +1,10 @@
 package main.java.po.log;
 
+import main.java.po.PO;
+
 import java.util.Date;
 
-public class LogPO{
+public class LogPO extends PO {
 
     private String operatorID;//执行动作的操作人
 

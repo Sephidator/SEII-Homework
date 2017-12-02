@@ -1,8 +1,10 @@
 package main.java.vo.bill;
 
+import main.java.vo.QueryVO;
+
 import java.util.Date;
 
-public class BillQueryVO {
+public class BillQueryVO extends QueryVO{
     public String ID; //单据编号
     public String state; //单据状态
     public Date start; //起始时间

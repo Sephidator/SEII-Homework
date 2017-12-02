@@ -7,26 +7,26 @@ import main.java.po.bill.purchasebill.PurchaseRefundBillPO;
 
 import java.util.ArrayList;
 
-public class PurchaseRefundBillDataServiceStub implements PurchaseRefundBillDataService{
+public class PurchaseRefundBillDataServiceStub implements PurchaseRefundBillDataService {
     @Override
     public ArrayList<PurchaseRefundBillPO> find(BillQueryPO query) {
-        ArrayList<PurchaseRefundBillPO> list=new ArrayList<>();
+        ArrayList<PurchaseRefundBillPO> list = new ArrayList<>();
         list.add(new PurchaseRefundBillPO());
         return list;
     }
 
     @Override
-    public String getID() {
-        return "123";
-    }
-
-    @Override
     public ResultMessage insert(PurchaseRefundBillPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage update(PurchaseRefundBillPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public String getPurchaseRefundBillID() {
+        return "JHTHD-20170910-12345";
     }
 }

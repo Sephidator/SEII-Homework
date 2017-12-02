@@ -9,11 +9,9 @@ import java.util.ArrayList;
 public interface PromotionBlService {
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query);
 
-    public ResultMessage addPromotion(PromotionVO vo);
+    public void addPromotion(PromotionVO vo);
 
-    public ResultMessage editPromotion(PromotionVO vo);
+    public void editPromotion(PromotionVO vo);
 
-    public ResultMessage deletePromotion(PromotionVO vo);
-
-    public String getID();
+    public void deletePromotion(PromotionVO vo);
 }
