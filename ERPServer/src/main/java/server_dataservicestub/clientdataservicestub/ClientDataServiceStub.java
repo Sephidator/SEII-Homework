@@ -7,31 +7,31 @@ import main.java.po.client.ClientQueryPO;
 
 import java.util.ArrayList;
 
-public class ClientDataServiceStub implements ClientDataService{
+public class ClientDataServiceStub implements ClientDataService {
     @Override
     public ArrayList<ClientPO> find(ClientQueryPO query) {
-        ArrayList<ClientPO> list=new ArrayList<>();
+        ArrayList<ClientPO> list = new ArrayList<>();
         list.add(new ClientPO());
         return list;
     }
 
     @Override
     public ResultMessage insert(ClientPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage delete(ClientPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage update(ClientPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
-    public String getID() {
-        return "123";
+    public String getClientID() {
+        return "Client00000004";
     }
 }

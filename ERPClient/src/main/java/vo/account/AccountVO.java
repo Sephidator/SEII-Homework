@@ -1,8 +1,9 @@
 package main.java.vo.account;
 
-public class AccountVO{
+import main.java.po.account.AccountPO;
+import main.java.vo.VO;
 
-    private String ID;//账户ID
+public class AccountVO extends VO {
 
     private String bankAccount;//账户银行账号
 
@@ -10,20 +11,13 @@ public class AccountVO{
 
     private double remaining;//账户余额
 
-    private boolean visible = true;//账户是否存在
-
     public AccountVO() {
     }
 
-    public AccountVO(String ID, String bankAccount, String name, double remaining) {
-        this.ID = ID;
+    public AccountVO(String bankAccount, String name, double remaining) {
         this.bankAccount = bankAccount;
         this.name = name;
         this.remaining = remaining;
-    }
-
-    public String getID() {
-        return ID;
     }
 
     public String getBankAccount() {
@@ -38,14 +32,6 @@ public class AccountVO{
         return remaining;
     }
 
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
@@ -58,7 +44,24 @@ public class AccountVO{
         this.remaining = remaining;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    /*返回AccountPO,不进行处理*/
+    public AccountPO getAccountPO(){
+        AccountPO accountPO = new AccountPO();
+        accountPO.setID(this.ID);
+        accountPO.setBankAccount(this.bankAccount);
+        accountPO.setName(this.name);
+        accountPO.setRemaining(this.remaining);
+        accountPO.setVisible(this.visible);
+
+        return accountPO;
+    }
+
+    /*返回AccountVO，不进行处理*/
+    public AccountVO(AccountPO accountPO){
+        this.ID = accountPO.getID();
+        this.bankAccount = accountPO.getBankAccount();
+        this.name = accountPO.getName();
+        this.remaining = accountPO.getRemaining();
+        this.visible = accountPO.isVisible();
     }
 }

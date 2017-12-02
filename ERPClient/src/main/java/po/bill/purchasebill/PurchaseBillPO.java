@@ -1,7 +1,7 @@
 package main.java.po.bill.purchasebill;
 
 import main.java.po.bill.BillPO;
-import main.java.po.promotion.GoodsItemPO;
+import main.java.po.goods.GoodsItemPO;
 
 import java.util.ArrayList;
 
@@ -14,20 +14,20 @@ public class PurchaseBillPO extends BillPO {
         return clientID;
     }
 
-    public ArrayList<GoodsItemPO> getPurchaseList() {
-        return purchaseList;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
     public void setClientID(String clientID) {
         this.clientID = clientID;
     }
 
+    public ArrayList<GoodsItemPO> getPurchaseList() {
+        return purchaseList;
+    }
+
     public void setPurchaseList(ArrayList<GoodsItemPO> purchaseList) {
         this.purchaseList = purchaseList;
+    }
+
+    public double getTotal() {
+        return total;
     }
 
     public void setTotal(double total) {

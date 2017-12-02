@@ -1,35 +1,38 @@
 package main.java.server_dataservicestub.goodsdataservicestub;
 
+
 import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.goods.GoodsQueryPO;
 
+import java.util.ArrayList;
+
 public class GoodsDataServiceStub implements GoodsDataService {
     @Override
-    public GoodsPO find(GoodsQueryPO query) {
-        GoodsPO goodsPO=new GoodsPO();
-        goodsPO.setComment("1");
-        return goodsPO;
+    public ArrayList<GoodsPO> find(GoodsQueryPO query) {
+        ArrayList<GoodsPO> list = new ArrayList<>();
+        list.add(new GoodsPO());
+        return list;
     }
 
     @Override
     public ResultMessage insert(GoodsPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage delete(GoodsPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage update(GoodsPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
-    public ResultMessage getGoodsID() {
-        return ResultMessage.success;
+    public String getGoodsID() {
+        return "Goods00001234";
     }
 }

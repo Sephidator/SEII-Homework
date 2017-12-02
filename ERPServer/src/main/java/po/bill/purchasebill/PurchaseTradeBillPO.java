@@ -1,28 +1,24 @@
 package main.java.po.bill.purchasebill;
 
-import main.java.po.promotion.GoodsItemPO;
+import main.java.po.goods.GoodsItemPO;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * 进货退货单VO类
- * */
 public class PurchaseTradeBillPO extends PurchaseBillPO {
 
-    public PurchaseTradeBillPO(String ID, String state, Date time, String type, String operatorID, String comment, String clientID, ArrayList<GoodsItemPO> purchaseList, double total) {
-        this.ID = ID;
+    public PurchaseTradeBillPO(String state, Date time, String operatorID, String comment, String clientID, ArrayList<GoodsItemPO> purchaseList, double total) {
         this.state = state;
         this.time = time;
-        this.type = type;
+        type = "进货单";
         this.operatorID = operatorID;
         this.comment = comment;
-        this.clientID=clientID;
-        this.purchaseList=purchaseList;
-        this.total=total;
+        this.clientID = clientID;
+        this.purchaseList = purchaseList;
+        this.total = total;
     }
 
-    public PurchaseTradeBillPO(){
+    public PurchaseTradeBillPO() {
 
     }
 

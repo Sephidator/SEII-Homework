@@ -1,7 +1,8 @@
 package main.java.po.client;
 
-public class ClientPO {
-    private String ID; // 客户编号
+import main.java.po.PO;
+
+public class ClientPO extends PO {
     private String category; // 客户类别：进货商、销售商
     private int level; // 客户级别：1-5（vip）
     private String name; // 客户姓名
@@ -11,18 +12,16 @@ public class ClientPO {
     private String email; // 客户电子邮箱
     private double receivable; // 客户应收
     private double payable; // 客户应付
-    private double receivableLimit;// 客户应收额度
+    private double receivableLimit; // 客户应收额度
     private String salesmanID; // 默认业务员
-    private boolean visible=true; //客户是否存在
 
     public ClientPO() {
 
     }
 
-    public ClientPO(String ID, String category, int level, String name,
+    public ClientPO(String category, int level, String name,
                     String phone, String address, String post, String email,
                     double receivable, double payable, double receivableLimit, String salesmanID) {
-        this.ID = ID;
         this.category = category;
         this.level = level;
         this.name = name;
@@ -36,107 +35,91 @@ public class ClientPO {
         this.salesmanID = salesmanID;
     }
 
-    public String getID(){
-        return ID;
-    }
-
-    public String getCategory(){
+    public String getCategory() {
         return category;
-    }
-
-    public int getLevel(){
-        return level;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getPhone(){
-        return phone;
-    }
-
-    public String getAddress(){
-        return address;
-    }
-
-    public String getPost(){
-        return post;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public double getReceivable(){
-        return receivable;
-    }
-
-    public double getPayable(){
-        return payable;
-    }
-
-    public double getReceivableLimit(){
-        return receivableLimit;
-    }
-
-    public String getSalesmanID(){
-        return salesmanID;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public void setCategory(String category) {
         this.category = category;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public String getPost() {
+        return post;
+    }
+
     public void setPost(String post) {
         this.post = post;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public double getReceivable() {
+        return receivable;
+    }
+
     public void setReceivable(double receivable) {
         this.receivable = receivable;
+    }
+
+    public double getPayable() {
+        return payable;
     }
 
     public void setPayable(double payable) {
         this.payable = payable;
     }
 
+    public double getReceivableLimit() {
+        return receivableLimit;
+    }
+
     public void setReceivableLimit(double receivableLimit) {
         this.receivableLimit = receivableLimit;
     }
 
-    public void setSalesmanID(String salesmanID) {
-        this.salesmanID = salesmanID;
+    public String getSalesmanID() {
+        return salesmanID;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    public void setSalesmanID(String salesmanID) {
+        this.salesmanID = salesmanID;
     }
 }

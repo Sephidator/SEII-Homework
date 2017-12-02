@@ -1,39 +1,38 @@
 package main.java.po.bill.inventorybill;
 
 import main.java.po.client.ClientPO;
-import main.java.po.promotion.GiftItemPO;
+import main.java.po.goods.GiftItemPO;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class InventoryGiftBillPO extends InventoryBillPO {
-    private ClientPO client;////客户信息
+    private String clientID;////客户信息
     private ArrayList<GiftItemPO> giftList;// 赠品列表
 
     public InventoryGiftBillPO() {
     }
 
-    public InventoryGiftBillPO(String ID, String state, Date time, String type, String operatorID, String comment, double total, ArrayList<GiftItemPO> giftList){
-        this.ID = ID;
+    public InventoryGiftBillPO(String state, Date time, String operatorID, String comment, String clientID, ArrayList<GiftItemPO> giftList) {
         this.state = state;
         this.time = time;
-        this.type = type;
+        type = "库存赠送单";
         this.operatorID = operatorID;
         this.comment = comment;
-        this.client=client;
-        this.giftList=giftList;
+        this.clientID = clientID;
+        this.giftList = giftList;
     }
 
-    public ClientPO getClient() {
-        return client;
+    public String getClient() {
+        return clientID;
     }
 
     public ArrayList<GiftItemPO> getGiftList() {
         return giftList;
     }
 
-    public void setClient(ClientPO client) {
-        this.client = client;
+    public void setClient(String clientID) {
+        this.clientID = clientID;
     }
 
     public void setGiftList(ArrayList<GiftItemPO> giftList) {

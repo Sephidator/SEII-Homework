@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 public class BusinessHistoryBl implements BusinessHistoryBlService {
     @Override
+    /**
+     * @version: 1
+     * @date: 2017.11.28 2:08
+     * @para: [query] 
+     * @function: 
+     */
     public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query) {
         return null;
     }

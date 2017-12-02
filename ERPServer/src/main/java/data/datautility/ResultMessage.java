@@ -1,8 +1,8 @@
 package main.java.data.datautility;
 
 public enum ResultMessage {
-    success,
-    failure,
-    exist,
-    notExist
+    SUCCESS,
+    FAILURE,
+    EXIST,
+    NOT_EXIST
 }

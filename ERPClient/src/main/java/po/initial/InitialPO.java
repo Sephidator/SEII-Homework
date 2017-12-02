@@ -1,8 +1,10 @@
 package main.java.po.initial;
 
+import main.java.po.PO;
+
 import java.util.ArrayList;
 
-public class InitialPO{
+public class InitialPO extends PO {
 
     private int year;//每一个账都有一个年份
 

@@ -1,18 +1,19 @@
 package main.java.dataservice.goodssortdataservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.po.goods.GoodsSortPO;
 import main.java.po.goods.GoodsSortQueryPO;
 
-public interface GoodsSortDataService {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
-    public GoodsSortPO find(GoodsSortQueryPO query);
+public interface GoodsSortDataService extends Remote {
 
-    public ResultMessage insert(GoodsSortPO po);
+    ArrayList<GoodsSortPO> find(GoodsSortQueryPO query) throws RemoteException;
 
-    public ResultMessage delete(GoodsSortPO po);
+    String insert(GoodsSortPO po) throws RemoteException;
 
-    public ResultMessage update(GoodsSortPO po);
+    void delete(String GoodsSortID) throws RemoteException;
 
-    public ResultMessage getGoodsSortID();
+    void update(GoodsSortPO po) throws RemoteException;
 }

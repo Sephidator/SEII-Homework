@@ -16,18 +16,19 @@ public class PurchaseTradeBillDataServiceStub implements PurchaseTradeBillDataSe
     }
 
     @Override
-    public String getID() {
-        return "123";
-    }
-
-    @Override
     public ResultMessage insert(PurchaseTradeBillPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
 
     @Override
     public ResultMessage update(PurchaseTradeBillPO po) {
-        return ResultMessage.success;
+        return ResultMessage.SUCCESS;
     }
+
+    @Override
+    public String getPurchaseTradeBillID() {
+        return "JHD-20170910-12345";
+    }
+
 }
 

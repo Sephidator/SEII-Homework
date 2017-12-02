@@ -1,9 +1,14 @@
 package main.java.po.account;
 
-public class AccountQueryPO {
-    public String ID;//账户ID
+import main.java.po.QueryPO;
 
-    public String bankAccount;//账户银行账号
+public class AccountQueryPO extends QueryPO {
+    public String bankAccount; //账户银行账号
+    public String name; //账户名字
 
-    public String name;//账户名字
+    public AccountQueryPO(String ID, String bankAccount, String name) {
+        this.ID = ID;
+        this.bankAccount = bankAccount;
+        this.name = name;
+    }
 }

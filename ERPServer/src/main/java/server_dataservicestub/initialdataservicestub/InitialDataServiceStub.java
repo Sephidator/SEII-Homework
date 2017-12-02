@@ -5,20 +5,25 @@ import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class InitialDataServiceStub implements InitialDataService{
+public class InitialDataServiceStub implements InitialDataService {
+
     @Override
-    public ResultMessage insert(InitialPO po) {
-        return ResultMessage.success;
+    public ArrayList<InitialPO> find(InitialQueryPO query) throws RemoteException {
+        ArrayList<InitialPO> list = new ArrayList<>();
+        list.add(new InitialPO());
+        return list;
     }
 
     @Override
-    public ArrayList<InitialPO> find(InitialQueryPO query) {
-        //int year, ArrayList<String> goodsIDList, ArrayList<String> goodsSortIDList, ArrayList<String> clientIDList, ArrayList<String> accountIDList
-        InitialPO initialPO = new InitialPO(2017,new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
-        ArrayList<InitialPO> initialPOArrayList = new ArrayList<InitialPO>();
-        initialPOArrayList.add(initialPO);
-        return initialPOArrayList;
+    public ResultMessage insert(InitialPO po) throws RemoteException {
+        return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public String getInitialID() throws RemoteException {
+        return "Initial00000004";
     }
 }

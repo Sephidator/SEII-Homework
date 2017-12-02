@@ -1,6 +1,8 @@
 package main.java.po.message;
 
-public class MessagePO {
+import main.java.po.PO;
+
+public class MessagePO extends PO {
     private String receiverID;
     private String senderID;
     private String message;

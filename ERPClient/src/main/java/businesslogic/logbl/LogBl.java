@@ -9,11 +9,23 @@ import java.util.ArrayList;
 
 public class LogBl implements LogBlService,LogTool{
     @Override
+    /**
+     * @version: 1
+     * @date: 2017.11.28 2:07
+     * @para: [log] 
+     * @function: 
+     */
     public ResultMessage addLog(LogVO log) {
         return null;
     }
 
     @Override
+    /**
+     * @version: 1
+     * @date: 2017.11.28 2:07
+     * @para: [query] 
+     * @function: 
+     */
     public ArrayList<LogVO> getLogList(LogQueryVO query) {
         return null;
     }

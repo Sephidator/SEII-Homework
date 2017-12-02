@@ -1,14 +1,14 @@
 package main.java.po.bill.salebill;
 
 import main.java.po.bill.BillPO;
-import main.java.po.promotion.GoodsItemPO;
+import main.java.po.goods.GoodsItemPO;
 
 import java.util.ArrayList;
 
 public class SaleBillPO extends BillPO {
     protected String clientID; // 客户信息
     protected String salesmanID; // 业务员
-    protected ArrayList<GoodsItemPO> saleList;// 出货商品清单/退货商品清单
+    protected ArrayList<GoodsItemPO> saleList; // 出货商品清单/退货商品清单
 
     public String getClientID() {
         return clientID;

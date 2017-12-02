@@ -1,6 +1,12 @@
 package main.java.po.goods;
 
-public class GoodsQueryPO {
-    public String ID; //商品编号
+import main.java.po.QueryPO;
+
+public class GoodsQueryPO extends QueryPO {
     public String name; //商品名称
+
+    public GoodsQueryPO(String ID, String name) {
+        this.ID = ID;
+        this.name = name;
+    }
 }

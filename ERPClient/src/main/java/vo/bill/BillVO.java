@@ -1,10 +1,12 @@
 package main.java.vo.bill;
 
+import main.java.businesslogic.BillTool;
+import main.java.vo.VO;
 import main.java.vo.user.UserVO;
 
 import java.util.Date;
 
-public class BillVO {
+public class BillVO extends VO {
     protected String ID; //单据编号
     protected String state; //单据状态
     protected Date time; //创建时间
@@ -58,5 +60,10 @@ public class BillVO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    /*实现待定*/
+    public BillTool getTool(){
+        return null;
     }
 }
