@@ -35,7 +35,7 @@ public class LoginUIController {
      * */
     @FXML
     private void handleLogin(){
-        UserVO user=new UserVO("进货销售人员", 23, true, "宋抟", "123", "123", true);
+        UserVO user=new UserVO("宋抟","进货销售人员","JN123", "password", 23,true);
         RootUIController root=RootUIController.initRoot(stage,user);
         root.showLogoutButton(true);
         PurchaseSalePanelUIController.init(root);

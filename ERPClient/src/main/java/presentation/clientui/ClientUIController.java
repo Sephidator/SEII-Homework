@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
@@ -47,6 +48,11 @@ public class ClientUIController extends MyUIController{
     @FXML
     private TableColumn<ClientVO,String> clientAddressColumn;
 
+    // 加载文件后调用的方法******************************************
+
+    /**
+     * 设置显示的客户信息以及显示方法
+     * */
     public void initialize(){
         clientIDColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getID()));
         clientNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
@@ -56,14 +62,17 @@ public class ClientUIController extends MyUIController{
         clientAddressColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getID()));
     }
 
+    // 设置controller数据的方法*****************************************
+
     public void setClientBlService(ClientBlService clientBlService) {
         this.clientBlService = clientBlService;
     }
 
-    public ClientBlService getClientBlService() {
-        return clientBlService;
-    }
+    // 界面之中会用到的方法******************************************
 
+    /**
+     * 取得客户列表并修改ObservableList的信息
+     * */
     private void showClientList(ArrayList<ClientVO> clientList){
         clientObservableList.removeAll();
 
@@ -73,10 +82,50 @@ public class ClientUIController extends MyUIController{
         clientTableView.setItems(clientObservableList);
     }
 
+    @FXML
+    private void handleAddClient(){
+        ClientInfoUIController.init(clientBlService,new ClientVO(),1);
+    }
+
+    @FXML
+    private void handleDeleteClient(){
+        // 注意：当没有项目时，getSelectedIndex会返回-1.这是remove时会报错ArrayIndexOutOfBoundsException.
+        int selectedIndex=clientTableView.getSelectionModel().getSelectedIndex();
+        if(selectedIndex>=0){
+            clientTableView.getItems().remove(selectedIndex);
+        }else{
+            // Nothing selected
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleEditClient(){
+        ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),2);
+    }
+
+    @FXML
+    private void handleCheckClient(){
+        ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),3);
+    }
+
+    // 加载文件和界面的方法******************************************
+
+    /**
+     * 初始化方法，调用init方法
+     * 之所以有这个方法是为了多态而提供的
+     * */
     public void instanceInit(RootUIController root){
         init(root);
     }
 
+    /**
+     * 静态初始化方法，加载相应的FXML文件，并添加一些信息
+     * */
     public static void init(RootUIController root){
         try{
             // 加载登陆界面
@@ -89,12 +138,15 @@ public class ClientUIController extends MyUIController{
             controller.setReturnPaneController(new PurchaseSalePanelUIController());
             controller.setClientBlService(null);
 
-            ClientVO c1=new ClientVO("ID:123","类别：经销商", 3, "名字：陈骁",
+            ClientVO c1=new ClientVO("类别：经销商", 3, "名字：陈骁",
                     "电话：123", "地址：南京大学", "邮编123", "邮件：123",
             0, 0, 20, null);
-            ClientVO c2=new ClientVO("ID:124","类别：经销商", 4, "名字：陈骁2",
+            c1.setID("123");
+            ClientVO c2=new ClientVO("类别：经销商", 4, "名字：陈骁2",
                     "电话：123", "地址：南京大学", "邮编123", "邮件：123",
                     0, 0, 20, null);
+            c2.setID("123");
+
             ArrayList<ClientVO> list=new ArrayList<>();
             list.add(c1);
             list.add(c2);

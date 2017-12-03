@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('/main/resources/pics/commonpics/背景.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.clientui.ClientUIController">
    <children>
       <ImageView fitHeight="60.0" fitWidth="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
@@ -88,7 +87,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="addClient" buttonType="RAISED" style="-fx-background-color: #3cba54; -fx-background-radius: 15; -fx-border-radius: 15;" text="添加客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <JFXButton fx:id="addClient" buttonType="RAISED" onAction="#handleAddClient" style="-fx-background-color: #3cba54; -fx-background-radius: 15; -fx-border-radius: 15;" text="添加客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -118,7 +117,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="deleteClient" buttonType="RAISED" style="-fx-background-color: #db3236; -fx-background-radius: 15; -fx-border-radius: 15;" text="删除客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <JFXButton fx:id="deleteClient" buttonType="RAISED" onAction="#handleDeleteClient" style="-fx-background-color: #db3236; -fx-background-radius: 15; -fx-border-radius: 15;" text="删除客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -148,7 +147,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="EditClient" buttonType="RAISED" style="-fx-background-color: #4885ed; -fx-background-radius: 15; -fx-border-radius: 15;" text="编辑客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <JFXButton fx:id="EditClient" buttonType="RAISED" onAction="#handleEditClient" style="-fx-background-color: #4885ed; -fx-background-radius: 15; -fx-border-radius: 15;" text="编辑客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -178,7 +177,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="checkClient" buttonType="RAISED" style="-fx-background-color: #f4c20d; -fx-background-radius: 15; -fx-border-radius: 15;" text="查看客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <JFXButton fx:id="checkClient" buttonType="RAISED" onAction="#handleCheckClient" style="-fx-background-color: #f4c20d; -fx-background-radius: 15; -fx-border-radius: 15;" text="查看客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
