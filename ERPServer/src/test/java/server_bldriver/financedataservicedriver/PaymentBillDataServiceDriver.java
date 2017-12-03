@@ -1,34 +1,23 @@
 package test.java.server_bldriver.financedataservicedriver;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.financedataservice.PaymentBillDataService;
-import org.junit.Test;
-import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.PaymentBillPO;
 import main.java.server_dataservicestub.financedataservicestub.PaymentBillDataServiceStub;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class PaymentBillDataServiceDriver {
-    PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
-    @Test
-    public void find() throws Exception {
-        assertEquals("FKD-20171106-00001",paymentBillDataService.find(new BillQueryPO()).get(0).getID());
-    }
+    PaymentBillDataService service=new PaymentBillDataServiceStub();
 
     @Test
-    public void getID() throws Exception {
-        assertEquals("FKD-20171106-00001",paymentBillDataService.getID());
+    public void find() throws Exception {
+        assertEquals(1,service.find(null).size());
     }
 
     @Test
     public void insert() throws Exception {
-        assertEquals(ResultMessage.success,paymentBillDataService.insert(new PaymentBillPO()));
-    }
-
-    @Test
-    public void update() throws Exception {
-        assertEquals(ResultMessage.success,paymentBillDataService.update(new PaymentBillPO()));
+        assertEquals("FKD-20171212-12345",service.insert(new PaymentBillPO()));
     }
 
 }

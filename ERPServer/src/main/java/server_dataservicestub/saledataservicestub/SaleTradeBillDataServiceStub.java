@@ -1,32 +1,36 @@
 package main.java.server_dataservicestub.saledataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.saledataservice.SaleTradeBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.salebill.SaleTradeBillPO;
+import main.java.po.bill.salebill.SaleTradeBillQueryPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class SaleTradeBillDataServiceStub implements SaleTradeBillDataService {
     @Override
-    public ArrayList<SaleTradeBillPO> find(BillQueryPO query) {
+    public ArrayList<SaleTradeBillPO> findByReport(SaleTradeBillQueryPO query) throws RemoteException {
         ArrayList<SaleTradeBillPO> list = new ArrayList<>();
         list.add(new SaleTradeBillPO());
         return list;
     }
 
     @Override
-    public ResultMessage insert(SaleTradeBillPO po) {
-        return ResultMessage.SUCCESS;
+    public ArrayList<SaleTradeBillPO> findByBill(BillQueryPO query) {
+        ArrayList<SaleTradeBillPO> list = new ArrayList<>();
+        list.add(new SaleTradeBillPO());
+        return list;
     }
 
     @Override
-    public ResultMessage update(SaleTradeBillPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(SaleTradeBillPO po) throws RemoteException {
+        return "XSD-20171212-12345";
     }
 
     @Override
-    public String getSaleTradeBillID() {
-        return "XSD-20170910-12345";
+    public void update(SaleTradeBillPO po) throws RemoteException {
+
     }
+
 }

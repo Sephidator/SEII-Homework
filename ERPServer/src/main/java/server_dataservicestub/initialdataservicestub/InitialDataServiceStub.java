@@ -1,6 +1,5 @@
 package main.java.server_dataservicestub.initialdataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
@@ -18,12 +17,8 @@ public class InitialDataServiceStub implements InitialDataService {
     }
 
     @Override
-    public ResultMessage insert(InitialPO po) throws RemoteException {
-        return ResultMessage.SUCCESS;
+    public String insert(InitialPO po) throws RemoteException {
+        return "00000001";
     }
 
-    @Override
-    public String getInitialID() throws RemoteException {
-        return "Initial00000004";
-    }
 }

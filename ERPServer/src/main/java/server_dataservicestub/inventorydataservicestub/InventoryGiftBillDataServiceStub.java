@@ -1,6 +1,5 @@
 package main.java.server_dataservicestub.inventorydataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
@@ -18,17 +17,13 @@ public class InventoryGiftBillDataServiceStub implements InventoryGiftBillDataSe
     }
 
     @Override
-    public ResultMessage insert(InventoryGiftBillPO bill) throws RemoteException {
-        return ResultMessage.SUCCESS;
+    public String insert(InventoryGiftBillPO bill) throws RemoteException {
+        return "KCZSD-20171212-12345";
     }
 
     @Override
-    public ResultMessage update(InventoryGiftBillPO bill) throws RemoteException {
-        return ResultMessage.SUCCESS;
+    public void update(InventoryGiftBillPO bill) throws RemoteException {
+
     }
 
-    @Override
-    public String getInventoryGiftBillID() throws RemoteException {
-        return "KCZSD-20170910-12345";
-    }
 }

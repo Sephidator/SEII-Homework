@@ -1,10 +1,10 @@
 package main.java.server_dataservicestub.purchasedataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.purchasedataservice.PurchaseRefundBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.purchasebill.PurchaseRefundBillPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class PurchaseRefundBillDataServiceStub implements PurchaseRefundBillDataService {
@@ -16,17 +16,12 @@ public class PurchaseRefundBillDataServiceStub implements PurchaseRefundBillData
     }
 
     @Override
-    public ResultMessage insert(PurchaseRefundBillPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(PurchaseRefundBillPO po) throws RemoteException {
+        return "JHTHD-20171212-12345";
     }
 
     @Override
-    public ResultMessage update(PurchaseRefundBillPO po) {
-        return ResultMessage.SUCCESS;
-    }
+    public void update(PurchaseRefundBillPO po) throws RemoteException {
 
-    @Override
-    public String getPurchaseRefundBillID() {
-        return "JHTHD-20170910-12345";
     }
 }

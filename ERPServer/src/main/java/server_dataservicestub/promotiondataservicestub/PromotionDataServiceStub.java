@@ -1,9 +1,9 @@
 package main.java.server_dataservicestub.promotiondataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.promotiondataservice.PromotionDataService;
 import main.java.po.promotion.*;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class PromotionDataServiceStub implements PromotionDataService {
@@ -17,22 +17,17 @@ public class PromotionDataServiceStub implements PromotionDataService {
     }
 
     @Override
-    public ResultMessage insert(PromotionPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(PromotionPO po) throws RemoteException {
+        return "00000001";
     }
 
     @Override
-    public ResultMessage delete(PromotionPO po) {
-        return ResultMessage.SUCCESS;
+    public void delete(String PromotionID) throws RemoteException {
+
     }
 
     @Override
-    public ResultMessage update(PromotionPO po) {
-        return ResultMessage.SUCCESS;
-    }
+    public void update(PromotionPO po) throws RemoteException {
 
-    @Override
-    public String getPromotionID() {
-        return "Promotion00000004";
     }
 }

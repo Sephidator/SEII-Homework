@@ -1,10 +1,10 @@
 package main.java.server_dataservicestub.clientdataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ClientDataServiceStub implements ClientDataService {
@@ -16,22 +16,19 @@ public class ClientDataServiceStub implements ClientDataService {
     }
 
     @Override
-    public ResultMessage insert(ClientPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(ClientPO po) {
+        return "00000001";
     }
 
     @Override
-    public ResultMessage delete(ClientPO po) {
-        return ResultMessage.SUCCESS;
+    public void delete(String clientID) throws RemoteException {
+
     }
 
     @Override
-    public ResultMessage update(ClientPO po) {
-        return ResultMessage.SUCCESS;
+    public void update(ClientPO po) throws RemoteException {
+
     }
 
-    @Override
-    public String getClientID() {
-        return "Client00000004";
-    }
+
 }

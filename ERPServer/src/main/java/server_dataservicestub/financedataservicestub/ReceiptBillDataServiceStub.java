@@ -1,10 +1,10 @@
 package main.java.server_dataservicestub.financedataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.financedataservice.ReceiptBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.ReceiptBillPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ReceiptBillDataServiceStub implements ReceiptBillDataService {
@@ -17,17 +17,13 @@ public class ReceiptBillDataServiceStub implements ReceiptBillDataService {
     }
 
     @Override
-    public ResultMessage insert(ReceiptBillPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(ReceiptBillPO po) throws RemoteException {
+        return "SKD-20171212-12345";
     }
 
     @Override
-    public ResultMessage update(ReceiptBillPO po) {
-        return ResultMessage.SUCCESS;
+    public void update(ReceiptBillPO po) throws RemoteException {
+
     }
 
-    @Override
-    public String getReceiptBillID() {
-        return "SKD-20171106-00001";
-    }
 }

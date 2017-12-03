@@ -1,10 +1,10 @@
 package main.java.server_dataservicestub.financedataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.financedataservice.PaymentBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.PaymentBillPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class PaymentBillDataServiceStub implements PaymentBillDataService {
@@ -17,17 +17,13 @@ public class PaymentBillDataServiceStub implements PaymentBillDataService {
     }
 
     @Override
-    public ResultMessage insert(PaymentBillPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(PaymentBillPO po) throws RemoteException {
+        return "FKD-20171212-12345";
     }
 
     @Override
-    public ResultMessage update(PaymentBillPO po) {
-        return ResultMessage.SUCCESS;
+    public void update(PaymentBillPO po) throws RemoteException {
+
     }
 
-    @Override
-    public String getPaymentBillID() {
-        return "FKD-20171106-00001";
-    }
 }
