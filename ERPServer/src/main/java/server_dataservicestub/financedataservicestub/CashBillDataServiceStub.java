@@ -1,6 +1,5 @@
 package main.java.server_dataservicestub.financedataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.financedataservice.CashBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
@@ -17,17 +16,14 @@ public class CashBillDataServiceStub implements CashBillDataService {
     }
 
     @Override
-    public ResultMessage insert(CashBillPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(CashBillPO po) {
+        return "XJFYD-20171212-12345";
     }
 
     @Override
-    public ResultMessage update(CashBillPO po) {
-        return ResultMessage.SUCCESS;
+    public void update(CashBillPO po) {
+
     }
 
-    @Override
-    public String getCashBillID() {
-        return "XJFYD-20171106-00001";
-    }
+
 }

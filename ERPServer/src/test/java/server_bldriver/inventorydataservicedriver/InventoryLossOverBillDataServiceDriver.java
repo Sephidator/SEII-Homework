@@ -1,34 +1,23 @@
 package test.java.server_bldriver.inventorydataservicedriver;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataService;
-import org.junit.Test;
-import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.server_dataservicestub.inventorydataservicestub.InventoryLossOverBillDataServiceStub;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class InventoryLossOverBillDataServiceDriver {
-
-    InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-    InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
-    BillQueryPO billQueryPO=new BillQueryPO();
+    InventoryLossOverBillDataService service=new InventoryLossOverBillDataServiceStub();
 
     @Test
     public void find() throws Exception {
-
-        assertEquals("1",inventoryLossOverBillDataService.find(billQueryPO).getComment());
+        assertEquals(1,service.find(null).size());
     }
 
     @Test
     public void insert() throws Exception {
-        assertEquals(ResultMessage.success,inventoryLossOverBillDataService.insert(inventoryLossOverBillPO));
-    }
-
-    @Test
-    public void update() throws Exception {
-        assertEquals(ResultMessage.success,inventoryLossOverBillDataService.update(inventoryLossOverBillPO));
+        assertEquals("KCYSD-20171212-12345",service.insert(new InventoryLossOverBillPO()));
     }
 
 }

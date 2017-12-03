@@ -1,11 +1,10 @@
 package main.java.server_dataservicestub.goodsdataservicestub;
 
-
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.goods.GoodsQueryPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class GoodsDataServiceStub implements GoodsDataService {
@@ -17,22 +16,18 @@ public class GoodsDataServiceStub implements GoodsDataService {
     }
 
     @Override
-    public ResultMessage insert(GoodsPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(GoodsPO po) throws RemoteException {
+        return "00000001";
     }
 
     @Override
-    public ResultMessage delete(GoodsPO po) {
-        return ResultMessage.SUCCESS;
+    public void delete(String goodsID) throws RemoteException {
+
     }
 
     @Override
-    public ResultMessage update(GoodsPO po) {
-        return ResultMessage.SUCCESS;
+    public void update(GoodsPO po) throws RemoteException {
+
     }
 
-    @Override
-    public String getGoodsID() {
-        return "Goods00001234";
-    }
 }

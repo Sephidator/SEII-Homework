@@ -1,6 +1,5 @@
 package main.java.server_dataservicestub.goodssortdataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
 import main.java.po.goods.GoodsSortQueryPO;
@@ -17,22 +16,19 @@ public class GoodsSortDataServiceStub implements GoodsSortDataService {
     }
 
     @Override
-    public ResultMessage insert(GoodsSortPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(GoodsSortPO po) throws RemoteException {
+        return "00000001";
     }
 
     @Override
-    public ResultMessage delete(GoodsSortPO po) {
-        return ResultMessage.SUCCESS;
+    public void delete(String GoodsSortID) throws RemoteException {
+
     }
 
     @Override
-    public ResultMessage update(GoodsSortPO po) {
-        return ResultMessage.SUCCESS;
+    public void update(GoodsSortPO po) throws RemoteException {
+
     }
 
-    @Override
-    public String getGoodsSortID() {
-        return "GoodsSort00000004";
-    }
+
 }

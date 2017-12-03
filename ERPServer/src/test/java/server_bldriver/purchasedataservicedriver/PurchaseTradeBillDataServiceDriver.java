@@ -1,9 +1,9 @@
 package test.java.server_bldriver.purchasedataservicedriver;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.purchasedataservice.PurchaseTradeBillDataService;
-import org.junit.Test;
+import main.java.po.bill.purchasebill.PurchaseTradeBillPO;
 import main.java.server_dataservicestub.purchasedataservicestub.PurchaseTradeBillDataServiceStub;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -16,18 +16,8 @@ public class PurchaseTradeBillDataServiceDriver {
     }
 
     @Test
-    public void getID() throws Exception {
-        assertEquals("123",service.getID());
-    }
-
-    @Test
     public void insert() throws Exception {
-        assertEquals(ResultMessage.success,service.insert(null));
-    }
-
-    @Test
-    public void update() throws Exception {
-        assertEquals(ResultMessage.success,service.update(null));
+        assertEquals("JHD-20171212-12345",service.insert(new PurchaseTradeBillPO()));
     }
 
 }

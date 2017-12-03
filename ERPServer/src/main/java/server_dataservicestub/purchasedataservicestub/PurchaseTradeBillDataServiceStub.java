@@ -1,10 +1,10 @@
 package main.java.server_dataservicestub.purchasedataservicestub;
 
-import main.java.data.datautility.ResultMessage;
 import main.java.dataservice.purchasedataservice.PurchaseTradeBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.purchasebill.PurchaseTradeBillPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class PurchaseTradeBillDataServiceStub implements PurchaseTradeBillDataService{
@@ -16,18 +16,13 @@ public class PurchaseTradeBillDataServiceStub implements PurchaseTradeBillDataSe
     }
 
     @Override
-    public ResultMessage insert(PurchaseTradeBillPO po) {
-        return ResultMessage.SUCCESS;
+    public String insert(PurchaseTradeBillPO po) throws RemoteException {
+        return "JHD-20171212-12345";
     }
 
     @Override
-    public ResultMessage update(PurchaseTradeBillPO po) {
-        return ResultMessage.SUCCESS;
-    }
+    public void update(PurchaseTradeBillPO po) throws RemoteException {
 
-    @Override
-    public String getPurchaseTradeBillID() {
-        return "JHD-20170910-12345";
     }
 
 }
