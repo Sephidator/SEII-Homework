@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.clientui.ClientInfoUIController">
    <children>
       <GridPane prefHeight="600.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -29,7 +29,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="132.0" prefWidth="375.0" spacing="100.0">
                            <children>
-                              <JFXButton buttonType="RAISED" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="确定" textFill="WHITE">
+                              <JFXButton fx:id="submit" buttonType="RAISED" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="确定" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -37,7 +37,7 @@
                                     <DropShadow />
                                  </effect>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #db3236; -fx-background-radius: 20; -fx-border-radius: 20;" text="取消" textFill="WHITE">
+                              <JFXButton fx:id="cancel" buttonType="RAISED" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #db3236; -fx-background-radius: 20; -fx-border-radius: 20;" text="取消" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -76,7 +76,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField editable="false" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="ID" editable="false" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -98,12 +98,12 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="level" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <ChoiceBox prefHeight="30.0" prefWidth="30.0" />
+                                    <ChoiceBox fx:id="levelChoiceBox" prefHeight="30.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -121,12 +121,12 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="category" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <ChoiceBox prefHeight="30.0" prefWidth="30.0" />
+                                    <ChoiceBox fx:id="categoryChoiceBox" prefHeight="30.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -144,7 +144,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="name" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -166,7 +166,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="phone" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -188,7 +188,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="email" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -210,7 +210,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="address" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -232,7 +232,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="post" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -252,7 +252,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="30.0" prefWidth="175.0">
+                              <TextField fx:id="receivable" prefHeight="30.0" prefWidth="175.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -272,7 +272,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="payable" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -294,7 +294,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="receivableLimit" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -316,12 +316,12 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="salesman" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <ChoiceBox prefHeight="30.0" prefWidth="30.0" />
+                                    <ChoiceBox fx:id="salesmanChoiceBox" prefHeight="30.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                            </children>
