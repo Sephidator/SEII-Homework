@@ -16,18 +16,13 @@ public class LogData implements LogDataService {
         ArrayList<LogPO> list = new ArrayList<>();
         Connection connection = DataHelper.getConnection();
         String sql;
-
-        if (query == null)
-            sql = "SELECT * FROM Log ";
-        else
-            sql = "SELECT * FROM Log WHERE time BETWEEN '" + query.start + "' AND '" + query.end + "'";
+        sql = "SELECT * FROM Log WHERE time BETWEEN '" + query.start + "' AND '" + query.end + "'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             LogPO logPO;
             while (resultSet.next()) {
-                logPO = new LogPO(String.format("%0" + 8 + "d", resultSet.getInt("operatorID")), resultSet.getString("action"), resultSet.getTimestamp("time"));
-                logPO.setID(String.format("%0" + 8 + "d", resultSet.getInt("ID")));
+                logPO = new LogPO(resultSet.getString("operatorID"), resultSet.getString("action"), resultSet.getTimestamp("time"));
                 list.add(logPO);
             }
             resultSet.close();
@@ -37,7 +32,6 @@ public class LogData implements LogDataService {
             e.printStackTrace();
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
@@ -56,7 +50,6 @@ public class LogData implements LogDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();

@@ -48,7 +48,7 @@ public class DataHelper {
             String sql = "SELECT * FROM " + table + " WHERE ID='" + ID + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
-                sql = "UPDATE " + table + " SET visible=FALSE WHERE ID=" + ID;
+                sql = "UPDATE " + table + " SET visible=FALSE WHERE ID='" + ID + "'";
                 statement.executeUpdate(sql);
                 resultSet.close();
                 statement.close();
@@ -57,7 +57,6 @@ public class DataHelper {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
