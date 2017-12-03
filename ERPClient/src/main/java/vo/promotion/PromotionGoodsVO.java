@@ -1,5 +1,7 @@
 package main.java.vo.promotion;
 
+import main.java.vo.goods.GoodsItemVO;
+
 import java.util.ArrayList;
 import java.util.Date;
 

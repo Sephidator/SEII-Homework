@@ -74,7 +74,7 @@ public class CashBillVO extends FinanceBillVO {
 
         /*得到UserVO*/
         UserTool userTool = new UserBl();
-        UserQueryVO userQueryVO = new UserQueryVO();
+        UserQueryVO userQueryVO = new UserQueryVO(null,null,null);
         userQueryVO.ID = cashBillPO.getOperatorID();
         userQueryVO.name = "";//初始化防止NPE
         userQueryVO.type = "";

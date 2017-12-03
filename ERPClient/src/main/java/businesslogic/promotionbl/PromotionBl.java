@@ -1,6 +1,5 @@
 package main.java.businesslogic.promotionbl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.vo.promotion.PromotionQueryVO;
 import main.java.vo.promotion.PromotionVO;
@@ -26,8 +25,8 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [vo] 
      * @function: 
      */
-    public ResultMessage addPromotion(PromotionVO vo) {
-        return null;
+    public void addPromotion(PromotionVO vo) {
+
     }
 
     @Override
@@ -37,8 +36,8 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [vo] 
      * @function: 
      */
-    public ResultMessage editPromotion(PromotionVO vo) {
-        return null;
+    public void editPromotion(PromotionVO vo) {
+
     }
 
     @Override
@@ -48,18 +47,9 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [vo] 
      * @function: 
      */
-    public ResultMessage deletePromotion(PromotionVO vo) {
-        return null;
+    public void deletePromotion(PromotionVO vo) {
+
     }
 
-    @Override
-    /**
-     * @version: 1
-     * @date: 2017.11.28 2:09
-     * @para: [] 
-     * @function: 
-     */
-    public String getID() {
-        return null;
-    }
+
 }

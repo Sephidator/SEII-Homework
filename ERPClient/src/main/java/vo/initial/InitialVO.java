@@ -8,7 +8,6 @@ import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.goodssortbl.GoodsSortBl;
 import main.java.businesslogic.goodssortbl.GoodsSortTool;
-import main.java.po.goods.GoodsPO;
 import main.java.po.initial.InitialPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
@@ -97,7 +96,7 @@ public class InitialVO{
         /*得到ArrayList<GoodsVO>*/
         ArrayList<GoodsVO> goodsVOArrayList = new ArrayList<>();
         GoodsTool goodsTool = new GoodsBl();
-        GoodsQueryVO goodsQueryVO = new GoodsQueryVO();
+        GoodsQueryVO goodsQueryVO = new GoodsQueryVO(null,null);
         for(String id : initialPO.getGoodsIDList()){
             goodsQueryVO.ID = id;
             goodsVOArrayList.add(goodsTool.getGoodsList(goodsQueryVO).get(0));//取得查询返回的商品的第一个
@@ -107,7 +106,7 @@ public class InitialVO{
         /*得到ArrayList<GoodsSortVO>*/
         ArrayList<GoodsSortVO> goodsSortVOArrayList = new ArrayList<>();
         GoodsSortTool goodsSortTool = new GoodsSortBl();
-        GoodsSortQueryVO goodsSortQueryVO = new GoodsSortQueryVO();
+        GoodsSortQueryVO goodsSortQueryVO = new GoodsSortQueryVO(null,null,null);
         for(String id : initialPO.getGoodsSortIDList()){
             goodsSortQueryVO.ID = id;
             goodsSortVOArrayList.add(goodsSortTool.getGoodsSortList(goodsSortQueryVO).get(0));//取得查询返回的商品分类的第一个
@@ -117,7 +116,7 @@ public class InitialVO{
         /*得到ArrayList<ClientVO>*/
         ArrayList<ClientVO> clientVOArrayList = new ArrayList<>();
         ClientTool ClientTool = new ClientBl();
-        ClientQueryVO clientQueryVO = new ClientQueryVO();
+        ClientQueryVO clientQueryVO = new ClientQueryVO(null,null);
         for(String id : initialPO.getClientIDList()){
             clientQueryVO.ID = id;
             clientVOArrayList.add(ClientTool.getClientList(clientQueryVO).get(0));//取得查询返回的客户的第一个
