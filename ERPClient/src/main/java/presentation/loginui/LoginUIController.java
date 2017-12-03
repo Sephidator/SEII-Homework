@@ -4,13 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import sun.applet.Main;
+import main.java.vo.user.UserVO;
 
 import java.io.IOException;
 
@@ -25,30 +24,7 @@ public class LoginUIController {
     @FXML
     private JFXButton exit;
 
-
     private Stage stage;
-
-    /**
-     * The constructor
-     * be called before the initialize() method
-     * */
-    public LoginUIController() {
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
-     * Initialize the controller class.
-     * be automatically called after the fxml file has been loaded.
-     * */
-    public void initialize(Stage stage){
-        this.stage=stage;
-        usernameField.setText("");
-        passwordField.setText("");
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -59,12 +35,12 @@ public class LoginUIController {
      * */
     @FXML
     private void handleLogin(){
-        PurchaseSalePanelUIController.init(stage);
+        UserVO user=new UserVO("进货销售人员", 23, true, "宋抟", "123", "123", true);
+        RootUIController root=RootUIController.initRoot(stage,user);
+        root.showLogoutButton(true);
+        PurchaseSalePanelUIController.init(root);
     }
 
-    /**
-     * Called when the user clickes on the Login button
-     * */
     @FXML
     private void handleExit(){
         // 这里还有一个登出操作没有写

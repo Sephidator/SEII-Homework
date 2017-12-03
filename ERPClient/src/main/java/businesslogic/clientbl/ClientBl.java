@@ -4,6 +4,8 @@ import main.java.businesslogicservice.clientblservice.ClientBlService;
 import main.java.po.client.ClientPO;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
@@ -61,5 +63,10 @@ public class ClientBl implements ClientBlService,ClientTool{
         ClientPO clientPO=new ClientPO();
 
 
+    }
+
+    @Override
+    public ArrayList<UserVO> getUserList(UserQueryVO query) {
+        return null;
     }
 }
