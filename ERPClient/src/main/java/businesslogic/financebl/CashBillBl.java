@@ -2,11 +2,9 @@ package main.java.businesslogic.financebl;
 
 import main.java.businesslogic.accountbl.AccountBl;
 import main.java.businesslogic.accountbl.AccountTool;
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
-import main.java.dataservice.financedataservice.CashBillDataService;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
@@ -16,10 +14,6 @@ import main.java.vo.bill.financebill.CashBillVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class CashBillBl implements CashBillBlService,CashBillTool{
@@ -30,7 +24,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 将CashBillVO转成CashBillPO，修改审批状态，调用CashBillDataService.update,返回ResultMessage
      */
     @Override
-    public void pass(BillVO bill) throws RemoteException, NotBoundException, MalformedURLException {
+    public void pass(BillVO bill)  {
         //转换VO到PO
         CashBillPO cashBillPO = ((CashBillVO) bill).getCashBillPO();
 
@@ -38,8 +32,8 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         cashBillPO.setState("审批通过");
 
         //调用dataService.update
-        CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
-        cashBillDataService.update(cashBillPO);
+        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
+        //cashBillDataService.update(cashBillPO);
     }
 
     /**

@@ -1,17 +1,11 @@
 package main.java.businesslogic.accountbl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
-import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class AccountBl implements AccountBlService,AccountTool{
@@ -24,19 +18,19 @@ public class AccountBl implements AccountBlService,AccountTool{
      *             得到ArrayList<AccountPO>以后转成ArrayList<AccountVO>，返回ArrayList<AccountVO>
      */
     @Override
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws RemoteException, NotBoundException, MalformedURLException {
+    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) {
         /*AccountQueryVO转为AccountQueryPO*/
         AccountQueryPO accountQueryPO = query.getAccountQueryPO();
 
         /*调用AccountDatdaService.find服务*/
-        AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        ArrayList<AccountPO> accoutPOArralist = accountDataService.find(accountQueryPO);
+        //AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
+        //ArrayList<AccountPO> accoutPOArralist = accountDataService.find(accountQueryPO);
 
         /*ArrayList<AccountPO>转成ArrayList<AccountVO>*/
         ArrayList<AccountVO> accountVOArrayList = new ArrayList<AccountVO>();
-        for(AccountPO accoutPO : accoutPOArralist){
-            accountVOArrayList.add(new AccountVO(accoutPO));
-        }
+        //for(AccountPO accoutPO : accoutPOArralist){
+        //    accountVOArrayList.add(new AccountVO(accoutPO));
+        //}
 
         /*返回ArrayList<AccountVO>*/
         return accountVOArrayList;
@@ -49,13 +43,13 @@ public class AccountBl implements AccountBlService,AccountTool{
      * @function: 将AccountVO转成AccountPO，并调用AccountDataService.update服务
      */
     @Override
-    public void editAccount(AccountVO account) throws RemoteException, NotBoundException, MalformedURLException {
+    public void editAccount(AccountVO account){
         /*AccountVO转成AccountPO*/
         AccountPO accountPO = account.getAccountPO();
 
         /*调用AccountDataService.update*/
-        AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        accountDataService.update(accountPO);
+       // AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
+        //accountDataService.update(accountPO);
     }
 
 
@@ -66,13 +60,13 @@ public class AccountBl implements AccountBlService,AccountTool{
      * @function: 将AccountVO转成AccountPO，并调用AccountDataService.insert服务
      */
     @Override
-    public void addAccount(AccountVO account) throws RemoteException, NotBoundException, MalformedURLException {
+    public void addAccount(AccountVO account)  {
         /*AccountVO转成AccountPO*/
         AccountPO accountPO = account.getAccountPO();
 
         /*调用AccountDataService.insert*/
-        AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        accountDataService.insert(accountPO);
+       // AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
+        //accountDataService.insert(accountPO);
     }
 
     /**
@@ -82,10 +76,10 @@ public class AccountBl implements AccountBlService,AccountTool{
      * @function: 调用AccountDataService.delete服务
      */
     @Override
-    public void deleteAccount(String accountID) throws RemoteException, NotBoundException, MalformedURLException {
+    public void deleteAccount(String accountID) {
 
         /*调用AccountDataService.delete*/
-        AccountDataService accountDataService = (AccountDataService)Naming.lookup("rmi://localhost:");
-        accountDataService.delete(accountID);
+        //AccountDataService accountDataService = (AccountDataService)Naming.lookup("rmi://localhost:");
+        //accountDataService.delete(accountID);
     }
 }

@@ -1,7 +1,7 @@
 package main.java.vo.report;
 
 import main.java.vo.bill.salebill.SaleTradeBillVO;
-import main.java.vo.promotion.GoodsItemVO;
+import main.java.vo.goods.GoodsItemVO;
 
 import java.util.ArrayList;
 import java.util.Date;

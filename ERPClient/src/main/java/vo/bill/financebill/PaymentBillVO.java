@@ -89,7 +89,7 @@ public class PaymentBillVO extends FinanceBillVO {
 
         /*得到UserVO*/
         UserTool userTool = new UserBl();
-        UserQueryVO userQueryVO = new UserQueryVO();
+        UserQueryVO userQueryVO = new UserQueryVO(null,null,null);
         userQueryVO.ID = paymentBillPO.getOperatorID();
         userQueryVO.name = "";//初始化防止NPE
         userQueryVO.type = "";
@@ -101,7 +101,7 @@ public class PaymentBillVO extends FinanceBillVO {
 
         /*得到ClientVO*/
         ClientTool clientTool = new ClientBl();
-        ClientQueryVO clientQueryVO = new ClientQueryVO();
+        ClientQueryVO clientQueryVO = new ClientQueryVO(null,null);
         clientQueryVO.ID = paymentBillPO.getClientID();
         clientQueryVO.name = "";
         ClientVO clientVO = clientTool.getClientList(clientQueryVO).get(0);
