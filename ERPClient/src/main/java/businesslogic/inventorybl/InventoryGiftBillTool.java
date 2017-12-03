@@ -1,16 +1,17 @@
 package main.java.businesslogic.inventorybl;
 
-import main.java.businesslogic.blutility.ResultMessage;
+import main.java.businesslogic.BillTool;
 import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
 
 import java.util.ArrayList;
 
-public interface InventoryGiftBillTool {
+public interface InventoryGiftBillTool extends BillTool{
 
-    public ResultMessage pass(InventoryGiftBillVO bill);
+    public void pass(BillVO billVO);
 
-    public ResultMessage reject(InventoryGiftBillVO bill);
+    public void reject(BillVO billVO);
 
     public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query);
 }

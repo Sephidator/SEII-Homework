@@ -12,15 +12,12 @@ public interface GoodsSortBLService {
     public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query);
 
     //添加一个商品分类
-    public ResultMessage addGoodsSort(GoodsSortVO goodsSort);
+    public String addGoodsSort(GoodsSortVO goodsSort);
 
     //删除一个商品分类
-    public ResultMessage deleteGoodsSort(GoodsSortVO goodsSort);
+    public void deleteGoodsSort(String goodsSortID);
 
     //编辑一个商品分类
-    public ResultMessage editGoodsSort(GoodsSortVO goodsSort);
-
-    //返回新商品分类ID
-    public String getID();
+    public void editGoodsSort(GoodsSortVO goodsSort);
 
 }

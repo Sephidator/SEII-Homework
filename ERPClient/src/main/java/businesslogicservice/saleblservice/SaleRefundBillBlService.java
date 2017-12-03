@@ -11,10 +11,15 @@ import main.java.vo.goods.GoodsVO;
 import java.util.ArrayList;
 
 public interface SaleRefundBillBlService {
-    public String getID ();
+
     public ArrayList<ClientVO> getSellerList(ClientQueryVO query);
+
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query);
-    public ResultMessage submit(SaleRefundBillVO bill);
-    public ResultMessage saveDraft(SaleRefundBillVO bill);
+
+    public String submit(SaleRefundBillVO bill);
+
+    public void saveDraft(SaleRefundBillVO bill);
+
     public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query);
+
 }

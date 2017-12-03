@@ -10,13 +10,11 @@ import java.util.ArrayList;
 
 public interface InventoryLossOverBillBLService {
 
-    public String getID();
-
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query);
 
-    public ResultMessage submit(InventoryLossOverBillVO bill);
+    public String submit(InventoryLossOverBillVO bill);
 
-    public ResultMessage saveDraft(InventoryLossOverBillVO bill);
+    public void saveDraft(InventoryLossOverBillVO bill);
 
     public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query);
 

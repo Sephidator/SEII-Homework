@@ -7,20 +7,11 @@ import main.java.vo.user.UserVO;
 import java.util.Date;
 
 public class BillVO extends VO {
-    protected String ID; //单据编号
     protected String state; //单据状态
     protected Date time; //创建时间
     protected String type; //单据类型
     protected UserVO operator;//操作员
     protected String comment; // 备注
-
-    public String getID() {
-        return ID;
-    }
-
-    public String getState() {
-        return state;
-    }
 
     public Date getTime() {
         return time;
@@ -36,10 +27,6 @@ public class BillVO extends VO {
 
     public String getComment() {
         return comment;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public void setState(String state) {

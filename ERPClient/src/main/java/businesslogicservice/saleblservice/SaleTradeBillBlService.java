@@ -13,11 +13,17 @@ import main.java.vo.promotion.PromotionVO;
 import java.util.ArrayList;
 
 public interface SaleTradeBillBlService {
-    public String getID ();
+
     public ArrayList<ClientVO> getSellerList(ClientQueryVO query);
+
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query);
+
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query);
-    public ResultMessage submit(SaleTradeBillVO bill);
-    public ResultMessage saveDraft(SaleTradeBillVO bill);
+
+    public String submit(SaleTradeBillVO bill);
+
+    public void saveDraft(SaleTradeBillVO bill);
+
     public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query);
+
 }

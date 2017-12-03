@@ -2,7 +2,7 @@ package main.java.vo.bill.salebill;
 
 import main.java.vo.bill.BillVO;
 import main.java.vo.client.ClientVO;
-import main.java.vo.promotion.GoodsItemVO;
+import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;

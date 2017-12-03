@@ -9,9 +9,11 @@ import java.util.ArrayList;
 public interface UserBlService {
     public ArrayList<UserVO> getUserList(UserQueryVO query);
 
-    public void addUser(UserVO vo);
+    public ResultMessage addUser(UserVO vo);
 
-    public void editUser(UserVO vo);
+    public ResultMessage editUser(UserVO vo);
 
-    public void deleteUser(UserVO vo);
+    public ResultMessage deleteUser(UserVO vo);
+
+    public String getID();
 }

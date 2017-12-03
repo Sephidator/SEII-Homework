@@ -3,6 +3,7 @@ package main.java.businesslogic.salebl;
 import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.BillVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
@@ -14,10 +15,7 @@ import main.java.vo.promotion.PromotionVO;
 import java.util.ArrayList;
 
 public class SaleTradBillBl implements SaleTradeBillBlService,SaleTradeBillTool {
-    @Override
-    public String getID() {
-        return null;
-    }
+
 
     @Override
     public ArrayList<ClientVO> getSellerList(ClientQueryVO query) {
@@ -35,13 +33,13 @@ public class SaleTradBillBl implements SaleTradeBillBlService,SaleTradeBillTool 
     }
 
     @Override
-    public ResultMessage submit(SaleTradeBillVO bill) {
+    public String submit(SaleTradeBillVO bill) {
         return null;
     }
 
     @Override
-    public ResultMessage saveDraft(SaleTradeBillVO bill) {
-        return null;
+    public void saveDraft(SaleTradeBillVO bill) {
+
     }
 
     @Override
@@ -50,12 +48,12 @@ public class SaleTradBillBl implements SaleTradeBillBlService,SaleTradeBillTool 
     }
 
     @Override
-    public ResultMessage pass(SaleTradeBillVO bill) {
-        return null;
+    public void pass(BillVO billVO) {
+
     }
 
     @Override
-    public ResultMessage reject(SaleTradeBillVO bill) {
-        return null;
+    public void reject(BillVO billVO) {
+
     }
 }

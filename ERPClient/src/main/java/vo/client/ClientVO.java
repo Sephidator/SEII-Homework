@@ -1,12 +1,16 @@
 package main.java.vo.client;
 
+import main.java.businesslogic.userbl.UserBl;
+import main.java.businesslogic.userbl.UserTool;
+import main.java.po.client.ClientPO;
+import main.java.vo.VO;
+import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 /**
  * 客户VO类
  * */
-public class ClientVO {
-    private String ID; // 客户编号
+public class ClientVO extends VO{
     private String category; // 客户类别：进货商、销售商
     private int level; // 客户级别：1-5（vip）
     private String name; // 客户姓名
@@ -18,16 +22,12 @@ public class ClientVO {
     private double payable; // 客户应付
     private double receivableLimit;// 客户应收额度
     private UserVO salesman; // 默认业务员
-    private boolean visible=true; //客户是否存在
 
     public ClientVO() {
 
     }
 
-    public ClientVO(String ID, String category, int level, String name,
-                    String phone, String address, String post, String email,
-                    double receivable, double payable, double receivableLimit, UserVO salesman) {
-        this.ID = ID;
+    public ClientVO(String category, int level, String name,String phone, String address, String post, String email,double receivable, double payable, double receivableLimit, UserVO salesman) {
         this.category = category;
         this.level = level;
         this.name = name;
@@ -41,8 +41,43 @@ public class ClientVO {
         this.salesman = salesman;
     }
 
-    public String getID(){
-        return ID;
+    public ClientPO getClientPO(){
+        ClientPO clientPO=new ClientPO();
+        clientPO.setID(this.ID);
+        clientPO.setVisible(this.visible);
+        clientPO.setCategory(this.category);
+        clientPO.setLevel(this.level);
+        clientPO.setName(this.name);
+        clientPO.setPhone(this.phone);
+        clientPO.setAddress(this.address);
+        clientPO.setPost(this.post);
+        clientPO.setEmail(this.email);
+        clientPO.setReceivable(this.receivable);
+        clientPO.setPayable(this.payable);
+        clientPO.setReceivableLimit(this.receivableLimit);
+
+        clientPO.setSalesmanID(this.salesman.getID());
+
+        return clientPO;
+    }
+
+    public ClientVO(ClientPO clientPO){
+        this.ID=clientPO.getID();
+        this.visible=clientPO.isVisible();
+        this.category=clientPO.getCategory();
+        this.level=clientPO.getLevel();
+        this.name=clientPO.getName();
+        this.phone=clientPO.getPhone();
+        this.address=clientPO.getAddress();
+        this.post=clientPO.getPost();
+        this.email=clientPO.getEmail();
+        this.receivable=clientPO.getReceivable();
+        this.payable=clientPO.getPayable();
+        this.receivableLimit=clientPO.getReceivableLimit();
+
+        UserTool userTool=new UserBl();
+        UserQueryVO userQueryVO=new UserQueryVO(clientPO.getID(),null,null);
+        this.salesman=userTool.getUserList(userQueryVO).get(0);
     }
 
     public String getCategory(){
@@ -89,14 +124,6 @@ public class ClientVO {
         return salesman;
     }
 
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -141,7 +168,4 @@ public class ClientVO {
         this.salesman = salesman;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
 }

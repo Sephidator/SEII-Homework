@@ -1,5 +1,12 @@
 package main.java.vo.bill.inventorybill;
 
+import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
+import main.java.businesslogic.inventorybl.InventoryLossOverBillTool;
+import main.java.businesslogic.userbl.UserBl;
+import main.java.businesslogic.userbl.UserTool;
+import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
+import main.java.po.bill.inventorybill.LossOverItemPO;
+import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -11,14 +18,53 @@ public class InventoryLossOverBillVO extends InventoryBillVO {
     public InventoryLossOverBillVO() {
     }
 
-    public InventoryLossOverBillVO(String ID, String state, Date time, String type, UserVO operator, String comment, ArrayList<LossOverItemVO> lossOverList){
-        this.ID = ID;
+    public InventoryLossOverBillVO(String state, Date time, UserVO operator, String comment, ArrayList<LossOverItemVO> lossOverList){
         this.state = state;
         this.time = time;
-        this.type = type;
+        type="库存溢损单";
         this.operator = operator;
         this.comment = comment;
         this.lossOverList=lossOverList;
+    }
+
+    public InventoryLossOverBillPO getInventoryLossOverBillPO(){
+        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
+        inventoryLossOverBillPO.setID(this.ID);
+        inventoryLossOverBillPO.setVisible(this.visible);
+        inventoryLossOverBillPO.setComment(this.comment);
+        inventoryLossOverBillPO.setState(this.state);
+        inventoryLossOverBillPO.setTime(this.time);
+        inventoryLossOverBillPO.setType(this.type);
+
+        ArrayList<LossOverItemPO> lossOverItemPOS=new ArrayList<>();
+        for(LossOverItemVO lossOverItemVO:this.lossOverList){
+            lossOverItemPOS.add(lossOverItemVO.getLossOverItemPO());
+        }
+        inventoryLossOverBillPO.setLossOverList(lossOverItemPOS);
+
+        inventoryLossOverBillPO.setOperatorID(this.operator.getID());
+
+        return inventoryLossOverBillPO;
+
+    }
+
+    public InventoryLossOverBillVO(InventoryLossOverBillPO inventoryLossOverBillPO){
+        this.ID=inventoryLossOverBillPO.getID();
+        this.visible=inventoryLossOverBillPO.isVisible();
+        this.comment=inventoryLossOverBillPO.getComment();
+        this.state=inventoryLossOverBillPO.getState();
+        this.time=inventoryLossOverBillPO.getTime();
+        this.type=inventoryLossOverBillPO.getType();
+
+        UserTool userTool=new UserBl();
+        UserQueryVO userQueryVO=new UserQueryVO(inventoryLossOverBillPO.getID(),null,null);
+        this.operator=userTool.getUserList(userQueryVO).get(0);
+
+        ArrayList<LossOverItemVO> lossOverItemVOS=new ArrayList<>();
+        for(LossOverItemPO lossOverItemPO:inventoryLossOverBillPO.getLossOverList()){
+            lossOverItemVOS.add(new LossOverItemVO(lossOverItemPO));
+        }
+        this.lossOverList=lossOverItemVOS;
     }
 
     public ArrayList<LossOverItemVO> getLossOverList() {
@@ -27,5 +73,10 @@ public class InventoryLossOverBillVO extends InventoryBillVO {
 
     public void setLossOverList(ArrayList<LossOverItemVO> lossOverList) {
         this.lossOverList = lossOverList;
+    }
+
+    public InventoryLossOverBillTool getTool(){
+        InventoryLossOverBillTool inventoryLossOverBillTool=new InventoryLossOverBillBl();
+        return inventoryLossOverBillTool;
     }
 }

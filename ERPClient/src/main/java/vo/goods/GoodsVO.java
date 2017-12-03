@@ -1,7 +1,11 @@
 package main.java.vo.goods;
 
-public class GoodsVO {
-    private String ID; //商品编号
+import main.java.businesslogic.goodssortbl.GoodsSortBl;
+import main.java.businesslogic.goodssortbl.GoodsSortTool;
+import main.java.po.goods.GoodsPO;
+import main.java.vo.VO;
+
+public class GoodsVO extends VO{
     private String name; //商品名称
     private GoodsSortVO goodsSort;//商品所在商品分类
     private String model; //商品型号
@@ -12,14 +16,12 @@ public class GoodsVO {
     private double latestRetail; //商品最近零售价
     private int alarmNum; //商品报警数量
     private String comment; //商品的备注
-    private boolean visible;// 商品是否存在
 
     public GoodsVO(){
 
     }
 
-    public GoodsVO(String ID, String name, GoodsSortVO goodsSort, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment, boolean visible) {
-        this.ID = ID;
+    public GoodsVO(String name, GoodsSortVO goodsSort, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment) {
         this.name = name;
         this.goodsSort = goodsSort;
         this.model = model;
@@ -30,12 +32,47 @@ public class GoodsVO {
         this.latestRetail = latestRetail;
         this.alarmNum = alarmNum;
         this.comment = comment;
-        this.visible = visible;
     }
 
-    public String getID() {
-        return ID;
+    public GoodsPO getGoodsPO(){
+        GoodsPO goodsPO=new GoodsPO();
+        goodsPO.setID(this.ID);
+        goodsPO.setVisible(this.visible);
+        goodsPO.setName(this.name);
+        goodsPO.setModel(this.model);
+        goodsPO.setNumber(this.number);
+        goodsPO.setCost(this.cost);
+        goodsPO.setRetail(this.retail);
+        goodsPO.setLatestCost(this.latestCost);
+        goodsPO.setLatestRetail(this.latestRetail);
+        goodsPO.setAlarmNum(this.alarmNum);
+        goodsPO.setComment(this.comment);
+
+        goodsPO.setGoodsSortID(this.goodsSort.getID());
+
+        return goodsPO;
     }
+
+    public GoodsVO(GoodsPO goodsPO) {
+        this.ID = goodsPO.getID();
+        this.visible = goodsPO.isVisible();
+        this.name = goodsPO.getName();
+        this.model = goodsPO.getModel();
+        this.number = goodsPO.getNumber();
+        this.cost = goodsPO.getCost();
+        this.retail = goodsPO.getRetail();
+        this.latestCost = goodsPO.getLatestCost();
+        this.latestRetail = goodsPO.getLatestRetail();
+        this.alarmNum = goodsPO.getAlarmNum();
+        this.comment = goodsPO.getComment();
+
+        GoodsSortTool goodsSortTool=new GoodsSortBl();
+
+        GoodsSortQueryVO goodsSortQueryVO=new GoodsSortQueryVO(goodsPO.getGoodsSortID(),null,null);
+
+        this.goodsSort=goodsSortTool.getGoodsSortList(goodsSortQueryVO).get(0);
+    }
+
 
     public String getName() {
         return name;
@@ -75,14 +112,6 @@ public class GoodsVO {
 
     public String getComment() {
         return comment;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public void setName(String name) {
@@ -125,7 +154,4 @@ public class GoodsVO {
         this.comment = comment;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
 }

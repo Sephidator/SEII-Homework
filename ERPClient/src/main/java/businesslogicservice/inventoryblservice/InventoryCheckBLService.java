@@ -22,6 +22,8 @@ public interface InventoryCheckBLService {
 
     public double getSaleAmount(Date start,Date end);
 
+    public int getTotal(Date start,Date end);
+
 
 
 
