@@ -10,10 +10,7 @@ import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;
 
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class UserData implements UserDataService {
@@ -24,15 +21,18 @@ public class UserData implements UserDataService {
         String sql;
         if (query == null)
             sql = "SELECT * FROM User WHERE visible=TRUE ";
+        else if (query.visible)
+            sql = "SELECT * FROM User WHERE (number='" + query.ID + "'OR ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "') AND visible=TRUE ";
         else
-            sql = "SELECT * FROM User WHERE (ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "') AND visible=TRUE ";
+            sql = "SELECT * FROM User WHERE (number='" + query.ID + "'OR ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             UserPO userPO;
             while (resultSet.next()) {
                 userPO = new UserPO(resultSet.getString("name"), resultSet.getString("type"), resultSet.getString("jobName"), resultSet.getString("password"), resultSet.getInt("age"), resultSet.getBoolean("top"));
-                userPO.setID(String.format("%0" + 8 + "d", resultSet.getInt("ID")));
+                userPO.setID(resultSet.getString("ID"));
+                userPO.setVisible(resultSet.getBoolean("visible"));
                 userPO.setLogin(resultSet.getBoolean("login"));
                 list.add(userPO);
             }
@@ -42,7 +42,6 @@ public class UserData implements UserDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
@@ -62,21 +61,23 @@ public class UserData implements UserDataService {
             }
             sql = "INSERT INTO User(name,type,jobname, password,age,top) VALUES ('" + po.getName() + "','" + po.getType() + "','" + po.getJobName() + "','" + po.getPassword() + "','" + po.getAge() + "'," + po.isTop() + ")";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            int key = -1;
             resultSet = statement.getGeneratedKeys();
+            String ID = null;
             if (resultSet.next()) {
-                key = resultSet.getInt(1);
+                int key = resultSet.getInt(1);
+                ID = "User" + String.format("%0" + 8 + "d", key);
+                sql = "UPDATE User SET ID='" + ID + "' WHERE number=" + key;
+                statement.executeUpdate(sql);
             }
             resultSet.close();
             statement.close();
-            return String.format("%0" + 8 + "d", key);
+            return ID;
         } catch (SQLException e) {
+            e.printStackTrace();
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
-            e.printStackTrace();
             throw new DataException();
         }
     }
@@ -95,12 +96,11 @@ public class UserData implements UserDataService {
             String sql = "SELECT * FROM User WHERE ID='" + po.getID() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
-                int key = resultSet.getInt("ID");
-                sql = "SELECT * FROM User WHERE ID<>'" + key + "' AND jobName= '" + po.getJobName() + "' AND visible = TRUE ";
+                sql = "SELECT * FROM User WHERE number<>'" + po.getID() + "' AND jobName= '" + po.getJobName() + "' AND visible = TRUE ";
                 resultSet = statement.executeQuery(sql);
                 if (resultSet.next())
                     throw new ExistException();
-                sql = "UPDATE User SET name'" + po.getName() + "', type='" + po.getType() + "', jobName='" + po.getJobName() + "', password='" + po.getPassword() + "', age='" + po.getAge() + "', top=" + po.isTop() + " WHERE ID=" + key;
+                sql = "UPDATE User SET name'" + po.getName() + "', type='" + po.getType() + "', jobName='" + po.getJobName() + "', password='" + po.getPassword() + "', age='" + po.getAge() + "', top=" + po.isTop() + " WHERE ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 resultSet.close();
                 statement.close();
@@ -128,10 +128,11 @@ public class UserData implements UserDataService {
                 if (resultSet.getBoolean("login"))
                     throw new LoginException();
                 UserPO userPO = new UserPO(resultSet.getString("name"), resultSet.getString("type"), resultSet.getString("jobName"), resultSet.getString("password"), resultSet.getInt("age"), resultSet.getBoolean("top"));
-                userPO.setID(String.format("%0" + 8 + "d", resultSet.getInt("ID")));
+                String ID = resultSet.getString("ID");
+                userPO.setID(ID);
+                userPO.setVisible(resultSet.getBoolean("visible"));
                 userPO.setLogin(true);
-                int key = resultSet.getInt("ID");
-                sql = "UPDATE User SET login=TRUE WHERE ID=" + key;
+                sql = "UPDATE User SET login=TRUE WHERE ID='" + ID + "'";
                 statement.executeUpdate(sql);
                 resultSet.close();
                 statement.close();
@@ -141,7 +142,6 @@ public class UserData implements UserDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
@@ -157,14 +157,13 @@ public class UserData implements UserDataService {
             String sql = "SELECT * FROM User WHERE ID='" + UserID + "'";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
-            sql = "UPDATE User SET login=FALSE ";
+            sql = "UPDATE User SET login=FALSE WHERE ID='" + UserID + "'";
             statement.executeUpdate(sql);
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();

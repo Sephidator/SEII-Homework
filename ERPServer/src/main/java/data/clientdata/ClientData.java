@@ -9,10 +9,7 @@ import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ClientData implements ClientDataService {
@@ -23,8 +20,10 @@ public class ClientData implements ClientDataService {
         String sql;
         if (query == null)
             sql = "SELECT * FROM Client WHERE visible=TRUE ";
+        else if (query.visible)
+            sql = "SELECT * FROM Client WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE";
         else
-            sql = "SELECT * FROM Client WHERE (ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE";
+            sql = "SELECT * FROM Client WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -34,7 +33,7 @@ public class ClientData implements ClientDataService {
                         resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("post"),
                         resultSet.getString("email"), resultSet.getDouble("receivable"), resultSet.getDouble("payable"),
                         resultSet.getDouble("receivableLimit"), String.format("%0" + 8 + "d", resultSet.getInt("salesmanID")));
-                clientPO.setID(String.format("%0" + 8 + "d", resultSet.getInt("ID")));
+                clientPO.setID(resultSet.getString("ID"));
                 list.add(clientPO);
             }
             resultSet.close();
@@ -43,7 +42,6 @@ public class ClientData implements ClientDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
@@ -61,18 +59,20 @@ public class ClientData implements ClientDataService {
                     + "','" + po.getPhone() + "','" + po.getAddress() + "','" + po.getPost() + "','" + po.getEmail() + "',"
                     + po.getReceivable() + "," + po.getPayable() + "," + po.getReceivableLimit() + "," + po.getSalesmanID() + ")";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            int key = -1;
             ResultSet resultSet = statement.getGeneratedKeys();
+            String ID = null;
             if (resultSet.next()) {
-                key = resultSet.getInt(1);
+                int key = resultSet.getInt(1);
+                ID = "Client" + String.format("%0" + 8 + "d", key);
+                sql = "UPDATE Client SET ID='" + ID + "' WHERE number=" + key;
+                statement.executeUpdate(sql);
             }
             resultSet.close();
             statement.close();
-            return String.format("%0" + 8 + "d", key);
+            return ID;
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
@@ -104,7 +104,6 @@ public class ClientData implements ClientDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();

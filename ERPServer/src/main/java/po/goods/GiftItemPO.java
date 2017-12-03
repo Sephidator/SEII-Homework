@@ -2,7 +2,7 @@ package main.java.po.goods;
 
 import java.io.Serializable;
 
-public class GiftItemPO implements Serializable{
+public class GiftItemPO implements Serializable {
     public String goodsID;
     public int number;
 

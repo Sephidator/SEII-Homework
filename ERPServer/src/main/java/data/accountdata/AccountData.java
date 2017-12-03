@@ -21,15 +21,18 @@ public class AccountData implements AccountDataService {
         String sql;
         if (query == null)
             sql = "SELECT * FROM Account WHERE visible=TRUE ";
+        else if (query.visible)
+            sql = "SELECT * FROM Account WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
         else
-            sql = "SELECT * FROM Account WHERE (ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE ";
+            sql = "SELECT * FROM Account WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             AccountPO accountPO;
             while (resultSet.next()) {
                 accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
-                accountPO.setID(String.format("%0" + 8 + "d", resultSet.getInt("ID")));
+                accountPO.setID(resultSet.getString("ID"));
+                accountPO.setVisible(resultSet.getBoolean("visible"));
                 list.add(accountPO);
             }
             resultSet.close();
@@ -38,7 +41,6 @@ public class AccountData implements AccountDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
@@ -58,18 +60,20 @@ public class AccountData implements AccountDataService {
             }
             sql = "INSERT INTO Account (bankAccount, name, remaining) VALUES ('" + po.getBankAccount() + "','" + po.getName() + "','" + po.getRemaining() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            int key = -1;
+            String ID = null;
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                key = resultSet.getInt(1);
+                int key = resultSet.getInt(1);
+                ID = "Account" + String.format("%0" + 8 + "d", key);
+                sql = "UPDATE Account SET ID='" + ID + "' WHERE number=" + key;
+                statement.executeUpdate(sql);
             }
             resultSet.close();
             statement.close();
-            return String.format("%0" + 8 + "d", key);
+            return ID;
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             e.printStackTrace();
@@ -90,12 +94,11 @@ public class AccountData implements AccountDataService {
             String sql = "SELECT * FROM Account WHERE ID='" + po.getID() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
-                int key = resultSet.getInt("ID");
-                sql = "SELECT * FROM Account WHERE ID<>'" + key + "' AND (bankAccount = '" + po.getBankAccount() + "' OR name = '" + po.getName() + "') AND visible = TRUE ";
+                sql = "SELECT * FROM Account WHERE ID<>'" + po.getID() + "' AND (bankAccount = '" + po.getBankAccount() + "' OR name = '" + po.getName() + "') AND visible = TRUE ";
                 resultSet = statement.executeQuery(sql);
                 if (resultSet.next())
                     throw new ExistException();
-                sql = "UPDATE Account SET bankAccount='" + po.getBankAccount() + "', name='" + po.getName() + "', remaining='" + po.getRemaining() + "' WHERE ID=" + key;
+                sql = "UPDATE Account SET bankAccount='" + po.getBankAccount() + "', name='" + po.getName() + "', remaining='" + po.getRemaining() + "' WHERE ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 resultSet.close();
                 statement.close();
@@ -104,7 +107,6 @@ public class AccountData implements AccountDataService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-                connection.close();
             } catch (SQLException e1) {
             }
             throw new DataException();
