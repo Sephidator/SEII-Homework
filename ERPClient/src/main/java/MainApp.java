@@ -14,10 +14,6 @@ public class MainApp extends Application {
 
     private Stage stage;
 
-    public Stage getPrimaryStage() {
-        return stage;
-    }
-
     @Override
     public void start(Stage stage) {
         this.stage=stage;
