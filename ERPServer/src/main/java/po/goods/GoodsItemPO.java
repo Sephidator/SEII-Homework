@@ -7,7 +7,7 @@ public class GoodsItemPO implements Serializable {
     public int number;//商品数量
     public double price;//商品单价
 
-    public GoodsItemPO(String goodsID, int number， double price) {
+    public GoodsItemPO(String goodsID, int number, double price) {
         this.goodsID = goodsID;
         this.number = number;
         this.price = price;
