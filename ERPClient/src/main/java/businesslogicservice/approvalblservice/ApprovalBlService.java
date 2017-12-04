@@ -10,7 +10,7 @@ public interface ApprovalBlService {
 
     public ArrayList<BillVO> getBillList(BillQueryVO query);
 
-    public void pass(BillVO vo, UserVO userVO);
+    public void pass(BillVO vo, UserVO senderVO);
 
-    public void reject(BillVO vo, String reason, UserVO userVO);
+    public void reject(BillVO vo, String reason, UserVO senderVO);
 }

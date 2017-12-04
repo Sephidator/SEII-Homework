@@ -8,6 +8,7 @@ import main.java.vo.goods.GoodsVO;
 public class GoodsItemVO {
     public GoodsVO goods;
     public int number;
+    public double price;//商品单价
 
     public GoodsItemVO(GoodsVO goodsVO, int number) {
         this.goods=goodsVO;
@@ -15,7 +16,7 @@ public class GoodsItemVO {
     }
 
     public GoodsItemPO getGoodsItemPO(){
-        GoodsItemPO goodsItemPO=new GoodsItemPO(this.goods.getID(),this.number);
+        GoodsItemPO goodsItemPO=new GoodsItemPO(this.goods.getID(),this.number,this.price);
         return goodsItemPO;
     }
 
