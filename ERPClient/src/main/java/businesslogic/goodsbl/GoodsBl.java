@@ -2,6 +2,7 @@ package main.java.businesslogic.goodsbl;
 
 import main.java.businesslogicservice.goodsblservice.GoodsBLService;
 import main.java.po.goods.GoodsPO;
+import main.java.po.goods.GoodsQueryPO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 
@@ -12,24 +13,40 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
      * @version: 1
      * @date:
      * @param: [query] 包含待查询信息的商品查询对象
-     * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsDatdaService.find服务
-     *             得到ArrayList<GoodsPO>以后转成ArrayList<GoodsVO>，返回ArrayList<GoodsVO>
+     * @return : 返回ArrayList<GoodsVO>的商品列表
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
-        return null;
+        ArrayList<GoodsPO> goodsPOS=new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
+
+        /*将GoodsQueryVO转为GoodsQueryPO*/
+        GoodsQueryPO goodsQueryPO=query.getGoodsQueryPO();
+
+        /*调用GoodsDatdaService.find得到ArrayList<GoodsPO>*/
+        for(GoodsPO goodsPO:goodsPOS){
+            goodsVOS.add(new GoodsVO(goodsPO));
+        }
+
+        return goodsVOS;
     }
 
     /**
      * @version: 1
      * @date:
      * @param: [goods] 增加的的商品对象，用于增加数据库中该商品数据
-     * @function: 将GoodsVO转成GoodsPO，并调用GoodsDataService.insert服务，返回ResultMessage
+     * @return: 返回String的增加商品的ID
      */
     @Override
     public String addGoods(GoodsVO goods) {
         String id="";
-        GoodsPO goodsPO=new GoodsPO();
+
+        /*将GoodsVO转换为GoodsPO*/
+        GoodsPO goodsPO=goods.getGoodsPO();
+
+        /*调用GoodsDatdaService.insert得到String的ID*/
+
+
         return id;
     }
 
@@ -37,23 +54,29 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
      * @version: 1
      * @date:
      * @param: [goods] 修改的的商品对象，用于修改数据库中该商品数据
-     * @function: 将GoodsVO转成GoodsPO，并调用GoodsDataService.update服务，返回ResultMessage
+     * @return:
      */
     @Override
     public void editGoods(GoodsVO goods) {
-        GoodsPO goodsPO=new GoodsPO();
+
+        /*将GoodsVO转成GoodsPO*/
+        GoodsPO goodsPO=goods.getGoodsPO();
+
+        /*调用GoodsDatdaService.update完成对商品数据的修改*/
+
+
 
     }
 
     /**
      * @version: 1
      * @date:
-     * @param: [goods] 删除的的商品对象，用于删除数据库中该商品数据
-     * @function: 将GoodsVO转成GoodsPO，并调用GoodsDataService.delete服务，返回ResultMessage
+     * @param: [goodsID] 删除的的商品对象的ID，用于删除数据库中该商品数据
+     * @return：
      */
     @Override
     public void deleteGoods(String goodsID) {
-        GoodsPO goodsPO=new GoodsPO();
+        /*调用GoodsDatdaService.delete完成对商品的修改*/
 
     }
 }

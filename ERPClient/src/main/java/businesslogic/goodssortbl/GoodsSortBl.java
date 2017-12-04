@@ -2,6 +2,7 @@ package main.java.businesslogic.goodssortbl;
 
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
 import main.java.po.goods.GoodsSortPO;
+import main.java.po.goods.GoodsSortQueryPO;
 import main.java.vo.goods.GoodsSortQueryVO;
 import main.java.vo.goods.GoodsSortVO;
 
@@ -12,29 +13,40 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @version: 1
      * @date:
      * @param: [query] 包含待查询信息的商品分类查询对象
-     * @function: 将GoodsSortQueryVO转为GoodsSortQueryPO，调用GoodsSortDatdaService.find服务
-     *             得到ArrayList<GoodsSortPO>以后转成ArrayList<GoodsSortVO>，返回ArrayList<GoodsSortVO>
+     * @return: 返回ArrayList<GoodsSortVO>的商品分类列表
      */
     @Override
     public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query) {
+        ArrayList<GoodsSortVO> goodsSortVOS=new ArrayList<>();
+        ArrayList<GoodsSortPO> goodsSortPOS=new ArrayList<>();
 
+        /*将GoodsSortQueryVO转为GoodsSortQueryPO*/
+        GoodsSortQueryPO goodsSortQueryPO=query.getGoodsSortQueryPO();
 
+        /*调用GoodsSortDatdaService.find服务得到ArrayList<GoodsSortPO>的商品分类列表*/
 
-        return null;
+        /*ArrayList<GoodsSortPO>以后转成ArrayList<GoodsSortVO>*/
+        for(GoodsSortPO goodsSortPO:goodsSortPOS){
+            goodsSortVOS.add(new GoodsSortVO(goodsSortPO));
+        }
+
+        return goodsSortVOS;
     }
 
     /**
      * @version: 1
      * @date:
      * @param: [goodsSort] 增加的的商品分类对象，用于增加数据库中该商品分类数据
-     * @function: 将GoodsSortVO转成GoodsSortPO，并调用GoodsSortDataService.insert服务，返回ResultMessage
+     * @return: 返回String的增加的商品分类的ID
      */
     @Override
     public String addGoodsSort(GoodsSortVO goodsSort) {
         String id="";
 
-        GoodsSortPO goodsSortPO=new GoodsSortPO();
+        /*将GoodsSortVO转成GoodsSortPO*/
+        GoodsSortPO goodsSortPO=goodsSort.getGoodsSortPO();
 
+        /*调用GoodsSortDataService.insert服务得到增加的商品分类ID*/
 
         return id;
     }
@@ -42,13 +54,13 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
     /**
      * @version: 1
      * @date:
-     * @param: [goodsSort] 修改的的商品分类对象，用于修改数据库中该商品分类数据
-     * @function: 将GoodsSortVO转成GoodsSortPO，并调用GoodsSortDataService.update服务，返回ResultMessage
+     * @param: [goodsSortID] 修改的的商品分类对象的ID，用于修改数据库中该商品分类数据
+     * @return:
      */
     @Override
     public void deleteGoodsSort(String goodsSortID) {
-        GoodsSortPO goodsSortPO=new GoodsSortPO();
 
+        /*调用GoodsSortDataService.delete服务完成对商品分类的删除*/
 
     }
 
@@ -56,11 +68,14 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @version: 1
      * @date:
      * @param: [goodsSort] 删除的的商品分类对象，用于删除数据库中该商品分类数据
-     * @function: 将GoodsSortVO转成GoodsSortPO，并调用GoodsSortDataService.delete服务，返回ResultMessage
+     * @return：
      */
     @Override
     public void editGoodsSort(GoodsSortVO goodsSort) {
-        GoodsSortPO goodsSortPO=new GoodsSortPO();
+        /*将GoodsSortVO转成GoodsSortPO*/
+        GoodsSortPO goodsSortPO=goodsSort.getGoodsSortPO();
+
+        /*调用GoodsSortDataService.update服务完成对商品分类的修改*/
 
 
     }
