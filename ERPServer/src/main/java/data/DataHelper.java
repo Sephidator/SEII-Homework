@@ -7,6 +7,7 @@ import main.java.po.account.AccountPO;
 import main.java.po.client.ClientPO;
 import main.java.po.user.UserPO;
 
+import java.rmi.RemoteException;
 import java.sql.*;
 
 public class DataHelper {
@@ -47,13 +48,12 @@ public class DataHelper {
                 table = "Client";
             String sql = "SELECT * FROM " + table + " WHERE ID='" + ID + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) {
-                sql = "UPDATE " + table + " SET visible=FALSE WHERE ID='" + ID + "'";
-                statement.executeUpdate(sql);
-                resultSet.close();
-                statement.close();
-            } else
+            if (!resultSet.next())
                 throw new NotExistException();
+            sql = "UPDATE " + table + " SET visible=FALSE WHERE ID='" + ID + "'";
+            statement.executeUpdate(sql);
+            resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             try {
                 connection.rollback();
