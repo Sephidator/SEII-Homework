@@ -13,5 +13,5 @@ public interface SaleRefundBillDataService extends Remote {
 
     String insert(SaleRefundBillPO po) throws RemoteException;
 
-    String update(SaleRefundBillPO po) throws RemoteException;
+    void update(SaleRefundBillPO po) throws RemoteException;
 }
