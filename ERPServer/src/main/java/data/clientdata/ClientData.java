@@ -4,7 +4,6 @@ import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
 import main.java.data.datautility.NotExistException;
 import main.java.dataservice.clientdataservice.ClientDataService;
-import main.java.po.account.AccountPO;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 
@@ -21,9 +20,9 @@ public class ClientData implements ClientDataService {
         if (query == null)
             sql = "SELECT * FROM Client WHERE visible=TRUE ";
         else if (query.visible)
-            sql = "SELECT * FROM Client WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE";
+            sql = "SELECT * FROM Client WHERE (keyID='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE";
         else
-            sql = "SELECT * FROM Client WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
+            sql = "SELECT * FROM Client WHERE (keyID='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -32,7 +31,7 @@ public class ClientData implements ClientDataService {
                 clientPO = new ClientPO(resultSet.getString("category"), resultSet.getInt("level"), resultSet.getString("name"),
                         resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("post"),
                         resultSet.getString("email"), resultSet.getDouble("receivable"), resultSet.getDouble("payable"),
-                        resultSet.getDouble("receivableLimit"), String.format("%0" + 8 + "d", resultSet.getInt("salesmanID")));
+                        resultSet.getDouble("receivableLimit"), resultSet.getString("salesmanID"));
                 clientPO.setID(resultSet.getString("ID"));
                 list.add(clientPO);
             }
@@ -64,7 +63,7 @@ public class ClientData implements ClientDataService {
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
                 ID = "Client" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Client SET ID='" + ID + "' WHERE key=" + key;
+                sql = "UPDATE Client SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -81,7 +80,24 @@ public class ClientData implements ClientDataService {
 
     @Override
     public synchronized void delete(String clientID) throws RemoteException {
-        DataHelper.delete(AccountPO.class, clientID);
+        Connection connection = DataHelper.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM Client WHERE ID='" + clientID + "' AND visible=TRUE ";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (!resultSet.next())
+                throw new NotExistException();
+            sql = "UPDATE Client SET visible=FALSE WHERE ID='" + clientID + "'";
+            statement.executeUpdate(sql);
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+            }
+            throw new DataException();
+        }
     }
 
     @Override

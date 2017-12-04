@@ -6,6 +6,8 @@ import main.java.data.datautility.ExistException;
 import main.java.data.datautility.LoginException;
 import main.java.data.datautility.NotExistException;
 import main.java.dataservice.userdataservice.UserDataService;
+import main.java.po.account.AccountPO;
+import main.java.po.client.ClientPO;
 import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;
 
@@ -22,9 +24,9 @@ public class UserData implements UserDataService {
         if (query == null)
             sql = "SELECT * FROM User WHERE visible=TRUE ";
         else if (query.visible)
-            sql = "SELECT * FROM User WHERE (key='" + query.ID + "'OR ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "') AND visible=TRUE ";
+            sql = "SELECT * FROM User WHERE (keyID='" + query.ID + "'OR ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "') AND visible=TRUE ";
         else
-            sql = "SELECT * FROM User WHERE (key='" + query.ID + "'OR ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "')";
+            sql = "SELECT * FROM User WHERE (keyID='" + query.ID + "'OR ID='" + query.ID + "' OR name='" + query.name + "' OR type='" + query.type + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -66,7 +68,7 @@ public class UserData implements UserDataService {
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
                 ID = "User" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE User SET ID='" + ID + "' WHERE key=" + key;
+                sql = "UPDATE User SET ID='" + ID + "' WHERE keyID='" + key + "'";
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -84,7 +86,24 @@ public class UserData implements UserDataService {
 
     @Override
     public synchronized void delete(String userID) throws RemoteException {
-        DataHelper.delete(UserPO.class, userID);
+        Connection connection = DataHelper.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM User WHERE ID='" + userID + "' AND visible=TRUE ";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (!resultSet.next())
+                throw new NotExistException();
+            sql = "UPDATE User SET visible=FALSE WHERE ID='" + userID + "'";
+            statement.executeUpdate(sql);
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+            }
+            throw new DataException();
+        }
     }
 
     @Override
@@ -95,13 +114,13 @@ public class UserData implements UserDataService {
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM User WHERE ID='" + po.getID() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next())
+            if (!resultSet.next())
                 throw new NotExistException();
-            sql = "SELECT * FROM User WHERE key<>'" + po.getID() + "' AND jobName= '" + po.getJobName() + "' AND visible = TRUE ";
+            sql = "SELECT * FROM User WHERE ID<>'" + po.getID() + "' AND jobName= '" + po.getJobName() + "' AND visible = TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
-            sql = "UPDATE User SET name'" + po.getName() + "', type='" + po.getType() + "', jobName='" + po.getJobName() + "', password='" + po.getPassword() + "', age='" + po.getAge() + "', top=" + po.isTop() + " WHERE ID='" + po.getID() + "'";
+            sql = "UPDATE User SET name='" + po.getName() + "', type='" + po.getType() + "', jobName='" + po.getJobName() + "', password='" + po.getPassword() + "', age='" + po.getAge() + "', top=" + po.isTop() + " WHERE ID='" + po.getID() + "'";
             statement.executeUpdate(sql);
             resultSet.close();
             statement.close();
@@ -111,6 +130,7 @@ public class UserData implements UserDataService {
                 connection.close();
             } catch (SQLException e1) {
             }
+            e.printStackTrace();
             throw new DataException();
         }
     }

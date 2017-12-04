@@ -9,8 +9,10 @@ import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args) throws RemoteException {
-        new DataHelper().init();
+        DataHelper.init();
         UserDataService service = new UserData();
-        service.insert(new UserPO("cst", "总经理", "admin", "admin", 19, true));
+        UserPO po = new UserPO("cst", "管理员", "admin", "admin", 19, true);
+        po.setID("User00000001");
+        service.update(po);
     }
 }

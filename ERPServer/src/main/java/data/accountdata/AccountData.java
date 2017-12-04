@@ -22,9 +22,9 @@ public class AccountData implements AccountDataService {
         if (query == null)
             sql = "SELECT * FROM Account WHERE visible=TRUE ";
         else if (query.visible)
-            sql = "SELECT * FROM Account WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
+            sql = "SELECT * FROM Account WHERE (keyID='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
         else
-            sql = "SELECT * FROM Account WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "')";
+            sql = "SELECT * FROM Account WHERE (keyID='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -65,7 +65,7 @@ public class AccountData implements AccountDataService {
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
                 ID = "Account" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Account SET ID='" + ID + "' WHERE key =" + key;
+                sql = "UPDATE Account SET ID='" + ID + "' WHERE keyID =" + key;
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -83,7 +83,24 @@ public class AccountData implements AccountDataService {
 
     @Override
     public synchronized void delete(String accountID) throws RemoteException {
-        DataHelper.delete(AccountPO.class, accountID);
+        Connection connection = DataHelper.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM Account WHERE ID='" + accountID + "' AND visible=TRUE ";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (!resultSet.next())
+                throw new NotExistException();
+            sql = "UPDATE Account SET visible=FALSE WHERE ID='" + accountID + "'";
+            statement.executeUpdate(sql);
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+            }
+            throw new DataException();
+        }
     }
 
     @Override
