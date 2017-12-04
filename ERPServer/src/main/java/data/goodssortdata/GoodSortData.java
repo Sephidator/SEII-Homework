@@ -22,15 +22,15 @@ public class GoodSortData implements GoodsSortDataService {
         if (query == null)
             sql = "SELECT * FROM GoodsSort WHERE visible=TRUE";
         else if (query.visible)
-            sql = "SELECT  * FROM GoodsSort WHERE (  key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE ";
+            sql = "SELECT  * FROM GoodsSort WHERE ( keyID='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE ";
         else
-            sql = "SELECT  * FROM GoodsSort WHERE ( key ='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
+            sql = "SELECT  * FROM GoodsSort WHERE ( keyID='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             GoodsSortPO goodsSortPO;
             ArrayList<String> childrenID = null;
-            ArrayList<String> goodsList = null;
+            ArrayList<String> goodsList;
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");
                 sql = "SELECT ID FROM GoodsSort WHERE fatherID='" + ID + "' AND visible=TRUE ";
@@ -44,13 +44,16 @@ public class GoodSortData implements GoodsSortDataService {
                 }
                 sql = "SELECT ID FROM Goods WHERE goodsSortID='" + ID + "' AND visible=TRUE ";
                 temp = statement.executeQuery(sql);
-                if (temp.next()) {
-                    goodsList = new ArrayList<>();
+                goodsList = new ArrayList<>();
+                if (!temp.next()) {
+                    goodsList = null;
+                } else {
                     goodsList.add(resultSet.getString("ID"));
                     while (temp.next()) {
                         goodsList.add(resultSet.getString("ID"));
                     }
                 }
+
                 goodsSortPO = new GoodsSortPO(resultSet.getString("name"), resultSet.getString("fatherID"), childrenID, goodsList, resultSet.getString("comment"));
                 goodsSortPO.setID(ID);
                 goodsSortPO.setVisible(resultSet.getBoolean("visible"));
@@ -77,9 +80,9 @@ public class GoodSortData implements GoodsSortDataService {
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
-            sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getFatherID() + "'";
+            sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getFatherID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
-            if (resultSet.next() && !resultSet.getBoolean("visible"))
+            if (!resultSet.next())
                 throw new NotExistException();
             sql = "SELECT * FROM Goods WHERE goodsSortID='" + po.getFatherID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
@@ -92,7 +95,7 @@ public class GoodSortData implements GoodsSortDataService {
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
                 ID = "GoodsSort" + String.format("%" + 8 + "d", key);
-                sql = "UPDATE GoodsSort SET ID='" + ID + "' WHERE key=" + key;
+                sql = "UPDATE GoodsSort SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -148,6 +151,10 @@ public class GoodSortData implements GoodsSortDataService {
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+            sql = "SELECT * FROM GoodsSort WHERE ID<>'" + po.getID() + "' AND name='" + po.getName() + "' AND visible=TRUE ";
+            resultSet = statement.executeQuery(sql);
+            if (resultSet.next())
+                throw new ExistException();
             sql = "UPDATE GoodsSort SET name='" + po.getName() + "' WHERE ID='" + po.getID() + "'";
             statement.executeUpdate(sql);
             resultSet.close();

@@ -11,17 +11,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 
 public class DataHelper {
-    private String driver = "com.mysql.jdbc.Driver";
+    private static final String driver = "com.mysql.jdbc.Driver";
 
-    private String url = "jdbc:mysql://localhost:3306/ERP?useUnicode=true&characterEncoding=utf8&useSSL=false";
+    private static final String url = "jdbc:mysql://localhost:3306/ERP?useUnicode=true&characterEncoding=utf8&useSSL=false";
 
-    private String user = "root";
+    private static final String user = "root";
 
-    private String password = "123456";
+    private static final String password = "123456";
 
     private static Connection connection;
 
-    public void init() {
+    public static void init() {
         try {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
@@ -33,33 +33,5 @@ public class DataHelper {
 
     public static Connection getConnection() {
         return connection;
-    }
-
-    public static <T extends PO> void delete(Class<T> t, String ID) {
-        Connection connection = getConnection();
-        try {
-            Statement statement = connection.createStatement();
-            String table = null;
-            if (t == AccountPO.class)
-                table = "Account";
-            else if (t == UserPO.class)
-                table = "User";
-            if (t == ClientPO.class)
-                table = "Client";
-            String sql = "SELECT * FROM " + table + " WHERE ID='" + ID + "' AND visible=TRUE ";
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (!resultSet.next())
-                throw new NotExistException();
-            sql = "UPDATE " + table + " SET visible=FALSE WHERE ID='" + ID + "'";
-            statement.executeUpdate(sql);
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-            }
-            throw new DataException();
-        }
     }
 }
