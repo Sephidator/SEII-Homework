@@ -22,9 +22,9 @@ public class AccountData implements AccountDataService {
         if (query == null)
             sql = "SELECT * FROM Account WHERE visible=TRUE ";
         else if (query.visible)
-            sql = "SELECT * FROM Account WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
+            sql = "SELECT * FROM Account WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
         else
-            sql = "SELECT * FROM Account WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "')";
+            sql = "SELECT * FROM Account WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "' OR bankAccount='" + query.bankAccount + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -65,7 +65,7 @@ public class AccountData implements AccountDataService {
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
                 ID = "Account" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Account SET ID='" + ID + "' WHERE number=" + key;
+                sql = "UPDATE Account SET ID='" + ID + "' WHERE key =" + key;
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -93,17 +93,16 @@ public class AccountData implements AccountDataService {
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Account WHERE ID='" + po.getID() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) {
-                sql = "SELECT * FROM Account WHERE ID<>'" + po.getID() + "' AND (bankAccount = '" + po.getBankAccount() + "' OR name = '" + po.getName() + "') AND visible = TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (resultSet.next())
-                    throw new ExistException();
-                sql = "UPDATE Account SET bankAccount='" + po.getBankAccount() + "', name='" + po.getName() + "', remaining='" + po.getRemaining() + "' WHERE ID='" + po.getID() + "'";
-                statement.executeUpdate(sql);
-                resultSet.close();
-                statement.close();
-            } else
+            if (!resultSet.next())
                 throw new NotExistException();
+            sql = "SELECT * FROM Account WHERE ID<>'" + po.getID() + "' AND (bankAccount = '" + po.getBankAccount() + "' OR name = '" + po.getName() + "') AND visible = TRUE ";
+            resultSet = statement.executeQuery(sql);
+            if (resultSet.next())
+                throw new ExistException();
+            sql = "UPDATE Account SET bankAccount='" + po.getBankAccount() + "', name='" + po.getName() + "', remaining='" + po.getRemaining() + "' WHERE ID='" + po.getID() + "'";
+            statement.executeUpdate(sql);
+            resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             try {
                 connection.rollback();

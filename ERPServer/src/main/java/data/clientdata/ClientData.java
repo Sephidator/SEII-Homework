@@ -21,9 +21,9 @@ public class ClientData implements ClientDataService {
         if (query == null)
             sql = "SELECT * FROM Client WHERE visible=TRUE ";
         else if (query.visible)
-            sql = "SELECT * FROM Client WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE";
+            sql = "SELECT * FROM Client WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "') AND visible=TRUE";
         else
-            sql = "SELECT * FROM Client WHERE (number='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
+            sql = "SELECT * FROM Client WHERE (key='" + query.ID + "' OR ID='" + query.ID + "' OR name='" + query.name + "')";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -64,7 +64,7 @@ public class ClientData implements ClientDataService {
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
                 ID = "Client" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Client SET ID='" + ID + "' WHERE number=" + key;
+                sql = "UPDATE Client SET ID='" + ID + "' WHERE key=" + key;
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -92,15 +92,14 @@ public class ClientData implements ClientDataService {
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Client WHERE ID='" + po.getID() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) {
-                sql = "UPDATE Client SET category='" + po.getCategory() + "',level=" + po.getLevel() + ",name='" + po.getName() + "',phone='" +
-                        po.getPhone() + "',address='" + po.getAddress() + "',post='" + po.getPost() + "',email='" + po.getEmail() + "',receivable=" +
-                        po.getReceivable() + ",payable=" + po.getPayable() + ",receivableLimit=" + po.getReceivableLimit() + ",salesmanID=" + po.getSalesmanID();
-                statement.executeUpdate(sql);
-                resultSet.close();
-                statement.close();
-            } else
+            if (!resultSet.next())
                 throw new NotExistException();
+            sql = "UPDATE Client SET category='" + po.getCategory() + "',level=" + po.getLevel() + ",name='" + po.getName() + "',phone='" +
+                    po.getPhone() + "',address='" + po.getAddress() + "',post='" + po.getPost() + "',email='" + po.getEmail() + "',receivable=" +
+                    po.getReceivable() + ",payable=" + po.getPayable() + ",receivableLimit=" + po.getReceivableLimit() + ",salesmanID='" + po.getSalesmanID() + "' WHERE ID='" + po.getID() + "'";
+            statement.executeUpdate(sql);
+            resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             try {
                 connection.rollback();
