@@ -22,8 +22,7 @@ public class SaleRefundBillDataServiceStub implements SaleRefundBillDataService 
     }
 
     @Override
-    public String update(SaleRefundBillPO po) throws RemoteException {
-        return null;
+    public void update(SaleRefundBillPO po) throws RemoteException {
     }
 
 }
