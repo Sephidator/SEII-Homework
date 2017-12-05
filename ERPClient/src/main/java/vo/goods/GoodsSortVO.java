@@ -54,28 +54,25 @@ public class GoodsSortVO extends VO{
         return goodsSortPO;
     }
 
-    public GoodsSortVO(GoodsSortPO goodsSortPO){
+    public GoodsSortVO(GoodsSortPO goodsSortPO)throws Exception{
         this.ID=goodsSortPO.getID();
         this.visible=goodsSortPO.isVisible();
         this.name=goodsSortPO.getName();
         this.comment=goodsSortPO.getComment();
 
         GoodsSortTool goodsSortTool=new GoodsSortBl();
-        GoodsSortQueryVO goodsSortQueryVO=new GoodsSortQueryVO(goodsSortPO.getID(),null,null);
-        this.father=goodsSortTool.getGoodsSortList(goodsSortQueryVO).get(0);
+        this.father=goodsSortTool.find(goodsSortPO.getFatherID());
 
         ArrayList<GoodsSortVO> children=new ArrayList<>();
         for(String childrenID:goodsSortPO.getChildrenID()){
-            GoodsSortQueryVO goodsSortQueryVO1=new GoodsSortQueryVO(childrenID,null,null);
-            children.add(goodsSortTool.getGoodsSortList(goodsSortQueryVO1).get(0));
+            children.add(goodsSortTool.find(childrenID));
         }
         this.children=children;
 
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
         GoodsTool goodsTool=new GoodsBl();
         for(String goodsID:goodsSortPO.getGoodsList()){
-            GoodsQueryVO goodsQueryVO=new GoodsQueryVO(goodsID,null);
-            goodsVOS.add(goodsTool.getGoodsList(goodsQueryVO).get(0));
+            goodsVOS.add(goodsTool.find(goodsID));
         }
         this.goods=goodsVOS;
 

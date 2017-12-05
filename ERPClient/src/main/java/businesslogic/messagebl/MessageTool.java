@@ -4,5 +4,5 @@ import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.message.MessageVO;
 
 public interface MessageTool {
-    public ResultMessage addMessage(MessageVO message);
+    public void addMessage(MessageVO message)throws Exception;
 }

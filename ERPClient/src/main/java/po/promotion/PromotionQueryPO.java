@@ -1,16 +1,14 @@
 package main.java.po.promotion;
 
-import main.java.po.QueryPO;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class PromotionQueryPO extends QueryPO {
+public class PromotionQueryPO implements Serializable {
     public String name; //名称
     public String type; //种类
     public Date time; //日期
 
-    public PromotionQueryPO(String ID,String name, String type, Date time) {
-        this.ID=ID;
+    public PromotionQueryPO(String name, String type, Date time) {
         this.name = name;
         this.type = type;
         this.time = time;

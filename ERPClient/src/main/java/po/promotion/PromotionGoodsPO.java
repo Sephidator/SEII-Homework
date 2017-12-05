@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class PromotionGoodsPO extends PromotionPO {
 
-    private double discount;//降价折让部分
+    private double discount; //降价折让部分
 
     private ArrayList<GoodsItemPO> goodsList; //组合降价的商品列表
 
@@ -28,8 +28,8 @@ public class PromotionGoodsPO extends PromotionPO {
         return discount;
     }
 
-    public void setDiscount(double disocunt) {
-        this.discount = disocunt;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public ArrayList<GoodsItemPO> getGoodsList() {

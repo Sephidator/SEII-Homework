@@ -5,5 +5,5 @@ import main.java.vo.log.LogVO;
 
 public interface LogTool {
 
-    public ResultMessage addLog(LogVO log);//添加操作日志，持久化更新涉及的对象的数据
+    public String addLog(LogVO log)throws Exception;//添加操作日志，持久化更新涉及的对象的数据
 }

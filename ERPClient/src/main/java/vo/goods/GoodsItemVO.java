@@ -16,16 +16,15 @@ public class GoodsItemVO {
         price=goodsVO.getCost();
     }
 
-    public GoodsItemPO getGoodsItemPO(){
+    public GoodsItemPO getGoodsItemPO()throws Exception{
         GoodsItemPO goodsItemPO=new GoodsItemPO(this.goods.getID(),this.number,this.price);
         return goodsItemPO;
     }
 
-    public GoodsItemVO(GoodsItemPO goodsItemPO){
+    public GoodsItemVO(GoodsItemPO goodsItemPO)throws Exception{
         this.number=goodsItemPO.number;
 
         GoodsTool goodsTool=new GoodsBl();
-        GoodsQueryVO goodsQueryVO=new GoodsQueryVO(goodsItemPO.goodsID,null);
-        this.goods=goodsTool.getGoodsList(goodsQueryVO).get(0);
+        this.goods=goodsTool.find(goodsItemPO.goodsID);
     }
 }

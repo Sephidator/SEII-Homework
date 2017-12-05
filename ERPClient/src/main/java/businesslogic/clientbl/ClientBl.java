@@ -20,7 +20,7 @@ public class ClientBl implements ClientBlService,ClientTool{
      * @return: 返回ArrayList<ClientVO>的客户列表
      */
     @Override
-    public ArrayList<ClientVO> getClientList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getClientList(ClientQueryVO query)  throws Exception{
         ArrayList<ClientVO> clientVOS=new ArrayList<>();
         ArrayList<ClientPO> clientPOS=new ArrayList<>();
 
@@ -37,6 +37,11 @@ public class ClientBl implements ClientBlService,ClientTool{
         return clientVOS;
     }
 
+    @Override
+    public ClientVO find(String ClientID) throws Exception {
+        return null;
+    }
+
     /**
      * @version: 1
      * @date:
@@ -44,7 +49,7 @@ public class ClientBl implements ClientBlService,ClientTool{
      * @return: 返回String的增加的客户ID
      */
     @Override
-    public String addClient(ClientVO client) {
+    public String addClient(ClientVO client)  throws Exception{
         String id="";
 
         /*将ClientVO转成ClientPO*/
@@ -62,7 +67,7 @@ public class ClientBl implements ClientBlService,ClientTool{
      * @return:
      */
     @Override
-    public void editClient(ClientVO client) {
+    public void editClient(ClientVO client)  throws Exception{
         /*将ClientVO转成ClientPO*/
         ClientPO clientPO=client.getClientPO();
 
@@ -78,7 +83,7 @@ public class ClientBl implements ClientBlService,ClientTool{
      * @return:
      */
     @Override
-    public void deleteClient(String clientID) {
+    public void deleteClient(String clientID)  throws Exception{
         /*调用ClientDataService.delete服务完成对客户的删除*/
 
 
@@ -91,7 +96,7 @@ public class ClientBl implements ClientBlService,ClientTool{
      * @return: 返回ArrayList<UserVO>的用户列表
      */
     @Override
-    public ArrayList<UserVO> getUserList(UserQueryVO query) {
+    public ArrayList<UserVO> getUserList(UserQueryVO query)  throws Exception{
         ArrayList<UserVO> userVOS=new ArrayList<>();
 
         /*调用UserTool服务得到ArrayList<UserVO>的客户列表*/

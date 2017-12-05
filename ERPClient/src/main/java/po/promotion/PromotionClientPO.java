@@ -8,7 +8,7 @@ import java.util.Date;
 public class PromotionClientPO extends PromotionPO {
     private int clientLevel; // 客户等级
 
-    private double discount;//折让金额
+    private double discount; // 折让金额
 
     private double voucher; // 代金券
 
@@ -18,7 +18,7 @@ public class PromotionClientPO extends PromotionPO {
 
     }
 
-    public PromotionClientPO(String ID, String name, Date start, Date end, int clientLevel, double discount,double voucher, ArrayList<GiftItemPO> giftList) {
+    public PromotionClientPO(String ID, String name, Date start, Date end, int clientLevel, double discount, double voucher, ArrayList<GiftItemPO> giftList) {
         this.ID = ID;
         this.name = name;
         type = "客户促销策略";

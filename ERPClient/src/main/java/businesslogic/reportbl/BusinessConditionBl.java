@@ -13,7 +13,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<Double> getCondition(BusinessConditionQueryVO query) {
+    public ArrayList<Double> getCondition(BusinessConditionQueryVO query)throws Exception {
         return null;
     }
 }

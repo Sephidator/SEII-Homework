@@ -24,14 +24,13 @@ public class LossOverItemVO {
         return lossOverItemPO;
     }
 
-    public LossOverItemVO(LossOverItemPO lossOverItemPO){
+    public LossOverItemVO(LossOverItemPO lossOverItemPO)throws Exception{
         this.price=lossOverItemPO.price;
         this.goodsNumber=lossOverItemPO.goodsNumber;
         this.actualNumber=lossOverItemPO.actualNumber;
 
         GoodsTool goodsTool=new GoodsBl();
-        GoodsQueryVO goodsQueryVO=new GoodsQueryVO(lossOverItemPO.goodsID,null);
-        this.goods=goodsTool.getGoodsList(goodsQueryVO).get(0);
+        this.goods=goodsTool.find(lossOverItemPO.goodsID);
     }
 
 

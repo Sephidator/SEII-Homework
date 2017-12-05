@@ -48,7 +48,7 @@ public class InventoryLossOverBillVO extends InventoryBillVO {
 
     }
 
-    public InventoryLossOverBillVO(InventoryLossOverBillPO inventoryLossOverBillPO){
+    public InventoryLossOverBillVO(InventoryLossOverBillPO inventoryLossOverBillPO)throws Exception{
         this.ID=inventoryLossOverBillPO.getID();
         this.visible=inventoryLossOverBillPO.isVisible();
         this.comment=inventoryLossOverBillPO.getComment();
@@ -57,8 +57,7 @@ public class InventoryLossOverBillVO extends InventoryBillVO {
         this.type=inventoryLossOverBillPO.getType();
 
         UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(inventoryLossOverBillPO.getID(),null,null);
-        this.operator=userTool.getUserList(userQueryVO).get(0);
+        this.operator=userTool.find(inventoryLossOverBillPO.getOperatorID());
 
         ArrayList<LossOverItemVO> lossOverItemVOS=new ArrayList<>();
         for(LossOverItemPO lossOverItemPO:inventoryLossOverBillPO.getLossOverList()){

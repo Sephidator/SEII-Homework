@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface InitialDataService extends Remote {
     /*获取持久化对象列表*/
-    ArrayList<InitialPO> find(InitialQueryPO query) throws RemoteException;
+    ArrayList<InitialPO> finds(InitialQueryPO query) throws RemoteException;
 
     /*添加起初信息*/
     String insert(InitialPO po) throws RemoteException;

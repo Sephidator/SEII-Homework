@@ -22,7 +22,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void pass(BillVO billVO) {
+    public void pass(BillVO billVO) throws Exception{
         InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
 
 
@@ -35,7 +35,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void reject(BillVO billVO) {
+    public void reject(BillVO billVO) throws Exception{
         InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
 
 
@@ -48,7 +48,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsTool.getGoodsList服务，返回ArrayList<GoodsVO>
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
 
         GoodsTool goodsTool=new GoodsBl();
@@ -64,7 +64,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public String submit(InventoryGiftBillVO bill) {
+    public String submit(InventoryGiftBillVO bill) throws Exception{
 
         String id="";
 
@@ -81,7 +81,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void saveDraft(InventoryGiftBillVO bill) {
+    public void saveDraft(InventoryGiftBillVO bill) throws Exception{
         InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
 
 
@@ -95,7 +95,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * 得到ArrayList<InventoryGiftBillPO>以后转成ArrayList<InventoryGiftBillVO>，返回ArrayList<InventoryGiftBillVO>
      */
     @Override
-    public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) {
+    public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception{
         BillQueryPO billQueryPO=new BillQueryPO();
 
 

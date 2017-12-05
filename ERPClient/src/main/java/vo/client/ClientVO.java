@@ -61,7 +61,7 @@ public class ClientVO extends VO{
         return clientPO;
     }
 
-    public ClientVO(ClientPO clientPO){
+    public ClientVO(ClientPO clientPO)throws Exception{
         this.ID=clientPO.getID();
         this.visible=clientPO.isVisible();
         this.category=clientPO.getCategory();
@@ -76,8 +76,7 @@ public class ClientVO extends VO{
         this.receivableLimit=clientPO.getReceivableLimit();
 
         UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(clientPO.getID(),null,null);
-        this.salesman=userTool.getUserList(userQueryVO).get(0);
+        this.salesman=userTool.find(clientPO.getSalesmanID());
     }
 
     public String getCategory(){

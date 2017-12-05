@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface PaymentBillDataService extends Remote {
 
     /*根据筛选条件获取付款单列表*/
-    ArrayList<PaymentBillPO> find(BillQueryPO query) throws RemoteException;
+    ArrayList<PaymentBillPO> finds(BillQueryPO query) throws RemoteException;
 
     /*添加付款单*/
     String insert(PaymentBillPO po) throws RemoteException;

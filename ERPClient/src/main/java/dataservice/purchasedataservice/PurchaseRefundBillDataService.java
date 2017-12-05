@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface PurchaseRefundBillDataService extends Remote {
-    ArrayList<PurchaseRefundBillPO> find(BillQueryPO query) throws RemoteException;
+    ArrayList<PurchaseRefundBillPO> finds(BillQueryPO query) throws RemoteException;
 
     String insert(PurchaseRefundBillPO po) throws RemoteException;
 

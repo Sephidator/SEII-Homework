@@ -63,7 +63,7 @@ public class CashBillVO extends FinanceBillVO {
     }
 
     /*得到CashBillVO*/
-    public CashBillVO(CashBillPO cashBillPO){
+    public CashBillVO(CashBillPO cashBillPO)throws Exception{
         this.ID = cashBillPO.getID();
         this.state = cashBillPO.getState();
         this.time = cashBillPO.getTime();
@@ -74,11 +74,7 @@ public class CashBillVO extends FinanceBillVO {
 
         /*得到UserVO*/
         UserTool userTool = new UserBl();
-        UserQueryVO userQueryVO = new UserQueryVO(null,null,null);
-        userQueryVO.ID = cashBillPO.getOperatorID();
-        userQueryVO.name = "";//初始化防止NPE
-        userQueryVO.type = "";
-        UserVO uservO = userTool.getUserList(userQueryVO).get(0);//拿到第一个userPO对象
+        UserVO uservO = userTool.find(cashBillPO.getOperatorID());
         this.operator = uservO;
 
         /*转换CashItemPO到CashItemVO*/

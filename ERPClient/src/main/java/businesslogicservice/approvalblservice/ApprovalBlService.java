@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public interface ApprovalBlService {
 
-    public ArrayList<BillVO> getBillList(BillQueryVO query);
+    public ArrayList<BillVO> getBillList(BillQueryVO query) throws Exception;
 
-    public void pass(BillVO vo, UserVO senderVO);
+    public void pass(BillVO vo, UserVO senderVO) throws Exception;
 
-    public void reject(BillVO vo, String reason, UserVO senderVO);
+    public void reject(BillVO vo, String reason, UserVO senderVO) throws Exception;
 }

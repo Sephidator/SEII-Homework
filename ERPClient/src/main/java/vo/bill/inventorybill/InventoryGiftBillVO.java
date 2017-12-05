@@ -20,11 +20,12 @@ import java.util.Date;
 public class InventoryGiftBillVO extends InventoryBillVO {
     private ClientVO client;////客户信息
     private ArrayList<GiftItemVO> giftList;// 赠品列表
+    private double total; //赠品总价
 
     public InventoryGiftBillVO() {
     }
 
-    public InventoryGiftBillVO(String state, Date time, UserVO operator, String comment, double total, ArrayList<GiftItemVO> giftList){
+    public InventoryGiftBillVO(String state, Date time, UserVO operator, String comment,ClientVO client,ArrayList<GiftItemVO> giftList, double total){
         this.state = state;
         this.time = time;
         this.type = "库存赠送单";
@@ -32,6 +33,7 @@ public class InventoryGiftBillVO extends InventoryBillVO {
         this.comment = comment;
         this.client=client;
         this.giftList=giftList;
+        this.total = total;
     }
 
     public InventoryGiftBillPO getInventoryGiftBillPO(){
@@ -45,7 +47,7 @@ public class InventoryGiftBillVO extends InventoryBillVO {
 
         inventoryGiftBillPO.setOperatorID(this.operator.getID());
 
-        inventoryGiftBillPO.setClient(this.client.getID());
+        inventoryGiftBillPO.setClientID(this.client.getID());
 
         ArrayList<GiftItemPO> giftItemPOS=new ArrayList<>();
         for(GiftItemVO giftItemVO:this.giftList){
@@ -56,7 +58,7 @@ public class InventoryGiftBillVO extends InventoryBillVO {
         return inventoryGiftBillPO;
     }
 
-    public InventoryGiftBillVO(InventoryGiftBillPO inventoryGiftBillPO){
+    public InventoryGiftBillVO(InventoryGiftBillPO inventoryGiftBillPO)throws Exception{
         this.ID=inventoryGiftBillPO.getID();
         this.visible=inventoryGiftBillPO.isVisible();
         this.state=inventoryGiftBillPO.getState();
@@ -64,12 +66,10 @@ public class InventoryGiftBillVO extends InventoryBillVO {
         this.comment=inventoryGiftBillPO.getComment();
 
         ClientTool clientTool=new ClientBl();
-        ClientQueryVO clientQueryVO=new ClientQueryVO(inventoryGiftBillPO.getClient(),null);
-        this.client=clientTool.getClientList(clientQueryVO).get(0);
+        this.client=clientTool.find(inventoryGiftBillPO.getClientID());
 
         UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(inventoryGiftBillPO.getID(),null,null);
-        this.operator=userTool.getUserList(userQueryVO).get(0);
+        this.operator=userTool.find(inventoryGiftBillPO.getOperatorID());
 
         ArrayList<GiftItemVO> giftItemVOS=new ArrayList<>();
         for(GiftItemPO giftItemPO:inventoryGiftBillPO.getGiftList()){

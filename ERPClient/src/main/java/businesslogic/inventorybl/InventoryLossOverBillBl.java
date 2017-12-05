@@ -21,7 +21,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,I
      * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void pass(BillVO billVO) {
+    public void pass(BillVO billVO) throws Exception{
         InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
 
 
@@ -34,7 +34,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,I
      * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void reject(BillVO billVO) {
+    public void reject(BillVO billVO) throws Exception{
         InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
 
 
@@ -47,7 +47,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,I
      * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsTool.getGoodsList服务，返回ArrayList<GoodsVO>
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
 
         GoodsTool goodsTool=new GoodsBl();
@@ -63,7 +63,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,I
      * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public String submit(InventoryLossOverBillVO bill) {
+    public String submit(InventoryLossOverBillVO bill) throws Exception{
         String id="";
         InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
 
@@ -78,7 +78,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,I
      * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void saveDraft(InventoryLossOverBillVO bill) {
+    public void saveDraft(InventoryLossOverBillVO bill) throws Exception{
         InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
 
 
@@ -92,7 +92,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,I
      * 得到ArrayList<InventoryLossOverBillPO>以后转成ArrayList<InventoryLossOverBillVO>，返回ArrayList<InventoryLossOverBillVO>
      */
     @Override
-    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query) {
+    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query)throws Exception {
         return null;
     }
 }

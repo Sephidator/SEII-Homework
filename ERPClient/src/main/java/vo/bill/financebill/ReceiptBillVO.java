@@ -81,7 +81,7 @@ public class ReceiptBillVO extends FinanceBillVO {
     }
 
     /*得到PO以后转成VO*/
-    public ReceiptBillVO(ReceiptBillPO receiptBillPO){
+    public ReceiptBillVO(ReceiptBillPO receiptBillPO)throws Exception{
         this.ID = receiptBillPO.getID();
         this.state = receiptBillPO.getState();
         this.time = receiptBillPO.getTime();
@@ -89,11 +89,7 @@ public class ReceiptBillVO extends FinanceBillVO {
 
         /*得到UserVO*/
         UserTool userTool = new UserBl();
-        UserQueryVO userQueryVO = new UserQueryVO(null,null,null);
-        userQueryVO.ID = receiptBillPO.getOperatorID();
-        userQueryVO.name = "";//初始化防止NPE
-        userQueryVO.type = "";
-        UserVO uservO = userTool.getUserList(userQueryVO).get(0);//拿到第一个userPO对象
+        UserVO uservO = userTool.find(receiptBillPO.getOperatorID());
         this.operator = uservO;
 
         this.comment = receiptBillPO.getComment();
@@ -101,10 +97,7 @@ public class ReceiptBillVO extends FinanceBillVO {
 
         /*得到ClientVO*/
         ClientTool clientTool = new ClientBl();
-        ClientQueryVO clientQueryVO = new ClientQueryVO(null,null);
-        clientQueryVO.ID = receiptBillPO.getClientID();
-        clientQueryVO.name = "";
-        ClientVO clientVO = clientTool.getClientList(clientQueryVO).get(0);
+        ClientVO clientVO = clientTool.find(receiptBillPO.getClientID());
         this.client = clientVO;
 
         this.visible = receiptBillPO.isVisible();

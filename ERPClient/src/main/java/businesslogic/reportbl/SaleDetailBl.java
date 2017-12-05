@@ -14,7 +14,7 @@ public class SaleDetailBl implements SaleDetailBlService {
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<SaleRecordVO> getSaleRecordList(SaleDetailQueryVO query) {
+    public ArrayList<SaleRecordVO> getSaleRecordList(SaleDetailQueryVO query)throws Exception {
         return null;
     }
 }

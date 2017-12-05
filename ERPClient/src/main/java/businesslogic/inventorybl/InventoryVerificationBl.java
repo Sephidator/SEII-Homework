@@ -15,7 +15,7 @@ public class InventoryVerificationBl implements InventoryVerificationBLService {
      *             得到ArrayList<GoodsPO>以后转成ArrayList<GoodsVO>，返回ArrayList<GoodsVO>
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
         return null;
     }
 }

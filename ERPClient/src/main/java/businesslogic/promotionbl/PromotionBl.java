@@ -14,7 +14,12 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) {
+    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception {
+        return null;
+    }
+
+    @Override
+    public PromotionVO find(String promotionID) {
         return null;
     }
 
@@ -25,7 +30,19 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [vo] 
      * @function: 
      */
-    public void addPromotion(PromotionVO vo) {
+    public String addPromotion(PromotionVO vo) throws Exception{
+
+        return null;
+    }
+
+    @Override
+    /**
+     * @version: 1
+     * @date: 2017.11.28 2:09
+     * @para: [vo] 
+     * @function: 
+     */
+    public void editPromotion(PromotionVO vo)throws Exception {
 
     }
 
@@ -36,18 +53,7 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [vo] 
      * @function: 
      */
-    public void editPromotion(PromotionVO vo) {
-
-    }
-
-    @Override
-    /**
-     * @version: 1
-     * @date: 2017.11.28 2:09
-     * @para: [vo] 
-     * @function: 
-     */
-    public void deletePromotion(PromotionVO vo) {
+    public void deletePromotion(PromotionVO vo) throws Exception{
 
     }
 

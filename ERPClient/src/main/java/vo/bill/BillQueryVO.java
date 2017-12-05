@@ -1,11 +1,10 @@
 package main.java.vo.bill;
 
 import main.java.po.bill.BillQueryPO;
-import main.java.vo.QueryVO;
 
 import java.util.Date;
 
-public class BillQueryVO extends QueryVO{
+public class BillQueryVO{
     public String state; //单据状态
     public Date start; //起始时间
     public Date end; //结束时间
@@ -16,8 +15,7 @@ public class BillQueryVO extends QueryVO{
     public BillQueryVO() {
     }
 
-    public BillQueryVO(String ID, String state, Date start, Date end, String type, String operator, String client) {
-        this.ID = ID;
+    public BillQueryVO(String state, Date start, Date end, String type, String operator, String client) {
         this.state = state;
         this.start = start;
         this.end = end;
@@ -27,7 +25,7 @@ public class BillQueryVO extends QueryVO{
     }
 
     public BillQueryPO getBillQueryPO(){
-        BillQueryPO billQueryPO=new BillQueryPO(this.ID,this.state,this.start,this.end,this.type,this.operator,this.client);
+        BillQueryPO billQueryPO=new BillQueryPO(this.state,this.start,this.end,this.type,this.operator,this.client);
         return billQueryPO;
     }
 }

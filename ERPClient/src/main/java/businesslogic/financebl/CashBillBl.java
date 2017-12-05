@@ -24,7 +24,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 将CashBillVO转成CashBillPO，修改审批状态，调用CashBillDataService.update,返回ResultMessage
      */
     @Override
-    public void pass(BillVO bill)  {
+    public void pass(BillVO bill) throws Exception{
         //转换VO到PO
         CashBillPO cashBillPO = ((CashBillVO) bill).getCashBillPO();
 
@@ -43,7 +43,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 将CashBillVO转成CashBillPO，调用CashBillDataService.update,返回ResultMessage
      */
     @Override
-    public void reject(BillVO bill) {
+    public void reject(BillVO bill) throws Exception{
         //转换VO到PO
         CashBillPO cashBillPO = ((CashBillVO)bill).getCashBillPO();
 
@@ -60,7 +60,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 将BillQueryVO转成BillQueryPO，再调用CashBillDataService.find
      */
     @Override
-    public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) {
+    public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception {
         return null;
     }
 
@@ -72,7 +72,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 调用GoodsTool.getGoodsList
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
         GoodsTool goodsTool = new GoodsBl();
         ArrayList<GoodsVO> goodsVOArrayList = goodsTool.getGoodsList(query);
         return goodsVOArrayList;
@@ -85,7 +85,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 调用AccountTool.geyAccountList
      */
     @Override
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) {
+    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception{
         AccountTool accountTool = new AccountBl();
         ArrayList<AccountVO> accountVOArrayList= accountTool.getAccountList(query);
         return accountVOArrayList;
@@ -98,7 +98,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 将CashBillVO转换成CashBillPO并调用CashBillDataService.insert
      */
     @Override
-    public String submit(CashBillVO vo) {
+    public String submit(CashBillVO vo) throws Exception{
         //转换
         //调用
         return null;
@@ -111,7 +111,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      * @function: 将CashBillVO转成CashBillPO，并调用CashBillDataService.insert
      */
     @Override
-    public void saveDraft(CashBillVO vo) {
+    public void saveDraft(CashBillVO vo) throws Exception{
 
     }
 }

@@ -51,7 +51,7 @@ public class SaleTradeBillVO extends SaleBillVO {
 
     }
 
-    public SaleTradeBillPO getsaleTradeBillPO(){
+    public SaleTradeBillPO getsaleTradeBillPO()throws Exception{
         SaleTradeBillPO saleTradeBillPO=new SaleTradeBillPO();
         saleTradeBillPO.setID(this.ID);
         saleTradeBillPO.setVisible(this.visible);
@@ -81,7 +81,7 @@ public class SaleTradeBillVO extends SaleBillVO {
         return saleTradeBillPO;
     }
 
-    public SaleTradeBillVO(SaleTradeBillPO saleTradeBillPO){
+    public SaleTradeBillVO(SaleTradeBillPO saleTradeBillPO)throws Exception{
         this.ID=saleTradeBillPO.getID();
         this.visible=saleTradeBillPO.isVisible();
         this.state=saleTradeBillPO.getState();
@@ -90,19 +90,15 @@ public class SaleTradeBillVO extends SaleBillVO {
         this.comment=saleTradeBillPO.getComment();
 
         PromotionTool promotionTool=new PromotionBl();
-        PromotionQueryVO promotionQueryVO=new PromotionQueryVO(saleTradeBillPO.getPromotionID(),null,null,null);
-        this.promotion=promotionTool.getPromotionList(promotionQueryVO).get(0);
+        this.promotion=promotionTool.find(saleTradeBillPO.getPromotionID());
 
 
         UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(saleTradeBillPO.getOperatorID(),null,null);
-        UserQueryVO userQueryVO1=new UserQueryVO(saleTradeBillPO.getSalesmanID(),null,null);
-        this.operator=userTool.getUserList(userQueryVO).get(0);
-        this.salesman=userTool.getUserList(userQueryVO1).get(0);
+        this.operator=userTool.find(saleTradeBillPO.getOperatorID());
+        this.salesman=userTool.find(saleTradeBillPO.getSalesmanID());
 
         ClientTool clientTool=new ClientBl();
-        ClientQueryVO clientQueryVO=new ClientQueryVO(saleTradeBillPO.getClientID(),null);
-        this.client=clientTool.getClientList(clientQueryVO).get(0);
+        this.client=clientTool.find(saleTradeBillPO.getClientID());
 
         ArrayList<GoodsItemVO> goodsItemVOS=new ArrayList<>();
         for(GoodsItemPO goodsItemPO:saleTradeBillPO.getSaleList()){

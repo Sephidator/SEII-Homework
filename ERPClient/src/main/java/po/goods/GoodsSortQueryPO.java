@@ -1,14 +1,11 @@
 package main.java.po.goods;
 
-import main.java.po.QueryPO;
+import java.io.Serializable;
 
-public class GoodsSortQueryPO extends QueryPO {
+public class GoodsSortQueryPO implements Serializable {
     public String name; //商品分类名称
-    public String goodsSortID;//商品所在商品分类
 
-    public GoodsSortQueryPO(String ID, String name, String goodsSortID) {
-        this.ID = ID;
+    public GoodsSortQueryPO(String name) {
         this.name = name;
-        this.goodsSortID = goodsSortID;
     }
 }

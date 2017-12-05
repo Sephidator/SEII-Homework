@@ -30,7 +30,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * @function: 将ClientQueryVO转为ClientQueryPO，调用ClientTool.getClientList服务，返回ArrayList<ClientVO>
      */
     @Override
-    public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) throws Exception{
         //ClientQueryPO clientQueryPO=new ClientQueryPO();
         ArrayList<ClientVO> clientVOS=new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsTool.getGoodsList服务，返回ArrayList<GoodsVO>
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
         //GoodsQueryPO goodsQueryPO=new GoodsQueryPO();
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * @function: 将PurchaseTradeBillVO转成PurchaseTradeBillPO，并调用PurchaseTradeBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public String submit(PurchaseTradeBillVO bill) {
+    public String submit(PurchaseTradeBillVO bill) throws Exception{
         String id="";
         PurchaseTradeBillPO purchaseTradeBillPO=new PurchaseTradeBillPO();
 
@@ -77,7 +77,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * @function: 将PurchaseTradeBillVO转成PurchaseTradeBillPO，并调用PurchaseTradeBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void saveDraft(PurchaseTradeBillVO bill) {
+    public void saveDraft(PurchaseTradeBillVO bill) throws Exception{
         PurchaseTradeBillPO purchaseTradeBillPO=new PurchaseTradeBillPO();
 
 
@@ -91,7 +91,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * 得到ArrayList<PurchaseTradeBillPO>以后转成ArrayList<PurchaseTradeBillVO>，返回ArrayList<PurchaseTradeBillVO>
      */
     @Override
-    public ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query) {
+    public ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query) throws Exception{
         BillQueryPO billQueryPO=new BillQueryPO();
         ArrayList<PurchaseTradeBillPO> purchaseTradeBillPOS=new ArrayList<>();
         ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS=new ArrayList<>();
@@ -107,7 +107,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * @function: 将PurchaseTradeBillVO转成PurchaseTradeBillPO，并调用PurchaseTradeBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void pass(BillVO billVO) {
+    public void pass(BillVO billVO) throws Exception{
         PurchaseTradeBillPO purchaseTradeBillPO=new PurchaseTradeBillPO();
 
 
@@ -120,7 +120,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
      * @function: 将PurchaseTradeBillVO转成PurchaseTradeBillPO，并调用PurchaseTradeBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void reject(BillVO billVO) {
+    public void reject(BillVO billVO) throws Exception{
         PurchaseTradeBillPO purchaseTradeBillPO=new PurchaseTradeBillPO();
 
 

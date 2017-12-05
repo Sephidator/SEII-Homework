@@ -16,7 +16,7 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
      * @return : 返回ArrayList<GoodsVO>的商品列表
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
         ArrayList<GoodsPO> goodsPOS=new ArrayList<>();
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
      * @return: 返回String的增加商品的ID
      */
     @Override
-    public String addGoods(GoodsVO goods) {
+    public String addGoods(GoodsVO goods) throws Exception{
         String id="";
 
         /*将GoodsVO转换为GoodsPO*/
@@ -57,7 +57,7 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
      * @return:
      */
     @Override
-    public void editGoods(GoodsVO goods) {
+    public void editGoods(GoodsVO goods) throws Exception{
 
         /*将GoodsVO转成GoodsPO*/
         GoodsPO goodsPO=goods.getGoodsPO();
@@ -68,6 +68,11 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
 
     }
 
+    @Override
+    public GoodsVO find(String goodsID) throws Exception {
+        return null;
+    }
+
     /**
      * @version: 1
      * @date:
@@ -75,7 +80,7 @@ public class GoodsBl implements GoodsBLService,GoodsTool {
      * @return：
      */
     @Override
-    public void deleteGoods(String goodsID) {
+    public void deleteGoods(String goodsID) throws Exception{
         /*调用GoodsDatdaService.delete完成对商品的修改*/
 
     }

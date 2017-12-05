@@ -8,13 +8,13 @@ import main.java.vo.user.UserVO;
 import java.util.ArrayList;
 
 public interface ClientBlService {
-    public ArrayList< ClientVO> getClientList(ClientQueryVO query);
+    public ArrayList< ClientVO> getClientList(ClientQueryVO query) throws Exception;
 
-    public String addClient(ClientVO client);
+    public String addClient(ClientVO client) throws Exception;
 
-    public void editClient(ClientVO client);
+    public void editClient(ClientVO client) throws Exception;
 
-    public void deleteClient(String clientID);
+    public void deleteClient(String clientID) throws Exception;
 
-    public ArrayList<UserVO> getUserList(UserQueryVO query);
+    public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception;
 }

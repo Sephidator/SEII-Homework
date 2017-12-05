@@ -5,7 +5,7 @@ import main.java.vo.user.UserVO;
 
 public class LoginBl implements LoginBlService{
     @Override
-    public UserVO login(String ID, String password) {
+    public UserVO login(String ID, String password)throws Exception {
         return null;
     }
 }

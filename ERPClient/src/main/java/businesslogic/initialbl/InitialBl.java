@@ -21,7 +21,7 @@ public class InitialBl implements InitialBlService{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
         return null;
     }
 
@@ -32,7 +32,7 @@ public class InitialBl implements InitialBlService{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<ClientVO> getClientList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getClientList(ClientQueryVO query)throws Exception {
         return null;
     }
 
@@ -43,7 +43,7 @@ public class InitialBl implements InitialBlService{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) {
+    public ArrayList<AccountVO> getAccountList(AccountQueryVO query)throws Exception {
         return null;
     }
 
@@ -54,7 +54,7 @@ public class InitialBl implements InitialBlService{
      * @para: [initial] 
      * @function: 
      */
-    public String establishInitial(InitialVO initial) {
+    public String establishInitial(InitialVO initial)throws Exception {
         return null;
     }
 
@@ -65,7 +65,7 @@ public class InitialBl implements InitialBlService{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<InitialVO> getInitial(InitialQueryVO query) {
+    public ArrayList<InitialVO> getInitial(InitialQueryVO query)throws Exception {
         return null;
     }
 }

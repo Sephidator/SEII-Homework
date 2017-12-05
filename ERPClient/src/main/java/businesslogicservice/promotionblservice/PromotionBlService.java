@@ -7,11 +7,11 @@ import main.java.vo.promotion.PromotionVO;
 import java.util.ArrayList;
 
 public interface PromotionBlService {
-    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query);
+    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) throws Exception;
 
-    public void addPromotion(PromotionVO vo);
+    public String addPromotion(PromotionVO vo) throws Exception;
 
-    public void editPromotion(PromotionVO vo);
+    public void editPromotion(PromotionVO vo) throws Exception;
 
-    public void deletePromotion(PromotionVO vo);
+    public void deletePromotion(PromotionVO vo) throws Exception;
 }

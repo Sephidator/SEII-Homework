@@ -1,18 +1,16 @@
 package main.java.vo.client;
 
 import main.java.po.client.ClientQueryPO;
-import main.java.vo.QueryVO;
 
-public class ClientQueryVO extends QueryVO{
+public class ClientQueryVO{
     public String name;
 
-    public ClientQueryVO(String ID, String name) {
-        this.ID = ID;
+    public ClientQueryVO(String name) {;
         this.name = name;
     }
 
     public ClientQueryPO getClientQueryPO(){
-        ClientQueryPO clientQueryPO=new ClientQueryPO(this.ID,this.name);
+        ClientQueryPO clientQueryPO=new ClientQueryPO(this.name);
         return clientQueryPO;
     }
 }
