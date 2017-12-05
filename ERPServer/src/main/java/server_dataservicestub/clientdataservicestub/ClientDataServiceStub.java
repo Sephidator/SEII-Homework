@@ -9,7 +9,12 @@ import java.util.ArrayList;
 
 public class ClientDataServiceStub implements ClientDataService {
     @Override
-    public ArrayList<ClientPO> find(ClientQueryPO query) {
+    public ClientPO find(String clientID) {
+        return new ClientPO();
+    }
+
+    @Override
+    public ArrayList<ClientPO> finds(ClientQueryPO query) {
         ArrayList<ClientPO> list = new ArrayList<>();
         list.add(new ClientPO());
         return list;
@@ -21,12 +26,12 @@ public class ClientDataServiceStub implements ClientDataService {
     }
 
     @Override
-    public void delete(String clientID) throws RemoteException {
+    public void delete(String clientID) {
 
     }
 
     @Override
-    public void update(ClientPO po) throws RemoteException {
+    public void update(ClientPO po) {
 
     }
 

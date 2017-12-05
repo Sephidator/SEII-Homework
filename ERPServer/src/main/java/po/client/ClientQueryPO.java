@@ -1,12 +1,11 @@
 package main.java.po.client;
 
-import main.java.po.QueryPO;
+import java.io.Serializable;
 
-public class ClientQueryPO extends QueryPO {
+public class ClientQueryPO implements Serializable {
     public String name;
 
-    public ClientQueryPO(String ID, String name) {
-        this.ID = ID;
+    public ClientQueryPO(String name) {
         this.name = name;
     }
 }

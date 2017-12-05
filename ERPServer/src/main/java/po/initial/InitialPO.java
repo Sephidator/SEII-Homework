@@ -1,6 +1,10 @@
 package main.java.po.initial;
 
 import main.java.po.PO;
+import main.java.po.account.AccountPO;
+import main.java.po.client.ClientPO;
+import main.java.po.goods.GoodsPO;
+import main.java.po.goods.GoodsSortPO;
 
 import java.util.ArrayList;
 
@@ -8,62 +12,62 @@ public class InitialPO extends PO {
 
     private int year;//每一个账都有一个年份
 
-    private ArrayList<String> goodsIDList;//每一个商品都有一个ID
+    private ArrayList<GoodsPO> goodsList;//每一个商品都有一个ID
 
-    private ArrayList<String> goodsSortIDList;//每一个商品分类都有一个ID
+    private ArrayList<GoodsSortPO> goodsSortList;//每一个商品分类都有一个ID
 
-    private ArrayList<String> clientIDList;//每一个客户都有一个ID
+    private ArrayList<ClientPO> clientList;//每一个客户都有一个ID
 
-    private ArrayList<String> accountIDList;//每一个账户都有一个ID
+    private ArrayList<AccountPO> accountList;//每一个账户都有一个ID
 
     public InitialPO() {
     }
 
-    public InitialPO(int year, ArrayList<String> goodsIDList, ArrayList<String> goodsSortIDList, ArrayList<String> clientIDList, ArrayList<String> accountIDList) {
+    public InitialPO(int year, ArrayList<GoodsPO> goodsList, ArrayList<GoodsSortPO> goodsSortList, ArrayList<ClientPO> clientList, ArrayList<AccountPO> accountList) {
         this.year = year;
-        this.goodsIDList = goodsIDList;
-        this.goodsSortIDList = goodsSortIDList;
-        this.clientIDList = clientIDList;
-        this.accountIDList = accountIDList;
+        this.goodsList = goodsList;
+        this.goodsSortList = goodsSortList;
+        this.clientList = clientList;
+        this.accountList = accountList;
     }
 
     public int getYear() {
         return year;
     }
 
-    public ArrayList<String> getGoodsIDList() {
-        return goodsIDList;
-    }
-
-    public ArrayList<String> getGoodsSortIDList() {
-        return goodsSortIDList;
-    }
-
-    public ArrayList<String> getClientIDList() {
-        return clientIDList;
-    }
-
-    public ArrayList<String> getAccountIDList() {
-        return accountIDList;
-    }
-
     public void setYear(int year) {
         this.year = year;
     }
 
-    public void setGoodsIDList(ArrayList<String> goodsIDList) {
-        this.goodsIDList = goodsIDList;
+    public ArrayList<GoodsPO> getGoodsList() {
+        return goodsList;
     }
 
-    public void setGoodsSortIDList(ArrayList<String> goodsSortIDList) {
-        this.goodsSortIDList = goodsSortIDList;
+    public void setGoodsList(ArrayList<GoodsPO> goodsList) {
+        this.goodsList = goodsList;
     }
 
-    public void setClientIDList(ArrayList<String> clientIDList) {
-        this.clientIDList = clientIDList;
+    public ArrayList<GoodsSortPO> getGoodsSortList() {
+        return goodsSortList;
     }
 
-    public void setAccountIDList(ArrayList<String> accountIDList) {
-        this.accountIDList = accountIDList;
+    public void setGoodsSortList(ArrayList<GoodsSortPO> goodsSortList) {
+        this.goodsSortList = goodsSortList;
+    }
+
+    public ArrayList<ClientPO> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(ArrayList<ClientPO> clientList) {
+        this.clientList = clientList;
+    }
+
+    public ArrayList<AccountPO> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(ArrayList<AccountPO> accountList) {
+        this.accountList = accountList;
     }
 }

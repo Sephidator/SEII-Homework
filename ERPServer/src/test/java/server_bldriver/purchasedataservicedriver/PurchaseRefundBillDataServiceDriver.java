@@ -11,8 +11,8 @@ public class PurchaseRefundBillDataServiceDriver {
     PurchaseRefundBillDataService service = new PurchaseRefundBillDataServiceStub();
 
     @Test
-    public void find() throws Exception {
-        assertEquals(1, service.find(null).size());
+    public void finds() throws Exception {
+        assertEquals(1, service.finds(null).size());
     }
 
     @Test

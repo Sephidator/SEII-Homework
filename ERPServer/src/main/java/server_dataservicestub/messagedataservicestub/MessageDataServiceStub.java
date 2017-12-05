@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class MessageDataServiceStub implements MessageDataService {
 
     @Override
-    public ArrayList<MessagePO> find(String receiverID) throws RemoteException {
+    public ArrayList<MessagePO> finds(String receiverID) {
         ArrayList<MessagePO> list = new ArrayList<>();
         list.add(new MessagePO());
         return list;
     }
 
     @Override
-    public void insert(MessagePO message) throws RemoteException {
+    public void insert(MessagePO message) {
 
     }
 }

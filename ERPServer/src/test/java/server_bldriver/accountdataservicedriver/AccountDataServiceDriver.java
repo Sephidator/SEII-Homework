@@ -12,7 +12,12 @@ public class AccountDataServiceDriver {
 
     @Test
     public void find() throws Exception {
-        assertEquals(1, accountDataService.find(null).size());
+        assertEquals(true, accountDataService.find("").isVisible());
+    }
+
+    @Test
+    public void finds() throws Exception {
+        assertEquals(1, accountDataService.finds(null).size());
     }
 
     @Test

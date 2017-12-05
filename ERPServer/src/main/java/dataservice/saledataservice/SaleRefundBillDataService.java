@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface SaleRefundBillDataService extends Remote {
 
-    ArrayList<SaleRefundBillPO> find(BillQueryPO query) throws RemoteException;
+    ArrayList<SaleRefundBillPO> finds(BillQueryPO query) throws RemoteException;
 
     String insert(SaleRefundBillPO po) throws RemoteException;
 

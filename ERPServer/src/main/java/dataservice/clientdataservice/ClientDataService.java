@@ -8,7 +8,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface ClientDataService extends Remote {
-    ArrayList<ClientPO> find(ClientQueryPO query) throws RemoteException;
+    ClientPO find(String clientID) throws RemoteException;
+
+    ArrayList<ClientPO> finds(ClientQueryPO query) throws RemoteException;
 
     String insert(ClientPO po) throws RemoteException;
 

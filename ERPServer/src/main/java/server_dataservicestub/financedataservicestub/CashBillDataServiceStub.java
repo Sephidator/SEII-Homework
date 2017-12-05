@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CashBillDataServiceStub implements CashBillDataService {
     @Override
-    public ArrayList<CashBillPO> find(BillQueryPO query) {
+    public ArrayList<CashBillPO> finds(BillQueryPO query) {
         ArrayList<CashBillPO> cashBillPOArrayList = new ArrayList<>();
         CashBillPO cashBillPO = new CashBillPO();
         cashBillPOArrayList.add(cashBillPO);

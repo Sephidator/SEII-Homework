@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ReceiptBillDataServiceStub implements ReceiptBillDataService {
     @Override
-    public ArrayList<ReceiptBillPO> find(BillQueryPO query) {
+    public ArrayList<ReceiptBillPO> finds(BillQueryPO query) {
         ReceiptBillPO receiptBillPO = new ReceiptBillPO();
         ArrayList<ReceiptBillPO> receiptBillPOS = new ArrayList<>();
         receiptBillPOS.add(receiptBillPO);
@@ -17,12 +17,12 @@ public class ReceiptBillDataServiceStub implements ReceiptBillDataService {
     }
 
     @Override
-    public String insert(ReceiptBillPO po) throws RemoteException {
+    public String insert(ReceiptBillPO po)  {
         return "SKD-20171212-12345";
     }
 
     @Override
-    public void update(ReceiptBillPO po) throws RemoteException {
+    public void update(ReceiptBillPO po){
 
     }
 

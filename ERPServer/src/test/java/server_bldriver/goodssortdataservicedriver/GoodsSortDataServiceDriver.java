@@ -12,7 +12,12 @@ public class GoodsSortDataServiceDriver {
 
     @Test
     public void find() throws Exception {
-        assertEquals(1, service.find(null).size());
+        assertEquals(true, service.find("").isVisible());
+    }
+
+    @Test
+    public void finds() throws Exception {
+        assertEquals(1, service.finds(null).size());
     }
 
     @Test

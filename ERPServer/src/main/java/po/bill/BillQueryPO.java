@@ -1,10 +1,9 @@
 package main.java.po.bill;
 
-import main.java.po.QueryPO;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class BillQueryPO extends QueryPO {
+public class BillQueryPO implements Serializable{
     public String state; //单据状态
     public Date start; //起始时间
     public Date end; //结束时间
@@ -15,8 +14,7 @@ public class BillQueryPO extends QueryPO {
     public BillQueryPO() {
     }
 
-    public BillQueryPO(String ID, String state, Date start, Date end, String type, String operator, String client) {
-        this.ID = ID;
+    public BillQueryPO(String state, Date start, Date end, String type, String operator, String client) {
         this.state = state;
         this.start = start;
         this.end = end;

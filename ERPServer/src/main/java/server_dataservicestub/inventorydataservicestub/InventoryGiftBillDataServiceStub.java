@@ -10,19 +10,19 @@ import java.util.ArrayList;
 public class InventoryGiftBillDataServiceStub implements InventoryGiftBillDataService {
 
     @Override
-    public ArrayList<InventoryGiftBillPO> find(BillQueryPO query) throws RemoteException {
+    public ArrayList<InventoryGiftBillPO> finds(BillQueryPO query) {
         ArrayList<InventoryGiftBillPO> list = new ArrayList<>();
         list.add(new InventoryGiftBillPO());
         return list;
     }
 
     @Override
-    public String insert(InventoryGiftBillPO bill) throws RemoteException {
+    public String insert(InventoryGiftBillPO bill) {
         return "KCZSD-20171212-12345";
     }
 
     @Override
-    public void update(InventoryGiftBillPO bill) throws RemoteException {
+    public void update(InventoryGiftBillPO bill) {
 
     }
 
