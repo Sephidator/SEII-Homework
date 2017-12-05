@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class InitialDataServiceStub implements InitialDataService {
 
     @Override
-    public ArrayList<InitialPO> find(InitialQueryPO query) throws RemoteException {
+    public ArrayList<InitialPO> finds(InitialQueryPO query) {
         ArrayList<InitialPO> list = new ArrayList<>();
         list.add(new InitialPO());
         return list;
     }
 
     @Override
-    public String insert(InitialPO po) throws RemoteException {
+    public String insert(InitialPO po) {
         return "00000001";
     }
 

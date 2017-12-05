@@ -11,8 +11,8 @@ public class PromotionDataServiceDriver {
     PromotionDataService service=new PromotionDataServiceStub();
 
     @Test
-    public void find() throws Exception {
-        assertEquals(3,service.find(null).size());
+    public void finds() throws Exception {
+        assertEquals(3,service.finds(null).size());
     }
 
     @Test

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class InventoryLossOverBillDataServiceStub implements InventoryLossOverBillDataService {
 
     @Override
-    public ArrayList<InventoryLossOverBillPO> find(BillQueryPO query) throws RemoteException {
+    public ArrayList<InventoryLossOverBillPO> finds(BillQueryPO query) throws RemoteException {
         ArrayList<InventoryLossOverBillPO> list = new ArrayList<>();
         list.add(new InventoryLossOverBillPO());
         return list;

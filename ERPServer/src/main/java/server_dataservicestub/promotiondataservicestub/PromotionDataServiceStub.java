@@ -8,7 +8,12 @@ import java.util.ArrayList;
 
 public class PromotionDataServiceStub implements PromotionDataService {
     @Override
-    public ArrayList<PromotionPO> find(PromotionQueryPO query) {
+    public PromotionPO find(String promotionID) {
+        return new PromotionPO();
+    }
+
+    @Override
+    public ArrayList<PromotionPO> finds(PromotionQueryPO query) {
         ArrayList<PromotionPO> list = new ArrayList<>();
         list.add(new PromotionClientPO());
         list.add(new PromotionTotalPO());
@@ -17,17 +22,17 @@ public class PromotionDataServiceStub implements PromotionDataService {
     }
 
     @Override
-    public String insert(PromotionPO po) throws RemoteException {
+    public String insert(PromotionPO po) {
         return "00000001";
     }
 
     @Override
-    public void delete(String PromotionID) throws RemoteException {
+    public void delete(String PromotionID) {
 
     }
 
     @Override
-    public void update(PromotionPO po) throws RemoteException {
+    public void update(PromotionPO po) {
 
     }
 }

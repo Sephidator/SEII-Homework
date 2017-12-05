@@ -9,24 +9,29 @@ import java.util.ArrayList;
 
 public class GoodsSortDataServiceStub implements GoodsSortDataService {
     @Override
-    public ArrayList<GoodsSortPO> find(GoodsSortQueryPO query) throws RemoteException {
+    public GoodsSortPO find(String goodsSortID) {
+        return new GoodsSortPO();
+    }
+
+    @Override
+    public ArrayList<GoodsSortPO> finds(GoodsSortQueryPO query) throws RemoteException {
         ArrayList<GoodsSortPO> list = new ArrayList<>();
         list.add(new GoodsSortPO());
         return list;
     }
 
     @Override
-    public String insert(GoodsSortPO po) throws RemoteException {
+    public String insert(GoodsSortPO po) {
         return "00000001";
     }
 
     @Override
-    public void delete(String GoodsSortID) throws RemoteException {
+    public void delete(String GoodsSortID) {
 
     }
 
     @Override
-    public void update(GoodsSortPO po) throws RemoteException {
+    public void update(GoodsSortPO po) {
 
     }
 

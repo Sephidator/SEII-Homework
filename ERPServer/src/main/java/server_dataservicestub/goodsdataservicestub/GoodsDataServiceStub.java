@@ -9,7 +9,12 @@ import java.util.ArrayList;
 
 public class GoodsDataServiceStub implements GoodsDataService {
     @Override
-    public ArrayList<GoodsPO> find(GoodsQueryPO query) {
+    public GoodsPO find(String goodsID) {
+        return new GoodsPO();
+    }
+
+    @Override
+    public ArrayList<GoodsPO> finds(GoodsQueryPO query) {
         ArrayList<GoodsPO> list = new ArrayList<>();
         list.add(new GoodsPO());
         return list;

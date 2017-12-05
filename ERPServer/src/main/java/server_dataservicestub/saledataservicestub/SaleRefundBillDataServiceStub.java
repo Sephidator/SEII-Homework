@@ -10,19 +10,19 @@ import java.util.ArrayList;
 public class SaleRefundBillDataServiceStub implements SaleRefundBillDataService {
 
     @Override
-    public ArrayList<SaleRefundBillPO> find(BillQueryPO query) {
+    public ArrayList<SaleRefundBillPO> finds(BillQueryPO query) {
         ArrayList<SaleRefundBillPO> list = new ArrayList<>();
         list.add(new SaleRefundBillPO());
         return list;
     }
 
     @Override
-    public String insert(SaleRefundBillPO po) throws RemoteException {
+    public String insert(SaleRefundBillPO po) {
         return "XSTHD-20171212-12345";
     }
 
     @Override
-    public void update(SaleRefundBillPO po) throws RemoteException {
+    public void update(SaleRefundBillPO po) {
     }
 
 }

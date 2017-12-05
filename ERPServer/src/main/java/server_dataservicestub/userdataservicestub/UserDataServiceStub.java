@@ -10,14 +10,19 @@ import java.util.ArrayList;
 public class UserDataServiceStub implements UserDataService {
 
     @Override
-    public ArrayList<UserPO> find(UserQueryPO query) throws RemoteException {
+    public UserPO find(String userID) {
+        return new UserPO();
+    }
+
+    @Override
+    public ArrayList<UserPO> finds(UserQueryPO query) {
         ArrayList<UserPO> list = new ArrayList<>();
         list.add(new UserPO());
         return list;
     }
 
     @Override
-    public String insert(UserPO po) throws RemoteException {
+    public String insert(UserPO po) {
         return "00000001";
     }
 

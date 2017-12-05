@@ -11,8 +11,8 @@ public class InventoryLossOverBillDataServiceDriver {
     InventoryLossOverBillDataService service=new InventoryLossOverBillDataServiceStub();
 
     @Test
-    public void find() throws Exception {
-        assertEquals(1,service.find(null).size());
+    public void finds() throws Exception {
+        assertEquals(1,service.finds(null).size());
     }
 
     @Test

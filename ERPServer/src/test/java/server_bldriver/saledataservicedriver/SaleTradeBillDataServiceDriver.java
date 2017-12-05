@@ -11,13 +11,13 @@ public class SaleTradeBillDataServiceDriver {
     SaleTradeBillDataService service = new SaleTradeBillDataServiceStub();
 
     @Test
-    public void findByReport() throws Exception {
-        assertEquals(1, service.findByReport(null).size());
+    public void findsByReport() throws Exception {
+        assertEquals(1, service.findsByReport(null).size());
     }
 
     @Test
-    public void findByBill() throws Exception {
-        assertEquals(1, service.findByBill(null).size());
+    public void findsByBill() throws Exception {
+        assertEquals(1, service.findsByBill(null).size());
     }
 
     @Test

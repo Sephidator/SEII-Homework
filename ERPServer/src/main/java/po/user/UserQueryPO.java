@@ -1,13 +1,12 @@
 package main.java.po.user;
 
-import main.java.po.QueryPO;
+import java.io.Serializable;
 
-public class UserQueryPO extends QueryPO {
+public class UserQueryPO implements Serializable {
     public String name;
     public String type;
 
-    public UserQueryPO(String ID, String name, String type) {
-        this.ID = ID;
+    public UserQueryPO(String name, String type) {
         this.name = name;
         this.type = type;
     }

@@ -1,13 +1,12 @@
 package main.java.po.account;
 
-import main.java.po.QueryPO;
+import java.io.Serializable;
 
-public class AccountQueryPO extends QueryPO {
+public class AccountQueryPO implements Serializable {
     public String bankAccount; //账户银行账号
     public String name; //账户名字
 
-    public AccountQueryPO(String ID, String bankAccount, String name) {
-        this.ID = ID;
+    public AccountQueryPO(String bankAccount, String name) {
         this.bankAccount = bankAccount;
         this.name = name;
     }

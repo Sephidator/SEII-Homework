@@ -4,13 +4,19 @@ import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
 public class AccountDataServiceStub implements AccountDataService {
 
     @Override
-    public ArrayList<AccountPO> find(AccountQueryPO query) {
+    public AccountPO find(String accountID) {
+        return new AccountPO();
+    }
+
+    @Override
+    public ArrayList<AccountPO> finds(AccountQueryPO query) {
         ArrayList<AccountPO> list = new ArrayList<>();
         list.add(new AccountPO());
         return list;

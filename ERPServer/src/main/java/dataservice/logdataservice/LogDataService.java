@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface LogDataService extends Remote {
     /*根据筛选条件查找符合的日志*/
-    ArrayList<LogPO> find(LogQueryPO query) throws RemoteException;
+    ArrayList<LogPO> finds(LogQueryPO query) throws RemoteException;
 
     /*插入日志*/
     void insert(LogPO po) throws RemoteException;

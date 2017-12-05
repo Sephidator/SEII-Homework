@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class LogDataServiceStub implements LogDataService {
     @Override
-    public ArrayList<LogPO> find(LogQueryPO query) {
+    public ArrayList<LogPO> finds(LogQueryPO query) {
         ArrayList<LogPO> logPOArrayList = new ArrayList<>();
         LogPO logPO = new LogPO();
         logPOArrayList.add(logPO);
@@ -17,6 +17,6 @@ public class LogDataServiceStub implements LogDataService {
     }
 
     @Override
-    public void insert(LogPO po) throws RemoteException {
+    public void insert(LogPO po)  {
     }
 }

@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface PurchaseTradeBillDataService extends Remote {
-    ArrayList<PurchaseTradeBillPO> find(BillQueryPO query) throws RemoteException;
+    ArrayList<PurchaseTradeBillPO> finds(BillQueryPO query) throws RemoteException;
 
     String insert(PurchaseTradeBillPO po) throws RemoteException;
 

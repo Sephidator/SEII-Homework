@@ -8,7 +8,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface UserDataService extends Remote {
-    ArrayList<UserPO> find(UserQueryPO query) throws RemoteException;
+    UserPO find(String userID) throws RemoteException;
+
+    ArrayList<UserPO> finds(UserQueryPO query) throws RemoteException;
 
     String insert(UserPO po) throws RemoteException;
 

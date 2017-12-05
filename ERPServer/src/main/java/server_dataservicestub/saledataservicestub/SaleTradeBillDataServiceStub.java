@@ -10,26 +10,26 @@ import java.util.ArrayList;
 
 public class SaleTradeBillDataServiceStub implements SaleTradeBillDataService {
     @Override
-    public ArrayList<SaleTradeBillPO> findByReport(SaleTradeBillQueryPO query) throws RemoteException {
+    public ArrayList<SaleTradeBillPO> findsByReport(SaleTradeBillQueryPO query) throws RemoteException {
         ArrayList<SaleTradeBillPO> list = new ArrayList<>();
         list.add(new SaleTradeBillPO());
         return list;
     }
 
     @Override
-    public ArrayList<SaleTradeBillPO> findByBill(BillQueryPO query) {
+    public ArrayList<SaleTradeBillPO> findsByBill(BillQueryPO query) {
         ArrayList<SaleTradeBillPO> list = new ArrayList<>();
         list.add(new SaleTradeBillPO());
         return list;
     }
 
     @Override
-    public String insert(SaleTradeBillPO po) throws RemoteException {
+    public String insert(SaleTradeBillPO po) {
         return "XSD-20171212-12345";
     }
 
     @Override
-    public void update(SaleTradeBillPO po) throws RemoteException {
+    public void update(SaleTradeBillPO po) {
 
     }
 

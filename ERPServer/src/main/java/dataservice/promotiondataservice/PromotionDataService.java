@@ -8,7 +8,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface PromotionDataService extends Remote {
-    ArrayList<PromotionPO> find(PromotionQueryPO query) throws RemoteException;
+    PromotionPO find(String promotionID) throws RemoteException;
+
+    ArrayList<PromotionPO> finds(PromotionQueryPO query) throws RemoteException;
 
     String insert(PromotionPO po) throws RemoteException;
 
