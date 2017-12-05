@@ -4,24 +4,24 @@ import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
+import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
-public class ClientInfoUIController {
+public class ClientInfoUIController extends InfoUIController{
     private ClientVO client;
-    private ClientUIController clientUIController;
     private ClientBlService clientBlService;
-    private ArrayList<UserVO> salesmanList;
-    private Stage stage;
 
     @FXML
     private TextField ID; // 客户编号
@@ -64,43 +64,65 @@ public class ClientInfoUIController {
      * 设置各个选择框的信息
      * */
     public void initialize(){
-        levelChoiceBox= new ChoiceBox<Integer>(FXCollections.observableArrayList(1,2,3,4,5));
-        levelChoiceBox.getSelectionModel().selectedIndexProperty()
-                .addListener(new ChangeListener<Number>() {
-                    public void changed(ObservableValue ov, Number value, Number new_value) {
-                        level.setText(new_value.toString());
-                    }
-                });
-
-        categoryChoiceBox= new ChoiceBox<String>(FXCollections.observableArrayList("供应商","销售商"));
-        categoryChoiceBox.getSelectionModel().selectedIndexProperty()
-                .addListener(new ChangeListener<Number>() {
-                    public void changed(ObservableValue ov, Number value, Number new_value) {
-                        category.setText(salesmanList.get(new_value.intValue()).getName());
-                    }
-                });
-
-        salesmanChoiceBox= new ChoiceBox<String>();
-        salesmanChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-            salesman.setText(salesmanList.get(newValue.intValue()).getName());
+        levelChoiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5));
+        levelChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+            level.setText(String.valueOf(newValue.intValue()+1));
         });
+
+
+        String[] categoryList=new String[]{"供应商","销售商"};
+        categoryChoiceBox.setItems(FXCollections.observableArrayList("供应商","销售商"));
+        categoryChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+            category.setText(categoryList[newValue.intValue()]);
+        });
+
     }
 
     // 设置controller数据的方法*****************************************
 
     public void setClient(ClientVO client) {
         this.client = client;
+        ID.setText("123");
+        category.setText(client.getCategory());
+        level.setText(String.valueOf(client.getLevel()));
+        name.setText(client.getName());
+        phone.setText(client.getPhone());
+        address.setText(client.getAddress());
+        post.setText(client.getPost());
+        email.setText(client.getEmail());
+        receivable.setText(String.valueOf(client.getReceivable()));
+        payable.setText(String.valueOf(client.getPayable()));
+        receivableLimit.setText(String.valueOf(client.getReceivableLimit()));
+        salesman.setText("wd");
     }
 
     public void setClientBlService(ClientBlService clientBlService) {
         this.clientBlService = clientBlService;
-    }
+        /*
+        if(clientBlService!=null){
+            ArrayList<UserVO> salesmanList=clientBlService.getUserList(null);
+            salesmanChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+                salesman.setText(salesmanList.get(newValue.intValue()).getName());
+                client.setSalesman(salesmanList.get(newValue.intValue()));
+            });
+        }
+        */
+        ArrayList<UserVO> salesmanList=new ArrayList<>();
+        UserVO user1=new UserVO("宋抟","进货销售人员","JN123", "password", 23,true);
+        salesmanList.add(user1);
+        UserVO user2=new UserVO("刘钦","进货销售人员","JN123", "password", 23,true);
+        salesmanList.add(user2);
 
-    public void setStage(Stage stage) {
-        this.stage=stage;
+        ObservableList<String> list=FXCollections.observableArrayList();
+        for(int i=0;i<salesmanList.size();i++){
+            list.add(salesmanList.get(i).getJobName()+","+salesmanList.get(i).getName());
+        }
+        salesmanChoiceBox.setItems(list);
+        salesmanChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+            salesman.setText(salesmanList.get(newValue.intValue()).getName());
+            client.setSalesman(salesmanList.get(newValue.intValue()));
+        });
     }
-
-    // 界面之中会用到的方法******************************************
 
     /**
      * 根据数字来设置按钮的文字
@@ -120,6 +142,8 @@ public class ClientInfoUIController {
         }
     }
 
+    // 界面之中会用到的方法******************************************
+
     @FXML
     private void handleConfirm(){
         String text=confirm.getText();
@@ -138,7 +162,7 @@ public class ClientInfoUIController {
 
     @FXML
     private void handleCancel(){
-        stage.close();
+        dialogStage.close();
     }
 
     // 加载文件和界面的方法******************************************
@@ -146,18 +170,29 @@ public class ClientInfoUIController {
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(ClientBlService service,ClientVO client, int command){
+    public static void init(ClientBlService service,ClientVO client, int command,Stage stage){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/main/java/presentation/clientui/ClientInfoUI.fxml"));
-            Stage stage=new Stage();
-            stage.setScene(new Scene(loader.load()));
+
+            // Create the dialog stage
+            Stage dialogStage=new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(stage);
+            dialogStage.setScene(new Scene(loader.load()));
 
             ClientInfoUIController controller=loader.getController();
             controller.setClientBlService(service);
             controller.setClient(client);
-            controller.setStage(stage);
+            controller.setDialogStage(dialogStage);
+            controller.setPaneFunction(command);
+
+
+            // Show the dialog and wait until the user closes it.
+            dialogStage.showAndWait();
+
         }catch(Exception e){
             e.printStackTrace();
         }

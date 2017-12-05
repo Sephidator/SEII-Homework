@@ -13,6 +13,10 @@ public class BillVO extends VO {
     protected UserVO operator;//操作员
     protected String comment; // 备注
 
+    public String getState() {
+        return state;
+    }
+
     public Date getTime() {
         return time;
     }

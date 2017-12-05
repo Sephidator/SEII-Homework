@@ -24,9 +24,9 @@
          <children>
             <GridPane>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="90.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -46,7 +46,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/进货类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handlePurchaseBill" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/进货类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -55,7 +55,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="5.0" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/销售类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="5.0" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/销售类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -64,7 +64,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="34.0" layoutY="66.0" onAction="#manageClient" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/客户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="34.0" layoutY="66.0" onAction="#manageClient" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/客户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>

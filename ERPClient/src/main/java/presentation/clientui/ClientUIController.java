@@ -13,24 +13,13 @@ import main.java.MainApp;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import main.java.presentation.uiutility.MyUIController;
+import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.client.ClientVO;
 
 import java.util.ArrayList;
 
-public class ClientUIController extends MyUIController{
+public class ClientUIController extends CenterUIController {
     private ClientBlService clientBlService;
-
-    @FXML
-    private JFXButton search;
-    @FXML
-    private JFXButton addClient;
-    @FXML
-    private JFXButton deleteClient;
-    @FXML
-    private JFXButton EditClient;
-    @FXML
-    private JFXButton checkClient;
 
     private ObservableList<ClientVO> clientObservableList= FXCollections.observableArrayList();
     @FXML
@@ -66,9 +55,9 @@ public class ClientUIController extends MyUIController{
 
     public void setClientBlService(ClientBlService clientBlService) {
         this.clientBlService = clientBlService;
+        //ArrayList<ClientVO> clientList=clientBlService.getClientList(null);
+        //showClientList(clientList);
     }
-
-    // 界面之中会用到的方法******************************************
 
     /**
      * 取得客户列表并修改ObservableList的信息
@@ -82,17 +71,39 @@ public class ClientUIController extends MyUIController{
         clientTableView.setItems(clientObservableList);
     }
 
+    // 界面之中会用到的方法******************************************
+
     @FXML
     private void handleAddClient(){
-        ClientInfoUIController.init(clientBlService,new ClientVO(),1);
+        ClientInfoUIController.init(clientBlService,new ClientVO(),1,root.getStage());
     }
 
     @FXML
     private void handleDeleteClient(){
-        // 注意：当没有项目时，getSelectedIndex会返回-1.这是remove时会报错ArrayIndexOutOfBoundsException.
+        int selectedIndex=clientTableView.getSelectionModel().getSelectedIndex();
+        if(isClientSelected()){
+            clientTableView.getItems().remove(selectedIndex);
+        }
+    }
+
+    @FXML
+    private void handleEditClient(){
+        if(isClientSelected()){
+            ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
+        }
+    }
+
+    @FXML
+    private void handleCheckClient() {
+        if(isClientSelected()){
+            ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),3,root.getStage());
+        }
+    }
+
+    private boolean isClientSelected(){
         int selectedIndex=clientTableView.getSelectionModel().getSelectedIndex();
         if(selectedIndex>=0){
-            clientTableView.getItems().remove(selectedIndex);
+            return true;
         }else{
             // Nothing selected
             Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -100,17 +111,8 @@ public class ClientUIController extends MyUIController{
             alert.setHeaderText("No Person Selected");
             alert.setContentText("Please select a person in the table");
             alert.showAndWait();
+            return false;
         }
-    }
-
-    @FXML
-    private void handleEditClient(){
-        ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),2);
-    }
-
-    @FXML
-    private void handleCheckClient(){
-        ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),3);
     }
 
     // 加载文件和界面的方法******************************************
@@ -135,7 +137,6 @@ public class ClientUIController extends MyUIController{
 
             ClientUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setReturnPaneController(new PurchaseSalePanelUIController());
             controller.setClientBlService(null);
 
             ClientVO c1=new ClientVO("类别：经销商", 3, "名字：陈骁",
@@ -152,7 +153,7 @@ public class ClientUIController extends MyUIController{
             list.add(c2);
             controller.showClientList(list);
 
-            root.setMainPaneController(controller);
+            root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){
             e.printStackTrace();
         }
