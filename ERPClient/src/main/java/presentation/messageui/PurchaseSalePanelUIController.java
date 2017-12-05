@@ -1,21 +1,33 @@
 package main.java.presentation.messageui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import main.java.MainApp;
 import main.java.presentation.clientui.ClientUIController;
 import main.java.presentation.mainui.RootUIController;
-import main.java.presentation.uiutility.MyUIController;
+import main.java.presentation.purchaseui.PurchaseBillUIController;
+import main.java.presentation.uiutility.CenterUIController;
 
 
-public class PurchaseSalePanelUIController extends MyUIController{
+public class PurchaseSalePanelUIController extends CenterUIController {
+
+
+    // 界面之中会用到的方法******************************************
+
+    @FXML
+    private void handlePurchaseBill(){
+        root.showLogoutButton(false);
+        PurchaseBillUIController.init(root);
+    }
 
     @FXML
     private void manageClient(){
         root.showLogoutButton(false);
         ClientUIController.init(root);
     }
+
+
+    // 加载文件和界面的方法******************************************
 
     public void instanceInit(RootUIController root){
         init(root);
@@ -29,10 +41,8 @@ public class PurchaseSalePanelUIController extends MyUIController{
             root.setCenterPane(loader.load());
 
             PurchaseSalePanelUIController controller=loader.getController();
-            root.setMainPaneController(controller);
             root.showLogoutButton(true);
             controller.setRoot(root);
-            controller.setReturnPaneController(null);
         }catch(Exception e){
             e.printStackTrace();
         }

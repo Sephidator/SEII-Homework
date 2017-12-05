@@ -3,7 +3,6 @@ package main.java.presentation.mainui;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -11,19 +10,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.presentation.loginui.LoginUIController;
-import main.java.presentation.uiutility.MyUIController;
+import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.user.UserVO;
 
 public class RootUIController {
     private Stage stage;
     private UserVO operator;
     private BorderPane rootPane;
-    private MyUIController mainPaneController;
+    private CenterUIController returnPaneController;
 
     @FXML
     private Label name;
     @FXML
-    private Label ID;
+    private Label jobNumber;
     @FXML
     private Label type;
     @FXML
@@ -39,19 +38,33 @@ public class RootUIController {
         this.rootPane = rootPane;
     }
 
-    public void setMainPaneController(MyUIController mainPaneController) {
-        this.mainPaneController = mainPaneController;
-    }
-
     public void setOperator(UserVO operator) {
         this.operator = operator;
         name.setText(operator.getName());
-        ID.setText(operator.getID());
+        jobNumber.setText(operator.getJobName());
         type.setText(operator.getType());
+    }
+
+    public void setReturnPaneController(CenterUIController returnPaneController) {
+        this.returnPaneController = returnPaneController;
     }
 
     public UserVO getOperator() {
         return operator;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setCenterPane(AnchorPane centerPane){
+        rootPane.setCenter(centerPane);
+    }
+
+
+    public void showLogoutButton(boolean state){
+        logout.setVisible(state);
+        exit.setVisible(!state);
     }
 
     @FXML
@@ -62,16 +75,7 @@ public class RootUIController {
     @FXML
     private void handleExit(){
         System.out.println("Button called");
-        mainPaneController.getReturnPaneController().instanceInit(this);
-    }
-
-    public void setCenterPane(AnchorPane centerPane){
-        rootPane.setCenter(centerPane);
-    }
-
-    public void showLogoutButton(boolean state){
-        logout.setVisible(state);
-        exit.setVisible(!state);
+        returnPaneController.instanceInit(this);
     }
 
     public static RootUIController initRoot(Stage stage, UserVO operator){

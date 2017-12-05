@@ -13,6 +13,7 @@ public class GoodsItemVO {
     public GoodsItemVO(GoodsVO goodsVO, int number) {
         this.goods=goodsVO;
         this.number = number;
+        price=goodsVO.getCost();
     }
 
     public GoodsItemPO getGoodsItemPO(){
