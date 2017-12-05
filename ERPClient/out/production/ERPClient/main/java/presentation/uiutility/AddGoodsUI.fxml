@@ -8,7 +8,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="360.0" prefWidth="480.0" style="-fx-background-image: url('/main/resources/pics/commonpics/背景.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.uiutility.AddGoodsUIController">
+=======
+<AnchorPane prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.uiutility.AddGoodsUIController">
+>>>>>>> 701cf5f1a1920a1720bd3562ad99e735d6517385
    <children>
       <HBox alignment="CENTER" layoutX="125.0" layoutY="316.0" spacing="80.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
          <children>
