@@ -140,7 +140,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Label alignment="CENTER" graphicTextGap="0.0" layoutX="124.0" layoutY="7.0" prefHeight="30.0" prefWidth="120.0" style="-fx-border-style: solid; -fx-background-color: #f4c20d; -fx-background-radius: 5; -fx-border-radius: 5;" text="待修改单据" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+      <Label alignment="CENTER" graphicTextGap="0.0" layoutX="124.0" layoutY="7.0" prefHeight="30.0" prefWidth="120.0" style="-fx-border-style: solid; -fx-background-color: #F5F5F5; -fx-background-radius: 5; -fx-border-radius: 5;" text="待修改单据" textOverrun="CLIP" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="18.0" />
          </font>

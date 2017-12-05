@@ -28,7 +28,7 @@ public class PurchaseBillVO extends BillVO {
     }
 
     public void setPurchaseList(ArrayList<GoodsItemVO> purchaseList) {
-        purchaseList = purchaseList;
+        this.purchaseList = purchaseList;
     }
 
     public void setTotalAmount(double total) {

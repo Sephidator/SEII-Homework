@@ -178,7 +178,8 @@ public class ClientInfoUIController extends InfoUIController{
 
             // Create the dialog stage
             Stage dialogStage=new Stage();
-            dialogStage.setTitle("Edit Person");
+            dialogStage.setResizable(false);
+            dialogStage.setTitle("客户信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));

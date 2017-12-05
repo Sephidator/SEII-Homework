@@ -119,6 +119,12 @@ public class PurchaseTradeBillUIController extends InfoUIController {
 
     public void setGoodsItemList(ArrayList<GoodsItemVO> goodsItemList) {
         this.goodsItemList=goodsItemList;
+        if(goodsItemList==null){
+            System.out.println("Null Exception");
+        }
+        else{
+            System.out.println("Not null");
+        }
         showGoodsItemList(goodsItemList);
     }
 
@@ -147,12 +153,17 @@ public class PurchaseTradeBillUIController extends InfoUIController {
      * 取得商品列表并修改ObservableList的信息
      * */
     private void showGoodsItemList(ArrayList<GoodsItemVO> goodsItemList){
-        goodsItemObservableList.removeAll();
+        if(goodsItemList!=null){
+            goodsItemTableView.getItems().clear();
+            goodsItemObservableList.removeAll();
 
-        for(int i=0;i<goodsItemList.size();i++){
-            goodsItemObservableList.add(goodsItemList.get(i));
+            for(int i=0;i<goodsItemList.size();i++){
+                goodsItemObservableList.add(goodsItemList.get(i));
+            }
+            goodsItemTableView.setItems(goodsItemObservableList);
+
+            System.out.println("GoodsItemListSize: "+goodsItemList.size());
         }
-        goodsItemTableView.setItems(goodsItemObservableList);
     }
 
 
@@ -161,6 +172,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     @FXML
     private void addGoods(){
         AddGoodsUIController.init(goodsList,goodsItemList,dialogStage);
+        System.out.println("添加商品了");
         showGoodsItemList(goodsItemList);
     }
 
@@ -178,6 +190,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
                 goodsItemList.get(selectedIndex).number++;
                 bill.setPurchaseList(goodsItemList);
                 showGoodsItemList(goodsItemList);
+                goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
         }
     }
@@ -190,9 +203,14 @@ public class PurchaseTradeBillUIController extends InfoUIController {
             goodsItemList.get(selectedIndex).number--;
             if(goodsItemList.get(selectedIndex).number==0){
                 goodsItemList.remove(selectedIndex);
+                bill.setPurchaseList(goodsItemList);
+                showGoodsItemList(goodsItemList);
             }
-            bill.setPurchaseList(goodsItemList);
-            showGoodsItemList(goodsItemList);
+            else{
+                bill.setPurchaseList(goodsItemList);
+                showGoodsItemList(goodsItemList);
+                goodsItemTableView.getSelectionModel().select(selectedIndex);
+            }
         }
     }
 
@@ -256,6 +274,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
 
             // Create the dialog stage
             Stage dialogStage=new Stage();
+            dialogStage.setResizable(false);
             dialogStage.setTitle("进货单信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
