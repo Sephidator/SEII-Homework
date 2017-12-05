@@ -17,7 +17,7 @@ public class UserBl implements UserBlService,UserTool {
      * @return: 返回ArrayList<UserVO>的用户列表
      */
     @Override
-    public ArrayList<UserVO> getUserList(UserQueryVO query) {
+    public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception{
         ArrayList<UserVO> userVOS=new ArrayList<>();
         ArrayList<UserPO> userPOS=new ArrayList<>();
 
@@ -34,6 +34,11 @@ public class UserBl implements UserBlService,UserTool {
         return userVOS;
     }
 
+    @Override
+    public UserVO find(String userID) throws Exception {
+        return null;
+    }
+
     /**
      * @version: 1
      * @date:
@@ -41,7 +46,7 @@ public class UserBl implements UserBlService,UserTool {
      * @return: 返回String的增加用户的ID
      */
     @Override
-    public String addUser(UserVO vo) {
+    public String addUser(UserVO vo) throws Exception{
         String id="";
 
         /*将UserVO转换为UserPO*/
@@ -59,7 +64,7 @@ public class UserBl implements UserBlService,UserTool {
      * @return:
      */
     @Override
-    public void editUser(UserVO vo) {
+    public void editUser(UserVO vo) throws Exception{
         /*将UserVO转换为UserPO*/
         UserPO userPO=vo.getUserPO();
 
@@ -73,7 +78,7 @@ public class UserBl implements UserBlService,UserTool {
      * @return:
      */
     @Override
-    public void deleteUser(String UserID) {
+    public void deleteUser(String UserID) throws Exception{
         /*调用UserDataService.delete服务完成对用户的删除*/
     }
 

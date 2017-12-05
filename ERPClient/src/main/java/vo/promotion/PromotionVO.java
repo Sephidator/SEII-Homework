@@ -1,10 +1,12 @@
 package main.java.vo.promotion;
 
+import main.java.vo.VO;
+
 import java.util.Date;
 
-public class PromotionVO {
+public class PromotionVO extends VO {
 
-    protected String ID;//促销策略编号
+    protected String name;//促销策略名字
 
     protected String type;//促销策略类型
 
@@ -12,8 +14,8 @@ public class PromotionVO {
 
     protected Date end;//促销策略截止时间
 
-    public String getID() {
-        return ID;
+    public String getName() {
+        return name;
     }
 
     public String getType() {
@@ -28,8 +30,8 @@ public class PromotionVO {
         return end;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setType(String type) {

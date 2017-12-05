@@ -6,5 +6,5 @@ import main.java.vo.user.UserVO;
 import java.util.ArrayList;
 
 public interface MessageBlService {
-    public ArrayList<MessageVO> getMessageList(UserVO receiver);
+    public ArrayList<MessageVO> getMessageList(UserVO receiver) throws Exception;
 }

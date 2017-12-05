@@ -37,7 +37,7 @@ public class PurchaseTradeBillVO extends PurchaseBillVO {
 
     }
 
-    public PurchaseTradeBillPO getPurchaseTradeBillPO(){
+    public PurchaseTradeBillPO getPurchaseTradeBillPO()throws Exception{
         PurchaseTradeBillPO purchaseTradeBillPO=new PurchaseTradeBillPO();
         purchaseTradeBillPO.setID(this.ID);
         purchaseTradeBillPO.setVisible(this.visible);
@@ -58,7 +58,7 @@ public class PurchaseTradeBillVO extends PurchaseBillVO {
         return purchaseTradeBillPO;
     }
 
-    public PurchaseTradeBillVO(PurchaseTradeBillPO purchaseTradeBillPO){
+    public PurchaseTradeBillVO(PurchaseTradeBillPO purchaseTradeBillPO)throws Exception{
         this.ID=purchaseTradeBillPO.getID();
         this.visible=purchaseTradeBillPO.isVisible();
         this.state=purchaseTradeBillPO.getState();
@@ -68,12 +68,10 @@ public class PurchaseTradeBillVO extends PurchaseBillVO {
         this.total=purchaseTradeBillPO.getTotal();
 
         UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(purchaseTradeBillPO.getOperatorID(),null,null);
-        this.operator=userTool.getUserList(userQueryVO).get(0);
+        this.operator=userTool.find(purchaseTradeBillPO.getOperatorID());
 
         ClientTool clientTool=new ClientBl();
-        ClientQueryVO clientQueryVO=new ClientQueryVO(purchaseTradeBillPO.getClientID(),null);
-        this.client=clientTool.getClientList(clientQueryVO).get(0);
+        this.client=clientTool.find(purchaseTradeBillPO.getClientID());
 
         ArrayList<GoodsItemVO> goodsItemVOS=new ArrayList<>();
         for(GoodsItemPO goodsItemPO:purchaseTradeBillPO.getPurchaseList()){

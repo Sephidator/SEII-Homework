@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface CashBillDataService extends Remote {
     /*根据筛选条件获取现金费用单列表*/
-    ArrayList<CashBillPO> find(BillQueryPO query) throws RemoteException;
+    ArrayList<CashBillPO> finds(BillQueryPO query) throws RemoteException;
 
     /*添加现金费用单*/
     String insert(CashBillPO po);

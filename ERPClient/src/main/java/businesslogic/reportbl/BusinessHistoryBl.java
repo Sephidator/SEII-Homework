@@ -14,7 +14,12 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query) {
+    public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query)throws Exception {
+        return null;
+    }
+
+    @Override
+    public String reverse(BillVO billVO) throws Exception {
         return null;
     }
 }

@@ -9,34 +9,34 @@ public class PromotionGoodsVO extends PromotionVO {
 
     private ArrayList<GoodsItemVO> goodsList; //组合降价的商品列表
 
-    private double total; //总价
+    private double discount; //降价折让部分
 
     PromotionGoodsVO(){
 
     }
 
-    public PromotionGoodsVO(String ID, String type, Date start, Date end, ArrayList<GoodsItemVO> goodsList, double total) {
-        this.ID=ID;
-        this.type=type;
+    public PromotionGoodsVO(String name, Date start, Date end, double discount,ArrayList<GoodsItemVO> goodsList) {
+        this.name=name;
+        this.type="特价包";
         this.start=start;
         this.end=end;
         this.goodsList = goodsList;
-        this.total = total;
+        this.discount = discount;
     }
 
     public ArrayList<GoodsItemVO> getGoodsList() {
         return goodsList;
     }
 
-    public double getTotal() {
-        return total;
+    public double getDiscount() {
+        return discount;
     }
 
     public void setGoodsList(ArrayList<GoodsItemVO> goodsList) {
         this.goodsList = goodsList;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public interface InventoryLossOverBillTool extends BillTool{
 
-    public void pass(BillVO billVO);
+    public void pass(BillVO billVO)throws Exception;
 
-    public void reject(BillVO billVO);
+    public void reject(BillVO billVO)throws Exception;
 
-    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query);
+    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query)throws Exception;
 }

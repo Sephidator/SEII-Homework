@@ -6,5 +6,7 @@ import main.java.vo.promotion.PromotionVO;
 import java.util.ArrayList;
 
 public interface PromotionTool {
-    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query);
+    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception;
+
+    public PromotionVO find(String promotionID);//通过promotionID查找某个促销策略
 }

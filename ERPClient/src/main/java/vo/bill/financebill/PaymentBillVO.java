@@ -81,7 +81,7 @@ public class PaymentBillVO extends FinanceBillVO {
     }
 
     /*得到PO以后转成VO*/
-    public PaymentBillVO(PaymentBillPO paymentBillPO){
+    public PaymentBillVO(PaymentBillPO paymentBillPO)throws Exception{
         this.ID = paymentBillPO.getID();
         this.state = paymentBillPO.getState();
         this.time = paymentBillPO.getTime();
@@ -89,11 +89,7 @@ public class PaymentBillVO extends FinanceBillVO {
 
         /*得到UserVO*/
         UserTool userTool = new UserBl();
-        UserQueryVO userQueryVO = new UserQueryVO(null,null,null);
-        userQueryVO.ID = paymentBillPO.getOperatorID();
-        userQueryVO.name = "";//初始化防止NPE
-        userQueryVO.type = "";
-        UserVO uservO = userTool.getUserList(userQueryVO).get(0);//拿到第一个userPO对象
+        UserVO uservO = userTool.find(paymentBillPO.getOperatorID());
         this.operator = uservO;
 
         this.comment = paymentBillPO.getComment();
@@ -101,10 +97,7 @@ public class PaymentBillVO extends FinanceBillVO {
 
         /*得到ClientVO*/
         ClientTool clientTool = new ClientBl();
-        ClientQueryVO clientQueryVO = new ClientQueryVO(null,null);
-        clientQueryVO.ID = paymentBillPO.getClientID();
-        clientQueryVO.name = "";
-        ClientVO clientVO = clientTool.getClientList(clientQueryVO).get(0);
+        ClientVO clientVO = clientTool.find(paymentBillPO.getClientID());
         this.client = clientVO;
 
         this.visible = paymentBillPO.isVisible();

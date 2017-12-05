@@ -20,7 +20,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [bill] 
      * @function: 
      */
-    public void pass(BillVO bill) {
+    public void pass(BillVO bill)  throws Exception{
 
     }
 
@@ -31,7 +31,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [bill] 
      * @function: 
      */
-    public void reject(BillVO bill) {
+    public void reject(BillVO bill)  throws Exception{
 
     }
 
@@ -42,7 +42,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) {
+    public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception {
         return null;
     }
 
@@ -53,7 +53,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<ClientVO> getClientList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception {
         return null;
     }
 
@@ -64,7 +64,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) {
+    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception {
         return null;
     }
 
@@ -75,7 +75,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [vo] 
      * @function: 
      */
-    public String submit(PaymentBillVO vo) {
+    public String submit(PaymentBillVO vo) throws Exception {
         return null;
     }
 
@@ -86,7 +86,7 @@ public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
      * @para: [vo] 
      * @function: 
      */
-    public void saveDraft(PaymentBillVO vo) {
+    public void saveDraft(PaymentBillVO vo)  throws Exception{
 
     }
 }

@@ -27,29 +27,12 @@ public class ApprovalBl implements ApprovalBlService {
      * @function: 将BillQueryVO转换为BillQueryPO，调用相关单据的Tool.get得到相关单据，再打包成ArrayList返回
      */
     @Override
-    public ArrayList<BillVO> getBillList(BillQueryVO query) {
+    public ArrayList<BillVO> getBillList(BillQueryVO query)  throws Exception{
 
         String type = query.type;
         ArrayList<BillVO> billVOArrayList = new ArrayList<BillVO>();
 
-        if(type.equals("PurchaseTradeBill")){
-            PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
-            ArrayList<PurchaseTradeBillVO> purchaseBillVOArrayList = purchaseTradeBillTool.getPurchaseTradeBillList(query);
-            for(int i = 0; i < purchaseBillVOArrayList.size(); i++){
-                billVOArrayList.add(purchaseBillVOArrayList.get(i));//将子类转换为父类
-            }
-            return billVOArrayList;
-        }
-        else if(type.equals("PurchaseRefundBill")){return billVOArrayList;}
-        else if(type.equals("SaleTradeBill")){return billVOArrayList;}
-        else if(type.equals("SaleRefundBill")){return billVOArrayList;}
-        else if(type.equals("PaymentBill")){return billVOArrayList;}
-        else if(type.equals("ReceiptBill")){return billVOArrayList;}
-        else if(type.equals("CashBill")){return billVOArrayList;}
-        else if(type.equals("InventoryLossOverBill")){return billVOArrayList;}
-        else if(type.equals("InventoryGiftBill")){return billVOArrayList;}
-        else if(type.equals("InventoryGiftBill")){return billVOArrayList;}
-        else{return billVOArrayList;}
+        return null;
     }
 
     /**
@@ -60,20 +43,10 @@ public class ApprovalBl implements ApprovalBlService {
      * 然后调用Tool.update，返回ResultMessage,其中还需要修改相关数据，详情查看用例文档
      */
     @Override
-    public void pass(BillVO billvo, UserVO sender) {
+    public void pass(BillVO billvo, UserVO sender)  throws Exception{
 
         /*通过单据并做相应数据修改*/
         String type = billvo.getType();
-        if(type.equals("PurchaseTradeBill")){}
-        else if(type.equals("PurchaseRefundBill")){}
-        else if(type.equals("SaleTradeBill")){}
-        else if(type.equals("SaleRefundBill")){}
-        else if(type.equals("PaymentBill")){}
-        else if(type.equals("ReceiptBill")){}
-        else if(type.equals("CashBill")){}
-        else if(type.equals("InventoryLossOverBill")){}
-        else if(type.equals("InventoryGiftBill")){}
-        else if(type.equals("InventoryGiftBill")){}
 
         /*操作日志*/
         LogTool logTool = new LogBl();
@@ -93,20 +66,10 @@ public class ApprovalBl implements ApprovalBlService {
      * 然后调用Tool.update和MessageDataService.insert，返回ResultMessage
      */
     @Override
-    public void reject(BillVO billvo, String reason, UserVO sender) {
+    public void reject(BillVO billvo, String reason, UserVO sender)  throws Exception{
 
         /*对单据相应处理*/
         String type = billvo.getType();
-        if(type.equals("PurchaseTradeBill")){}
-        else if(type.equals("PurchaseRefundBill")){}
-        else if(type.equals("SaleTradeBill")){}
-        else if(type.equals("SaleRefundBill")){}
-        else if(type.equals("PaymentBill")){}
-        else if(type.equals("ReceiptBill")){}
-        else if(type.equals("CashBill")){}
-        else if(type.equals("InventoryLossOverBill")){}
-        else if(type.equals("InventoryGiftBill")){}
-        else if(type.equals("InventoryGiftBill")){}
 
         /*操作日志*/
         LogTool logTool = new LogBl();

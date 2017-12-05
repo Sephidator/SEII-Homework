@@ -9,9 +9,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface SaleTradeBillDataService extends Remote {
-    ArrayList<SaleTradeBillPO> findByReport(SaleTradeBillQueryPO query) throws RemoteException;
+    ArrayList<SaleTradeBillPO> findsByReport(SaleTradeBillQueryPO query) throws RemoteException;
 
-    ArrayList<SaleTradeBillPO> findByBill(BillQueryPO query) throws RemoteException;
+    ArrayList<SaleTradeBillPO> findsByBill(BillQueryPO query) throws RemoteException;
 
     String insert(SaleTradeBillPO po) throws RemoteException;
 

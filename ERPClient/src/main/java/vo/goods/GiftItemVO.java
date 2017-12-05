@@ -19,11 +19,10 @@ public class GiftItemVO {
         return giftItemPO;
     }
 
-    public GiftItemVO(GiftItemPO giftItemPO){
+    public GiftItemVO(GiftItemPO giftItemPO)throws Exception{
         this.number=giftItemPO.number;
 
         GoodsTool goodsTool=new GoodsBl();
-        GoodsQueryVO goodsQueryVO=new GoodsQueryVO(giftItemPO.goodsID,null);
-        this.goods=goodsTool.getGoodsList(goodsQueryVO).get(0);
+        this.goods=goodsTool.find(giftItemPO.goodsID);
     }
 }

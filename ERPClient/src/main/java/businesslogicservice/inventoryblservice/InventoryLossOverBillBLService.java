@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public interface InventoryLossOverBillBLService {
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query);
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    public String submit(InventoryLossOverBillVO bill);
+    public String submit(InventoryLossOverBillVO bill) throws Exception;
 
-    public void saveDraft(InventoryLossOverBillVO bill);
+    public void saveDraft(InventoryLossOverBillVO bill) throws Exception;
 
-    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query);
+    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query) throws Exception;
 
 }

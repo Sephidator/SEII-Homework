@@ -8,7 +8,7 @@ import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 import java.util.ArrayList;
 
 public interface PurchaseTradeBillTool extends BillTool{
-    public void pass(BillVO billVO);
-    public void reject(BillVO billVO);
-    public ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query);
+    public void pass(BillVO billVO)throws Exception;
+    public void reject(BillVO billVO)throws Exception;
+    public ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query)throws Exception;
 }

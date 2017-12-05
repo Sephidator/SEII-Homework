@@ -18,42 +18,42 @@ public class SaleTradBillBl implements SaleTradeBillBlService,SaleTradeBillTool 
 
 
     @Override
-    public ArrayList<ClientVO> getSellerList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getSellerList(ClientQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) {
+    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public String submit(SaleTradeBillVO bill) {
+    public String submit(SaleTradeBillVO bill)throws Exception {
         return null;
     }
 
     @Override
-    public void saveDraft(SaleTradeBillVO bill) {
+    public void saveDraft(SaleTradeBillVO bill) throws Exception{
 
     }
 
     @Override
-    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) {
+    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public void pass(BillVO billVO) {
+    public void pass(BillVO billVO) throws Exception{
 
     }
 
     @Override
-    public void reject(BillVO billVO) {
+    public void reject(BillVO billVO) throws Exception{
 
     }
 }

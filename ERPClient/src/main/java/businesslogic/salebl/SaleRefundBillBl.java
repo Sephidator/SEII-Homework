@@ -15,38 +15,38 @@ import java.util.ArrayList;
 public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillTool{
 
     @Override
-    public ArrayList<ClientVO> getSellerList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getSellerList(ClientQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public String submit(SaleRefundBillVO bill) {
+    public String submit(SaleRefundBillVO bill) throws Exception{
         String id="";
         return null;
     }
 
     @Override
-    public void saveDraft(SaleRefundBillVO bill) {
+    public void saveDraft(SaleRefundBillVO bill) throws Exception{
 
     }
 
     @Override
-    public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query) {
+    public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query)throws Exception {
         return null;
     }
 
     @Override
-    public void pass(BillVO billVO) {
+    public void pass(BillVO billVO) throws Exception{
 
     }
 
     @Override
-    public void reject(BillVO billVO) {
+    public void reject(BillVO billVO) throws Exception{
 
     }
 }

@@ -15,7 +15,7 @@ public class LogBl implements LogBlService,LogTool{
      * @para: [log] 
      * @function: 
      */
-    public ResultMessage addLog(LogVO log) {
+    public String addLog(LogVO log)throws Exception {
         return null;
     }
 
@@ -26,7 +26,7 @@ public class LogBl implements LogBlService,LogTool{
      * @para: [query] 
      * @function: 
      */
-    public ArrayList<LogVO> getLogList(LogQueryVO query) {
+    public ArrayList<LogVO> getLogList(LogQueryVO query)throws Exception {
         return null;
     }
 }

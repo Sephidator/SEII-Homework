@@ -53,7 +53,7 @@ public class GoodsVO extends VO{
         return goodsPO;
     }
 
-    public GoodsVO(GoodsPO goodsPO) {
+    public GoodsVO(GoodsPO goodsPO) throws Exception{
         this.ID = goodsPO.getID();
         this.visible = goodsPO.isVisible();
         this.name = goodsPO.getName();
@@ -68,9 +68,7 @@ public class GoodsVO extends VO{
 
         GoodsSortTool goodsSortTool=new GoodsSortBl();
 
-        GoodsSortQueryVO goodsSortQueryVO=new GoodsSortQueryVO(goodsPO.getGoodsSortID(),null,null);
-
-        this.goodsSort=goodsSortTool.getGoodsSortList(goodsSortQueryVO).get(0);
+        this.goodsSort=goodsSortTool.find(goodsPO.getGoodsSortID());
     }
 
 

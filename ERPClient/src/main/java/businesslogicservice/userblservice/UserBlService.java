@@ -6,12 +6,12 @@ import main.java.vo.user.UserVO;
 import java.util.ArrayList;
 
 public interface UserBlService {
-    public ArrayList<UserVO> getUserList(UserQueryVO query);
+    public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception;
 
-    public String addUser(UserVO vo);
+    public String addUser(UserVO vo) throws Exception;
 
-    public void editUser(UserVO vo);
+    public void editUser(UserVO vo) throws Exception;
 
-    public void deleteUser(String UserID);
+    public void deleteUser(String UserID) throws Exception;
 
 }

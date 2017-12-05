@@ -13,7 +13,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回入库数量
      */
     @Override
-    public int getImportNumber(Date start, Date end) {
+    public int getImportNumber(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -25,7 +25,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回出库数量
      */
     @Override
-    public int getExportNumber(Date start, Date end) {
+    public int getExportNumber(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -37,7 +37,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回入库金额
      */
     @Override
-    public double getImportAmount(Date start, Date end) {
+    public double getImportAmount(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -49,7 +49,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回出库金额
      */
     @Override
-    public double getExportAmount(Date start, Date end) {
+    public double getExportAmount(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -60,7 +60,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList服务，返回进货数量
      */
     @Override
-    public int getPurchaseNumber(Date start, Date end) {
+    public int getPurchaseNumber(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -71,7 +71,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList服务，返回进货金额
      */
     @Override
-    public int getPurchaseAmount(Date start, Date end) {
+    public int getPurchaseAmount(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -82,7 +82,7 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * @function: 调用SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回销售数量
      */
     @Override
-    public double getSaleNumber(Date start, Date end) {
+    public double getSaleNumber(Date start, Date end)throws Exception {
         return 0;
     }
 
@@ -93,12 +93,12 @@ public class InventoryCheckBl implements InventoryCheckBLService {
      * @function: 调用SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回销售金额
      */
     @Override
-    public double getSaleAmount(Date start, Date end) {
+    public double getSaleAmount(Date start, Date end)throws Exception {
         return 0;
     }
 
     @Override
-    public int getTotal(Date start, Date end){
+    public int getTotal(Date start, Date end)throws Exception{
         return 0;
     }
 }

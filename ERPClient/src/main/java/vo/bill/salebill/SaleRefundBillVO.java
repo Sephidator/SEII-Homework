@@ -37,7 +37,7 @@ public class SaleRefundBillVO extends SaleBillVO {
 
     public SaleRefundBillVO(){}
 
-    public SaleRefundBillPO getSaleRefundBillPO(){
+    public SaleRefundBillPO getSaleRefundBillPO()throws Exception{
         SaleRefundBillPO saleRefundBillPO=new SaleRefundBillPO();
         saleRefundBillPO.setID(this.ID);
         saleRefundBillPO.setVisible(this.visible);
@@ -62,7 +62,7 @@ public class SaleRefundBillVO extends SaleBillVO {
         return saleRefundBillPO;
     }
 
-    public SaleRefundBillVO(SaleRefundBillPO saleRefundBillPO){
+    public SaleRefundBillVO(SaleRefundBillPO saleRefundBillPO)throws Exception{
         this.ID=saleRefundBillPO.getID();
         this.visible=saleRefundBillPO.isVisible();
         this.state=saleRefundBillPO.getState();
@@ -72,14 +72,11 @@ public class SaleRefundBillVO extends SaleBillVO {
         this.total=saleRefundBillPO.getTotal();
 
         UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(saleRefundBillPO.getOperatorID(),null,null);
-        UserQueryVO userQueryVO1=new UserQueryVO(saleRefundBillPO.getSalesmanID(),null,null);
-        this.operator=userTool.getUserList(userQueryVO).get(0);
-        this.salesman=userTool.getUserList(userQueryVO1).get(0);
+        this.operator=userTool.find(saleRefundBillPO.getOperatorID());
+        this.salesman=userTool.find(saleRefundBillPO.getSalesmanID());
 
         ClientTool clientTool=new ClientBl();
-        ClientQueryVO clientQueryVO=new ClientQueryVO(saleRefundBillPO.getClientID(),null);
-        this.client=clientTool.getClientList(clientQueryVO).get(0);
+        this.client=clientTool.find(saleRefundBillPO.getClientID());
 
         ArrayList<GoodsItemVO> goodsItemVOS=new ArrayList<>();
         for(GoodsItemPO goodsItemPO:saleRefundBillPO.getSaleList()){

@@ -14,16 +14,16 @@ import java.util.ArrayList;
 
 public interface SaleTradeBillBlService {
 
-    public ArrayList<ClientVO> getSellerList(ClientQueryVO query);
+    public ArrayList<ClientVO> getSellerList(ClientQueryVO query) throws Exception;
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query);
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query);
+    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) throws Exception;
 
-    public String submit(SaleTradeBillVO bill);
+    public String submit(SaleTradeBillVO bill) throws Exception;
 
-    public void saveDraft(SaleTradeBillVO bill);
+    public void saveDraft(SaleTradeBillVO bill) throws Exception;
 
-    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query);
+    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) throws Exception;
 
 }

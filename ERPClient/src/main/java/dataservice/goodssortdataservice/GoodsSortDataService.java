@@ -8,8 +8,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface GoodsSortDataService extends Remote {
+    GoodsSortPO find(String goodsSortID) throws RemoteException;
 
-    ArrayList<GoodsSortPO> find(GoodsSortQueryPO query) throws RemoteException;
+    ArrayList<GoodsSortPO> finds(GoodsSortQueryPO query) throws RemoteException;
 
     String insert(GoodsSortPO po) throws RemoteException;
 

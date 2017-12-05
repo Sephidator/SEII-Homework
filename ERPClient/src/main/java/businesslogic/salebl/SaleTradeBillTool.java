@@ -9,7 +9,7 @@ import main.java.vo.bill.salebill.SaleTradeBillVO;
 import java.util.ArrayList;
 
 public interface SaleTradeBillTool extends BillTool{
-    public void pass(BillVO billVO);
-    public void reject(BillVO billVO);
-    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query);
+    public void pass(BillVO billVO)throws Exception;
+    public void reject(BillVO billVO)throws Exception;
+    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query)throws Exception;
 }

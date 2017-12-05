@@ -16,7 +16,7 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @return: 返回ArrayList<GoodsSortVO>的商品分类列表
      */
     @Override
-    public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query) {
+    public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query) throws Exception{
         ArrayList<GoodsSortVO> goodsSortVOS=new ArrayList<>();
         ArrayList<GoodsSortPO> goodsSortPOS=new ArrayList<>();
 
@@ -33,6 +33,11 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
         return goodsSortVOS;
     }
 
+    @Override
+    public GoodsSortVO find(String goodsSortID) {
+        return null;
+    }
+
     /**
      * @version: 1
      * @date:
@@ -40,7 +45,7 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @return: 返回String的增加的商品分类的ID
      */
     @Override
-    public String addGoodsSort(GoodsSortVO goodsSort) {
+    public String addGoodsSort(GoodsSortVO goodsSort) throws Exception{
         String id="";
 
         /*将GoodsSortVO转成GoodsSortPO*/
@@ -58,7 +63,7 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @return:
      */
     @Override
-    public void deleteGoodsSort(String goodsSortID) {
+    public void deleteGoodsSort(String goodsSortID) throws Exception{
 
         /*调用GoodsSortDataService.delete服务完成对商品分类的删除*/
 
@@ -71,7 +76,7 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @return：
      */
     @Override
-    public void editGoodsSort(GoodsSortVO goodsSort) {
+    public void editGoodsSort(GoodsSortVO goodsSort) throws Exception{
         /*将GoodsSortVO转成GoodsSortPO*/
         GoodsSortPO goodsSortPO=goodsSort.getGoodsSortPO();
 

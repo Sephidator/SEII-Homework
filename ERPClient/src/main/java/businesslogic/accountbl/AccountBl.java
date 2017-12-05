@@ -18,7 +18,7 @@ public class AccountBl implements AccountBlService,AccountTool{
      *             得到ArrayList<AccountPO>以后转成ArrayList<AccountVO>，返回ArrayList<AccountVO>
      */
     @Override
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) {
+    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception{
         /*AccountQueryVO转为AccountQueryPO*/
         AccountQueryPO accountQueryPO = query.getAccountQueryPO();
 
@@ -43,13 +43,18 @@ public class AccountBl implements AccountBlService,AccountTool{
      * @function: 将AccountVO转成AccountPO，并调用AccountDataService.update服务
      */
     @Override
-    public void editAccount(AccountVO account){
+    public void editAccount(AccountVO account) throws Exception{
         /*AccountVO转成AccountPO*/
         AccountPO accountPO = account.getAccountPO();
 
         /*调用AccountDataService.update*/
        // AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
         //accountDataService.update(accountPO);
+    }
+
+    @Override
+    public AccountVO find(String accountID) throws Exception {
+        return null;
     }
 
 
@@ -60,13 +65,15 @@ public class AccountBl implements AccountBlService,AccountTool{
      * @function: 将AccountVO转成AccountPO，并调用AccountDataService.insert服务
      */
     @Override
-    public void addAccount(AccountVO account)  {
+    public String addAccount(AccountVO account)   throws Exception{
         /*AccountVO转成AccountPO*/
         AccountPO accountPO = account.getAccountPO();
 
         /*调用AccountDataService.insert*/
        // AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
         //accountDataService.insert(accountPO);
+
+        return null;
     }
 
     /**
@@ -76,7 +83,7 @@ public class AccountBl implements AccountBlService,AccountTool{
      * @function: 调用AccountDataService.delete服务
      */
     @Override
-    public void deleteAccount(String accountID) {
+    public void deleteAccount(String accountID)  throws Exception{
 
         /*调用AccountDataService.delete*/
         //AccountDataService accountDataService = (AccountDataService)Naming.lookup("rmi://localhost:");

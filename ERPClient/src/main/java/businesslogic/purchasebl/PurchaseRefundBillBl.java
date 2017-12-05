@@ -26,7 +26,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @function: 将ClientQueryVO转为ClientQueryPO，调用ClientTool.getClientList服务，返回ArrayList<ClientVO>
      */
     @Override
-    public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) {
+    public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) throws Exception{
         //ClientQueryPO clientQueryPO=new ClientQueryPO();
         ArrayList<ClientVO> clientVOS=new ArrayList<>();
 
@@ -42,7 +42,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsTool.getGoodsList服务，返回ArrayList<GoodsVO>
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) {
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
 
         GoodsTool goodsTool=new GoodsBl();
@@ -58,7 +58,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @function: 将PurchaseRefundBillVO转成PurchaseRefundBillPO，并调用PurchaseRefundBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public String submit(PurchaseRefundBillVO bill) {
+    public String submit(PurchaseRefundBillVO bill) throws Exception{
         String id="";
         PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
 
@@ -73,7 +73,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @function: 将PurchaseRefundBillVO转成PurchaseRefundBillPO，并调用PurchaseRefundBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void saveDraft(PurchaseRefundBillVO bill) {
+    public void saveDraft(PurchaseRefundBillVO bill) throws Exception{
         PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
 
 
@@ -87,7 +87,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * 得到ArrayList<PurchaseRefundBillPO>以后转成ArrayList<PurchaseRefundBillVO>，返回ArrayList<PurchaseRefundBillVO>
      */
     @Override
-    public ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query) {
+    public ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query) throws Exception{
         BillQueryPO billQueryPO=new BillQueryPO();
         ArrayList<PurchaseRefundBillPO> purchaseRefundBillPOS=new ArrayList<>();
         ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS=new ArrayList<>();
@@ -103,7 +103,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @function: 将PurchaseRefundBillVO转成PurchaseRefundBillPO，并调用PurchaseRefundBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void pass(BillVO billVO) {
+    public void pass(BillVO billVO) throws Exception{
         PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
 
 
@@ -116,7 +116,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @function: 将PurchaseRefundBillVO转成PurchaseRefundBillPO，并调用PurchaseRefundBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public void reject(BillVO billVO) {
+    public void reject(BillVO billVO) throws Exception{
         PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
 
 

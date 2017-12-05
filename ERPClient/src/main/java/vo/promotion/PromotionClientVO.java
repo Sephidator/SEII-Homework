@@ -8,6 +8,8 @@ import java.util.Date;
 public class PromotionClientVO extends PromotionVO {
     private int clientLevel; // 客户等级
 
+    private double discount; // 折让金额
+
     private double voucher;//代金券
 
     private ArrayList<GiftItemVO> giftList; // 赠品列表
@@ -16,12 +18,14 @@ public class PromotionClientVO extends PromotionVO {
 
     }
 
-    public PromotionClientVO(String ID, String type, Date start, Date end, int clientLevel, int voucher, ArrayList<GiftItemVO> giftList) {
+    public PromotionClientVO(String ID,String name ,String type, Date start, Date end, int clientLevel, double discount,int voucher, ArrayList<GiftItemVO> giftList) {
         this.ID=ID;
-        this.type=type;
+        this.name = name;
+        this.type="客户促销策略";
         this.start=start;
         this.end=end;
         this.clientLevel = clientLevel;
+        this.discount = discount;
         this.voucher = voucher;
         this.giftList = giftList;
     }
@@ -32,6 +36,14 @@ public class PromotionClientVO extends PromotionVO {
 
     public double getVoucher() {
         return voucher;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public ArrayList<GiftItemVO> getGiftList() {

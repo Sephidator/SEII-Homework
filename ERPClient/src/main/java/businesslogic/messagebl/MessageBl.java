@@ -9,12 +9,11 @@ import java.util.ArrayList;
 
 public class MessageBl implements MessageBlService,MessageTool{
     @Override
-    public ArrayList<MessageVO> getMessageList(UserVO receiver) {
+    public ArrayList<MessageVO> getMessageList(UserVO receiver)throws Exception {
         return null;
     }
 
     @Override
-    public ResultMessage addMessage(MessageVO message) {
-        return null;
+    public void addMessage(MessageVO message)throws Exception {
     }
 }

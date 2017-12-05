@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 public interface LogBlService {
 
-    public ArrayList<LogVO> getLogList(LogQueryVO query);//返回指定时间区间内的操作日志
+    public ArrayList<LogVO> getLogList(LogQueryVO query) throws Exception;//返回指定时间区间内的操作日志
 
 }

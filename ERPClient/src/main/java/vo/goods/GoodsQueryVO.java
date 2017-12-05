@@ -1,19 +1,19 @@
 package main.java.vo.goods;
 
 import main.java.po.goods.GoodsQueryPO;
-import main.java.vo.QueryVO;
 
 
-public class GoodsQueryVO extends QueryVO{
+public class GoodsQueryVO{
     public String name; //商品名称
+    public String goodsSortID;//商品所在商品分类
 
-    public GoodsQueryVO(String ID, String name) {
-        this.ID = ID;
+    public GoodsQueryVO(String name,String ID) {
         this.name = name;
+        this.goodsSortID = ID;
     }
 
     public GoodsQueryPO getGoodsQueryPO(){
-        GoodsQueryPO goodsQueryPO=new GoodsQueryPO(this.ID,this.name);
+        GoodsQueryPO goodsQueryPO=new GoodsQueryPO(this.name,this.goodsSortID);
         return goodsQueryPO;
     }
 }
