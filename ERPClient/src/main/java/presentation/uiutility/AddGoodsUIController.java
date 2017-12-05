@@ -77,12 +77,14 @@ public class AddGoodsUIController {
      * 取得商品列表并修改ObservableList的信息
      * */
     private void showGoodsList(ArrayList<GoodsVO> goodsList){
-        goodsObservableList.removeAll();
+        if(goodsList!=null){
+            goodsObservableList.removeAll();
 
-        for(int i=0;i<goodsList.size();i++){
-            goodsObservableList.add(goodsList.get(i));
+            for(int i=0;i<goodsList.size();i++){
+                goodsObservableList.add(goodsList.get(i));
+            }
+            goodsTableView.setItems(goodsObservableList);
         }
-        goodsTableView.setItems(goodsObservableList);
     }
 
     @FXML
@@ -124,13 +126,14 @@ public class AddGoodsUIController {
             loader.setLocation(MainApp.class.getResource("/main/java/presentation/uiutility/AddGoodsUI.fxml"));
 
             Stage dialogStage=new Stage();
+            dialogStage.setResizable(false);
             dialogStage.setTitle("添加商品界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
 
             AddGoodsUIController controller=loader.getController();
-            controller.setDialogStage(stage);
+            controller.setDialogStage(dialogStage);
             controller.setGoodsList(goodsList);
             controller.setGoodsItemList(goodsItemList);
 

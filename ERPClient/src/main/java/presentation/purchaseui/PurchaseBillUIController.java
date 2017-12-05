@@ -76,6 +76,8 @@ public class PurchaseBillUIController extends CenterUIController {
     private void addPurchaseTradeBill(){
         PurchaseTradeBillVO bill=new PurchaseTradeBillVO();
         bill.setOperator(root.getOperator());
+        bill.setPurchaseList(new ArrayList<>());
+        bill.setType("进货单");
         PurchaseTradeBillUIController.init(null,bill,1,root.getStage());
     }
 
