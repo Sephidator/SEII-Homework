@@ -83,8 +83,10 @@ public class PurchaseBillUIController extends CenterUIController {
 
     @FXML
     private void addPurchaseRefundBill(){
+        System.out.println("不是null");
         PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
         bill.setOperator(root.getOperator());
+        bill.setPurchaseList(new ArrayList<>());
         bill.setType("进货退货单");
         PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
     }
