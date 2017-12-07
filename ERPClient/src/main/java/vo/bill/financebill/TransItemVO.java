@@ -10,6 +10,13 @@ public class TransItemVO {
     public double transAmount;//转账金额
     public String comment;//备注
 
+    public TransItemVO(){}
+    public TransItemVO(AccountVO account, double transAmount, String comment) {
+        this.account = account;
+        this.transAmount = transAmount;
+        this.comment = comment;
+    }
+
     /*得到TransItemPO*/
     public TransItemPO getTransItemPO(){
         TransItemPO transItemPO = new TransItemPO(this.account.getBankAccount(),this.transAmount,this.comment);

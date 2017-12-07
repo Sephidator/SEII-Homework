@@ -11,19 +11,19 @@ public class AccountDataServiceStub implements AccountDataService {
 
     @Override
     public AccountPO find(String accountID) {
-        return new AccountPO();
+        return new AccountPO(accountID+".bankAccount",accountID+".name",123.321);
     }
 
     @Override
     public ArrayList<AccountPO> finds(AccountQueryPO query) {
         ArrayList<AccountPO> list = new ArrayList<>();
-        list.add(new AccountPO());
+        list.add(new AccountPO(query.bankAccount,query.name,123.321));
         return list;
     }
 
     @Override
     public String insert(AccountPO po) {
-        return "00000001";
+        return po.getID();
     }
 
     @Override
