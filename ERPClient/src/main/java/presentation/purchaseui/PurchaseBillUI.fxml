@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.purchaseui.PurchaseBillUIController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('/main/resources/pics/commonpics/背景.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.purchaseui.PurchaseBillUIController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
         <columnConstraints>
@@ -61,7 +62,14 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Button layoutX="47.0" layoutY="4.0" mnemonicParsing="false" onAction="#addPurchaseTradeBill" prefHeight="40.0" prefWidth="147.0" text="制定进货单" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <JFXButton buttonType="RAISED" onAction="#addPurchaseTradeBill" style="-fx-background-color: #3cba54; -fx-background-radius: 15; -fx-border-radius: 15;" text="制定进货单" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </JFXButton>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -84,7 +92,14 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Button layoutX="30.0" layoutY="6.0" mnemonicParsing="false" onAction="#addPurchaseRefundBill" prefHeight="42.0" prefWidth="130.0" text="制定进货退货单" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <JFXButton buttonType="RAISED" onAction="#addPurchaseRefundBill" style="-fx-background-color: #f4c20d; -fx-background-radius: 15; -fx-border-radius: 15;" text="制定进货退货单" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </JFXButton>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -107,7 +122,14 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Button layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#editPurchaseBill" prefHeight="42.0" prefWidth="115.0" text="编辑单据" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <JFXButton buttonType="RAISED" onAction="#editPurchaseBill" style="-fx-background-color: #4885ed; -fx-background-radius: 15; -fx-border-radius: 15;" text="编辑单据" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </JFXButton>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -118,7 +140,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Label alignment="CENTER" graphicTextGap="0.0" layoutX="124.0" layoutY="7.0" prefHeight="30.0" prefWidth="120.0" styleClass="greyLabel" text="待修改单据" textOverrun="CLIP" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+      <Label alignment="CENTER" graphicTextGap="0.0" layoutX="124.0" layoutY="7.0" prefHeight="30.0" prefWidth="120.0" style="-fx-border-style: solid; -fx-background-color: #F5F5F5; -fx-background-radius: 5; -fx-border-radius: 5;" text="待修改单据" textOverrun="CLIP" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="18.0" />
          </font>

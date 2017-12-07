@@ -58,9 +58,9 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     @FXML
     private ChoiceBox<String> clientChoiceBox;
     @FXML
-    private Button confirm;
+    private JFXButton confirm;
     @FXML
-    private Button cancel;
+    private JFXButton cancel;
 
 
     // 加载文件后调用的方法******************************************
@@ -178,10 +178,8 @@ public class PurchaseTradeBillUIController extends InfoUIController {
 
     @FXML
     private void deleteGoods(){
-        if(isGoodsItemSelected()){
-            int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            goodsItemTableView.getItems().remove(selectedIndex);
-        }
+        int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
+        goodsItemTableView.getItems().remove(selectedIndex);
     }
 
     @FXML
@@ -272,7 +270,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchaseTradeBillUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchasetradeBillUI.fxml"));
 
             // Create the dialog stage
             Stage dialogStage=new Stage();

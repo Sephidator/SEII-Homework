@@ -1,10 +1,10 @@
 package main.java.presentation.loginui;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.presentation.mainui.RootUIController;
@@ -20,9 +20,9 @@ public class LoginUIController {
     @FXML
     private JFXTextField passwordField;
     @FXML
-    private Button login;
+    private JFXButton login;
     @FXML
-    private Button exit;
+    private JFXButton exit;
 
     private Stage stage;
 

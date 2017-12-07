@@ -83,10 +83,9 @@ public class PurchaseBillUIController extends CenterUIController {
 
     @FXML
     private void addPurchaseRefundBill(){
-        PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
-        bill.setOperator(root.getOperator());
-        bill.setType("进货退货单");
-        PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
+        //PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
+        //bill.setOperator(root.getOperator());
+        //PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML
@@ -97,8 +96,8 @@ public class PurchaseBillUIController extends CenterUIController {
                 PurchaseTradeBillUIController.init(null,bill,2,root.getStage());
             }
             else if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
-                PurchaseRefundBillVO bill=(PurchaseRefundBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseRefundBillUIController.init(null,bill,2,root.getStage());
+                //PurchaseRefundBillVO bill=(PurchaseRefundBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
+                //PurchaseRefundBillUIController.init(null,bill,3,root.getStage());
             }
         }
     }

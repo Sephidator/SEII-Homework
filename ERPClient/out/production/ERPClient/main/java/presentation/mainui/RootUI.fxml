@@ -17,7 +17,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.mainui.RootUIController">
    <top>
-      <AnchorPane prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #1080EE;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #4885ed;" BorderPane.alignment="CENTER">
          <children>
             <GridPane layoutX="288.0" layoutY="1.0" prefHeight="61.0" prefWidth="788.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
@@ -95,7 +95,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="60.0" GridPane.columnIndex="2">
                      <children>
-                        <JFXButton fx:id="exit" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" onAction="#handleExit" prefHeight="40.0" prefWidth="40.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                        <JFXButton fx:id="exit" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" onAction="#handleExit" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #FF0000; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>
@@ -113,7 +113,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="logout" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="153.0" layoutY="10.0" onAction="#handleLogout" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #EC3025; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                        <JFXButton fx:id="logout" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="153.0" layoutY="10.0" onAction="#handleLogout" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #FF0000; -fx-border-radius: 20; -fx-background-radius: 20;" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>
