@@ -1,8 +1,11 @@
 package main.java.vo.bill.financebill;
+import main.java.businesslogic.accountbl.AccountBl;
+import main.java.businesslogic.accountbl.AccountTool;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.po.bill.financebill.CashItemPO;
+import main.java.vo.account.AccountVO;
 import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
@@ -16,13 +19,16 @@ import java.util.*;
 
 public class CashBillVO extends FinanceBillVO {
 
+    private AccountVO account;//现金费用单的银行账户
+
     private ArrayList<CashItemVO> itemList;//现金费用单条目清单的条目名和金额
 
     public CashBillVO(){
 
     }
 
-    public CashBillVO(String state, Date time,UserVO operator, String comment, double total,  ArrayList<CashItemVO> itemList) {
+    public CashBillVO(AccountVO account, String state, Date time,UserVO operator, String comment, double total,  ArrayList<CashItemVO> itemList) {
+        this.account = account;
         this.state = state;
         this.time = time;
         this.type = "现金费用单";
@@ -40,9 +46,14 @@ public class CashBillVO extends FinanceBillVO {
         this.itemList = itemList;
     }
 
+    public AccountVO getAccount(){return this.account;}
+
+    public void setAccount(AccountVO account){this.account = account;}
+
     /*得到CashBillPO*/
     public CashBillPO getCashBillPO(){
         CashBillPO cashBillPO = new CashBillPO();
+        cashBillPO.setAccountID(this.account.getBankAccount());
         cashBillPO.setID(this.ID);
         cashBillPO.setState(this.state);
         cashBillPO.setTime(this.time);
@@ -71,6 +82,9 @@ public class CashBillVO extends FinanceBillVO {
         this.visible = cashBillPO.isVisible();
         this.comment = cashBillPO.getComment();
         this.total = cashBillPO.getTotal();
+
+        AccountTool accountTool = new AccountBl();
+        this.account = accountTool.find(cashBillPO.getAccountID());
 
         /*得到UserVO*/
         UserTool userTool = new UserBl();
