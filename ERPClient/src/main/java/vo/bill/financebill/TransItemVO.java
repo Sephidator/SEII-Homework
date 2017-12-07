@@ -1,21 +1,25 @@
 package main.java.vo.bill.financebill;
 
+import main.java.businesslogic.accountbl.AccountBl;
+import main.java.businesslogic.accountbl.AccountTool;
 import main.java.po.bill.financebill.TransItemPO;
+import main.java.vo.account.AccountVO;
 
 public class TransItemVO {
-    public String bankAccount;//银行账户
+    public AccountVO account;//银行账户
     public double transAmount;//转账金额
     public String comment;//备注
 
     /*得到TransItemPO*/
     public TransItemPO getTransItemPO(){
-        TransItemPO transItemPO = new TransItemPO(this.bankAccount,this.transAmount,this.comment);
+        TransItemPO transItemPO = new TransItemPO(this.account.getBankAccount(),this.transAmount,this.comment);
         return transItemPO;
     }
 
     /*将PO转成VO*/
-    public TransItemVO(TransItemPO transItemPO){
-        this.bankAccount = transItemPO.bankAccount;
+    public TransItemVO(TransItemPO transItemPO) throws Exception{
+        AccountTool accountTool = new AccountBl();
+        this.account = accountTool.find(transItemPO.accountID);
         this.transAmount = transItemPO.transAmount;
         this.comment = transItemPO.comment;
     }

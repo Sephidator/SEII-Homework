@@ -11,13 +11,16 @@ import java.util.Date;
 
 public class CashBillPO extends FinanceBillPO {
 
+    private String accountID;//银行账户
+
     private ArrayList<CashItemPO> itemList;//现金费用单条目清单的条目名和金额
 
     public CashBillPO() {
 
     }
 
-    public CashBillPO(String state, Date time, String operatorID, String comment, double total, ArrayList<CashItemPO> itemList) {
+    public CashBillPO(String accountID, String state, Date time, String operatorID, String comment, double total, ArrayList<CashItemPO> itemList) {
+        this.accountID = accountID;
         this.state = state;
         this.time = time;
         this.operatorID = operatorID;
@@ -34,5 +37,9 @@ public class CashBillPO extends FinanceBillPO {
     public void setItemList(ArrayList<CashItemPO> itemList) {
         this.itemList = itemList;
     }
+
+    public String getAccountID(){return this.accountID;}
+
+    public void setAccountID(String accountID){this.accountID = accountID;}
 }
 
