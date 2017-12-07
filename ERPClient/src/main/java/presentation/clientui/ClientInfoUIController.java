@@ -54,9 +54,9 @@ public class ClientInfoUIController extends InfoUIController{
     @FXML
     private ChoiceBox<String> salesmanChoiceBox;
     @FXML
-    private JFXButton confirm;
+    private Button confirm;
     @FXML
-    private JFXButton cancel;
+    private Button cancel;
 
     // 加载文件后调用的方法******************************************
 

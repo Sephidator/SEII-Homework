@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('/main/resources/pics/commonpics/背景.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.clientui.ClientUIController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.clientui.ClientUIController">
    <children>
       <ImageView fitHeight="60.0" fitWidth="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <image>
@@ -29,7 +29,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <TextField prefHeight="40.0" prefWidth="250.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="30.0">
+      <TextField prefHeight="30.0" prefWidth="250.0" styleClass="text-field" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -87,14 +87,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="addClient" buttonType="RAISED" onAction="#handleAddClient" style="-fx-background-color: #3cba54; -fx-background-radius: 15; -fx-border-radius: 15;" text="添加客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                    </JFXButton>
+                                    <Button layoutX="37.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleAddClient" prefHeight="48.0" prefWidth="92.0" text="添加客户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -117,14 +110,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="deleteClient" buttonType="RAISED" onAction="#handleDeleteClient" style="-fx-background-color: #db3236; -fx-background-radius: 15; -fx-border-radius: 15;" text="删除客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                    </JFXButton>
+                                    <Button layoutX="4.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleDeleteClient" prefHeight="65.0" prefWidth="96.0" text="删除客户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -147,14 +133,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="EditClient" buttonType="RAISED" onAction="#handleEditClient" style="-fx-background-color: #4885ed; -fx-background-radius: 15; -fx-border-radius: 15;" text="编辑客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                    </JFXButton>
+                                    <Button layoutX="3.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleEditClient" prefHeight="66.0" prefWidth="95.0" text="编辑客户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -177,14 +156,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <JFXButton fx:id="checkClient" buttonType="RAISED" onAction="#handleCheckClient" style="-fx-background-color: #f4c20d; -fx-background-radius: 15; -fx-border-radius: 15;" text="查看客户" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                    </JFXButton>
+                                    <Button layoutX="3.0" mnemonicParsing="false" onAction="#handleCheckClient" prefHeight="48.0" prefWidth="95.0" text="查看客户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
