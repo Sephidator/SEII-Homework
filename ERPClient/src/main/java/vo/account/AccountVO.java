@@ -44,6 +44,7 @@ public class AccountVO extends VO {
         this.remaining = remaining;
     }
 
+    /*一共五个参数*/
     /*返回AccountPO,不进行处理*/
     public AccountPO getAccountPO(){
         AccountPO accountPO = new AccountPO();
@@ -56,7 +57,7 @@ public class AccountVO extends VO {
         return accountPO;
     }
 
-    /*返回AccountVO，不进行处理*/
+    /*AccountVO，不进行处理*/
     public AccountVO(AccountPO accountPO){
         this.ID = accountPO.getID();
         this.bankAccount = accountPO.getBankAccount();

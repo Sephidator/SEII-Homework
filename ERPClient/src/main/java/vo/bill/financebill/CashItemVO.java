@@ -3,9 +3,18 @@ package main.java.vo.bill.financebill;
 import main.java.po.bill.financebill.CashItemPO;
 
 public class CashItemVO {
+
     public String ItemName;// 条目名
     public double amount;//金额
     public String comment;//备注
+
+    public CashItemVO(){}
+    public CashItemVO(String itemName, double amount, String comment) {
+        ItemName = itemName;
+        this.amount = amount;
+        this.comment = comment;
+    }
+
 
     /*得到CashItemPO*/
     public CashItemPO getCashItemPO(){

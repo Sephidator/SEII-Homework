@@ -1,6 +1,8 @@
 package main.java.businesslogic.accountbl;
 
 import main.java.businesslogicservice.accountblservice.AccountBlService;
+import main.java.data_stub.accountdataservicestub.AccountDataServiceStub;
+import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 import main.java.vo.account.AccountQueryVO;
@@ -24,13 +26,17 @@ public class AccountBl implements AccountBlService,AccountTool{
 
         /*调用AccountDatdaService.find服务*/
         //AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        //ArrayList<AccountPO> accoutPOArralist = accountDataService.find(accountQueryPO);
+        //ArrayList<AccountPO> accoutPOS = accountDataService.finds(accountQueryPO);
+
+        /*调用dataservice的桩*/
+        AccountDataService accountDataServiceStub = new AccountDataServiceStub();
+        ArrayList<AccountPO> accountPOS = accountDataServiceStub.finds(accountQueryPO);
 
         /*ArrayList<AccountPO>转成ArrayList<AccountVO>*/
         ArrayList<AccountVO> accountVOArrayList = new ArrayList<AccountVO>();
-        //for(AccountPO accoutPO : accoutPOArralist){
-        //    accountVOArrayList.add(new AccountVO(accoutPO));
-        //}
+        for(AccountPO accountPO : accountPOS){
+            accountVOArrayList.add(new AccountVO(accountPO));
+        }
 
         /*返回ArrayList<AccountVO>*/
         return accountVOArrayList;
@@ -50,11 +56,31 @@ public class AccountBl implements AccountBlService,AccountTool{
         /*调用AccountDataService.update*/
        // AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
         //accountDataService.update(accountPO);
+
+        /*调用dataservice的桩*/
+        AccountDataService accountDataService = new AccountDataServiceStub();
+        accountDataService.update(accountPO);
     }
 
+    /**
+     * @version: 1
+     * @date: 2017.12.08 0:06
+     * @para:  [accountID]待查询的ID，find用于系统查询
+     * @function: 给其它类使用的findByID方法
+     */
     @Override
     public AccountVO find(String accountID) throws Exception {
-        return null;
+        /*调用AccountDataService.find*/
+//        AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
+//        AccountPO accountPO = accountDataService.find(accountID);
+//        AccountVO accountVO = new AccountVO(accountPO);
+
+        /*调用dataservice的桩*/
+        AccountDataService accountDataService = new AccountDataServiceStub();
+        AccountPO accountPO = accountDataService.find(accountID);
+        AccountVO accountVO = new AccountVO(accountPO);
+
+        return accountVO;
     }
 
 
@@ -71,9 +97,13 @@ public class AccountBl implements AccountBlService,AccountTool{
 
         /*调用AccountDataService.insert*/
        // AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        //accountDataService.insert(accountPO);
+        //String id = accountDataService.insert(accountPO);
 
-        return null;
+        /*调用AccountDataService桩*/
+        AccountDataService accountDataService = new AccountDataServiceStub();
+        String id = accountDataService.insert(accountPO);
+
+        return id;
     }
 
     /**
@@ -88,5 +118,9 @@ public class AccountBl implements AccountBlService,AccountTool{
         /*调用AccountDataService.delete*/
         //AccountDataService accountDataService = (AccountDataService)Naming.lookup("rmi://localhost:");
         //accountDataService.delete(accountID);
+
+        /*调用AccountDataService桩*/
+        AccountDataService accountDataService = new AccountDataServiceStub();
+        accountDataService.delete(accountID);
     }
 }

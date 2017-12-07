@@ -10,7 +10,5 @@ public class BusinessConditionQueryVO {
         this.start = start;
         this.end = end;
     }
-
-    public BusinessConditionQueryVO() {
-    }
+    public BusinessConditionQueryVO(){}
 }
