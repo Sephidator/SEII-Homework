@@ -125,28 +125,31 @@ public class PromotionData implements PromotionDataService {
                     sql = "UPDATE Promotion SET ID='" + ID + "', clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE keyID =" + key;
                     statement.executeUpdate(sql);
                     ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
-                    for (int i = 0; i < list.size(); i++) {
-                        sql = "INSERT INTO GiftItem (site_ID, GoodsID, number) VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "'";
-                        statement.executeUpdate(sql);
-                    }
+                    if (list != null)
+                        for (int i = 0; i < list.size(); i++) {
+                            sql = "INSERT INTO GiftItem (site_ID, GoodsID, number) VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "'";
+                            statement.executeUpdate(sql);
+                        }
                 } else if (type.equals("特价包")) {
                     PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
                     sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "'";
                     statement.executeUpdate(sql);
                     ArrayList<GoodsItemPO> list = new ArrayList<>();
-                    for (int i = 0; i < list.size(); i++) {
-                        sql = "INSERT INTO GoodsItem (site_ID, GoodsID, number, price) VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
-                        statement.executeUpdate(sql);
-                    }
+                    if (list != null)
+                        for (int i = 0; i < list.size(); i++) {
+                            sql = "INSERT INTO GoodsItem (site_ID, GoodsID, number, price) VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
+                            statement.executeUpdate(sql);
+                        }
                 } else {
                     PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
                     sql = "UPDATE Promotion SET ID='" + ID + "', total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "'";
                     statement.executeUpdate(sql);
                     ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
-                    for (int i = 0; i < list.size(); i++) {
-                        sql = "INSERT INTO GiftItem (site_ID, GoodsID, number) VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "'";
-                        statement.executeUpdate(sql);
-                    }
+                    if (list != null)
+                        for (int i = 0; i < list.size(); i++) {
+                            sql = "INSERT INTO GiftItem (site_ID, GoodsID, number) VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "'";
+                            statement.executeUpdate(sql);
+                        }
                 }
             }
             return ID;
@@ -202,28 +205,31 @@ public class PromotionData implements PromotionDataService {
                 sql = "UPDATE Promotion SET clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE ID ='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "UPDATE GiftItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "' WHERE site_ID='" + po.getID() + "'";
-                    statement.executeUpdate(sql);
-                }
+                if (list != null)
+                    for (int i = 0; i < list.size(); i++) {
+                        sql = "UPDATE GiftItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "' WHERE site_ID='" + po.getID() + "'";
+                        statement.executeUpdate(sql);
+                    }
             } else if (type.equals("特价包")) {
                 PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
                 sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 ArrayList<GoodsItemPO> list = new ArrayList<>();
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "UPDATE GoodsItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "', price='" + list.get(i).price + "' WHERE site_ID='" + po.getID() + "'";
-                    statement.executeUpdate(sql);
-                }
+                if (list != null)
+                    for (int i = 0; i < list.size(); i++) {
+                        sql = "UPDATE GoodsItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "', price='" + list.get(i).price + "' WHERE site_ID='" + po.getID() + "'";
+                        statement.executeUpdate(sql);
+                    }
             } else {
                 PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
                 sql = "UPDATE Promotion SET total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "UPDATE GiftItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "' WHERE site_ID='" + po.getID() + "'";
-                    statement.executeUpdate(sql);
-                }
+                if (list != null)
+                    for (int i = 0; i < list.size(); i++) {
+                        sql = "UPDATE GiftItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "' WHERE site_ID='" + po.getID() + "'";
+                        statement.executeUpdate(sql);
+                    }
             }
             resultSet.close();
             statement.close();
