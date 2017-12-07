@@ -1,14 +1,10 @@
 package main.java.data;
 
 import main.java.data.datautility.DataException;
-import main.java.data.datautility.NotExistException;
-import main.java.po.PO;
-import main.java.po.account.AccountPO;
-import main.java.po.client.ClientPO;
-import main.java.po.user.UserPO;
 
-import java.rmi.RemoteException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DataHelper {
     private static final String driver = "com.mysql.jdbc.Driver";
@@ -25,6 +21,15 @@ public class DataHelper {
         try {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String sql = "SELECT * FROM Time";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            if (!dateFormat.format(new Date()).equals(resultSet.getDate("today"))) {
+                sql = "UPDATE Time SET today='" + new java.sql.Date(new Date().getTime()) + "'";
+                statement.executeUpdate(sql);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new DataException();
