@@ -27,7 +27,7 @@ public class PromotionDataServiceStub implements PromotionDataService {
     }
 
     @Override
-    public void delete(String PromotionID) {
+    public void delete(String promotionID) {
 
     }
 

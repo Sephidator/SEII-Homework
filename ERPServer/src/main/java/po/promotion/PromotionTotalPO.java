@@ -16,8 +16,7 @@ public class PromotionTotalPO extends PromotionPO {
 
     }
 
-    public PromotionTotalPO(String ID, String name, Date start, Date end, double total, double voucher, ArrayList<GiftItemPO> giftList) {
-        this.ID = ID;
+    public PromotionTotalPO(String name, Date start, Date end, double total, double voucher, ArrayList<GiftItemPO> giftList) {
         this.name = name;
         type = "总价促销策略";
         this.start = start;
