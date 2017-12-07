@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /*
- * 现金费用单数据
- * @author:
- * @version:
- */
+* 现金费用单数据
+* @author:
+* @version:
+*/
 
 public class CashBillPO extends FinanceBillPO {
+    private String accountID;
 
     private ArrayList<CashItemPO> itemList;//现金费用单条目清单的条目名和金额
 

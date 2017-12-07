@@ -2,6 +2,7 @@ package main.java.data.initialdata;
 
 import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
+import main.java.data.datautility.ExistException;
 import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.client.ClientPO;
@@ -108,14 +109,18 @@ public class InitialData implements InitialDataService {
     }
 
     @Override
-    public String insert(InitialPO po) throws RemoteException {
+    public synchronized String insert(InitialPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO Initial (year) VALUE " + po.getYear();
+            String sql = "SELECT * FROM Initial WHERE year=" + po.getYear();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next())
+                throw new ExistException();
+            sql = "INSERT INTO Initial (year) VALUE (" + po.getYear() + ")";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet = statement.getGeneratedKeys();
             String ID = null;
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
@@ -124,40 +129,45 @@ public class InitialData implements InitialDataService {
                 statement.executeUpdate(sql);
             }
             ArrayList<GoodsPO> goodsPOS = po.getGoodsList();
-            for (int i = 0; i < goodsPOS.size(); i++) {
-                GoodsPO goodsPO = goodsPOS.get(i);
-                sql = "INSERT INTO GoodsRecord (ID,name,goodsSortID,model,number,cost,retail,latestCost,latestRetail,alarmNum,comment) VALUES ('" + goodsPO.getName() + "','" +
-                        goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
-                        goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
-                statement.executeUpdate(sql);
-            }
+            if (goodsPOS != null)
+                for (int i = 0; i < goodsPOS.size(); i++) {
+                    GoodsPO goodsPO = goodsPOS.get(i);
+                    sql = "INSERT INTO GoodsRecord (ID,name,goodsSortID,model,number,cost,retail,latestCost,latestRetail,alarmNum,comment) VALUES ('" + goodsPO.getName() + "','" +
+                            goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
+                            goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
+                    statement.executeUpdate(sql);
+                }
             ArrayList<GoodsSortPO> goodsSortPOS = po.getGoodsSortList();
-            for (int i = 0; i < goodsSortPOS.size(); i++) {
-                GoodsSortPO goodsSortPO = goodsSortPOS.get(i);
-                sql = "INSERT INTO GoodsSortRecord (ID, name, fatherID, comment) VALUES ('" + goodsSortPO.getID() + "','" + goodsSortPO.getName() + "','" + goodsSortPO.getFatherID() + "','" + goodsSortPO.getComment() + "')";
-                statement.executeUpdate(sql);
-            }
+            if (goodsSortPOS != null)
+                for (int i = 0; i < goodsSortPOS.size(); i++) {
+                    GoodsSortPO goodsSortPO = goodsSortPOS.get(i);
+                    sql = "INSERT INTO GoodsSortRecord (ID, name, fatherID, comment) VALUES ('" + goodsSortPO.getID() + "','" + goodsSortPO.getName() + "','" + goodsSortPO.getFatherID() + "','" + goodsSortPO.getComment() + "')";
+                    statement.executeUpdate(sql);
+                }
             ArrayList<ClientPO> clientPOS = po.getClientList();
-            for (int i = 0; i < clientPOS.size(); i++) {
-                ClientPO clientPO = clientPOS.get(i);
-                sql = "INSERT INTO ClientRecord (ID, category, level, name, phone, address, post, email, receivable, payable, " +
-                        "receivableLimit, salesmanID) VALUES ('" + clientPO.getID() + "','" + clientPO.getCategory() + "'," + clientPO.getLevel() + ",'" + clientPO.getName()
-                        + "','" + clientPO.getPhone() + "','" + clientPO.getAddress() + "','" + clientPO.getPost() + "','" + clientPO.getEmail() + "',"
-                        + clientPO.getReceivable() + "," + clientPO.getPayable() + "," + clientPO.getReceivableLimit() + "," + clientPO.getSalesmanID() + ")";
-                statement.executeUpdate(sql);
-            }
+            if (clientPOS != null)
+                for (int i = 0; i < clientPOS.size(); i++) {
+                    ClientPO clientPO = clientPOS.get(i);
+                    sql = "INSERT INTO ClientRecord (ID, category, level, name, phone, address, post, email, receivable, payable, " +
+                            "receivableLimit, salesmanID) VALUES ('" + clientPO.getID() + "','" + clientPO.getCategory() + "'," + clientPO.getLevel() + ",'" + clientPO.getName()
+                            + "','" + clientPO.getPhone() + "','" + clientPO.getAddress() + "','" + clientPO.getPost() + "','" + clientPO.getEmail() + "',"
+                            + clientPO.getReceivable() + "," + clientPO.getPayable() + "," + clientPO.getReceivableLimit() + "," + clientPO.getSalesmanID() + ")";
+                    statement.executeUpdate(sql);
+                }
             ArrayList<AccountPO> accountPOS = po.getAccountList();
-            for (int i = 0; i < accountPOS.size(); i++) {
-                AccountPO accountPO = accountPOS.get(i);
-                sql = "INSERT INTO AccountRecord (ID, bankAccount, name, remaining) VALUES ('" + accountPO.getID() + "',''" + accountPO.getBankAccount() + "','" + accountPO.getName() + "','" + accountPO.getRemaining() + "')";
-                statement.executeUpdate(sql);
-            }
+            if (accountPOS != null)
+                for (int i = 0; i < accountPOS.size(); i++) {
+                    AccountPO accountPO = accountPOS.get(i);
+                    sql = "INSERT INTO AccountRecord (ID, bankAccount, name, remaining) VALUES ('" + accountPO.getID() + "',''" + accountPO.getBankAccount() + "','" + accountPO.getName() + "','" + accountPO.getRemaining() + "')";
+                    statement.executeUpdate(sql);
+                }
             return ID;
         } catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException e1) {
             }
+            e.printStackTrace();
             throw new DataException();
         }
     }
