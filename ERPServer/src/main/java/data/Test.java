@@ -12,7 +12,6 @@ public class Test {
         DataHelper.init();
         UserDataService service = new UserData();
         UserPO po = new UserPO("cst", "管理员", "admin", "admin", 19, true);
-        po.setID("User00000001");
-        service.update(po);
+        service.insert(po);
     }
 }

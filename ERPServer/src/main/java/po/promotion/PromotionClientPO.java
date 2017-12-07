@@ -18,8 +18,7 @@ public class PromotionClientPO extends PromotionPO {
 
     }
 
-    public PromotionClientPO(String ID, String name, Date start, Date end, int clientLevel, double discount, double voucher, ArrayList<GiftItemPO> giftList) {
-        this.ID = ID;
+    public PromotionClientPO(String name, Date start, Date end, int clientLevel, double discount, double voucher, ArrayList<GiftItemPO> giftList) {
         this.name = name;
         type = "客户促销策略";
         this.start = start;

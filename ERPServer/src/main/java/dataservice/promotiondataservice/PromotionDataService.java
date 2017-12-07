@@ -14,7 +14,7 @@ public interface PromotionDataService extends Remote {
 
     String insert(PromotionPO po) throws RemoteException;
 
-    void delete(String PromotionID) throws RemoteException;
+    void delete(String promotionID) throws RemoteException;
 
     void update(PromotionPO po) throws RemoteException;
 }
