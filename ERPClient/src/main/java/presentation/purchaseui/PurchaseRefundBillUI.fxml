@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.purchaseui.PurchaseTradeBillUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.purchaseui.PurchaseRefundBillUIController">
    <children>
       <ScrollPane hbarPolicy="NEVER" prefHeight="600.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
@@ -301,7 +301,7 @@
                                        <children>
                                           <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="300.0" spacing="10.0">
                                              <children>
-                                                <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="120.0" styleClass="greyLabel" text="退货商品列表" textFill="WHITE" textOverrun="CLIP">
+                                                <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="120.0" styleClass="greyLabel" text="进货商品列表" textFill="WHITE" textOverrun="CLIP">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>

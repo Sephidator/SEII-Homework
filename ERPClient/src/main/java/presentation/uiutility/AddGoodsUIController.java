@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
@@ -39,11 +40,6 @@ public class AddGoodsUIController {
     private TableColumn<GoodsVO,String> priceColumn;
     @FXML
     private TableColumn<GoodsVO,String> commentColumn;
-    @FXML
-    private JFXButton confirm;
-    @FXML
-    private JFXButton cancel;
-
 
     // 加载文件后调用的方法******************************************
 

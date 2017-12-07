@@ -1,6 +1,5 @@
 package main.java.presentation.purchaseui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,20 +10,20 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
 import main.java.presentation.uiutility.AddGoodsUIController;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
-import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
+import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class PurchaseTradeBillUIController extends InfoUIController {
-    private PurchaseTradeBillBlService service;
-    private PurchaseTradeBillVO bill;
+public class PurchaseRefundBillUIController extends InfoUIController {
+    private PurchaseRefundBillBlService service;
+    private PurchaseRefundBillVO bill;
     private ArrayList<GoodsVO> goodsList;
     private ArrayList<GoodsItemVO> goodsItemList;
 
@@ -76,7 +75,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
 
     // 设置controller数据的方法*****************************************
 
-    public void setBill(PurchaseTradeBillVO bill) {
+    public void setBill(PurchaseRefundBillVO bill) {
         this.bill = bill;
         ID.setText(bill.getID());
         type.setText(bill.getType());
@@ -86,7 +85,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
     }
 
-    public void setService(PurchaseTradeBillBlService service) {
+    public void setService(PurchaseRefundBillBlService service) {
         this.service=service;
         // ArrayList<ClientVO> clientList=service.getClientList(null);
 
@@ -253,7 +252,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("No Selection");
             alert.setHeaderText("未选择商品");
-            alert.setContentText("请在进货商品列表中选择商品");
+            alert.setContentText("请在退货商品列表中选择商品");
             alert.showAndWait();
             return false;
         }
@@ -262,27 +261,27 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(PurchaseTradeBillVO)bill,3,stage);
+        init(null,(PurchaseRefundBillVO)bill,3,stage);
     }
 
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(PurchaseTradeBillBlService service,PurchaseTradeBillVO bill, int command,Stage stage){
+    public static void init(PurchaseRefundBillBlService service,PurchaseRefundBillVO bill, int command,Stage stage){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchaseTradeBillUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchaseRefundBillUI.fxml"));
 
             // Create the dialog stage
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("进货单信息界面");
+            dialogStage.setTitle("进货退货单信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
 
-            PurchaseTradeBillUIController controller=loader.getController();
+            PurchaseRefundBillUIController controller=loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setBill(bill);
