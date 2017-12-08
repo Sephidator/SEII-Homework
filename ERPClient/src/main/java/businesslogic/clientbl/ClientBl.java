@@ -3,6 +3,8 @@ package main.java.businesslogic.clientbl;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
+import main.java.data_stub.clientdataservicestub.ClientDataServiceStub;
+import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 import main.java.vo.client.ClientQueryVO;
@@ -27,7 +29,11 @@ public class ClientBl implements ClientBlService,ClientTool{
         /*将ClientQueryVO转为ClientQueryPO*/
         ClientQueryPO clientQueryPO=query.getClientQueryPO();
 
-        /*调用ClientDataService.find服务得到ArrayList<ClientPO>的客户列表*/
+        /*调用ClientDataService.finds服务得到ArrayList<ClientPO>的客户列表*/
+
+         /*调用dataservice的桩*/
+        ClientDataService clientDataService=new ClientDataServiceStub();
+        clientPOS=clientDataService.finds(clientQueryPO);
 
         /*ArrayList<ClientPO>以后转成ArrayList<ClientVO>*/
         for(ClientPO clientPO:clientPOS){
@@ -38,24 +44,40 @@ public class ClientBl implements ClientBlService,ClientTool{
     }
 
     @Override
-    public ClientVO find(String ClientID) throws Exception {
-        return null;
+    public ClientVO find(String clientID) throws Exception {
+        ClientVO clientVO=new ClientVO();
+        ClientPO clientPO=new ClientPO();
+
+        /*调用ClientDataService.find服务得到ClientPO的客户*/
+
+        /*调用dataservice的桩*/
+        ClientDataService clientDataService=new ClientDataServiceStub();
+        clientPO=clientDataService.find(clientID);
+
+        /*转换ClientPO*/
+        clientVO=new ClientVO(clientPO);
+
+        return clientVO;
     }
 
     /**
      * @version: 1
      * @date:
-     * @param: [client] 增加的的客户对象，用于增加数据库中该客户数据
+     * @param: [clientVO] 增加的的客户对象，用于增加数据库中该客户数据
      * @return: 返回String的增加的客户ID
      */
     @Override
-    public String addClient(ClientVO client)  throws Exception{
+    public String addClient(ClientVO clientVO)  throws Exception{
         String id="";
 
         /*将ClientVO转成ClientPO*/
-        ClientPO clientPO=client.getClientPO();
+        ClientPO clientPO=clientVO.getClientPO();
 
         /*调用ClientDataService.insert服务得到增加的客户ID*/
+
+        /*调用dataservice的桩*/
+        ClientDataService clientDataService=new ClientDataServiceStub();
+        id=clientDataService.insert(clientPO);
 
         return id;
     }
@@ -73,7 +95,9 @@ public class ClientBl implements ClientBlService,ClientTool{
 
         /*调用ClientDataService.update服务完成客户数据的修改*/
 
-
+        /*调用dataservice的桩*/
+        ClientDataService clientDataService=new ClientDataServiceStub();
+        clientDataService.update(clientPO);
     }
 
     /**
@@ -86,7 +110,9 @@ public class ClientBl implements ClientBlService,ClientTool{
     public void deleteClient(String clientID)  throws Exception{
         /*调用ClientDataService.delete服务完成对客户的删除*/
 
-
+        /*调用dataservice的桩*/
+        ClientDataService clientDataService=new ClientDataServiceStub();
+        clientDataService.delete(clientID);
     }
 
     /**

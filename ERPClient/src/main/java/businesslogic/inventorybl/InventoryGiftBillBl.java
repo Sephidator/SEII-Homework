@@ -1,9 +1,12 @@
 package main.java.businesslogic.inventorybl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
+import main.java.businesslogic.logbl.LogBl;
+import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBLService;
+import main.java.data_stub.inventorydataservicestub.InventoryGiftBillDataServiceStub;
+import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 import main.java.vo.bill.BillQueryVO;
@@ -11,6 +14,7 @@ import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
+import main.java.vo.log.LogVO;
 
 import java.util.ArrayList;
 
@@ -23,8 +27,18 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      */
     @Override
     public void pass(BillVO billVO) throws Exception{
-        InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
 
+        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
+
+        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+        /*调用InventoryGiftBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+        inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
     }
 
@@ -36,7 +50,17 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      */
     @Override
     public void reject(BillVO billVO) throws Exception{
-        InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
+        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
+
+        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+        /*调用InventoryGiftBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+        inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
 
     }
@@ -64,12 +88,24 @@ public class InventoryGiftBillBl implements InventoryGiftBillBLService,Inventory
      * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
      */
     @Override
-    public String submit(InventoryGiftBillVO bill) throws Exception{
+    public String submit(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
 
         String id="";
 
-        InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
+        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
 
+        /*调用InventoryGiftBillDataService.insert服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+        id=inventoryGiftBillDataService.insert(inventoryGiftBillPO);
+
+        /*调用LogTool*/
+        LogVO logVO=new LogVO(inventoryGiftBillVO.getOperator(),"提交了一份新的库存赠送单",inventoryGiftBillVO.getTime());
+        LogTool logTool=new LogBl();
+        logTool.addLog(logVO);
 
         return id;
     }

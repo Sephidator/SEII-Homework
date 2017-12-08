@@ -1,6 +1,8 @@
 package main.java.businesslogic.goodssortbl;
 
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
+import main.java.data_stub.goodssortdataservicestub.GoodsSortDataServiceStub;
+import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
 import main.java.po.goods.GoodsSortQueryPO;
 import main.java.vo.goods.GoodsSortQueryVO;
@@ -24,6 +26,10 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
         GoodsSortQueryPO goodsSortQueryPO=query.getGoodsSortQueryPO();
 
         /*调用GoodsSortDatdaService.find服务得到ArrayList<GoodsSortPO>的商品分类列表*/
+
+         /*调用dataservice的桩*/
+        GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
+        goodsSortPOS=goodsSortDataService.finds(goodsSortQueryPO);
 
         /*ArrayList<GoodsSortPO>以后转成ArrayList<GoodsSortVO>*/
         for(GoodsSortPO goodsSortPO:goodsSortPOS){
@@ -53,6 +59,10 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
 
         /*调用GoodsSortDataService.insert服务得到增加的商品分类ID*/
 
+         /*调用dataservice的桩*/
+         GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
+         id=goodsSortDataService.insert(goodsSortPO);
+
         return id;
     }
 
@@ -66,6 +76,10 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
     public void deleteGoodsSort(String goodsSortID) throws Exception{
 
         /*调用GoodsSortDataService.delete服务完成对商品分类的删除*/
+
+         /*调用dataservice的桩*/
+         GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
+         goodsSortDataService.delete(goodsSortID);
 
     }
 
@@ -81,6 +95,10 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
         GoodsSortPO goodsSortPO=goodsSort.getGoodsSortPO();
 
         /*调用GoodsSortDataService.update服务完成对商品分类的修改*/
+
+         /*调用dataservice的桩*/
+         GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
+         goodsSortDataService.update(goodsSortPO);
 
 
     }
