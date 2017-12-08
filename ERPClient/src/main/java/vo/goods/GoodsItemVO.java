@@ -3,7 +3,6 @@ package main.java.vo.goods;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.po.goods.GoodsItemPO;
-import main.java.vo.goods.GoodsVO;
 
 public class GoodsItemVO {
     public GoodsVO goods;
@@ -16,7 +15,7 @@ public class GoodsItemVO {
         price=goodsVO.getCost();
     }
 
-    public GoodsItemPO getGoodsItemPO()throws Exception{
+    public GoodsItemPO getGoodsItemPO(){
         GoodsItemPO goodsItemPO=new GoodsItemPO(this.goods.getID(),this.number,this.price);
         return goodsItemPO;
     }
