@@ -8,5 +8,7 @@ import java.util.ArrayList;
 public interface ClientTool{
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;
 
+    public void editClient(ClientVO client) throws Exception;
+
     public ClientVO find(String ClientID) throws Exception;//通过ClientID查找某个客户
 }
