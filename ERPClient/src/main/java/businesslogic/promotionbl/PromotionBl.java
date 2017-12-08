@@ -18,6 +18,12 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
         return null;
     }
 
+    /**
+     * @version: 1
+     * @date: 2017.12.08 14:51
+     * @para: [promotionID]
+     * @function:
+     */
     @Override
     public PromotionVO find(String promotionID) {
         return null;
