@@ -34,7 +34,15 @@ public class PurchaseTradeBillVO extends PurchaseBillVO {
     }
 
     public PurchaseTradeBillVO(){
-
+        ID = "";
+        state = "";
+        time=new Date();
+        type = "进货单";
+        operator = new UserVO();
+        comment = "";
+        client = new ClientVO();
+        purchaseList = new ArrayList<>();
+        total = 0;
     }
 
     public PurchaseTradeBillPO getPurchaseTradeBillPO()throws Exception{

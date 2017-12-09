@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/mainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.messageui.PurchaseSalePanelUIController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/mainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.messageui.InventoryPanelUIController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <columnConstraints>
@@ -25,9 +25,9 @@
          <children>
             <GridPane>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="90.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -39,6 +39,7 @@
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -47,19 +48,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handlePurchaseBill" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/进货类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                           <children>
-                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="5.0" onAction="#handleSaleBill" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/销售类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleGoodsSort" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/商品分类管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -71,7 +60,55 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="34.0" layoutY="66.0" onAction="#handleClient" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/客户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleGoods" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/商品管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <children>
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInventoryCheck" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/设置库存报警.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInventoryVeritification" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/库存查看.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                           <children>
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInventoryAlarm" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/库存盘点.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <children>
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInventoryBill" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/库存类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>

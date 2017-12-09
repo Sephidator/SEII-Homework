@@ -1,7 +1,31 @@
+/*
+* 修改pane样式的CSS类
+*/
 .background {
     -fx-background-color: #FEFEFE;
 }
 
+
+.upBorder {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #888888;
+}
+
+.rightBorder {
+    -fx-border-width: 0 2 0 0;
+    -fx-border-color: #888888;
+    -fx-border-style: dashed;
+}
+
+.downBorder {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #888888;
+    -fx-border-style: dashed;
+}
+
+/*
+* 修改label样式的CSS类
+*/
 .myLabel {
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #2190DD;
@@ -11,7 +35,8 @@
     -fx-border-radius: 5;
     -fx-opacity: 1;
     -fx-pref-height: 30;
-    -fx-font-size: 18px;
+    -fx-pref-width: 70;
+    -fx-font-size: 16px;
 }
 
 .greyLabel {
@@ -23,33 +48,51 @@
     -fx-border-radius: 5;
     -fx-opacity: 1;
     -fx-pref-height: 30;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
 }
 
-.choice-box {
-    -fx-background-color: #EDEDED;
+.greyLabel2 {
+    -fx-text-fill: #000000;
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 6;
+    -fx-border-style: solid;
+    -fx-border-width: 1 1 1 1;
+    -fx-border-radius: 5;
+    -fx-opacity: 1;
+    -fx-pref-height: 30;
+    -fx-pref-width: 85;
+    -fx-font-size: 16px;
+}
+
+.simpleLabelStyle {
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0;
+    -fx-opacity: 1;
+    -fx-pref-height: 30;
+    -fx-alignment: bottom-left;
 }
 
 /*
-.label-bright {
--fx-font-size: 12pt;
--fx-text-fill: #3A363A;
--fx-opacity: 1;
-}
-
-.label-header {
--fx-font-size: 12pt;
--fx-text-fill: #3A363A;
--fx-opacity: 1;
-}
+* 修改选择框样式的CSS类
 */
+.choice-box {
+    -fx-background-color: #EDEDED;
+    -fx-font-size: 11px;
+    -fx-pref-height: 30;
+    -fx-pref-width: 40;
+}
 
+
+/*
+* 修改表格样式的CSS类
+*/
 .table-view {
-    -fx-base: #EaEAEA;
+    -fx-base: #EAEAEA;
     -fx-control-inner-background: #EDEDED;
     -fx-background-color: #EDEDED;
     -fx-padding: 5;
-    -fx-font-size: 15px;
+    -fx-font-size: 12px;
 }
 
 .table-view .column-header-background {
@@ -82,11 +125,10 @@
     -fx-pref-height: 30;
 }
 
-/* 
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
+
+/*
+* 修改按钮样式的CSS类
+*/
 .button {
     /*-fx-padding: 5 22 5 22;*/
     -fx-border-color: #EDEDED;

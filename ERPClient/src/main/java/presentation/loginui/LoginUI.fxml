@@ -11,24 +11,24 @@
 
 <AnchorPane prefHeight="240.0" prefWidth="400.0" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.loginui.LoginUIController">
    <children>
-      <HBox layoutX="50.0" layoutY="62.0" prefHeight="40.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
+      <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="62.0" prefHeight="40.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="40.0">
                <image>
                   <Image url="@../../../resources/pics/loginui/用户.png" />
                </image>
             </ImageView>
-            <JFXTextField prefHeight="40.0" prefWidth="240.0" />
+            <JFXTextField fx:id="usernameField" prefHeight="40.0" prefWidth="240.0" />
          </children>
       </HBox>
-      <HBox layoutX="50.0" layoutY="137.0" prefHeight="40.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
+      <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="137.0" prefHeight="40.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="40.0">
                <image>
                   <Image url="@../../../resources/pics/loginui/密码.png" />
                </image>
             </ImageView>
-            <JFXTextField prefHeight="40.0" prefWidth="240.0" />
+            <JFXTextField fx:id="passwordField" prefHeight="40.0" prefWidth="240.0" />
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="65.0" layoutY="14.0" prefHeight="40.0" prefWidth="270.0" text="灯具进销存管理系统" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="10.0">

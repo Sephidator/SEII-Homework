@@ -59,7 +59,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="5.0" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/销售类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="5.0" onAction="#handleSaleBill" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/销售类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -71,7 +71,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="34.0" layoutY="66.0" onAction="#manageClient" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/客户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                              <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="34.0" layoutY="66.0" onAction="#handleClient" style="-fx-background-image: url('/main/resources/pics/messageui/purchasesalepanelui/客户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>

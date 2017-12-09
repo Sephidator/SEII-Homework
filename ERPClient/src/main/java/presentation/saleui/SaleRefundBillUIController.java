@@ -1,4 +1,4 @@
-package main.java.presentation.purchaseui;
+package main.java.presentation.saleui;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,20 +10,20 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
+import main.java.businesslogicservice.saleblservice.SaleRefundBillBlService;
 import main.java.presentation.uiutility.AddGoodsUIController;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
-import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
+import main.java.vo.bill.salebill.SaleRefundBillVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class PurchaseRefundBillUIController extends InfoUIController {
-    private PurchaseRefundBillBlService service;
-    private PurchaseRefundBillVO bill;
+public class SaleRefundBillUIController extends InfoUIController {
+    private SaleRefundBillBlService service;
+    private SaleRefundBillVO bill;
     private ArrayList<GoodsVO> goodsList;
     private ArrayList<GoodsItemVO> goodsItemList;
 
@@ -51,6 +51,8 @@ public class PurchaseRefundBillUIController extends InfoUIController {
     @FXML
     private TextField operator; //操作员
     @FXML
+    private TextField salesman; // 业务员
+    @FXML
     private TextField total; // 总价
     @FXML
     private TextArea comment; // 备注
@@ -75,7 +77,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
 
     // 设置controller数据的方法*****************************************
 
-    public void setBill(PurchaseRefundBillVO bill) {
+    public void setBill(SaleRefundBillVO bill) {
         this.bill = bill;
         ID.setText(bill.getID());
         type.setText(bill.getType());
@@ -85,7 +87,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
         operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
     }
 
-    public void setService(PurchaseRefundBillBlService service) {
+    public void setService(SaleRefundBillBlService service) {
         this.service=service;
         // ArrayList<ClientVO> clientList=service.getClientList(null);
 
@@ -190,7 +192,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
             int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
             if(goodsItemList.get(selectedIndex).number<goodsItemList.get(selectedIndex).goods.getNumber()){
                 goodsItemList.get(selectedIndex).number++;
-                bill.setPurchaseList(goodsItemList);
+                bill.setSaleList(goodsItemList);
                 showGoodsItemList(goodsItemList);
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
@@ -201,15 +203,15 @@ public class PurchaseRefundBillUIController extends InfoUIController {
     private void goodsNumberMinus(){
         if(isGoodsItemSelected()){
             int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            ArrayList<GoodsItemVO> goodsItemList=bill.getPurchaseList();
+            ArrayList<GoodsItemVO> goodsItemList=bill.getSaleList();
             goodsItemList.get(selectedIndex).number--;
             if(goodsItemList.get(selectedIndex).number==0){
                 goodsItemList.remove(selectedIndex);
-                bill.setPurchaseList(goodsItemList);
+                bill.setSaleList(goodsItemList);
                 showGoodsItemList(goodsItemList);
             }
             else{
-                bill.setPurchaseList(goodsItemList);
+                bill.setSaleList(goodsItemList);
                 showGoodsItemList(goodsItemList);
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
@@ -221,10 +223,10 @@ public class PurchaseRefundBillUIController extends InfoUIController {
         String text=confirm.getText();
         /*
         if(text.equals("确认添加")){
-            purchaseTradeBlService.addClient(client);
+            saleTradeBlService.addClient(client);
         }
         else if(text.equals("确认编辑")){
-            purchaseTradeBillBlService.editClient(client);
+            saleTradeBillBlService.editClient(client);
         }
         else{
             stage.close();
@@ -262,17 +264,17 @@ public class PurchaseRefundBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(PurchaseRefundBillVO)bill,3,stage);
+        init(null,(SaleRefundBillVO)bill,3,stage);
     }
 
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(PurchaseRefundBillBlService service,PurchaseRefundBillVO bill, int command,Stage stage){
+    public static void init(SaleRefundBillBlService service,SaleRefundBillVO bill, int command,Stage stage){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchaseRefundBillUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/saleui/SaleRefundBillUI.fxml"));
 
             // Create the dialog stage
             Stage dialogStage=new Stage();
@@ -282,7 +284,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
 
-            PurchaseRefundBillUIController controller=loader.getController();
+            SaleRefundBillUIController controller=loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setBill(bill);
@@ -297,7 +299,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
             list.add(goods2);
 
             controller.setGoodsList(list);
-            controller.setGoodsItemList(bill.getPurchaseList());
+            controller.setGoodsItemList(bill.getSaleList());
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.
