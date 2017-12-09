@@ -101,7 +101,7 @@ public class PromotionData implements PromotionDataService {
     }
 
     @Override
-    public String insert(PromotionPO po) throws RemoteException {
+    public synchronized String insert(PromotionPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
@@ -127,7 +127,7 @@ public class PromotionData implements PromotionDataService {
                     ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
                     if (list != null)
                         for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GiftItem (site_ID, GoodsID, number) VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "'";
+                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
                             statement.executeUpdate(sql);
                         }
                 } else if (type.equals("特价包")) {
@@ -137,7 +137,7 @@ public class PromotionData implements PromotionDataService {
                     ArrayList<GoodsItemPO> list = new ArrayList<>();
                     if (list != null)
                         for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GoodsItem (site_ID, GoodsID, number, price) VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
+                            sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                             statement.executeUpdate(sql);
                         }
                 } else {
@@ -147,7 +147,7 @@ public class PromotionData implements PromotionDataService {
                     ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
                     if (list != null)
                         for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GiftItem (site_ID, GoodsID, number) VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "'";
+                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
                             statement.executeUpdate(sql);
                         }
                 }
@@ -163,7 +163,7 @@ public class PromotionData implements PromotionDataService {
     }
 
     @Override
-    public void delete(String promotionID) throws RemoteException {
+    public synchronized void delete(String promotionID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
@@ -186,7 +186,7 @@ public class PromotionData implements PromotionDataService {
     }
 
     @Override
-    public void update(PromotionPO po) throws RemoteException {
+    public synchronized void update(PromotionPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
@@ -204,30 +204,36 @@ public class PromotionData implements PromotionDataService {
                 PromotionClientPO promotionClientPO = (PromotionClientPO) po;
                 sql = "UPDATE Promotion SET clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE ID ='" + po.getID() + "'";
                 statement.executeUpdate(sql);
+                sql = "DELETE FROM GiftItem WHERE site_ID='" + po.getID() + "'";
+                statement.executeUpdate(sql);
                 ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
                 if (list != null)
                     for (int i = 0; i < list.size(); i++) {
-                        sql = "UPDATE GiftItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "' WHERE site_ID='" + po.getID() + "'";
+                        sql = "INSERT INTO GiftItem VALUE ('" + promotionClientPO.getID() + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
                         statement.executeUpdate(sql);
                     }
             } else if (type.equals("特价包")) {
                 PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
                 sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
+                sql = "DELETE FROM GoodsItem WHERE site_ID='" + po.getID() + "'";
+                statement.executeUpdate(sql);
                 ArrayList<GoodsItemPO> list = new ArrayList<>();
                 if (list != null)
                     for (int i = 0; i < list.size(); i++) {
-                        sql = "UPDATE GoodsItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "', price='" + list.get(i).price + "' WHERE site_ID='" + po.getID() + "'";
+                        sql = "INSERT INTO GoodsItem VALUES ('" + promotionGoodsPO.getID() + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                         statement.executeUpdate(sql);
                     }
             } else {
                 PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
                 sql = "UPDATE Promotion SET total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
+                sql = "DELETE FROM GiftItem WHERE site_ID='" + po.getID() + "'";
+                statement.executeUpdate(sql);
                 ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
                 if (list != null)
                     for (int i = 0; i < list.size(); i++) {
-                        sql = "UPDATE GiftItem SET GoodsID='" + list.get(i).goodsID + "', number='" + list.get(i).number + "' WHERE site_ID='" + po.getID() + "'";
+                        sql = "INSERT INTO GiftItem VALUE ('" + promotionTotalPO.getID() + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
                         statement.executeUpdate(sql);
                     }
             }

@@ -38,12 +38,12 @@ public class MessageData implements MessageDataService {
     }
 
     @Override
-    public synchronized void insert(MessagePO message) throws RemoteException {
+    public void insert(MessagePO message) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO Message (receiverID, senderID, message) VALUES ('" + message.getReceiverID() + "','" + message.getSenderID() + "','" + message.getMessage() + "')";
+            String sql = "INSERT INTO Message VALUES ('" + message.getReceiverID() + "','" + message.getSenderID() + "','" + message.getMessage() + "')";
             statement.executeUpdate(sql);
             statement.close();
         } catch (SQLException e) {

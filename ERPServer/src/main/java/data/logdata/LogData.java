@@ -16,7 +16,10 @@ public class LogData implements LogDataService {
         ArrayList<LogPO> list = new ArrayList<>();
         Connection connection = DataHelper.getConnection();
         String sql;
-        sql = "SELECT * FROM Log WHERE time BETWEEN '" + query.start + "' AND '" + query.end + "'";
+        if (query == null)
+            sql = "SELECT * FROM Log";
+        else
+            sql = "SELECT * FROM Log WHERE time BETWEEN '" + query.start + "' AND '" + query.end + "'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -44,11 +47,12 @@ public class LogData implements LogDataService {
 
         try {
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO Log (operatorID, action, time) VALUES ('" + po.getOperatorID() + "','" + po.getAction() + "','" + new Timestamp(po.getTime().getTime()) + "')";
+            String sql = "INSERT INTO Log VALUES ('" + po.getOperatorID() + "','" + po.getAction() + "','" + new Timestamp(po.getTime().getTime()) + "')";
             statement.executeUpdate(sql);
             statement.close();
         } catch (SQLException e) {
             try {
+                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }
