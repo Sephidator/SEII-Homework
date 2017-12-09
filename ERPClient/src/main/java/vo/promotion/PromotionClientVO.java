@@ -15,7 +15,15 @@ public class PromotionClientVO extends PromotionVO {
     private ArrayList<GiftItemVO> giftList; // 赠品列表
 
     PromotionClientVO(){
-
+        this.ID="";
+        this.name = "";
+        this.type="客户促销策略";
+        this.start=new Date();
+        this.end=new Date();
+        this.clientLevel = 0;
+        this.discount = 0;
+        this.voucher = 0;
+        this.giftList = new ArrayList<>();
     }
 
     public PromotionClientVO(String ID,String name ,String type, Date start, Date end, int clientLevel, double discount,int voucher, ArrayList<GiftItemVO> giftList) {

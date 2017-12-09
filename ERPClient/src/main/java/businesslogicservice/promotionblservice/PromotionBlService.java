@@ -13,5 +13,5 @@ public interface PromotionBlService {
 
     public void editPromotion(PromotionVO vo) throws Exception;
 
-    public void deletePromotion(PromotionVO vo) throws Exception;
+    public void deletePromotion(String promotionID) throws Exception;
 }

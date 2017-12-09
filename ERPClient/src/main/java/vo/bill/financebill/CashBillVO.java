@@ -24,7 +24,14 @@ public class CashBillVO extends FinanceBillVO {
     private ArrayList<CashItemVO> itemList;//现金费用单条目清单的条目名和金额
 
     public CashBillVO(){
-
+        this.account = new AccountVO();
+        this.state = "";
+        this.time = new Date();
+        this.type = "现金费用单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.total=0;
+        this.itemList=new ArrayList<CashItemVO>();
     }
 
     public CashBillVO(AccountVO account, String state, Date time,UserVO operator, String comment, double total,  ArrayList<CashItemVO> itemList) {

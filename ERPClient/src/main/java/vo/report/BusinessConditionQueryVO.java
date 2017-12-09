@@ -10,5 +10,8 @@ public class BusinessConditionQueryVO {
         this.start = start;
         this.end = end;
     }
-    public BusinessConditionQueryVO(){}
+    public BusinessConditionQueryVO(){
+        this.start = new Date();
+        this.end = new Date();
+    }
 }

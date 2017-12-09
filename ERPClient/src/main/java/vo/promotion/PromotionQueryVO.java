@@ -1,5 +1,7 @@
 package main.java.vo.promotion;
 
+import main.java.po.promotion.PromotionQueryPO;
+
 import java.util.Date;
 
 public class PromotionQueryVO{
@@ -11,5 +13,11 @@ public class PromotionQueryVO{
         this.name = name;
         this.type = type;
         this.time = time;
+    }
+
+    /*得到PromotionQueryPO*/
+    public PromotionQueryPO getPromotionQueryPO(){
+        PromotionQueryPO promotionQueryPO = new PromotionQueryPO(this.name,this.type,this.time);
+        return promotionQueryPO;
     }
 }

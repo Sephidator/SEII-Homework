@@ -85,7 +85,7 @@ public class ApprovalBl implements ApprovalBlService {
 
         /*记录操作日志*/
         LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(sender,"通过编号为"+billvo.getID()+"的单据",new Date());
+        LogVO logVO = new LogVO(sender,"通过编号为"+billvo.getID()+"的单据",billvo.getTime());
         logTool.addLog(logVO);
 
         /*添加message*/

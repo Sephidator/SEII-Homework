@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 public class InitialVO extends VO {
 
+    /*年份由UI层分配*/
     private int year;//每一个账都有一个年份
 
     private ArrayList<GoodsVO> goodsList;//每一个商品都有一个ID
@@ -44,6 +45,11 @@ public class InitialVO extends VO {
     private ArrayList<AccountVO> accountList;//每一个账户都有一个ID
 
     public InitialVO() {
+        this.year = 0;
+        this.goodsList = new ArrayList<>();
+        this.goodsSortList = new ArrayList<>();
+        this.clientList = new ArrayList<>();
+        this.accountList = new ArrayList<>();
     }
 
     public InitialVO(int year, ArrayList<GoodsVO> goodsList, ArrayList<GoodsSortVO> goodsSortList, ArrayList<ClientVO> clientList, ArrayList<AccountVO> accountList) {
@@ -94,7 +100,41 @@ public class InitialVO extends VO {
         this.accountList = accountList;
     }
 
-    /*不需要将VO转成PO*/
+    /*将VO转成PO*/
+    public InitialPO getInitialPO(){
+        InitialPO initialPO = new InitialPO();
+        initialPO.setYear(this.getYear());
+
+        /*转换AccountVOList到AccountPOList*/
+        ArrayList<AccountPO> accountPOS = new ArrayList<>();
+        ArrayList<AccountVO> accountVOS = this.getAccountList();
+        for(AccountVO accountVO : accountVOS)
+            accountPOS.add(accountVO.getAccountPO());
+        initialPO.setAccountList(accountPOS);
+
+        /*转换ClientVOList到ClientPOList*/
+        ArrayList<ClientPO> clientPOS = new ArrayList<>();
+        ArrayList<ClientVO> clientVOS = this.getClientList();
+        for(ClientVO clientVO : clientVOS)
+            clientPOS.add(clientVO.getClientPO());
+        initialPO.setClientList(clientPOS);
+
+        /*转换GoodsVOList到GoodsPOList*/
+        ArrayList<GoodsPO> goodsPOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS = this.getGoodsList();
+        for(GoodsVO goodsVO : goodsVOS)
+            goodsPOS.add(goodsVO.getGoodsPO());
+        initialPO.setGoodsList(goodsPOS);
+
+        /*转换AccountVOList到AccountPOList*/
+        ArrayList<GoodsSortPO> goodsSortPOS = new ArrayList<>();
+        ArrayList<GoodsSortVO> goodsSortVOS = this.getGoodsSortList();
+        for(GoodsSortVO goodsSortVO : goodsSortVOS)
+            goodsSortPOS.add(goodsSortVO.getGoodsSortPO());
+        initialPO.setGoodsSortList(goodsSortPOS);
+
+        return initialPO;
+    }
 
     /*将PO转换成VO*/
     public InitialVO(InitialPO initialPO)throws Exception{

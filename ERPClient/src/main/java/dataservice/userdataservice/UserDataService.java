@@ -17,8 +17,4 @@ public interface UserDataService extends Remote {
     void delete(String userID) throws RemoteException;
 
     void update(UserPO po) throws RemoteException;
-
-    UserPO login(String jobName, String password) throws RemoteException;
-
-    void logout(String userID) throws RemoteException;
 }

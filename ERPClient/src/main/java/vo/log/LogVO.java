@@ -1,5 +1,8 @@
 package main.java.vo.log;
 
+import main.java.businesslogic.userbl.UserBl;
+import main.java.businesslogic.userbl.UserTool;
+import main.java.po.log.LogPO;
 import main.java.vo.user.UserVO;
 import java.util.Date;
 
@@ -18,6 +21,9 @@ public class LogVO{
     private Date time;//执行动作的时间
 
     public LogVO() {
+        this.operator = new UserVO();
+        this.action = "";
+        this.time = new Date();
     }
 
     public LogVO(UserVO operator, String action, Date time) {
@@ -48,6 +54,24 @@ public class LogVO{
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    /*得到LogPO*/
+    public LogPO getLogPO()throws Exception{
+        LogPO logPO = new LogPO();
+        logPO.setOperatorID(this.getOperator().getID());
+        logPO.setAction(this.getAction());
+        logPO.setTime(this.getTime());
+
+        return logPO;
+    }
+
+    /*得到LogVO*/
+    public LogVO(LogPO logPO)throws Exception{
+        UserTool userTool = new UserBl();
+        this.setOperator(userTool.find(logPO.getOperatorID()));
+        this.setTime(logPO.getTime());
+        this.setAction(logPO.getAction());
     }
 }
 

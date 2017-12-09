@@ -1,5 +1,6 @@
 package main.java.vo.promotion;
 
+import main.java.po.promotion.PromotionPO;
 import main.java.vo.VO;
 
 import java.util.Date;
@@ -44,5 +45,36 @@ public class PromotionVO extends VO {
 
     public void setEnd(Date end) {
         this.end = end;
+    }
+
+    public PromotionVO(String name, String type, Date start, Date end){
+        this.name = name;
+        this.type = type;
+        this.start = start;
+        this.end = end;
+    }
+    public PromotionVO(){
+        this.name = "";
+        this.type = "";
+        this.start = new Date();
+        this.end = new Date();
+    }
+    /*从PromotionPO转至PromotionVO*/
+    public PromotionVO(PromotionPO promotionPO){
+        this.setName(promotionPO.getName());
+        this.setEnd(promotionPO.getEnd());
+        this.setStart(promotionPO.getStart());
+        this.setType(promotionPO.getType());
+    }
+
+    /*从PromotionVO转至PromotionPO*/
+    public PromotionPO getPromotionPO(){
+        PromotionPO promotionPO = new PromotionPO();
+        promotionPO.setName(this.getName());
+        promotionPO.setType(this.getType());
+        promotionPO.setStart(this.getStart());
+        promotionPO.setEnd(this.getEnd());
+
+        return promotionPO;
     }
 }
