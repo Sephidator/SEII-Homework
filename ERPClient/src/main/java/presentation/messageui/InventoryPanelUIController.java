@@ -10,29 +10,34 @@ import main.java.presentation.saleui.SaleBillUIController;
 import main.java.presentation.uiutility.CenterUIController;
 
 
-public class PurchaseSalePanelUIController extends CenterUIController {
+public class InventoryPanelUIController extends CenterUIController {
 
 
     // 界面之中会用到的方法******************************************
 
     @FXML
-    private void handlePurchaseBill(){
-        root.showLogoutButton(false);
-        PurchaseBillUIController.init(root);
+    private void handleGoodsSort(){
     }
 
     @FXML
-    private void handleSaleBill(){
-        root.showLogoutButton(false);
-        SaleBillUIController.init(root);
+    private void handleGoods(){
     }
 
     @FXML
-    private void handleClient(){
-        root.showLogoutButton(false);
-        ClientUIController.init(root);
+    private void handleInventoryAlarm(){
     }
 
+    @FXML
+    private void handleInventoryCheck(){
+    }
+
+    @FXML
+    private void handleInventoryVeritification(){
+    }
+
+    @FXML
+    private void handleInventoryBill(){
+    }
 
     // 加载文件和界面的方法******************************************
 
@@ -44,10 +49,10 @@ public class PurchaseSalePanelUIController extends CenterUIController {
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/messageui/PurchaseSalePanelUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/messageui/InventoryPanelUI.fxml"));
             root.setCenterPane(loader.load());
 
-            PurchaseSalePanelUIController controller=loader.getController();
+            InventoryPanelUIController controller=loader.getController();
             root.showLogoutButton(true);
             controller.setRoot(root);
         }catch(Exception e){

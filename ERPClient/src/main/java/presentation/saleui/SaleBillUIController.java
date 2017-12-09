@@ -9,16 +9,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
-import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
-import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.businesslogicservice.saleblservice.SaleRefundBillBlService;
+import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import main.java.presentation.purchaseui.PurchaseRefundBillUIController;
-import main.java.presentation.purchaseui.PurchaseTradeBillUIController;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.bill.purchasebill.PurchaseBillVO;
-import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
-import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
+import main.java.vo.bill.salebill.SaleBillVO;
+import main.java.vo.bill.salebill.SaleRefundBillVO;
+import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsVO;
@@ -28,18 +26,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SaleBillUIController extends CenterUIController {
-    private PurchaseTradeBillBlService purchaseTradeBillBlService;
-    private PurchaseRefundBillBlService purchaseRefundBillBlService;
+    private SaleTradeBillBlService saleTradeBillBlService;
+    private SaleRefundBillBlService saleRefundBillBlService;
 
-    private ObservableList<PurchaseBillVO> purchaseBillObservableList= FXCollections.observableArrayList();
+    private ObservableList<SaleBillVO> saleBillObservableList= FXCollections.observableArrayList();
     @FXML
-    private TableView<PurchaseBillVO> purchaseBillTableView;
+    private TableView<SaleBillVO> saleBillTableView;
     @FXML
-    private TableColumn<PurchaseBillVO,String> IDColumn;
+    private TableColumn<SaleBillVO,String> IDColumn;
     @FXML
-    private TableColumn<PurchaseBillVO,String> typeColumn;
+    private TableColumn<SaleBillVO,String> typeColumn;
     @FXML
-    private TableColumn<PurchaseBillVO,String> stateColumn;
+    private TableColumn<SaleBillVO,String> stateColumn;
 
     // 加载文件后调用的方法******************************************
 
@@ -54,60 +52,61 @@ public class SaleBillUIController extends CenterUIController {
 
     // 设置controller数据的方法*****************************************
 
-    public void setPurchaseTradeBillBlService(PurchaseTradeBillBlService purchaseTradeBillBlService) {
-        this.purchaseTradeBillBlService = purchaseTradeBillBlService;
+    public void setSaleTradeBillBlService(SaleTradeBillBlService saleTradeBillBlService) {
+        this.saleTradeBillBlService = saleTradeBillBlService;
     }
 
-    public void setPurchaseRefundBillBlService(PurchaseRefundBillBlService purchaseRefundBillBlService) {
-        this.purchaseRefundBillBlService = purchaseRefundBillBlService;
+    public void setSaleRefundBillBlService(SaleRefundBillBlService saleRefundBillBlService) {
+        this.saleRefundBillBlService = saleRefundBillBlService;
     }
 
-    private void showPurchaseBillList(ArrayList<PurchaseBillVO> purchaseBillList){
-        purchaseBillObservableList.removeAll();
+    private void showSaleBillList(ArrayList<SaleBillVO> saleBillList){
+        saleBillObservableList.removeAll();
 
-        for(int i=0;i<purchaseBillList.size();i++){
-            purchaseBillObservableList.add(purchaseBillList.get(i));
+        for(int i=0;i<saleBillList.size();i++){
+            saleBillObservableList.add(saleBillList.get(i));
         }
-        purchaseBillTableView.setItems(purchaseBillObservableList);
+        saleBillTableView.setItems(saleBillObservableList);
     }
 
     // 界面之中会用到的方法******************************************
 
     @FXML
-    private void addPurchaseTradeBill(){
-        PurchaseTradeBillVO bill=new PurchaseTradeBillVO();
+    private void addSaleTradeBill(){
+        SaleTradeBillVO bill=new SaleTradeBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("进货单");
-        PurchaseTradeBillUIController.init(null,bill,1,root.getStage());
+        bill.setSaleList(new ArrayList<>());
+        bill.setType("销售单");
+        SaleTradeBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML
-    private void addPurchaseRefundBill(){
-        System.out.println("不是null");
-        PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
+    private void addSaleRefundBill(){
+        SaleRefundBillVO bill=new SaleRefundBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("进货退货单");
-        PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
+        bill.setSaleList(new ArrayList<>());
+        bill.setType("销售退货单");
+        SaleRefundBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML
-    private void editPurchaseBill(){
+    private void editSaleBill(){
+        /*
         if(isBillSelected()){
-            if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货单")){
-                PurchaseTradeBillVO bill=(PurchaseTradeBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseTradeBillUIController.init(null,bill,2,root.getStage());
+            if(saleBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货单")){
+                SaleTradeBillVO bill=(SaleTradeBillVO) saleBillTableView.getSelectionModel().getSelectedItem();
+                SaleTradeBillUIController.init(null,bill,2,root.getStage());
             }
-            else if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
-                PurchaseRefundBillVO bill=(PurchaseRefundBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseRefundBillUIController.init(null,bill,2,root.getStage());
+            else if(saleBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
+                SaleRefundBillVO bill=(SaleRefundBillVO) saleBillTableView.getSelectionModel().getSelectedItem();
+                SaleRefundBillUIController.init(null,bill,2,root.getStage());
             }
         }
+        */
     }
 
     private boolean isBillSelected(){
-        int selectedIndex=purchaseBillTableView.getSelectionModel().getSelectedIndex();
+        int selectedIndex=saleBillTableView.getSelectionModel().getSelectedIndex();
         if(selectedIndex>=0){
             return true;
         }else{
@@ -138,13 +137,13 @@ public class SaleBillUIController extends CenterUIController {
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchaseBillUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/saleui/SaleBillUI.fxml"));
             root.setCenterPane(loader.load());
 
             SaleBillUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setPurchaseTradeBillBlService(null);
-            controller.setPurchaseRefundBillBlService(null);
+            controller.setSaleTradeBillBlService(null);
+            controller.setSaleRefundBillBlService(null);
 
             Date date= new SimpleDateFormat("yyyy-MM-dd").parse("2017-1-12");
             ClientVO client=new ClientVO("类别：经销商", 4, "名字：陈骁2",
@@ -159,14 +158,15 @@ public class SaleBillUIController extends CenterUIController {
             GoodsItemVO item=new GoodsItemVO(g,3);
             ArrayList<GoodsItemVO> list=new ArrayList<>();
             list.add(item);
-            PurchaseTradeBillVO bill1=new PurchaseTradeBillVO("草稿",date,root.getOperator(),"备注", client, list,100);
-            PurchaseRefundBillVO bill2=new PurchaseRefundBillVO("审批不通过",date,root.getOperator(),"备注", client, list,100);
+
+            SaleTradeBillVO bill1=new SaleTradeBillVO("草稿",date,root.getOperator(),"备注", client,root.getOperator(), list,null, 100,100,100,100);
+            SaleRefundBillVO bill2=new SaleRefundBillVO("审批不通过",date,root.getOperator(),"备注", client, root.getOperator(), list, 100);
             bill1.setID("123");
             bill2.setID("123");
-            ArrayList<PurchaseBillVO> plist=new ArrayList<>();
+            ArrayList<SaleBillVO> plist=new ArrayList<>();
             plist.add(bill1);
             plist.add(bill2);
-            controller.showPurchaseBillList(plist);
+            controller.showSaleBillList(plist);
 
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){

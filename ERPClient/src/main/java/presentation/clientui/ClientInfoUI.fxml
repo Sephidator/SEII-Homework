@@ -62,7 +62,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="ID" editable="false" prefHeight="35.0" prefWidth="175.0">
+                                    <TextField fx:id="ID" editable="false" prefHeight="35.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -89,7 +89,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <ChoiceBox fx:id="levelChoiceBox" prefHeight="30.0" prefWidth="30.0" />
+                                    <ChoiceBox fx:id="levelChoiceBox" prefHeight="30.0" prefWidth="40.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -111,7 +111,7 @@
                                           <String fx:value="myLabel" />
                                        </styleClass>
                                     </Label>
-                                    <TextField fx:id="category" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="category" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -138,7 +138,7 @@
                                           <String fx:value="myLabel" />
                                        </styleClass>
                                     </Label>
-                                    <TextField fx:id="name" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="name" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -160,7 +160,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="phone" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="phone" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -186,7 +186,7 @@
                                           <String fx:value="myLabel" />
                                        </styleClass>
                                     </Label>
-                                    <TextField fx:id="email" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="email" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -208,7 +208,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="address" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="address" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -230,7 +230,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="post" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="post" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -250,7 +250,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="receivable" prefHeight="30.0" prefWidth="175.0">
+                              <TextField fx:id="receivable" prefHeight="30.0" prefWidth="170.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -270,7 +270,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="payable" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="payable" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -292,7 +292,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="receivableLimit" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="receivableLimit" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -314,7 +314,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="salesman" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="salesman" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

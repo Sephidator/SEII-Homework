@@ -33,7 +33,6 @@ public class MainApp extends Application {
         LoginUIController.init(stage);
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
