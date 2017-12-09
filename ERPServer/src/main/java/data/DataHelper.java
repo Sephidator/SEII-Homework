@@ -22,16 +22,21 @@ public class DataHelper {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String sql = "SELECT * FROM Time";
+            String sql = "SELECT * FROM DataHelper";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
             if (!dateFormat.format(new Date()).equals(resultSet.getDate("today"))) {
-                sql = "UPDATE Time SET today='" + new java.sql.Date(new Date().getTime()) + "'";
+                resultSet = statement.executeQuery("SELECT COUNT (keyID) FROM CashBill");
+                int cashBill = resultSet.getInt(1);
+                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', cashBill=" + cashBill + "";
                 statement.executeUpdate(sql);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+            }
             throw new DataException();
         }
     }

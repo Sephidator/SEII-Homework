@@ -77,7 +77,7 @@ public class GoodsSortData implements GoodsSortDataService {
             String sql = "SELECT ID FROM GoodsSort WHERE fatherID='" + ID + "' AND visible=TRUE ";
             ResultSet temp = statement.executeQuery(sql);
             childrenID = store(temp);
-            ArrayList<String> goodsList = null;
+            ArrayList<String> goodsList;
             sql = "SELECT ID FROM Goods WHERE goodsSortID='" + ID + "' AND visible=TRUE ";
             temp = statement.executeQuery(sql);
             goodsList = store(temp);
@@ -91,14 +91,10 @@ public class GoodsSortData implements GoodsSortDataService {
     }
 
     private ArrayList<String> store(ResultSet resultSet) throws SQLException {
-        ArrayList<String> list = null;
+        ArrayList<String> list = new ArrayList<>();
         try {
-            if (resultSet.next()) {
-                list = new ArrayList<>();
+            while (resultSet.next()) {
                 list.add(resultSet.getString("ID"));
-                while (resultSet.next()) {
-                    list.add(resultSet.getString("ID"));
-                }
             }
             return list;
         } catch (SQLException e) {

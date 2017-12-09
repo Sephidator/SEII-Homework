@@ -12,8 +12,8 @@ public interface CashBillDataService extends Remote {
     ArrayList<CashBillPO> finds(BillQueryPO query) throws RemoteException;
 
     /*添加现金费用单*/
-    String insert(CashBillPO po);
+    String insert(CashBillPO po) throws RemoteException;
 
     /*更新现金费用单信息*/
-    void update(CashBillPO po);
+    void update(CashBillPO po) throws RemoteException;
 }

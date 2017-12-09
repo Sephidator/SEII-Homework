@@ -94,14 +94,10 @@ public class InitialData implements InitialDataService {
     }
 
     private ArrayList<String> store(ResultSet resultSet) throws SQLException {
-        ArrayList<String> list = null;
+        ArrayList<String> list = new ArrayList<>();
         try {
-            if (resultSet.next()) {
-                list = new ArrayList<>();
+            while (resultSet.next())
                 list.add(resultSet.getString("ID"));
-                while (resultSet.next())
-                    list.add(resultSet.getString("ID"));
-            }
             return list;
         } catch (SQLException e) {
             throw e;
