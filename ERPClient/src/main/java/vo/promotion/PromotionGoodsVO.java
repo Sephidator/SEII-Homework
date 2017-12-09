@@ -12,7 +12,12 @@ public class PromotionGoodsVO extends PromotionVO {
     private double discount; //降价折让部分
 
     PromotionGoodsVO(){
-
+        this.name="";
+        this.type="特价包";
+        this.start=new Date();
+        this.end=new Date();
+        this.goodsList = new ArrayList<>();
+        this.discount = 0;
     }
 
     public PromotionGoodsVO(String name, Date start, Date end, double discount,ArrayList<GoodsItemVO> goodsList) {

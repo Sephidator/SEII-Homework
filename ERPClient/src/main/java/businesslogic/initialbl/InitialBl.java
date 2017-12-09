@@ -1,6 +1,16 @@
 package main.java.businesslogic.initialbl;
 
+import main.java.businesslogic.accountbl.AccountBl;
+import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.clientbl.ClientBl;
+import main.java.businesslogic.clientbl.ClientTool;
+import main.java.businesslogic.goodsbl.GoodsBl;
+import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogicservice.initialblservice.InitialBlService;
+import main.java.data_stub.initialdataservicestub.InitialDataServiceStub;
+import main.java.dataservice.initialdataservice.InitialDataService;
+import main.java.po.goods.GoodsPO;
+import main.java.po.initial.InitialPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 import main.java.vo.client.ClientQueryVO;
@@ -19,10 +29,12 @@ public class InitialBl implements InitialBlService{
      * @version: 1
      * @date: 2017.11.28 2:05
      * @para: [query] 
-     * @function: 
+     * @function: 获取商品信息
      */
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
-        return null;
+        GoodsTool goodsTool = new GoodsBl();
+        ArrayList<GoodsVO> goodsVOS = goodsTool.getGoodsList(query);
+        return goodsVOS;
     }
 
     @Override
@@ -30,10 +42,12 @@ public class InitialBl implements InitialBlService{
      * @version: 1
      * @date: 2017.11.28 2:05
      * @para: [query] 
-     * @function: 
+     * @function: 获取客户信息
      */
     public ArrayList<ClientVO> getClientList(ClientQueryVO query)throws Exception {
-        return null;
+        ClientTool clientTool = new ClientBl();
+        ArrayList<ClientVO> clientVOS = clientTool.getClientList(query);
+        return clientVOS;
     }
 
     @Override
@@ -44,7 +58,9 @@ public class InitialBl implements InitialBlService{
      * @function: 
      */
     public ArrayList<AccountVO> getAccountList(AccountQueryVO query)throws Exception {
-        return null;
+        AccountTool accountTool = new AccountBl();
+        ArrayList<AccountVO> accountVOS = accountTool.getAccountList(query);
+        return accountVOS;
     }
 
     @Override
@@ -52,10 +68,15 @@ public class InitialBl implements InitialBlService{
      * @version: 1
      * @date: 2017.11.28 2:05
      * @para: [initial] 
-     * @function: 
+     * @function: 期初建账
      */
     public String establishInitial(InitialVO initial)throws Exception {
-        return null;
+        /*dataService*/
+        //InitialDataService initialDataService = (InitialDataService)Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        InitialDataService initialDataService = new InitialDataServiceStub();
+        String id = initialDataService.insert(initial.getInitialPO());
+        return id;
     }
 
     @Override
@@ -63,9 +84,19 @@ public class InitialBl implements InitialBlService{
      * @version: 1
      * @date: 2017.11.28 2:05
      * @para: [query] 
-     * @function: 
+     * @function: 查看期初信息
      */
     public ArrayList<InitialVO> getInitial(InitialQueryVO query)throws Exception {
-        return null;
+        /*dataService*/
+        //InitialDataService initialDataService = (InitialDataService)Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        InitialDataService initialDataService = new InitialDataServiceStub();
+        ArrayList<InitialPO> initialPOS = initialDataService.finds(query.getInitialQueryPO());
+        //转换为ArrayList<InitialVO>
+        ArrayList<InitialVO> initialVOS = new ArrayList<>();
+        for(InitialPO initialPO : initialPOS)
+            initialVOS.add(new InitialVO(initialPO));
+
+        return initialVOS;
     }
 }

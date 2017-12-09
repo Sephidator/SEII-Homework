@@ -14,7 +14,13 @@ public class PromotionTotalVO extends PromotionVO {
     private ArrayList<GiftItemVO> giftList; // 赠品列表
 
     public PromotionTotalVO(){
-
+        this.ID="";
+        this.type="";
+        this.start=new Date();
+        this.end=new Date();
+        this.total=0;
+        this.voucher=0;
+        this.giftList=new ArrayList<>();
     }
 
     public PromotionTotalVO(String ID,String type, Date start, Date end, double total, double voucher, ArrayList<GiftItemVO> giftList) {

@@ -18,6 +18,11 @@ public class BusinessHistoryQueryVO {
     }
 
     public BusinessHistoryQueryVO() {
+        this.start = new Date();
+        this.end = new Date();
+        this.type = "";
+        this.client = "";
+        this.operator = "";
     }
 
 }

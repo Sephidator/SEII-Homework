@@ -143,7 +143,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
 
         //add Log
         LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的现金费用单",new Date());
+        LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的现金费用单",vo.getTime());
         logTool.addLog(logVO);
 
         return id;

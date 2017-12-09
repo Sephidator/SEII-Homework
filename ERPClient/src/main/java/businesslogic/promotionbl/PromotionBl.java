@@ -1,6 +1,10 @@
 package main.java.businesslogic.promotionbl;
 
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
+import main.java.data_stub.promotiondataservicestub.PromotionDataServiceStub;
+import main.java.dataservice.promotiondataservice.PromotionDataService;
+import main.java.po.promotion.PromotionPO;
+import main.java.po.promotion.PromotionQueryPO;
 import main.java.vo.promotion.PromotionQueryVO;
 import main.java.vo.promotion.PromotionVO;
 
@@ -15,7 +19,20 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @function: 
      */
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception {
-        return null;
+        /*将PromotionVO转换到PromotionPO*/
+        PromotionQueryPO promotionQueryPO = query.getPromotionQueryPO();
+
+        /*dataService*/
+        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        ArrayList<PromotionPO> promotionPOS = promotionDataService.finds(promotionQueryPO);
+
+        ArrayList<PromotionVO> promotionVOS  = new ArrayList<>();//转换至ArrayList<PromotionVO
+        for(PromotionPO promotionPO : promotionPOS)
+            promotionVOS.add(new PromotionVO(promotionPO));
+
+        return promotionVOS;
     }
 
     /**
@@ -25,8 +42,13 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @function:
      */
     @Override
-    public PromotionVO find(String promotionID) {
-        return null;
+    public PromotionVO find(String promotionID) throws Exception{
+        /*dataService*/
+        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        PromotionPO promotionPO = promotionDataService.find(promotionID);
+        return new PromotionVO(promotionPO);
     }
 
     @Override
@@ -37,8 +59,14 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @function: 
      */
     public String addPromotion(PromotionVO vo) throws Exception{
-
-        return null;
+        /*将PromotionVO转到PromotionPO*/
+        PromotionPO promotionPO = vo.getPromotionPO();
+        /*dataService*/
+        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        String id = promotionDataService.insert(promotionPO);
+        return id;
     }
 
     @Override
@@ -49,7 +77,13 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @function: 
      */
     public void editPromotion(PromotionVO vo)throws Exception {
-
+        /*将PromotionVO转到PromotionPO*/
+        PromotionPO promotionPO = vo.getPromotionPO();
+        /*dataService*/
+        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        promotionDataService.update(promotionPO);
     }
 
     @Override
@@ -59,8 +93,12 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @para: [vo] 
      * @function: 
      */
-    public void deletePromotion(PromotionVO vo) throws Exception{
-
+    public void deletePromotion(String promotionID) throws Exception{
+        /*dataService*/
+        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        promotionDataService.delete(promotionID);
     }
 
 

@@ -8,7 +8,11 @@ public class CashItemVO {
     public double amount;//金额
     public String comment;//备注
 
-    public CashItemVO(){}
+    public CashItemVO(){
+        ItemName = "";
+        this.amount = 0;
+        this.comment = "";
+    }
     public CashItemVO(String itemName, double amount, String comment) {
         ItemName = itemName;
         this.amount = amount;

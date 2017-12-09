@@ -26,7 +26,14 @@ public class ReceiptBillVO extends FinanceBillVO {
     private ArrayList<TransItemVO> transList;//付款单转账列表的银行账户和金额
 
     public ReceiptBillVO(){
-
+        this.state = "";
+        this.time = new Date();
+        this.type = "收款单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.total=0;
+        this.client=new ClientVO();
+        this.transList=new ArrayList<>();
     }
 
     public ReceiptBillVO(String state, Date time,UserVO operator, String comment, double total, ClientVO client, ArrayList<TransItemVO> transList) {

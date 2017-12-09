@@ -18,5 +18,10 @@ public class SaleDetailQueryVO {
     }
 
     public SaleDetailQueryVO() {
+        this.start = new Date();
+        this.end = new Date();
+        this.goodsName = "";
+        this.client = "";
+        this.salesman = "";
     }
 }

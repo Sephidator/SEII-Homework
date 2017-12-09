@@ -1,6 +1,8 @@
 package main.java.businesslogic.userbl;
 
 import main.java.businesslogicservice.userblservice.UserBlService;
+import main.java.data_stub.userdataservicestub.UserDataServiceStub;
+import main.java.dataservice.userdataservice.UserDataService;
 import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;
 import main.java.vo.user.UserQueryVO;
@@ -18,15 +20,18 @@ public class UserBl implements UserBlService,UserTool {
      */
     @Override
     public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception{
-        ArrayList<UserVO> userVOS=new ArrayList<>();
-        ArrayList<UserPO> userPOS=new ArrayList<>();
 
         /*将UserQueryVO转换为UserQueryPO*/
         UserQueryPO userQueryPO=query.getUserQueryPO();
 
         /*调用UserDataService.find服务得到ArrayList<UserPO>的用户列表*/
+        //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");
+        /*UserDataserviceStub*/
+        UserDataService userDataService = new UserDataServiceStub();
+        ArrayList<UserPO> userPOS = userDataService.finds(userQueryPO);
 
         /*ArrayList<UserPO>以后转成ArrayList<UserVO>*/
+        ArrayList<UserVO> userVOS=new ArrayList<>();
         for(UserPO userPO:userPOS){
             userVOS.add(new UserVO(userPO));
         }
@@ -36,7 +41,8 @@ public class UserBl implements UserBlService,UserTool {
 
     @Override
     public UserVO find(String userID) throws Exception {
-        return null;
+        UserTool userTool = new UserBl();
+        return userTool.find(userID);
     }
 
     /**
@@ -47,12 +53,15 @@ public class UserBl implements UserBlService,UserTool {
      */
     @Override
     public String addUser(UserVO vo) throws Exception{
-        String id="";
 
         /*将UserVO转换为UserPO*/
         UserPO userPO=vo.getUserPO();
 
         /*调用UserDataService.insert服务得到String的用户ID*/
+        //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");
+        /*UserDataserviceStub*/
+        UserDataService userDataService = new UserDataServiceStub();
+        String id = userDataService.insert(vo.getUserPO());
 
         return id;
     }
@@ -69,6 +78,10 @@ public class UserBl implements UserBlService,UserTool {
         UserPO userPO=vo.getUserPO();
 
         /*调用UserDataService.update服务完成对用户的修改*/
+        //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");
+        /*UserDataserviceStub*/
+        UserDataService userDataService = new UserDataServiceStub();
+        userDataService.update(userPO);
     }
 
     /**
@@ -80,6 +93,10 @@ public class UserBl implements UserBlService,UserTool {
     @Override
     public void deleteUser(String UserID) throws Exception{
         /*调用UserDataService.delete服务完成对用户的删除*/
+        //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");
+        /*UserDataserviceStub*/
+        UserDataService userDataService = new UserDataServiceStub();
+        userDataService.delete(UserID);
     }
 
 }

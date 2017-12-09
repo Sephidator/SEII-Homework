@@ -12,6 +12,9 @@ public class AccountVO extends VO {
     private double remaining;//账户余额
 
     public AccountVO() {
+        this.bankAccount = "";
+        this.name = "";
+        this.remaining = 0;
     }
 
     public AccountVO(String bankAccount, String name, double remaining) {

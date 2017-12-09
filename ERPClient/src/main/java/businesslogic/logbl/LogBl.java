@@ -1,7 +1,9 @@
 package main.java.businesslogic.logbl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogicservice.logblservice.LogBlService;
+import main.java.data_stub.logdataservicestub.LogDataServiceStub;
+import main.java.dataservice.logdataservice.LogDataService;
+import main.java.po.log.LogPO;
 import main.java.vo.log.LogQueryVO;
 import main.java.vo.log.LogVO;
 
@@ -13,10 +15,15 @@ public class LogBl implements LogBlService,LogTool{
      * @version: 1
      * @date: 2017.11.28 2:07
      * @para: [log] 
-     * @function: 
+     * @function: 仅当调用XXBill.submit，Approval.pass的时候才会记录日志
      */
-    public String addLog(LogVO log)throws Exception {
-        return null;
+    public void addLog(LogVO log)throws Exception {
+        LogPO logPO = log.getLogPO();
+        /*dataService*/
+        //LogDataService logDataService = (LogDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        LogDataService logDataService = new LogDataServiceStub();
+        logDataService.insert(logPO);
     }
 
     @Override
@@ -27,6 +34,16 @@ public class LogBl implements LogBlService,LogTool{
      * @function: 
      */
     public ArrayList<LogVO> getLogList(LogQueryVO query)throws Exception {
-        return null;
+        /*dataService*/
+        //LogDataService logDataService = (LogDataService) Naming.lookup("rmi://localhost:");
+        /*dataServiceStub*/
+        LogDataService logDataService = new LogDataServiceStub();
+        ArrayList<LogPO> logPOS = logDataService.finds(query.getLogQueryPO());
+
+        ArrayList<LogVO> logVOS = new ArrayList<>();//对获取列表进行转换
+        for(LogPO logPO : logPOS)
+            logVOS.add(new LogVO(logPO));
+
+        return logVOS;
     }
 }
