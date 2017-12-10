@@ -49,6 +49,8 @@ public class PromotionData implements PromotionDataService {
             while (resultSet.next()) {
                 list.add(getPromotionPO(statement, resultSet, resultSet.getString("ID"), resultSet.getString("type")));
             }
+            resultSet.close();
+            statement.close();
             return list;
         } catch (SQLException e) {
             try {
@@ -152,6 +154,8 @@ public class PromotionData implements PromotionDataService {
                         }
                 }
             }
+            resultSet.close();
+            statement.close();
             return ID;
         } catch (SQLException e) {
             try {
