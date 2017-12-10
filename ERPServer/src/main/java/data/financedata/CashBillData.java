@@ -3,6 +3,7 @@ package main.java.data.financedata;
 import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
 import main.java.data.datautility.FullException;
+import main.java.data.datautility.NotExistException;
 import main.java.dataservice.financedataservice.CashBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
@@ -23,7 +24,7 @@ public class CashBillData implements CashBillDataService {
     /**
      * @param query
      * @return ArrayList<CashBillPO>
-     * @throws RemoteException
+     * @throws RemoteException,DataException
      */
     @Override
     public ArrayList<CashBillPO> finds(BillQueryPO query) throws RemoteException {
@@ -46,12 +47,12 @@ public class CashBillData implements CashBillDataService {
                     while (temp.next()) {
                         itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
                     }
-                    cashBillPO = new CashBillPO("草稿", resultSet.getTimestamp("time"), resultSet.getString("operator"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
+                    cashBillPO = new CashBillPO("草稿", resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
                     list.add(cashBillPO);
                 }
             } else {
                 if ("审批不通过".equals(query.state))
-                    sql = "SELECT * FROM CashBill WHERE visible=TRUE AND operatorID='" + query.operatorID + "' AND state='审批不通过'";
+                    sql = "SELECT * FROM CashBill WHERE operatorID='" + query.operatorID + "' AND state='审批不通过'";
                 else if (query.start != null && query.end != null)
                     sql = "SELECT * FROM CashBill WHERE visible=TRUE AND state='" + query.state + "' AND (time BETWEEN '" + query.start + "' AND '" + query.end + "')";
                 else if (query.operatorID != null)
@@ -67,11 +68,13 @@ public class CashBillData implements CashBillDataService {
                     while (temp.next()) {
                         itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
                     }
-                    cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operator"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
+                    cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
                     cashBillPO.setID(ID);
                     list.add(cashBillPO);
                 }
             }
+            resultSet.close();
+            statement.close();
             return list;
         } catch (SQLException e) {
             try {
@@ -85,7 +88,7 @@ public class CashBillData implements CashBillDataService {
     /**
      * @param po
      * @return String
-     * @throws RemoteException
+     * @throws RemoteException,DataException,FullException
      */
     @Override
     public synchronized String insert(CashBillPO po) throws RemoteException {
@@ -96,6 +99,7 @@ public class CashBillData implements CashBillDataService {
             String sql;
             ResultSet resultSet;
             ArrayList<CashItemPO> list = po.getItemList();
+            String ID = "Success";
             if ("草稿".equals(po.getState())) {
                 sql = "INSERT INTO CashBillDraft (time, operatorID, comment, total, accountID) VALUES ('" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getAccountID() + "')";
                 statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
@@ -106,9 +110,8 @@ public class CashBillData implements CashBillDataService {
                     sql = "INSERT INTO CashItem VALUES ('" + key + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
                     statement.executeUpdate(sql);
                 }
-                return "Success";
             } else {
-                sql = "SELECT cashBill FROM DataHelper";
+                sql = "SELECT CashBill FROM DataHelper";
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
                 int before = resultSet.getInt(1);
@@ -123,15 +126,17 @@ public class CashBillData implements CashBillDataService {
                 resultSet = statement.getGeneratedKeys();
                 resultSet.next();
                 int key = resultSet.getInt(1);
-                String ID = "XJFYD-" + new SimpleDateFormat("yyyyMMdd-").format(new Date()) + (key - before);
+                ID = "XJFYD-" + new SimpleDateFormat("yyyyMMdd-").format(new Date()) + String.format("%0" + 5 + "d", key - before);
                 sql = "UPDATE CashBill SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
                 for (int i = 0; i < list.size(); i++) {
                     sql = "INSERT INTO CashItem VALUES ('" + ID + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
                     statement.executeUpdate(sql);
                 }
-                return ID;
             }
+            resultSet.close();
+            statement.close();
+            return ID;
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -143,10 +148,47 @@ public class CashBillData implements CashBillDataService {
 
     /**
      * @param po
-     * @throws RemoteException
+     * @throws RemoteException,DataException,NotExistException
      */
     @Override
-    public void update(CashBillPO po) throws RemoteException {
+    public synchronized void update(CashBillPO po) throws RemoteException {
+        Connection connection = DataHelper.getConnection();
 
+        try {
+            Statement statement = connection.createStatement();
+            String ID = po.getID();
+            String sql;
+            ResultSet resultSet;
+            if (!"待审批".equals(po.getState())) {
+                statement = connection.createStatement();
+                sql = "SELECT * FROM CashBill WHERE ID='" + ID + "' AND visible=TRUE ";
+                resultSet = statement.executeQuery(sql);
+                if (!resultSet.next())
+                    throw new NotExistException();
+                sql = "SELECT visible FROM Account WHERE ID='" + resultSet.getString("accountID") + "' AND visible=TRUE ";
+                resultSet = statement.executeQuery(sql);
+                if (!resultSet.next()) {
+                    sql = "UPDATE CashBill SET visible=FALSE WHERE ID='" + ID + "'";
+                    statement.executeUpdate(sql);
+                    throw new NotExistException();
+                }
+            }
+            sql = "UPDATE CashBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', accountID='" + po.getAccountID() + "' WHERE ID='" + ID + "'";
+            statement.executeUpdate(sql);
+            sql = "DELETE FROM CashItem WHERE site_ID='" + ID + "'";
+            statement.executeUpdate(sql);
+            ArrayList<CashItemPO> list = po.getItemList();
+            for (int i = 0; i < list.size(); i++) {
+                sql = "INSERT INTO CashItem VALUES ('" + ID + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
+                statement.executeUpdate(sql);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+            }
+            throw new DataException();
+        }
     }
 }

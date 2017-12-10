@@ -13,7 +13,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class AccountData implements AccountDataService {
-
     @Override
     public AccountPO find(String accountID) throws RemoteException {
         Connection connection = DataHelper.getConnection();

@@ -25,15 +25,28 @@ public class DataHelper {
             String sql = "SELECT * FROM DataHelper";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            if (!dateFormat.format(new Date()).equals(resultSet.getDate("today"))) {
-                resultSet = statement.executeQuery("SELECT COUNT (keyID) FROM CashBill");
+            if (!resultSet.next()) {
+                sql = "INSERT INTO DataHelper VALUES ('" + new java.sql.Date(new Date().getTime()) + "', 0, 0, 0, 0)";
+                statement.executeUpdate(sql);
+            } else if (!dateFormat.format(new Date()).equals(resultSet.getDate("today"))) {
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM CashBill");
+                resultSet.next();
                 int cashBill = resultSet.getInt(1);
-                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', cashBill=" + cashBill + "";
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM PaymentBill");
+                resultSet.next();
+                int paymentBill = resultSet.getInt(1);
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM ReceiptBill");
+                resultSet.next();
+                int receiptBill = resultSet.getInt(1);
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM InventoryGiftBill");
+                resultSet.next();
+                int inventoryGiftBill = resultSet.getInt(1);
+                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill;
                 statement.executeUpdate(sql);
             }
         } catch (Exception e) {
             try {
+                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }
