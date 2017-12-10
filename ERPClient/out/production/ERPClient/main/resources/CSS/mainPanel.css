@@ -1,5 +1,8 @@
 .background {
-    -fx-background-color: #FEFEFE;
+    -fx-background-image: url('/main/resources/pics/commonpics/背景.png');
+    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
 }
 
 .myButton {
