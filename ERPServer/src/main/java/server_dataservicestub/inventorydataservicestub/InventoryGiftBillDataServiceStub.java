@@ -17,12 +17,12 @@ public class InventoryGiftBillDataServiceStub implements InventoryGiftBillDataSe
     }
 
     @Override
-    public String insert(InventoryGiftBillPO bill) {
+    public String insert(InventoryGiftBillPO po) {
         return "KCZSD-20171212-12345";
     }
 
     @Override
-    public void update(InventoryGiftBillPO bill) {
+    public void update(InventoryGiftBillPO po) {
 
     }
 
