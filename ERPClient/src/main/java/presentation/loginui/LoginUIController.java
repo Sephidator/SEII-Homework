@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.presentation.mainui.RootUIController;
+import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.vo.user.UserVO;
@@ -46,6 +47,11 @@ public class LoginUIController {
             RootUIController root=RootUIController.initRoot(stage,user);
             root.showLogoutButton(true);
             InventoryPanelUIController.init(root);
+        }
+        else if(usernameField.getText().equals("3")){
+            RootUIController root=RootUIController.initRoot(stage,user);
+            root.showLogoutButton(true);
+            FinancePanelUIController.init(root);
         }
     }
 
