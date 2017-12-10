@@ -17,12 +17,12 @@ public class InventoryLossOverBillDataServiceStub implements InventoryLossOverBi
     }
 
     @Override
-    public String insert(InventoryLossOverBillPO bill) throws RemoteException {
+    public String insert(InventoryLossOverBillPO po) throws RemoteException {
         return "KCYSD-20171212-12345";
     }
 
     @Override
-    public void update(InventoryLossOverBillPO bill) throws RemoteException {
+    public void update(InventoryLossOverBillPO po) throws RemoteException {
 
     }
 
