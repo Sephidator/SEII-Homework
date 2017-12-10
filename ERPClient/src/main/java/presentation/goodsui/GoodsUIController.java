@@ -135,14 +135,9 @@ public class GoodsUIController extends CenterUIController {
             controller.setRoot(root);
             controller.setGoodsBlService(null);
 
-            /*
-            GoodsVO c1=new GoodsVO("类别：经销商", 3, "名字：陈骁",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-            0, 0, 20, null);
+            GoodsVO c1=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
             c1.setID("123");
-            GoodsVO c2=new GoodsVO("类别：经销商", 4, "名字：陈骁2",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                    0, 0, 20, null);
+            GoodsVO c2=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
             c2.setID("123");
 
             ArrayList<GoodsVO> list=new ArrayList<>();
@@ -150,7 +145,6 @@ public class GoodsUIController extends CenterUIController {
             list.add(c2);
 
             controller.showGoodsList(list);
-            */
 
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){

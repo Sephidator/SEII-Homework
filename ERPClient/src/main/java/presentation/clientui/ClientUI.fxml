@@ -15,20 +15,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.clientui.ClientUIController">
    <children>
-      <ImageView fitHeight="60.0" fitWidth="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+      <ImageView fitHeight="50.0" fitWidth="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <image>
             <Image url="@../../../resources/pics/clientui/客户头像.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #ADCEFA;" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="30.0">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
-               <image>
-                  <Image url="@../../../resources/pics/clientui/搜索.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
+      <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="30.0" />
       <TextField prefHeight="30.0" prefWidth="250.0" styleClass="text-field" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="18.0" />

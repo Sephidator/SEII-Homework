@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import main.java.MainApp;
 import main.java.presentation.clientui.ClientUIController;
+import main.java.presentation.goodssortui.GoodsSortUIController;
+import main.java.presentation.goodsui.GoodsUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.purchaseui.PurchaseBillUIController;
 import main.java.presentation.saleui.SaleBillUIController;
@@ -17,10 +19,14 @@ public class InventoryPanelUIController extends CenterUIController {
 
     @FXML
     private void handleGoodsSort(){
+        root.showLogoutButton(false);
+        GoodsSortUIController.init(root);
     }
 
     @FXML
     private void handleGoods(){
+        root.showLogoutButton(false);
+        GoodsUIController.init(root);
     }
 
     @FXML

@@ -43,9 +43,7 @@ public class GoodsSortUIController extends CenterUIController {
     public void setGoodsSortBlService(GoodsSortBLService goodsSortBlService) {
         this.goodsSortBlService=goodsSortBlService;
         //ArrayList<GoodsSortVO> goodsSortList=goodsSortBlService.getGoodsSortList(null);
-    }
 
-    private void showSortList(){
         GoodsSortVO c1=new GoodsSortVO();
         c1.setID("Sort12345");
         c1.setName("二极管1");
@@ -76,13 +74,14 @@ public class GoodsSortUIController extends CenterUIController {
         a.setName("灯具");
         a.setChildren(list2);
 
-        addGoodsSort(null,a);
+        showGoodsSort(null,a);
     }
+
 
     /**
      * 取得客户列表并修改ObservableList的信息
      * */
-    private void addGoodsSort(TreeItem<String> fatherItem,GoodsSortVO newSort){
+    private void showGoodsSort(TreeItem<String> fatherItem,GoodsSortVO newSort){
         TreeItem<String> newItem= new TreeItem<String>(newSort.getID()+": "+newSort.getName());
 
         if(fatherItem==null){
@@ -94,7 +93,7 @@ public class GoodsSortUIController extends CenterUIController {
 
         if(newSort.getChildren()!=null && newSort.getChildren().size()>0){
             for(GoodsSortVO child:newSort.getChildren()){
-                addGoodsSort(newItem,child);
+                showGoodsSort(newItem,child);
             }
         }
     }

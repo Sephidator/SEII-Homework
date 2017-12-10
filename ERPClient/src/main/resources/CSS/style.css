@@ -2,7 +2,10 @@
 * 修改pane样式的CSS类
 */
 .background {
-    -fx-background-color: #FEFEFE;
+    -fx-background-image: url("/main/resources/pics/commonpics/背景.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
 }
 
 
@@ -77,7 +80,7 @@
 * 修改选择框样式的CSS类
 */
 .choice-box {
-    -fx-background-color: #EDEDED;
+    -fx-background-color: #FEFEFE;
     -fx-font-size: 11px;
     -fx-pref-height: 30;
     -fx-pref-width: 40;
@@ -88,9 +91,9 @@
 * 修改表格样式的CSS类
 */
 .table-view {
-    -fx-base: #EAEAEA;
-    -fx-control-inner-background: #EDEDED;
-    -fx-background-color: #EDEDED;
+    -fx-base: #FEFEFE;
+    -fx-control-inner-background: #FEFEFE;
+    -fx-background-color: #FEFEFE;
     -fx-padding: 5;
     -fx-font-size: 12px;
 }
@@ -117,7 +120,7 @@
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: #70BAE1;
+    -fx-background-color: #0880EE;
 }
 
 .text-field {
@@ -131,18 +134,18 @@
 */
 .button {
     /*-fx-padding: 5 22 5 22;*/
-    -fx-border-color: #EDEDED;
+    -fx-border-color: #FFFFFF;
     -fx-border-width: 2;
     -fx-border-radius: 25;
     -fx-background-radius: 27;
-    -fx-background-color: #21A4DD;
+    -fx-background-color: #076DD4;
     -fx-font-size: 15px;
     -fx-text-fill: #FFFFFF;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #2190DD;
+    -fx-background-color: derive(#076DD4,-10%);;
 }
 
 /*
@@ -156,12 +159,12 @@
 */
 
 .button:default {
-    -fx-background-color: #076DD4; /*-fx-focus-color;*/
+    -fx-background-color: #0650C8; /*-fx-focus-color;*/
     -fx-text-fill: #ffffff;
 }
 
 .button:default:hover {
-    -fx-background-color: derive(#076DD4,-10%);
+    -fx-background-color: derive(#0650C8,-10%);
 }
 
 .button:cancel, .button:default:cancel {
@@ -172,4 +175,17 @@
 
 .button:cancel:hover {
     -fx-background-color: derive(#EC3025,-10%);
+}
+
+.searchButton{
+    -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25 25;
+    -fx-background-position: center center;
+    -fx-background-color: #70BAE1; /*-fx-focus-color;*/
+    -fx-text-fill: #ffffff;
+}
+
+.searchButton:hover {
+    -fx-background-color: #2190DD;
 }
