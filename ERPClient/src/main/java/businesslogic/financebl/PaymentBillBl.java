@@ -4,7 +4,7 @@ import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
-import main.java.businesslogicservice.financeblservice.PaymentBilllBlService;
+import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.data_stub.accountdataservicestub.AccountDataServiceStub;
 import main.java.data_stub.clientdataservicestub.ClientDataServiceStub;
 import main.java.data_stub.financedataservicestub.PaymentBillDataServiceStub;
@@ -24,9 +24,8 @@ import main.java.vo.client.ClientVO;
 import main.java.vo.log.LogVO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class PaymentBillBl implements PaymentBilllBlService,PaymentBillTool{
+public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
     @Override
     /**
      * @version: 1

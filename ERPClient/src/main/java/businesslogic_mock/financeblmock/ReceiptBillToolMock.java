@@ -26,4 +26,9 @@ public class ReceiptBillToolMock implements ReceiptBillTool {
         receiptBillVOArrayList.add(receiptBillVO);
         return receiptBillVOArrayList;
     }
+
+    @Override
+    public String submit(ReceiptBillVO vo) throws Exception {
+        return "测试ID";
+    }
 }

@@ -14,4 +14,6 @@ public interface PaymentBillTool extends BillTool{
     public void reject(BillVO bill) throws Exception;//修改单据状态为不通过
 
     public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception;//取得收款单列表
+
+    public String submit(PaymentBillVO vo) throws Exception;//红冲使用
 }
