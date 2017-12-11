@@ -23,4 +23,9 @@ public class PaymentBillToolMock implements PaymentBillTool {
     public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception {
         return null;
     }
+
+    @Override
+    public String submit(PaymentBillVO vo) throws Exception {
+        return "测试ID";
+    }
 }

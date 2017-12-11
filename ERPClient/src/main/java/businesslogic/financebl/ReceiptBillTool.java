@@ -14,4 +14,6 @@ public interface ReceiptBillTool extends BillTool{
     public void reject(BillVO bill) throws Exception;//修改单据状态为不通过
 
     public ArrayList<ReceiptBillVO> getReceiptBillList(BillQueryVO query) throws Exception;//取得收款单列表
+
+    public String submit(ReceiptBillVO vo) throws Exception;//红冲使用
 }

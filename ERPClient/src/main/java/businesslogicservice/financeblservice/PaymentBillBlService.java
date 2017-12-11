@@ -8,7 +8,7 @@ import main.java.vo.client.ClientVO;
 
 import java.util.ArrayList;
 
-public interface PaymentBilllBlService {
+public interface PaymentBillBlService {
 
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;//返回客户列表
 
