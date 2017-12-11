@@ -71,7 +71,7 @@ public class PromotionData implements PromotionDataService {
                 sql = "SELECT * FROM GiftItem WHERE site_ID='" + promotionID + "'";
                 ResultSet temp = statement.executeQuery(sql);
                 while (temp.next()) {
-                    giftItem = new GiftItemPO(temp.getString("GoodsID"), temp.getInt("number"));
+                    giftItem = new GiftItemPO(temp.getString("GoodsID"), temp.getInt("number"), temp.getDouble("price"));
                     giftList.add(giftItem);
                 }
                 promotionPO = new PromotionClientPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getInt("clientLevel"), resultSet.getDouble("discount"), resultSet.getDouble("voucher"), giftList);
@@ -91,7 +91,7 @@ public class PromotionData implements PromotionDataService {
                 sql = "SELECT * FROM GiftItem WHERE site_ID='" + promotionID + "'";
                 ResultSet temp = statement.executeQuery(sql);
                 while (temp.next()) {
-                    giftItem = new GiftItemPO(temp.getString("GoodsID"), temp.getInt("number"));
+                    giftItem = new GiftItemPO(temp.getString("GoodsID"), temp.getInt("number"), temp.getDouble("price"));
                     giftList.add(giftItem);
                 }
                 promotionPO = new PromotionTotalPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getDouble("total"), resultSet.getDouble("voucher"), giftList);
