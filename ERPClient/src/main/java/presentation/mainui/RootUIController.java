@@ -1,9 +1,9 @@
 package main.java.presentation.mainui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -26,9 +26,9 @@ public class RootUIController {
     @FXML
     private Label type;
     @FXML
-    private JFXButton logout;
+    private Button logout;
     @FXML
-    private JFXButton exit;
+    private Button exit;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -86,7 +86,6 @@ public class RootUIController {
             BorderPane rootPane=loader.load();
             Scene scene=new Scene(rootPane);
             stage.setScene(scene);
-            stage.setResizable(true);
             stage.show();
 
             RootUIController controller=loader.getController();
