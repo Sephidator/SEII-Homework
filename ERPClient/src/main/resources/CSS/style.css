@@ -177,6 +177,9 @@
     -fx-background-color: derive(#EC3025,-10%);
 }
 
+/*
+* 修改搜索按钮样式的CSS类
+*/
 .searchButton{
     -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
     -fx-background-repeat: no-repeat;

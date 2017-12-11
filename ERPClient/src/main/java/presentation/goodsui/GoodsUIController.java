@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import main.java.MainApp;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.presentation.mainui.RootUIController;
+import main.java.presentation.messageui.InventoryPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.GoodsVO;
@@ -145,7 +146,7 @@ public class GoodsUIController extends CenterUIController {
 
             controller.showGoodsList(list);
 
-            root.setReturnPaneController(new PurchaseSalePanelUIController());
+            root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){
             e.printStackTrace();
         }

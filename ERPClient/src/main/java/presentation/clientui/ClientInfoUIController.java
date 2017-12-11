@@ -148,10 +148,10 @@ public class ClientInfoUIController extends InfoUIController{
     private void handleConfirm(){
         String text=confirm.getText();
         /*
-        if(text.equals("确认添加")){
+        if(text.equals("添加")){
             clientBlService.addClient(client);
         }
-        else if(text.equals("确认编辑")){
+        else if(text.equals("编辑")){
             clientBlService.editClient(client);
         }
         else{

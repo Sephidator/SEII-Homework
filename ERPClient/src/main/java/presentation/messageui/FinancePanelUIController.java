@@ -3,7 +3,10 @@ package main.java.presentation.messageui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import main.java.MainApp;
+import main.java.presentation.accountui.AccountUIController;
 import main.java.presentation.clientui.ClientUIController;
+import main.java.presentation.financeui.FinanceBillUIController;
+import main.java.presentation.logui.LogUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.purchaseui.PurchaseBillUIController;
 import main.java.presentation.saleui.SaleBillUIController;
@@ -15,25 +18,40 @@ public class FinancePanelUIController extends CenterUIController {
 
     // 界面之中会用到的方法******************************************
 
-    /*
+
     @FXML
-    private void handlePurchaseBill(){
+    private void handleAccount(){
         root.showLogoutButton(false);
-        PurchaseBillUIController.init(root);
+        AccountUIController.init(root);
     }
 
     @FXML
-    private void handleSaleBill(){
+    private void handleFinanceBill(){
         root.showLogoutButton(false);
-        SaleBillUIController.init(root);
+        FinanceBillUIController.init(root);
     }
 
     @FXML
-    private void handleClient(){
+    private void handleLog(){
         root.showLogoutButton(false);
-        ClientUIController.init(root);
+        LogUIController.init(root);
     }
-    */
+
+    @FXML
+    private void handleSaleDetail(){
+    }
+
+    @FXML
+    private void handleBusinessHistory(){
+    }
+
+    @FXML
+    private void handleBusinessCondition(){
+    }
+
+    @FXML
+    private void handleInitial(){
+    }
 
     // 加载文件和界面的方法******************************************
 

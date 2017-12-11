@@ -49,7 +49,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/账户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleAccount" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/账户管理.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -61,7 +61,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/财务类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleFinanceBill" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/财务类单据.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -73,7 +73,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/销售明细表.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleSaleDetail" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/销售明细表.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -85,7 +85,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/经营历程表.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleBusinessHistory" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/经营历程表.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -97,7 +97,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/查看操作日志.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleLog" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/查看操作日志.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -109,7 +109,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/经营情况表.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleBusinessCondition" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/经营情况表.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -121,7 +121,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/期初建账.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInitial" style="-fx-background-image: url('/main/resources/pics/messageui/financepanelui/期初建账.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
