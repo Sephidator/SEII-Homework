@@ -4,6 +4,7 @@ import main.java.businesslogic.salebl.SaleTradBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
 import main.java.vo.bill.salebill.SaleTradeBillQueryVO;
+import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
 
@@ -29,11 +30,11 @@ public class SaleDetailBl implements SaleDetailBlService {
     public ArrayList<SaleRecordVO> getSaleRecordList(SaleDetailQueryVO query)throws Exception {
         /*制作SaleTradeBillQueryVO*/
         //TODO 差一个client属性
-        SaleTradeBillQueryVO saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.salesman);
+        SaleTradeBillQueryVO saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
 
         SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
         //TODO 需要提供一个查找函数
-        //saleTradeBillTool.getSaleTradeBillList(saleTradeBillQueryVO);
+        ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.findsByReport(saleTradeBillQueryVO);
 
 
         ArrayList<SaleRecordVO> saleRecordVOS = new ArrayList<>();

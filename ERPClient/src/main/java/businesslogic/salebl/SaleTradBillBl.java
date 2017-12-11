@@ -1,9 +1,9 @@
 package main.java.businesslogic.salebl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
+import main.java.vo.bill.salebill.SaleTradeBillQueryVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
@@ -44,6 +44,11 @@ public class SaleTradBillBl implements SaleTradeBillBlService,SaleTradeBillTool 
 
     @Override
     public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query)throws Exception {
+        return null;
+    }
+
+    @Override
+    public ArrayList<SaleTradeBillVO> findsByReport(SaleTradeBillQueryVO query) throws Exception {
         return null;
     }
 

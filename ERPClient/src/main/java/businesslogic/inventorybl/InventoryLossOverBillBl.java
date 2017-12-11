@@ -2,13 +2,20 @@ package main.java.businesslogic.inventorybl;
 
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
+import main.java.businesslogic.logbl.LogBl;
+import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
+import main.java.data_stub.inventorydataservicestub.InventoryLossOverBillDataServiceStub;
+import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataService;
+import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
+import main.java.vo.bill.inventorybill.LossOverItemVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
+import main.java.vo.log.LogVO;
 
 import java.util.ArrayList;
 
@@ -16,12 +23,33 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
     /**
      * @version: 1
      * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
+     * @param: [billVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return:
      */
     @Override
     public void pass(BillVO billVO) throws Exception{
-        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
+        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
+
+        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*修改状态*/
+        inventoryLossOverBillPO.setState("审批通过");
+
+        /*调用InventoryLossOverBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
+
+        /*调用goodsTool*/
+        GoodsTool goodsTool=new GoodsBl();
+        for(LossOverItemVO lossOverItemVO:inventoryLossOverBillVO.getLossOverList()){
+            GoodsVO goodsVO=lossOverItemVO.goods;
+            goodsVO.setNumber(lossOverItemVO.actualNumber);
+            goodsTool.editGoods(goodsVO);
+        }
 
 
     }
@@ -29,12 +57,25 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
     /**
      * @version: 1
      * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
+     * @param: [billVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return:
      */
     @Override
     public void reject(BillVO billVO) throws Exception{
-        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
+        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
+
+        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*修改状态*/
+        inventoryLossOverBillPO.setState("审批未通过");
+
+        /*调用InventoryLossOverBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
 
 
     }
@@ -43,7 +84,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @version: 1
      * @date:
      * @param: [query] 包含待查询信息的商品查询对象
-     * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsTool.getGoodsList服务，返回ArrayList<GoodsVO>
+     * @return: ArrayList<GoodsVO>的商品列表
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
@@ -58,13 +99,30 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
     /**
      * @version: 1
      * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
+     * @param: [inventoryLossOverBillVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return: String的提交单据的ID
      */
     @Override
-    public String submit(InventoryLossOverBillVO bill) throws Exception{
+    public String submit(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
         String id="";
-        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
+
+        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*修改状态*/
+        inventoryLossOverBillPO.setState("待审批");
+
+        /*调用InventoryLossOverBillDataService.insert服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+        id=inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
+
+        /*调用LogTool*/
+        LogVO logVO=new LogVO(inventoryLossOverBillVO.getOperator(),"提交了一份新的库存溢损单",inventoryLossOverBillPO.getTime());
+        LogTool logTool=new LogBl();
+        logTool.addLog(logVO);
 
 
         return id;
@@ -74,11 +132,23 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @version: 1
      * @date:
      * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryLossOverBillVO转成InventoryLossOverBillPO，并调用InventoryLossOverBillDataService.update服务，返回ResultMessage
+     * @return:
      */
     @Override
-    public void saveDraft(InventoryLossOverBillVO bill) throws Exception{
+    public void saveDraft(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
         InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
+
+        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+        inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*修改状态*/
+        inventoryLossOverBillPO.setState("草稿");
+
+        /*调用InventoryLossOverBillDataService.update服务*/
+
+        /*调用dataservice的桩*/
+        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+        inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
 
 
     }
@@ -87,11 +157,28 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @version: 1
      * @date:
      * @param: [query] 包含待查询信息的单据查询对象
-     * @function: 将BillQueryVO转为BillQueryPO，调用InventoryLossOverBillDataService.find服务，
-     * 得到ArrayList<InventoryLossOverBillPO>以后转成ArrayList<InventoryLossOverBillVO>，返回ArrayList<InventoryLossOverBillVO>
-     */
+     * @return: 返回ArrayList<InventoryLossOverBillVO>的单据列表
+     * */
     @Override
     public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query)throws Exception {
-        return null;
+        BillQueryPO billQueryPO=new BillQueryPO();
+        ArrayList<InventoryLossOverBillPO> inventoryLossOverBillPOS=new ArrayList<>();
+        ArrayList<InventoryLossOverBillVO> inventoryLossOverBillVOS=new ArrayList<>();
+
+        /*将BillQueryVO转为BillQueryPO*/
+        billQueryPO=query.getBillQueryPO();
+
+        /*调用InventoryLossOverBillDataService.find服务*/
+
+        /*调用dataservice的桩*/
+        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+        inventoryLossOverBillPOS=inventoryLossOverBillDataService.finds(billQueryPO);
+
+        /*ArrayList<InventoryLossOverBillPO>以后转成ArrayList<InventoryLossOverBillVO>*/
+        for(InventoryLossOverBillPO inventoryLossOverBillPO:inventoryLossOverBillPOS){
+            inventoryLossOverBillVOS.add(new InventoryLossOverBillVO(inventoryLossOverBillPO));
+        }
+
+        return inventoryLossOverBillVOS;
     }
 }
