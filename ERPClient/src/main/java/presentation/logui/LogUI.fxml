@@ -15,7 +15,7 @@
             <Label styleClass="greyLabel" text="时间区间" />
             <JFXDatePicker editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间起点" styleClass="date-picker" />
             <JFXDatePicker editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间终点" styleClass="date-picker" />
-            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" text="Button" />
+            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" />
          </children>
       </HBox>
       <TableView fx:id="logTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
