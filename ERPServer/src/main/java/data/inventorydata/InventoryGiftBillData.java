@@ -45,7 +45,7 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
                     ResultSet temp = statement.executeQuery(sql);
                     ArrayList<GiftItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
-                        itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number")));
+                        itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
                     }
                     inventoryGiftBillPO = new InventoryGiftBillPO("草稿", resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
                     list.add(inventoryGiftBillPO);
@@ -66,7 +66,7 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
                     ResultSet temp = statement.executeQuery(sql);
                     ArrayList<GiftItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
-                        itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number")));
+                        itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
                     }
                     inventoryGiftBillPO = new InventoryGiftBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
                     inventoryGiftBillPO.setID(ID);
@@ -130,7 +130,7 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
                 sql = "UPDATE InventoryGiftBill SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
                 for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO GiftItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "')";
+                    sql = "INSERT INTO GiftItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                     statement.executeUpdate(sql);
                 }
             }
@@ -191,7 +191,7 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
             statement.executeUpdate(sql);
             ArrayList<GiftItemPO> list = po.getGiftList();
             for (int i = 0; i < list.size(); i++) {
-                sql = "INSERT INTO GiftItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "')";
+                sql = "INSERT INTO GiftItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                 statement.executeUpdate(sql);
             }
             statement.close();
