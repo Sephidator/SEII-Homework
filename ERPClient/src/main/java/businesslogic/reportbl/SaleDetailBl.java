@@ -25,19 +25,21 @@ public class SaleDetailBl implements SaleDetailBlService {
      * 以列表形式显示，列表中包含如下信息：
      * 时间（精确到天），商品名，型号，数量，单价，总额。
      *
-     * 实现说明：通过筛选条件拿到合适的SaleTradeBill，再拿到属性saleList，以及时间，打包成ArrayList传回
+     * 实现说明：通过筛选条件拿到合适的SaleTradeBill，打包成ArrayList传回
      */
     public ArrayList<SaleRecordVO> getSaleRecordList(SaleDetailQueryVO query)throws Exception {
         /*制作SaleTradeBillQueryVO*/
-        //TODO 差一个client属性
         SaleTradeBillQueryVO saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
 
         SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
-        //TODO 需要提供一个查找函数
+        //拿到销售单的单据
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.findsByReport(saleTradeBillQueryVO);
 
-
+        //开始组装saleRecordVO
         ArrayList<SaleRecordVO> saleRecordVOS = new ArrayList<>();
+        for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
+            saleRecordVOS.add(new SaleRecordVO(saleTradeBillVO));
+        }
         return saleRecordVOS;
     }
 }
