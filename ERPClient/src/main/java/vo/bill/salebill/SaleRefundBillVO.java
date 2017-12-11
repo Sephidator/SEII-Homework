@@ -8,10 +8,8 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.salebill.SaleRefundBillPO;
 import main.java.po.goods.GoodsItemPO;
-import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -35,7 +33,17 @@ public class SaleRefundBillVO extends SaleBillVO {
         this.total=total;
     }
 
-    public SaleRefundBillVO(){}
+    public SaleRefundBillVO(){
+        this.state = "";
+        this.time = new Date();
+        this.type = "销售退货单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.client=new ClientVO();
+        this.salesman=new UserVO();
+        this.saleList=new ArrayList<GoodsItemVO>();
+        this.total=0;
+    }
 
     public SaleRefundBillPO getSaleRefundBillPO()throws Exception{
         SaleRefundBillPO saleRefundBillPO=new SaleRefundBillPO();

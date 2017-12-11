@@ -8,10 +8,8 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 import main.java.po.goods.GiftItemPO;
-import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -23,6 +21,14 @@ public class InventoryGiftBillVO extends InventoryBillVO {
     private double total; //赠品总价
 
     public InventoryGiftBillVO() {
+        this.state = "";
+        this.time = new Date();
+        this.type = "库存赠送单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.client=new ClientVO();
+        this.giftList=new ArrayList<GiftItemVO>();
+        this.total = 0;
     }
 
     public InventoryGiftBillVO(String state, Date time, UserVO operator, String comment,ClientVO client,ArrayList<GiftItemVO> giftList, double total){

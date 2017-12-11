@@ -5,15 +5,15 @@ import main.java.po.goods.GoodsQueryPO;
 
 public class GoodsQueryVO{
     public String name; //商品名称
-    public String goodsSortID;//商品所在商品分类
+    public String goodsID;//商品所在商品分类
 
-    public GoodsQueryVO(String name,String goodsSortID) {
+    public GoodsQueryVO(String name,String goodsID) {
         this.name = name;
-        this.goodsSortID = goodsSortID;
+        this.goodsID = goodsID;
     }
 
     public GoodsQueryPO getGoodsQueryPO(){
-        GoodsQueryPO goodsQueryPO=new GoodsQueryPO(this.name,this.goodsSortID);
+        GoodsQueryPO goodsQueryPO=new GoodsQueryPO(this.name,this.goodsID);
         return goodsQueryPO;
     }
 }

@@ -4,7 +4,7 @@ import main.java.businesslogic.purchasebl.PurchaseRefundBillBl;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillTool;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
-import main.java.businesslogicservice.inventoryblservice.InventoryCheckBLService;
+import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
@@ -13,7 +13,7 @@ import main.java.vo.goods.GoodsItemVO;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InventoryCheckBl implements InventoryCheckBLService {
+public class InventoryCheckBl implements InventoryCheckBlService {
     /**
      * @version: 1
      * @date:

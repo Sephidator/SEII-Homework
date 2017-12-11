@@ -8,10 +8,8 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.purchasebill.PurchaseRefundBillPO;
 import main.java.po.goods.GoodsItemPO;
-import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -34,7 +32,14 @@ public class PurchaseRefundBillVO extends PurchaseBillVO {
     }
 
     public PurchaseRefundBillVO(){
-
+        this.state = "";
+        this.time = new Date();
+        this.type = "进货退货单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.client=new ClientVO();
+        this.purchaseList=new ArrayList<>();
+        this.total=0;
     }
 
     public PurchaseRefundBillPO getPurchaseRefundBillPO()throws Exception{

@@ -6,7 +6,6 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.po.bill.inventorybill.LossOverItemPO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -16,6 +15,12 @@ public class InventoryLossOverBillVO extends InventoryBillVO {
     private ArrayList<LossOverItemVO> lossOverList; //商品溢损列表
 
     public InventoryLossOverBillVO() {
+        this.state = "";
+        this.time = new Date();
+        type="库存溢损单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.lossOverList=new ArrayList<LossOverItemVO>();
     }
 
     public InventoryLossOverBillVO(String state, Date time, UserVO operator, String comment, ArrayList<LossOverItemVO> lossOverList){

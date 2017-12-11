@@ -1,6 +1,6 @@
 package main.java.client_blservicestub.inventoryblservicestub;
 
-//public class InventoryCheckBLServiceStuub implements InventoryCheckBLService{
+//public class InventoryCheckBLServiceStuub implements InventoryCheckBlService{
 //    @Override
 //    public int getImportNumber(Date start, Date end) {
 //        return 10;

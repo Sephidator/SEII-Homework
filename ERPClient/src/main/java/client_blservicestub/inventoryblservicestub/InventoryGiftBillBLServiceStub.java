@@ -1,6 +1,6 @@
 package main.java.client_blservicestub.inventoryblservicestub;
 
-//public class InventoryGiftBillBLServiceStub implements InventoryGiftBillBLService {
+//public class InventoryGiftBillBLServiceStub implements InventoryGiftBillBlService {
 //    @Override
 //    public String getID() {
 //        return "YSD-20171022-00002";

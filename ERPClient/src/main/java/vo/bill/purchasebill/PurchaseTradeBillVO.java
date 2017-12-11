@@ -8,10 +8,8 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.purchasebill.PurchaseTradeBillPO;
 import main.java.po.goods.GoodsItemPO;
-import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -34,15 +32,15 @@ public class PurchaseTradeBillVO extends PurchaseBillVO {
     }
 
     public PurchaseTradeBillVO(){
-        ID = "";
-        state = "";
-        time=new Date();
-        type = "进货单";
-        operator = new UserVO();
-        comment = "";
-        client = new ClientVO();
-        purchaseList = new ArrayList<>();
-        total = 0;
+        this.ID = "";
+        this.state = "";
+        this.time=new Date();
+        this.type = "进货单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.client = new ClientVO();
+        this.purchaseList = new ArrayList<>();
+        this.total = 0;
     }
 
     public PurchaseTradeBillPO getPurchaseTradeBillPO()throws Exception{

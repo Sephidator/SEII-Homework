@@ -9,17 +9,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
-import main.java.businesslogicservice.goodsblservice.GoodsBLService;
+import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.goods.GoodsVO;
 import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
 public class GoodsUIController extends CenterUIController {
-    private GoodsBLService goodsBlService;
+    private GoodsBlService goodsBlService;
 
     private ObservableList<GoodsVO> goodsObservableList= FXCollections.observableArrayList();
     @FXML
@@ -53,7 +52,7 @@ public class GoodsUIController extends CenterUIController {
 
     // 设置controller数据的方法*****************************************
 
-    public void setGoodsBlService(GoodsBLService goodsBlService) {
+    public void setGoodsBlService(GoodsBlService goodsBlService) {
         this.goodsBlService = goodsBlService;
         //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
         //showGoodsList(goodsList);
