@@ -109,7 +109,7 @@ public class AddGoodsUIController {
             }
             if(giftItemList!=null){
                 GoodsVO goods=goodsTableView.getSelectionModel().getSelectedItem();
-                GiftItemVO giftItem=new GiftItemVO(goods,1);
+                GiftItemVO giftItem=new GiftItemVO(goods,1,80);
                 giftItemList.add(giftItem);
             }
         }
