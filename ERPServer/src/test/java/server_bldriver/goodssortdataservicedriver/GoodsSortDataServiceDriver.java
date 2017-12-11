@@ -17,7 +17,7 @@ public class GoodsSortDataServiceDriver {
 
     @Test
     public void finds() throws Exception {
-        assertEquals(1, service.finds(null).size());
+        assertEquals(true, service.getRoot().isVisible());
     }
 
     @Test

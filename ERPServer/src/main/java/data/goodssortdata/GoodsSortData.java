@@ -5,12 +5,8 @@ import main.java.data.datautility.DataException;
 import main.java.data.datautility.ExistException;
 import main.java.data.datautility.NotNullException;
 import main.java.data.datautility.NotExistException;
-import main.java.data.goodsdata.GoodsData;
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
-import main.java.po.goods.GoodsPO;
-import main.java.po.goods.GoodsQueryPO;
 import main.java.po.goods.GoodsSortPO;
-import main.java.po.goods.GoodsSortQueryPO;
 
 import java.rmi.RemoteException;
 import java.sql.*;
@@ -28,8 +24,6 @@ public class GoodsSortData implements GoodsSortDataService {
             resultSet.next();
             GoodsSortPO goodsSortPO = getGoodsSortPO(statement, resultSet);
             goodsSortPO.setVisible(resultSet.getBoolean("visible"));
-            resultSet.close();
-            statement.close();
             return goodsSortPO;
         } catch (SQLException e) {
             try {
@@ -41,25 +35,14 @@ public class GoodsSortData implements GoodsSortDataService {
     }
 
     @Override
-    public ArrayList<GoodsSortPO> finds(GoodsSortQueryPO query) throws RemoteException {
+    public GoodsSortPO getRoot() throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<GoodsSortPO> list = new ArrayList<>();
-        String sql;
-        if (query == null)
-            sql = "SELECT * FROM GoodsSort WHERE visible=TRUE";
-        else
-            sql = "SELECT  * FROM GoodsSort WHERE name='" + query.name + "' AND visible=TRUE ";
+
         try {
             Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM GoodsSort WHERE visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
-            GoodsSortPO goodsSortPO;
-            while (resultSet.next()) {
-                goodsSortPO = getGoodsSortPO(statement, resultSet);
-                list.add(goodsSortPO);
-            }
-            resultSet.close();
-            statement.close();
-            return list;
+            return getGoodsSortPO(statement, resultSet);
         } catch (SQLException e) {
             try {
                 connection.rollback();
