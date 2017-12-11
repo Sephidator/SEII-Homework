@@ -69,7 +69,8 @@ public class RootUIController {
 
     @FXML
     private void handleLogout(){
-        LoginUIController.init(stage);
+        stage.close();
+        LoginUIController.init(new Stage());
     }
 
     @FXML

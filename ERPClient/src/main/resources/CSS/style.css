@@ -42,6 +42,19 @@
     -fx-font-size: 16px;
 }
 
+.myLabel2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #2190DD;
+    -fx-background-radius: 6;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-opacity: 1;
+    -fx-pref-height: 30;
+    -fx-pref-width: 70;
+    -fx-font-size: 12px;
+}
+
 .greyLabel {
     -fx-text-fill: #000000;
     -fx-background-color: #F5F5F5;
@@ -136,8 +149,8 @@
     /*-fx-padding: 5 22 5 22;*/
     -fx-border-color: #FFFFFF;
     -fx-border-width: 2;
-    -fx-border-radius: 25;
-    -fx-background-radius: 27;
+    -fx-border-radius: 30;
+    -fx-background-radius: 32;
     -fx-background-color: #076DD4;
     -fx-font-size: 15px;
     -fx-text-fill: #FFFFFF;
@@ -168,7 +181,6 @@
 }
 
 .button:cancel, .button:default:cancel {
-    -fx-opacity: 0.8;
     -fx-background-color: #EC3025;
     -fx-text-fill: white;
 }

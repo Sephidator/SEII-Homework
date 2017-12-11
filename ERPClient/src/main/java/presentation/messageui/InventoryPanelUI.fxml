@@ -84,7 +84,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInventoryVeritification" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/库存盘点.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                              <JFXButton alignment="BOTTOM_LEFT" buttonType="RAISED" onAction="#handleInventoryVerification" style="-fx-background-image: url('/main/resources/pics/messageui/inventorypanelui/库存盘点.png'); -fx-background-repeat: stretch; -fx-background-size: stretch; -fx-background-position: center center;" styleClass="myButton" text="" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
