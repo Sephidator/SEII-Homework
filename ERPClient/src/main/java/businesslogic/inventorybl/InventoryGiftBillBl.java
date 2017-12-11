@@ -12,6 +12,7 @@ import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
@@ -23,7 +24,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @version: 1
      * @date:
      * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
+     * @return:
      */
     @Override
     public void pass(BillVO billVO) throws Exception{
@@ -33,6 +34,9 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
         InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
 
+        /*修改状态*/
+        inventoryGiftBillPO.setState("审批通过");
+
         /*调用InventoryGiftBillDataService.update服务*/
 
 
@@ -40,13 +44,22 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
         InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
         inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
+        /*调用goodsTool*/
+        GoodsTool goodsTool=new GoodsBl();
+        for(GiftItemVO giftItemVO:inventoryGiftBillVO.getGiftList()){
+            GoodsVO goodsVO=giftItemVO.goods;
+            goodsVO.setNumber(goodsVO.getNumber()-giftItemVO.number);
+            goodsTool.editGoods(goodsVO);
+        }
+
+
     }
 
     /**
      * @version: 1
      * @date:
      * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
+     * @return:
      */
     @Override
     public void reject(BillVO billVO) throws Exception{
@@ -54,6 +67,9 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
 
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
         InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+        /*修改状态*/
+        inventoryGiftBillPO.setState("审批未通过");
 
         /*调用InventoryGiftBillDataService.update服务*/
 
@@ -69,7 +85,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @version: 1
      * @date:
      * @param: [query] 包含待查询信息的商品查询对象
-     * @function: 将GoodsQueryVO转为GoodsQueryPO，调用GoodsTool.getGoodsList服务，返回ArrayList<GoodsVO>
+     * @return: ArrayList<GoodsVO>的商品列表
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
@@ -84,8 +100,8 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
     /**
      * @version: 1
      * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
+     * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return: String的提交单据的ID
      */
     @Override
     public String submit(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
@@ -94,6 +110,9 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
 
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
         InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+        /*修改状态*/
+        inventoryGiftBillPO.setState("待审批");
 
         /*调用InventoryGiftBillDataService.insert服务*/
 
@@ -113,29 +132,52 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
     /**
      * @version: 1
      * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @function: 将InventoryGiftBillVO转成InventoryGiftBillPO，并调用InventoryGiftBillDataService.update服务，返回ResultMessage
+     * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return:
      */
     @Override
-    public void saveDraft(InventoryGiftBillVO bill) throws Exception{
+    public void saveDraft(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
         InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
 
+        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+        inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
 
+        /*修改状态*/
+        inventoryGiftBillPO.setState("草稿");
+
+        /*调用InventoryGiftBillDataService.insert服务*/
+
+        /*调用dataservice的桩*/
+        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+        inventoryGiftBillDataService.insert(inventoryGiftBillPO);
     }
 
     /**
      * @version: 1
      * @date:
      * @param: [query] 包含待查询信息的单据查询对象
-     * @function: 将BillQueryVO转为BillQueryPO，调用InventoryGiftBillDataService.find服务，
-     * 得到ArrayList<InventoryGiftBillPO>以后转成ArrayList<InventoryGiftBillVO>，返回ArrayList<InventoryGiftBillVO>
+     * @return: 返回ArrayList<InventoryGiftBillVO>的单据列表
      */
     @Override
     public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception{
         BillQueryPO billQueryPO=new BillQueryPO();
+        ArrayList<InventoryGiftBillPO> inventoryGiftBillPOS=new ArrayList<>();
+        ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS=new ArrayList<>();
 
+        /*将BillQueryVO转为BillQueryPO*/
+        billQueryPO=query.getBillQueryPO();
 
+        /*调用InventoryGiftBillDataService.find服务*/
 
-        return null;
+        /*调用dataservice的桩*/
+        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+        inventoryGiftBillPOS=inventoryGiftBillDataService.finds(billQueryPO);
+
+        /*ArrayList<InventoryGiftBillPO>以后转成ArrayList<InventoryGiftBillVO>*/
+        for(InventoryGiftBillPO inventoryGiftBillPO:inventoryGiftBillPOS){
+            inventoryGiftBillVOS.add(new InventoryGiftBillVO(inventoryGiftBillPO));
+        }
+
+        return inventoryGiftBillVOS;
     }
 }
