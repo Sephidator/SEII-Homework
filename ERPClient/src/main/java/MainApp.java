@@ -12,14 +12,9 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
-    private Stage stage;
-
     @Override
     public void start(Stage stage) {
-        this.stage=stage;
-        this.stage.setTitle("灯具进销存管理系统");
-
-        getLoginPane();
+        stage.setTitle("灯具进销存管理系统");
 
         // 设置关闭界面时做什么
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -27,9 +22,7 @@ public class MainApp extends Application {
             public void handle(WindowEvent event) {
             }
         });
-    }
 
-    public void getLoginPane(){
         LoginUIController.init(stage);
     }
 

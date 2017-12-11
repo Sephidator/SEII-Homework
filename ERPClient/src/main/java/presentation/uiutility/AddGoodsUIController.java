@@ -15,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.vo.bill.BillVO;
+import main.java.vo.bill.inventorybill.LossOverItemVO;
+import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsVO;
 
@@ -24,6 +26,8 @@ public class AddGoodsUIController {
     protected Stage dialogStage;
     private ArrayList<GoodsVO> goodsList;
     private ArrayList<GoodsItemVO> goodsItemList;
+    private ArrayList<LossOverItemVO> lossOverItemList;
+    private ArrayList<GiftItemVO> giftItemList;
 
     private ObservableList<GoodsVO> goodsObservableList= FXCollections.observableArrayList();
     @FXML
@@ -67,6 +71,14 @@ public class AddGoodsUIController {
         this.goodsItemList=goodsItemList;
     }
 
+    public void setLossOverItemList(ArrayList<LossOverItemVO> lossOverItemList) {
+        this.lossOverItemList=lossOverItemList;
+    }
+
+    public void setGiftItemList(ArrayList<GiftItemVO> GiftItemList) {
+        this.giftItemList=giftItemList;
+    }
+
     // 界面之中会用到的方法******************************************
 
     /**
@@ -86,8 +98,20 @@ public class AddGoodsUIController {
     @FXML
     private void handleConfirm(){
         if(isGoodsSelected()){
-            GoodsItemVO goodsItem=new GoodsItemVO(goodsTableView.getSelectionModel().getSelectedItem(),1);
-            goodsItemList.add(goodsItem);
+            if(goodsItemList!=null){
+                GoodsItemVO goodsItem=new GoodsItemVO(goodsTableView.getSelectionModel().getSelectedItem(),1);
+                goodsItemList.add(goodsItem);
+            }
+            if(lossOverItemList!=null){
+                GoodsVO goods=goodsTableView.getSelectionModel().getSelectedItem();
+                LossOverItemVO lossOverItem=new LossOverItemVO(goods,goods.getRetail(),goods.getNumber(),goods.getNumber());
+                lossOverItemList.add(lossOverItem);
+            }
+            if(giftItemList!=null){
+                GoodsVO goods=goodsTableView.getSelectionModel().getSelectedItem();
+                GiftItemVO giftItem=new GiftItemVO(goods,1);
+                giftItemList.add(giftItem);
+            }
         }
         dialogStage.close();
     }
@@ -116,6 +140,7 @@ public class AddGoodsUIController {
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
+
     public static void init(ArrayList<GoodsVO> goodsList,ArrayList<GoodsItemVO> goodsItemList,Stage stage){
         try{
             FXMLLoader loader=new FXMLLoader();
@@ -132,6 +157,53 @@ public class AddGoodsUIController {
             controller.setDialogStage(dialogStage);
             controller.setGoodsList(goodsList);
             controller.setGoodsItemList(goodsItemList);
+
+            dialogStage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void init(ArrayList<GoodsVO> goodsList,Stage stage,ArrayList<LossOverItemVO> lossOverItemList){
+        try{
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/uiutility/AddGoodsUI.fxml"));
+
+            Stage dialogStage=new Stage();
+            dialogStage.setResizable(false);
+            dialogStage.setTitle("添加商品界面");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(stage);
+            dialogStage.setScene(new Scene(loader.load()));
+
+            AddGoodsUIController controller=loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setGoodsList(goodsList);
+            controller.setLossOverItemList(lossOverItemList);
+
+            dialogStage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void init(Stage stage,ArrayList<GoodsVO> goodsList,ArrayList<GiftItemVO> giftItemList){
+        try{
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/uiutility/AddGoodsUI.fxml"));
+
+            Stage dialogStage=new Stage();
+            dialogStage.setResizable(false);
+            dialogStage.setTitle("添加商品界面");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(stage);
+            dialogStage.setScene(new Scene(loader.load()));
+
+            AddGoodsUIController controller=loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setGoodsList(goodsList);
+            controller.setGiftItemList(giftItemList);
 
             dialogStage.showAndWait();
         }catch(Exception e){

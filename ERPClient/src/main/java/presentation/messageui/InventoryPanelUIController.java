@@ -3,12 +3,11 @@ package main.java.presentation.messageui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import main.java.MainApp;
-import main.java.presentation.clientui.ClientUIController;
 import main.java.presentation.goodssortui.GoodsSortUIController;
 import main.java.presentation.goodsui.GoodsUIController;
+import main.java.presentation.inventoryui.InventoryBillUIController;
+import main.java.presentation.inventoryui.InventoryVerificationUIController;
 import main.java.presentation.mainui.RootUIController;
-import main.java.presentation.purchaseui.PurchaseBillUIController;
-import main.java.presentation.saleui.SaleBillUIController;
 import main.java.presentation.uiutility.CenterUIController;
 
 
@@ -30,7 +29,9 @@ public class InventoryPanelUIController extends CenterUIController {
     }
 
     @FXML
-    private void handleInventoryAlarm(){
+    private void handleInventoryBill(){
+        root.showLogoutButton(false);
+        InventoryBillUIController.init(root);
     }
 
     @FXML
@@ -38,12 +39,11 @@ public class InventoryPanelUIController extends CenterUIController {
     }
 
     @FXML
-    private void handleInventoryVeritification(){
+    private void handleInventoryVerification(){
+        root.showLogoutButton(false);
+        InventoryVerificationUIController.init(root);
     }
 
-    @FXML
-    private void handleInventoryBill(){
-    }
 
     // 加载文件和界面的方法******************************************
 

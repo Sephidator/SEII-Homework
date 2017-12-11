@@ -39,17 +39,20 @@ public class LoginUIController {
     private void handleLogin(){
         UserVO user=new UserVO("宋抟","进货销售人员","JN123", "password", 23,true);
         if(usernameField.getText().equals("1")){
-            RootUIController root=RootUIController.initRoot(stage,user);
+            stage.close();
+            RootUIController root=RootUIController.initRoot(new Stage(),user);
             root.showLogoutButton(true);
             PurchaseSalePanelUIController.init(root);
         }
         else if(usernameField.getText().equals("2")){
-            RootUIController root=RootUIController.initRoot(stage,user);
+            stage.close();
+            RootUIController root=RootUIController.initRoot(new Stage(),user);
             root.showLogoutButton(true);
             InventoryPanelUIController.init(root);
         }
         else if(usernameField.getText().equals("3")){
-            RootUIController root=RootUIController.initRoot(stage,user);
+            stage.close();
+            RootUIController root=RootUIController.initRoot(new Stage(),user);
             root.showLogoutButton(true);
             FinancePanelUIController.init(root);
         }

@@ -24,6 +24,7 @@ public class GoodsSortUIController extends CenterUIController {
      * 设置显示的客户信息以及显示方法
      * */
     public void initialize(){
+        goodsSortTreeView.setEditable(true);
         /*
         root = new TreeItem<String>("Root");
         root.setExpanded(true);
@@ -95,18 +96,43 @@ public class GoodsSortUIController extends CenterUIController {
 
     @FXML
     private void handleAddSort(){
+        GoodsSortInfoUIController.init(goodsSortBlService,new GoodsSortVO(),1,root.getStage());
     }
 
     @FXML
     private void handleDeleteSort(){
+        int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+        if(isGoodsSortSelected()){
+           TreeItem<String> item=goodsSortTreeView.getTreeItem(selectedIndex);
+           item.getParent().getChildren().remove(item);
+        }
     }
 
     @FXML
     private void handleEditSort(){
+        /*
+        int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+        TreeItem<String> item=goodsSortTreeView.getTreeItem(selectedIndex);
+        */
+        GoodsSortInfoUIController.init(goodsSortBlService,new GoodsSortVO(),3,root.getStage());
     }
 
     @FXML
     private void handleAddGoods() {
+    }
+
+    private boolean isGoodsSortSelected(){
+        int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+        if(selectedIndex>=0){
+            return true;
+        }else{
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("未选中商品分类");
+            alert.setContentText("请在表中选择商品分类");
+            alert.showAndWait();
+            return false;
+        }
     }
 
     /*
