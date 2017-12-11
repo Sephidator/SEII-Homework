@@ -1,15 +1,14 @@
 package main.java.businesslogicservice.goodssortblservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
-import main.java.vo.goods.GoodsSortQueryVO;
 import main.java.vo.goods.GoodsSortVO;
 
-import java.util.ArrayList;
+public interface GoodsSortBlService {
 
-public interface GoodsSortBLService {
+    //寻找商品分类的根节点
+    public GoodsSortVO getRoot() throws Exception;
 
-    //根据输入信息返回相应的商品分类
-    public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query) throws Exception;
+    //查找一个商品分类
+    public GoodsSortVO find(String goodsSortID) throws Exception;
 
     //添加一个商品分类
     public String addGoodsSort(GoodsSortVO goodsSort) throws Exception;

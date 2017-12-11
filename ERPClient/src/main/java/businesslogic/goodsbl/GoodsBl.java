@@ -1,6 +1,6 @@
 package main.java.businesslogic.goodsbl;
 
-import main.java.businesslogicservice.goodsblservice.GoodsBLService;
+import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.data_stub.goodsdataservicestub.GoodsDataServiceStub;
 import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
@@ -10,7 +10,7 @@ import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class GoodsBl implements GoodsBLService,GoodsTool {
+public class GoodsBl implements GoodsBlService,GoodsTool {
     /**
      * @version: 1
      * @date:

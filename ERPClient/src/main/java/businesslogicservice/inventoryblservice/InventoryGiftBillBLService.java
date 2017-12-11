@@ -8,7 +8,7 @@ import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public interface InventoryGiftBillBLService {
+public interface InventoryGiftBillBlService {
 
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 

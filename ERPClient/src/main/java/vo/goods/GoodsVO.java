@@ -18,7 +18,16 @@ public class GoodsVO extends VO{
     private String comment; //商品的备注
 
     public GoodsVO(){
-
+        this.name = "";
+        this.goodsSort = new GoodsSortVO();
+        this.model = "";
+        this.number = 0;
+        this.cost = 0;
+        this.retail = 0;
+        this.latestCost = 0;
+        this.latestRetail = 0;
+        this.alarmNum = 0;
+        this.comment = "";
     }
 
     public GoodsVO(String name, GoodsSortVO goodsSort, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment) {

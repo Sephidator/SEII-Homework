@@ -2,7 +2,7 @@ package main.java.businesslogicservice.inventoryblservice;
 
 import java.util.Date;
 
-public interface InventoryCheckBLService {
+public interface InventoryCheckBlService {
 
     //对应的在此时间段内的入库商品数
     public int getImportNumber(Date start,Date end) throws Exception;

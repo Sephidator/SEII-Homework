@@ -4,7 +4,6 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.client.ClientPO;
 import main.java.vo.VO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 /**
@@ -24,7 +23,17 @@ public class ClientVO extends VO{
     private UserVO salesman; // 默认业务员
 
     public ClientVO() {
-
+        this.category = "";
+        this.level = 0;
+        this.name = "";
+        this.phone = "";
+        this.address = "";
+        this.post = "";
+        this.email = "";
+        this.receivable = 0;
+        this.payable = 0;
+        this.receivableLimit = 0;
+        this.salesman = new UserVO();
     }
 
     public ClientVO(String category, int level, String name,String phone, String address, String post, String email,double receivable, double payable, double receivableLimit, UserVO salesman) {

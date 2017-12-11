@@ -2,7 +2,7 @@ package test.java.client_presentationdriver.inventoryblservicedriver;
 
 //public class InventoryCheckBLServiceDriver {
 //
-//    InventoryCheckBLService inventoryCheckBLService=new InventoryCheckBLServiceStuub();
+//    InventoryCheckBlService inventoryCheckBLService=new InventoryCheckBLServiceStuub();
 //    DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
 //    Date beginDate = dateFormat1.parse("2017-9-25");
 //    Date endDate = dateFormat1.parse("2017-10-22");

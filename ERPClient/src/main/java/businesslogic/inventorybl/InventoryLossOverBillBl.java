@@ -1,9 +1,8 @@
 package main.java.businesslogic.inventorybl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
-import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBLService;
+import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
@@ -13,7 +12,7 @@ import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class InventoryLossOverBillBl implements InventoryLossOverBillBLService,InventoryLossOverBillTool {
+public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,InventoryLossOverBillTool {
     /**
      * @version: 1
      * @date:

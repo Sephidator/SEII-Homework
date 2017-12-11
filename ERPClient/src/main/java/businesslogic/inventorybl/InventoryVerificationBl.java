@@ -1,6 +1,6 @@
 package main.java.businesslogic.inventorybl;
 
-import main.java.businesslogicservice.inventoryblservice.InventoryVerificationBLService;
+import main.java.businesslogicservice.inventoryblservice.InventoryVerificationBlService;
 import main.java.data_stub.goodsdataservicestub.GoodsDataServiceStub;
 import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
@@ -10,7 +10,7 @@ import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class InventoryVerificationBl implements InventoryVerificationBLService {
+public class InventoryVerificationBl implements InventoryVerificationBlService {
     /**
      * @version: 1
      * @date:

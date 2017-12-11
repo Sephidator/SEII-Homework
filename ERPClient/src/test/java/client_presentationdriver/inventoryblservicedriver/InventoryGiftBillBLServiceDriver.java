@@ -2,7 +2,7 @@ package test.java.client_presentationdriver.inventoryblservicedriver;
 
 //public class InventoryGiftBillBLServiceDriver {
 //
-//    InventoryGiftBillBLService inventoryGiftBillBLService=new InventoryGiftBillBLServiceStub();
+//    InventoryGiftBillBlService inventoryGiftBillBLService=new InventoryGiftBillBLServiceStub();
 //    GoodsQueryVO goodsQueryVO=new GoodsQueryVO();
 //    InventoryGiftBillVO inventoryGiftBillVO=new InventoryGiftBillVO();
 //    BillQueryVO billQueryVO=new BillQueryVO();

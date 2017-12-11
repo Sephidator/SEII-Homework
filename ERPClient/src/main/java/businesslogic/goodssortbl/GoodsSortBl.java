@@ -1,16 +1,12 @@
 package main.java.businesslogic.goodssortbl;
 
-import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
+import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
 import main.java.data_stub.goodssortdataservicestub.GoodsSortDataServiceStub;
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
-import main.java.po.goods.GoodsSortQueryPO;
-import main.java.vo.goods.GoodsSortQueryVO;
 import main.java.vo.goods.GoodsSortVO;
 
-import java.util.ArrayList;
-
-public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
+public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
     /**
      * @version: 1
      * @date:
@@ -18,25 +14,8 @@ public class GoodsSortBl implements GoodsSortBLService,GoodsSortTool {
      * @return: 返回ArrayList<GoodsSortVO>的商品分类列表
      */
     @Override
-    public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query) throws Exception{
-        ArrayList<GoodsSortVO> goodsSortVOS=new ArrayList<>();
-        ArrayList<GoodsSortPO> goodsSortPOS=new ArrayList<>();
-
-        /*将GoodsSortQueryVO转为GoodsSortQueryPO*/
-        GoodsSortQueryPO goodsSortQueryPO=query.getGoodsSortQueryPO();
-
-        /*调用GoodsSortDatdaService.find服务得到ArrayList<GoodsSortPO>的商品分类列表*/
-
-         /*调用dataservice的桩*/
-        GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
-        goodsSortPOS=goodsSortDataService.finds(goodsSortQueryPO);
-
-        /*ArrayList<GoodsSortPO>以后转成ArrayList<GoodsSortVO>*/
-        for(GoodsSortPO goodsSortPO:goodsSortPOS){
-            goodsSortVOS.add(new GoodsSortVO(goodsSortPO));
-        }
-
-        return goodsSortVOS;
+    public GoodsSortVO getRoot(){
+        return null;
     }
 
     @Override

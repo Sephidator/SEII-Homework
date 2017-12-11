@@ -5,7 +5,7 @@ import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public interface InventoryVerificationBLService {
+public interface InventoryVerificationBlService {
 
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 }

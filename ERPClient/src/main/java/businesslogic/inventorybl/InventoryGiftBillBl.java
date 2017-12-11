@@ -4,7 +4,7 @@ import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
-import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBLService;
+import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.data_stub.inventorydataservicestub.InventoryGiftBillDataServiceStub;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
 import main.java.po.bill.BillQueryPO;
@@ -18,7 +18,7 @@ import main.java.vo.log.LogVO;
 
 import java.util.ArrayList;
 
-public class InventoryGiftBillBl implements InventoryGiftBillBLService,InventoryGiftBillTool {
+public class InventoryGiftBillBl implements InventoryGiftBillBlService,InventoryGiftBillTool {
     /**
      * @version: 1
      * @date:

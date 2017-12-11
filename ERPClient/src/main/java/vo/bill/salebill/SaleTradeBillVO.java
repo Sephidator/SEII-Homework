@@ -10,12 +10,9 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.salebill.SaleTradeBillPO;
 import main.java.po.goods.GoodsItemPO;
-import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
-import main.java.vo.promotion.PromotionQueryVO;
 import main.java.vo.promotion.PromotionVO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -48,7 +45,19 @@ public class SaleTradeBillVO extends SaleBillVO {
     }
 
     public SaleTradeBillVO(){
-
+        this.state = "";
+        this.time = new Date();
+        this.type = "销售单";
+        this.operator = new UserVO();
+        this.comment = "";
+        this.client=new ClientVO();
+        this.salesman=new UserVO();
+        this.saleList=new ArrayList<GoodsItemVO>();
+        this.promotion=new PromotionVO();
+        this.totalBeforeDiscount=0;
+        this.discount=0;
+        this.amountOfVoucher=0;
+        this.totalAfterDiscount=0;
     }
 
     public SaleTradeBillPO getsaleTradeBillPO()throws Exception{

@@ -5,7 +5,6 @@ import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.goodssortbl.GoodsSortBl;
 import main.java.businesslogic.goodssortbl.GoodsSortTool;
 import main.java.po.goods.GoodsSortPO;
-import main.java.po.goods.GoodsSortQueryPO;
 import main.java.vo.VO;
 
 import java.util.ArrayList;
@@ -21,7 +20,11 @@ public class GoodsSortVO extends VO{
     private String comment; //商品分类备注
 
     public GoodsSortVO() {
-
+        this.name = "";
+        this.father = null;
+        this.children = new ArrayList<GoodsSortVO>();
+        this.goods = new ArrayList<GoodsVO>();
+        this.comment = "";
     }
 
     public GoodsSortVO(String name, GoodsSortVO father, ArrayList<GoodsSortVO> children, ArrayList<GoodsVO> goods, String comment) {

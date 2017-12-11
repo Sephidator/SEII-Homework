@@ -1,27 +1,20 @@
 package main.java.presentation.goodssortui;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import main.java.MainApp;
 import main.java.businesslogic.goodssortbl.GoodsSortBl;
-import main.java.businesslogicservice.clientblservice.ClientBlService;
-import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
-import main.java.presentation.clientui.ClientInfoUIController;
+import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsSortVO;
 
 import java.util.ArrayList;
 
 public class GoodsSortUIController extends CenterUIController {
-    private GoodsSortBLService goodsSortBlService;
+    private GoodsSortBlService goodsSortBlService;
     @FXML
     private TreeView goodsSortTreeView;
 
@@ -40,7 +33,7 @@ public class GoodsSortUIController extends CenterUIController {
 
     // 设置controller数据的方法*****************************************
 
-    public void setGoodsSortBlService(GoodsSortBLService goodsSortBlService) {
+    public void setGoodsSortBlService(GoodsSortBlService goodsSortBlService) {
         this.goodsSortBlService=goodsSortBlService;
         //ArrayList<GoodsSortVO> goodsSortList=goodsSortBlService.getGoodsSortList(null);
 
