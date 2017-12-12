@@ -59,11 +59,6 @@ public class GoodsUIController extends CenterUIController {
         //showGoodsList(goodsList);
     }
 
-    private void refresh(){
-        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
-        //showGoodsList(goodsList);
-    }
-
     /**
      * 取得客户列表并修改ObservableList的信息
      * */

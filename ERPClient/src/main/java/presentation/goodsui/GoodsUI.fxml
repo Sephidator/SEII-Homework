@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="50.0" fitWidth="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <image>
-            <Image url="@../../../resources/pics/clientui/客户头像.png" />
+            <Image url="@../../../resources/pics/commonpics/客户头像.png" />
          </image>
       </ImageView>
       <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="30.0" />

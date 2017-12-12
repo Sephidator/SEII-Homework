@@ -89,23 +89,16 @@ public class FinanceBillUIController extends CenterUIController {
 
     @FXML
     private void addReceiptBill(){
-        /*
-        PurchaseTradeBillVO bill=new PurchaseTradeBillVO();
+        ReceiptBillVO bill=new ReceiptBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("收款单");
-        PurchaseTradeBillUIController.init(null,bill,1,root.getStage());
-        */
+        ReceiptBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML
     private void addPaymentBill(){
-        System.out.println("不是null");
-        PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
+        PaymentBillVO bill=new PaymentBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("付款单");
-        PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
+        PaymentBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML
