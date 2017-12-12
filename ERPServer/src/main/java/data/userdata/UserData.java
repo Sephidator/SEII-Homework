@@ -6,8 +6,6 @@ import main.java.data.datautility.ExistException;
 import main.java.data.datautility.LoginException;
 import main.java.data.datautility.NotExistException;
 import main.java.dataservice.userdataservice.UserDataService;
-import main.java.po.account.AccountPO;
-import main.java.po.client.ClientPO;
 import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;
 
@@ -15,7 +13,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/03
+ */
 public class UserData implements UserDataService {
+    /**
+     * @param userID [帐号ID]
+     * @return 对应ID的帐号
+     * @throws RemoteException,DataException
+     */
     @Override
     public UserPO find(String userID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -39,6 +47,11 @@ public class UserData implements UserDataService {
         }
     }
 
+    /**
+     * @param query [帐号筛选条件]
+     * @return 符合筛选条件的帐号
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<UserPO> finds(UserQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -71,6 +84,11 @@ public class UserData implements UserDataService {
         }
     }
 
+    /**
+     * @param po [帐号]
+     * @return 新建帐号ID
+     * @throws RemoteException,DataException,ExistException
+     */
     @Override
     public synchronized String insert(UserPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -82,7 +100,7 @@ public class UserData implements UserDataService {
             if (resultSet.next()) {
                 throw new ExistException();
             }
-            sql = "INSERT INTO User(name,type,jobname, password,age,top) VALUES ('" + po.getName() + "','" + po.getType() + "','" + po.getJobName() + "','" + po.getPassword() + "','" + po.getAge() + "'," + po.isTop() + ")";
+            sql = "INSERT INTO User (name, type, jobName, password, age, top) VALUES ('" + po.getName() + "','" + po.getType() + "','" + po.getJobName() + "','" + po.getPassword() + "','" + po.getAge() + "'," + po.isTop() + ")";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             resultSet = statement.getGeneratedKeys();
             String ID = null;
@@ -105,6 +123,10 @@ public class UserData implements UserDataService {
         }
     }
 
+    /**
+     * @param userID [删除帐号ID]
+     * @throws RemoteException,DataException,NotExistException
+     */
     @Override
     public synchronized void delete(String userID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -127,6 +149,10 @@ public class UserData implements UserDataService {
         }
     }
 
+    /**
+     * @param po [更新后帐号]
+     * @throws RemoteException,DataException,NotExistException,ExistException
+     */
     @Override
     public synchronized void update(UserPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -156,6 +182,13 @@ public class UserData implements UserDataService {
         }
     }
 
+    /**
+     * @param jobName  [工号]
+     * @param password [密码]
+     * @return 对应工号和密码的帐号
+     * @throws RemoteException,DataException,NotExistException,LoginException
+     * @description 提供登录服务，不支持多地登录
+     */
     @Override
     public synchronized UserPO login(String jobName, String password) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -186,6 +219,11 @@ public class UserData implements UserDataService {
         }
     }
 
+    /**
+     * @param UserID [登出帐号ID]
+     * @throws RemoteException,DataException
+     * @@description 提供登出服务
+     */
     @Override
     public synchronized void logout(String UserID) throws RemoteException {
         Connection connection = DataHelper.getConnection();

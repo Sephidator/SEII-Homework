@@ -3,7 +3,6 @@ package main.java.data.financedata;
 import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
 import main.java.data.datautility.FullException;
-import main.java.data.datautility.NotExistException;
 import main.java.dataservice.financedataservice.CashBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
@@ -13,17 +12,16 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
- * @author CST
- * @description Implements CashBillDataService
- * @date 2017/12/9 下午6:14
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/09
  */
 public class CashBillData implements CashBillDataService {
     /**
-     * @param query
-     * @return ArrayList<CashBillPO>
+     * @param query [单据筛选条件]
+     * @return 符合筛选条件的现金费用单
      * @throws RemoteException,DataException
      */
     @Override
@@ -36,42 +34,23 @@ public class CashBillData implements CashBillDataService {
             ResultSet resultSet;
             String sql;
             CashBillPO cashBillPO;
-            if ("草稿".equals(query.state)) {
-                sql = "SELECT * FROM CashBillDraft WHERE operatorID='" + query.operatorID + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM CashItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
-                    ArrayList<CashItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
-                    }
-                    cashBillPO = new CashBillPO("草稿", resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
-                    list.add(cashBillPO);
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
+                sql = "SELECT * FROM CashBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
+            else {
+                sql = "SELECT * FROM CashBill WHERE (state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "') AND visible=TRUE ";
+            }
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String ID = resultSet.getString("ID");
+                sql = "SELECT * FROM CashItem WHERE site_ID='" + ID + "'";
+                ResultSet temp = statement.executeQuery(sql);
+                ArrayList<CashItemPO> itemPOS = new ArrayList<>();
+                while (temp.next()) {
+                    itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
                 }
-            } else {
-                if ("审批不通过".equals(query.state))
-                    sql = "SELECT * FROM CashBill WHERE operatorID='" + query.operatorID + "' AND state='审批不通过'";
-                else if (query.start != null && query.end != null)
-                    sql = "SELECT * FROM CashBill WHERE visible=TRUE AND state='" + query.state + "' AND (time BETWEEN '" + query.start + "' AND '" + query.end + "')";
-                else if (query.operatorID != null)
-                    sql = "SELECT * FROM CashBill WHERE visible=TRUE AND state='" + query.state + "' AND operatorID='" + query.operatorID + "'";
-                else
-                    sql = "SELECT * FROM CashBill WHERE visible=TRUE AND state='" + query.state + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM CashItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
-                    ArrayList<CashItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
-                    }
-                    cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
-                    cashBillPO.setID(ID);
-                    list.add(cashBillPO);
-                }
+                cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
+                cashBillPO.setID(ID);
+                list.add(cashBillPO);
             }
             resultSet.close();
             statement.close();
@@ -86,8 +65,8 @@ public class CashBillData implements CashBillDataService {
     }
 
     /**
-     * @param po
-     * @return String
+     * @param po [现金费用单]
+     * @return 新建现金费用单的ID
      * @throws RemoteException,DataException,FullException
      */
     @Override
@@ -96,43 +75,28 @@ public class CashBillData implements CashBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            String sql;
-            ResultSet resultSet;
             ArrayList<CashItemPO> list = po.getItemList();
-            String ID = "Success";
-            if ("草稿".equals(po.getState())) {
-                sql = "INSERT INTO CashBillDraft (time, operatorID, comment, total, accountID) VALUES ('" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getAccountID() + "')";
-                statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                resultSet = statement.getGeneratedKeys();
-                resultSet.next();
-                int key = resultSet.getInt(1);
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO CashItem VALUES ('" + key + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
-                    statement.executeUpdate(sql);
-                }
-            } else {
-                sql = "SELECT CashBill FROM DataHelper";
-                resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                int before = resultSet.getInt(1);
-                sql = "SELECT COUNT(keyID) FROM CashBill";
-                resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                int all = resultSet.getInt(1);
-                if (all - before >= 99999)
-                    throw new FullException();
-                sql = "INSERT INTO CashBill (state, time, operatorID, comment, total, accountID) VALUES ('待审批', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getAccountID() + "')";
-                statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                resultSet = statement.getGeneratedKeys();
-                resultSet.next();
-                int key = resultSet.getInt(1);
-                ID = "XJFYD-" + new SimpleDateFormat("yyyyMMdd-").format(new Date()) + String.format("%0" + 5 + "d", key - before);
-                sql = "UPDATE CashBill SET ID='" + ID + "' WHERE keyID=" + key;
+            String sql = "SELECT CashBill FROM DataHelper";
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            int before = resultSet.getInt(1);
+            sql = "SELECT COUNT(keyID) FROM CashBill";
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            int all = resultSet.getInt(1);
+            if (all - before >= 99999)
+                throw new FullException();
+            sql = "INSERT INTO CashBill (state, time, operatorID, comment, total, accountID) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getAccountID() + "')";
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "XJFYD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
+            sql = "UPDATE CashBill SET ID='" + ID + "' WHERE keyID=" + key;
+            statement.executeUpdate(sql);
+            for (int i = 0; i < list.size(); i++) {
+                sql = "INSERT INTO CashItem VALUES ('" + ID + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
                 statement.executeUpdate(sql);
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO CashItem VALUES ('" + ID + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
-                    statement.executeUpdate(sql);
-                }
             }
             resultSet.close();
             statement.close();
@@ -147,8 +111,8 @@ public class CashBillData implements CashBillDataService {
     }
 
     /**
-     * @param po
-     * @throws RemoteException,DataException,NotExistException
+     * @param po [更新后的现金费用单]
+     * @throws RemoteException,DataException
      */
     @Override
     public synchronized void update(CashBillPO po) throws RemoteException {
@@ -157,23 +121,7 @@ public class CashBillData implements CashBillDataService {
         try {
             Statement statement = connection.createStatement();
             String ID = po.getID();
-            String sql;
-            ResultSet resultSet;
-            if (!"待审批".equals(po.getState())) {
-                statement = connection.createStatement();
-                sql = "SELECT * FROM CashBill WHERE ID='" + ID + "' AND visible=TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (!resultSet.next())
-                    throw new NotExistException();
-                sql = "SELECT visible FROM Account WHERE ID='" + resultSet.getString("accountID") + "' AND visible=TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (!resultSet.next()) {
-                    sql = "UPDATE CashBill SET visible=FALSE WHERE ID='" + ID + "'";
-                    statement.executeUpdate(sql);
-                    throw new NotExistException();
-                }
-            }
-            sql = "UPDATE CashBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', accountID='" + po.getAccountID() + "' WHERE ID='" + ID + "'";
+            String sql = "UPDATE CashBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', accountID='" + po.getAccountID() + "' WHERE ID='" + ID + "'";
             statement.executeUpdate(sql);
             sql = "DELETE FROM CashItem WHERE site_ID='" + ID + "'";
             statement.executeUpdate(sql);

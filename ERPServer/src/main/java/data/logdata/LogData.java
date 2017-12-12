@@ -10,7 +10,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/04
+ */
 public class LogData implements LogDataService {
+    /**
+     * @param query [日志筛选条件]
+     * @return 符合筛选条件的日志
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<LogPO> finds(LogQueryPO query) throws RemoteException {
         ArrayList<LogPO> list = new ArrayList<>();
@@ -18,8 +28,9 @@ public class LogData implements LogDataService {
         String sql;
         if (query == null)
             sql = "SELECT * FROM Log";
-        else
-            sql = "SELECT * FROM Log WHERE time BETWEEN '" + query.start + "' AND '" + query.end + "'";
+        else {
+            sql = "SELECT * FROM Log WHERE time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "'";
+        }
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -41,6 +52,10 @@ public class LogData implements LogDataService {
         }
     }
 
+    /**
+     * @param po [日志]
+     * @throws RemoteException,DataException
+     */
     @Override
     public void insert(LogPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();

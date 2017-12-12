@@ -6,6 +6,11 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author 陈思彤
+ * @description 数据库相关操作
+ * @date 2017/12/03
+ */
 public class DataHelper {
     private static final String driver = "com.mysql.jdbc.Driver";
 
@@ -17,6 +22,9 @@ public class DataHelper {
 
     private static Connection connection;
 
+    /**
+     * @description 数据库连接，更新数据库数据
+     */
     public static void init() {
         try {
             Class.forName(driver);
@@ -26,9 +34,9 @@ public class DataHelper {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next()) {
-                sql = "INSERT INTO DataHelper VALUES ('" + new java.sql.Date(new Date().getTime()) + "', 0, 0, 0, 0)";
+                sql = "INSERT INTO DataHelper VALUES ('" + new java.sql.Date(new Date().getTime()) + "', 0, 0, 0, 0, 0)";
                 statement.executeUpdate(sql);
-            } else if (!dateFormat.format(new Date()).equals(resultSet.getDate("today"))) {
+            } else if (!dateFormat.format(new Date()).equals(resultSet.getString("today"))) {
                 resultSet = statement.executeQuery("SELECT COUNT(*) FROM CashBill");
                 resultSet.next();
                 int cashBill = resultSet.getInt(1);
@@ -41,7 +49,10 @@ public class DataHelper {
                 resultSet = statement.executeQuery("SELECT COUNT(*) FROM InventoryGiftBill");
                 resultSet.next();
                 int inventoryGiftBill = resultSet.getInt(1);
-                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill;
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM InventoryLossOverBill");
+                resultSet.next();
+                int inventoryLossOverBill = resultSet.getInt(1);
+                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill + ", InventoryLossOverBill=" + inventoryLossOverBill;
                 statement.executeUpdate(sql);
             }
         } catch (Exception e) {
@@ -54,6 +65,9 @@ public class DataHelper {
         }
     }
 
+    /**
+     * @return 数据库连接的Connection
+     */
     public static Connection getConnection() {
         return connection;
     }
