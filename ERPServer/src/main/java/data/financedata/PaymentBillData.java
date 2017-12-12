@@ -3,7 +3,6 @@ package main.java.data.financedata;
 import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
 import main.java.data.datautility.FullException;
-import main.java.data.datautility.NotExistException;
 import main.java.dataservice.financedataservice.PaymentBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.PaymentBillPO;
@@ -37,9 +36,8 @@ public class PaymentBillData implements PaymentBillDataService {
             PaymentBillPO paymentBillPO;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
                 sql = "SELECT * FROM PaymentBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else {
+            else
                 sql = "SELECT * FROM PaymentBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
-            }
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");

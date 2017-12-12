@@ -36,9 +36,8 @@ public class InventoryLossOverBillData implements InventoryLossOverBillDataServi
             InventoryLossOverBillPO inventoryLossOverBillPO;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
                 sql = "SELECT * FROM InventoryLossOverBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else {
+            else
                 sql = "SELECT * FROM InventoryLossOverBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "'";
-            }
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");

@@ -34,7 +34,7 @@ public class DataHelper {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next()) {
-                sql = "INSERT INTO DataHelper VALUES ('" + new java.sql.Date(new Date().getTime()) + "', 0, 0, 0, 0, 0)";
+                sql = "INSERT INTO DataHelper VALUES ('" + new java.sql.Date(new Date().getTime()) + "', 0, 0, 0, 0, 0, 0, 0, 0, 0)";
                 statement.executeUpdate(sql);
             } else if (!dateFormat.format(new Date()).equals(resultSet.getString("today"))) {
                 resultSet = statement.executeQuery("SELECT COUNT(*) FROM CashBill");
@@ -52,7 +52,13 @@ public class DataHelper {
                 resultSet = statement.executeQuery("SELECT COUNT(*) FROM InventoryLossOverBill");
                 resultSet.next();
                 int inventoryLossOverBill = resultSet.getInt(1);
-                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill + ", InventoryLossOverBill=" + inventoryLossOverBill;
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM PurchaseRefundBill");
+                resultSet.next();
+                int purchaseRefundBill = resultSet.getInt(1);
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM SaleRefundBill");
+                resultSet.next();
+                int saleRefundBill = resultSet.getInt(1);
+                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill + ", InventoryLossOverBill=" + inventoryLossOverBill + ", PurchaseRefundBill=" + purchaseRefundBill + ", SaleRefundBill=" + saleRefundBill;
                 statement.executeUpdate(sql);
             }
         } catch (Exception e) {

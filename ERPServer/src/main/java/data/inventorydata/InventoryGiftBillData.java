@@ -37,9 +37,8 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
             InventoryGiftBillPO inventoryGiftBillPO;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
                 sql = "SELECT * FROM InventoryGiftBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else {
+            else
                 sql = "SELECT * FROM InventoryGiftBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
-            }
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");

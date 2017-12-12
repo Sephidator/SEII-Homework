@@ -13,6 +13,11 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description 
+ * @date 2017/12/04
+ */
 public class PromotionData implements PromotionDataService {
     @Override
     public PromotionPO find(String promotionID) throws RemoteException {

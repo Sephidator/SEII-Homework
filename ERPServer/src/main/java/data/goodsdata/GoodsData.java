@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * @author 陈思彤
  * @description
- * @date 2017/12/05
+ * @date 2017/12/04
  */
 public class GoodsData implements GoodsDataService {
     /**
