@@ -173,7 +173,7 @@ public class SaleRefundBillUIController extends InfoUIController {
 
     @FXML
     private void addGoods(){
-        AddGoodsUIController.init(goodsList,goodsItemList,dialogStage);
+        AddGoodsUIController.init(goodsList,goodsItemList,dialogStage,false);
         System.out.println("添加商品了");
         showGoodsItemList(goodsItemList);
     }

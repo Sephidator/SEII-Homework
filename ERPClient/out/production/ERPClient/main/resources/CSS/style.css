@@ -204,3 +204,19 @@
 .searchButton:hover {
     -fx-background-color: #2190DD;
 }
+
+/*
+* 修改导出按钮样式的CSS类
+*/
+.exportButton{
+    -fx-background-image: url("/main/resources/pics/commonpics/导出.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25 25;
+    -fx-background-position: center center;
+    -fx-background-color: #00CD00; /*-fx-focus-color;*/
+    -fx-text-fill: #ffffff;
+}
+
+.exportButton:hover {
+    -fx-background-color: #00EE00;
+}
