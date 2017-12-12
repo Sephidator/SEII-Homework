@@ -1,6 +1,8 @@
 package main.java.vo.bill;
 
 import main.java.businesslogic.BillTool;
+import main.java.presentation.uiutility.CenterUIController;
+import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.VO;
 import main.java.vo.user.UserVO;
 
@@ -55,6 +57,11 @@ public class BillVO extends VO {
 
     /*实现待定*/
     public BillTool getTool(){
+        return null;
+    }
+
+    /*实现待定*/
+    public InfoUIController getInfoUIController() {
         return null;
     }
 }

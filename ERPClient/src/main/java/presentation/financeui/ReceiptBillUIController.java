@@ -13,6 +13,7 @@ import main.java.MainApp;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.presentation.uiutility.AddAccountUIController;
 import main.java.presentation.uiutility.AddGoodsUIController;
+import main.java.presentation.uiutility.CheckInput;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillVO;
@@ -145,25 +146,16 @@ public class ReceiptBillUIController extends InfoUIController {
     @FXML
     private void handleCorrect(){
         if(isGiftItemSelected()){
-            Double number;
-            try{
-                number=Double.parseDouble(inputAmount.getText());
-                if(number<=0){
-                    throw new NumberFormatException();
-                }
-            }catch (NumberFormatException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Invalid input");
-                alert.setHeaderText("输入不正确");
-                alert.setContentText("请输入正数");
-                alert.showAndWait();
-                return;
-            }
+            String str=inputAmount.getText();
 
-            int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
-            transItemList.get(selectedIndex).transAmount=number;
-            bill.setTransList(transItemList);
-            showTransItemList(transItemList);
+            if(CheckInput.isPositiveNumber(str)){
+                Double number=Double.parseDouble(str);
+                int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
+
+                transItemList.get(selectedIndex).transAmount=number;
+                bill.setTransList(transItemList);
+                showTransItemList(transItemList);
+            }
         }
     }
 
