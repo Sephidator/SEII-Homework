@@ -75,6 +75,10 @@ public class InventoryBillUIController extends CenterUIController {
 
     @FXML
     private void addInventoryGiftBill(){
+        InventoryGiftBillVO bill=new InventoryGiftBillVO();
+        bill.setOperator(root.getOperator());
+        System.out.println(bill.getGiftList()==null);
+        InventoryGiftBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML

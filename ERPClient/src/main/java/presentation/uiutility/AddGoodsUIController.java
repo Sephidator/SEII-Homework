@@ -58,6 +58,12 @@ public class AddGoodsUIController {
 
     // 设置controller数据的方法*****************************************
 
+    public void setPriceColumn(boolean priceIsCost) {
+        if(!priceIsCost){
+            priceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getRetail())));
+        }
+    }
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage=dialogStage;
     }
@@ -75,7 +81,7 @@ public class AddGoodsUIController {
         this.lossOverItemList=lossOverItemList;
     }
 
-    public void setGiftItemList(ArrayList<GiftItemVO> GiftItemList) {
+    public void setGiftItemList(ArrayList<GiftItemVO> giftItemList) {
         this.giftItemList=giftItemList;
     }
 
@@ -98,6 +104,7 @@ public class AddGoodsUIController {
     @FXML
     private void handleConfirm(){
         if(isGoodsSelected()){
+            System.out.println(giftItemList==null);
             if(goodsItemList!=null){
                 GoodsItemVO goodsItem=new GoodsItemVO(goodsTableView.getSelectionModel().getSelectedItem(),1);
                 goodsItemList.add(goodsItem);
@@ -111,6 +118,7 @@ public class AddGoodsUIController {
                 GoodsVO goods=goodsTableView.getSelectionModel().getSelectedItem();
                 GiftItemVO giftItem=new GiftItemVO(goods,1,80);
                 giftItemList.add(giftItem);
+                System.out.println("GiftList length: "+giftItemList.size());
             }
         }
         dialogStage.close();
@@ -141,7 +149,7 @@ public class AddGoodsUIController {
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
 
-    public static void init(ArrayList<GoodsVO> goodsList,ArrayList<GoodsItemVO> goodsItemList,Stage stage){
+    public static void init(ArrayList<GoodsVO> goodsList,ArrayList<GoodsItemVO> goodsItemList,Stage stage,boolean priceIsCost){
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/main/java/presentation/uiutility/AddGoodsUI.fxml"));
@@ -154,6 +162,7 @@ public class AddGoodsUIController {
             dialogStage.setScene(new Scene(loader.load()));
 
             AddGoodsUIController controller=loader.getController();
+            controller.setPriceColumn(priceIsCost);
             controller.setDialogStage(dialogStage);
             controller.setGoodsList(goodsList);
             controller.setGoodsItemList(goodsItemList);

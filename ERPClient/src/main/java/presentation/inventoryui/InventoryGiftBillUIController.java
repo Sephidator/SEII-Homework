@@ -1,6 +1,5 @@
-package main.java.presentation.purchaseui;
+package main.java.presentation.inventoryui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,52 +10,42 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.presentation.uiutility.AddGoodsUIController;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
-import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
-import main.java.vo.client.ClientVO;
-import main.java.vo.goods.GoodsItemVO;
+import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class PurchaseTradeBillUIController extends InfoUIController {
-    private PurchaseTradeBillBlService service;
-    private PurchaseTradeBillVO bill;
+public class InventoryGiftBillUIController extends InfoUIController {
+    private InventoryGiftBillBlService service;
+    private InventoryGiftBillVO bill;
     private ArrayList<GoodsVO> goodsList;
-    private ArrayList<GoodsItemVO> goodsItemList;
+    private ArrayList<GiftItemVO> giftItemList;
 
-    private ObservableList<GoodsItemVO> goodsItemObservableList= FXCollections.observableArrayList();
+    private ObservableList<GiftItemVO> giftItemObservableList= FXCollections.observableArrayList();
     @FXML
-    private TableView<GoodsItemVO> goodsItemTableView;
+    private TableView<GiftItemVO> giftItemTableView;
     @FXML
-    private TableColumn<GoodsItemVO,String> IDColumn;
+    private TableColumn<GiftItemVO,String> IDColumn;
     @FXML
-    private TableColumn<GoodsItemVO,String> nameColumn;
+    private TableColumn<GiftItemVO,String> nameColumn;
     @FXML
-    private TableColumn<GoodsItemVO,String> modelColumn;
+    private TableColumn<GiftItemVO,String> modelColumn;
     @FXML
-    private TableColumn<GoodsItemVO,String> numberColumn;
-    @FXML
-    private TableColumn<GoodsItemVO,String> priceColumn;
-    @FXML
-    private TableColumn<GoodsItemVO,String> amountColumn;
+    private TableColumn<GiftItemVO,String> numberColumn;
+
     @FXML
     private TextField ID; // 单据编号
     @FXML
     private TextField type; // 单据类型
     @FXML
-    private TextField client; // 客户
-    @FXML
     private TextField operator; //操作员
     @FXML
-    private TextField total; // 总价
-    @FXML
     private TextArea comment; // 备注
-    @FXML
-    private ChoiceBox<String> clientChoiceBox;
     @FXML
     private Button confirm;
     @FXML
@@ -70,62 +59,35 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         nameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goods.getName()));
         modelColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getModel())));
         numberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number)));
-        priceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().price)));
-        amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number*cellData.getValue().price)));
     }
 
     // 设置controller数据的方法*****************************************
 
-    public void setBill(PurchaseTradeBillVO bill) {
+    public void setBill(InventoryGiftBillVO bill) {
         this.bill = bill;
         ID.setText(bill.getID());
         type.setText(bill.getType());
-        total.setText(String.valueOf(bill.getTotal()));
-        comment.setText(bill.getComment());
-        client.setText(bill.getClient()==null?"":(bill.getClient().getID()+":"+bill.getClient().getName()));
         operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
+        comment.setText(bill.getComment());
     }
 
-    public void setService(PurchaseTradeBillBlService service) {
+    public void setService(InventoryGiftBillBlService service) {
         this.service=service;
-        // ArrayList<ClientVO> clientList=service.getClientList(null);
-
-        ClientVO c1=new ClientVO("类别：经销商", 3, "名字：陈骁",
-                "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                0, 0, 20, null);
-        c1.setID("123");
-        ClientVO c2=new ClientVO("类别：经销商", 4, "名字：陈骁2",
-                "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                0, 0, 20, null);
-        c2.setID("123");
-
-        ArrayList<ClientVO> clientList=new ArrayList<>();
-        clientList.add(c1);
-        clientList.add(c2);
-        ObservableList<String> list=FXCollections.observableArrayList();
-        for(int i=0;i<clientList.size();i++){
-            list.add(clientList.get(i).getID()+","+clientList.get(i).getName());
-        }
-        clientChoiceBox.setItems(list);
-        clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-            client.setText(clientList.get(newValue.intValue()).getName());
-            bill.setClient(clientList.get(newValue.intValue()));
-        });
     }
 
     public void setGoodsList(ArrayList<GoodsVO> goodsList) {
         this.goodsList=goodsList;
     }
 
-    public void setGoodsItemList(ArrayList<GoodsItemVO> goodsItemList) {
-        this.goodsItemList=goodsItemList;
-        if(goodsItemList==null){
+    public void setGiftItemList(ArrayList<GiftItemVO> giftItemList) {
+        this.giftItemList=giftItemList;
+        if(giftItemList==null){
             System.out.println("Null Exception");
         }
         else{
             System.out.println("Not null");
         }
-        showGoodsItemList(goodsItemList);
+        showGiftItemList(giftItemList);
     }
 
     /**
@@ -152,17 +114,17 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showGoodsItemList(ArrayList<GoodsItemVO> goodsItemList){
-        if(goodsItemList!=null){
-            goodsItemTableView.getItems().clear();
-            goodsItemObservableList.removeAll();
+    private void showGiftItemList(ArrayList<GiftItemVO> giftItemList){
+        if(giftItemList!=null){
+            giftItemTableView.getItems().clear();
+            giftItemObservableList.removeAll();
 
-            for(int i=0;i<goodsItemList.size();i++){
-                goodsItemObservableList.add(goodsItemList.get(i));
+            for(int i=0;i<giftItemList.size();i++){
+                giftItemObservableList.add(giftItemList.get(i));
             }
-            goodsItemTableView.setItems(goodsItemObservableList);
+            giftItemTableView.setItems(giftItemObservableList);
 
-            System.out.println("GoodsItemListSize: "+goodsItemList.size());
+            System.out.println("GiftItemListSize: "+giftItemList.size());
         }
     }
 
@@ -171,47 +133,46 @@ public class PurchaseTradeBillUIController extends InfoUIController {
 
     @FXML
     private void addGoods(){
-        AddGoodsUIController.init(goodsList,goodsItemList,dialogStage,true);
+        System.out.println("添加商品按钮："+(giftItemList==null));
+        AddGoodsUIController.init(dialogStage,goodsList,giftItemList);
         System.out.println("添加商品了");
-        showGoodsItemList(goodsItemList);
+        showGiftItemList(giftItemList);
     }
 
     @FXML
     private void deleteGoods(){
-        if(isGoodsItemSelected()){
-            int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            goodsItemTableView.getItems().remove(selectedIndex);
+        if(isGiftItemSelected()){
+            int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
+            giftItemTableView.getItems().remove(selectedIndex);
         }
     }
 
     @FXML
     private void goodsNumberPlus(){
-        if(isGoodsItemSelected()){
-            int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            if(goodsItemList.get(selectedIndex).number<goodsItemList.get(selectedIndex).goods.getNumber()){
-                goodsItemList.get(selectedIndex).number++;
-                bill.setPurchaseList(goodsItemList);
-                showGoodsItemList(goodsItemList);
-                goodsItemTableView.getSelectionModel().select(selectedIndex);
-            }
+        if(isGiftItemSelected()){
+            int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
+            giftItemList.get(selectedIndex).number++;
+            bill.setGiftList(giftItemList);
+            showGiftItemList(giftItemList);
+            giftItemTableView.getSelectionModel().select(selectedIndex);
         }
     }
 
     @FXML
     private void goodsNumberMinus(){
-        if(isGoodsItemSelected()){
-            int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            ArrayList<GoodsItemVO> goodsItemList=bill.getPurchaseList();
-            goodsItemList.get(selectedIndex).number--;
-            if(goodsItemList.get(selectedIndex).number==0){
-                goodsItemList.remove(selectedIndex);
-                bill.setPurchaseList(goodsItemList);
-                showGoodsItemList(goodsItemList);
+        if(isGiftItemSelected()){
+            int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
+            ArrayList<GiftItemVO> giftItemList=bill.getGiftList();
+            giftItemList.get(selectedIndex).number--;
+            if(giftItemList.get(selectedIndex).number==0){
+                giftItemList.remove(selectedIndex);
+                bill.setGiftList(giftItemList);
+                showGiftItemList(giftItemList);
             }
             else{
-                bill.setPurchaseList(goodsItemList);
-                showGoodsItemList(goodsItemList);
-                goodsItemTableView.getSelectionModel().select(selectedIndex);
+                bill.setGiftList(giftItemList);
+                showGiftItemList(giftItemList);
+                giftItemTableView.getSelectionModel().select(selectedIndex);
             }
         }
     }
@@ -244,8 +205,8 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         }
     }
 
-    private boolean isGoodsItemSelected(){
-        int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
+    private boolean isGiftItemSelected(){
+        int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
         if(selectedIndex>=0){
             return true;
         }else{
@@ -253,7 +214,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("No Selection");
             alert.setHeaderText("未选择商品");
-            alert.setContentText("请在进货商品列表中选择商品");
+            alert.setContentText("请在商品列表中选择商品");
             alert.showAndWait();
             return false;
         }
@@ -262,27 +223,27 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(PurchaseTradeBillVO)bill,3,stage);
+        init(null,(InventoryGiftBillVO)bill,3,stage);
     }
 
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(PurchaseTradeBillBlService service,PurchaseTradeBillVO bill, int command,Stage stage){
+    public static void init(InventoryGiftBillBlService service,InventoryGiftBillVO bill, int command,Stage stage){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/purchaseui/PurchaseTradeBillUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/inventoryui/InventoryGiftBillUI.fxml"));
 
             // Create the dialog stage
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("进货单信息界面");
+            dialogStage.setTitle("库存赠送单信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
 
-            PurchaseTradeBillUIController controller=loader.getController();
+            InventoryGiftBillUIController controller=loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setBill(bill);
@@ -297,7 +258,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
             list.add(goods2);
 
             controller.setGoodsList(list);
-            controller.setGoodsItemList(bill.getPurchaseList());
+            controller.setGiftItemList(bill.getGiftList());
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.

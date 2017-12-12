@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
@@ -13,8 +14,15 @@ import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.GoodsVO;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class InventoryVerificationUIController extends CenterUIController {
     private GoodsBlService goodsBlService;
@@ -60,6 +68,11 @@ public class InventoryVerificationUIController extends CenterUIController {
         //showGoodsList(goodsList);
     }
 
+    private void refresh(){
+        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
+        //showGoodsList(goodsList);
+    }
+
     /**
      * 取得客户列表并修改ObservableList的信息
      * */
@@ -73,6 +86,59 @@ public class InventoryVerificationUIController extends CenterUIController {
     }
 
     // 界面之中会用到的方法******************************************
+
+    @FXML
+    private void handleExport(){
+        try {
+            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+            String day=sdf.format(new Date());
+
+            String filename = "C:/导出报表/"+day+"库存盘点"+".xls" ;
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("First Sheet");
+
+            HSSFRow rowHead = sheet.createRow((short)0);
+            rowHead.createCell(0).setCellValue("商品编号");
+            rowHead.createCell(1).setCellValue("名称");
+            rowHead.createCell(2).setCellValue("型号");
+            rowHead.createCell(3).setCellValue("进价");
+            rowHead.createCell(4).setCellValue("零售价");
+            rowHead.createCell(5).setCellValue("数量");
+            rowHead.createCell(6).setCellValue("备注");
+
+            ObservableList<GoodsVO> list=goodsTableView.getItems();
+            for(int i=0;i<list.size();i++){
+                HSSFRow row = sheet.createRow((short)(i+1));
+                row.createCell(0).setCellValue(list.get(i).getID());
+                row.createCell(1).setCellValue(list.get(i).getName());
+                row.createCell(2).setCellValue(list.get(i).getModel());
+                row.createCell(3).setCellValue(list.get(i).getCost());
+                row.createCell(4).setCellValue(list.get(i).getRetail());
+                row.createCell(5).setCellValue(list.get(i).getNumber());
+                row.createCell(6).setCellValue(list.get(i).getComment());
+            }
+
+            File file=new File(filename);
+            if(!file.getParentFile().exists()) {
+                //如果目标文件所在的目录不存在，则创建父目录
+                System.out.println("目标文件所在目录不存在，准备创建它！");
+                file.getParentFile().mkdirs();
+            }
+            FileOutputStream fileOut = new FileOutputStream(file);
+            workbook.write(fileOut);
+            fileOut.close();
+
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("导出报表成功");
+            alert.setContentText("文件路径："+filename);
+            alert.showAndWait();
+
+        } catch ( Exception ex ) {
+            System.out.println(ex);
+        }
+    }
+
 
     // 加载文件和界面的方法******************************************
 
