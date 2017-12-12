@@ -3,7 +3,6 @@ package main.java.data.financedata;
 import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
 import main.java.data.datautility.FullException;
-import main.java.data.datautility.NotExistException;
 import main.java.dataservice.financedataservice.ReceiptBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.ReceiptBillPO;
@@ -13,17 +12,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 /**
- * @author CST
- * @description Implements PaymentBillDataService
- * @date 2017/12/10 下午2:36
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/10
  */
 public class ReceiptBillData implements ReceiptBillDataService {
     /**
-     * @param query
-     * @return ArrayList<ReceiptBillPO>
+     * @param query [单据筛选条件]
+     * @return 符合筛选条件的收款单
      * @throws RemoteException,DataException
      */
     @Override
@@ -36,42 +35,23 @@ public class ReceiptBillData implements ReceiptBillDataService {
             ResultSet resultSet;
             String sql;
             ReceiptBillPO receiptBillPO;
-            if ("草稿".equals(query.state)) {
-                sql = "SELECT * FROM ReceiptBillDraft WHERE operatorID='" + query.operatorID + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
-                    ArrayList<TransItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new TransItemPO(temp.getString("accountID"), temp.getDouble("transAmount"), temp.getString("comment")));
-                    }
-                    receiptBillPO = new ReceiptBillPO("草稿", resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("clientID"), itemPOS);
-                    list.add(receiptBillPO);
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
+                sql = "SELECT * FROM ReceiptBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
+            else {
+                sql = "SELECT * FROM ReceiptBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
+            }
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String ID = resultSet.getString("ID");
+                sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
+                ResultSet temp = statement.executeQuery(sql);
+                ArrayList<TransItemPO> itemPOS = new ArrayList<>();
+                while (temp.next()) {
+                    itemPOS.add(new TransItemPO(temp.getString("accountID"), temp.getDouble("transAmount"), temp.getString("comment")));
                 }
-            } else {
-                if ("审批不通过".equals(query.state))
-                    sql = "SELECT * FROM ReceiptBill WHERE operatorID='" + query.operatorID + "' AND state='审批不通过'";
-                else if (query.start != null && query.end != null)
-                    sql = "SELECT * FROM ReceiptBill WHERE visible=TRUE AND state='" + query.state + "' AND (time BETWEEN '" + query.start + "' AND '" + query.end + "')";
-                else if (query.operatorID != null)
-                    sql = "SELECT * FROM ReceiptBill WHERE visible=TRUE AND state='" + query.state + "' AND operatorID='" + query.operatorID + "'";
-                else
-                    sql = "SELECT * FROM ReceiptBill WHERE visible=TRUE AND state='" + query.state + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
-                    ArrayList<TransItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new TransItemPO(temp.getString("accountID"), temp.getDouble("transAmount"), temp.getString("comment")));
-                    }
-                    receiptBillPO = new ReceiptBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("clientID"), itemPOS);
-                    receiptBillPO.setID(ID);
-                    list.add(receiptBillPO);
-                }
+                receiptBillPO = new ReceiptBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("clientID"), itemPOS);
+                receiptBillPO.setID(ID);
+                list.add(receiptBillPO);
             }
             resultSet.close();
             statement.close();
@@ -86,8 +66,8 @@ public class ReceiptBillData implements ReceiptBillDataService {
     }
 
     /**
-     * @param po
-     * @return String
+     * @param po [收款单]
+     * @return 新建收款单的ID
      * @throws RemoteException,DataException,FullException
      */
     @Override
@@ -96,43 +76,28 @@ public class ReceiptBillData implements ReceiptBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            String sql;
-            ResultSet resultSet;
             ArrayList<TransItemPO> list = po.getTransList();
-            String ID = "Success";
-            if ("草稿".equals(po.getState())) {
-                sql = "INSERT INTO ReceiptBillDraft (time, operatorID, comment, total, clientID) VALUES ('" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
-                statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                resultSet = statement.getGeneratedKeys();
-                resultSet.next();
-                int key = resultSet.getInt(1);
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO TransItem VALUES ('" + key + "', '" + list.get(i).accountID + "', '" + list.get(i).transAmount + "', '" + list.get(i).comment + "')";
-                    statement.executeUpdate(sql);
-                }
-            } else {
-                sql = "SELECT ReceiptBill FROM DataHelper";
-                resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                int before = resultSet.getInt(1);
-                sql = "SELECT COUNT(keyID) FROM PaymentBill";
-                resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                int all = resultSet.getInt(1);
-                if (all - before >= 99999)
-                    throw new FullException();
-                sql = "INSERT INTO ReceiptBill (state, time, operatorID, comment, total, clientID) VALUES ('待审批', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
-                statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                resultSet = statement.getGeneratedKeys();
-                resultSet.next();
-                int key = resultSet.getInt(1);
-                ID = "FKD-" + new SimpleDateFormat("yyyyMMdd-").format(new Date()) + String.format("%0" + 5 + "d", key - before);
-                sql = "UPDATE ReceiptBill SET ID='" + ID + "' WHERE keyID=" + key;
+            String sql = "SELECT ReceiptBill FROM DataHelper";
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            int before = resultSet.getInt(1);
+            sql = "SELECT COUNT(keyID) FROM ReceiptBill";
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            int all = resultSet.getInt(1);
+            if (all - before >= 99999)
+                throw new FullException();
+            sql = "INSERT INTO ReceiptBill (state, time, operatorID, comment, total, clientID) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "SKD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
+            sql = "UPDATE ReceiptBill SET ID='" + ID + "' WHERE keyID=" + key;
+            statement.executeUpdate(sql);
+            for (int i = 0; i < list.size(); i++) {
+                sql = "INSERT INTO TransItem VALUES ('" + ID + "', '" + list.get(i).accountID + "', '" + list.get(i).transAmount + "', '" + list.get(i).comment + "')";
                 statement.executeUpdate(sql);
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO TransItem VALUES ('" + ID + "', '" + list.get(i).accountID + "', '" + list.get(i).transAmount + "', '" + list.get(i).comment + "')";
-                    statement.executeUpdate(sql);
-                }
             }
             resultSet.close();
             statement.close();
@@ -147,8 +112,8 @@ public class ReceiptBillData implements ReceiptBillDataService {
     }
 
     /**
-     * @param po
-     * @throws RemoteException,DataException,NotExistException
+     * @param po [更新后的收款单]
+     * @throws RemoteException,DataException
      */
     @Override
     public synchronized void update(ReceiptBillPO po) throws RemoteException {
@@ -157,37 +122,9 @@ public class ReceiptBillData implements ReceiptBillDataService {
         try {
             Statement statement = connection.createStatement();
             String ID = po.getID();
-            String sql;
-            ResultSet resultSet;
-            if (!"待审批".equals(po.getState())) {
-                statement = connection.createStatement();
-                sql = "SELECT * FROM ReceiptBill WHERE ID='" + ID + "' AND visible=TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (!resultSet.next())
-                    throw new NotExistException();
-                sql = "SELECT visible FROM Client WHERE ID='" + resultSet.getString("clientID") + "' AND visible=TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (!resultSet.next()) {
-                    sql = "UPDATE ReceiptBill SET visible=FALSE WHERE ID='" + ID + "'";
-                    statement.executeUpdate(sql);
-                    throw new NotExistException();
-                }
-            }
-            sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String accountID = resultSet.getString("accountID");
-                sql = "SELECT * FROM Account WHERE ID='" + accountID + "' AND visible=TRUE ";
-                ResultSet temp = statement.executeQuery(sql);
-                if (!temp.next()) {
-                    sql = "UPDATE ReceiptBill SET visible=FALSE WHERE ID='" + ID + "'";
-                    statement.executeUpdate(sql);
-                    throw new NotExistException();
-                }
-            }
-            sql = "DELETE FROM TransItem WHERE site_ID='" + ID + "'";
+            String sql = "UPDATE ReceiptBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', clientID='" + po.getClientID() + "' WHERE ID='" + ID + "'";
             statement.executeUpdate(sql);
-            sql = "UPDATE ReceiptBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', clientID='" + po.getClientID() + "' WHERE ID='" + ID + "'";
+            sql = "DELETE FROM TransItem WHERE site_ID='" + ID + "'";
             statement.executeUpdate(sql);
             ArrayList<TransItemPO> list = po.getTransList();
             for (int i = 0; i < list.size(); i++) {
@@ -204,4 +141,3 @@ public class ReceiptBillData implements ReceiptBillDataService {
         }
     }
 }
-

@@ -12,7 +12,18 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/03
+ */
+
 public class AccountData implements AccountDataService {
+    /**
+     * @param accountID [帐户ID]
+     * @return 对应ID的账户
+     * @throws RemoteException,DataException
+     */
     @Override
     public AccountPO find(String accountID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -24,7 +35,8 @@ public class AccountData implements AccountDataService {
             resultSet.next();
             AccountPO accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
             accountPO.setID(resultSet.getString("ID"));
-            accountPO.setVisible(resultSet.getBoolean("visible"));
+            accountPO.setVisible(resultSet.
+                    getBoolean("visible"));
             resultSet.close();
             statement.close();
             return accountPO;
@@ -37,6 +49,11 @@ public class AccountData implements AccountDataService {
         }
     }
 
+    /**
+     * @param query [账户筛选条件]
+     * @return 符合筛选条件的账户
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<AccountPO> finds(AccountQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -67,6 +84,11 @@ public class AccountData implements AccountDataService {
         }
     }
 
+    /**
+     * @param po [账户]
+     * @return 新建账户ID
+     * @throws RemoteException,DataException,ExistException
+     */
     @Override
     public synchronized String insert(AccountPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -101,6 +123,10 @@ public class AccountData implements AccountDataService {
         }
     }
 
+    /**
+     * @param accountID [删除账户的ID]
+     * @throws RemoteException,DataException,NotExistException
+     */
     @Override
     public synchronized void delete(String accountID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -124,6 +150,10 @@ public class AccountData implements AccountDataService {
         }
     }
 
+    /**
+     * @param po [更新后的账户]
+     * @throws RemoteException,DataException,NotExistException,ExistException
+     */
     @Override
     public synchronized void update(AccountPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
