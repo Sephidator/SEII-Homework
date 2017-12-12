@@ -9,10 +9,10 @@ public class GoodsItemVO {
     public int number;
     public double price;//商品单价
 
-    public GoodsItemVO(GoodsVO goodsVO, int number) {
+    public GoodsItemVO(GoodsVO goodsVO, int number,double price) {
         this.goods=goodsVO;
         this.number = number;
-        price=goodsVO.getCost();
+        this.price=price;
     }
 
     public GoodsItemPO getGoodsItemPO(){
@@ -25,5 +25,7 @@ public class GoodsItemVO {
 
         GoodsTool goodsTool=new GoodsBl();
         this.goods=goodsTool.find(goodsItemPO.goodsID);
+
+        this.price=goodsItemPO.price;
     }
 }
