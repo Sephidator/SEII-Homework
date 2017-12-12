@@ -15,7 +15,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/06
+ */
 public class InitialData implements InitialDataService {
+    /**
+     * @param query [期初建帐]
+     * @return 符合筛选条件的期初建帐
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<InitialPO> finds(InitialQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -93,17 +103,23 @@ public class InitialData implements InitialDataService {
         return null;
     }
 
+    /**
+     * @param resultSet
+     * @return 商品分类的子分类或商品
+     * @throws SQLException
+     */
     private ArrayList<String> store(ResultSet resultSet) throws SQLException {
         ArrayList<String> list = new ArrayList<>();
-        try {
-            while (resultSet.next())
-                list.add(resultSet.getString("ID"));
-            return list;
-        } catch (SQLException e) {
-            throw e;
-        }
+        while (resultSet.next())
+            list.add(resultSet.getString("ID"));
+        return list;
     }
 
+    /**
+     * @param po [期初建帐]
+     * @return 新建期初建帐的ID
+     * @throws RemoteException,DataException
+     */
     @Override
     public synchronized String insert(InitialPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -128,7 +144,7 @@ public class InitialData implements InitialDataService {
             if (goodsPOS != null)
                 for (int i = 0; i < goodsPOS.size(); i++) {
                     GoodsPO goodsPO = goodsPOS.get(i);
-                    sql = "INSERT INTO GoodsRecord (ID,name,goodsSortID,model,number,cost,retail,latestCost,latestRetail,alarmNum,comment) VALUES ('" + goodsPO.getName() + "','" +
+                    sql = "INSERT INTO GoodsRecord VALUES ('" + ID + "','" + goodsPO.getName() + "','" +
                             goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
                             goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
                     statement.executeUpdate(sql);
@@ -137,24 +153,23 @@ public class InitialData implements InitialDataService {
             if (goodsSortPOS != null)
                 for (int i = 0; i < goodsSortPOS.size(); i++) {
                     GoodsSortPO goodsSortPO = goodsSortPOS.get(i);
-                    sql = "INSERT INTO GoodsSortRecord (ID, name, fatherID, comment) VALUES ('" + goodsSortPO.getID() + "','" + goodsSortPO.getName() + "','" + goodsSortPO.getFatherID() + "','" + goodsSortPO.getComment() + "')";
+                    sql = "INSERT INTO GoodsSortRecord VALUES ('" + ID + "','" + goodsSortPO.getID() + "','" + goodsSortPO.getName() + "','" + goodsSortPO.getFatherID() + "','" + goodsSortPO.getComment() + "')";
                     statement.executeUpdate(sql);
                 }
             ArrayList<ClientPO> clientPOS = po.getClientList();
             if (clientPOS != null)
                 for (int i = 0; i < clientPOS.size(); i++) {
                     ClientPO clientPO = clientPOS.get(i);
-                    sql = "INSERT INTO ClientRecord (ID, category, level, name, phone, address, post, email, receivable, payable, " +
-                            "receivableLimit, salesmanID) VALUES ('" + clientPO.getID() + "','" + clientPO.getCategory() + "'," + clientPO.getLevel() + ",'" + clientPO.getName()
+                    sql = "INSERT INTO ClientRecord VALUES ('" + ID + "','" + clientPO.getID() + "','" + clientPO.getCategory() + "'," + clientPO.getLevel() + ",'" + clientPO.getName()
                             + "','" + clientPO.getPhone() + "','" + clientPO.getAddress() + "','" + clientPO.getPost() + "','" + clientPO.getEmail() + "',"
-                            + clientPO.getReceivable() + "," + clientPO.getPayable() + "," + clientPO.getReceivableLimit() + "," + clientPO.getSalesmanID() + ")";
+                            + clientPO.getReceivable() + "," + clientPO.getPayable() + "," + clientPO.getReceivableLimit() + ",'" + clientPO.getSalesmanID() + "')";
                     statement.executeUpdate(sql);
                 }
             ArrayList<AccountPO> accountPOS = po.getAccountList();
             if (accountPOS != null)
                 for (int i = 0; i < accountPOS.size(); i++) {
                     AccountPO accountPO = accountPOS.get(i);
-                    sql = "INSERT INTO AccountRecord (ID, bankAccount, name, remaining) VALUES ('" + accountPO.getID() + "',''" + accountPO.getBankAccount() + "','" + accountPO.getName() + "','" + accountPO.getRemaining() + "')";
+                    sql = "INSERT INTO AccountRecord VALUES ('" + ID + "','" + accountPO.getID() + "','" + accountPO.getBankAccount() + "','" + accountPO.getName() + "','" + accountPO.getRemaining() + "')";
                     statement.executeUpdate(sql);
                 }
             return ID;

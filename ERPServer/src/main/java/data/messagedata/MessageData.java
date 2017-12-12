@@ -9,7 +9,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/04
+ */
 public class MessageData implements MessageDataService {
+    /**
+     * @param receiverID [接受消息人员的ID]
+     * @return 对应receiverID的消息
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<MessagePO> finds(String receiverID) throws RemoteException {
         ArrayList<MessagePO> list = new ArrayList<>();
@@ -37,6 +47,10 @@ public class MessageData implements MessageDataService {
         }
     }
 
+    /**
+     * @param message [消息]
+     * @throws RemoteException,DataException
+     */
     @Override
     public void insert(MessagePO message) throws RemoteException {
         Connection connection = DataHelper.getConnection();

@@ -11,7 +11,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/04
+ */
 public class ClientData implements ClientDataService {
+    /**
+     * @param clientID [客户ID]
+     * @return 对应ID的客户
+     * @throws RemoteException,DataException
+     */
     @Override
     public ClientPO find(String clientID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -38,6 +48,11 @@ public class ClientData implements ClientDataService {
         }
     }
 
+    /**
+     * @param query [客户筛选条件]
+     * @return 符合筛选条件的客户
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<ClientPO> finds(ClientQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -71,6 +86,11 @@ public class ClientData implements ClientDataService {
         }
     }
 
+    /**
+     * @param po [客户]
+     * @return 新建客户的ID
+     * @throws RemoteException,DataException
+     */
     @Override
     public synchronized String insert(ClientPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -102,6 +122,10 @@ public class ClientData implements ClientDataService {
         }
     }
 
+    /**
+     * @param clientID [删除客户ID]
+     * @throws RemoteException,DataException,NotExistException
+     */
     @Override
     public synchronized void delete(String clientID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -124,6 +148,10 @@ public class ClientData implements ClientDataService {
         }
     }
 
+    /**
+     * @param po [更新后的客户]
+     * @throws RemoteException,DataException,NotExistException
+     */
     @Override
     public synchronized void update(ClientPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();

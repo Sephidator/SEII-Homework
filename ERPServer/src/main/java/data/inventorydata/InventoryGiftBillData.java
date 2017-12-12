@@ -3,7 +3,6 @@ package main.java.data.inventorydata;
 import main.java.data.DataHelper;
 import main.java.data.datautility.DataException;
 import main.java.data.datautility.FullException;
-import main.java.data.datautility.NotExistException;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
@@ -13,17 +12,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 /**
- * @author CST
- * @description Implements InventoryGiftBillDataService
- * @date 2017/12/10 下午5:52
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/10
  */
 public class InventoryGiftBillData implements InventoryGiftBillDataService {
     /**
-     * @param query
-     * @return ArrayList<InventoryGiftBillPO>
+     * @param query [单据筛选条件]
+     * @return 符合筛选条件的库存赠送单
      * @throws RemoteException,DataException
      */
     @Override
@@ -36,42 +35,23 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
             ResultSet resultSet;
             String sql;
             InventoryGiftBillPO inventoryGiftBillPO;
-            if ("草稿".equals(query.state)) {
-                sql = "SELECT * FROM InventoryGiftBillDraft WHERE operatorID='" + query.operatorID + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM GiftItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
-                    ArrayList<GiftItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
-                    }
-                    inventoryGiftBillPO = new InventoryGiftBillPO("草稿", resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
-                    list.add(inventoryGiftBillPO);
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
+                sql = "SELECT * FROM InventoryGiftBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
+            else {
+                sql = "SELECT * FROM InventoryGiftBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
+            }
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String ID = resultSet.getString("ID");
+                sql = "SELECT * FROM GiftItem WHERE site_ID='" + ID + "'";
+                ResultSet temp = statement.executeQuery(sql);
+                ArrayList<GiftItemPO> itemPOS = new ArrayList<>();
+                while (temp.next()) {
+                    itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
                 }
-            } else {
-                if ("审批不通过".equals(query.state))
-                    sql = "SELECT * FROM InventoryGiftBill WHERE operatorID='" + query.operatorID + "' AND state='审批不通过'";
-                else if (query.start != null && query.end != null)
-                    sql = "SELECT * FROM InventoryGiftBill WHERE visible=TRUE AND state='" + query.state + "' AND (time BETWEEN '" + query.start + "' AND '" + query.end + "')";
-                else if (query.operatorID != null)
-                    sql = "SELECT * FROM InventoryGiftBill WHERE visible=TRUE AND state='" + query.state + "' AND operatorID='" + query.operatorID + "'";
-                else
-                    sql = "SELECT * FROM InventoryGiftBill WHERE visible=TRUE AND state='" + query.state + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM GiftItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
-                    ArrayList<GiftItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
-                    }
-                    inventoryGiftBillPO = new InventoryGiftBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
-                    inventoryGiftBillPO.setID(ID);
-                    list.add(inventoryGiftBillPO);
-                }
+                inventoryGiftBillPO = new InventoryGiftBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
+                inventoryGiftBillPO.setID(ID);
+                list.add(inventoryGiftBillPO);
             }
             resultSet.close();
             statement.close();
@@ -86,53 +66,38 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
     }
 
     /**
-     * @param po
-     * @return String
+     * @param po [库存赠送单]
+     * @return 新建库存赠送单的ID
      * @throws RemoteException,DataException,FullException
      */
     @Override
-    public String insert(InventoryGiftBillPO po) throws RemoteException {
+    public synchronized String insert(InventoryGiftBillPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
             Statement statement = connection.createStatement();
-            String sql;
-            ResultSet resultSet;
             ArrayList<GiftItemPO> list = po.getGiftList();
-            String ID = "Success";
-            if ("草稿".equals(po.getState())) {
-                sql = "INSERT INTO InventoryGiftBillDraft (time, operatorID, comment, total, clientID) VALUES ('" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
-                statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                resultSet = statement.getGeneratedKeys();
-                resultSet.next();
-                int key = resultSet.getInt(1);
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO GiftItem VALUES ('" + key + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "')";
-                    statement.executeUpdate(sql);
-                }
-            } else {
-                sql = "SELECT InventoryGiftBill FROM DataHelper";
-                resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                int before = resultSet.getInt(1);
-                sql = "SELECT COUNT(keyID) FROM InventoryGiftBill";
-                resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                int all = resultSet.getInt(1);
-                if (all - before >= 99999)
-                    throw new FullException();
-                sql = "INSERT INTO InventoryGift (state, time, operatorID, comment, total, clientID) VALUES ('待审批', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
-                statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                resultSet = statement.getGeneratedKeys();
-                resultSet.next();
-                int key = resultSet.getInt(1);
-                ID = "KCZSD-" + new SimpleDateFormat("yyyyMMdd-").format(new Date()) + String.format("%0" + 5 + "d", key - before);
-                sql = "UPDATE InventoryGiftBill SET ID='" + ID + "' WHERE keyID=" + key;
+            String sql = "SELECT InventoryGiftBill FROM DataHelper";
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            int before = resultSet.getInt(1);
+            sql = "SELECT COUNT(keyID) FROM InventoryGiftBill";
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            int all = resultSet.getInt(1);
+            if (all - before >= 99999)
+                throw new FullException();
+            sql = "INSERT INTO PaymentBill (state, time, operatorID, comment, total, clientID) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "KCZSD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
+            sql = "UPDATE InventoryGiftBill SET ID='" + ID + "' WHERE keyID=" + key;
+            statement.executeUpdate(sql);
+            for (int i = 0; i < list.size(); i++) {
+                sql = "INSERT INTO GiftItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                 statement.executeUpdate(sql);
-                for (int i = 0; i < list.size(); i++) {
-                    sql = "INSERT INTO GiftItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
-                    statement.executeUpdate(sql);
-                }
             }
             resultSet.close();
             statement.close();
@@ -147,47 +112,19 @@ public class InventoryGiftBillData implements InventoryGiftBillDataService {
     }
 
     /**
-     * @param po
-     * @throws RemoteException,DataException,NotExistException
+     * @param po [更新后的库存赠送单]
+     * @throws RemoteException,DataException
      */
     @Override
-    public void update(InventoryGiftBillPO po) throws RemoteException {
+    public synchronized void update(InventoryGiftBillPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {
             Statement statement = connection.createStatement();
             String ID = po.getID();
-            String sql;
-            ResultSet resultSet;
-            if (!"待审批".equals(po.getState())) {
-                statement = connection.createStatement();
-                sql = "SELECT * FROM InventoryGiftBill WHERE ID='" + ID + "' AND visible=TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (!resultSet.next())
-                    throw new NotExistException();
-                sql = "SELECT visible FROM Client WHERE ID='" + resultSet.getString("clientID") + "' AND visible=TRUE ";
-                resultSet = statement.executeQuery(sql);
-                if (!resultSet.next()) {
-                    sql = "UPDATE InventoryGiftBill SET visible=FALSE WHERE ID='" + ID + "'";
-                    statement.executeUpdate(sql);
-                    throw new NotExistException();
-                }
-            }
-            sql = "SELECT * FROM GiftItem WHERE site_ID='" + ID + "'";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String goodsID = resultSet.getString("goodsID");
-                sql = "SELECT * FROM Goods WHERE ID='" + goodsID + "' AND visible=TRUE ";
-                ResultSet temp = statement.executeQuery(sql);
-                if (!temp.next()) {
-                    sql = "UPDATE InventoryGiftBill SET visible=FALSE WHERE ID='" + ID + "'";
-                    statement.executeUpdate(sql);
-                    throw new NotExistException();
-                }
-            }
-            sql = "DELETE FROM GiftItem WHERE site_ID='" + ID + "'";
+            String sql = "UPDATE InventoryGiftBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', clientID='" + po.getClientID() + "' WHERE ID='" + ID + "'";
             statement.executeUpdate(sql);
-            sql = "UPDATE InventoryGiftBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', clientID='" + po.getClientID() + "' WHERE ID='" + ID + "'";
+            sql = "DELETE FROM GiftItem WHERE site_ID='" + ID + "'";
             statement.executeUpdate(sql);
             ArrayList<GiftItemPO> list = po.getGiftList();
             for (int i = 0; i < list.size(); i++) {

@@ -13,7 +13,17 @@ import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author 陈思彤
+ * @description
+ * @date 2017/12/05
+ */
 public class GoodsData implements GoodsDataService {
+    /**
+     * @param goodsID [商品ID]
+     * @return 对应ID的商品
+     * @throws RemoteException,DataException
+     */
     @Override
     public GoodsPO find(String goodsID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -40,6 +50,11 @@ public class GoodsData implements GoodsDataService {
         }
     }
 
+    /**
+     * @param query [商品筛选条件]
+     * @return 符合筛选条件的商品
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<GoodsPO> finds(GoodsQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -72,12 +87,17 @@ public class GoodsData implements GoodsDataService {
         }
     }
 
+    /**
+     * @param po [商品]
+     * @return 新建商品的ID
+     * @throws RemoteException,DataException,ExistException,NotExistException,NotNullException
+     */
     @Override
     public synchronized String insert(GoodsPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
         try {
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM Goods WHERE name='" + po.getName() + "' AND visible=TRUE ";
+            String sql = "SELECT * FROM Goods WHERE name='" + po.getName() + "' AND model='" + po.getModel() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
@@ -89,14 +109,14 @@ public class GoodsData implements GoodsDataService {
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
-            sql = "INSERT INTO Goods (name,goodsSortID,model,number,cost,retail,latestCost,latestRetail,alarmNum,comment) VALUES ('" + po.getName() + "','" + po.getGoodsSortID() + "','" + po.getModel() + "','"
+            sql = "INSERT INTO Goods (name, goodsSortID, model, number, cost, retail, latestCost, latestRetail, alarmNum, comment) VALUES ('" + po.getName() + "','" + po.getGoodsSortID() + "','" + po.getModel() + "','"
                     + po.getNumber() + "','" + po.getCost() + "','" + po.getRetail() + "','" + po.getLatestCost() + "','" + po.getLatestRetail() + "','" + po.getAlarmNum() + "','" + po.getComment() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             String ID = null;
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
-                ID = "Goods" + po.getGoodsSortID().split("GoodsSort")[1] + "-" + String.format("%" + 8 + "d", key);
+                ID = "Goods" + String.format("%" + 8 + "d", key);
                 sql = "UPDATE Goods SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
             }
@@ -112,6 +132,10 @@ public class GoodsData implements GoodsDataService {
         }
     }
 
+    /**
+     * @param goodsID [删除商品ID]
+     * @throws RemoteException,DataException,NotExistException
+     */
     @Override
     public synchronized void delete(String goodsID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -134,6 +158,10 @@ public class GoodsData implements GoodsDataService {
         }
     }
 
+    /**
+     * @param po [更新后商品]
+     * @throws RemoteException,DataException,NotExistException,ExistException
+     */
     @Override
     public synchronized void update(GoodsPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -144,11 +172,19 @@ public class GoodsData implements GoodsDataService {
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
-            sql = "SELECT * FROM Goods WHERE ID<>'" + po.getID() + "' AND name='" + po.getName() + "' AND visible=TRUE ";
+            sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getGoodsSortID() + "' AND visible=TRUE ";
+            resultSet = statement.executeQuery(sql);
+            if (!resultSet.next())
+                throw new NotExistException();
+            sql = "SELECT * FROM Goods WHERE ID<>'" + po.getID() + "' AND name='" + po.getName() + "' AND model='" + po.getModel() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
-            sql = "UPDATE Goods SET name='" + po.getName() + "' WHERE ID='" + po.getID() + "'";
+            sql = "SELECT * FROM GoodsSort WHERE fatherID='" + po.getGoodsSortID() + "' AND visible=TRUE ";
+            resultSet = statement.executeQuery(sql);
+            if (resultSet.next())
+                throw new NotNullException();
+            sql = "UPDATE Goods SET name='" + po.getName() + "', goodsSortID='" + po.getGoodsSortID() + "', model='" + po.getModel() + "', number='" + po.getNumber() + "', cost='" + po.getCost() + "', retail='" + po.getRetail() + "', latestCost='" + po.getLatestCost() + "', latestRetail='" + po.getLatestRetail() + "', alarmNum='" + po.getAlarmNum() + "', comment='" + po.getComment() + "' WHERE ID = '" + po.getID() + "'";
             statement.executeUpdate(sql);
             resultSet.close();
             statement.close();
