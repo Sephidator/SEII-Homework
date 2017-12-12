@@ -155,7 +155,7 @@ public class PurchaseBillUIController extends CenterUIController {
             g.setModel("大号");
             g.setCost(5);
             g.setComment("备注");
-            GoodsItemVO item=new GoodsItemVO(g,3);
+            GoodsItemVO item=new GoodsItemVO(g,3,g.getCost());
             ArrayList<GoodsItemVO> list=new ArrayList<>();
             list.add(item);
             PurchaseTradeBillVO bill1=new PurchaseTradeBillVO("草稿",date,root.getOperator(),"备注", client, list,100);

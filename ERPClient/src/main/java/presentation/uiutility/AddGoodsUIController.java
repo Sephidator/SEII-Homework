@@ -106,7 +106,8 @@ public class AddGoodsUIController {
         if(isGoodsSelected()){
             System.out.println(giftItemList==null);
             if(goodsItemList!=null){
-                GoodsItemVO goodsItem=new GoodsItemVO(goodsTableView.getSelectionModel().getSelectedItem(),1);
+                int index=goodsTableView.getSelectionModel().getSelectedIndex();
+                GoodsItemVO goodsItem=new GoodsItemVO(goodsTableView.getItems().get(index),1,Double.parseDouble(priceColumn.getCellData(index)));
                 goodsItemList.add(goodsItem);
             }
             if(lossOverItemList!=null){
