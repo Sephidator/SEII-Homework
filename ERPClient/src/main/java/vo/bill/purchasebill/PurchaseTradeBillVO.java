@@ -8,6 +8,8 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.purchasebill.PurchaseTradeBillPO;
 import main.java.po.goods.GoodsItemPO;
+import main.java.presentation.purchaseui.PurchaseTradeBillUIController;
+import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.user.UserVO;
@@ -89,6 +91,11 @@ public class PurchaseTradeBillVO extends PurchaseBillVO {
     public PurchaseTradeBillTool getTool(){
         PurchaseTradeBillTool purchaseTradeBillTool=new PurchaseTradeBillBl();
         return purchaseTradeBillTool;
+    }
+
+    /*实现待定*/
+    public PurchaseTradeBillUIController getInfoUIController() {
+        return new PurchaseTradeBillUIController();
     }
 
 }

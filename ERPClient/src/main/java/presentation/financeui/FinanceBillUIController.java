@@ -21,10 +21,7 @@ import main.java.presentation.purchaseui.PurchaseRefundBillUIController;
 import main.java.presentation.purchaseui.PurchaseTradeBillUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.account.AccountVO;
-import main.java.vo.bill.financebill.FinanceBillVO;
-import main.java.vo.bill.financebill.PaymentBillVO;
-import main.java.vo.bill.financebill.ReceiptBillVO;
-import main.java.vo.bill.financebill.TransItemVO;
+import main.java.vo.bill.financebill.*;
 import main.java.vo.bill.purchasebill.PurchaseBillVO;
 import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
@@ -103,14 +100,9 @@ public class FinanceBillUIController extends CenterUIController {
 
     @FXML
     private void addCashBill(){
-        /*
-        System.out.println("不是null");
-        PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
+        CashBillVO bill=new CashBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("付款单");
-        PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
-        */
+        CashBillUIController.init(null,bill,1,root.getStage());
     }
 
     @FXML

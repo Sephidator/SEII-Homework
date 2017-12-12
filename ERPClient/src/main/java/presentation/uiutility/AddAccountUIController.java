@@ -110,7 +110,7 @@ public class AddAccountUIController {
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
 
-    public static void init(ArrayList<AccountVO> goodsList,ArrayList<TransItemVO> transItemList,Stage stage){
+    public static void init(ArrayList<AccountVO> accountList,ArrayList<TransItemVO> transItemList,Stage stage){
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/main/java/presentation/uiutility/AddAccountUI.fxml"));
@@ -124,7 +124,7 @@ public class AddAccountUIController {
 
             AddAccountUIController controller=loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setAccountList(goodsList);
+            controller.setAccountList(accountList);
             controller.setTransItemList(transItemList);
 
             dialogStage.showAndWait();
