@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * @author 陈思彤
  * @description
- * @date 2017/12/09
+ * @date 2017/12/07
  */
 public class CashBillData implements CashBillDataService {
     /**
@@ -36,9 +36,8 @@ public class CashBillData implements CashBillDataService {
             CashBillPO cashBillPO;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
                 sql = "SELECT * FROM CashBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else {
+            else
                 sql = "SELECT * FROM CashBill WHERE (state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "') AND visible=TRUE ";
-            }
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");
