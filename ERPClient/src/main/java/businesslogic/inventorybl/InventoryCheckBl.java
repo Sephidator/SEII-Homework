@@ -4,133 +4,136 @@ import main.java.businesslogic.purchasebl.PurchaseRefundBillBl;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillTool;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
+import main.java.businesslogic.salebl.SaleRefundBillBl;
+import main.java.businesslogic.salebl.SaleRefundBillTool;
+import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
+import main.java.vo.bill.salebill.SaleRefundBillVO;
+import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.goods.GoodsItemVO;
+import main.java.vo.goods.InventoryCheckItemVO;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class InventoryCheckBl implements InventoryCheckBlService {
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList服务，返回入库数量
-     */
+
     @Override
-    public int getImportNumber(Date start, Date end)throws Exception {
-        int importNumber=0;
+    public ArrayList<InventoryCheckItemVO> getInventoryCheck(Date start,Date end) throws Exception {
+        ArrayList<InventoryCheckItemVO> inventoryCheckItemVOS=new ArrayList<>();
+
+        ArrayList<GoodsItemVO> purchaseRefundBillGoodsItemVOS=new ArrayList<>();
+        ArrayList<GoodsItemVO> purchaseTradeBillGoodsItemVOS=new ArrayList<>();
+        ArrayList<GoodsItemVO> saleRefundBillGoodsItemVOS=new ArrayList<>();
+        ArrayList<GoodsItemVO> saleTradeBillGoodsItemVOS=new ArrayList<>();
+
         ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS=new ArrayList<>();
         ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS=new ArrayList<>();
+        ArrayList<SaleRefundBillVO> saleRefundBillVOS=new ArrayList<>();
+        ArrayList<SaleTradeBillVO> saleTradeBillVOS=new ArrayList<>();
+
         BillQueryVO billQueryVO=new BillQueryVO(null,start,end,null,null,null);
 
-        /*调用PurchaseRefundBillTool.getPurchaseRefundBillList*/
+        //寻找相应单据列表
         PurchaseRefundBillTool purchaseRefundBillTool=new PurchaseRefundBillBl();
         purchaseRefundBillVOS=purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO);
 
-        /*调用PurchaseTradeBillTool.getPurchaseTradeBillList*/
         PurchaseTradeBillTool purchaseTradeBillTool=new PurchaseTradeBillBl();
         purchaseTradeBillVOS=purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO);
 
-        /*计算importNumber*/
+        SaleRefundBillTool saleRefundBillTool=new SaleRefundBillBl();
+        saleRefundBillVOS=saleRefundBillTool.getSaleRefundBillList(billQueryVO);
+
+        SaleTradeBillTool saleTradeBillTool=new SaleTradBillBl();
+        saleTradeBillVOS=saleTradeBillTool.getSaleTradeBillList(billQueryVO);
+
+        //寻找相应单据的ArrayList<GoodsItemVO>
         for(PurchaseRefundBillVO purchaseRefundBillVO:purchaseRefundBillVOS){
             for(GoodsItemVO goodsItemVO:purchaseRefundBillVO.getPurchaseList()){
-                importNumber+=goodsItemVO.number;
+                purchaseRefundBillGoodsItemVOS.add(goodsItemVO);
             }
         }
         for(PurchaseTradeBillVO purchaseTradeBillVO:purchaseTradeBillVOS){
             for(GoodsItemVO goodsItemVO:purchaseTradeBillVO.getPurchaseList()){
-                importNumber-=goodsItemVO.number;
+                purchaseTradeBillGoodsItemVOS.add(goodsItemVO);
             }
         }
-        return importNumber;
-    }
+        for(SaleRefundBillVO saleRefundBillVO:saleRefundBillVOS){
+            for(GoodsItemVO goodsItemVO:saleRefundBillVO.getSaleList()){
+                saleRefundBillGoodsItemVOS.add(goodsItemVO);
+            }
+        }
+        for(SaleTradeBillVO saleTradeBillVO:saleTradeBillVOS){
+            for(GoodsItemVO goodsItemVO:saleTradeBillVO.getSaleList()){
+                saleTradeBillGoodsItemVOS.add(goodsItemVO);
+            }
+        }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList、
-     * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回出库数量
-     */
-    @Override
-    public int getExportNumber(Date start, Date end)throws Exception {
-        return 0;
-    }
+        //填入ArrayList<InventoryCheckItemVO> inventoryCheckItemVOS
+        for(GoodsItemVO goodsItemVO:purchaseRefundBillGoodsItemVOS){
+            int judge=0;
+            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
+                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
+                    judge=1;
+                    inventoryCheckItemVO.purchaseNumber=inventoryCheckItemVO.purchaseNumber-goodsItemVO.number;
+                    inventoryCheckItemVO.purchaseAmount=inventoryCheckItemVO.purchaseAmount-goodsItemVO.price*goodsItemVO.number;
+                    break;
+                }
+            }
+            if(judge==0){
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,0-goodsItemVO.number,0-goodsItemVO.number*goodsItemVO.price,0,0));
+            }
+        }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList、
-     * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回入库金额
-     */
-    @Override
-    public double getImportAmount(Date start, Date end)throws Exception {
-        return 0;
-    }
+        for(GoodsItemVO goodsItemVO:purchaseTradeBillGoodsItemVOS){
+            int judge=0;
+            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
+                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
+                    judge=1;
+                    inventoryCheckItemVO.purchaseNumber=inventoryCheckItemVO.purchaseNumber+goodsItemVO.number;
+                    inventoryCheckItemVO.purchaseAmount=inventoryCheckItemVO.purchaseAmount+goodsItemVO.price*goodsItemVO.number;
+                    break;
+                }
+            }
+            if(judge==0){
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,goodsItemVO.number,goodsItemVO.number*goodsItemVO.price,0,0));
+            }
+        }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList、
-     * SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回出库金额
-     */
-    @Override
-    public double getExportAmount(Date start, Date end)throws Exception {
-        return 0;
-    }
+        for(GoodsItemVO goodsItemVO:saleRefundBillGoodsItemVOS){
+            int judge=0;
+            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
+                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
+                    judge=1;
+                    inventoryCheckItemVO.saleNumber=inventoryCheckItemVO.saleNumber-goodsItemVO.number;
+                    inventoryCheckItemVO.saleAmount=inventoryCheckItemVO.saleAmount-goodsItemVO.price*goodsItemVO.number;
+                    break;
+                }
+            }
+            if(judge==0){
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,0,0,0-goodsItemVO.number,0-goodsItemVO.price*goodsItemVO.number));
+            }
+        }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList服务，返回进货数量
-     */
-    @Override
-    public int getPurchaseNumber(Date start, Date end)throws Exception {
-        return 0;
-    }
+        for(GoodsItemVO goodsItemVO:saleTradeBillGoodsItemVOS){
+            int judge=0;
+            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
+                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
+                    judge=1;
+                    inventoryCheckItemVO.saleNumber=inventoryCheckItemVO.saleNumber+goodsItemVO.number;
+                    inventoryCheckItemVO.saleAmount=inventoryCheckItemVO.saleAmount+goodsItemVO.price*goodsItemVO.number;
+                    break;
+                }
+            }
+            if(judge==0){
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,0,0,goodsItemVO.number,goodsItemVO.price*goodsItemVO.number));
+            }
+        }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用PurchaseRefundBillTool.getPurchaseRefundBillList、PurchaseTradeBillTool.getPurchaseTradeBillList服务，返回进货金额
-     */
-    @Override
-    public int getPurchaseAmount(Date start, Date end)throws Exception {
-        return 0;
-    }
-
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回销售数量
-     */
-    @Override
-    public double getSaleNumber(Date start, Date end)throws Exception {
-        return 0;
-    }
-
-    /**
-     * @version: 1
-     * @date:
-     * @param: [Start],[end] 查询的时间段，用于查询数据库中符合该时间段的单据数据
-     * @function: 调用SaleRefundBillTool.getSaleRefundBillList、SaleTradeBillTool.getSaleTradeBillList服务，返回销售金额
-     */
-    @Override
-    public double getSaleAmount(Date start, Date end)throws Exception {
-        return 0;
-    }
-
-    @Override
-    public int getTotal(Date start, Date end)throws Exception{
-        return 0;
+        return inventoryCheckItemVOS;
     }
 }

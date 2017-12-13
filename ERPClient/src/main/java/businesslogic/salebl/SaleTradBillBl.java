@@ -37,14 +37,19 @@ public class SaleTradBillBl implements SaleTradeBillBlService,SaleTradeBillTool 
         return null;
     }
 
-    @Override
-    public void saveDraft(SaleTradeBillVO bill) throws Exception{
-
-    }
+//    @Override
+//    public void saveDraft(SaleTradeBillVO bill) throws Exception{
+//
+//    }
 
     @Override
     public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query)throws Exception {
         return null;
+    }
+
+    @Override
+    public void editSaleTradeBill(SaleTradeBillVO saleTradeBillVO) throws Exception {
+
     }
 
     @Override

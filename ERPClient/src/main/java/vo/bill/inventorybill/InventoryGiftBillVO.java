@@ -8,6 +8,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 import main.java.po.goods.GiftItemPO;
+import main.java.presentation.inventoryui.InventoryGiftBillUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.user.UserVO;
@@ -103,5 +104,9 @@ public class InventoryGiftBillVO extends InventoryBillVO {
     public InventoryGiftBillTool getTool(){
         InventoryGiftBillTool inventoryGiftBillTool=new InventoryGiftBillBl();
         return inventoryGiftBillTool;
+    }
+
+    public InventoryGiftBillUIController getInfoUIController(){
+        return new InventoryGiftBillUIController();
     }
 }

@@ -8,6 +8,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.salebill.SaleRefundBillPO;
 import main.java.po.goods.GoodsItemPO;
+import main.java.presentation.saleui.SaleRefundBillUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.user.UserVO;
@@ -104,5 +105,9 @@ public class SaleRefundBillVO extends SaleBillVO {
     public SaleRefundBillTool getTool(){
         SaleRefundBillTool saleRefundBillTool=new SaleRefundBillBl();
         return saleRefundBillTool;
+    }
+
+    public SaleRefundBillUIController getInfoUIController(){
+        return new SaleRefundBillUIController();
     }
 }

@@ -30,14 +30,19 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
         return null;
     }
 
-    @Override
-    public void saveDraft(SaleRefundBillVO bill) throws Exception{
-
-    }
+//    @Override
+//    public void saveDraft(SaleRefundBillVO bill) throws Exception{
+//
+//    }
 
     @Override
     public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query)throws Exception {
         return null;
+    }
+
+    @Override
+    public void editSaleRefundBill(SaleRefundBillVO saleRefundBillVO) throws Exception {
+
     }
 
     @Override

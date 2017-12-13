@@ -21,6 +21,7 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,PurchaseRefundBillTool {
@@ -96,22 +97,22 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
      * @param: [purchaseRefundBillVO] 修改的单据对象，用于更新数据库中该单据数据
      * @return:
      */
-    @Override
-    public void saveDraft(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception{
-        PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
-
-        /*将PurchaseRefundBillVO转成PurchaseRefundBillPO*/
-        purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
-
-        /*修改状态*/
-        purchaseRefundBillPO.setState("草稿");
-
-        /*调用PurchaseRefundBillDataService.insert服务*/
-
-        /*调用dataservice的桩*/
-        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
-        purchaseRefundBillDataService.insert(purchaseRefundBillPO);
-    }
+//    @Override
+//    public void saveDraft(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception{
+//        PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
+//
+//        /*将PurchaseRefundBillVO转成PurchaseRefundBillPO*/
+//        purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
+//
+//        /*修改状态*/
+//        purchaseRefundBillPO.setState("草稿");
+//
+//        /*调用PurchaseRefundBillDataService.insert服务*/
+//
+//        /*调用dataservice的桩*/
+//        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+//        purchaseRefundBillDataService.insert(purchaseRefundBillPO);
+//    }
 
     /**
      * @version: 1
@@ -140,6 +141,18 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         }
 
         return purchaseRefundBillVOS;
+    }
+
+    @Override
+    public void editPurchaseRefundBill(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception {
+        PurchaseRefundBillPO purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
+
+        /*调用PurchaseRefundBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+        purchaseRefundBillDataService.update(purchaseRefundBillPO);
     }
 
     /**
@@ -174,6 +187,10 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         }
 
         /*调用ClientTool*/
+        ClientTool clientTool=new ClientBl();
+        ClientVO clientVO=purchaseRefundBillVO.getClient();
+        clientVO.setPayable(clientVO.getPayable()+purchaseRefundBillVO.getTotal());
+        clientTool.editClient(clientVO);
 
 
 

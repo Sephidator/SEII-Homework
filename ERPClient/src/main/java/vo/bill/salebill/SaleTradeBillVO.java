@@ -10,6 +10,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.salebill.SaleTradeBillPO;
 import main.java.po.goods.GoodsItemPO;
+import main.java.presentation.saleui.SaleTradeBillUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.promotion.PromotionVO;
@@ -159,6 +160,10 @@ public class SaleTradeBillVO extends SaleBillVO {
     public SaleTradeBillTool getTool(){
         SaleTradeBillTool saleTradeBillTool=new SaleTradBillBl();
         return saleTradeBillTool;
+    }
+
+    public SaleTradeBillUIController getInfoUIController(){
+        return new SaleTradeBillUIController();
     }
 
 }
