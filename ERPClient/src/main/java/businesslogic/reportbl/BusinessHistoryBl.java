@@ -42,8 +42,6 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
      */
     public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query)throws Exception {
 
-        final String allBill = "所有单据";
-
         /*将BusinessHistoryQueryVO转为BillQueryVO*/
         BillQueryVO billQueryVO = new BillQueryVO();
         billQueryVO.start = query.start;
@@ -55,45 +53,45 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
         ArrayList<BillVO> billVOArrayList = new ArrayList<>();
         /*调用相应单据的getArrayList*/
         //财务类
-        if(query.type.equals("付款单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("付款单")){
             PaymentBillTool paymentBillTool = new PaymentBillBl();
             billVOArrayList.addAll(paymentBillTool.getPaymentBillList(billQueryVO));
         }
-        if(query.type.equals("收款单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("收款单")){
             ReceiptBillTool receiptBillTool = new ReceiptBillBl();
             billVOArrayList.addAll(receiptBillTool.getReceiptBillList(billQueryVO));
         }
-        if(query.type.equals("现金费用单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("现金费用单")){
             CashBillTool cashBillTool = new CashBillBl();
             billVOArrayList.addAll(cashBillTool.getCashBillList(billQueryVO));
         }
 
         //销售类
-        if(query.type.equals("销售退货单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("销售退货单")){
             SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
             billVOArrayList.addAll(saleRefundBillTool.getSaleRefundBillList(billQueryVO));
         }
-        if(query.type.equals("销售出货单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("销售出货单")){
             SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
             billVOArrayList.addAll(saleTradeBillTool.getSaleTradeBillList(billQueryVO));
         }
 
         //进货类
-        if(query.type.equals("进货退货单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("进货退货单")){
             PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
             billVOArrayList.addAll(purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO));
         }
-        if(query.type.equals("进货单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("进货单")){
             PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
             billVOArrayList.addAll(purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO));
         }
 
         //仓库类
-        if(query.type.equals("库存溢损单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("库存溢损单")){
             InventoryLossOverBillTool inventoryLossOverBillTool = new InventoryLossOverBillBl();
             billVOArrayList.addAll(inventoryLossOverBillTool.getInventoryLossOverBillList(billQueryVO));
         }
-        if(query.type.equals("库存赠送单") || query.type.equals(allBill)){
+        if(query == null ||query.type.equals("库存赠送单")){
             InventoryGiftBillTool inventoryGiftBillTool = new InventoryGiftBillBl();
             billVOArrayList.addAll(inventoryGiftBillTool.getInventoryGiftBillList(billQueryVO));
         }
