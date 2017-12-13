@@ -31,27 +31,37 @@ public class CashBillData implements CashBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet;
+            ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
-            CashBillPO cashBillPO;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
-                sql = "SELECT * FROM CashBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else
-                sql = "SELECT * FROM CashBill WHERE (state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "') AND visible=TRUE ";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String ID = resultSet.getString("ID");
-                sql = "SELECT * FROM CashItem WHERE site_ID='" + ID + "'";
-                ResultSet temp = statement.executeQuery(sql);
-                ArrayList<CashItemPO> itemPOS = new ArrayList<>();
-                while (temp.next()) {
-                    itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
+            ResultSet resultSet;
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                sql = "SELECT * FROM CashBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sqlOfQuery.add(sql);
+            } else {
+                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String operatorID = resultSet.getString("ID");
+                    sql = "SELECT * FROM CashBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
                 }
-                cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
-                cashBillPO.setID(ID);
-                list.add(cashBillPO);
             }
-            resultSet.close();
+            for (int i = 0; i < sqlOfQuery.size(); i++) {
+                sql = sqlOfQuery.get(i);
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String ID = resultSet.getString("ID");
+                    sql = "SELECT * FROM CashItem WHERE site_ID='" + ID + "'";
+                    ResultSet temp = statement.executeQuery(sql);
+                    ArrayList<CashItemPO> itemPOS = new ArrayList<>();
+                    while (temp.next()) {
+                        itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
+                    }
+                    CashBillPO cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
+                    cashBillPO.setID(ID);
+                    list.add(cashBillPO);
+                }
+            }
             statement.close();
             return list;
         } catch (SQLException e) {
@@ -74,7 +84,6 @@ public class CashBillData implements CashBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            ArrayList<CashItemPO> list = po.getItemList();
             String sql = "SELECT CashBill FROM DataHelper";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
@@ -93,6 +102,7 @@ public class CashBillData implements CashBillDataService {
             String ID = "XJFYD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
             sql = "UPDATE CashBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+            ArrayList<CashItemPO> list = po.getItemList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO CashItem VALUES ('" + ID + "', '" + list.get(i).itemName + "', '" + list.get(i).amount + "', '" + list.get(i).comment + "')";
                 statement.executeUpdate(sql);

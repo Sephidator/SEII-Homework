@@ -31,27 +31,37 @@ public class InventoryLossOverBillData implements InventoryLossOverBillDataServi
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet;
+            ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
-            InventoryLossOverBillPO inventoryLossOverBillPO;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
-                sql = "SELECT * FROM InventoryLossOverBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else
-                sql = "SELECT * FROM InventoryLossOverBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "'";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String ID = resultSet.getString("ID");
-                sql = "SELECT * FROM LossOverItem WHERE site_ID='" + ID + "'";
-                ResultSet temp = statement.executeQuery(sql);
-                ArrayList<LossOverItemPO> itemPOS = new ArrayList<>();
-                while (temp.next()) {
-                    itemPOS.add(new LossOverItemPO(temp.getString("goodsID"), temp.getDouble("price"), temp.getInt("goodsNumber"), temp.getInt("actualNumber")));
+            ResultSet resultSet;
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                sql = "SELECT * FROM InventoryLossOverBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sqlOfQuery.add(sql);
+            } else {
+                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String operatorID = resultSet.getString("ID");
+                    sql = "SELECT * FROM InventoryLossOverBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
                 }
-                inventoryLossOverBillPO = new InventoryLossOverBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), itemPOS);
-                inventoryLossOverBillPO.setID(ID);
-                list.add(inventoryLossOverBillPO);
             }
-            resultSet.close();
+            for (int i = 0; i < sqlOfQuery.size(); i++) {
+                sql = sqlOfQuery.get(i);
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String ID = resultSet.getString("ID");
+                    sql = "SELECT * FROM LossOverItem WHERE site_ID='" + ID + "'";
+                    ResultSet temp = statement.executeQuery(sql);
+                    ArrayList<LossOverItemPO> itemPOS = new ArrayList<>();
+                    while (temp.next()) {
+                        itemPOS.add(new LossOverItemPO(temp.getString("goodsID"), temp.getDouble("price"), temp.getInt("goodsNumber"), temp.getInt("actualNumber")));
+                    }
+                    InventoryLossOverBillPO inventoryLossOverBillPO = new InventoryLossOverBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), itemPOS);
+                    inventoryLossOverBillPO.setID(ID);
+                    list.add(inventoryLossOverBillPO);
+                }
+            }
             statement.close();
             return list;
         } catch (SQLException e) {
@@ -74,7 +84,6 @@ public class InventoryLossOverBillData implements InventoryLossOverBillDataServi
 
         try {
             Statement statement = connection.createStatement();
-            ArrayList<LossOverItemPO> list = po.getLossOverList();
             String sql = "SELECT InventoryLossOverBill FROM DataHelper";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
@@ -93,6 +102,7 @@ public class InventoryLossOverBillData implements InventoryLossOverBillDataServi
             String ID = "KCYSD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
             sql = "UPDATE InventoryLossOverBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+            ArrayList<LossOverItemPO> list = po.getLossOverList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO LossOverItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).price + "', '" + list.get(i).goodsNumber + "', '" + list.get(i).actualNumber + "')";
                 statement.executeUpdate(sql);

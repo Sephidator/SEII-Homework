@@ -32,27 +32,44 @@ public class ReceiptBillData implements ReceiptBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet;
+            ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
-            ReceiptBillPO receiptBillPO;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
-                sql = "SELECT * FROM ReceiptBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else
-                sql = "SELECT * FROM ReceiptBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String ID = resultSet.getString("ID");
-                sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
-                ResultSet temp = statement.executeQuery(sql);
-                ArrayList<TransItemPO> itemPOS = new ArrayList<>();
-                while (temp.next()) {
-                    itemPOS.add(new TransItemPO(temp.getString("accountID"), temp.getDouble("transAmount"), temp.getString("comment")));
+            ResultSet resultSet;
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                sql = "SELECT * FROM ReceiptBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sqlOfQuery.add(sql);
+            } else {
+                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String operatorID = resultSet.getString("ID");
+                    sql = "SELECT * FROM ReceiptBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
                 }
-                receiptBillPO = new ReceiptBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("clientID"), itemPOS);
-                receiptBillPO.setID(ID);
-                list.add(receiptBillPO);
+                sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String clientID = resultSet.getString("ID");
+                    sql = "SELECT * FROM ReceiptBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
+                }
             }
-            resultSet.close();
+            for (int i = 0; i < sqlOfQuery.size(); i++) {
+                sql = sqlOfQuery.get(i);
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String ID = resultSet.getString("ID");
+                    sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
+                    ResultSet temp = statement.executeQuery(sql);
+                    ArrayList<TransItemPO> itemPOS = new ArrayList<>();
+                    while (temp.next()) {
+                        itemPOS.add(new TransItemPO(temp.getString("accountID"), temp.getDouble("transAmount"), temp.getString("comment")));
+                    }
+                    ReceiptBillPO receiptBillPO = new ReceiptBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("clientID"), itemPOS);
+                    receiptBillPO.setID(ID);
+                    list.add(receiptBillPO);
+                }
+            }
             statement.close();
             return list;
         } catch (SQLException e) {
@@ -75,7 +92,6 @@ public class ReceiptBillData implements ReceiptBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            ArrayList<TransItemPO> list = po.getTransList();
             String sql = "SELECT ReceiptBill FROM DataHelper";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
@@ -94,6 +110,7 @@ public class ReceiptBillData implements ReceiptBillDataService {
             String ID = "SKD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
             sql = "UPDATE ReceiptBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+            ArrayList<TransItemPO> list = po.getTransList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO TransItem VALUES ('" + ID + "', '" + list.get(i).accountID + "', '" + list.get(i).transAmount + "', '" + list.get(i).comment + "')";
                 statement.executeUpdate(sql);

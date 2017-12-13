@@ -31,27 +31,46 @@ public class PurchaseRefundBillData implements PurchaseRefundBillDataService {
 
         try {
             Statement statement = connection.createStatement();
+            ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
-            PurchaseRefundBillPO purchaseRefundBillPO;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
-                sql = "SELECT * FROM PurchaseRefundBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else
-                sql = "SELECT * FROM PurchaseRefundBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String ID = resultSet.getString("ID");
-                sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
-                ResultSet temp = statement.executeQuery(sql);
-                ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
-                while (temp.next()) {
-                    itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
+            ResultSet resultSet;
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                sql = "SELECT * FROM PurchaseRefundBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sqlOfQuery.add(sql);
+            } else {
+                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String operatorID = resultSet.getString("ID");
+                    sql = "SELECT * FROM PurchaseRefundBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
                 }
-                temp.close();
-                purchaseRefundBillPO = new PurchaseRefundBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
-                purchaseRefundBillPO.setID(ID);
-                list.add(purchaseRefundBillPO);
+                sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String clientID = resultSet.getString("ID");
+                    sql = "SELECT * FROM PurchaseRefundBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
+                }
             }
-            resultSet.close();
+            for (int i = 0; i < sqlOfQuery.size(); i++) {
+                sql = sqlOfQuery.get(i);
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String ID = resultSet.getString("ID");
+                    sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
+                    ResultSet temp = statement.executeQuery(sql);
+                    ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
+                    while (temp.next()) {
+                        itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
+                    }
+                    temp.close();
+                    PurchaseRefundBillPO purchaseRefundBillPO = new PurchaseRefundBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
+                    purchaseRefundBillPO.setID(ID);
+                    list.add(purchaseRefundBillPO);
+                }
+            }
+
             statement.close();
             return list;
         } catch (SQLException e) {
@@ -74,7 +93,6 @@ public class PurchaseRefundBillData implements PurchaseRefundBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            ArrayList<GoodsItemPO> list = po.getPurchaseList();
             String sql = "SELECT PurchaseRefundBill FROM DataHelper";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
@@ -93,6 +111,7 @@ public class PurchaseRefundBillData implements PurchaseRefundBillDataService {
             String ID = "JHTHD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
             sql = "UPDATE PurchaseRefundBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+            ArrayList<GoodsItemPO> list = po.getPurchaseList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                 statement.executeUpdate(sql);

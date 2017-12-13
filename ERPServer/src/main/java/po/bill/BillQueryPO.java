@@ -8,18 +8,18 @@ public class BillQueryPO implements Serializable {
     public Date start; //起始时间
     public Date end; //结束时间
     public String type; //单据类型
-    public String operatorID; //操作员
-    public String clientID; // 客户
+    public String operator; //操作员
+    public String client; // 客户
 
     public BillQueryPO() {
     }
 
-    public BillQueryPO(String state, Date start, Date end, String type, String operatorID, String clientID) {
+    public BillQueryPO(String state, Date start, Date end, String type, String operator, String client) {
         this.state = state;
         this.start = start;
         this.end = end;
         this.type = type;
-        this.operatorID = operatorID;
-        this.clientID = clientID;
+        this.operator = operator;
+        this.client = client;
     }
 }
