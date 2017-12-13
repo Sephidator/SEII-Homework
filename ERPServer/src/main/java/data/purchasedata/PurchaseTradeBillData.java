@@ -31,27 +31,45 @@ public class PurchaseTradeBillData implements PurchaseTradeBillDataService {
 
         try {
             Statement statement = connection.createStatement();
+            ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
-            PurchaseTradeBillPO purchaseTradeBillPO;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state))
-                sql = "SELECT * FROM PurchaseTradeBill WHERE operatorID='" + query.operatorID + "' AND state='" + query.state + "'";
-            else
-                sql = "SELECT * FROM PurchaseTradeBill WHERE state='" + query.state + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "'") + " AND '" + new Timestamp(query.end.getTime()) + "') OR operatorID='" + query.operatorID + "' OR clientID='" + query.clientID + "'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String ID = resultSet.getString("ID");
-                sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
-                ResultSet temp = statement.executeQuery(sql);
-                ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
-                while (temp.next()) {
-                    itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
+            ResultSet resultSet;
+            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                sql = "SELECT * FROM PurchaseTradeBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sqlOfQuery.add(sql);
+            } else {
+                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String operatorID = resultSet.getString("ID");
+                    sql = "SELECT * FROM PurchaseTradeBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
                 }
-                temp.close();
-                purchaseTradeBillPO = new PurchaseTradeBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
-                purchaseTradeBillPO.setID(ID);
-                list.add(purchaseTradeBillPO);
+                sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String clientID = resultSet.getString("ID");
+                    sql = "SELECT * FROM PurchaseTradeBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                    sqlOfQuery.add(sql);
+                }
             }
-            resultSet.close();
+            for (int i = 0; i < sqlOfQuery.size(); i++) {
+                sql = sqlOfQuery.get(i);
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String ID = resultSet.getString("ID");
+                    sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
+                    ResultSet temp = statement.executeQuery(sql);
+                    ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
+                    while (temp.next()) {
+                        itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
+                    }
+                    temp.close();
+                    PurchaseTradeBillPO purchaseTradeBillPO = new PurchaseTradeBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
+                    purchaseTradeBillPO.setID(ID);
+                    list.add(purchaseTradeBillPO);
+                }
+            }
             statement.close();
             return list;
         } catch (SQLException e) {
@@ -74,12 +92,11 @@ public class PurchaseTradeBillData implements PurchaseTradeBillDataService {
 
         try {
             Statement statement = connection.createStatement();
-            ArrayList<GoodsItemPO> list = po.getPurchaseList();
             String sql = "SELECT PurchaseTradeBill FROM DataHelper";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
             int before = resultSet.getInt(1);
-            sql = "SELECT COUNT(keyID) FROM PurchaseRefundBill";
+            sql = "SELECT COUNT(keyID) FROM PurchaseTradeBill";
             resultSet = statement.executeQuery(sql);
             resultSet.next();
             int all = resultSet.getInt(1);
@@ -93,6 +110,7 @@ public class PurchaseTradeBillData implements PurchaseTradeBillDataService {
             String ID = "JHD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
             sql = "UPDATE PurchaseTradeBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+            ArrayList<GoodsItemPO> list = po.getPurchaseList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                 statement.executeUpdate(sql);

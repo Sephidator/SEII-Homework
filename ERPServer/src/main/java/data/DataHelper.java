@@ -55,10 +55,16 @@ public class DataHelper {
                 resultSet = statement.executeQuery("SELECT COUNT(*) FROM PurchaseRefundBill");
                 resultSet.next();
                 int purchaseRefundBill = resultSet.getInt(1);
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM PurchaseTradeBill");
+                resultSet.next();
+                int purchaseTradeBill = resultSet.getInt(1);
                 resultSet = statement.executeQuery("SELECT COUNT(*) FROM SaleRefundBill");
                 resultSet.next();
                 int saleRefundBill = resultSet.getInt(1);
-                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill + ", InventoryLossOverBill=" + inventoryLossOverBill + ", PurchaseRefundBill=" + purchaseRefundBill + ", SaleRefundBill=" + saleRefundBill;
+                resultSet = statement.executeQuery("SELECT COUNT(*) FROM SaleTradeBill");
+                resultSet.next();
+                int saleTradeBill = resultSet.getInt(1);
+                sql = "UPDATE DataHelper SET today='" + new java.sql.Date(new Date().getTime()) + "', CashBill=" + cashBill + ", PaymentBill=" + paymentBill + ", ReceiptBill=" + receiptBill + ", InventoryGiftBill=" + inventoryGiftBill + ", InventoryLossOverBill=" + inventoryLossOverBill + ", PurchaseRefundBill=" + purchaseRefundBill + ", PurchaseTradeBill=" + purchaseTradeBill + ", SaleRefundBill=" + saleRefundBill + ", SaleTradeBill=" + saleTradeBill;
                 statement.executeUpdate(sql);
             }
         } catch (Exception e) {
