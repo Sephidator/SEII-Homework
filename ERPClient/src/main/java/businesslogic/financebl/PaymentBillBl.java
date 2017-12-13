@@ -149,9 +149,6 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         //转换
         PaymentBillPO paymentBillPO = vo.getPaymentBillPO();
 
-        //修改状态
-        paymentBillPO.setState("待审批");
-
         //调用
         /*dataService*/
         //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
@@ -160,32 +157,48 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         String id = paymentBillDataService.insert(paymentBillPO);
 
         //add Log
-        LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的付款单",vo.getTime());
-        logTool.addLog(logVO);
+        if(vo.getState().equals("待审批")){
+            LogTool logTool = new LogBl();
+            LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的付款单",vo.getTime());
+            logTool.addLog(logVO);
+        }
 
         return id;
     }
 
     @Override
-    /**
-     * @version: 1
-     * @date: 2017.11.28 2:06
-     * @para: [vo] 
-     * @function: 
-     */
-    public void saveDraft(PaymentBillVO vo)  throws Exception{
-        //转换
+    public void editPaymentBill(PaymentBillVO vo) throws Exception {
+        /*转PaymentBillVO到PaymentBillPO*/
         PaymentBillPO paymentBillPO = vo.getPaymentBillPO();
-
-        //修改状态
-        paymentBillPO.setState("草稿");
 
         //调用
         /*dataService*/
         //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
         /*dataServiceStub*/
         PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
-        paymentBillDataService.insert(paymentBillPO);
+
+        paymentBillDataService.update(paymentBillPO);
     }
+
+//    @Override
+//    /**
+//     * @version: 1
+//     * @date: 2017.11.28 2:06
+//     * @para: [vo]
+//     * @function:
+//     */
+//    public void saveDraft(PaymentBillVO vo)  throws Exception{
+//        //转换
+//        PaymentBillPO paymentBillPO = vo.getPaymentBillPO();
+//
+//        //修改状态
+//        paymentBillPO.setState("草稿");
+//
+//        //调用
+//        /*dataService*/
+//        //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
+//        /*dataServiceStub*/
+//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+//        paymentBillDataService.insert(paymentBillPO);
+//    }
 }

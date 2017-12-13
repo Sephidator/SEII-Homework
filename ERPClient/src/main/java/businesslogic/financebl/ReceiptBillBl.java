@@ -161,32 +161,49 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         String id = receiptBillDataService.insert(receiptBillPO);
 
         //add Log
-        LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的收款单",vo.getTime());
-        logTool.addLog(logVO);
+        if(vo.getState().equals("待审批")){
+            LogTool logTool = new LogBl();
+            LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的收款单",vo.getTime());
+            logTool.addLog(logVO);
+        }
 
         return id;
     }
 
     @Override
-    /**
-     * @version: 1
-     * @date: 2017.11.28 2:07
-     * @para: [vo] 
-     * @function: 
-     */
-    public void saveDraft(ReceiptBillVO vo)  throws Exception{
-        //转换
-        ReceiptBillPO receiptBillPO = vo.getReceiptBillPO();
+    public void editReceiptBill(ReceiptBillVO vo) throws Exception {
 
-        //修改状态
-        receiptBillPO.setState("草稿");
+        /*将ReceiptBillVO转为ReceiptBillPO*/
+        ReceiptBillPO receiptBillPO = vo.getReceiptBillPO();
 
         //调用
         /*dataService*/
         //ReceiptBillDataService receiptBillDataService = (ReceiptBillDataService) Naming.lookup("rmi://localhost:");
         /*dataServiceStub*/
         ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
-        receiptBillDataService.insert(receiptBillPO);
+        receiptBillDataService.update(receiptBillPO);
+
     }
+
+//    @Override
+//    /**
+//     * @version: 1
+//     * @date: 2017.11.28 2:07
+//     * @para: [vo]
+//     * @function:
+//     */
+//    public void saveDraft(ReceiptBillVO vo)  throws Exception{
+//        //转换
+//        ReceiptBillPO receiptBillPO = vo.getReceiptBillPO();
+//
+//        //修改状态
+//        receiptBillPO.setState("草稿");
+//
+//        //调用
+//        /*dataService*/
+//        //ReceiptBillDataService receiptBillDataService = (ReceiptBillDataService) Naming.lookup("rmi://localhost:");
+//        /*dataServiceStub*/
+//        ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
+//        receiptBillDataService.insert(receiptBillPO);
+//    }
 }

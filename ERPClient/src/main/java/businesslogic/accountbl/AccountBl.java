@@ -22,7 +22,9 @@ public class AccountBl implements AccountBlService,AccountTool{
     @Override
     public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception{
         /*AccountQueryVO转为AccountQueryPO*/
-        AccountQueryPO accountQueryPO = query.getAccountQueryPO();
+        AccountQueryPO accountQueryPO = new AccountQueryPO("","");
+        if(query != null)accountQueryPO = query.getAccountQueryPO();
+        else accountQueryPO = null;
 
         /*调用AccountDatdaService.find服务*/
         //AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");

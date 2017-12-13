@@ -19,8 +19,10 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      * @function: 
      */
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception {
-        /*将PromotionVO转换到PromotionPO*/
-        PromotionQueryPO promotionQueryPO = query.getPromotionQueryPO();
+        /*将PromotionQueryVO转换到PromotionQueryPO*/
+        PromotionQueryPO promotionQueryPO = new PromotionQueryPO("","",null);
+        if(query == null)promotionQueryPO = null;
+        else promotionQueryPO = query.getPromotionQueryPO();
 
         /*dataService*/
         //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");

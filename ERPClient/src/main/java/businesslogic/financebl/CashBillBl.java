@@ -131,9 +131,6 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         //转换
         CashBillPO cashBillPO = vo.getCashBillPO();
 
-        //修改状态
-        cashBillPO.setState("待审批");
-
         //调用
         /*dataService*/
         //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
@@ -142,32 +139,46 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         String id = cashBillDataService.insert(cashBillPO);
 
         //add Log
-        LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的现金费用单",vo.getTime());
-        logTool.addLog(logVO);
+        if(vo.getState().equals("待审批")){
+            LogTool logTool = new LogBl();
+            LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的现金费用单",vo.getTime());
+            logTool.addLog(logVO);
+        }
 
         return id;
     }
 
-    /**
-     * @version: 1
-     * @date: 2017.11.27 13:37
-     * @para: [vo] 现金费用单vo
-     * @function: 将CashBillVO转成CashBillPO，并调用CashBillDataService.insert
-     */
     @Override
-    public void saveDraft(CashBillVO vo) throws Exception{
-        //转换
+    public void editCashBill(CashBillVO vo) throws Exception {
+        /*将CashBillVO转为CashBillPO*/
         CashBillPO cashBillPO = vo.getCashBillPO();
 
-        //修改状态
-        cashBillPO.setState("草稿");
-
-        //调用
         /*dataService*/
         //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
         /*dataServiceStub*/
         CashBillDataService cashBillDataService = new CashBillDataServiceStub();
-        cashBillDataService.insert(cashBillPO);
+        cashBillDataService.update(cashBillPO);
     }
+
+//    /**
+//     * @version: 1
+//     * @date: 2017.11.27 13:37
+//     * @para: [vo] 现金费用单vo
+//     * @function: 将CashBillVO转成CashBillPO，并调用CashBillDataService.insert
+//     */
+//    @Override
+//    public void saveDraft(CashBillVO vo) throws Exception{
+//        //转换
+//        CashBillPO cashBillPO = vo.getCashBillPO();
+//
+//        //修改状态
+//        cashBillPO.setState("草稿");
+//
+//        //调用
+//        /*dataService*/
+//        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
+//        /*dataServiceStub*/
+//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+//        cashBillDataService.insert(cashBillPO);
+//    }
 }
