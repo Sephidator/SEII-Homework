@@ -17,6 +17,7 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class InventoryGiftBillBl implements InventoryGiftBillBlService,InventoryGiftBillTool {
@@ -135,22 +136,22 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
      * @return:
      */
-    @Override
-    public void saveDraft(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
-        InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
-
-        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
-
-        /*修改状态*/
-        inventoryGiftBillPO.setState("草稿");
-
-        /*调用InventoryGiftBillDataService.insert服务*/
-
-        /*调用dataservice的桩*/
-        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-        inventoryGiftBillDataService.insert(inventoryGiftBillPO);
-    }
+//    @Override
+//    public void saveDraft(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
+//        InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
+//
+//        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+//        inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+//
+//        /*修改状态*/
+//        inventoryGiftBillPO.setState("草稿");
+//
+//        /*调用InventoryGiftBillDataService.insert服务*/
+//
+//        /*调用dataservice的桩*/
+//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+//        inventoryGiftBillDataService.insert(inventoryGiftBillPO);
+//    }
 
     /**
      * @version: 1
@@ -179,5 +180,18 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
         }
 
         return inventoryGiftBillVOS;
+    }
+
+    @Override
+    public void editInventoryGiftBill(InventoryGiftBillVO inventoryGiftBillVO) throws Exception {
+        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+         /*调用InventoryGiftBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+
     }
 }

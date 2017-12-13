@@ -6,6 +6,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.po.bill.inventorybill.LossOverItemPO;
+import main.java.presentation.inventoryui.InventoryLossOverBillUIController;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -82,5 +83,9 @@ public class InventoryLossOverBillVO extends InventoryBillVO {
     public InventoryLossOverBillTool getTool(){
         InventoryLossOverBillTool inventoryLossOverBillTool=new InventoryLossOverBillBl();
         return inventoryLossOverBillTool;
+    }
+
+    public InventoryLossOverBillUIController getInfoUIController(){
+        return new InventoryLossOverBillUIController();
     }
 }

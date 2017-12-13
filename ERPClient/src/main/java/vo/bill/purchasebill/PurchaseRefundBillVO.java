@@ -8,6 +8,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.purchasebill.PurchaseRefundBillPO;
 import main.java.po.goods.GoodsItemPO;
+import main.java.presentation.purchaseui.PurchaseRefundBillUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.user.UserVO;
@@ -90,4 +91,7 @@ public class PurchaseRefundBillVO extends PurchaseBillVO {
         return purchaseRefundBillTool;
     }
 
+    public PurchaseRefundBillUIController getInfoUIController(){
+        return new PurchaseRefundBillUIController();
+    }
 }

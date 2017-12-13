@@ -1,11 +1,11 @@
 package main.java.businesslogicservice.inventoryblservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface InventoryGiftBillBlService {
@@ -14,8 +14,9 @@ public interface InventoryGiftBillBlService {
 
     public String submit(InventoryGiftBillVO bill) throws Exception;
 
-    public void saveDraft(InventoryGiftBillVO bill) throws Exception;
+    //public void saveDraft(InventoryGiftBillVO bill) throws Exception;
 
     public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception;
 
+    public void editInventoryGiftBill(InventoryGiftBillVO inventoryGiftBillVO) throws Exception;
 }

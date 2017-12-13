@@ -17,6 +17,7 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,InventoryLossOverBillTool {
@@ -134,24 +135,24 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
      * @return:
      */
-    @Override
-    public void saveDraft(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
-        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
-
-        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
-        inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
-
-        /*修改状态*/
-        inventoryLossOverBillPO.setState("草稿");
-
-        /*调用InventoryLossOverBillDataService.update服务*/
-
-        /*调用dataservice的桩*/
-        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-        inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
-
-
-    }
+//    @Override
+//    public void saveDraft(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
+//        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
+//
+//        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+//        inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+//
+//        /*修改状态*/
+//        inventoryLossOverBillPO.setState("草稿");
+//
+//        /*调用InventoryLossOverBillDataService.update服务*/
+//
+//        /*调用dataservice的桩*/
+//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+//        inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
+//
+//
+//    }
 
     /**
      * @version: 1
@@ -180,5 +181,17 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
         }
 
         return inventoryLossOverBillVOS;
+    }
+
+    @Override
+    public void editInventoryLossOverBill(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception {
+        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*调用InventoryLossOverBillDataService.update服务*/
+
+
+        /*调用dataservice的桩*/
+        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
     }
 }

@@ -8,6 +8,7 @@ import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface PurchaseRefundBillBlService {
@@ -18,8 +19,9 @@ public interface PurchaseRefundBillBlService {
 
     public String submit(PurchaseRefundBillVO bill) throws Exception;
 
-    public void saveDraft(PurchaseRefundBillVO bill) throws Exception;
+    //public void saveDraft(PurchaseRefundBillVO bill) throws Exception;
 
     public ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query) throws Exception;
 
+    public void editPurchaseRefundBill(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception;
 }

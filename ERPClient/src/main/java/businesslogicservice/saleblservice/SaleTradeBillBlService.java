@@ -10,6 +10,7 @@ import main.java.vo.goods.GoodsVO;
 import main.java.vo.promotion.PromotionQueryVO;
 import main.java.vo.promotion.PromotionVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface SaleTradeBillBlService {
@@ -22,8 +23,9 @@ public interface SaleTradeBillBlService {
 
     public String submit(SaleTradeBillVO bill) throws Exception;
 
-    public void saveDraft(SaleTradeBillVO bill) throws Exception;
+    //public void saveDraft(SaleTradeBillVO bill) throws Exception;
 
     public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) throws Exception;
 
+    public void editSaleTradeBill(SaleTradeBillVO saleTradeBillVO) throws Exception;
 }
