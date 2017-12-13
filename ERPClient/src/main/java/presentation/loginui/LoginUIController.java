@@ -37,6 +37,9 @@ public class LoginUIController {
      * */
     @FXML
     private void handleLogin(){
+        System.out.println(usernameField.getText()==null);
+        System.out.println(usernameField.getText().equals(""));
+
         UserVO user=new UserVO("宋抟","进货销售人员","JN123", "password", 23,true);
         if(usernameField.getText().equals("1")){
             stage.close();

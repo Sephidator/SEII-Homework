@@ -9,6 +9,9 @@ import main.java.presentation.financeui.FinanceBillUIController;
 import main.java.presentation.logui.LogUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.purchaseui.PurchaseBillUIController;
+import main.java.presentation.reportui.BusinessConditionUIController;
+import main.java.presentation.reportui.BusinessHistoryUIController;
+import main.java.presentation.reportui.SaleDetailUIController;
 import main.java.presentation.saleui.SaleBillUIController;
 import main.java.presentation.uiutility.CenterUIController;
 
@@ -39,14 +42,20 @@ public class FinancePanelUIController extends CenterUIController {
 
     @FXML
     private void handleSaleDetail(){
+        root.showLogoutButton(false);
+        SaleDetailUIController.init(root);
     }
 
     @FXML
     private void handleBusinessHistory(){
+        root.showLogoutButton(false);
+        BusinessHistoryUIController.init(root);
     }
 
     @FXML
     private void handleBusinessCondition(){
+        root.showLogoutButton(false);
+        BusinessConditionUIController.init(root);
     }
 
     @FXML

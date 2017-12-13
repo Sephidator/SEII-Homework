@@ -136,6 +136,14 @@
     -fx-background-color: #0880EE;
 }
 
+
+.tableView-resize {
+    -fx-font-size: 18px;
+}
+
+/*
+* 修改textfield样式的CSS类
+*/
 .text-field {
     -fx-font-size: 12px;
     -fx-pref-height: 30;
