@@ -4,6 +4,7 @@ import main.java.businesslogicservice.logblservice.LogBlService;
 import main.java.data_stub.logdataservicestub.LogDataServiceStub;
 import main.java.dataservice.logdataservice.LogDataService;
 import main.java.po.log.LogPO;
+import main.java.po.log.LogQueryPO;
 import main.java.vo.log.LogQueryVO;
 import main.java.vo.log.LogVO;
 
@@ -34,11 +35,15 @@ public class LogBl implements LogBlService,LogTool{
      * @function: 
      */
     public ArrayList<LogVO> getLogList(LogQueryVO query)throws Exception {
+        LogQueryPO logQueryPO = new LogQueryPO(null, null);
+        if(query == null)logQueryPO = null;
+        else logQueryPO = query.getLogQueryPO();
+
         /*dataService*/
         //LogDataService logDataService = (LogDataService) Naming.lookup("rmi://localhost:");
         /*dataServiceStub*/
         LogDataService logDataService = new LogDataServiceStub();
-        ArrayList<LogPO> logPOS = logDataService.finds(query.getLogQueryPO());
+        ArrayList<LogPO> logPOS = logDataService.finds(logQueryPO);
 
         ArrayList<LogVO> logVOS = new ArrayList<>();//对获取列表进行转换
         for(LogPO logPO : logPOS)

@@ -4,6 +4,8 @@ import main.java.businesslogic.inventorybl.InventoryGiftBillBl;
 import main.java.businesslogic.inventorybl.InventoryGiftBillTool;
 import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
 import main.java.businesslogic.inventorybl.InventoryLossOverBillTool;
+import main.java.businesslogic.promotionbl.PromotionBl;
+import main.java.businesslogic.promotionbl.PromotionTool;
 import main.java.businesslogic.salebl.SaleRefundBillBl;
 import main.java.businesslogic.salebl.SaleRefundBillTool;
 import main.java.businesslogic.salebl.SaleTradBillBl;
@@ -16,6 +18,8 @@ import main.java.vo.bill.inventorybill.LossOverItemVO;
 import main.java.vo.bill.salebill.SaleRefundBillVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.goods.GiftItemVO;
+import main.java.vo.promotion.PromotionTotalVO;
+import main.java.vo.promotion.PromotionVO;
 import main.java.vo.report.BusinessConditionQueryVO;
 
 import java.util.ArrayList;
@@ -90,11 +94,35 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         //进货退货差价,需要拿到同一批货的进价和退货的价格，目前无法判断同一批货
         double priceDiffTotal = 0;
 
-        // 代金券与实际收款差额收入，这个无法理解
+        // 代金券与实际代金券差额收入，（销售单promotionID找到发放代金券总额，减去实际上代金券使用金额，求和）
+        //实现：通过每一个销售单的PromotionID，拿到PromotionVO，通过type转成相应子类型，拿到代金券代金总额；
+        // 然后每一个销售单的代金券是实际使用的钱。总额减去实际使用就是差额收入了
         double diffVoucherGetTotal = 0;
+        double voucherTotal = 0;
+        double voucherUse = 0;
 
-        /*销售成本*///这个等待讨论
+        PromotionTool promotionTool = new PromotionBl();
+        PromotionVO promotionVO = new PromotionVO();
+        PromotionTotalVO promotionTotalVO = new PromotionTotalVO();
+        for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
+            promotionVO = saleTradeBillVO.getPromotion();
+            if(promotionVO.getType().equals("总价促销策略")){
+                PromotionVO promotionVOSure = promotionTool.find(promotionVO.getID());
+                promotionTotalVO = (PromotionTotalVO)promotionVOSure;//一定可以转化为总价促销策略，不然凉了
+            }
+            voucherTotal += promotionTotalVO.getVoucher();
+            voucherUse += saleTradeBillVO.getAmountOfVoucher();
+        }
+
+        diffVoucherGetTotal = voucherTotal - voucherUse;
+
+        /*销售成本*///这个等待讨论（销售单-销售退货单）
+        //TODO 所有进货单的总金额,是折让前总额吗？
         double saleCostTotal = 0;
+        for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
+            saleCostTotal += saleTradeBillVO.getTotalBeforeDiscount();
+        }
+
 
         /*****************************************************************/
 
@@ -124,8 +152,8 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         /*****************************************************************/
 
         /*利润*/
-        //理解为，折让后销售收入 + 商品收入 - 商品类总支出
-        double profit = saleTotalAfterDiscount + goodsTotal - goodsExpend;
+        //理解为，折让后销售收入 + 商品收入 - 商品类总支出 - 销售成本
+        double profit = saleTotalAfterDiscount + goodsTotal - goodsExpend - saleCostTotal;
 
         ArrayList<Double> resultList = new ArrayList<>();
 

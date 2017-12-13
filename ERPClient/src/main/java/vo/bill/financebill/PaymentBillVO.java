@@ -6,9 +6,8 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.financebill.PaymentBillPO;
 import main.java.po.bill.financebill.TransItemPO;
-import main.java.vo.client.ClientQueryVO;
+import main.java.presentation.financeui.PaymentBillUIController;
 import main.java.vo.client.ClientVO;
-import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.*;
@@ -108,6 +107,11 @@ public class PaymentBillVO extends FinanceBillVO {
         this.client = clientVO;
 
         this.visible = paymentBillPO.isVisible();
+    }
+
+    /*实现待定*/
+    public PaymentBillUIController getInfoUIController() {
+        return new PaymentBillUIController();
     }
 }
 

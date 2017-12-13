@@ -16,5 +16,7 @@ public interface PaymentBillBlService {
 
     public String submit(PaymentBillVO vo) throws Exception;//更新并提交付款单，持久化更新涉及的对象的数据，成功返回ID
 
-    public void saveDraft(PaymentBillVO vo) throws Exception;//保存单据草稿
+    //public String saveDraft(PaymentBillVO vo) throws Exception;//保存单据草稿
+
+    public void editPaymentBill(PaymentBillVO vo) throws Exception;//编辑付款单
 }

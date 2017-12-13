@@ -5,6 +5,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.po.bill.financebill.CashItemPO;
+import main.java.presentation.financeui.CashBillUIController;
 import main.java.vo.account.AccountVO;
 import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
@@ -104,6 +105,11 @@ public class CashBillVO extends FinanceBillVO {
         for(CashItemPO cashItemPO : cashItemPOS)
             cashItemVOArrayList.add(new CashItemVO(cashItemPO));
         this.itemList = cashItemVOArrayList;
+    }
+
+    /*实现待定*/
+    public CashBillUIController getInfoUIController() {
+        return new CashBillUIController();
     }
 }
 

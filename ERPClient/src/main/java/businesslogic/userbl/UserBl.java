@@ -22,7 +22,9 @@ public class UserBl implements UserBlService,UserTool {
     public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception{
 
         /*将UserQueryVO转换为UserQueryPO*/
-        UserQueryPO userQueryPO=query.getUserQueryPO();
+        UserQueryPO userQueryPO = new UserQueryPO("","");
+        if(query == null)userQueryPO = null;
+        else userQueryPO = query.getUserQueryPO();
 
         /*调用UserDataService.find服务得到ArrayList<UserPO>的用户列表*/
         //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");

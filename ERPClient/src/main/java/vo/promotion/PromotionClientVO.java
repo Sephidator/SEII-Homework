@@ -15,7 +15,6 @@ public class PromotionClientVO extends PromotionVO {
     private ArrayList<GiftItemVO> giftList; // 赠品列表
 
     PromotionClientVO(){
-        this.ID="";
         this.name = "";
         this.type="客户促销策略";
         this.start=new Date();
@@ -26,8 +25,7 @@ public class PromotionClientVO extends PromotionVO {
         this.giftList = new ArrayList<>();
     }
 
-    public PromotionClientVO(String ID,String name ,String type, Date start, Date end, int clientLevel, double discount,int voucher, ArrayList<GiftItemVO> giftList) {
-        this.ID=ID;
+    public PromotionClientVO(String name ,Date start, Date end, int clientLevel, double discount,int voucher, ArrayList<GiftItemVO> giftList) {
         this.name = name;
         this.type="客户促销策略";
         this.start=start;

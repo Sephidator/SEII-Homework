@@ -5,8 +5,10 @@ import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
 import main.java.vo.bill.salebill.SaleTradeBillQueryVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
+import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
+import java.util.Date;
 
 import java.util.ArrayList;
 
@@ -29,7 +31,11 @@ public class SaleDetailBl implements SaleDetailBlService {
      */
     public ArrayList<SaleRecordVO> getSaleRecordList(SaleDetailQueryVO query)throws Exception {
         /*制作SaleTradeBillQueryVO*/
-        SaleTradeBillQueryVO saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
+        Date start = new Date();Date end = new Date();
+        String goodsName = ""; String client = ""; String salesman = "";
+        SaleTradeBillQueryVO saleTradeBillQueryVO;
+        if(query == null)saleTradeBillQueryVO = null;
+        else saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
 
         SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
         //拿到销售单的单据
@@ -37,8 +43,11 @@ public class SaleDetailBl implements SaleDetailBlService {
 
         //开始组装saleRecordVO
         ArrayList<SaleRecordVO> saleRecordVOS = new ArrayList<>();
+        ArrayList<GoodsItemVO> goodsItemVOS = new ArrayList<>();
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
-            saleRecordVOS.add(new SaleRecordVO(saleTradeBillVO));
+            goodsItemVOS = saleTradeBillVO.getSaleList();
+            for(GoodsItemVO goodsItemVO : goodsItemVOS)
+                saleRecordVOS.add(new SaleRecordVO(saleTradeBillVO.getTime(), goodsItemVO));
         }
         return saleRecordVOS;
     }

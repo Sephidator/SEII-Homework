@@ -11,6 +11,7 @@ import main.java.data_stub.initialdataservicestub.InitialDataServiceStub;
 import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.initial.InitialPO;
+import main.java.po.initial.InitialQueryPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 import main.java.vo.client.ClientQueryVO;
@@ -87,11 +88,15 @@ public class InitialBl implements InitialBlService{
      * @function: 查看期初信息
      */
     public ArrayList<InitialVO> getInitial(InitialQueryVO query)throws Exception {
+        InitialQueryPO initialQueryPO = new InitialQueryPO(0, 0);
+        if(query == null)initialQueryPO = null;
+        else initialQueryPO = query.getInitialQueryPO();
+
         /*dataService*/
         //InitialDataService initialDataService = (InitialDataService)Naming.lookup("rmi://localhost:");
         /*dataServiceStub*/
         InitialDataService initialDataService = new InitialDataServiceStub();
-        ArrayList<InitialPO> initialPOS = initialDataService.finds(query.getInitialQueryPO());
+        ArrayList<InitialPO> initialPOS = initialDataService.finds(initialQueryPO);
         //转换为ArrayList<InitialVO>
         ArrayList<InitialVO> initialVOS = new ArrayList<>();
         for(InitialPO initialPO : initialPOS)
