@@ -166,7 +166,12 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
         ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS=new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        billQueryPO=query.getBillQueryPO();
+        if(query==null){
+            billQueryPO=null;
+        }
+        else{
+            billQueryPO=query.getBillQueryPO();
+        }
 
         /*调用InventoryGiftBillDataService.find服务*/
 

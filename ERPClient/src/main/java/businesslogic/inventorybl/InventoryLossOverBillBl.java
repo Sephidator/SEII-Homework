@@ -167,7 +167,12 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
         ArrayList<InventoryLossOverBillVO> inventoryLossOverBillVOS=new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        billQueryPO=query.getBillQueryPO();
+        if(query==null){
+            billQueryPO=null;
+        }
+        else{
+            billQueryPO=query.getBillQueryPO();
+        }
 
         /*调用InventoryLossOverBillDataService.find服务*/
 

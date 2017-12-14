@@ -14,13 +14,38 @@ public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
      * @return: 返回ArrayList<GoodsSortVO>的商品分类列表
      */
     @Override
-    public GoodsSortVO getRoot(){
-        return null;
+    public GoodsSortVO getRoot() throws Exception{
+
+        GoodsSortPO goodsSortPO=new GoodsSortPO();
+        GoodsSortVO goodsSortVO=new GoodsSortVO();
+
+        /*调用GoodsDataService.getRoot*/
+
+        /*调用dataservice*/
+        GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
+        goodsSortPO=goodsSortDataService.getRoot();
+
+        /*GoodsSortPO转换为GoodsSortVO*/
+        goodsSortVO=new GoodsSortVO(goodsSortPO);
+
+        return goodsSortVO;
     }
 
     @Override
-    public GoodsSortVO find(String goodsSortID) {
-        return null;
+    public GoodsSortVO find(String goodsSortID) throws Exception {
+        GoodsSortVO goodsSortVO=new GoodsSortVO();
+        GoodsSortPO goodsSortPO=new GoodsSortPO();
+
+        /*调用GoodsSortDataService.find*/
+
+        /*调用dataservice*/
+        GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
+        goodsSortPO=goodsSortDataService.find(goodsSortID);
+
+       /*GoodsSortPO转换为GoodsSortVO*/
+        goodsSortVO=new GoodsSortVO(goodsSortPO);
+
+        return goodsSortVO;
     }
 
     /**

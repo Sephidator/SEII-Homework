@@ -47,6 +47,25 @@ public class UserBl implements UserBlService,UserTool {
         return userTool.find(userID);
     }
 
+    @Override
+    public UserVO login(String jobName, String password) throws Exception {
+
+        /*dataserviceStub*/
+        //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");
+        UserDataService userDataService = new UserDataServiceStub();
+        UserPO userPO = userDataService.login(jobName,password);
+        return new UserVO(userPO);
+    }
+
+    @Override
+    public void logout(String userID) throws Exception {
+
+        /*dataserviceStub*/
+        //UserDataService userDataService = (UserDataService) Naming.lookup("rmi://localhost:");
+        UserDataService userDataService = new UserDataServiceStub();
+        userDataService.logout(userID);
+    }
+
     /**
      * @version: 1
      * @date:

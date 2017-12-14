@@ -123,7 +123,12 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
         ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS=new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        billQueryPO=query.getBillQueryPO();
+        if(query==null){
+            billQueryPO=null;
+        }
+        else{
+            billQueryPO=query.getBillQueryPO();
+        }
 
         /*调用PurchaseTradeBillDataService.find服务*/
 
@@ -178,14 +183,14 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService,PurchaseT
         GoodsTool goodsTool=new GoodsBl();
         for(GoodsItemVO goodsItemVO:purchaseTradeBillVO.getPurchaseList()){
             GoodsVO goodsVO=goodsItemVO.goods;
-            goodsVO.setNumber(goodsVO.getNumber()-goodsItemVO.number);
+            goodsVO.setNumber(goodsVO.getNumber()+goodsItemVO.number);
             goodsTool.editGoods(goodsVO);
         }
 
         /*调用ClientTool*/
         ClientTool clientTool=new ClientBl();
         ClientVO clientVO=purchaseTradeBillVO.getClient();
-        clientVO.setPayable(clientVO.getPayable()+purchaseTradeBillVO.getTotal());
+        clientVO.setReceivable(clientVO.getReceivable()+purchaseTradeBillVO.getTotal());
         clientTool.editClient(clientVO);
 
 

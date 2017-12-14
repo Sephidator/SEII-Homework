@@ -27,7 +27,13 @@ public class ClientBl implements ClientBlService,ClientTool{
         ArrayList<ClientPO> clientPOS=new ArrayList<>();
 
         /*将ClientQueryVO转为ClientQueryPO*/
-        ClientQueryPO clientQueryPO=query.getClientQueryPO();
+        ClientQueryPO clientQueryPO=new ClientQueryPO("");
+        if(query==null){
+            clientQueryPO=null;
+        }
+        else{
+            clientQueryPO=query.getClientQueryPO();
+        }
 
         /*调用ClientDataService.finds服务得到ArrayList<ClientPO>的客户列表*/
 

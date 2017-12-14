@@ -11,7 +11,7 @@ public interface InventoryGiftBillDataService extends Remote {
 
     ArrayList<InventoryGiftBillPO> finds(BillQueryPO query) throws RemoteException;
 
-    String insert(InventoryGiftBillPO bill) throws RemoteException;
+    String insert(InventoryGiftBillPO po) throws RemoteException;
 
-    void update(InventoryGiftBillPO bill) throws RemoteException;
+    void update(InventoryGiftBillPO po) throws RemoteException;
 }

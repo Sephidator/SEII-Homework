@@ -20,7 +20,7 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      */
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception {
         /*将PromotionQueryVO转换到PromotionQueryPO*/
-        PromotionQueryPO promotionQueryPO = new PromotionQueryPO("","",null);
+        PromotionQueryPO promotionQueryPO = new PromotionQueryPO("","");
         if(query == null)promotionQueryPO = null;
         else promotionQueryPO = query.getPromotionQueryPO();
 

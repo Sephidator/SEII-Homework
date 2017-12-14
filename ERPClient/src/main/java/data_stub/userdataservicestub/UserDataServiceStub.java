@@ -35,4 +35,14 @@ public class UserDataServiceStub implements UserDataService {
     public void update(UserPO po) throws RemoteException {
 
     }
+
+    @Override
+    public UserPO login(String jobName, String password) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public void logout(String userID) throws RemoteException {
+
+    }
 }

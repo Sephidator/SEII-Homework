@@ -12,7 +12,7 @@ public class SaleTradeBillPO extends SaleBillPO {
     private String promotionID; // 适用的促销策略
     private double totalBeforeDiscount; // 折让前总额
     private double discount; // 折让金额
-    private double amountOfVoucher; // 代金卷金额
+    private double amountOfVoucher; // 使用代金卷金额
     private double totalAfterDiscount; // 折让后总额
 
     public SaleTradeBillPO(String state, Date time, String operatorID, String comment, String clientID, String salesmanID, ArrayList<GoodsItemPO> saleList, String promotionID, double totalBeforeDiscount, double discount, double amountOfVoucher, double totalAfterDiscount) {

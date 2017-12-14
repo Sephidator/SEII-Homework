@@ -3,7 +3,7 @@ package main.java.po.bill;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BillQueryPO implements Serializable{
+public class BillQueryPO implements Serializable {
     public String state; //单据状态
     public Date start; //起始时间
     public Date end; //结束时间
