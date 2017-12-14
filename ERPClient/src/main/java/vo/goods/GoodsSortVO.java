@@ -121,4 +121,8 @@ public class GoodsSortVO extends VO{
         this.comment = comment;
     }
 
+    @Override
+    public String toString(){
+        return "分类："+name;
+    }
 }

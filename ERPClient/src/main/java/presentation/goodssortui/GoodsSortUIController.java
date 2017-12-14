@@ -3,18 +3,24 @@ package main.java.presentation.goodssortui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import main.java.MainApp;
+import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodssortbl.GoodsSortBl;
+import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
+import main.java.presentation.goodsui.GoodsInfoUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.GoodsSortVO;
+import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
 public class GoodsSortUIController extends CenterUIController {
     private GoodsSortBlService goodsSortBlService;
+    private GoodsBlService goodsBlService;
     @FXML
     private TreeView goodsSortTreeView;
 
@@ -24,7 +30,8 @@ public class GoodsSortUIController extends CenterUIController {
      * 设置显示的客户信息以及显示方法
      * */
     public void initialize(){
-        goodsSortTreeView.setEditable(true);
+        //goodsSortTreeView.setEditable(true);
+
         /*
         root = new TreeItem<String>("Root");
         root.setExpanded(true);
@@ -45,6 +52,13 @@ public class GoodsSortUIController extends CenterUIController {
         GoodsSortVO c2=new GoodsSortVO();
         c2.setID("Sort98085");
         c2.setName("二极管2");
+
+        GoodsVO g1=new GoodsVO();
+        g1.setID("Sort12345");
+        g1.setName("蓝光LED");
+        ArrayList<GoodsVO> l=new ArrayList<>();
+        l.add(g1);
+        c1.setGoods(l);
 
         ArrayList<GoodsSortVO> list=new ArrayList<>();
         list.add(c1);
@@ -71,12 +85,17 @@ public class GoodsSortUIController extends CenterUIController {
         showGoodsSort(null,a);
     }
 
+    public void setGoodsBlService(GoodsBlService goodsBlService) {
+        this.goodsBlService=goodsBlService;
+    }
+
 
     /**
      * 取得客户列表并修改ObservableList的信息
      * */
-    private void showGoodsSort(TreeItem<String> fatherItem,GoodsSortVO newSort){
-        TreeItem<String> newItem= new TreeItem<String>(newSort.getID()+": "+newSort.getName());
+    private void showGoodsSort(TreeItem fatherItem, GoodsSortVO newSort){
+        TreeItem newItem= new TreeItem(newSort);
+        newItem.setExpanded(true);
 
         if(fatherItem==null){
             goodsSortTreeView.setRoot(newItem);
@@ -85,10 +104,14 @@ public class GoodsSortUIController extends CenterUIController {
             fatherItem.getChildren().add(newItem);
         }
 
-        if(newSort.getChildren()!=null && newSort.getChildren().size()>0){
-            for(GoodsSortVO child:newSort.getChildren()){
-                showGoodsSort(newItem,child);
-            }
+        for(GoodsSortVO child:newSort.getChildren()){
+            showGoodsSort(newItem,child);
+        }
+
+        for(GoodsVO goods:newSort.getGoods()){
+            TreeItem<GoodsVO> goodsTreeItem=new TreeItem(goods);
+            goodsTreeItem.setExpanded(false);
+            newItem.getChildren().add(goodsTreeItem);
         }
     }
 
@@ -110,11 +133,17 @@ public class GoodsSortUIController extends CenterUIController {
 
     @FXML
     private void handleEditSort(){
-        /*
         int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
-        TreeItem<String> item=goodsSortTreeView.getTreeItem(selectedIndex);
-        */
-        GoodsSortInfoUIController.init(goodsSortBlService,new GoodsSortVO(),3,root.getStage());
+        if(goodsSortTreeView.getTreeItem(selectedIndex).isExpanded()){
+            TreeItem<GoodsSortVO> item=goodsSortTreeView.getTreeItem(selectedIndex);
+            GoodsSortVO sort=item.getValue();
+            GoodsSortInfoUIController.init(goodsSortBlService,sort,3,root.getStage());
+        }
+        else{
+            TreeItem<GoodsVO> item=goodsSortTreeView.getTreeItem(selectedIndex);
+            GoodsVO goods=item.getValue();
+            GoodsInfoUIController.init(goodsBlService,goods,3,root.getStage());
+        }
     }
 
     @FXML
@@ -163,6 +192,7 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setGoodsSortBlService(new GoodsSortBl());
+            controller.setGoodsBlService(new GoodsBl());
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

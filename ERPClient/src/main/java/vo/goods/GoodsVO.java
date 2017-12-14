@@ -161,4 +161,8 @@ public class GoodsVO extends VO{
         this.comment = comment;
     }
 
+    @Override
+    public String toString(){
+        return "商品："+name;
+    }
 }

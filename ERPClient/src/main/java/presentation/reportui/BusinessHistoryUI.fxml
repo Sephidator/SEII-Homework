@@ -11,19 +11,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.reportui.BusinessHistoryUIController">
    <children>
-      <ChoiceBox fx:id="conditionSelector" layoutX="20.0" layoutY="35.0" prefWidth="150.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
-      <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="352.0" layoutY="40.0" onAction="#handleSearch" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="35.0" />
-      <VBox layoutX="280.0" layoutY="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <JFXDatePicker fx:id="start" editable="false" prefHeight="35.0" prefWidth="250.0" promptText="起始时间" />
-            <JFXDatePicker fx:id="end" editable="false" prefHeight="35.0" prefWidth="250.0" promptText="结束时间" />
-         </children>
-      </VBox>
-      <TextField fx:id="inputInfo" layoutX="419.0" layoutY="39.0" prefWidth="250.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="40.0" />
       <GridPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -35,7 +25,7 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="billTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <TableView fx:id="billTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="IDColumn" prefWidth="75.0" text="单据编号" />
                         <TableColumn fx:id="typeColumn" prefWidth="75.0" text="类型" />
@@ -130,5 +120,14 @@
             </GridPane>
          </children>
       </GridPane>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ChoiceBox fx:id="conditionSelector" prefHeight="40.0" prefWidth="40.0" styleClass="choiceBox-resize" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0" />
+            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="450.0" layoutY="35.0" onAction="#handleSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="25.0" />
+            <TextField fx:id="inputInfo" layoutX="79.0" layoutY="40.0" prefHeight="40.0" prefWidth="350.0" styleClass="textField-resize" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="30.0" />
+            <JFXDatePicker fx:id="start" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="起始时间" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0" />
+            <JFXDatePicker fx:id="end" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="结束时间" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="50.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
