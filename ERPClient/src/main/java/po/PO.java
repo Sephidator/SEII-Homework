@@ -3,7 +3,7 @@ package main.java.po;
 import java.io.Serializable;
 
 public class PO implements Serializable {
-    protected String ID; //编号
+    protected String ID = ""; //编号
 
     protected boolean visible = true; //是否可见
 

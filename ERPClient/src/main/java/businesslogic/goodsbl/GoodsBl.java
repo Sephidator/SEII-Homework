@@ -23,7 +23,13 @@ public class GoodsBl implements GoodsBlService,GoodsTool {
         ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
 
         /*将GoodsQueryVO转为GoodsQueryPO*/
-        GoodsQueryPO goodsQueryPO=query.getGoodsQueryPO();
+        GoodsQueryPO goodsQueryPO=new GoodsQueryPO("","");
+        if(query==null){
+            goodsQueryPO=null;
+        }
+        else{
+            goodsQueryPO=query.getGoodsQueryPO();
+        }
 
         /*调用GoodsDadaService.find得到ArrayList<GoodsPO>*/
 

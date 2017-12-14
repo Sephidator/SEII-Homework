@@ -127,7 +127,12 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS=new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        billQueryPO=query.getBillQueryPO();
+        if(query==null){
+            billQueryPO=null;
+        }
+        else{
+            billQueryPO=query.getBillQueryPO();
+        }
 
         /*调用PurchaseRefundBillDataService.find服务*/
 

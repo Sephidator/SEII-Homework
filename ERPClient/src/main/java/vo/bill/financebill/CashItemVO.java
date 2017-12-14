@@ -28,7 +28,7 @@ public class CashItemVO {
 
     /*得到CashItemVO*/
     public CashItemVO(CashItemPO cashItemPO){
-        this.ItemName = cashItemPO.ItemName;
+        this.ItemName = cashItemPO.itemName;
         this.amount = cashItemPO.amount;
         this.comment = cashItemPO.comment;
     }

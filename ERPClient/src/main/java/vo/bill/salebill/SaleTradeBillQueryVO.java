@@ -1,4 +1,6 @@
 package main.java.vo.bill.salebill;
+import main.java.po.bill.salebill.SaleTradeBillQueryPO;
+
 import java.util.Date;
 
 public class SaleTradeBillQueryVO {
@@ -14,5 +16,11 @@ public class SaleTradeBillQueryVO {
         this.goodsName = goodsName;
         this.client = client;
         this.salesman = salesman;
+    }
+
+    public SaleTradeBillQueryPO getSaleTradeBillQueryPO(){
+        SaleTradeBillQueryPO saleTradeBillQueryPO=new SaleTradeBillQueryPO(this.start,this.end,this.goodsName,this.client,this.salesman);
+
+        return saleTradeBillQueryPO;
     }
 }
