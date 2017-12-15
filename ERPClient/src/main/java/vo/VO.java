@@ -2,7 +2,7 @@ package main.java.vo;
 
 public class VO{
 
-    protected String ID; //编号
+    protected String ID=""; //编号
 
     protected boolean visible = true; //是否可见
 

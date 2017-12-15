@@ -11,6 +11,7 @@ import main.java.MainApp;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
+import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.report.SaleDetailQueryVO;
@@ -64,8 +65,8 @@ public class SaleDetailUIController extends CenterUIController {
         goodsAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty("60"));
 
 
-        String[] conditionList=new String[]{"无","时间","商品名","客户","业务员"};
-        conditionSelector.setItems(FXCollections.observableArrayList("无","时间","商品名","客户","业务员"));
+        String[] conditionList=new String[]{"所有单据","时间","商品名","客户","业务员"};
+        conditionSelector.setItems(FXCollections.observableArrayList("所有单据","时间","商品名","客户","业务员"));
         conditionSelector.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
             showInputField(conditionList[newValue.intValue()]);
         });
@@ -85,7 +86,7 @@ public class SaleDetailUIController extends CenterUIController {
         end.getEditor().setText("");
         inputInfo.setText("");
 
-        if(condition.equals("无")){
+        if(condition.equals("所有单据")){
             start.setVisible(false);
             end.setVisible(false);
             inputInfo.setVisible(false);
@@ -191,17 +192,9 @@ public class SaleDetailUIController extends CenterUIController {
     // 加载文件和界面的方法******************************************
 
     /**
-     * 初始化方法，调用init方法
-     * 之所以有这个方法是为了多态而提供的
-     * */
-    public void instanceInit(RootUIController root){
-        init(root);
-    }
-
-    /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(RootUIController root){
+    public static void init(RootUIController root, boolean isFinance){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
@@ -211,11 +204,11 @@ public class SaleDetailUIController extends CenterUIController {
             SaleDetailUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setSaleRecordBlService(null);
-            controller.showInputField("无");
+            controller.showInputField("所有单据");
 
             //controller.showSaleRecordList(list);
 
-            root.setReturnPaneController(new FinancePanelUIController());
+            root.setReturnPaneController(isFinance?new FinancePanelUIController():new ManagerPanelUIController());
         }catch(Exception e){
             e.printStackTrace();
         }

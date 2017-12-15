@@ -12,6 +12,7 @@ import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
+import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.bill.BillVO;
 import main.java.vo.report.BusinessHistoryQueryVO;
@@ -45,6 +46,10 @@ public class BusinessHistoryUIController extends CenterUIController {
     private TextField inputInfo;
     @FXML
     private Button search;
+    @FXML
+    private Button reverse;
+    @FXML
+    private Button reverseAndCopy;
 
     // 加载文件后调用的方法******************************************
 
@@ -56,8 +61,8 @@ public class BusinessHistoryUIController extends CenterUIController {
         typeColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getType()));
         operatorColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getOperator().getName()));
 
-        String[] conditionList=new String[]{"无","时间","单据类型","客户","操作员"};
-        conditionSelector.setItems(FXCollections.observableArrayList("无","时间","单据类型","客户","操作员"));
+        String[] conditionList=new String[]{"所有单据","时间","单据类型","客户","操作员"};
+        conditionSelector.setItems(FXCollections.observableArrayList("所有单据","时间","单据类型","客户","操作员"));
         conditionSelector.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
             showInputField(conditionList[newValue.intValue()]);
         });
@@ -65,6 +70,11 @@ public class BusinessHistoryUIController extends CenterUIController {
     }
 
     // 设置controller数据的方法*****************************************
+
+    public void setButtonDisable(){
+        reverse.setDisable(true);
+        reverseAndCopy.setDisable(true);
+    }
 
     public void setBusinessHistoryBlService(BusinessHistoryBlService service) {
         this.service = service;
@@ -77,7 +87,7 @@ public class BusinessHistoryUIController extends CenterUIController {
         end.getEditor().setText("");
         inputInfo.setText("");
 
-        if(condition.equals("无")){
+        if(condition.equals("所有单据")){
             start.setVisible(false);
             end.setVisible(false);
             inputInfo.setVisible(false);
@@ -143,6 +153,16 @@ public class BusinessHistoryUIController extends CenterUIController {
         }
     }
 
+    @FXML
+    private void  handleReverse(){
+
+    }
+
+    @FXML
+    private void  handleReverseAndCopy(){
+
+    }
+
     private boolean isValidTime(){
         String errorMessage = "";
         try{
@@ -204,17 +224,9 @@ public class BusinessHistoryUIController extends CenterUIController {
     // 加载文件和界面的方法******************************************
 
     /**
-     * 初始化方法，调用init方法
-     * 之所以有这个方法是为了多态而提供的
-     * */
-    public void instanceInit(RootUIController root){
-        init(root);
-    }
-
-    /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(RootUIController root){
+    public static void init(RootUIController root,boolean isFinance){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
@@ -224,11 +236,16 @@ public class BusinessHistoryUIController extends CenterUIController {
             BusinessHistoryUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setBusinessHistoryBlService(null);
-            controller.showInputField("无");
-
+            controller.showInputField("所有单据");
             //controller.showSaleRecordList(list);
 
-            root.setReturnPaneController(new FinancePanelUIController());
+            if(isFinance){
+                root.setReturnPaneController(new FinancePanelUIController());
+            }
+            else{
+                controller.setButtonDisable();
+                root.setReturnPaneController(new ManagerPanelUIController());
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

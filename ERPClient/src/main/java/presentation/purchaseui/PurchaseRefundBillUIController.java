@@ -153,17 +153,9 @@ public class PurchaseRefundBillUIController extends InfoUIController {
      * 取得商品列表并修改ObservableList的信息
      * */
     private void showGoodsItemList(ArrayList<GoodsItemVO> goodsItemList){
-        if(goodsItemList!=null){
-            goodsItemTableView.getItems().clear();
-            goodsItemObservableList.removeAll();
-
-            for(int i=0;i<goodsItemList.size();i++){
-                goodsItemObservableList.add(goodsItemList.get(i));
-            }
-            goodsItemTableView.setItems(goodsItemObservableList);
-
-            System.out.println("GoodsItemListSize: "+goodsItemList.size());
-        }
+        goodsItemTableView.getItems().clear();
+        goodsItemObservableList.setAll(goodsItemList);
+        goodsItemTableView.setItems(goodsItemObservableList);
     }
 
 

@@ -11,6 +11,7 @@ import main.java.MainApp;
 import main.java.businesslogicservice.logblservice.LogBlService;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
+import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.log.LogVO;
 
@@ -68,17 +69,9 @@ public class LogUIController extends CenterUIController {
     // 加载文件和界面的方法******************************************
 
     /**
-     * 初始化方法，调用init方法
-     * 之所以有这个方法是为了多态而提供的
-     * */
-    public void instanceInit(RootUIController root){
-        init(root);
-    }
-
-    /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(RootUIController root){
+    public static void init(RootUIController root,boolean isFinance){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
@@ -99,7 +92,8 @@ public class LogUIController extends CenterUIController {
             list.add(c2);
             controller.showLogList(list);
 
-            root.setReturnPaneController(new FinancePanelUIController());
+
+            root.setReturnPaneController(isFinance?new FinancePanelUIController():new ManagerPanelUIController());
         }catch(Exception e){
             e.printStackTrace();
         }

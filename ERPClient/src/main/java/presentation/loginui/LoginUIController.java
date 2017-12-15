@@ -10,6 +10,7 @@ import main.java.MainApp;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
+import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.vo.user.UserVO;
 
@@ -43,21 +44,35 @@ public class LoginUIController {
         UserVO user=new UserVO("宋抟","进货销售人员","JN123", "password", 23,true);
         if(usernameField.getText().equals("1")){
             stage.close();
-            RootUIController root=RootUIController.initRoot(new Stage(),user);
+            Stage newStage=new Stage();
+            newStage.setTitle("灯具进销存管理系统");
+            RootUIController root=RootUIController.initRoot(newStage,user);
             root.showLogoutButton(true);
             PurchaseSalePanelUIController.init(root);
         }
         else if(usernameField.getText().equals("2")){
             stage.close();
-            RootUIController root=RootUIController.initRoot(new Stage(),user);
+            Stage newStage=new Stage();
+            newStage.setTitle("灯具进销存管理系统");
+            RootUIController root=RootUIController.initRoot(newStage,user);
             root.showLogoutButton(true);
             InventoryPanelUIController.init(root);
         }
         else if(usernameField.getText().equals("3")){
             stage.close();
-            RootUIController root=RootUIController.initRoot(new Stage(),user);
+            Stage newStage=new Stage();
+            newStage.setTitle("灯具进销存管理系统");
+            RootUIController root=RootUIController.initRoot(newStage,user);
             root.showLogoutButton(true);
             FinancePanelUIController.init(root);
+        }
+        else if(usernameField.getText().equals("4")){
+            stage.close();
+            Stage newStage=new Stage();
+            newStage.setTitle("灯具进销存管理系统");
+            RootUIController root=RootUIController.initRoot(newStage,user);
+            root.showLogoutButton(true);
+            ManagerPanelUIController.init(root);
         }
     }
 

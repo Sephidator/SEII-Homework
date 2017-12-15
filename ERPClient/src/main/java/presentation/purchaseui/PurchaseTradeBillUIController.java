@@ -83,7 +83,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         total.setText(String.valueOf(bill.getTotal()));
         comment.setText(bill.getComment());
         client.setText(bill.getClient()==null?"":(bill.getClient().getID()+":"+bill.getClient().getName()));
-        operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
+        operator.setText(bill.getOperator().getID()+":"+bill.getOperator().getName());
     }
 
     public void setService(PurchaseTradeBillBlService service) {
@@ -155,14 +155,8 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     private void showGoodsItemList(ArrayList<GoodsItemVO> goodsItemList){
         if(goodsItemList!=null){
             goodsItemTableView.getItems().clear();
-            goodsItemObservableList.removeAll();
-
-            for(int i=0;i<goodsItemList.size();i++){
-                goodsItemObservableList.add(goodsItemList.get(i));
-            }
+            goodsItemObservableList.setAll(goodsItemList);
             goodsItemTableView.setItems(goodsItemObservableList);
-
-            System.out.println("GoodsItemListSize: "+goodsItemList.size());
         }
     }
 

@@ -138,7 +138,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="280.0" layoutY="114.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" text="Button" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="20.0" />
+            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="280.0" layoutY="114.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="20.0" />
          </children>
       </AnchorPane>
    </children>
