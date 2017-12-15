@@ -108,7 +108,7 @@
     -fx-control-inner-background: #FEFEFE;
     -fx-background-color: #FEFEFE;
     -fx-padding: 5;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
 }
 
 .table-view .column-header-background {
@@ -197,7 +197,9 @@
 .searchButton{
     -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 25 25;
+    -fx-background-size: 30 30;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
     -fx-background-position: center center;
     -fx-background-color: #70BAE1; /*-fx-focus-color;*/
     -fx-text-fill: #ffffff;
@@ -256,6 +258,8 @@
 .textField-resize {
     -fx-font-size: 14px;
     -fx-pref-height: inherit;
+    -fx-pref-width: 330;
+    -fx-pref-height: 40;
 }
 
 
@@ -266,7 +270,6 @@
 .choiceBox-resize {
     -fx-background-color: #FEFEFE;
     -fx-font-size: 12px;
-    -fx-pref-height: inherit;
-    -fx-pref-width: inherit;
-    -fx-background-size: 40 40;
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
 }

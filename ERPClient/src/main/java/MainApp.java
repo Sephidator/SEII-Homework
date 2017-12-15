@@ -15,14 +15,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("灯具进销存管理系统");
-
-        // 设置关闭界面时做什么
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-            }
-        });
-
         LoginUIController.init(stage);
     }
 

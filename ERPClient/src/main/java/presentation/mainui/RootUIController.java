@@ -70,7 +70,9 @@ public class RootUIController {
     @FXML
     private void handleLogout(){
         stage.close();
-        LoginUIController.init(new Stage());
+        Stage newStage=new Stage();
+        newStage.setTitle("灯具进销存管理系统");
+        LoginUIController.init(newStage);
     }
 
     @FXML
