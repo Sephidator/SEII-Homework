@@ -6,6 +6,8 @@ import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
+import main.java.businesslogic.messagebl.MessageBl;
+import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
 import main.java.data_stub.purchasedataservicestub.PurchaseRefundBillDataServiceStub;
 import main.java.dataservice.purchasedataservice.PurchaseRefundBillDataService;
@@ -20,6 +22,7 @@ import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
+import main.java.vo.message.MessageVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -183,7 +186,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
         purchaseRefundBillDataService.update(purchaseRefundBillPO);
 
-        /*调用goodsTool*/
+        /*修改商品调用goodsTool*/
         GoodsTool goodsTool=new GoodsBl();
         for(GoodsItemVO goodsItemVO:purchaseRefundBillVO.getPurchaseList()){
             GoodsVO goodsVO=goodsItemVO.goods;
@@ -191,13 +194,16 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
             goodsTool.editGoods(goodsVO);
         }
 
-        /*调用ClientTool*/
+        /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool=new ClientBl();
         ClientVO clientVO=purchaseRefundBillVO.getClient();
         clientVO.setPayable(clientVO.getPayable()+purchaseRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
 
+        /*发送message*/
+        MessageTool messageTool=new MessageBl();
 
+        MessageVO messageVO=new MessageVO();
 
     }
 
