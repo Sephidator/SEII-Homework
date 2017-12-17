@@ -2,6 +2,7 @@ package main.java.businesslogic.promotionbl;
 
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.data_stub.promotiondataservicestub.PromotionDataServiceStub;
+import main.java.datafactory.promotiondatafactory.PromotionDataFactory;
 import main.java.dataservice.promotiondataservice.PromotionDataService;
 import main.java.po.promotion.PromotionPO;
 import main.java.po.promotion.PromotionQueryPO;
@@ -25,9 +26,11 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
         else promotionQueryPO = query.getPromotionQueryPO();
 
         /*dataService*/
-        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        PromotionDataFactory promotionDataFactory = new PromotionDataFactory();
+        PromotionDataService promotionDataService = promotionDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        PromotionDataService promotionDataService = new PromotionDataServiceStub();
         ArrayList<PromotionPO> promotionPOS = promotionDataService.finds(promotionQueryPO);
 
         ArrayList<PromotionVO> promotionVOS  = new ArrayList<>();//转换至ArrayList<PromotionVO
@@ -46,9 +49,10 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
     @Override
     public PromotionVO find(String promotionID) throws Exception{
         /*dataService*/
-        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        PromotionDataFactory promotionDataFactory = new PromotionDataFactory();
+        PromotionDataService promotionDataService = promotionDataFactory.getService();
+//        /*dataServiceStub*/
+//        PromotionDataService promotionDataService = new PromotionDataServiceStub();
         PromotionPO promotionPO = promotionDataService.find(promotionID);
         return new PromotionVO(promotionPO);
     }
@@ -64,9 +68,10 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
         /*将PromotionVO转到PromotionPO*/
         PromotionPO promotionPO = vo.getPromotionPO();
         /*dataService*/
-        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        PromotionDataFactory promotionDataFactory = new PromotionDataFactory();
+        PromotionDataService promotionDataService = promotionDataFactory.getService();
+//        /*dataServiceStub*/
+//        PromotionDataService promotionDataService = new PromotionDataServiceStub();
         String id = promotionDataService.insert(promotionPO);
         return id;
     }
@@ -82,9 +87,10 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
         /*将PromotionVO转到PromotionPO*/
         PromotionPO promotionPO = vo.getPromotionPO();
         /*dataService*/
-        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        PromotionDataFactory promotionDataFactory = new PromotionDataFactory();
+        PromotionDataService promotionDataService = promotionDataFactory.getService();
+//        /*dataServiceStub*/
+//        PromotionDataService promotionDataService = new PromotionDataServiceStub();
         promotionDataService.update(promotionPO);
     }
 
@@ -97,9 +103,10 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      */
     public void deletePromotion(String promotionID) throws Exception{
         /*dataService*/
-        //PromotionDataService promotionDataService = (PromotionDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PromotionDataService promotionDataService = new PromotionDataServiceStub();
+        PromotionDataFactory promotionDataFactory = new PromotionDataFactory();
+        PromotionDataService promotionDataService = promotionDataFactory.getService();
+//        /*dataServiceStub*/
+//        PromotionDataService promotionDataService = new PromotionDataServiceStub();
         promotionDataService.delete(promotionID);
     }
 

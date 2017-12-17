@@ -8,6 +8,7 @@ import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
 import main.java.data_stub.financedataservicestub.CashBillDataServiceStub;
+import main.java.datafactory.financedatafactory.CashBillDataFactory;
 import main.java.dataservice.financedataservice.CashBillDataService;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.vo.account.AccountQueryVO;
@@ -38,12 +39,13 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         cashBillPO.setState("审批通过");
 
         //调用dataService.update
-        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
-        //cashBillDataService.update(cashBillPO);
-
-        /*调用dataservice的桩*/
-        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
+        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
+
+//        /*调用dataservice的桩*/
+//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+//        cashBillDataService.update(cashBillPO);
     }
 
     /**
@@ -61,12 +63,13 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         cashBillPO.setState("审批未通过");
 
         //调用dataService.update
-        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
-        //cashBillDataService.update(cashBillPO);
-
-        /*调用dataservice的桩*/
-        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
+        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
+
+//        /*调用dataservice的桩*/
+//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+//        cashBillDataService.update(cashBillPO);
     }
 
     /**
@@ -78,10 +81,11 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
     @Override
     public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception {
         /*dataService*/
-        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
+        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
+        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
 
-        /*dataServiceStub*/
-        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+//        /*dataServiceStub*/
+//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
 
         ArrayList<CashBillPO> cashBillPOS = cashBillDataService.finds(query.getBillQueryPO());
 
@@ -133,9 +137,11 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
 
         //调用
         /*dataService*/
-        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
+        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
         String id = cashBillDataService.insert(cashBillPO);
 
         //add Log
@@ -154,9 +160,10 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         CashBillPO cashBillPO = vo.getCashBillPO();
 
         /*dataService*/
-        //CashBillDataService cashBillDataService = (CashBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
+        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
+//        /*dataServiceStub*/
+//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
         cashBillDataService.update(cashBillPO);
     }
 

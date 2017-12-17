@@ -1,6 +1,8 @@
 package main.java.vo.promotion;
 
+import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
+import main.java.vo.goods.GoodsItemVO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,5 +54,26 @@ public class PromotionTotalVO extends PromotionVO {
 
     public void setGiftList(ArrayList<GiftItemVO> giftList) {
         this.giftList = giftList;
+    }
+
+    /*计算适用的促销策略的赠品列表*/
+    public ArrayList<GiftItemVO> countGiftList(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
+        if(total >= this.getTotal())
+            return this.getGiftList();
+        else
+            return new ArrayList<>();
+    }
+
+    /*计算适用的促销策略的代金券总额*/
+    public double countVoucher(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
+        if(total > this.getTotal())
+            return this.getVoucher();
+        else
+            return 0;
+    }
+
+    /*计算适用的促销策略的折让部分*/
+    public double countPromotionDiscount(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
+        return 0;
     }
 }
