@@ -8,6 +8,7 @@ import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogicservice.initialblservice.InitialBlService;
 import main.java.data_stub.initialdataservicestub.InitialDataServiceStub;
+import main.java.datafactory.initialdatafactory.InitialDataFactory;
 import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.initial.InitialPO;
@@ -73,9 +74,11 @@ public class InitialBl implements InitialBlService{
      */
     public String establishInitial(InitialVO initial)throws Exception {
         /*dataService*/
-        //InitialDataService initialDataService = (InitialDataService)Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        InitialDataService initialDataService = new InitialDataServiceStub();
+        InitialDataFactory initialDataFactory = new InitialDataFactory();
+        InitialDataService initialDataService = initialDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        InitialDataService initialDataService = new InitialDataServiceStub();
         String id = initialDataService.insert(initial.getInitialPO());
         return id;
     }
@@ -93,9 +96,10 @@ public class InitialBl implements InitialBlService{
         else initialQueryPO = query.getInitialQueryPO();
 
         /*dataService*/
-        //InitialDataService initialDataService = (InitialDataService)Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        InitialDataService initialDataService = new InitialDataServiceStub();
+        InitialDataFactory initialDataFactory = new InitialDataFactory();
+        InitialDataService initialDataService = initialDataFactory.getService();
+//        /*dataServiceStub*/
+//        InitialDataService initialDataService = new InitialDataServiceStub();
         ArrayList<InitialPO> initialPOS = initialDataService.finds(initialQueryPO);
         //转换为ArrayList<InitialVO>
         ArrayList<InitialVO> initialVOS = new ArrayList<>();

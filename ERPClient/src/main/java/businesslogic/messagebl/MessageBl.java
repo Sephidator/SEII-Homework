@@ -2,6 +2,7 @@ package main.java.businesslogic.messagebl;
 
 import main.java.businesslogicservice.messageblservice.MessageBlService;
 import main.java.data_stub.messagedataservicestub.MessageDataServiceStub;
+import main.java.datafactory.messagedatafactory.MessageDataFactory;
 import main.java.dataservice.messagedataservice.MessageDataService;
 import main.java.po.message.MessagePO;
 import main.java.vo.message.MessageVO;
@@ -20,9 +21,11 @@ public class MessageBl implements MessageBlService,MessageTool{
     @Override
     public ArrayList<MessageVO> getMessageList(UserVO receiver)throws Exception {
         /*dataService*/
-        //MessageDataService messageDataService = (MessageDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        MessageDataService messageDataService = new MessageDataServiceStub();
+        MessageDataFactory messageDataFactory = new MessageDataFactory();
+        MessageDataService messageDataService = messageDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        MessageDataService messageDataService = new MessageDataServiceStub();
         ArrayList<MessagePO> messagePOS = messageDataService.finds(receiver.getID());
 
         ArrayList<MessageVO> messageVOS = new ArrayList<>();
@@ -35,9 +38,10 @@ public class MessageBl implements MessageBlService,MessageTool{
     @Override
     public void addMessage(MessageVO message)throws Exception {
         /*dataService*/
-        //MessageDataService messageDataService = (MessageDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        MessageDataService messageDataService = new MessageDataServiceStub();
+        MessageDataFactory messageDataFactory = new MessageDataFactory();
+        MessageDataService messageDataService = messageDataFactory.getService();
+//        /*dataServiceStub*/
+//        MessageDataService messageDataService = new MessageDataServiceStub();
         messageDataService.insert(message.getMessagePO());
     }
 }

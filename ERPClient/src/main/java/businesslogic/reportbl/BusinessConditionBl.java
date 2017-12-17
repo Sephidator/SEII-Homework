@@ -74,7 +74,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
 
         /* 销售收入，
          * 记录销售出货单的总额减去销售退货单总额，
-         * 折让只为销售出货单的discount
+         * 折让只为销售出货单的discount以及促销策略部分
          * */
         double saleTotalBeforeDiscount = 0;//折让后销售收入
         double saleDiscount = 0;//折让
@@ -83,7 +83,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.getSaleTradeBillList(billQueryVO);
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
             saleTotalBeforeDiscount += saleTradeBillVO.getTotalBeforeDiscount();
-            saleDiscount += saleTradeBillVO.getDiscount();
+            saleDiscount += saleTradeBillVO.getDiscount()+saleTradeBillVO.getAmountOfVoucher();
         }
         SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
         ArrayList<SaleRefundBillVO> saleRefundBillVOS = saleRefundBillTool.getSaleRefundBillList(billQueryVO);
@@ -124,14 +124,9 @@ public class BusinessConditionBl implements BusinessConditionBlService {
 
         PromotionTool promotionTool = new PromotionBl();
         PromotionVO promotionVO = new PromotionVO();
-        PromotionTotalVO promotionTotalVO = new PromotionTotalVO();
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
             promotionVO = saleTradeBillVO.getPromotion();
-            if(promotionVO.getType().equals("总价促销策略")){
-                PromotionVO promotionVOSure = promotionTool.find(promotionVO.getID());
-                promotionTotalVO = (PromotionTotalVO)promotionVOSure;//一定可以转化为总价促销策略，不然凉了
-            }
-            voucherTotal += promotionTotalVO.getVoucher();
+            voucherTotal += promotionVO.countVoucher(saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount());
             voucherUse += saleTradeBillVO.getAmountOfVoucher();
         }
 

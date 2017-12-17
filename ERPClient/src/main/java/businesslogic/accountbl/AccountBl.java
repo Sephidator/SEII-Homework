@@ -2,6 +2,7 @@ package main.java.businesslogic.accountbl;
 
 import main.java.businesslogicservice.accountblservice.AccountBlService;
 import main.java.data_stub.accountdataservicestub.AccountDataServiceStub;
+import main.java.datafactory.accountdatafactory.AccountDataFactory;
 import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
@@ -27,12 +28,13 @@ public class AccountBl implements AccountBlService,AccountTool{
         else accountQueryPO = null;
 
         /*调用AccountDatdaService.find服务*/
-        //AccountDataService accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        //ArrayList<AccountPO> accoutPOS = accountDataService.finds(accountQueryPO);
+        AccountDataFactory accountDataFactory = new AccountDataFactory();
+        AccountDataService accountDataService = accountDataFactory.getService();
+        ArrayList<AccountPO> accountPOS = accountDataService.finds(accountQueryPO);
 
-        /*调用dataservice的桩*/
-        AccountDataService accountDataServiceStub = new AccountDataServiceStub();
-        ArrayList<AccountPO> accountPOS = accountDataServiceStub.finds(accountQueryPO);
+//        /*调用dataservice的桩*/
+//        AccountDataService accountDataServiceStub = new AccountDataServiceStub();
+//        ArrayList<AccountPO> accountPOS = accountDataServiceStub.finds(accountQueryPO);
 
         /*ArrayList<AccountPO>转成ArrayList<AccountVO>*/
         ArrayList<AccountVO> accountVOArrayList = new ArrayList<AccountVO>();

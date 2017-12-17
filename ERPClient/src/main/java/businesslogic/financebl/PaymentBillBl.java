@@ -4,10 +4,15 @@ import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
+import main.java.businesslogic.messagebl.MessageBl;
+import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.data_stub.accountdataservicestub.AccountDataServiceStub;
 import main.java.data_stub.clientdataservicestub.ClientDataServiceStub;
 import main.java.data_stub.financedataservicestub.PaymentBillDataServiceStub;
+import main.java.datafactory.accountdatafactory.AccountDataFactory;
+import main.java.datafactory.clientdatafactory.ClientDataFactory;
+import main.java.datafactory.financedatafactory.PaymentBillDataFactory;
 import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.dataservice.financedataservice.PaymentBillDataService;
@@ -19,9 +24,11 @@ import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.PaymentBillVO;
+import main.java.vo.bill.financebill.TransItemVO;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.log.LogVO;
+import main.java.vo.message.MessageVO;
 
 import java.util.ArrayList;
 
@@ -41,9 +48,10 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         paymentBillPO.setState("审批通过");
 
         /*dataService*/
-       // PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataserviceStub*/
-        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
+        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
+//        /*dataserviceStub*/
+//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
 
         paymentBillDataService.update(paymentBillPO);
 
@@ -52,6 +60,15 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         ClientVO clientVO = clientTool.find(paymentBillPO.getClientID());
         clientVO.setReceivable(clientVO.getReceivable() - paymentBillPO.getTotal());//原来的应收减去付款单的总金额
         clientTool.editClient(clientVO);
+
+         /*添加message*/
+        MessageTool messageTool = new MessageBl();
+        String message = "";String messOne="对账户";String messTwo="汇款";String messThree="元";
+        ArrayList<TransItemVO> transItemVOS = new ArrayList<>();
+        for(TransItemVO transItemVO : transItemVOS)
+            message += messOne + transItemVO.account + messTwo + transItemVO.transAmount+messThree+", ";
+        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"（系统消息）");
+        messageTool.addMessage(messageVO);
     }
 
     @Override
@@ -69,9 +86,10 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         paymentBillPO.setState("审批未通过");
 
         /*dataService*/
-        //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
+        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
+//        /*dataServiceStub*/
+//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
         paymentBillDataService.update(paymentBillPO);
     }
 
@@ -84,9 +102,10 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      */
     public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception {
         /*dataService*/
-        //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
+        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
+//        /*dataServiceStub*/
+//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
         ArrayList<PaymentBillPO> paymentBillPOS = paymentBillDataService.finds(query.getBillQueryPO());
 
         ArrayList<PaymentBillVO> paymentBillVOS = new ArrayList<>();
@@ -105,9 +124,11 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      */
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception {
         /*dataService*/
-        //ClientDataService clientDataService = (ClientDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        ClientDataService clientDataService = new ClientDataServiceStub();
+        ClientDataFactory clientDataFactory = new ClientDataFactory();
+        ClientDataService clientDataService = clientDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        ClientDataService clientDataService = new ClientDataServiceStub();
         ArrayList<ClientPO> clientPOS = clientDataService.finds(query.getClientQueryPO());
 
         ArrayList<ClientVO> clientVOS = new ArrayList<>();
@@ -126,9 +147,11 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      */
     public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception {
         /*dataService*/
-        //AccountDataService clientDataService = (AccountDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        AccountDataService accountDataService = new AccountDataServiceStub();
+        AccountDataFactory accountDataFactory = new AccountDataFactory();
+        AccountDataService accountDataService = accountDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        AccountDataService accountDataService = new AccountDataServiceStub();
         ArrayList<AccountPO> accountPOS = accountDataService.finds(query.getAccountQueryPO());
 
         ArrayList<AccountVO> accountVOS = new ArrayList<>();
@@ -151,9 +174,10 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
 
         //调用
         /*dataService*/
-        //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
+        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
+//        /*dataServiceStub*/
+//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
         String id = paymentBillDataService.insert(paymentBillPO);
 
         //add Log
@@ -173,9 +197,10 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
 
         //调用
         /*dataService*/
-        //PaymentBillDataService paymentBillDataService = (PaymentBillDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
+        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
+//        /*dataServiceStub*/
+//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
 
         paymentBillDataService.update(paymentBillPO);
     }

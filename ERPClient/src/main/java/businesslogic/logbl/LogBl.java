@@ -2,6 +2,7 @@ package main.java.businesslogic.logbl;
 
 import main.java.businesslogicservice.logblservice.LogBlService;
 import main.java.data_stub.logdataservicestub.LogDataServiceStub;
+import main.java.datafactory.logdatafactory.LogDataFactory;
 import main.java.dataservice.logdataservice.LogDataService;
 import main.java.po.log.LogPO;
 import main.java.po.log.LogQueryPO;
@@ -21,9 +22,11 @@ public class LogBl implements LogBlService,LogTool{
     public void addLog(LogVO log)throws Exception {
         LogPO logPO = log.getLogPO();
         /*dataService*/
-        //LogDataService logDataService = (LogDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        LogDataService logDataService = new LogDataServiceStub();
+        LogDataFactory logDataFactory = new LogDataFactory();
+        LogDataService logDataService = logDataFactory.getService();
+
+//        /*dataServiceStub*/
+//        LogDataService logDataService = new LogDataServiceStub();
         logDataService.insert(logPO);
     }
 
@@ -40,9 +43,10 @@ public class LogBl implements LogBlService,LogTool{
         else logQueryPO = query.getLogQueryPO();
 
         /*dataService*/
-        //LogDataService logDataService = (LogDataService) Naming.lookup("rmi://localhost:");
-        /*dataServiceStub*/
-        LogDataService logDataService = new LogDataServiceStub();
+        LogDataFactory logDataFactory = new LogDataFactory();
+        LogDataService logDataService = logDataFactory.getService();
+//        /*dataServiceStub*/
+//        LogDataService logDataService = new LogDataServiceStub();
         ArrayList<LogPO> logPOS = logDataService.finds(logQueryPO);
 
         ArrayList<LogVO> logVOS = new ArrayList<>();//对获取列表进行转换
