@@ -4,8 +4,8 @@ import main.java.businesslogic.accountbl.AccountBl;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
 
 public class AccountBlFactory {
-    public static AccountBlService getService(){
-        AccountBlService service=new AccountBl();
-        return service;
+    public AccountBlService getService(){
+        AccountBlService accountBlService=new AccountBl();
+        return accountBlService;
     }
 }
