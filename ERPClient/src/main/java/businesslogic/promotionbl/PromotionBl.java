@@ -1,11 +1,16 @@
 package main.java.businesslogic.promotionbl;
 
+import main.java.businesslogic.goodsbl.GoodsBl;
+import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.data_stub.promotiondataservicestub.PromotionDataServiceStub;
 import main.java.datafactory.promotiondatafactory.PromotionDataFactory;
 import main.java.dataservice.promotiondataservice.PromotionDataService;
+import main.java.po.goods.GoodsQueryPO;
 import main.java.po.promotion.PromotionPO;
 import main.java.po.promotion.PromotionQueryPO;
+import main.java.vo.goods.GoodsQueryVO;
+import main.java.vo.goods.GoodsVO;
 import main.java.vo.promotion.PromotionQueryVO;
 import main.java.vo.promotion.PromotionVO;
 
@@ -108,6 +113,20 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
 //        /*dataServiceStub*/
 //        PromotionDataService promotionDataService = new PromotionDataServiceStub();
         promotionDataService.delete(promotionID);
+    }
+
+    @Override
+    /**
+     * @version: 1
+     * @date: 2017.12.18 23:37
+     * @para: [query]
+     * @function: 目的是总经理制定促销策略的时候可以选择用于赠送的商品列表
+     */
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
+
+        GoodsTool goodsTool = new GoodsBl();
+        ArrayList<GoodsVO> goodsVOS = goodsTool.getGoodsList(query);
+        return goodsVOS;
     }
 
 
