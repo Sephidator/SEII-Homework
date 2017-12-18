@@ -4,8 +4,11 @@ import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
+import main.java.businesslogic.messagebl.MessageBl;
+import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.data_stub.inventorydataservicestub.InventoryGiftBillDataServiceStub;
+import main.java.datafactory.inventorydatafactory.InventoryGiftBillDataFactory;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
@@ -16,72 +19,12 @@ import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
+import main.java.vo.message.MessageVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class InventoryGiftBillBl implements InventoryGiftBillBlService,InventoryGiftBillTool {
-    /**
-     * @version: 1
-     * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
-    @Override
-    public void pass(BillVO billVO) throws Exception{
-
-        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
-
-        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
-
-        /*修改状态*/
-        inventoryGiftBillPO.setState("审批通过");
-
-        /*调用InventoryGiftBillDataService.update服务*/
-
-
-        /*调用dataservice的桩*/
-        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-        inventoryGiftBillDataService.update(inventoryGiftBillPO);
-
-        /*调用goodsTool*/
-        GoodsTool goodsTool=new GoodsBl();
-        for(GiftItemVO giftItemVO:inventoryGiftBillVO.getGiftList()){
-            GoodsVO goodsVO=giftItemVO.goods;
-            goodsVO.setNumber(goodsVO.getNumber()-giftItemVO.number);
-            goodsTool.editGoods(goodsVO);
-        }
-
-
-    }
-
-    /**
-     * @version: 1
-     * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
-    @Override
-    public void reject(BillVO billVO) throws Exception{
-        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
-
-        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
-
-        /*修改状态*/
-        inventoryGiftBillPO.setState("审批未通过");
-
-        /*调用InventoryGiftBillDataService.update服务*/
-
-
-        /*调用dataservice的桩*/
-        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-        inventoryGiftBillDataService.update(inventoryGiftBillPO);
-
-
-    }
-
     /**
      * @version: 1
      * @date:
@@ -101,8 +44,8 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
     /**
      * @version: 1
      * @date:
-     * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return: String的提交单据的ID
+     * @param: [inventoryGiftBillVO] 提交或草稿的单据对象，用于更新数据库中该单据数据
+     * @return: String的提交单据或草稿的ID
      */
     @Override
     public String submit(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
@@ -112,30 +55,30 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
         InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
 
-        /*修改状态*/
-        inventoryGiftBillPO.setState("待审批");
+        /*调用InventoryGiftBillDataFactory*/
+        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
+        id=inventoryGiftBillDataFactory.getService().insert(inventoryGiftBillPO);
 
-        /*调用InventoryGiftBillDataService.insert服务*/
-
-
-        /*调用dataservice的桩*/
-        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-        id=inventoryGiftBillDataService.insert(inventoryGiftBillPO);
+//        /*调用dataservice的桩*/
+//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+//        id=inventoryGiftBillDataService.insert(inventoryGiftBillPO);
 
         /*调用LogTool*/
-        LogVO logVO=new LogVO(inventoryGiftBillVO.getOperator(),"提交了一份新的库存赠送单",inventoryGiftBillVO.getTime());
-        LogTool logTool=new LogBl();
-        logTool.addLog(logVO);
+        if(inventoryGiftBillVO.getState().equals("待审批")){
+            LogVO logVO=new LogVO(inventoryGiftBillVO.getOperator(),"提交了一份新的库存赠送单",inventoryGiftBillVO.getTime());
+            LogTool logTool=new LogBl();
+            logTool.addLog(logVO);
+        }
 
         return id;
     }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
+//    /**
+//     * @version: 1
+//     * @date:
+//     * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
+//     * @return:
+//     */
 //    @Override
 //    public void saveDraft(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
 //        InventoryGiftBillPO inventoryGiftBillPO=new InventoryGiftBillPO();
@@ -173,11 +116,13 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
             billQueryPO=query.getBillQueryPO();
         }
 
-        /*调用InventoryGiftBillDataService.find服务*/
+        /*调用InventoryGiftBillDataFactory*/
+        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
+        inventoryGiftBillPOS=inventoryGiftBillDataFactory.getService().finds(billQueryPO);
 
-        /*调用dataservice的桩*/
-        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-        inventoryGiftBillPOS=inventoryGiftBillDataService.finds(billQueryPO);
+//        /*调用dataservice的桩*/
+//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+//        inventoryGiftBillPOS=inventoryGiftBillDataService.finds(billQueryPO);
 
         /*ArrayList<InventoryGiftBillPO>以后转成ArrayList<InventoryGiftBillVO>*/
         for(InventoryGiftBillPO inventoryGiftBillPO:inventoryGiftBillPOS){
@@ -187,16 +132,90 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
         return inventoryGiftBillVOS;
     }
 
+    /**
+     * @version: 1
+     * @date:
+     * @param: [inventoryGiftBillVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
     @Override
     public void editInventoryGiftBill(InventoryGiftBillVO inventoryGiftBillVO) throws Exception {
         InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
 
-         /*调用InventoryGiftBillDataService.update服务*/
+         /*调用InventoryGiftBillDataFactory*/
+         InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
+         inventoryGiftBillDataFactory.getService().update(inventoryGiftBillPO);
+
+//        /*调用dataservice的桩*/
+//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+//        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+
+    }
+
+    /**
+     * @version: 1
+     * @date:
+     * @param: [billVO] 通过的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
+    @Override
+    public void pass(BillVO billVO) throws Exception{
+
+        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
+
+        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+        /*调用InventoryGiftBillDataFactory*/
+        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
+        inventoryGiftBillDataFactory.getService().update(inventoryGiftBillPO);
+
+//        /*调用dataservice的桩*/
+//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+//        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+
+        /*修改商品信息调用goodsTool*/
+        GoodsTool goodsTool=new GoodsBl();
+        for(GiftItemVO giftItemVO:inventoryGiftBillVO.getGiftList()){
+            GoodsVO goodsVO=giftItemVO.goods;
+            goodsVO.setNumber(goodsVO.getNumber()-giftItemVO.number);
+            goodsTool.editGoods(goodsVO);
+        }
+
+        /*发送message*/
+        MessageTool messageTool=new MessageBl();
+        String message="";
+        String messageOne="赠送商品 ";
+        String messageTwo=" 数量 ";
+        for(GiftItemVO giftItemVO:inventoryGiftBillVO.getGiftList()){
+            message+=messageOne+giftItemVO.goods.getID()+messageTwo+giftItemVO.number+",";
+        }
+        MessageVO messageVO=new MessageVO(inventoryGiftBillVO.getOperator(),inventoryGiftBillVO.getOperator(),message+"系统消息");
+        messageTool.addMessage(messageVO);
+    }
+
+    /**
+     * @version: 1
+     * @date:
+     * @param: [billVO] 审批不通过的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
+    @Override
+    public void reject(BillVO billVO) throws Exception{
+        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
+
+        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
+        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+
+        /*调用InventoryGiftBillDataFactory*/
+        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
+        inventoryGiftBillDataFactory.getService().update(inventoryGiftBillPO);
 
 
-        /*调用dataservice的桩*/
-        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+//        /*调用dataservice的桩*/
+//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
+//        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+
 
     }
 }

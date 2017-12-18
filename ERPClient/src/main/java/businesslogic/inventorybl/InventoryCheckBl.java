@@ -21,7 +21,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class InventoryCheckBl implements InventoryCheckBlService {
-
+    /**
+     * @version: 1
+     * @date:
+     * @param: [start][end] 分别包含待查询信息的时间区间
+     * @function: 返回ArrayList<InventoryCheckItemVO>的库存查看列表
+     */
     @Override
     public ArrayList<InventoryCheckItemVO> getInventoryCheck(Date start,Date end) throws Exception {
         ArrayList<InventoryCheckItemVO> inventoryCheckItemVOS=new ArrayList<>();

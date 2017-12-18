@@ -6,6 +6,7 @@ import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
 import main.java.data_stub.inventorydataservicestub.InventoryLossOverBillDataServiceStub;
+import main.java.datafactory.inventorydatafactory.InventoryLossOverBillDataFactory;
 import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
@@ -21,66 +22,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,InventoryLossOverBillTool {
-    /**
-     * @version: 1
-     * @date:
-     * @param: [billVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
-    @Override
-    public void pass(BillVO billVO) throws Exception{
-        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
-
-        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
-        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
-
-        /*修改状态*/
-        inventoryLossOverBillPO.setState("审批通过");
-
-        /*调用InventoryLossOverBillDataService.update服务*/
-
-
-        /*调用dataservice的桩*/
-        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
-
-        /*调用goodsTool*/
-        GoodsTool goodsTool=new GoodsBl();
-        for(LossOverItemVO lossOverItemVO:inventoryLossOverBillVO.getLossOverList()){
-            GoodsVO goodsVO=lossOverItemVO.goods;
-            goodsVO.setNumber(lossOverItemVO.actualNumber);
-            goodsTool.editGoods(goodsVO);
-        }
-
-
-    }
-
-    /**
-     * @version: 1
-     * @date:
-     * @param: [billVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
-    @Override
-    public void reject(BillVO billVO) throws Exception{
-        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
-
-        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
-        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
-
-        /*修改状态*/
-        inventoryLossOverBillPO.setState("审批未通过");
-
-        /*调用InventoryLossOverBillDataService.update服务*/
-
-
-        /*调用dataservice的桩*/
-        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
-
-
-    }
-
     /**
      * @version: 1
      * @date:
@@ -100,8 +41,8 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
     /**
      * @version: 1
      * @date:
-     * @param: [inventoryLossOverBillVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return: String的提交单据的ID
+     * @param: [inventoryLossOverBillVO] 提交或草稿的单据对象，用于更新数据库中该单据数据
+     * @return: String的提交单据或草稿的ID
      */
     @Override
     public String submit(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
@@ -110,31 +51,31 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
         /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
         InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
 
-        /*修改状态*/
-        inventoryLossOverBillPO.setState("待审批");
-
         /*调用InventoryLossOverBillDataService.insert服务*/
+        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
+        id=inventoryLossOverBillDataFactory.getService().insert(inventoryLossOverBillPO);
 
-
-        /*调用dataservice的桩*/
-        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-        id=inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
+//        /*调用dataservice的桩*/
+//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+//        id=inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
 
         /*调用LogTool*/
-        LogVO logVO=new LogVO(inventoryLossOverBillVO.getOperator(),"提交了一份新的库存溢损单",inventoryLossOverBillPO.getTime());
-        LogTool logTool=new LogBl();
-        logTool.addLog(logVO);
+        if(inventoryLossOverBillVO.getState().equals("待审批")){
+            LogVO logVO=new LogVO(inventoryLossOverBillVO.getOperator(),"提交了一份新的库存溢损单",inventoryLossOverBillPO.getTime());
+            LogTool logTool=new LogBl();
+            logTool.addLog(logVO);
+        }
 
 
         return id;
     }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
+//    /**
+//     * @version: 1
+//     * @date:
+//     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
+//     * @return:
+//     */
 //    @Override
 //    public void saveDraft(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
 //        InventoryLossOverBillPO inventoryLossOverBillPO=new InventoryLossOverBillPO();
@@ -174,11 +115,13 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
             billQueryPO=query.getBillQueryPO();
         }
 
-        /*调用InventoryLossOverBillDataService.find服务*/
+        /*调用InventoryLossOverBillDataFactory*/
+        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
+        inventoryLossOverBillPOS=inventoryLossOverBillDataFactory.getService().finds(billQueryPO);
 
-        /*调用dataservice的桩*/
-        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-        inventoryLossOverBillPOS=inventoryLossOverBillDataService.finds(billQueryPO);
+//        /*调用dataservice的桩*/
+//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+//        inventoryLossOverBillPOS=inventoryLossOverBillDataService.finds(billQueryPO);
 
         /*ArrayList<InventoryLossOverBillPO>以后转成ArrayList<InventoryLossOverBillVO>*/
         for(InventoryLossOverBillPO inventoryLossOverBillPO:inventoryLossOverBillPOS){
@@ -188,15 +131,79 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
         return inventoryLossOverBillVOS;
     }
 
+    /**
+     * @version: 1
+     * @date:
+     * @param: [inventoryLossOverBillVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
     @Override
     public void editInventoryLossOverBill(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception {
         InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
 
         /*调用InventoryLossOverBillDataService.update服务*/
+        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
+        inventoryLossOverBillDataFactory.getService().update(inventoryLossOverBillPO);
+
+//        /*调用dataservice的桩*/
+//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+//        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
+    }
+
+    /**
+     * @version: 1
+     * @date:
+     * @param: [billVO] 审批通过的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
+    @Override
+    public void pass(BillVO billVO) throws Exception{
+        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
+
+        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*调用InventoryLossOverBillDataFactory*/
+        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
+        inventoryLossOverBillDataFactory.getService().update(inventoryLossOverBillPO);
 
 
-        /*调用dataservice的桩*/
-        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
+//        /*调用dataservice的桩*/
+//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+//        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
+
+        /*调用goodsTool*/
+        GoodsTool goodsTool=new GoodsBl();
+        for(LossOverItemVO lossOverItemVO:inventoryLossOverBillVO.getLossOverList()){
+            GoodsVO goodsVO=lossOverItemVO.goods;
+            goodsVO.setNumber(lossOverItemVO.actualNumber);
+            goodsTool.editGoods(goodsVO);
+        }
+
+
+    }
+
+    /**
+     * @version: 1
+     * @date:
+     * @param: [billVO] 审批未通过的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
+    @Override
+    public void reject(BillVO billVO) throws Exception{
+        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
+
+        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
+        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+
+        /*调用InventoryLossOverBillDataService.update服务*/
+        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
+        inventoryLossOverBillDataFactory.getService().update(inventoryLossOverBillPO);
+
+//        /*调用dataservice的桩*/
+//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
+//        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
+
+
     }
 }
