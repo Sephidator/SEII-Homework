@@ -80,18 +80,20 @@ public class ApprovalBl implements ApprovalBlService {
     @Override
     public void pass(BillVO billvo, UserVO sender)  throws Exception{
 
+        /*添加message*/
+        MessageTool messageTool = new MessageBl();
+        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,"你的编号为"+billvo.getID()+"的单据被"+sender.getID()+"审批通过（系统消息）");
+        messageTool.addMessage(messageVO);
+
         /*通过单据*/
         billvo.getTool().pass(billvo);
 
         /*记录操作日志*/
         LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(sender,"通过编号为"+billvo.getID()+"的单据",billvo.getTime());
+        LogVO logVO = new LogVO(sender,"通过编号为"+billvo.getID()+"的单据",new Date());
         logTool.addLog(logVO);
 
-        /*添加message*/
-        MessageTool messageTool = new MessageBl();
-        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,"你的编号为"+billvo.getID()+"的单据被"+sender.getID()+"审批通过（系统消息）");
-        messageTool.addMessage(messageVO);
+
     }
 
     /**

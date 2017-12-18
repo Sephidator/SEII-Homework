@@ -8,8 +8,11 @@ import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogic.messagebl.MessageBl;
 import main.java.businesslogic.messagebl.MessageTool;
+import main.java.businesslogic.userbl.UserBl;
+import main.java.businesslogic.userbl.UserTool;
 import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
 import main.java.data_stub.purchasedataservicestub.PurchaseRefundBillDataServiceStub;
+import main.java.datafactory.purchasedatafactory.PurchaseRefundBillDataFactory;
 import main.java.dataservice.purchasedataservice.PurchaseRefundBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.purchasebill.PurchaseRefundBillPO;
@@ -23,6 +26,8 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 import main.java.vo.message.MessageVO;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -66,8 +71,8 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
     /**
      * @version: 1
      * @date:
-     * @param: [purchaseRefundBillVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return: 返回String的提交单据的ID
+     * @param: [purchaseRefundBillVO] 提交或草稿的单据对象，用于更新数据库中该单据数据
+     * @return: 返回String的提交单据或草稿的ID
      */
     @Override
     public String submit(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception{
@@ -76,30 +81,30 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         /*将PurchaseRefundBillVO转成PurchaseRefundBillPO*/
         PurchaseRefundBillPO purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
 
-        /*修改状态*/
-        purchaseRefundBillPO.setState("待审批");
+        /*调用PurchaseRefundBillDataFactory*/
+        PurchaseRefundBillDataFactory purchaseRefundBillDataFactory=new PurchaseRefundBillDataFactory();
+        id=purchaseRefundBillDataFactory.getService().insert(purchaseRefundBillPO);
 
-        /*调用PurchaseRefundBillDataService.insert服务*/
-
-
-        /*调用dataservice的桩*/
-        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
-        id=purchaseRefundBillDataService.insert(purchaseRefundBillPO);
+//        /*调用dataservice的桩*/
+//        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+//        id=purchaseRefundBillDataService.insert(purchaseRefundBillPO);
 
         /*调用LogTool*/
-        LogVO logVO=new LogVO(purchaseRefundBillVO.getOperator(),"提交了一份新的进货退货单",purchaseRefundBillVO.getTime());
-        LogTool logTool=new LogBl();
-        logTool.addLog(logVO);
+        if(purchaseRefundBillVO.getState().equals("进货退货单")){
+            LogVO logVO=new LogVO(purchaseRefundBillVO.getOperator(),"提交了一份新的进货退货单",purchaseRefundBillVO.getTime());
+            LogTool logTool=new LogBl();
+            logTool.addLog(logVO);
+        }
 
         return id;
     }
 
-    /**
-     * @version: 1
-     * @date:
-     * @param: [purchaseRefundBillVO] 修改的单据对象，用于更新数据库中该单据数据
-     * @return:
-     */
+//    /**
+//     * @version: 1
+//     * @date:
+//     * @param: [purchaseRefundBillVO] 修改的单据对象，用于更新数据库中该单据数据
+//     * @return:
+//     */
 //    @Override
 //    public void saveDraft(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception{
 //        PurchaseRefundBillPO purchaseRefundBillPO=new PurchaseRefundBillPO();
@@ -137,11 +142,13 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
             billQueryPO=query.getBillQueryPO();
         }
 
-        /*调用PurchaseRefundBillDataService.find服务*/
+        /*PurchaseRefundBillDataFactory*/
+        PurchaseRefundBillDataFactory purchaseRefundBillDataFactory=new PurchaseRefundBillDataFactory();
+        purchaseRefundBillPOS=purchaseRefundBillDataFactory.getService().finds(billQueryPO);
 
-        /*调用dataservice的桩*/
-        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
-        purchaseRefundBillPOS=purchaseRefundBillDataService.finds(billQueryPO);
+//        /*调用dataservice的桩*/
+//        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+//        purchaseRefundBillPOS=purchaseRefundBillDataService.finds(billQueryPO);
 
         /*ArrayList<PurchaseRefundBillPO>以后转成ArrayList<PurchaseRefundBillVO>*/
         for(PurchaseRefundBillPO purchaseRefundBillPO:purchaseRefundBillPOS){
@@ -151,22 +158,30 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         return purchaseRefundBillVOS;
     }
 
+    /**
+     * @version: 1
+     * @date:
+     * @param: [purchaseRefundBillVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @return:
+     */
     @Override
     public void editPurchaseRefundBill(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception {
         PurchaseRefundBillPO purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
 
-        /*调用PurchaseRefundBillDataService.update服务*/
+        /*调用PurchaseRefundBillDataFactory*/
+        PurchaseRefundBillDataFactory purchaseRefundBillDataFactory=new PurchaseRefundBillDataFactory();
+        purchaseRefundBillDataFactory.getService().update(purchaseRefundBillPO);
 
 
-        /*调用dataservice的桩*/
-        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
-        purchaseRefundBillDataService.update(purchaseRefundBillPO);
+//        /*调用dataservice的桩*/
+//        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+//        purchaseRefundBillDataService.update(purchaseRefundBillPO);
     }
 
     /**
      * @version: 1
      * @date:
-     * @param: [billVO] 修改的单据对象，用于更新数据库中该单据数据
+     * @param: [billVO] 审批通过的单据对象，用于更新数据库中该单据数据
      * @return：
      */
     @Override
@@ -176,17 +191,15 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         /*将PurchaseRefundBillVO转成PurchaseRefundBillPO*/
         PurchaseRefundBillPO purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
 
-        /*修改状态*/
-        purchaseRefundBillPO.setState("审批通过");
+        /*调用PurchaseRefundBillDataFactory*/
+        PurchaseRefundBillDataFactory purchaseRefundBillDataFactory=new PurchaseRefundBillDataFactory();
+        purchaseRefundBillDataFactory.getService().update(purchaseRefundBillPO);
 
-        /*调用PurchaseRefundBillDataService.update服务*/
+//        /*调用dataservice的桩*/
+//        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+//        purchaseRefundBillDataService.update(purchaseRefundBillPO);
 
-
-        /*调用dataservice的桩*/
-        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
-        purchaseRefundBillDataService.update(purchaseRefundBillPO);
-
-        /*修改商品调用goodsTool*/
+        /*修改商品信息调用goodsTool*/
         GoodsTool goodsTool=new GoodsBl();
         for(GoodsItemVO goodsItemVO:purchaseRefundBillVO.getPurchaseList()){
             GoodsVO goodsVO=goodsItemVO.goods;
@@ -202,15 +215,31 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
 
         /*发送message*/
         MessageTool messageTool=new MessageBl();
+        /*给库存管理人员发送message*/
+        String messageToInventory="";
+        for(GoodsItemVO goodsItemVO:purchaseRefundBillVO.getPurchaseList()) {
+            messageToInventory += "商品： " + goodsItemVO.goods.getID() +" 进货退货 "+goodsItemVO.number+"，";
+        }
+        UserTool userTool=new UserBl();
+        UserQueryVO userQueryVO=new UserQueryVO(null,"库存管理人员");
+        ArrayList<UserVO> userVOS=userTool.getUserList(userQueryVO);
+        int ran=(int)(Math.random()*(userVOS.size()-0+1));
+        MessageVO messageVOToInventory=new MessageVO(userVOS.get(ran),purchaseRefundBillVO.getOperator(),messageToInventory+"（系统消息）");
+        messageTool.addMessage(messageVOToInventory);
 
-        MessageVO messageVO=new MessageVO();
+        /*给财务人员发送message*/
+        String messageToFinance="客户应收应付调整： 应收："+clientVO.getReceivable()+" 应付："+clientVO.getPayable();
+        UserQueryVO userQueryVO1=new UserQueryVO(null,"财务人员");
+        ArrayList<UserVO> userVOS1=userTool.getUserList(userQueryVO);
+        int ran1=(int)(Math.random()*(userVOS.size()-0+1));
+        MessageVO messageVOToFinance=new MessageVO(userVOS1.get(ran1),purchaseRefundBillVO.getOperator(),messageToFinance+"（系统消息）");
 
     }
 
     /**
      * @version: 1
      * @date:
-     * @param: [bill] 修改的单据对象，用于更新数据库中该单据数据
+     * @param: [billVO] 审批未通过的单据对象，用于更新数据库中该单据数据
      * @return：
      */
     @Override
@@ -220,17 +249,13 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService,Purchas
         /*将PurchaseRefundBillVO转成PurchaseRefundBillPO*/
         PurchaseRefundBillPO purchaseRefundBillPO=purchaseRefundBillVO.getPurchaseRefundBillPO();
 
-        /*修改状态*/
-        purchaseRefundBillPO.setState("审批未通过");
+        /*调用PurchaseRefundBillDataFactory*/
+        PurchaseRefundBillDataFactory purchaseRefundBillDataFactory=new PurchaseRefundBillDataFactory();
+        purchaseRefundBillDataFactory.getService().update(purchaseRefundBillPO);
 
-        /*调用PurchaseRefundBillDataService.update服务*/
-
-
-        /*调用dataservice的桩*/
-        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
-        purchaseRefundBillDataService.update(purchaseRefundBillPO);
-
-
+//        /*调用dataservice的桩*/
+//        PurchaseRefundBillDataService purchaseRefundBillDataService=new PurchaseRefundBillDataServiceStub();
+//        purchaseRefundBillDataService.update(purchaseRefundBillPO);
 
     }
 
