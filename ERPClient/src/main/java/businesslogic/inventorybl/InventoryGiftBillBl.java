@@ -7,7 +7,6 @@ import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogic.messagebl.MessageBl;
 import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
-import main.java.data_stub.inventorydataservicestub.InventoryGiftBillDataServiceStub;
 import main.java.datafactory.inventorydatafactory.InventoryGiftBillDataFactory;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
 import main.java.po.bill.BillQueryPO;
@@ -21,10 +20,9 @@ import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 import main.java.vo.message.MessageVO;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class InventoryGiftBillBl implements InventoryGiftBillBlService,InventoryGiftBillTool {
+public class InventoryGiftBillBl implements InventoryGiftBillBlService, InventoryGiftBillTool {
     /**
      * @version: 1
      * @date:
@@ -32,11 +30,11 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @return: ArrayList<GoodsVO>的商品列表
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
-        ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
+        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
 
-        GoodsTool goodsTool=new GoodsBl();
-        goodsVOS=goodsTool.getGoodsList(query);
+        GoodsTool goodsTool = new GoodsBl();
+        goodsVOS = goodsTool.getGoodsList(query);
 
         return goodsVOS;
     }
@@ -48,25 +46,21 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @return: String的提交单据或草稿的ID
      */
     @Override
-    public String submit(InventoryGiftBillVO inventoryGiftBillVO) throws Exception{
+    public String submit(InventoryGiftBillVO inventoryGiftBillVO) throws Exception {
 
-        String id="";
+        String id = "";
 
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+        InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
 
         /*调用InventoryGiftBillDataFactory*/
-        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
-        id=inventoryGiftBillDataFactory.getService().insert(inventoryGiftBillPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-//        id=inventoryGiftBillDataService.insert(inventoryGiftBillPO);
+        InventoryGiftBillDataService inventoryGiftBillDataService = InventoryGiftBillDataFactory.getService();
+        id = inventoryGiftBillDataService.insert(inventoryGiftBillPO);
 
         /*调用LogTool*/
-        if(inventoryGiftBillVO.getState().equals("待审批")){
-            LogVO logVO=new LogVO(inventoryGiftBillVO.getOperator(),"提交了一份新的库存赠送单",inventoryGiftBillVO.getTime());
-            LogTool logTool=new LogBl();
+        if (inventoryGiftBillVO.getState().equals("待审批")) {
+            LogVO logVO = new LogVO(inventoryGiftBillVO.getOperator(), "提交了一份新的库存赠送单", inventoryGiftBillVO.getTime());
+            LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }
 
@@ -103,29 +97,22 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @return: 返回ArrayList<InventoryGiftBillVO>的单据列表
      */
     @Override
-    public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception{
-        BillQueryPO billQueryPO=new BillQueryPO();
-        ArrayList<InventoryGiftBillPO> inventoryGiftBillPOS=new ArrayList<>();
-        ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS=new ArrayList<>();
+    public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception {
+        BillQueryPO billQueryPO = null;
+        ArrayList<InventoryGiftBillPO> inventoryGiftBillPOS = new ArrayList<>();
+        ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        if(query==null){
-            billQueryPO=null;
-        }
-        else{
-            billQueryPO=query.getBillQueryPO();
+        if (query != null) {
+            billQueryPO = query.getBillQueryPO();
         }
 
         /*调用InventoryGiftBillDataFactory*/
-        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
-        inventoryGiftBillPOS=inventoryGiftBillDataFactory.getService().finds(billQueryPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-//        inventoryGiftBillPOS=inventoryGiftBillDataService.finds(billQueryPO);
+        InventoryGiftBillDataService inventoryGiftBillDataService = InventoryGiftBillDataFactory.getService();
+        inventoryGiftBillPOS = inventoryGiftBillDataService.finds(billQueryPO);
 
         /*ArrayList<InventoryGiftBillPO>以后转成ArrayList<InventoryGiftBillVO>*/
-        for(InventoryGiftBillPO inventoryGiftBillPO:inventoryGiftBillPOS){
+        for (InventoryGiftBillPO inventoryGiftBillPO : inventoryGiftBillPOS) {
             inventoryGiftBillVOS.add(new InventoryGiftBillVO(inventoryGiftBillPO));
         }
 
@@ -140,15 +127,11 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      */
     @Override
     public void editInventoryGiftBill(InventoryGiftBillVO inventoryGiftBillVO) throws Exception {
-        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+        InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
 
          /*调用InventoryGiftBillDataFactory*/
-         InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
-         inventoryGiftBillDataFactory.getService().update(inventoryGiftBillPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-//        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+        InventoryGiftBillDataService inventoryGiftBillDataService = InventoryGiftBillDataFactory.getService();
+        inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
     }
 
@@ -159,38 +142,34 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @return:
      */
     @Override
-    public void pass(BillVO billVO) throws Exception{
+    public void pass(BillVO billVO) throws Exception {
 
-        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
+        InventoryGiftBillVO inventoryGiftBillVO = (InventoryGiftBillVO) billVO;
 
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+        InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
 
         /*调用InventoryGiftBillDataFactory*/
-        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
-        inventoryGiftBillDataFactory.getService().update(inventoryGiftBillPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-//        inventoryGiftBillDataService.update(inventoryGiftBillPO);
+        InventoryGiftBillDataService inventoryGiftBillDataService=InventoryGiftBillDataFactory.getService();
+        inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
         /*修改商品信息调用goodsTool*/
-        GoodsTool goodsTool=new GoodsBl();
-        for(GiftItemVO giftItemVO:inventoryGiftBillVO.getGiftList()){
-            GoodsVO goodsVO=giftItemVO.goods;
-            goodsVO.setNumber(goodsVO.getNumber()-giftItemVO.number);
+        GoodsTool goodsTool = new GoodsBl();
+        for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
+            GoodsVO goodsVO = giftItemVO.goods;
+            goodsVO.setNumber(goodsVO.getNumber() - giftItemVO.number);
             goodsTool.editGoods(goodsVO);
         }
 
         /*发送message*/
-        MessageTool messageTool=new MessageBl();
-        String message="";
-        String messageOne="赠送商品 ";
-        String messageTwo=" 数量 ";
-        for(GiftItemVO giftItemVO:inventoryGiftBillVO.getGiftList()){
-            message+=messageOne+giftItemVO.goods.getID()+messageTwo+giftItemVO.number+",";
+        MessageTool messageTool = new MessageBl();
+        String message = "";
+        String messageOne = "赠送商品 ";
+        String messageTwo = " 数量 ";
+        for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
+            message += messageOne + giftItemVO.goods.getID() + messageTwo + giftItemVO.number + ",";
         }
-        MessageVO messageVO=new MessageVO(inventoryGiftBillVO.getOperator(),inventoryGiftBillVO.getOperator(),message+"系统消息");
+        MessageVO messageVO = new MessageVO(inventoryGiftBillVO.getOperator(), inventoryGiftBillVO.getOperator(), message + "系统消息");
         messageTool.addMessage(messageVO);
     }
 
@@ -201,21 +180,15 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService,Inventory
      * @return:
      */
     @Override
-    public void reject(BillVO billVO) throws Exception{
-        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO) billVO;
+    public void reject(BillVO billVO) throws Exception {
+        InventoryGiftBillVO inventoryGiftBillVO = (InventoryGiftBillVO) billVO;
 
         /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        InventoryGiftBillPO inventoryGiftBillPO=inventoryGiftBillVO.getInventoryGiftBillPO();
+        InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
 
         /*调用InventoryGiftBillDataFactory*/
-        InventoryGiftBillDataFactory inventoryGiftBillDataFactory=new InventoryGiftBillDataFactory();
-        inventoryGiftBillDataFactory.getService().update(inventoryGiftBillPO);
-
-
-//        /*调用dataservice的桩*/
-//        InventoryGiftBillDataService inventoryGiftBillDataService=new InventoryGiftBillDataServiceStub();
-//        inventoryGiftBillDataService.update(inventoryGiftBillPO);
-
+        InventoryGiftBillDataService inventoryGiftBillDataService=InventoryGiftBillDataFactory.getService();
+        inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
     }
 }

@@ -2,6 +2,7 @@ package main.java.businesslogic.goodsbl;
 
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.datafactory.goodsdatafactory.GoodsDataFactory;
+import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.goods.GoodsQueryPO;
 import main.java.vo.goods.GoodsQueryVO;
@@ -9,7 +10,7 @@ import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
-public class GoodsBl implements GoodsBlService,GoodsTool {
+public class GoodsBl implements GoodsBlService, GoodsTool {
     /**
      * @version: 1
      * @date:
@@ -17,28 +18,21 @@ public class GoodsBl implements GoodsBlService,GoodsTool {
      * @return: 返回ArrayList<GoodsVO>的商品列表
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
-        ArrayList<GoodsPO> goodsPOS=new ArrayList<>();
-        ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
+        ArrayList<GoodsPO> goodsPOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
 
         /*将GoodsQueryVO转为GoodsQueryPO*/
-        GoodsQueryPO goodsQueryPO=new GoodsQueryPO("","");
-        if(query==null){
-            goodsQueryPO=null;
-        }
-        else{
-            goodsQueryPO=query.getGoodsQueryPO();
+        GoodsQueryPO goodsQueryPO = null;
+        if (query != null) {
+            goodsQueryPO = query.getGoodsQueryPO();
         }
 
         /*调用GoodsDataFactory得到ArrayList<GoodsPO>*/
-        GoodsDataFactory goodsDataFactory=new GoodsDataFactory();
-        goodsPOS=goodsDataFactory.getService().finds(goodsQueryPO);
+        GoodsDataService goodsDataService = GoodsDataFactory.getService();
+        goodsPOS = goodsDataService.finds(goodsQueryPO);
 
-//        /*调用dataservice的桩*/
-//        GoodsDataService goodsDataService=new GoodsDataServiceStub();
-//        goodsPOS=goodsDataService.finds(goodsQueryPO);
-
-        for(GoodsPO goodsPO:goodsPOS){
+        for (GoodsPO goodsPO : goodsPOS) {
             goodsVOS.add(new GoodsVO(goodsPO));
         }
 
@@ -52,19 +46,15 @@ public class GoodsBl implements GoodsBlService,GoodsTool {
      * @return: 返回String的增加商品的ID
      */
     @Override
-    public String addGoods(GoodsVO goods) throws Exception{
-        String id="";
+    public String addGoods(GoodsVO goods) throws Exception {
+        String id = "";
 
         /*将GoodsVO转换为GoodsPO*/
-        GoodsPO goodsPO=goods.getGoodsPO();
+        GoodsPO goodsPO = goods.getGoodsPO();
 
         /*调用GoodsDataFactory得到String的ID*/
-        GoodsDataFactory goodsDataFactory=new GoodsDataFactory();
-        id=goodsDataFactory.getService().insert(goodsPO);
-
-//        /*调用dataservice的桩*/
-//        GoodsDataService goodsDataService=new GoodsDataServiceStub();
-//        id=goodsDataService.insert(goodsPO);
+        GoodsDataService goodsDataService = GoodsDataFactory.getService();
+        id = goodsDataService.insert(goodsPO);
 
         return id;
     }
@@ -76,19 +66,14 @@ public class GoodsBl implements GoodsBlService,GoodsTool {
      * @return:
      */
     @Override
-    public void editGoods(GoodsVO goods) throws Exception{
+    public void editGoods(GoodsVO goods) throws Exception {
 
         /*将GoodsVO转成GoodsPO*/
-        GoodsPO goodsPO=goods.getGoodsPO();
+        GoodsPO goodsPO = goods.getGoodsPO();
 
         /*调用GoodsDataFactory完成对商品数据的修改*/
-        GoodsDataFactory goodsDataFactory=new GoodsDataFactory();
-        goodsDataFactory.getService().update(goodsPO);
-
-
-//        /*调用dataservice的桩*/
-//        GoodsDataService goodsDataService=new GoodsDataServiceStub();
-//        goodsDataService.update(goodsPO);
+        GoodsDataService goodsDataService = GoodsDataFactory.getService();
+        goodsDataService.update(goodsPO);
 
     }
 
@@ -100,19 +85,15 @@ public class GoodsBl implements GoodsBlService,GoodsTool {
      */
     @Override
     public GoodsVO find(String goodsID) throws Exception {
-        GoodsVO goodsVO=new GoodsVO();
-        GoodsPO goodsPO=new GoodsPO();
+        GoodsVO goodsVO = new GoodsVO();
+        GoodsPO goodsPO = new GoodsPO();
 
          /*调用GoodsDataFactory完成对商品数据的修改*/
-         GoodsDataFactory goodsDataFactory=new GoodsDataFactory();
-         goodsDataFactory.getService().find(goodsID);
-
-//        /*调用dataservice的桩*/
-//        GoodsDataService goodsDataService=new GoodsDataServiceStub();
-//        goodsPO=goodsDataService.find(goodsID);
+        GoodsDataService goodsDataService = GoodsDataFactory.getService();
+        goodsDataService.find(goodsID);
 
         /*转换GoodsPO*/
-        goodsVO=new GoodsVO(goodsPO);
+        goodsVO = new GoodsVO(goodsPO);
 
         return goodsVO;
     }
@@ -124,14 +105,10 @@ public class GoodsBl implements GoodsBlService,GoodsTool {
      * @return：
      */
     @Override
-    public void deleteGoods(String goodsID) throws Exception{
+    public void deleteGoods(String goodsID) throws Exception {
         /*调用GoodsDataFactory完成对商品的修改*/
-        GoodsDataFactory goodsDataFactory=new GoodsDataFactory();
-        goodsDataFactory.getService().delete(goodsID);
-
-//         /*调用dataservice的桩*/
-//         GoodsDataService goodsDataService=new GoodsDataServiceStub();
-//         goodsDataService.delete(goodsID);
+        GoodsDataService goodsDataService = GoodsDataFactory.getService();
+        goodsDataService.delete(goodsID);
 
     }
 }

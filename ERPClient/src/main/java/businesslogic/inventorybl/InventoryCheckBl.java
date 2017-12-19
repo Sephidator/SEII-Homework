@@ -28,114 +28,114 @@ public class InventoryCheckBl implements InventoryCheckBlService {
      * @function: 返回ArrayList<InventoryCheckItemVO>的库存查看列表
      */
     @Override
-    public ArrayList<InventoryCheckItemVO> getInventoryCheck(Date start,Date end) throws Exception {
-        ArrayList<InventoryCheckItemVO> inventoryCheckItemVOS=new ArrayList<>();
+    public ArrayList<InventoryCheckItemVO> getInventoryCheck(Date start, Date end) throws Exception {
+        ArrayList<InventoryCheckItemVO> inventoryCheckItemVOS = new ArrayList<>();
 
-        ArrayList<GoodsItemVO> purchaseRefundBillGoodsItemVOS=new ArrayList<>();
-        ArrayList<GoodsItemVO> purchaseTradeBillGoodsItemVOS=new ArrayList<>();
-        ArrayList<GoodsItemVO> saleRefundBillGoodsItemVOS=new ArrayList<>();
-        ArrayList<GoodsItemVO> saleTradeBillGoodsItemVOS=new ArrayList<>();
+        ArrayList<GoodsItemVO> purchaseRefundBillGoodsItemVOS = new ArrayList<>();
+        ArrayList<GoodsItemVO> purchaseTradeBillGoodsItemVOS = new ArrayList<>();
+        ArrayList<GoodsItemVO> saleRefundBillGoodsItemVOS = new ArrayList<>();
+        ArrayList<GoodsItemVO> saleTradeBillGoodsItemVOS = new ArrayList<>();
 
-        ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS=new ArrayList<>();
-        ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS=new ArrayList<>();
-        ArrayList<SaleRefundBillVO> saleRefundBillVOS=new ArrayList<>();
-        ArrayList<SaleTradeBillVO> saleTradeBillVOS=new ArrayList<>();
+        ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS = new ArrayList<>();
+        ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS = new ArrayList<>();
+        ArrayList<SaleRefundBillVO> saleRefundBillVOS = new ArrayList<>();
+        ArrayList<SaleTradeBillVO> saleTradeBillVOS = new ArrayList<>();
 
-        BillQueryVO billQueryVO=new BillQueryVO(null,start,end,null,null,null);
+        BillQueryVO billQueryVO = new BillQueryVO(null, start, end, null, null, null);
 
         //寻找相应单据列表
-        PurchaseRefundBillTool purchaseRefundBillTool=new PurchaseRefundBillBl();
-        purchaseRefundBillVOS=purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO);
+        PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
+        purchaseRefundBillVOS = purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO);
 
-        PurchaseTradeBillTool purchaseTradeBillTool=new PurchaseTradeBillBl();
-        purchaseTradeBillVOS=purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO);
+        PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
+        purchaseTradeBillVOS = purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO);
 
-        SaleRefundBillTool saleRefundBillTool=new SaleRefundBillBl();
-        saleRefundBillVOS=saleRefundBillTool.getSaleRefundBillList(billQueryVO);
+        SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
+        saleRefundBillVOS = saleRefundBillTool.getSaleRefundBillList(billQueryVO);
 
-        SaleTradeBillTool saleTradeBillTool=new SaleTradBillBl();
-        saleTradeBillVOS=saleTradeBillTool.getSaleTradeBillList(billQueryVO);
+        SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
+        saleTradeBillVOS = saleTradeBillTool.getSaleTradeBillList(billQueryVO);
 
         //寻找相应单据的ArrayList<GoodsItemVO>
-        for(PurchaseRefundBillVO purchaseRefundBillVO:purchaseRefundBillVOS){
-            for(GoodsItemVO goodsItemVO:purchaseRefundBillVO.getPurchaseList()){
+        for (PurchaseRefundBillVO purchaseRefundBillVO : purchaseRefundBillVOS) {
+            for (GoodsItemVO goodsItemVO : purchaseRefundBillVO.getPurchaseList()) {
                 purchaseRefundBillGoodsItemVOS.add(goodsItemVO);
             }
         }
-        for(PurchaseTradeBillVO purchaseTradeBillVO:purchaseTradeBillVOS){
-            for(GoodsItemVO goodsItemVO:purchaseTradeBillVO.getPurchaseList()){
+        for (PurchaseTradeBillVO purchaseTradeBillVO : purchaseTradeBillVOS) {
+            for (GoodsItemVO goodsItemVO : purchaseTradeBillVO.getPurchaseList()) {
                 purchaseTradeBillGoodsItemVOS.add(goodsItemVO);
             }
         }
-        for(SaleRefundBillVO saleRefundBillVO:saleRefundBillVOS){
-            for(GoodsItemVO goodsItemVO:saleRefundBillVO.getSaleList()){
+        for (SaleRefundBillVO saleRefundBillVO : saleRefundBillVOS) {
+            for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
                 saleRefundBillGoodsItemVOS.add(goodsItemVO);
             }
         }
-        for(SaleTradeBillVO saleTradeBillVO:saleTradeBillVOS){
-            for(GoodsItemVO goodsItemVO:saleTradeBillVO.getSaleList()){
+        for (SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS) {
+            for (GoodsItemVO goodsItemVO : saleTradeBillVO.getSaleList()) {
                 saleTradeBillGoodsItemVOS.add(goodsItemVO);
             }
         }
 
         //填入ArrayList<InventoryCheckItemVO> inventoryCheckItemVOS
-        for(GoodsItemVO goodsItemVO:purchaseRefundBillGoodsItemVOS){
-            int judge=0;
-            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
-                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
-                    judge=1;
-                    inventoryCheckItemVO.purchaseNumber=inventoryCheckItemVO.purchaseNumber-goodsItemVO.number;
-                    inventoryCheckItemVO.purchaseAmount=inventoryCheckItemVO.purchaseAmount-goodsItemVO.price*goodsItemVO.number;
+        for (GoodsItemVO goodsItemVO : purchaseRefundBillGoodsItemVOS) {
+            int judge = 0;
+            for (InventoryCheckItemVO inventoryCheckItemVO : inventoryCheckItemVOS) {
+                if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
+                    judge = 1;
+                    inventoryCheckItemVO.purchaseNumber = inventoryCheckItemVO.purchaseNumber - goodsItemVO.number;
+                    inventoryCheckItemVO.purchaseAmount = inventoryCheckItemVO.purchaseAmount - goodsItemVO.price * goodsItemVO.number;
                     break;
                 }
             }
-            if(judge==0){
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,0-goodsItemVO.number,0-goodsItemVO.number*goodsItemVO.price,0,0));
+            if (judge == 0) {
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0 - goodsItemVO.number, 0 - goodsItemVO.number * goodsItemVO.price, 0, 0));
             }
         }
 
-        for(GoodsItemVO goodsItemVO:purchaseTradeBillGoodsItemVOS){
-            int judge=0;
-            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
-                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
-                    judge=1;
-                    inventoryCheckItemVO.purchaseNumber=inventoryCheckItemVO.purchaseNumber+goodsItemVO.number;
-                    inventoryCheckItemVO.purchaseAmount=inventoryCheckItemVO.purchaseAmount+goodsItemVO.price*goodsItemVO.number;
+        for (GoodsItemVO goodsItemVO : purchaseTradeBillGoodsItemVOS) {
+            int judge = 0;
+            for (InventoryCheckItemVO inventoryCheckItemVO : inventoryCheckItemVOS) {
+                if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
+                    judge = 1;
+                    inventoryCheckItemVO.purchaseNumber = inventoryCheckItemVO.purchaseNumber + goodsItemVO.number;
+                    inventoryCheckItemVO.purchaseAmount = inventoryCheckItemVO.purchaseAmount + goodsItemVO.price * goodsItemVO.number;
                     break;
                 }
             }
-            if(judge==0){
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,goodsItemVO.number,goodsItemVO.number*goodsItemVO.price,0,0));
+            if (judge == 0) {
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, goodsItemVO.number, goodsItemVO.number * goodsItemVO.price, 0, 0));
             }
         }
 
-        for(GoodsItemVO goodsItemVO:saleRefundBillGoodsItemVOS){
-            int judge=0;
-            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
-                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
-                    judge=1;
-                    inventoryCheckItemVO.saleNumber=inventoryCheckItemVO.saleNumber-goodsItemVO.number;
-                    inventoryCheckItemVO.saleAmount=inventoryCheckItemVO.saleAmount-goodsItemVO.price*goodsItemVO.number;
+        for (GoodsItemVO goodsItemVO : saleRefundBillGoodsItemVOS) {
+            int judge = 0;
+            for (InventoryCheckItemVO inventoryCheckItemVO : inventoryCheckItemVOS) {
+                if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
+                    judge = 1;
+                    inventoryCheckItemVO.saleNumber = inventoryCheckItemVO.saleNumber - goodsItemVO.number;
+                    inventoryCheckItemVO.saleAmount = inventoryCheckItemVO.saleAmount - goodsItemVO.price * goodsItemVO.number;
                     break;
                 }
             }
-            if(judge==0){
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,0,0,0-goodsItemVO.number,0-goodsItemVO.price*goodsItemVO.number));
+            if (judge == 0) {
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0, 0, 0 - goodsItemVO.number, 0 - goodsItemVO.price * goodsItemVO.number));
             }
         }
 
-        for(GoodsItemVO goodsItemVO:saleTradeBillGoodsItemVOS){
-            int judge=0;
-            for(InventoryCheckItemVO inventoryCheckItemVO:inventoryCheckItemVOS){
-                if(inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())){
-                    judge=1;
-                    inventoryCheckItemVO.saleNumber=inventoryCheckItemVO.saleNumber+goodsItemVO.number;
-                    inventoryCheckItemVO.saleAmount=inventoryCheckItemVO.saleAmount+goodsItemVO.price*goodsItemVO.number;
+        for (GoodsItemVO goodsItemVO : saleTradeBillGoodsItemVOS) {
+            int judge = 0;
+            for (InventoryCheckItemVO inventoryCheckItemVO : inventoryCheckItemVOS) {
+                if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
+                    judge = 1;
+                    inventoryCheckItemVO.saleNumber = inventoryCheckItemVO.saleNumber + goodsItemVO.number;
+                    inventoryCheckItemVO.saleAmount = inventoryCheckItemVO.saleAmount + goodsItemVO.price * goodsItemVO.number;
                     break;
                 }
             }
-            if(judge==0){
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,0,0,goodsItemVO.number,goodsItemVO.price*goodsItemVO.number));
+            if (judge == 0) {
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0, 0, goodsItemVO.number, goodsItemVO.price * goodsItemVO.number));
             }
         }
 

@@ -5,7 +5,7 @@ import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 
 public class GoodsBlFactory {
 
-    public GoodsBlService getService(){
+    public static GoodsBlService getService(){
         GoodsBlService goodsBlService=new GoodsBl();
         return goodsBlService;
     }

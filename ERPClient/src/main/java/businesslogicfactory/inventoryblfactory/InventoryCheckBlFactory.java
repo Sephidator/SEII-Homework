@@ -4,7 +4,7 @@ import main.java.businesslogic.inventorybl.InventoryCheckBl;
 import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService;
 
 public class InventoryCheckBlFactory {
-    public InventoryCheckBlService getService(){
+    public static InventoryCheckBlService getService(){
         InventoryCheckBlService inventoryCheckBlService=new InventoryCheckBl();
         return inventoryCheckBlService;
     }

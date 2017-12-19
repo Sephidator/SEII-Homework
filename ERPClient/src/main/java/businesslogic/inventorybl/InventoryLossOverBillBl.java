@@ -5,7 +5,6 @@ import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
-import main.java.data_stub.inventorydataservicestub.InventoryLossOverBillDataServiceStub;
 import main.java.datafactory.inventorydatafactory.InventoryLossOverBillDataFactory;
 import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataService;
 import main.java.po.bill.BillQueryPO;
@@ -18,10 +17,9 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,InventoryLossOverBillTool {
+public class InventoryLossOverBillBl implements InventoryLossOverBillBlService, InventoryLossOverBillTool {
     /**
      * @version: 1
      * @date:
@@ -29,11 +27,11 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @return: ArrayList<GoodsVO>的商品列表
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
-        ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
+        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
 
-        GoodsTool goodsTool=new GoodsBl();
-        goodsVOS=goodsTool.getGoodsList(query);
+        GoodsTool goodsTool = new GoodsBl();
+        goodsVOS = goodsTool.getGoodsList(query);
 
         return goodsVOS;
     }
@@ -45,24 +43,20 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @return: String的提交单据或草稿的ID
      */
     @Override
-    public String submit(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception{
-        String id="";
+    public String submit(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception {
+        String id = "";
 
         /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
-        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+        InventoryLossOverBillPO inventoryLossOverBillPO = inventoryLossOverBillVO.getInventoryLossOverBillPO();
 
         /*调用InventoryLossOverBillDataService.insert服务*/
-        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
-        id=inventoryLossOverBillDataFactory.getService().insert(inventoryLossOverBillPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-//        id=inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
+        InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
+        id = inventoryLossOverBillDataService.insert(inventoryLossOverBillPO);
 
         /*调用LogTool*/
-        if(inventoryLossOverBillVO.getState().equals("待审批")){
-            LogVO logVO=new LogVO(inventoryLossOverBillVO.getOperator(),"提交了一份新的库存溢损单",inventoryLossOverBillPO.getTime());
-            LogTool logTool=new LogBl();
+        if (inventoryLossOverBillVO.getState().equals("待审批")) {
+            LogVO logVO = new LogVO(inventoryLossOverBillVO.getOperator(), "提交了一份新的库存溢损单", inventoryLossOverBillPO.getTime());
+            LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }
 
@@ -100,31 +94,24 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @date:
      * @param: [query] 包含待查询信息的单据查询对象
      * @return: 返回ArrayList<InventoryLossOverBillVO>的单据列表
-     * */
+     */
     @Override
-    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query)throws Exception {
-        BillQueryPO billQueryPO=new BillQueryPO();
-        ArrayList<InventoryLossOverBillPO> inventoryLossOverBillPOS=new ArrayList<>();
-        ArrayList<InventoryLossOverBillVO> inventoryLossOverBillVOS=new ArrayList<>();
+    public ArrayList<InventoryLossOverBillVO> getInventoryLossOverBillList(BillQueryVO query) throws Exception {
+        BillQueryPO billQueryPO = null;
+        ArrayList<InventoryLossOverBillPO> inventoryLossOverBillPOS = new ArrayList<>();
+        ArrayList<InventoryLossOverBillVO> inventoryLossOverBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        if(query==null){
-            billQueryPO=null;
-        }
-        else{
-            billQueryPO=query.getBillQueryPO();
+        if (query != null) {
+            billQueryPO = query.getBillQueryPO();
         }
 
         /*调用InventoryLossOverBillDataFactory*/
-        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
-        inventoryLossOverBillPOS=inventoryLossOverBillDataFactory.getService().finds(billQueryPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-//        inventoryLossOverBillPOS=inventoryLossOverBillDataService.finds(billQueryPO);
+        InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
+        inventoryLossOverBillPOS = inventoryLossOverBillDataService.finds(billQueryPO);
 
         /*ArrayList<InventoryLossOverBillPO>以后转成ArrayList<InventoryLossOverBillVO>*/
-        for(InventoryLossOverBillPO inventoryLossOverBillPO:inventoryLossOverBillPOS){
+        for (InventoryLossOverBillPO inventoryLossOverBillPO : inventoryLossOverBillPOS) {
             inventoryLossOverBillVOS.add(new InventoryLossOverBillVO(inventoryLossOverBillPO));
         }
 
@@ -139,15 +126,12 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      */
     @Override
     public void editInventoryLossOverBill(InventoryLossOverBillVO inventoryLossOverBillVO) throws Exception {
-        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+        InventoryLossOverBillPO inventoryLossOverBillPO = inventoryLossOverBillVO.getInventoryLossOverBillPO();
 
         /*调用InventoryLossOverBillDataService.update服务*/
-        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
-        inventoryLossOverBillDataFactory.getService().update(inventoryLossOverBillPO);
+        InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
+        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
 
-//        /*调用dataservice的桩*/
-//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-//        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
     }
 
     /**
@@ -157,25 +141,20 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @return:
      */
     @Override
-    public void pass(BillVO billVO) throws Exception{
-        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
+    public void pass(BillVO billVO) throws Exception {
+        InventoryLossOverBillVO inventoryLossOverBillVO = (InventoryLossOverBillVO) billVO;
 
         /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
-        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+        InventoryLossOverBillPO inventoryLossOverBillPO = inventoryLossOverBillVO.getInventoryLossOverBillPO();
 
         /*调用InventoryLossOverBillDataFactory*/
-        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
-        inventoryLossOverBillDataFactory.getService().update(inventoryLossOverBillPO);
-
-
-//        /*调用dataservice的桩*/
-//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-//        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
+        InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
+        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
 
         /*调用goodsTool*/
-        GoodsTool goodsTool=new GoodsBl();
-        for(LossOverItemVO lossOverItemVO:inventoryLossOverBillVO.getLossOverList()){
-            GoodsVO goodsVO=lossOverItemVO.goods;
+        GoodsTool goodsTool = new GoodsBl();
+        for (LossOverItemVO lossOverItemVO : inventoryLossOverBillVO.getLossOverList()) {
+            GoodsVO goodsVO = lossOverItemVO.goods;
             goodsVO.setNumber(lossOverItemVO.actualNumber);
             goodsTool.editGoods(goodsVO);
         }
@@ -190,20 +169,15 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService,I
      * @return:
      */
     @Override
-    public void reject(BillVO billVO) throws Exception{
-        InventoryLossOverBillVO inventoryLossOverBillVO=(InventoryLossOverBillVO) billVO;
+    public void reject(BillVO billVO) throws Exception {
+        InventoryLossOverBillVO inventoryLossOverBillVO = (InventoryLossOverBillVO) billVO;
 
         /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
-        InventoryLossOverBillPO inventoryLossOverBillPO=inventoryLossOverBillVO.getInventoryLossOverBillPO();
+        InventoryLossOverBillPO inventoryLossOverBillPO = inventoryLossOverBillVO.getInventoryLossOverBillPO();
 
         /*调用InventoryLossOverBillDataService.update服务*/
-        InventoryLossOverBillDataFactory inventoryLossOverBillDataFactory=new InventoryLossOverBillDataFactory();
-        inventoryLossOverBillDataFactory.getService().update(inventoryLossOverBillPO);
-
-//        /*调用dataservice的桩*/
-//        InventoryLossOverBillDataService inventoryLossOverBillDataService=new InventoryLossOverBillDataServiceStub();
-//        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
-
+        InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
+        inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
 
     }
 }

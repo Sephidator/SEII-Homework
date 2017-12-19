@@ -5,7 +5,7 @@ import main.java.businesslogicservice.saleblservice.SaleRefundBillBlService;
 import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 
 public class SaleTradeBillBlFactory {
-    public SaleTradeBillBlService getService(){
+    public static SaleTradeBillBlService getService(){
         SaleTradeBillBlService saleTradeBillBlService=new SaleTradBillBl();
         return saleTradeBillBlService;
     }

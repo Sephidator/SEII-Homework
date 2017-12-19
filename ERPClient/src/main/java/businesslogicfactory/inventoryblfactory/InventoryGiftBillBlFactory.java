@@ -4,7 +4,7 @@ import main.java.businesslogic.inventorybl.InventoryGiftBillBl;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 
 public class InventoryGiftBillBlFactory {
-    public InventoryGiftBillBlService getService(){
+    public static InventoryGiftBillBlService getService(){
         InventoryGiftBillBlService inventoryGiftBillBlService=new InventoryGiftBillBl();
         return inventoryGiftBillBlService;
     }
