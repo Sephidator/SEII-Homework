@@ -14,7 +14,6 @@ import main.java.businesslogic.salebl.SaleRefundBillTool;
 import main.java.businesslogic.salebl.SaleTradBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
-import main.java.po.bill.financebill.ReceiptBillPO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.PaymentBillVO;

@@ -1,5 +1,7 @@
 package main.java.businesslogic.financebl;
 
+import main.java.businesslogic.accountbl.AccountBl;
+import main.java.businesslogic.accountbl.AccountTool;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.logbl.LogBl;
@@ -7,18 +9,10 @@ import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogic.messagebl.MessageBl;
 import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
-import main.java.data_stub.accountdataservicestub.AccountDataServiceStub;
-import main.java.data_stub.clientdataservicestub.ClientDataServiceStub;
-import main.java.data_stub.financedataservicestub.PaymentBillDataServiceStub;
-import main.java.datafactory.accountdatafactory.AccountDataFactory;
-import main.java.datafactory.clientdatafactory.ClientDataFactory;
 import main.java.datafactory.financedatafactory.PaymentBillDataFactory;
-import main.java.dataservice.accountdataservice.AccountDataService;
-import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.dataservice.financedataservice.PaymentBillDataService;
-import main.java.po.account.AccountPO;
+import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.PaymentBillPO;
-import main.java.po.client.ClientPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillQueryVO;
@@ -48,11 +42,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         paymentBillPO.setState("审批通过");
 
         /*dataService*/
-        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
-        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
-//        /*dataserviceStub*/
-//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
-
+        PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         paymentBillDataService.update(paymentBillPO);
 
         /*修改应收数据*/
@@ -63,12 +53,22 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
 
          /*添加message*/
         MessageTool messageTool = new MessageBl();
-        String message = "";String messOne="对账户";String messTwo="汇款";String messThree="元";
-        ArrayList<TransItemVO> transItemVOS = new ArrayList<>();
+        String message = "";String messOne="从账户";String messTwo="取出";String messThree="元";
+        ArrayList<TransItemVO> transItemVOS = ((PaymentBillVO)bill).getTransList();
         for(TransItemVO transItemVO : transItemVOS)
             message += messOne + transItemVO.account + messTwo + transItemVO.transAmount+messThree+", ";
         MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"（系统消息）");
         messageTool.addMessage(messageVO);
+
+        //更改账户余额,对每一个账户减去付款单转账列表的金额
+        AccountTool accountTool = new AccountBl();
+        AccountVO accountVO;
+        for(TransItemVO transItemVO : transItemVOS){
+            accountVO = accountTool.find(transItemVO.account.getID());//取得银行账户
+            accountVO.setRemaining(accountVO.getRemaining() - transItemVO.transAmount);
+            accountTool.editAccount(accountVO);
+        }
+
     }
 
     @Override
@@ -86,10 +86,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         paymentBillPO.setState("审批未通过");
 
         /*dataService*/
-        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
-        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         paymentBillDataService.update(paymentBillPO);
     }
 
@@ -102,11 +99,12 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      */
     public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception {
         /*dataService*/
-        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
-        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
-        ArrayList<PaymentBillPO> paymentBillPOS = paymentBillDataService.finds(query.getBillQueryPO());
+        PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
+
+        BillQueryPO billQueryPO = null;
+        if(query != null)
+            billQueryPO=query.getBillQueryPO();
+        ArrayList<PaymentBillPO> paymentBillPOS = paymentBillDataService.finds(billQueryPO);
 
         ArrayList<PaymentBillVO> paymentBillVOS = new ArrayList<>();
         for(PaymentBillPO paymentBillPO : paymentBillPOS)
@@ -123,17 +121,9 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      * @function: 根据query返回相应的的客户列表
      */
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception {
-        /*dataService*/
-        ClientDataFactory clientDataFactory = new ClientDataFactory();
-        ClientDataService clientDataService = clientDataFactory.getService();
 
-//        /*dataServiceStub*/
-//        ClientDataService clientDataService = new ClientDataServiceStub();
-        ArrayList<ClientPO> clientPOS = clientDataService.finds(query.getClientQueryPO());
-
-        ArrayList<ClientVO> clientVOS = new ArrayList<>();
-        for(ClientPO clientPO : clientPOS)
-            clientVOS.add(new ClientVO(clientPO));
+        ClientTool clientTool = new ClientBl();
+        ArrayList<ClientVO> clientVOS = clientTool.getClientList(query);
 
         return clientVOS;
     }
@@ -146,18 +136,9 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      * @function: 根据query返回相应的的账户列表
      */
     public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception {
-        /*dataService*/
-        AccountDataFactory accountDataFactory = new AccountDataFactory();
-        AccountDataService accountDataService = accountDataFactory.getService();
 
-//        /*dataServiceStub*/
-//        AccountDataService accountDataService = new AccountDataServiceStub();
-        ArrayList<AccountPO> accountPOS = accountDataService.finds(query.getAccountQueryPO());
-
-        ArrayList<AccountVO> accountVOS = new ArrayList<>();
-        for(AccountPO accountPO : accountPOS)
-            accountVOS.add(new AccountVO(accountPO));
-
+        AccountTool accountTool = new AccountBl();
+        ArrayList<AccountVO> accountVOS = accountTool.getAccountList(query);
         return accountVOS;
     }
 
@@ -174,10 +155,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
 
         //调用
         /*dataService*/
-        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
-        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
+        PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         String id = paymentBillDataService.insert(paymentBillPO);
 
         //add Log
@@ -197,11 +175,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
 
         //调用
         /*dataService*/
-        PaymentBillDataFactory paymentBillDataFactory = new PaymentBillDataFactory();
-        PaymentBillDataService paymentBillDataService = paymentBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        PaymentBillDataService paymentBillDataService = new PaymentBillDataServiceStub();
-
+        PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         paymentBillDataService.update(paymentBillPO);
     }
 

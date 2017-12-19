@@ -7,10 +7,8 @@ import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogicservice.initialblservice.InitialBlService;
-import main.java.data_stub.initialdataservicestub.InitialDataServiceStub;
 import main.java.datafactory.initialdatafactory.InitialDataFactory;
 import main.java.dataservice.initialdataservice.InitialDataService;
-import main.java.po.goods.GoodsPO;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
 import main.java.vo.account.AccountQueryVO;
@@ -74,11 +72,7 @@ public class InitialBl implements InitialBlService{
      */
     public String establishInitial(InitialVO initial)throws Exception {
         /*dataService*/
-        InitialDataFactory initialDataFactory = new InitialDataFactory();
-        InitialDataService initialDataService = initialDataFactory.getService();
-
-//        /*dataServiceStub*/
-//        InitialDataService initialDataService = new InitialDataServiceStub();
+        InitialDataService initialDataService = InitialDataFactory.getService();
         String id = initialDataService.insert(initial.getInitialPO());
         return id;
     }
@@ -91,15 +85,11 @@ public class InitialBl implements InitialBlService{
      * @function: 查看期初信息
      */
     public ArrayList<InitialVO> getInitial(InitialQueryVO query)throws Exception {
-        InitialQueryPO initialQueryPO = new InitialQueryPO(0, 0);
-        if(query == null)initialQueryPO = null;
-        else initialQueryPO = query.getInitialQueryPO();
+        InitialQueryPO initialQueryPO = null;
+        if(query != null)initialQueryPO = query.getInitialQueryPO();
 
         /*dataService*/
-        InitialDataFactory initialDataFactory = new InitialDataFactory();
-        InitialDataService initialDataService = initialDataFactory.getService();
-//        /*dataServiceStub*/
-//        InitialDataService initialDataService = new InitialDataServiceStub();
+        InitialDataService initialDataService = InitialDataFactory.getService();
         ArrayList<InitialPO> initialPOS = initialDataService.finds(initialQueryPO);
         //转换为ArrayList<InitialVO>
         ArrayList<InitialVO> initialVOS = new ArrayList<>();

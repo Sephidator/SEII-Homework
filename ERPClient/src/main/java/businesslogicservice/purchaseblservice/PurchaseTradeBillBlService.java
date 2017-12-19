@@ -1,6 +1,5 @@
 package main.java.businesslogicservice.purchaseblservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 import main.java.vo.client.ClientQueryVO;
@@ -8,7 +7,6 @@ import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface PurchaseTradeBillBlService {

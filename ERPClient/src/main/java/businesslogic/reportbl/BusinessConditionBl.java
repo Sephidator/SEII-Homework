@@ -65,9 +65,8 @@ public class BusinessConditionBl implements BusinessConditionBlService {
      */
     public ArrayList<Double> getCondition(BusinessConditionQueryVO query)throws Exception {
 
-        BillQueryVO billQueryVO = new BillQueryVO();
-        if(query == null) billQueryVO = null;
-        else{
+        BillQueryVO billQueryVO = null;
+        if(query != null){
             billQueryVO.start = query.start;
             billQueryVO.end = query.end;
         }

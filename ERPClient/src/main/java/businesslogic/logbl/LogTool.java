@@ -1,6 +1,5 @@
 package main.java.businesslogic.logbl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.log.LogVO;
 
 public interface LogTool {

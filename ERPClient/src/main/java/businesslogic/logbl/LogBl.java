@@ -1,7 +1,6 @@
 package main.java.businesslogic.logbl;
 
 import main.java.businesslogicservice.logblservice.LogBlService;
-import main.java.data_stub.logdataservicestub.LogDataServiceStub;
 import main.java.datafactory.logdatafactory.LogDataFactory;
 import main.java.dataservice.logdataservice.LogDataService;
 import main.java.po.log.LogPO;
@@ -22,11 +21,7 @@ public class LogBl implements LogBlService,LogTool{
     public void addLog(LogVO log)throws Exception {
         LogPO logPO = log.getLogPO();
         /*dataService*/
-        LogDataFactory logDataFactory = new LogDataFactory();
-        LogDataService logDataService = logDataFactory.getService();
-
-//        /*dataServiceStub*/
-//        LogDataService logDataService = new LogDataServiceStub();
+        LogDataService logDataService = LogDataFactory.getService();
         logDataService.insert(logPO);
     }
 
@@ -38,15 +33,12 @@ public class LogBl implements LogBlService,LogTool{
      * @function: 
      */
     public ArrayList<LogVO> getLogList(LogQueryVO query)throws Exception {
-        LogQueryPO logQueryPO = new LogQueryPO(null, null);
-        if(query == null)logQueryPO = null;
-        else logQueryPO = query.getLogQueryPO();
+        LogQueryPO logQueryPO = null;
+        if(query != null)
+            logQueryPO = query.getLogQueryPO();
 
         /*dataService*/
-        LogDataFactory logDataFactory = new LogDataFactory();
-        LogDataService logDataService = logDataFactory.getService();
-//        /*dataServiceStub*/
-//        LogDataService logDataService = new LogDataServiceStub();
+        LogDataService logDataService = LogDataFactory.getService();
         ArrayList<LogPO> logPOS = logDataService.finds(logQueryPO);
 
         ArrayList<LogVO> logVOS = new ArrayList<>();//对获取列表进行转换

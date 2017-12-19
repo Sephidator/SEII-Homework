@@ -1,6 +1,5 @@
 package main.java.businesslogicservice.initialblservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 import main.java.vo.client.ClientQueryVO;

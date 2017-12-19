@@ -7,9 +7,9 @@ import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
-import main.java.data_stub.financedataservicestub.CashBillDataServiceStub;
 import main.java.datafactory.financedatafactory.CashBillDataFactory;
 import main.java.dataservice.financedataservice.CashBillDataService;
+import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
@@ -20,8 +20,7 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.ArrayList;;
 
 public class CashBillBl implements CashBillBlService,CashBillTool{
     /**
@@ -39,13 +38,16 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         cashBillPO.setState("审批通过");
 
         //调用dataService.update
-        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
-        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
+        CashBillDataService cashBillDataService = CashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
 
-//        /*调用dataservice的桩*/
-//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
-//        cashBillDataService.update(cashBillPO);
+        //修改账户余额，银行账户减去总额
+        CashBillVO cashBillVO = (CashBillVO)bill;
+        AccountTool accountTool = new AccountBl();
+        AccountVO accountVO = accountTool.find(cashBillVO.getAccount().getID());
+        accountVO.setRemaining(accountVO.getRemaining() - cashBillVO.getTotal());
+        accountTool.editAccount(accountVO);
+
     }
 
     /**
@@ -63,13 +65,8 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         cashBillPO.setState("审批未通过");
 
         //调用dataService.update
-        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
-        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
+        CashBillDataService cashBillDataService = CashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
-
-//        /*调用dataservice的桩*/
-//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
-//        cashBillDataService.update(cashBillPO);
     }
 
     /**
@@ -81,13 +78,12 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
     @Override
     public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception {
         /*dataService*/
-        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
-        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
+        CashBillDataService cashBillDataService = CashBillDataFactory.getService();
 
-//        /*dataServiceStub*/
-//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
-
-        ArrayList<CashBillPO> cashBillPOS = cashBillDataService.finds(query.getBillQueryPO());
+        BillQueryPO billQueryPO = null;
+        if(query != null)
+            billQueryPO=query.getBillQueryPO();
+        ArrayList<CashBillPO> cashBillPOS = cashBillDataService.finds(billQueryPO);
 
         /*转化POS到VOS*/
         ArrayList<CashBillVO> cashBillVOS = new ArrayList<>();
@@ -137,11 +133,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
 
         //调用
         /*dataService*/
-        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
-        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
-
-//        /*dataServiceStub*/
-//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+        CashBillDataService cashBillDataService = CashBillDataFactory.getService();
         String id = cashBillDataService.insert(cashBillPO);
 
         //add Log
@@ -160,10 +152,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         CashBillPO cashBillPO = vo.getCashBillPO();
 
         /*dataService*/
-        CashBillDataFactory cashBillDataFactory = new CashBillDataFactory();
-        CashBillDataService cashBillDataService = cashBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        CashBillDataService cashBillDataService = new CashBillDataServiceStub();
+        CashBillDataService cashBillDataService = CashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
     }
 
