@@ -9,6 +9,7 @@ import main.java.dataservice.userdataservice.UserDataService;
 import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class UserData implements UserDataService {
+public class UserData implements UserDataService, Serializable {
     /**
      * @param userID [帐号ID]
      * @return 对应ID的帐号

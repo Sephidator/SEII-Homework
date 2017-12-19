@@ -11,6 +11,7 @@ import main.java.po.goods.GoodsSortPO;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class InitialData implements InitialDataService {
+public class InitialData implements InitialDataService, Serializable {
     /**
      * @param query [期初建帐]
      * @return 符合筛选条件的期初建帐

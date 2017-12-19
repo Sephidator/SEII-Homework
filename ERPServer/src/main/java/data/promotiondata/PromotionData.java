@@ -9,16 +9,17 @@ import main.java.po.goods.GiftItemPO;
 import main.java.po.goods.GoodsItemPO;
 import main.java.po.promotion.*;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
  * @author 陈思彤
- * @description 
+ * @description
  * @date 2017/12/04
  */
-public class PromotionData implements PromotionDataService {
+public class PromotionData implements PromotionDataService, Serializable {
     @Override
     public PromotionPO find(String promotionID) throws RemoteException {
         Connection connection = DataHelper.getConnection();

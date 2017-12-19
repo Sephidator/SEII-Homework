@@ -8,6 +8,7 @@ import main.java.data.datautility.NotExistException;
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class GoodsSortData implements GoodsSortDataService {
+public class GoodsSortData implements GoodsSortDataService, Serializable {
     /**
      * @param goodsSortID [商品分类ID]
      * @return 对应ID的商品分类

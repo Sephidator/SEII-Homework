@@ -9,6 +9,7 @@ import main.java.po.bill.salebill.SaleTradeBillPO;
 import main.java.po.bill.salebill.SaleTradeBillQueryPO;
 import main.java.po.goods.GoodsItemPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/13
  */
-public class SaleTradeBillData implements SaleTradeBillDataService {
+public class SaleTradeBillData implements SaleTradeBillDataService, Serializable {
     /**
      * @param query [销售单筛选条件]
      * @return 符合筛选条件的销售单

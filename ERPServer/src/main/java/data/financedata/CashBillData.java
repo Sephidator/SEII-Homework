@@ -8,6 +8,7 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.po.bill.financebill.CashItemPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/07
  */
-public class CashBillData implements CashBillDataService {
+public class CashBillData implements CashBillDataService, Serializable {
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的现金费用单
