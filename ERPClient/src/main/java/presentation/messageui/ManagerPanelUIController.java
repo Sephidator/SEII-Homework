@@ -9,6 +9,7 @@ import main.java.presentation.financeui.FinanceBillUIController;
 import main.java.presentation.initialui.InitialUIController;
 import main.java.presentation.logui.LogUIController;
 import main.java.presentation.mainui.RootUIController;
+import main.java.presentation.promotionui.PromotionUIController;
 import main.java.presentation.reportui.BusinessConditionUIController;
 import main.java.presentation.reportui.BusinessHistoryUIController;
 import main.java.presentation.reportui.SaleDetailUIController;
@@ -28,6 +29,8 @@ public class ManagerPanelUIController extends CenterUIController {
 
     @FXML
     private void handlePromotion(){
+        root.showLogoutButton(false);
+        PromotionUIController.init(root);
     }
 
     @FXML

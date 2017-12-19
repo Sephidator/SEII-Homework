@@ -16,7 +16,7 @@ public class PromotionClientVO extends PromotionVO {
 
     private ArrayList<GiftItemVO> giftList; // 赠品列表
 
-    PromotionClientVO(){
+    public PromotionClientVO(){
         this.name = "";
         this.type="客户促销策略";
         this.start=new Date();

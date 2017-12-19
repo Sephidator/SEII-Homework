@@ -8,10 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.presentation.mainui.RootUIController;
-import main.java.presentation.messageui.FinancePanelUIController;
-import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.messageui.ManagerPanelUIController;
-import main.java.presentation.messageui.PurchaseSalePanelUIController;
+import main.java.presentation.messageui.*;
 import main.java.vo.user.UserVO;
 
 import java.io.IOException;
@@ -73,6 +70,14 @@ public class LoginUIController {
             RootUIController root=RootUIController.initRoot(newStage,user);
             root.showLogoutButton(true);
             ManagerPanelUIController.init(root);
+        }
+        else if(usernameField.getText().equals("5")){
+            stage.close();
+            Stage newStage=new Stage();
+            newStage.setTitle("灯具进销存管理系统");
+            RootUIController root=RootUIController.initRoot(newStage,user);
+            root.showLogoutButton(true);
+            AdministratorPanelUIController.init(root);
         }
     }
 

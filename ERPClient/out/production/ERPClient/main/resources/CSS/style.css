@@ -273,3 +273,8 @@
     -fx-pref-height: 40;
     -fx-pref-width: 40;
 }
+
+
+.jfx-date-picker {
+    -jfx-default-color: #123456;
+}

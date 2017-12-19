@@ -134,7 +134,7 @@ public class PaymentBillUIController extends InfoUIController {
 
     @FXML
     private void deleteAccount(){
-        if(isGiftItemSelected()){
+        if(isAccountSelected()){
             int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
             transItemTableView.getItems().remove(selectedIndex);
         }
@@ -142,7 +142,7 @@ public class PaymentBillUIController extends InfoUIController {
 
     @FXML
     private void handleCorrect(){
-        if(isGiftItemSelected()){
+        if(isAccountSelected()){
             String str=inputAmount.getText();
 
             if(CheckInput.isPositiveNumber(str)){
@@ -194,7 +194,7 @@ public class PaymentBillUIController extends InfoUIController {
         }
     }
 
-    private boolean isGiftItemSelected(){
+    private boolean isAccountSelected(){
         int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
         if(selectedIndex>=0){
             return true;

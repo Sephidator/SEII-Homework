@@ -1,6 +1,7 @@
 package main.java.vo.promotion;
 
 import main.java.po.promotion.PromotionPO;
+import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.VO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
@@ -95,5 +96,10 @@ public class PromotionVO extends VO {
     /*计算适用的促销策略的折让部分*/
     public double countPromotionDiscount(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
         return 0;
+    }
+
+    /*实现待定*/
+    public InfoUIController getInfoUIController() {
+        return null;
     }
 }

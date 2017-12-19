@@ -509,7 +509,7 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </TextField>
-                                          <ChoiceBox fx:id="clientChoiceBox1" maxHeight="30.0" maxWidth="40.0" prefHeight="30.0" prefWidth="40.0" value="" />
+                                          <ChoiceBox fx:id="promotionChoiceBox" maxHeight="30.0" maxWidth="40.0" prefHeight="30.0" prefWidth="40.0" value="" />
                                        </children>
                                     </HBox>
                                  </children>

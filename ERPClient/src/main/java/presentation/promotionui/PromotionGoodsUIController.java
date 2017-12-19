@@ -1,5 +1,6 @@
-package main.java.presentation.saleui;
+package main.java.presentation.promotionui;
 
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,26 +11,25 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
+import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.presentation.uiutility.AddGoodsUIController;
+import main.java.presentation.uiutility.CheckInput;
 import main.java.presentation.uiutility.InfoUIController;
-import main.java.vo.bill.BillVO;
-import main.java.vo.bill.salebill.SaleTradeBillVO;
-import main.java.vo.client.ClientVO;
-import main.java.vo.goods.GiftItemVO;
+import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.goods.GoodsVO;
+import main.java.vo.promotion.PromotionGoodsVO;
+import main.java.vo.promotion.PromotionGoodsVO;
 import main.java.vo.promotion.PromotionVO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class SaleTradeBillUIController extends InfoUIController {
-    private SaleTradeBillBlService service;
-    private SaleTradeBillVO bill;
+public class PromotionGoodsUIController extends InfoUIController {
+    private PromotionBlService service;
+    private PromotionGoodsVO promotion;
     private ArrayList<GoodsVO> goodsList;
     private ArrayList<GoodsItemVO> goodsItemList;
-    private ArrayList<GiftItemVO> giftItemList;
-    private ArrayList<PromotionVO> promotionList;
 
     private ObservableList<GoodsItemVO> goodsItemObservableList= FXCollections.observableArrayList();
     @FXML
@@ -42,50 +42,16 @@ public class SaleTradeBillUIController extends InfoUIController {
     private TableColumn<GoodsItemVO,String> modelColumn;
     @FXML
     private TableColumn<GoodsItemVO,String> numberColumn;
-    @FXML
-    private TableColumn<GoodsItemVO,String> priceColumn;
-    @FXML
-    private TableColumn<GoodsItemVO,String> amountColumn;
-
-    private ObservableList<GiftItemVO> giftItemObservableList= FXCollections.observableArrayList();
-    @FXML
-    private TableView<GiftItemVO> giftItemTableView;
-    @FXML
-    private TableColumn<GiftItemVO,String> IDColumn2;
-    @FXML
-    private TableColumn<GiftItemVO,String> nameColumn2;
-    @FXML
-    private TableColumn<GiftItemVO,String> modelColumn2;
-    @FXML
-    private TableColumn<GiftItemVO,String> numberColumn2;
 
     @FXML
     private TextField ID; // 单据编号
     @FXML
-    private TextField type; // 单据类型
+    private JFXDatePicker start; //起始时间
     @FXML
-    private TextField client; // 客户
-    @FXML
-    private TextField operator; //操作员
-    @FXML
-    private TextField salesman; // 业务员
-    @FXML
-    private TextArea comment; // 备注
-    @FXML
-    private TextField promotionInfo; // 适用的促销策略
-    @FXML
-    private TextField totalBeforeDiscount; // 折让前总额
+    private JFXDatePicker end; //结束时间
     @FXML
     private TextField discount; // 折让金额
-    @FXML
-    private TextField amountOfVoucher; // 代金卷金额
-    @FXML
-    private TextField totalAfterDiscount; // 折让后总额
-
-    @FXML
-    private ChoiceBox<String> clientChoiceBox;
-    @FXML
-    private ChoiceBox<PromotionVO> promotionChoiceBox;
+    
     @FXML
     private Button confirm;
     @FXML
@@ -99,53 +65,20 @@ public class SaleTradeBillUIController extends InfoUIController {
         nameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goods.getName()));
         modelColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getModel())));
         numberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number)));
-        priceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().price)));
-        amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number*cellData.getValue().price)));
     }
 
     // 设置controller数据的方法*****************************************
 
-    public void setBill(SaleTradeBillVO bill) {
-        this.bill = bill;
-        ID.setText(bill.getID());
-        type.setText(bill.getType());
-        client.setText(bill.getClient()==null?"":(bill.getClient().getID()+":"+bill.getClient().getName()));
-        operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
-        promotionInfo.setText("");//promotionInfo.setText(bill.getPromotion().getName());
-        salesman.setText("salesman");//salesman.setText(bill.getPromotion().getName());
-        comment.setText(bill.getComment());
-
-        totalBeforeDiscount.setText(String.valueOf(bill.getTotalBeforeDiscount()));
-        totalAfterDiscount.setText(String.valueOf(bill.getTotalAfterDiscount()));
-        discount.setText(String.valueOf(bill.getDiscount()));
-        amountOfVoucher.setText(String.valueOf(bill.getAmountOfVoucher()));
+    public void setPromotion(PromotionGoodsVO promotion) {
+        this.promotion=promotion;
+        ID.setText(promotion.getID());
+        start.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(promotion.getStart()));
+        end.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(promotion.getEnd()));
+        discount.setText(String.valueOf(promotion.getDiscount()));
     }
 
-    public void setService(SaleTradeBillBlService service) {
+    public void setService(PromotionBlService service) {
         this.service=service;
-        // ArrayList<ClientVO> clientList=service.getClientList(null);
-
-        ClientVO c1=new ClientVO("类别：经销商", 3, "名字：陈骁",
-                "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                0, 0, 20, null);
-        c1.setID("123");
-        ClientVO c2=new ClientVO("类别：经销商", 4, "名字：陈骁2",
-                "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                0, 0, 20, null);
-        c2.setID("123");
-
-        ArrayList<ClientVO> clientList=new ArrayList<>();
-        clientList.add(c1);
-        clientList.add(c2);
-        ObservableList<String> list=FXCollections.observableArrayList();
-        for(int i=0;i<clientList.size();i++){
-            list.add(clientList.get(i).getID()+","+clientList.get(i).getName());
-        }
-        clientChoiceBox.setItems(list);
-        clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-            client.setText(clientList.get(newValue.intValue()).getName());
-            bill.setClient(clientList.get(newValue.intValue()));
-        });
     }
 
     public void setGoodsList(ArrayList<GoodsVO> goodsList) {
@@ -155,25 +88,6 @@ public class SaleTradeBillUIController extends InfoUIController {
     public void setGoodsItemList(ArrayList<GoodsItemVO> goodsItemList) {
         this.goodsItemList=goodsItemList;
         showGoodsItemList(goodsItemList);
-    }
-
-    public void setGiftItemList(ArrayList<GoodsItemVO> goodsItemList) {
-        this.giftItemList=giftItemList;
-        showGoodsItemList(goodsItemList);
-    }
-
-    /**
-     * 取得赠品列表并修改ObservableList的信息
-     * */
-    private void setPromotionList(ArrayList<PromotionVO> promotionList){
-        this.promotionList=promotionList;
-        ObservableList<PromotionVO> list=FXCollections.observableArrayList();
-        list.setAll(promotionList);
-        promotionChoiceBox.setItems(list);
-        promotionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-            promotionInfo.setText(promotionList.get(newValue.intValue()).getName());
-            bill.setPromotion(promotionList.get(newValue.intValue()));
-        });
     }
 
     /**
@@ -203,35 +117,11 @@ public class SaleTradeBillUIController extends InfoUIController {
     private void showGoodsItemList(ArrayList<GoodsItemVO> goodsItemList){
         if(goodsItemList!=null){
             goodsItemTableView.getItems().clear();
-            goodsItemObservableList.removeAll();
-
-            for(int i=0;i<goodsItemList.size();i++){
-                goodsItemObservableList.add(goodsItemList.get(i));
-            }
+            goodsItemObservableList.setAll(goodsItemList);
             goodsItemTableView.setItems(goodsItemObservableList);
-
-            System.out.println("GoodsItemListSize: "+goodsItemList.size());
         }
     }
 
-    /**
-     * 取得赠品列表并修改ObservableList的信息
-     * */
-    private void showGiftItemList(ArrayList<GiftItemVO> giftItemList){
-        /*
-        if(goodsItemList!=null){
-            giftItemTableView.getItems().clear();
-            giftItemObservableList.removeAll();
-
-            for(int i=0;i<giftItemList.size();i++){
-                giftItemObservableList.add(giftItemList.get(i));
-            }
-            giftItemTableView.setItems(giftItemObservableList);
-
-            System.out.println("GoodsItemListSize: "+giftItemList.size());
-        }
-        */
-    }
 
     // 界面之中会用到的方法******************************************
 
@@ -239,7 +129,7 @@ public class SaleTradeBillUIController extends InfoUIController {
     private void addGoods(){
         AddGoodsUIController.init(goodsList,goodsItemList,dialogStage,false);
         showGoodsItemList(goodsItemList);
-        bill.setSaleList(goodsItemList);
+        promotion.setGoodsList(goodsItemList);
     }
 
     @FXML
@@ -248,7 +138,7 @@ public class SaleTradeBillUIController extends InfoUIController {
             int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
             goodsItemTableView.getItems().remove(selectedIndex);
             goodsItemList.remove(selectedIndex);
-            bill.setSaleList(goodsItemList);
+            promotion.setGoodsList(goodsItemList);
         }
     }
 
@@ -258,7 +148,7 @@ public class SaleTradeBillUIController extends InfoUIController {
             int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
             if(goodsItemList.get(selectedIndex).number<goodsItemList.get(selectedIndex).goods.getNumber()){
                 goodsItemList.get(selectedIndex).number++;
-                bill.setSaleList(goodsItemList);
+                promotion.setGoodsList(goodsItemList);
                 showGoodsItemList(goodsItemList);
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
@@ -269,18 +159,34 @@ public class SaleTradeBillUIController extends InfoUIController {
     private void goodsNumberMinus(){
         if(isGoodsItemSelected()){
             int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            ArrayList<GoodsItemVO> goodsItemList=bill.getSaleList();
+            ArrayList<GoodsItemVO> goodsItemList=promotion.getGoodsList();
             goodsItemList.get(selectedIndex).number--;
             if(goodsItemList.get(selectedIndex).number==0){
                 goodsItemList.remove(selectedIndex);
-                bill.setSaleList(goodsItemList);
+                promotion.setGoodsList(goodsItemList);
                 showGoodsItemList(goodsItemList);
             }
             else{
-                bill.setSaleList(goodsItemList);
+                promotion.setGoodsList(goodsItemList);
                 showGoodsItemList(goodsItemList);
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
+        }
+    }
+
+    @FXML
+    private void handleDiscountCorrect(){
+        String str=discount.getText();
+
+        if(CheckInput.isPositiveNumber(str)){
+            Double number=Double.parseDouble(str);
+            promotion.setDiscount(number);
+
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("折让设置成功");
+            alert.setContentText("促销策略的折让为："+str);
+            alert.showAndWait();
         }
     }
 
@@ -289,10 +195,10 @@ public class SaleTradeBillUIController extends InfoUIController {
         String text=confirm.getText();
         /*
         if(text.equals("确认添加")){
-            saleTradeBlService.addClient(client);
+            purchaseTradeBlService.addClient(client);
         }
         else if(text.equals("确认编辑")){
-            saleTradeBillBlService.editClient(client);
+            purchaseTradeBillBlService.editClient(client);
         }
         else{
             stage.close();
@@ -321,7 +227,7 @@ public class SaleTradeBillUIController extends InfoUIController {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("No Selection");
             alert.setHeaderText("未选择商品");
-            alert.setContentText("请在进货商品列表中选择商品");
+            alert.setContentText("请在商品列表中选择商品");
             alert.showAndWait();
             return false;
         }
@@ -329,31 +235,31 @@ public class SaleTradeBillUIController extends InfoUIController {
 
     // 加载文件和界面的方法******************************************
 
-    public void showInfo(BillVO bill, Stage stage){
-        init(null,(SaleTradeBillVO)bill,3,stage);
+    public void showInfo(PromotionVO promotion, Stage stage){
+        init(null,(PromotionGoodsVO)promotion,3,stage);
     }
 
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(SaleTradeBillBlService service,SaleTradeBillVO bill, int command,Stage stage){
+    public static void init(PromotionBlService service,PromotionGoodsVO promotion, int command,Stage stage){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/saleui/SaleTradeBillUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/promotionui/PromotionGoodsUI.fxml"));
 
             // Create the dialog stage
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("进货单信息界面");
+            dialogStage.setTitle("商品促销策略");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
 
-            SaleTradeBillUIController controller=loader.getController();
+            PromotionGoodsUIController controller=loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setService(service);
-            controller.setBill(bill);
+            controller.setPromotion(promotion);
 
             //controller.setGoodsList(service.getGoodsList(null));
             ArrayList<GoodsVO> list=new ArrayList<GoodsVO>();
@@ -365,9 +271,7 @@ public class SaleTradeBillUIController extends InfoUIController {
             list.add(goods2);
 
             controller.setGoodsList(list);
-            controller.setGoodsItemList(bill.getSaleList());
-            controller.setGiftItemList(null);
-            controller.setPromotionList(null);
+            controller.setGoodsItemList(promotion.getGoodsList());
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.

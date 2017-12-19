@@ -13,7 +13,7 @@ public class PromotionGoodsVO extends PromotionVO {
 
     private double discount; //降价折让部分
 
-    PromotionGoodsVO(){
+    public PromotionGoodsVO(){
         this.name="";
         this.type="特价包";
         this.start=new Date();
