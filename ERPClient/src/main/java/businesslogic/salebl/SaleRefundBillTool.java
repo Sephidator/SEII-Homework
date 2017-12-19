@@ -1,7 +1,6 @@
 package main.java.businesslogic.salebl;
 
 import main.java.businesslogic.BillTool;
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.salebill.SaleRefundBillVO;

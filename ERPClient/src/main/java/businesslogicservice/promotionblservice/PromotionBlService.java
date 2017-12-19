@@ -1,6 +1,5 @@
 package main.java.businesslogicservice.promotionblservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.promotion.PromotionQueryVO;

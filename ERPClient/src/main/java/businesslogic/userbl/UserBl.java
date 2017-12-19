@@ -1,7 +1,6 @@
 package main.java.businesslogic.userbl;
 
 import main.java.businesslogicservice.userblservice.UserBlService;
-import main.java.data_stub.userdataservicestub.UserDataServiceStub;
 import main.java.datafactory.userdatafactory.UserDataFactory;
 import main.java.dataservice.userdataservice.UserDataService;
 import main.java.po.user.UserPO;
@@ -23,16 +22,12 @@ public class UserBl implements UserBlService,UserTool {
     public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception{
 
         /*将UserQueryVO转换为UserQueryPO*/
-        UserQueryPO userQueryPO = new UserQueryPO("","");
-        if(query == null)userQueryPO = null;
-        else userQueryPO = query.getUserQueryPO();
+        UserQueryPO userQueryPO = null;
+        if(query != null)
+            userQueryPO = query.getUserQueryPO();
 
         /*调用UserDataService.find服务得到ArrayList<UserPO>的用户列表*/
-        UserDataFactory userDataFactory = new UserDataFactory();
-        UserDataService userDataService = userDataFactory.getService();
-
-//        /*UserDataserviceStub*/
-//        UserDataService userDataService = new UserDataServiceStub();
+        UserDataService userDataService = UserDataFactory.getService();
         ArrayList<UserPO> userPOS = userDataService.finds(userQueryPO);
 
         /*ArrayList<UserPO>以后转成ArrayList<UserVO>*/
@@ -54,9 +49,7 @@ public class UserBl implements UserBlService,UserTool {
     public UserVO login(String jobName, String password) throws Exception {
 
         /*dataservice*/
-        UserDataFactory userDataFactory = new UserDataFactory();
-        UserDataService userDataService = userDataFactory.getService();
-//        UserDataService userDataService = new UserDataServiceStub();
+        UserDataService userDataService = UserDataFactory.getService();
         UserPO userPO = userDataService.login(jobName,password);
         return new UserVO(userPO);
     }
@@ -65,9 +58,7 @@ public class UserBl implements UserBlService,UserTool {
     public void logout(String userID) throws Exception {
 
         /*dataserviceStub*/
-        UserDataFactory userDataFactory = new UserDataFactory();
-        UserDataService userDataService = userDataFactory.getService();
-//        UserDataService userDataService = new UserDataServiceStub();
+        UserDataService userDataService = UserDataFactory.getService();
         userDataService.logout(userID);
     }
 
@@ -84,10 +75,7 @@ public class UserBl implements UserBlService,UserTool {
         UserPO userPO=vo.getUserPO();
 
         /*调用UserDataService.insert服务得到String的用户ID*/
-        UserDataFactory userDataFactory = new UserDataFactory();
-        UserDataService userDataService = userDataFactory.getService();
-//        /*UserDataserviceStub*/
-//        UserDataService userDataService = new UserDataServiceStub();
+        UserDataService userDataService = UserDataFactory.getService();
         String id = userDataService.insert(vo.getUserPO());
 
         return id;
@@ -105,10 +93,7 @@ public class UserBl implements UserBlService,UserTool {
         UserPO userPO=vo.getUserPO();
 
         /*调用UserDataService.update服务完成对用户的修改*/
-        UserDataFactory userDataFactory = new UserDataFactory();
-        UserDataService userDataService = userDataFactory.getService();
-//        /*UserDataserviceStub*/
-//        UserDataService userDataService = new UserDataServiceStub();
+        UserDataService userDataService = UserDataFactory.getService();
         userDataService.update(userPO);
     }
 
@@ -121,10 +106,7 @@ public class UserBl implements UserBlService,UserTool {
     @Override
     public void deleteUser(String UserID) throws Exception{
         /*调用UserDataService.delete服务完成对用户的删除*/
-        UserDataFactory userDataFactory = new UserDataFactory();
-        UserDataService userDataService = userDataFactory.getService();
-//        /*UserDataserviceStub*/
-//        UserDataService userDataService = new UserDataServiceStub();
+        UserDataService userDataService = UserDataFactory.getService();
         userDataService.delete(UserID);
     }
 

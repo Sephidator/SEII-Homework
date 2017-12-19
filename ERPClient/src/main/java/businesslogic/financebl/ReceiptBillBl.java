@@ -1,5 +1,7 @@
 package main.java.businesslogic.financebl;
 
+import main.java.businesslogic.accountbl.AccountBl;
+import main.java.businesslogic.accountbl.AccountTool;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.logbl.LogBl;
@@ -7,18 +9,10 @@ import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogic.messagebl.MessageBl;
 import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
-import main.java.data_stub.accountdataservicestub.AccountDataServiceStub;
-import main.java.data_stub.clientdataservicestub.ClientDataServiceStub;
-import main.java.data_stub.financedataservicestub.ReceiptBillDataServiceStub;
-import main.java.datafactory.accountdatafactory.AccountDataFactory;
-import main.java.datafactory.clientdatafactory.ClientDataFactory;
 import main.java.datafactory.financedatafactory.ReceiptBillDataFactory;
-import main.java.dataservice.accountdataservice.AccountDataService;
-import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.dataservice.financedataservice.ReceiptBillDataService;
-import main.java.po.account.AccountPO;
+import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.ReceiptBillPO;
-import main.java.po.client.ClientPO;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillQueryVO;
@@ -31,7 +25,6 @@ import main.java.vo.log.LogVO;
 import main.java.vo.message.MessageVO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
     @Override
@@ -47,11 +40,7 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
 
         /*修改状态*/
         receiptBillPO.setState("审批通过");
-
-        ReceiptBillDataFactory receiptBillDataFactory = new ReceiptBillDataFactory();
-        ReceiptBillDataService receiptBillDataService = receiptBillDataFactory.getService();
-//        /*dataserviceStub*/
-//        ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
+        ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
 
         receiptBillDataService.update(receiptBillPO);
 
@@ -63,12 +52,21 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
 
         /*添加message*/
         MessageTool messageTool = new MessageBl();
-        String message = "";String messOne="向账户";String messTwo="确认收到汇款";String messThree="元";
-        ArrayList<TransItemVO> transItemVOS = new ArrayList<>();
+        String message = "";String messOne="确认账户";String messTwo="收到汇款";String messThree="元";
+        ArrayList<TransItemVO> transItemVOS = ((ReceiptBillVO)bill).getTransList();;
         for(TransItemVO transItemVO : transItemVOS)
             message += messOne + transItemVO.account + messTwo + transItemVO.transAmount+messThree+",";
         MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"（系统消息）");
         messageTool.addMessage(messageVO);
+
+        //更改账户余额,对每一个账户加上付款单转账列表的金额
+        AccountTool accountTool = new AccountBl();
+        AccountVO accountVO;
+        for(TransItemVO transItemVO : transItemVOS){
+            accountVO = accountTool.find(transItemVO.account.getID());//取得银行账户
+            accountVO.setRemaining(accountVO.getRemaining() + transItemVO.transAmount);
+            accountTool.editAccount(accountVO);
+        }
     }
 
     @Override
@@ -86,10 +84,7 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         receiptBillPO.setState("审批未通过");
 
         /*dataService*/
-        ReceiptBillDataFactory receiptBillDataFactory = new ReceiptBillDataFactory();
-        ReceiptBillDataService receiptBillDataService = receiptBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
+        ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
         receiptBillDataService.update(receiptBillPO);
     }
 
@@ -102,11 +97,12 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
      */
     public ArrayList<ReceiptBillVO> getReceiptBillList(BillQueryVO query) throws Exception {
         /*dataService*/
-        ReceiptBillDataFactory receiptBillDataFactory = new ReceiptBillDataFactory();
-        ReceiptBillDataService receiptBillDataService = receiptBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
-        ArrayList<ReceiptBillPO> receiptBillPOS = receiptBillDataService.finds(query.getBillQueryPO());
+        ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
+
+        BillQueryPO billQueryPO = null;
+        if(query != null)
+            billQueryPO = query.getBillQueryPO();
+        ArrayList<ReceiptBillPO> receiptBillPOS = receiptBillDataService.finds(billQueryPO);
 
         ArrayList<ReceiptBillVO> receiptBillVOS = new ArrayList<>();
         for(ReceiptBillPO receiptBillPO : receiptBillPOS)
@@ -123,17 +119,9 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
      * @function: 
      */
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception {
-        /*dataService*/
-        ClientDataFactory clientDataFactory = new ClientDataFactory();
-        ClientDataService clientDataService = clientDataFactory.getService();
-//        /*dataServiceStub*/
-//        ClientDataService clientDataService = new ClientDataServiceStub();
-        ArrayList<ClientPO> clientPOS = clientDataService.finds(query.getClientQueryPO());
 
-        ArrayList<ClientVO> clientVOS = new ArrayList<>();
-        for(ClientPO clientPO : clientPOS)
-            clientVOS.add(new ClientVO(clientPO));
-
+        ClientTool clientTool = new ClientBl();
+        ArrayList<ClientVO> clientVOS = clientTool.getClientList(query);
         return clientVOS;
     }
 
@@ -145,18 +133,9 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
      * @function: 
      */
     public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception {
-        /*dataService*/
-        AccountDataFactory accountDataFactory = new AccountDataFactory();
-        AccountDataService accountDataService = accountDataFactory.getService();
-//        /*dataServiceStub*/
-//        AccountDataService accountDataService = new AccountDataServiceStub();
-        ArrayList<AccountPO> accountPOS = accountDataService.finds(query.getAccountQueryPO());
-
-        ArrayList<AccountVO> accountVOS = new ArrayList<>();
-        for(AccountPO accountPO : accountPOS)
-            accountVOS.add(new AccountVO(accountPO));
-
-        return accountVOS;
+        AccountTool accountTool = new AccountBl();
+        ArrayList<AccountVO> accountVOArrayList = accountTool.getAccountList(query);
+        return accountVOArrayList;
     }
 
     @Override
@@ -175,10 +154,7 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
 
         //调用
         /*dataService*/
-        ReceiptBillDataFactory receiptBillDataFactory = new ReceiptBillDataFactory();
-        ReceiptBillDataService receiptBillDataService = receiptBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
+        ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
         String id = receiptBillDataService.insert(receiptBillPO);
 
         //add Log
@@ -199,10 +175,7 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
 
         //调用
         /*dataService*/
-        ReceiptBillDataFactory receiptBillDataFactory = new ReceiptBillDataFactory();
-        ReceiptBillDataService receiptBillDataService = receiptBillDataFactory.getService();
-//        /*dataServiceStub*/
-//        ReceiptBillDataService receiptBillDataService = new ReceiptBillDataServiceStub();
+        ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
         receiptBillDataService.update(receiptBillPO);
 
     }

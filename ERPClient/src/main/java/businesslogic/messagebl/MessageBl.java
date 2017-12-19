@@ -1,7 +1,6 @@
 package main.java.businesslogic.messagebl;
 
 import main.java.businesslogicservice.messageblservice.MessageBlService;
-import main.java.data_stub.messagedataservicestub.MessageDataServiceStub;
 import main.java.datafactory.messagedatafactory.MessageDataFactory;
 import main.java.dataservice.messagedataservice.MessageDataService;
 import main.java.po.message.MessagePO;
@@ -21,11 +20,8 @@ public class MessageBl implements MessageBlService,MessageTool{
     @Override
     public ArrayList<MessageVO> getMessageList(UserVO receiver)throws Exception {
         /*dataService*/
-        MessageDataFactory messageDataFactory = new MessageDataFactory();
-        MessageDataService messageDataService = messageDataFactory.getService();
+        MessageDataService messageDataService = MessageDataFactory.getService();
 
-//        /*dataServiceStub*/
-//        MessageDataService messageDataService = new MessageDataServiceStub();
         ArrayList<MessagePO> messagePOS = messageDataService.finds(receiver.getID());
 
         ArrayList<MessageVO> messageVOS = new ArrayList<>();
@@ -38,10 +34,7 @@ public class MessageBl implements MessageBlService,MessageTool{
     @Override
     public void addMessage(MessageVO message)throws Exception {
         /*dataService*/
-        MessageDataFactory messageDataFactory = new MessageDataFactory();
-        MessageDataService messageDataService = messageDataFactory.getService();
-//        /*dataServiceStub*/
-//        MessageDataService messageDataService = new MessageDataServiceStub();
+        MessageDataService messageDataService = MessageDataFactory.getService();
         messageDataService.insert(message.getMessagePO());
     }
 }

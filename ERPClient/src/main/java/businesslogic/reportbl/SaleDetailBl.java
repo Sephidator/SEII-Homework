@@ -33,9 +33,9 @@ public class SaleDetailBl implements SaleDetailBlService {
         /*制作SaleTradeBillQueryVO*/
         Date start = new Date();Date end = new Date();
         String goodsName = ""; String client = ""; String salesman = "";
-        SaleTradeBillQueryVO saleTradeBillQueryVO;
-        if(query == null)saleTradeBillQueryVO = null;
-        else saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
+        SaleTradeBillQueryVO saleTradeBillQueryVO = null;
+        if(query != null)
+            saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
 
         SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
         //拿到销售单的单据

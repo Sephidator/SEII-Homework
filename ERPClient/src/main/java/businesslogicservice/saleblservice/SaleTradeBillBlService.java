@@ -1,6 +1,5 @@
 package main.java.businesslogicservice.saleblservice;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.client.ClientQueryVO;
@@ -10,7 +9,6 @@ import main.java.vo.goods.GoodsVO;
 import main.java.vo.promotion.PromotionQueryVO;
 import main.java.vo.promotion.PromotionVO;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface SaleTradeBillBlService {

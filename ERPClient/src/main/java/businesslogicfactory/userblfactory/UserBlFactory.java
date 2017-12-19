@@ -4,7 +4,7 @@ import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogicservice.userblservice.UserBlService;
 
 public class UserBlFactory {
-    public UserBlService getService(){
+    public static UserBlService getService(){
         UserBlService userBlService = new UserBl();
         return userBlService;
     }
