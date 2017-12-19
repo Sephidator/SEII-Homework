@@ -1,13 +1,12 @@
 package main.java.businesslogic.goodssortbl;
 
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
-import main.java.data_stub.goodssortdataservicestub.GoodsSortDataServiceStub;
 import main.java.datafactory.goodssortdatafactory.GoodsSortDataFactory;
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
 import main.java.vo.goods.GoodsSortVO;
 
-public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
+public class GoodsSortBl implements GoodsSortBlService, GoodsSortTool {
     /**
      * @version: 1
      * @date:
@@ -15,21 +14,17 @@ public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
      * @return: GoodsSortVO的根商品分类
      */
     @Override
-    public GoodsSortVO getRoot() throws Exception{
+    public GoodsSortVO getRoot() throws Exception {
 
-        GoodsSortPO goodsSortPO=new GoodsSortPO();
-        GoodsSortVO goodsSortVO=new GoodsSortVO();
+        GoodsSortPO goodsSortPO = new GoodsSortPO();
+        GoodsSortVO goodsSortVO = new GoodsSortVO();
 
         /*调用GoodsDataService.getRoot*/
-        GoodsSortDataFactory goodsSortDataFactory=new GoodsSortDataFactory();
-        goodsSortPO=goodsSortDataFactory.getService().getRoot();
-
-//        /*调用dataservice*/
-//        GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
-//        goodsSortPO=goodsSortDataService.getRoot();
+        GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
+        goodsSortPO = goodsSortDataService.getRoot();
 
         /*GoodsSortPO转换为GoodsSortVO*/
-        goodsSortVO=new GoodsSortVO(goodsSortPO);
+        goodsSortVO = new GoodsSortVO(goodsSortPO);
 
         return goodsSortVO;
     }
@@ -42,19 +37,15 @@ public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
      */
     @Override
     public GoodsSortVO find(String goodsSortID) throws Exception {
-        GoodsSortVO goodsSortVO=new GoodsSortVO();
-        GoodsSortPO goodsSortPO=new GoodsSortPO();
+        GoodsSortVO goodsSortVO = new GoodsSortVO();
+        GoodsSortPO goodsSortPO = new GoodsSortPO();
 
         /*调用GoodsSortDataFactory*/
-        GoodsSortDataFactory goodsSortDataFactory=new GoodsSortDataFactory();
-        goodsSortPO=goodsSortDataFactory.getService().find(goodsSortID);
-
-//        /*调用dataservice*/
-//        GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
-//        goodsSortPO=goodsSortDataService.find(goodsSortID);
+        GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
+        goodsSortPO = goodsSortDataService.find(goodsSortID);
 
        /*GoodsSortPO转换为GoodsSortVO*/
-        goodsSortVO=new GoodsSortVO(goodsSortPO);
+        goodsSortVO = new GoodsSortVO(goodsSortPO);
 
         return goodsSortVO;
     }
@@ -66,19 +57,15 @@ public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
      * @return: 返回String的增加的商品分类的ID
      */
     @Override
-    public String addGoodsSort(GoodsSortVO goodsSort) throws Exception{
-        String id="";
+    public String addGoodsSort(GoodsSortVO goodsSort) throws Exception {
+        String id = "";
 
         /*将GoodsSortVO转成GoodsSortPO*/
-        GoodsSortPO goodsSortPO=goodsSort.getGoodsSortPO();
+        GoodsSortPO goodsSortPO = goodsSort.getGoodsSortPO();
 
         /*调用GoodsSortDataFactory服务得到增加的商品分类ID*/
-        GoodsSortDataFactory goodsSortDataFactory=new GoodsSortDataFactory();
-        id=goodsSortDataFactory.getService().insert(goodsSortPO);
-
-//         /*调用dataservice的桩*/
-//         GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
-//         id=goodsSortDataService.insert(goodsSortPO);
+        GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
+        id = goodsSortDataService.insert(goodsSortPO);
 
         return id;
     }
@@ -90,15 +77,11 @@ public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
      * @return:
      */
     @Override
-    public void deleteGoodsSort(String goodsSortID) throws Exception{
+    public void deleteGoodsSort(String goodsSortID) throws Exception {
 
         /*调用GoodsSortDataFactory完成对商品分类的删除*/
-        GoodsSortDataFactory goodsSortDataFactory=new GoodsSortDataFactory();
-        goodsSortDataFactory.getService().delete(goodsSortID);
-
-//         /*调用dataservice的桩*/
-//         GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
-//         goodsSortDataService.delete(goodsSortID);
+        GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
+        goodsSortDataService.delete(goodsSortID);
 
     }
 
@@ -109,18 +92,13 @@ public class GoodsSortBl implements GoodsSortBlService,GoodsSortTool {
      * @return：
      */
     @Override
-    public void editGoodsSort(GoodsSortVO goodsSort) throws Exception{
+    public void editGoodsSort(GoodsSortVO goodsSort) throws Exception {
         /*将GoodsSortVO转成GoodsSortPO*/
-        GoodsSortPO goodsSortPO=goodsSort.getGoodsSortPO();
+        GoodsSortPO goodsSortPO = goodsSort.getGoodsSortPO();
 
         /*调用GoodsSortDataFactory完成对商品分类的修改*/
-        GoodsSortDataFactory goodsSortDataFactory=new GoodsSortDataFactory();
-        goodsSortDataFactory.getService().update(goodsSortPO);
-
-//         /*调用dataservice的桩*/
-//         GoodsSortDataService goodsSortDataService=new GoodsSortDataServiceStub();
-//         goodsSortDataService.update(goodsSortPO);
-
+        GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
+        goodsSortDataService.update(goodsSortPO);
 
     }
 

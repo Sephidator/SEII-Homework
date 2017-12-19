@@ -1,6 +1,5 @@
 package main.java.businesslogic.salebl;
 
-import main.java.businesslogic.blutility.ResultMessage;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
@@ -12,7 +11,6 @@ import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.businesslogicservice.saleblservice.SaleRefundBillBlService;
-import main.java.data_stub.saledataservicestub.SaleRefundBillDataServiceStub;
 import main.java.datafactory.saledatafactory.SaleRefundBillDataFactory;
 import main.java.dataservice.saledataservice.SaleRefundBillDataService;
 import main.java.po.bill.BillQueryPO;
@@ -32,7 +30,7 @@ import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
-public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillTool{
+public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBillTool {
     /**
      * @version: 1
      * @date:
@@ -40,12 +38,12 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      * @return: 返回ArrayList<ClientVO>的客户列表
      */
     @Override
-    public ArrayList<ClientVO> getSellerList(ClientQueryVO query)throws Exception {
-        ArrayList<ClientVO> clientVOS=new ArrayList<>();
+    public ArrayList<ClientVO> getSellerList(ClientQueryVO query) throws Exception {
+        ArrayList<ClientVO> clientVOS = new ArrayList<>();
 
         /*调用ClientTool.getClientList*/
-        ClientTool clientTool=new ClientBl();
-        clientVOS=clientTool.getClientList(query);
+        ClientTool clientTool = new ClientBl();
+        clientVOS = clientTool.getClientList(query);
 
         return clientVOS;
     }
@@ -57,12 +55,12 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      * @return: 返回ArrayList<GoodsVO>的商品列表
      */
     @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
-        ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
+    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
+        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
 
         /*调用GoodsTool.getGoodsList*/
-        GoodsTool goodsTool=new GoodsBl();
-        goodsVOS=goodsTool.getGoodsList(query);
+        GoodsTool goodsTool = new GoodsBl();
+        goodsVOS = goodsTool.getGoodsList(query);
 
         return goodsVOS;
     }
@@ -74,24 +72,20 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      * @return: 返回String的提交单据或草稿的ID
      */
     @Override
-    public String submit(SaleRefundBillVO saleRefundBillVO) throws Exception{
-        String id="";
+    public String submit(SaleRefundBillVO saleRefundBillVO) throws Exception {
+        String id = "";
 
         /*将SaleRefundBillVO转成SaleRefundBillPO*/
-        SaleRefundBillPO saleRefundBillPO=saleRefundBillVO.getSaleRefundBillPO();
+        SaleRefundBillPO saleRefundBillPO = saleRefundBillVO.getSaleRefundBillPO();
 
         /*调用SaleRefundBillDataFactory*/
-        SaleRefundBillDataFactory saleRefundBillDataFactory=new SaleRefundBillDataFactory();
-        id=saleRefundBillDataFactory.getService().insert(saleRefundBillPO);
-
-//        /*调用dataservice的桩*/
-//        SaleRefundBillDataService saleRefundBillDataService=new SaleRefundBillDataServiceStub();
-//        id=saleRefundBillDataService.insert(saleRefundBillPO);
+        SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
+        id = saleRefundBillDataService.insert(saleRefundBillPO);
 
         /*调用LogTool*/
-        if(saleRefundBillVO.getState().equals("待审批")){
-            LogVO logVO=new LogVO(saleRefundBillVO.getOperator(),"提交了一份新的销售退货单",saleRefundBillVO.getTime());
-            LogTool logTool=new LogBl();
+        if (saleRefundBillVO.getState().equals("待审批")) {
+            LogVO logVO = new LogVO(saleRefundBillVO.getOperator(), "提交了一份新的销售退货单", saleRefundBillVO.getTime());
+            LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }
 
@@ -110,29 +104,22 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      * @return: 返回ArrayList<SaleRefundBillVO>的单据列表
      */
     @Override
-    public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query)throws Exception {
-        BillQueryPO billQueryPO=new BillQueryPO();
-        ArrayList<SaleRefundBillPO> saleRefundBillPOS=new ArrayList<>();
-        ArrayList<SaleRefundBillVO> saleRefundBillVOS=new ArrayList<>();
+    public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query) throws Exception {
+        BillQueryPO billQueryPO = null;
+        ArrayList<SaleRefundBillPO> saleRefundBillPOS = new ArrayList<>();
+        ArrayList<SaleRefundBillVO> saleRefundBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
-        if(query==null){
-            billQueryPO=null;
-        }
-        else{
-            billQueryPO=query.getBillQueryPO();
+        if (query != null) {
+            billQueryPO = query.getBillQueryPO();
         }
 
         /*调用SaleRefundBillDataFactory*/
-        SaleRefundBillDataFactory saleRefundBillDataFactory=new SaleRefundBillDataFactory();
-        saleRefundBillPOS=saleRefundBillDataFactory.getService().finds(billQueryPO);
-
-//        /*调用dataservice的桩*/
-//        SaleRefundBillDataService saleRefundBillDataService=new SaleRefundBillDataServiceStub();
-//        saleRefundBillPOS=saleRefundBillDataService.finds(billQueryPO);
+        SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
+        saleRefundBillPOS = saleRefundBillDataService.finds(billQueryPO);
 
         /*ArrayList<SaleRefundBillPO>以后转成ArrayList<SaleRefundBillVO>*/
-        for(SaleRefundBillPO saleRefundBillPO:saleRefundBillPOS){
+        for (SaleRefundBillPO saleRefundBillPO : saleRefundBillPOS) {
             saleRefundBillVOS.add(new SaleRefundBillVO(saleRefundBillPO));
         }
 
@@ -147,15 +134,12 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      */
     @Override
     public void editSaleRefundBill(SaleRefundBillVO saleRefundBillVO) throws Exception {
-        SaleRefundBillPO saleRefundBillPO=saleRefundBillVO.getSaleRefundBillPO();
+        SaleRefundBillPO saleRefundBillPO = saleRefundBillVO.getSaleRefundBillPO();
 
         /*调用SaleRefundBillDataFactory*/
-        SaleRefundBillDataFactory saleRefundBillDataFactory=new SaleRefundBillDataFactory();
-        saleRefundBillDataFactory.getService().update(saleRefundBillPO);
+        SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
+        saleRefundBillDataService.update(saleRefundBillPO);
 
-//        /*调用dataservice的桩*/
-//        SaleRefundBillDataService saleRefundBillDataService=new SaleRefundBillDataServiceStub();
-//        saleRefundBillDataService.update(saleRefundBillPO);
     }
 
     /**
@@ -165,54 +149,50 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      * @return：
      */
     @Override
-    public void pass(BillVO billVO) throws Exception{
-        SaleRefundBillVO saleRefundBillVO=(SaleRefundBillVO) billVO;
+    public void pass(BillVO billVO) throws Exception {
+        SaleRefundBillVO saleRefundBillVO = (SaleRefundBillVO) billVO;
 
         /*将SaleRefundBillVO转成SaleRefundBillPO*/
-        SaleRefundBillPO saleRefundBillPO=saleRefundBillVO.getSaleRefundBillPO();
+        SaleRefundBillPO saleRefundBillPO = saleRefundBillVO.getSaleRefundBillPO();
 
         /*调用SaleRefundBillDataService.update服务*/
-        SaleRefundBillDataFactory saleRefundBillDataFactory=new SaleRefundBillDataFactory();
-        saleRefundBillDataFactory.getService().update(saleRefundBillPO);
-
-//        /*调用dataservice的桩*/
-//        SaleRefundBillDataService saleRefundBillDataService=new SaleRefundBillDataServiceStub();
-//        saleRefundBillDataService.update(saleRefundBillPO);
+        SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
+        saleRefundBillDataService.update(saleRefundBillPO);
 
         /*修改商品信息调用goodsTool*/
-        GoodsTool goodsTool=new GoodsBl();
-        for(GoodsItemVO goodsItemVO:saleRefundBillVO.getSaleList()){
-            GoodsVO goodsVO=goodsItemVO.goods;
-            goodsVO.setNumber(goodsVO.getNumber()+goodsItemVO.number);
+        GoodsTool goodsTool = new GoodsBl();
+        for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
+            GoodsVO goodsVO = goodsItemVO.goods;
+            goodsVO.setNumber(goodsVO.getNumber() + goodsItemVO.number);
             goodsTool.editGoods(goodsVO);
         }
 
         /*修改客户应收应付调用ClientTool*/
-        ClientTool clientTool=new ClientBl();
-        ClientVO clientVO=saleRefundBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable()+saleRefundBillVO.getTotal());
+        ClientTool clientTool = new ClientBl();
+        ClientVO clientVO = saleRefundBillVO.getClient();
+        clientVO.setReceivable(clientVO.getReceivable() + saleRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
 
         /*发送message*/
-        MessageTool messageTool=new MessageBl();
+        MessageTool messageTool = new MessageBl();
         /*给库存管理人员发送message*/
-        String messageToInventory="";
-        for(GoodsItemVO goodsItemVO:saleRefundBillVO.getSaleList()) {
-            messageToInventory += "商品： " + goodsItemVO.goods.getID() +" 销售退货 "+goodsItemVO.number+"，";
+        String messageToInventory = "";
+        for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
+            messageToInventory += "商品： " + goodsItemVO.goods.getID() + " 销售退货 " + goodsItemVO.number + "，";
         }
-        UserTool userTool=new UserBl();
-        UserQueryVO userQueryVO=new UserQueryVO(null,"库存管理人员");
-        ArrayList<UserVO> userVOS=userTool.getUserList(userQueryVO);
-        int ran=(int)(1+Math.random()*(userVOS.size()-0+1));
-        MessageVO messageVOToInventory=new MessageVO(userVOS.get(ran),saleRefundBillVO.getOperator(),messageToInventory+"（系统消息）");
+        UserTool userTool = new UserBl();
+        UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
+        ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
+        int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
+        MessageVO messageVOToInventory = new MessageVO(userVOS.get(ran), saleRefundBillVO.getOperator(), messageToInventory + "（系统消息）");
         messageTool.addMessage(messageVOToInventory);
 
         /*给财务人员发送message*/
-        String messageToFinance="客户应收应付调整： 应收："+clientVO.getReceivable()+" 应付："+clientVO.getPayable();
-        UserQueryVO userQueryVO1=new UserQueryVO(null,"财务人员");
-        ArrayList<UserVO> userVOS1=userTool.getUserList(userQueryVO);
-        int ran1=(int)(1+Math.random()*(userVOS.size()-0+1));
-        MessageVO messageVOToFinance=new MessageVO(userVOS1.get(ran1),saleRefundBillVO.getOperator(),messageToFinance+"（系统消息）");
+        String messageToFinance = "客户应收应付调整： 应收：" + clientVO.getReceivable() + " 应付：" + clientVO.getPayable();
+        UserQueryVO userQueryVO1 = new UserQueryVO(null, "财务人员");
+        ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO);
+        int ran1 = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
+        MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), saleRefundBillVO.getOperator(), messageToFinance + "（系统消息）");
 
     }
 
@@ -223,18 +203,15 @@ public class SaleRefundBillBl implements SaleRefundBillBlService,SaleRefundBillT
      * @return：
      */
     @Override
-    public void reject(BillVO billVO) throws Exception{
-        SaleRefundBillVO saleRefundBillVO=(SaleRefundBillVO) billVO;
+    public void reject(BillVO billVO) throws Exception {
+        SaleRefundBillVO saleRefundBillVO = (SaleRefundBillVO) billVO;
 
         /*将SaleRefundBillVO转成SaleRefundBillPO*/
-        SaleRefundBillPO saleRefundBillPO=saleRefundBillVO.getSaleRefundBillPO();
+        SaleRefundBillPO saleRefundBillPO = saleRefundBillVO.getSaleRefundBillPO();
 
         /*调用SaleRefundBillDataFactory*/
-        SaleRefundBillDataFactory saleRefundBillDataFactory=new SaleRefundBillDataFactory();
-        saleRefundBillDataFactory.getService().update(saleRefundBillPO);
+        SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
+        saleRefundBillDataService.update(saleRefundBillPO);
 
-//        /*调用dataservice的桩*/
-//        SaleRefundBillDataService saleRefundBillDataService=new SaleRefundBillDataServiceStub();
-//        saleRefundBillDataService.update(saleRefundBillPO);
     }
 }

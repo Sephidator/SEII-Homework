@@ -5,7 +5,7 @@ import main.java.dataservice.inventorydataservice.InventoryLossOverBillDataServi
 import java.rmi.Naming;
 
 public class InventoryLossOverBillDataFactory {
-    public InventoryLossOverBillDataService getService() throws Exception{
+    public static InventoryLossOverBillDataService getService() throws Exception{
         InventoryLossOverBillDataService inventoryLossOverBillDataService=(InventoryLossOverBillDataService) Naming.lookup("rmi://127.0.0.1:7200/InventoryLossOverBillDataService");
         return inventoryLossOverBillDataService;
     }
