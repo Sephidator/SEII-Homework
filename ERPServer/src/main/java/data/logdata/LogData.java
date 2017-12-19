@@ -6,6 +6,7 @@ import main.java.dataservice.logdataservice.LogDataService;
 import main.java.po.log.LogPO;
 import main.java.po.log.LogQueryPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class LogData implements LogDataService {
+public class LogData implements LogDataService, Serializable {
     /**
      * @param query [日志筛选条件]
      * @return 符合筛选条件的日志

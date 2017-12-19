@@ -7,6 +7,7 @@ import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class ClientData implements ClientDataService {
+public class ClientData implements ClientDataService, Serializable {
     /**
      * @param clientID [客户ID]
      * @return 对应ID的客户

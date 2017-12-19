@@ -8,6 +8,7 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.po.bill.inventorybill.LossOverItemPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/12
  */
-public class InventoryLossOverBillData implements InventoryLossOverBillDataService {
+public class InventoryLossOverBillData implements InventoryLossOverBillDataService, Serializable {
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的库存溢损单

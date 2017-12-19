@@ -1,4 +1,4 @@
-package main.java.database;
+package main.java.data;
 
 import main.java.data.datautility.DataException;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  * @description 数据库相关操作
  * @date 2017/12/03
  */
-public class DatabaseHelper {
+public class DataHelper {
     private static final String driver = "com.mysql.jdbc.Driver";
 
     private static final String url = "jdbc:mysql://localhost:3306/ERP?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -25,7 +25,7 @@ public class DatabaseHelper {
     /**
      * @description 数据库连接，更新数据库数据
      */
-    public DatabaseHelper() {
+    public DataHelper() {
         try {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);

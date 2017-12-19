@@ -5,6 +5,7 @@ import main.java.data.datautility.DataException;
 import main.java.dataservice.messagedataservice.MessageDataService;
 import main.java.po.message.MessagePO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class MessageData implements MessageDataService {
+public class MessageData implements MessageDataService , Serializable{
     /**
      * @param receiverID [接受消息人员的ID]
      * @return 对应receiverID的消息

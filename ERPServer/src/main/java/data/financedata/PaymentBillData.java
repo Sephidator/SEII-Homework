@@ -8,6 +8,7 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.PaymentBillPO;
 import main.java.po.bill.financebill.TransItemPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/10
  */
-public class PaymentBillData implements PaymentBillDataService {
+public class PaymentBillData implements PaymentBillDataService, Serializable {
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的付款单

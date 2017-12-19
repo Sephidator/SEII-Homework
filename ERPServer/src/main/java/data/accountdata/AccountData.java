@@ -8,6 +8,7 @@ import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @date 2017/12/03
  */
 
-public class AccountData implements AccountDataService {
+public class AccountData implements AccountDataService, Serializable {
     /**
      * @param accountID [帐户ID]
      * @return 对应ID的账户

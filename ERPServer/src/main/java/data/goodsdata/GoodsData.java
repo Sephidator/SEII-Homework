@@ -9,6 +9,7 @@ import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.goods.GoodsQueryPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class GoodsData implements GoodsDataService {
+public class GoodsData implements GoodsDataService, Serializable {
     /**
      * @param goodsID [商品ID]
      * @return 对应ID的商品

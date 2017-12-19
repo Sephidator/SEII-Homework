@@ -8,6 +8,7 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 import main.java.po.goods.GiftItemPO;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/10
  */
-public class InventoryGiftBillData implements InventoryGiftBillDataService {
+public class InventoryGiftBillData implements InventoryGiftBillDataService, Serializable {
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的库存赠送单
