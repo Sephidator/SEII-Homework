@@ -67,6 +67,7 @@ public class ClientInfoUIController extends InfoUIController{
         levelChoiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5));
         levelChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
             level.setText(String.valueOf(newValue.intValue()+1));
+            client.setLevel(newValue.intValue()+1);
         });
 
 
@@ -74,6 +75,7 @@ public class ClientInfoUIController extends InfoUIController{
         categoryChoiceBox.setItems(FXCollections.observableArrayList("供应商","销售商"));
         categoryChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
             category.setText(categoryList[newValue.intValue()]);
+            client.setCategory(categoryList[newValue.intValue()]);
         });
 
     }
