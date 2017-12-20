@@ -8,8 +8,10 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.inventorybill.InventoryLossOverBillPO;
 import main.java.po.bill.inventorybill.LossOverItemPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +21,15 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/12
  */
-public class InventoryLossOverBillData implements InventoryLossOverBillDataService, Serializable {
+public class InventoryLossOverBillData extends UnicastRemoteObject implements InventoryLossOverBillDataService {
+    public InventoryLossOverBillData() throws RemoteException {
+        InventoryLossOverBillDataService inventoryLossOverBillDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/InventoryLossOverBillDataService", inventoryLossOverBillDataService);
+        } catch (MalformedURLException e) {
+        }
+    }
+
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的库存溢损单

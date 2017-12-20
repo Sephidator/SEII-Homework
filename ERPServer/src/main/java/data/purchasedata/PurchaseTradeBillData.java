@@ -8,8 +8,10 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.purchasebill.PurchaseTradeBillPO;
 import main.java.po.goods.GoodsItemPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +21,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/13
  */
-public class PurchaseTradeBillData implements PurchaseTradeBillDataService, Serializable {
+public class PurchaseTradeBillData extends UnicastRemoteObject implements PurchaseTradeBillDataService {
+    public PurchaseTradeBillData() throws RemoteException {
+        PurchaseTradeBillDataService purchaseTradeBillDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/PurchaseTradeBillDataService", purchaseTradeBillDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的进货单

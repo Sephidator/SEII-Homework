@@ -8,8 +8,10 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.salebill.SaleRefundBillPO;
 import main.java.po.goods.GoodsItemPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +21,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/13
  */
-public class SaleRefundBillData implements SaleRefundBillDataService, Serializable {
+public class SaleRefundBillData extends UnicastRemoteObject implements SaleRefundBillDataService {
+    public SaleRefundBillData() throws RemoteException {
+        SaleRefundBillDataService saleRefundBillDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/SaleRefundBillDataService", saleRefundBillDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的销售退货单

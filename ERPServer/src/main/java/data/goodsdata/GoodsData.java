@@ -9,9 +9,14 @@ import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.goods.GoodsQueryPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +24,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class GoodsData implements GoodsDataService, Serializable {
+public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
+    public GoodsData() throws RemoteException {
+        GoodsDataService goodsDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/GoodsDataService", goodsDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param goodsID [商品ID]
      * @return 对应ID的商品

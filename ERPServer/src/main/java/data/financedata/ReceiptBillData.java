@@ -8,8 +8,10 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.ReceiptBillPO;
 import main.java.po.bill.financebill.TransItemPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +22,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/10
  */
-public class ReceiptBillData implements ReceiptBillDataService, Serializable {
+public class ReceiptBillData extends UnicastRemoteObject implements ReceiptBillDataService {
+    public ReceiptBillData() throws RemoteException {
+        ReceiptBillDataService receiptBillDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/ReceiptBillDataService", receiptBillDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的收款单

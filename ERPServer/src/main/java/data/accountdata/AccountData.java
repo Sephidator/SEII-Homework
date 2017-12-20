@@ -8,9 +8,14 @@ import main.java.dataservice.accountdataservice.AccountDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +24,16 @@ import java.util.ArrayList;
  * @date 2017/12/03
  */
 
-public class AccountData implements AccountDataService, Serializable {
+public class AccountData extends UnicastRemoteObject implements AccountDataService {
+    public AccountData() throws RemoteException {
+        AccountDataService accountDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/AccountDataService", accountDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param accountID [帐户ID]
      * @return 对应ID的账户

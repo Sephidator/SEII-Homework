@@ -9,8 +9,10 @@ import main.java.po.goods.GiftItemPO;
 import main.java.po.goods.GoodsItemPO;
 import main.java.po.promotion.*;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -19,7 +21,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class PromotionData implements PromotionDataService, Serializable {
+public class PromotionData extends UnicastRemoteObject implements PromotionDataService {
+    public PromotionData() throws RemoteException {
+        PromotionDataService promotionDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/PromotionDataService", promotionDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public PromotionPO find(String promotionID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
