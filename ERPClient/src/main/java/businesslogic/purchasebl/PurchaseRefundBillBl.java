@@ -57,7 +57,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
-        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS;
 
         /*调用GoodsTool.getGoodsList*/
         GoodsTool goodsTool = new GoodsBl();
@@ -125,7 +125,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
     @Override
     public ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query) throws Exception {
         BillQueryPO billQueryPO = null;
-        ArrayList<PurchaseRefundBillPO> purchaseRefundBillPOS = new ArrayList<>();
+        ArrayList<PurchaseRefundBillPO> purchaseRefundBillPOS;
         ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/

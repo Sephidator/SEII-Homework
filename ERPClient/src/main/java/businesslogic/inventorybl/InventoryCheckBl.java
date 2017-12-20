@@ -36,10 +36,10 @@ public class InventoryCheckBl implements InventoryCheckBlService {
         ArrayList<GoodsItemVO> saleRefundBillGoodsItemVOS = new ArrayList<>();
         ArrayList<GoodsItemVO> saleTradeBillGoodsItemVOS = new ArrayList<>();
 
-        ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS = new ArrayList<>();
-        ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS = new ArrayList<>();
-        ArrayList<SaleRefundBillVO> saleRefundBillVOS = new ArrayList<>();
-        ArrayList<SaleTradeBillVO> saleTradeBillVOS = new ArrayList<>();
+        ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS;
+        ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS;
+        ArrayList<SaleRefundBillVO> saleRefundBillVOS;
+        ArrayList<SaleTradeBillVO> saleTradeBillVOS;
 
         BillQueryVO billQueryVO = new BillQueryVO(null, start, end, null, null, null);
 

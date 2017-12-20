@@ -14,7 +14,7 @@ public class LoginBl implements LoginBlService {
      */
     @Override
     public UserVO login(String jobName, String password) throws Exception {
-        UserVO userVO = new UserVO();
+        UserVO userVO;
 
         UserTool userTool = new UserBl();
         userVO = userTool.login(jobName, password);

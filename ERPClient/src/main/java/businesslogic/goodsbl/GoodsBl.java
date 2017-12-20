@@ -19,7 +19,7 @@ public class GoodsBl implements GoodsBlService, GoodsTool {
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
-        ArrayList<GoodsPO> goodsPOS = new ArrayList<>();
+        ArrayList<GoodsPO> goodsPOS;
         ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
 
         /*将GoodsQueryVO转为GoodsQueryPO*/
@@ -85,7 +85,7 @@ public class GoodsBl implements GoodsBlService, GoodsTool {
      */
     @Override
     public GoodsVO find(String goodsID) throws Exception {
-        GoodsVO goodsVO = new GoodsVO();
+        GoodsVO goodsVO;
         GoodsPO goodsPO = new GoodsPO();
 
          /*调用GoodsDataFactory完成对商品数据的修改*/

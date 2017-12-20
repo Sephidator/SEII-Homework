@@ -16,8 +16,8 @@ public class GoodsSortBl implements GoodsSortBlService, GoodsSortTool {
     @Override
     public GoodsSortVO getRoot() throws Exception {
 
-        GoodsSortPO goodsSortPO = new GoodsSortPO();
-        GoodsSortVO goodsSortVO = new GoodsSortVO();
+        GoodsSortPO goodsSortPO;
+        GoodsSortVO goodsSortVO;
 
         /*调用GoodsDataService.getRoot*/
         GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
@@ -37,8 +37,8 @@ public class GoodsSortBl implements GoodsSortBlService, GoodsSortTool {
      */
     @Override
     public GoodsSortVO find(String goodsSortID) throws Exception {
-        GoodsSortVO goodsSortVO = new GoodsSortVO();
-        GoodsSortPO goodsSortPO = new GoodsSortPO();
+        GoodsSortVO goodsSortVO;
+        GoodsSortPO goodsSortPO;
 
         /*调用GoodsSortDataFactory*/
         GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();

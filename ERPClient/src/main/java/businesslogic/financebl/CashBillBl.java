@@ -6,6 +6,8 @@ import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
+import main.java.businesslogic.messagebl.MessageBl;
+import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
 import main.java.datafactory.financedatafactory.CashBillDataFactory;
 import main.java.dataservice.financedataservice.CashBillDataService;
@@ -19,6 +21,7 @@ import main.java.vo.bill.financebill.CashBillVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
+import main.java.vo.message.MessageVO;
 
 import java.util.ArrayList;;
 
@@ -47,6 +50,11 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         AccountVO accountVO = accountTool.find(cashBillVO.getAccount().getID());
         accountVO.setRemaining(accountVO.getRemaining() - cashBillVO.getTotal());
         accountTool.editAccount(accountVO);
+
+        //addMessage
+        MessageTool messageTool = new MessageBl();
+        MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),"你申请的编号为"+cashBillVO.getID()+"的现金费用单已经审批通过，现在可以从账户"+cashBillVO.getAccount()+"取出"+cashBillVO.getTool()+"元");
+        messageTool.addMessage(messageVO);
 
     }
 
