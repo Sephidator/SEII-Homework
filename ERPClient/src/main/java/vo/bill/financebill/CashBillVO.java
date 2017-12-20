@@ -1,6 +1,8 @@
 package main.java.vo.bill.financebill;
 import main.java.businesslogic.accountbl.AccountBl;
 import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.financebl.CashBillBl;
+import main.java.businesslogic.financebl.CashBillTool;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.financebill.CashBillPO;
@@ -105,6 +107,12 @@ public class CashBillVO extends FinanceBillVO {
         for(CashItemPO cashItemPO : cashItemPOS)
             cashItemVOArrayList.add(new CashItemVO(cashItemPO));
         this.itemList = cashItemVOArrayList;
+    }
+
+    /*getTool*/
+    public CashBillTool getTool(){
+        CashBillTool cashBillTool = new CashBillBl();
+        return cashBillTool;
     }
 
     /*实现待定*/

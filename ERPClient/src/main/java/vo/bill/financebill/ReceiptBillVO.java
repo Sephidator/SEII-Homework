@@ -2,6 +2,8 @@ package main.java.vo.bill.financebill;
 
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
+import main.java.businesslogic.financebl.ReceiptBillBl;
+import main.java.businesslogic.financebl.ReceiptBillTool;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.bill.financebill.ReceiptBillPO;
@@ -107,6 +109,12 @@ public class ReceiptBillVO extends FinanceBillVO {
         this.client = clientVO;
 
         this.visible = receiptBillPO.isVisible();
+    }
+
+    /*getTool*/
+    public ReceiptBillTool getTool(){
+        ReceiptBillTool paymentBillTool = new ReceiptBillBl();
+        return paymentBillTool;
     }
 
     /*实现待定*/

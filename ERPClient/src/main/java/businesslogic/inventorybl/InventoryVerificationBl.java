@@ -17,7 +17,7 @@ public class InventoryVerificationBl implements InventoryVerificationBlService {
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query)throws Exception {
-        ArrayList<GoodsVO> goodsVOS=new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS;
 
         GoodsTool goodsTool=new GoodsBl();
         goodsVOS=goodsTool.getGoodsList(query);

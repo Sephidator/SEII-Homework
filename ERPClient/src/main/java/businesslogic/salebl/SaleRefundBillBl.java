@@ -39,7 +39,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
      */
     @Override
     public ArrayList<ClientVO> getSellerList(ClientQueryVO query) throws Exception {
-        ArrayList<ClientVO> clientVOS = new ArrayList<>();
+        ArrayList<ClientVO> clientVOS;
 
         /*调用ClientTool.getClientList*/
         ClientTool clientTool = new ClientBl();
@@ -56,7 +56,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
-        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS;
 
         /*调用GoodsTool.getGoodsList*/
         GoodsTool goodsTool = new GoodsBl();
@@ -106,7 +106,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
     @Override
     public ArrayList<SaleRefundBillVO> getSaleRefundBillList(BillQueryVO query) throws Exception {
         BillQueryPO billQueryPO = null;
-        ArrayList<SaleRefundBillPO> saleRefundBillPOS = new ArrayList<>();
+        ArrayList<SaleRefundBillPO> saleRefundBillPOS;
         ArrayList<SaleRefundBillVO> saleRefundBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/

@@ -39,7 +39,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
      */
     @Override
     public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) throws Exception {
-        ArrayList<ClientVO> clientVOS = new ArrayList<>();
+        ArrayList<ClientVO> clientVOS;
 
         /*调用ClientTool.getClientList*/
         ClientTool clientTool = new ClientBl();
@@ -56,7 +56,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
-        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS;
 
         /*调用GoodsTool.getGoodsList*/
         GoodsTool goodsTool = new GoodsBl();
@@ -114,7 +114,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
     @Override
     public ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query) throws Exception {
         BillQueryPO billQueryPO = null;
-        ArrayList<PurchaseTradeBillPO> purchaseTradeBillPOS = new ArrayList<>();
+        ArrayList<PurchaseTradeBillPO> purchaseTradeBillPOS;
         ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/

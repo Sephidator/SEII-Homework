@@ -25,7 +25,7 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query)throws Exception {
         /*将PromotionQueryVO转换到PromotionQueryPO*/
         PromotionQueryPO promotionQueryPO = null;
-        if(query == null)
+        if(query != null)
             promotionQueryPO = query.getPromotionQueryPO();
 
         /*dataService*/

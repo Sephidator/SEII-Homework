@@ -31,8 +31,6 @@ public class SaleDetailBl implements SaleDetailBlService {
      */
     public ArrayList<SaleRecordVO> getSaleRecordList(SaleDetailQueryVO query)throws Exception {
         /*制作SaleTradeBillQueryVO*/
-        Date start = new Date();Date end = new Date();
-        String goodsName = ""; String client = ""; String salesman = "";
         SaleTradeBillQueryVO saleTradeBillQueryVO = null;
         if(query != null)
             saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
@@ -43,7 +41,7 @@ public class SaleDetailBl implements SaleDetailBlService {
 
         //开始组装saleRecordVO
         ArrayList<SaleRecordVO> saleRecordVOS = new ArrayList<>();
-        ArrayList<GoodsItemVO> goodsItemVOS = new ArrayList<>();
+        ArrayList<GoodsItemVO> goodsItemVOS;
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
             goodsItemVOS = saleTradeBillVO.getSaleList();
             for(GoodsItemVO goodsItemVO : goodsItemVOS)

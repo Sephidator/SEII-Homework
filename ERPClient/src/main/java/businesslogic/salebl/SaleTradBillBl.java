@@ -46,7 +46,7 @@ public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool
      */
     @Override
     public ArrayList<ClientVO> getSellerList(ClientQueryVO query) throws Exception {
-        ArrayList<ClientVO> clientVOS = new ArrayList<>();
+        ArrayList<ClientVO> clientVOS;
 
         /*调用ClientTool.getClientList*/
         ClientTool clientTool = new ClientBl();
@@ -63,7 +63,7 @@ public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
-        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS;
 
         /*调用GoodsTool.getGoodsList*/
         GoodsTool goodsTool = new GoodsBl();
@@ -80,7 +80,7 @@ public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool
      */
     @Override
     public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) throws Exception {
-        ArrayList<PromotionVO> promotionVOS = new ArrayList<>();
+        ArrayList<PromotionVO> promotionVOS;
 
         /*调用PromotionTool.getPromotionList*/
         PromotionTool promotionTool = new PromotionBl();
@@ -130,7 +130,7 @@ public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool
     @Override
     public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) throws Exception {
         BillQueryPO billQueryPO = null;
-        ArrayList<SaleTradeBillPO> saleTradeBillPOS = new ArrayList<>();
+        ArrayList<SaleTradeBillPO> saleTradeBillPOS;
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
@@ -174,7 +174,7 @@ public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool
     @Override
     public ArrayList<SaleTradeBillVO> findsByReport(SaleTradeBillQueryVO query) throws Exception {
 
-        ArrayList<SaleTradeBillPO> saleTradeBillPOS = new ArrayList<>();
+        ArrayList<SaleTradeBillPO> saleTradeBillPOS;
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = new ArrayList<>();
 
         SaleTradeBillQueryPO saleTradeBillQueryPO = null;

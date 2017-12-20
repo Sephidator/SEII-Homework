@@ -24,7 +24,7 @@ public class ClientBl implements ClientBlService, ClientTool {
     @Override
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception {
         ArrayList<ClientVO> clientVOS = new ArrayList<>();
-        ArrayList<ClientPO> clientPOS = new ArrayList<>();
+        ArrayList<ClientPO> clientPOS;
 
         /*将ClientQueryVO转为ClientQueryPO*/
         ClientQueryPO clientQueryPO = null;
@@ -52,8 +52,8 @@ public class ClientBl implements ClientBlService, ClientTool {
      */
     @Override
     public ClientVO find(String clientID) throws Exception {
-        ClientVO clientVO = new ClientVO();
-        ClientPO clientPO = new ClientPO();
+        ClientVO clientVO;
+        ClientPO clientPO;
 
         /*调用ClientDataFactory得到ClientPO的客户*/
         ClientDataService clientDataService = ClientDataFactory.getService();
@@ -123,7 +123,7 @@ public class ClientBl implements ClientBlService, ClientTool {
      */
     @Override
     public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception {
-        ArrayList<UserVO> userVOS = new ArrayList<>();
+        ArrayList<UserVO> userVOS;
 
         /*调用UserTool服务得到ArrayList<UserVO>的客户列表*/
         UserTool userTool = new UserBl();

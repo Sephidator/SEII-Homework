@@ -31,7 +31,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
      */
     @Override
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception {
-        ArrayList<GoodsVO> goodsVOS = new ArrayList<>();
+        ArrayList<GoodsVO> goodsVOS;
 
         GoodsTool goodsTool = new GoodsBl();
         goodsVOS = goodsTool.getGoodsList(query);
@@ -99,7 +99,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
     @Override
     public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception {
         BillQueryPO billQueryPO = null;
-        ArrayList<InventoryGiftBillPO> inventoryGiftBillPOS = new ArrayList<>();
+        ArrayList<InventoryGiftBillPO> inventoryGiftBillPOS;
         ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS = new ArrayList<>();
 
         /*将BillQueryVO转为BillQueryPO*/
