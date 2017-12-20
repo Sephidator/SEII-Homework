@@ -8,8 +8,10 @@ import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;
 import main.java.po.bill.financebill.CashItemPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +21,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/07
  */
-public class CashBillData implements CashBillDataService, Serializable {
+public class CashBillData extends UnicastRemoteObject implements CashBillDataService {
+    public CashBillData() throws RemoteException {
+        CashBillDataService cashBillDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/CashBillDataService", cashBillDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param query [单据筛选条件]
      * @return 符合筛选条件的现金费用单

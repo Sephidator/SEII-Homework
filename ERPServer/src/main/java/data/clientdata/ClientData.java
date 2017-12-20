@@ -7,9 +7,14 @@ import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +22,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class ClientData implements ClientDataService, Serializable {
+public class ClientData extends UnicastRemoteObject implements ClientDataService {
+    public ClientData() throws RemoteException {
+        ClientDataService clientDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/ClientDataService", clientDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param clientID [客户ID]
      * @return 对应ID的客户

@@ -8,9 +8,14 @@ import main.java.data.datautility.NotExistException;
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
 import main.java.po.goods.GoodsSortPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +23,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class GoodsSortData implements GoodsSortDataService, Serializable {
+public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataService {
+    public GoodsSortData() throws RemoteException {
+        GoodsSortDataService goodsSortDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/GoodsSortDataService", goodsSortDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param goodsSortID [商品分类ID]
      * @return 对应ID的商品分类

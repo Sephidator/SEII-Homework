@@ -9,9 +9,14 @@ import main.java.dataservice.userdataservice.UserDataService;
 import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +24,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class UserData implements UserDataService, Serializable {
+public class UserData extends UnicastRemoteObject implements UserDataService {
+    public UserData() throws RemoteException {
+        UserDataService userDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/UserDataService", userDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param userID [帐号ID]
      * @return 对应ID的帐号

@@ -6,8 +6,10 @@ import main.java.dataservice.logdataservice.LogDataService;
 import main.java.po.log.LogPO;
 import main.java.po.log.LogQueryPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -16,7 +18,17 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class LogData implements LogDataService, Serializable {
+public class LogData extends UnicastRemoteObject implements LogDataService {
+
+    public LogData() throws RemoteException {
+        LogDataService logDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/LogDataService", logDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param query [日志筛选条件]
      * @return 符合筛选条件的日志

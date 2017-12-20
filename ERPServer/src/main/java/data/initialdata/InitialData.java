@@ -11,9 +11,14 @@ import main.java.po.goods.GoodsSortPO;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +26,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/04
  */
-public class InitialData implements InitialDataService, Serializable {
+public class InitialData extends UnicastRemoteObject implements InitialDataService {
+    public InitialData() throws RemoteException {
+        InitialDataService initialDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/InitialDataService", initialDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param query [期初建帐]
      * @return 符合筛选条件的期初建帐

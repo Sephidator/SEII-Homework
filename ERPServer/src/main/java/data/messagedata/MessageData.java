@@ -5,9 +5,14 @@ import main.java.data.datautility.DataException;
 import main.java.dataservice.messagedataservice.MessageDataService;
 import main.java.po.message.MessagePO;
 
-import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.sql.*;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +20,16 @@ import java.util.ArrayList;
  * @description
  * @date 2017/12/03
  */
-public class MessageData implements MessageDataService , Serializable{
+public class MessageData extends UnicastRemoteObject implements MessageDataService {
+    public MessageData() throws RemoteException {
+        MessageDataService messageDataService = this;
+        try {
+            Naming.rebind("rmi://127.0.0.1:7200/MessageDataService", messageDataService);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param receiverID [接受消息人员的ID]
      * @return 对应receiverID的消息
