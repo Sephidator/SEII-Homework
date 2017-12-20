@@ -146,7 +146,7 @@ public class UserInfoUIController extends InfoUIController{
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(text+"用户失败");
-                alert.setContentText("数据库连接错误");
+                alert.setContentText("数据库错误");
                 alert.showAndWait();
             }catch(NotExistException e){
                 Alert alert=new Alert(Alert.AlertType.ERROR);

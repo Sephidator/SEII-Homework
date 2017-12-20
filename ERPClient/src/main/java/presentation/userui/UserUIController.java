@@ -124,7 +124,7 @@ public class UserUIController extends CenterUIController {
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("删除用户失败");
-                alert.setContentText("数据库连接错误");
+                alert.setContentText("数据库错误");
                 alert.showAndWait();
             }catch(NotExistException e){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
