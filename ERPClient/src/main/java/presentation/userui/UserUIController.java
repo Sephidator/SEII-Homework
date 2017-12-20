@@ -118,7 +118,7 @@ public class UserUIController extends CenterUIController {
                 Alert alert=new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("SUCCESS");
                 alert.setHeaderText("删除用户成功");
-                alert.setContentText("用户ID："+ID+" 用户名字："+name);
+                alert.setContentText("用户ID："+ID+System.lineSeparator()+"名字："+name);
                 alert.showAndWait();
             }catch(DataException e){
                 Alert alert=new Alert(Alert.AlertType.ERROR);

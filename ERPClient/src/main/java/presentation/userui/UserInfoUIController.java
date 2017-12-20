@@ -126,7 +126,7 @@ public class UserInfoUIController extends InfoUIController{
                     Alert alert=new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("SUCCESS");
                     alert.setHeaderText("添加用户成功");
-                    alert.setContentText("用户ID："+userID+" 用户名字："+userName);
+                    alert.setContentText("用户ID："+userID+System.lineSeparator()+"名字："+userName);
                     alert.showAndWait();
                 }
                 else if(text.equals("编辑")){
@@ -137,7 +137,7 @@ public class UserInfoUIController extends InfoUIController{
                     Alert alert=new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("SUCCESS");
                     alert.setHeaderText("编辑用户成功");
-                    alert.setContentText("用户ID："+userID+" 用户名字："+userName);
+                    alert.setContentText("用户ID："+userID+System.lineSeparator()+"名字："+userName);
                     alert.showAndWait();
                 }
 
