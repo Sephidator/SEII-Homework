@@ -1,10 +1,10 @@
 package main.java.data.goodsdata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
-import main.java.data.datautility.ExistException;
-import main.java.data.datautility.NotExistException;
-import main.java.data.datautility.NotNullException;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.dataservice.goodsdataservice.GoodsDataService;
 import main.java.po.goods.GoodsPO;
 import main.java.po.goods.GoodsQueryPO;

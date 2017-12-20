@@ -3,12 +3,17 @@ package main.java.presentation.mainui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.exception.DataException;
+import main.java.exception.LoginException;
+import main.java.exception.NotExistException;
+import main.java.businesslogicfactory.loginblfactory.LoginBlFactory;
 import main.java.presentation.loginui.LoginUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.user.UserVO;
@@ -69,10 +74,25 @@ public class RootUIController {
 
     @FXML
     private void handleLogout(){
-        stage.close();
-        Stage newStage=new Stage();
-        newStage.setTitle("灯具进销存管理系统");
-        LoginUIController.init(newStage);
+        try{
+            LoginBlFactory.getService().logout(operator.getID());
+            stage.close();
+            Stage newStage=new Stage();
+            newStage.setTitle("灯具进销存管理系统");
+            LoginUIController.init(newStage);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("登陆失败");
+            alert.setContentText("数据库连接错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("登陆失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
     }
 
     @FXML

@@ -4,9 +4,14 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.loginblfactory.LoginBlFactory;
+import main.java.exception.DataException;
+import main.java.exception.LoginException;
+import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.*;
 import main.java.vo.user.UserVO;
@@ -35,49 +40,55 @@ public class LoginUIController {
      * */
     @FXML
     private void handleLogin(){
-        System.out.println(usernameField.getText()==null);
-        System.out.println(usernameField.getText().equals(""));
+        try{
+            UserVO user= LoginBlFactory.getService().login(usernameField.getText(),passwordField.getText());
 
-        UserVO user=new UserVO("宋抟","进货销售人员","JN123", "password", 23,true);
-        if(usernameField.getText().equals("1")){
             stage.close();
             Stage newStage=new Stage();
             newStage.setTitle("灯具进销存管理系统");
             RootUIController root=RootUIController.initRoot(newStage,user);
             root.showLogoutButton(true);
-            PurchaseSalePanelUIController.init(root);
-        }
-        else if(usernameField.getText().equals("2")){
-            stage.close();
-            Stage newStage=new Stage();
-            newStage.setTitle("灯具进销存管理系统");
-            RootUIController root=RootUIController.initRoot(newStage,user);
-            root.showLogoutButton(true);
-            InventoryPanelUIController.init(root);
-        }
-        else if(usernameField.getText().equals("3")){
-            stage.close();
-            Stage newStage=new Stage();
-            newStage.setTitle("灯具进销存管理系统");
-            RootUIController root=RootUIController.initRoot(newStage,user);
-            root.showLogoutButton(true);
-            FinancePanelUIController.init(root);
-        }
-        else if(usernameField.getText().equals("4")){
-            stage.close();
-            Stage newStage=new Stage();
-            newStage.setTitle("灯具进销存管理系统");
-            RootUIController root=RootUIController.initRoot(newStage,user);
-            root.showLogoutButton(true);
-            ManagerPanelUIController.init(root);
-        }
-        else if(usernameField.getText().equals("5")){
-            stage.close();
-            Stage newStage=new Stage();
-            newStage.setTitle("灯具进销存管理系统");
-            RootUIController root=RootUIController.initRoot(newStage,user);
-            root.showLogoutButton(true);
-            AdministratorPanelUIController.init(root);
+
+            if(user.getType().equals("进货销售人员")){
+                PurchaseSalePanelUIController.init(root);
+            }
+            else if(user.getType().equals("库存管理人员")){
+                InventoryPanelUIController.init(root);
+            }
+            else if(user.getType().equals("财务人员")){
+                FinancePanelUIController.init(root);
+            }
+            else if(user.getType().equals("总经理")){
+                ManagerPanelUIController.init(root);
+            }
+            else if(user.getType().equals("管理员")){
+                AdministratorPanelUIController.init(root);
+            }
+        }catch(LoginException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("登陆失败");
+            alert.setContentText("用户已登录");
+            alert.showAndWait();
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("登陆失败");
+            alert.setContentText("数据库连接错误");
+            alert.showAndWait();
+        }catch(NotExistException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("登陆失败");
+            alert.setContentText("用户名和密码不匹配");
+            alert.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("登陆失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
         }
     }
 

@@ -1,7 +1,7 @@
 package main.java.data.logdata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
+import main.java.exception.DataException;
 import main.java.dataservice.logdataservice.LogDataService;
 import main.java.po.log.LogPO;
 import main.java.po.log.LogQueryPO;

@@ -1,7 +1,7 @@
 package main.java.data.messagedata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
+import main.java.exception.DataException;
 import main.java.dataservice.messagedataservice.MessageDataService;
 import main.java.po.message.MessagePO;
 

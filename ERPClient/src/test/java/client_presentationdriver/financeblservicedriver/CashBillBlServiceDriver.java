@@ -1,6 +1,6 @@
 //package test.java.client_presentationdriver.financeblservicedriver;
 //
-//import main.java.businesslogic.blutility.ResultMessage;
+//import main.java.exception.ResultMessage;
 //import main.java.businesslogicservice.financeblservice.CashBillBlService;
 //import main.java.client_blservicestub.financeblservicestub.CashBillBlServiceStub;
 //import org.junit.Test;

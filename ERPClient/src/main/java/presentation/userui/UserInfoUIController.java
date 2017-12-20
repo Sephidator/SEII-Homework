@@ -1,22 +1,22 @@
 package main.java.presentation.userui;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.NotExistException;
 import main.java.businesslogicservice.userblservice.UserBlService;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.user.UserVO;
-import main.java.vo.user.UserVO;
-
-import java.util.ArrayList;
 
 public class UserInfoUIController extends InfoUIController{
     private UserVO user;
@@ -72,7 +72,7 @@ public class UserInfoUIController extends InfoUIController{
 
     public void setUser(UserVO user) {
         this.user = user;
-        ID.setText(user.getName());
+        ID.setText(user.getID());
         type.setText(user.getType());
         jobName.setText(user.getJobName());
         password.setText(user.getPassword());
@@ -88,18 +88,26 @@ public class UserInfoUIController extends InfoUIController{
     /**
      * 根据数字来设置按钮的文字
      * 按钮被点击时，根据不同的文字执行不同的功能
-     * 好吧这个控制耦合有点蠢，但是做的工作少一点
-     * 1对应添加客户；2对应编辑客户界面；3对应查看客户界面
+     * 1对应添加用户；2对应编辑用户；3对应查看用户
      * */
     public void setPaneFunction(int command){
         if(command==1){
-            confirm.setText("确认添加");
+            confirm.setText("添加");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("编辑");
         }
         else if(command==3){
             confirm.setText("确定");
+            ID.setEditable(false);
+            type.setEditable(false);
+            jobName.setEditable(false);
+            password.setEditable(false);
+            name.setEditable(false);
+            age.setEditable(false);
+            top.setEditable(false);
+            typeChoiceBox.setDisable(true);
+            topChoiceBox.setDisable(true);
         }
     }
 
@@ -107,23 +115,121 @@ public class UserInfoUIController extends InfoUIController{
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("添加")){
-            userBlService.addUser(user);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("添加")){
+                    String userID=userBlService.addUser(user);
+                    String userName=user.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("SUCCESS");
+                    alert.setHeaderText("添加用户成功");
+                    alert.setContentText("用户ID："+userID+" 用户名字："+userName);
+                    alert.showAndWait();
+                }
+                else if(text.equals("编辑")){
+                    userBlService.editUser(user);
+                    String userID=user.getID();
+                    String userName=user.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("SUCCESS");
+                    alert.setHeaderText("编辑用户成功");
+                    alert.setContentText("用户ID："+userID+" 用户名字："+userName);
+                    alert.showAndWait();
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"用户失败");
+                alert.setContentText("数据库连接错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"用户失败");
+                alert.setContentText("用户不存在");
+                alert.showAndWait();
+            }catch(ExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"用户失败");
+                alert.setContentText("账号和已有用户重复");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"用户失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
         }
-        else if(text.equals("编辑")){
-            userBlService.editUser(user);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
     private void handleCancel(){
         dialogStage.close();
+    }
+
+    /**
+     * 检查用户信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+
+        String errorMessage = "";
+
+        if (type.getText().length()==0) {
+            errorMessage+=("未选择用户类型。"+System.lineSeparator());
+        }
+        if (jobName.getText().length()==0) {
+            errorMessage+=("未输入用户账号名。"+System.lineSeparator());
+        }
+        if (password.getText().length()==0) {
+            errorMessage+=("未输入用户密码。"+System.lineSeparator());
+        }
+        if (name.getText().length()==0) {
+            errorMessage+=("未输入用户姓名。"+System.lineSeparator());
+        }
+        if (top.getText().length()==0) {
+            errorMessage+=("未输入用户权限。"+System.lineSeparator());
+        }
+        if (age.getText().length()==0) {
+            errorMessage+=("未输入用户年龄。"+System.lineSeparator());
+        }
+        else {
+            try {
+                int i=Integer.parseInt(age.getText());
+                if(i<=0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("用户年龄必须是正整数。"+System.lineSeparator());
+            }
+        }
+
+        if(errorMessage.length()==0){
+            user.setType(type.getText());
+            user.setJobName(jobName.getText());
+            user.setPassword(password.getText());
+            user.setName(name.getText());
+            user.setAge(Integer.parseInt(age.getText()));
+            user.setTop(top.getText().equals("是"));
+
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("用户信息错误");
+            alert.setHeaderText("请检查用户信息的输入");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+
+            return false;
+        }
     }
 
     // 加载文件和界面的方法******************************************

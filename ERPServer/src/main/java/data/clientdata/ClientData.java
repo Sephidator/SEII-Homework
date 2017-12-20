@@ -1,8 +1,8 @@
 package main.java.data.clientdata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
-import main.java.data.datautility.NotExistException;
+import main.java.exception.DataException;
+import main.java.exception.NotExistException;
 import main.java.dataservice.clientdataservice.ClientDataService;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;

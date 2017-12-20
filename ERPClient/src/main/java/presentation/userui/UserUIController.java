@@ -5,16 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import main.java.MainApp;
+import main.java.exception.DataException;
+import main.java.exception.NotExistException;
+import main.java.businesslogicfactory.userblfactory.UserBlFactory;
 import main.java.businesslogicservice.userblservice.UserBlService;
-import main.java.presentation.userui.UserInfoUIController;
+import main.java.presentation.messageui.AdministratorPanelUIController;
 import main.java.presentation.mainui.RootUIController;
-import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
@@ -34,6 +34,8 @@ public class UserUIController extends CenterUIController {
     @FXML
     private TableColumn<UserVO,String> userTopColumn;
 
+    @FXML
+    private TextField searchInfo;
 
     // 加载文件后调用的方法******************************************
 
@@ -51,12 +53,33 @@ public class UserUIController extends CenterUIController {
 
     public void setUserBlService(UserBlService userBlService) {
         this.userBlService = userBlService;
-        //ArrayList<UserVO> userList=userBlService.getUserList(null);
-        //showUserList(userList);
+        refresh(null);
     }
 
     /**
-     * 取得客户列表并修改ObservableList的信息
+     * 刷新界面，取得所有用户的列表，并显示在tableview中
+     * */
+    private void refresh(UserQueryVO query){
+        try {
+            ArrayList<UserVO> userList = userBlService.getUserList(query);
+            showUserList(userList);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找用户失败");
+            alert.setContentText("数据库连接错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找用户失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * 取得用户列表并修改ObservableList的信息
      * */
     private void showUserList(ArrayList<UserVO> userList){
         userObservableList.removeAll();
@@ -67,15 +90,56 @@ public class UserUIController extends CenterUIController {
     // 界面之中会用到的方法******************************************
 
     @FXML
+    private void handleSearch(){
+        String text=searchInfo.getText();
+        if(text.equals("")){
+            refresh(null);
+        }
+        else{
+            UserQueryVO query=new UserQueryVO(text,text);
+            refresh(query);
+        }
+    }
+
+    @FXML
     private void handleAddUser(){
         UserInfoUIController.init(userBlService,new UserVO(),1,root.getStage());
+        refresh(null);
     }
 
     @FXML
     private void handleDeleteUser(){
-        int selectedIndex=userTableView.getSelectionModel().getSelectedIndex();
         if(isUserSelected()){
-            userTableView.getItems().remove(selectedIndex);
+            try {
+                String ID = userTableView.getSelectionModel().getSelectedItem().getID();
+                String name = userTableView.getSelectionModel().getSelectedItem().getName();
+                UserBlFactory.getService().deleteUser(ID);
+
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("SUCCESS");
+                alert.setHeaderText("删除用户成功");
+                alert.setContentText("用户ID："+ID+" 用户名字："+name);
+                alert.showAndWait();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除用户失败");
+                alert.setContentText("数据库连接错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除用户失败");
+                alert.setContentText("用户不存在");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除用户失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
+            refresh(null);
         }
     }
 
@@ -84,6 +148,7 @@ public class UserUIController extends CenterUIController {
         if(isUserSelected()){
             UserInfoUIController.init(userBlService,userTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
         }
+        refresh(null);
     }
 
     @FXML
@@ -130,9 +195,9 @@ public class UserUIController extends CenterUIController {
 
             UserUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setUserBlService(null);
+            controller.setUserBlService(UserBlFactory.getService());
 
-            root.setReturnPaneController(new PurchaseSalePanelUIController());
+            root.setReturnPaneController(new AdministratorPanelUIController());
         }catch(Exception e){
             e.printStackTrace();
         }

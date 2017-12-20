@@ -1,6 +1,6 @@
 package main.java.data;
 
-import main.java.data.datautility.DataException;
+import main.java.exception.DataException;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;

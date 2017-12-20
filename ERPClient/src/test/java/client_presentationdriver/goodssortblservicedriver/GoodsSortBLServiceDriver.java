@@ -1,6 +1,6 @@
 //package client_presentationdriver.goodssortblservicedriver;
 //
-//import main.java.businesslogic.blutility.ResultMessage;
+//import main.java.exception.ResultMessage;
 //import main.java.businesslogicservice.goodssortblservice.GoodsSortBLService;
 //import main.java.client_blservicestub.goodssortblservicestub.GoodsSortBLServiceStub;
 //import org.junit.Test;

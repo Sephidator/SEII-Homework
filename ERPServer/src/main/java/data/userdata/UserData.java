@@ -1,10 +1,10 @@
 package main.java.data.userdata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
-import main.java.data.datautility.ExistException;
-import main.java.data.datautility.LoginException;
-import main.java.data.datautility.NotExistException;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.LoginException;
+import main.java.exception.NotExistException;
 import main.java.dataservice.userdataservice.UserDataService;
 import main.java.po.user.UserPO;
 import main.java.po.user.UserQueryPO;

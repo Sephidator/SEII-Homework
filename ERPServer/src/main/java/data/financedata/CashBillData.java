@@ -1,8 +1,8 @@
 package main.java.data.financedata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
-import main.java.data.datautility.FullException;
+import main.java.exception.DataException;
+import main.java.exception.FullException;
 import main.java.dataservice.financedataservice.CashBillDataService;
 import main.java.po.bill.BillQueryPO;
 import main.java.po.bill.financebill.CashBillPO;

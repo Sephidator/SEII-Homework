@@ -8,4 +8,4 @@
 *.xml
 out/
 gen/
-class
+*.class

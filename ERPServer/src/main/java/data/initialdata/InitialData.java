@@ -1,8 +1,8 @@
 package main.java.data.initialdata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
-import main.java.data.datautility.ExistException;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
 import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.client.ClientPO;

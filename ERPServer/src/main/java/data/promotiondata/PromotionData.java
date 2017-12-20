@@ -1,9 +1,9 @@
 package main.java.data.promotiondata;
 
 import main.java.data.DataHelper;
-import main.java.data.datautility.DataException;
-import main.java.data.datautility.ExistException;
-import main.java.data.datautility.NotExistException;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.NotExistException;
 import main.java.dataservice.promotiondataservice.PromotionDataService;
 import main.java.po.goods.GiftItemPO;
 import main.java.po.goods.GoodsItemPO;
