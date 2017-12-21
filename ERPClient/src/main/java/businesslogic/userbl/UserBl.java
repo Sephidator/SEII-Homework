@@ -41,8 +41,9 @@ public class UserBl implements UserBlService,UserTool {
 
     @Override
     public UserVO find(String userID) throws Exception {
-        UserTool userTool = new UserBl();
-        return userTool.find(userID);
+        UserDataService userDataService = UserDataFactory.getService();
+        UserPO userPO = userDataService.find(userID);
+        return new UserVO(userPO);
     }
 
     @Override

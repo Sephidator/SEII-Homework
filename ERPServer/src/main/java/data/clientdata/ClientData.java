@@ -115,7 +115,7 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
             String sql = "INSERT INTO Client (category, level, name, phone, address, post, email, receivable, payable, " +
                     "receivableLimit, salesmanID) VALUES ('" + po.getCategory() + "'," + po.getLevel() + ",'" + po.getName()
                     + "','" + po.getPhone() + "','" + po.getAddress() + "','" + po.getPost() + "','" + po.getEmail() + "',"
-                    + po.getReceivable() + "," + po.getPayable() + "," + po.getReceivableLimit() + "," + po.getSalesmanID() + ")";
+                    + po.getReceivable() + "," + po.getPayable() + "," + po.getReceivableLimit() + ",'" + po.getSalesmanID() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet resultSet = statement.getGeneratedKeys();
             String ID = null;

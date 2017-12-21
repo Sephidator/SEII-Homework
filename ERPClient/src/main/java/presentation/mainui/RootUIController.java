@@ -97,7 +97,6 @@ public class RootUIController {
 
     @FXML
     private void handleExit(){
-        System.out.println("Button called");
         returnPaneController.instanceInit(this);
     }
 

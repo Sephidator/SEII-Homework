@@ -9,12 +9,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import main.java.MainApp;
+import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
+import main.java.exception.DataException;
+import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
+import main.java.vo.user.UserQueryVO;
 
 import java.util.ArrayList;
 
@@ -37,6 +43,9 @@ public class ClientUIController extends CenterUIController {
     @FXML
     private TableColumn<ClientVO,String> clientAddressColumn;
 
+    @FXML
+    private TextField searchInfo;
+
     // 加载文件后调用的方法******************************************
 
     /**
@@ -48,15 +57,36 @@ public class ClientUIController extends CenterUIController {
         clientLevelColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getLevel())));
         clientCategoryColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getCategory()));
         clientPhoneColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getPhone()));
-        clientAddressColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getID()));
+        clientAddressColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getAddress()));
     }
 
     // 设置controller数据的方法*****************************************
 
     public void setClientBlService(ClientBlService clientBlService) {
         this.clientBlService = clientBlService;
-        //ArrayList<ClientVO> clientList=clientBlService.getClientList(null);
-        //showClientList(clientList);
+        refresh(null);
+    }
+
+    /**
+     * 刷新界面，取得所有用户的列表，并显示在tableview中
+     * */
+    private void refresh(ClientQueryVO query){
+        try {
+            ArrayList<ClientVO> clientList = clientBlService.getClientList(query);
+            showClientList(clientList);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找客户失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找客户失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -64,25 +94,63 @@ public class ClientUIController extends CenterUIController {
      * */
     private void showClientList(ArrayList<ClientVO> clientList){
         clientObservableList.removeAll();
-
-        for(int i=0;i<clientList.size();i++){
-            clientObservableList.add(clientList.get(i));
-        }
+        clientObservableList.setAll(clientList);
         clientTableView.setItems(clientObservableList);
     }
 
     // 界面之中会用到的方法******************************************
 
     @FXML
+    private void handleSearch(){
+        String text=searchInfo.getText();
+        if(text.equals("")){
+            refresh(null);
+        }
+        else{
+            ClientQueryVO query=new ClientQueryVO(text);
+            refresh(query);
+        }
+    }
+
+    @FXML
     private void handleAddClient(){
         ClientInfoUIController.init(clientBlService,new ClientVO(),1,root.getStage());
+        refresh(null);
     }
 
     @FXML
     private void handleDeleteClient(){
-        int selectedIndex=clientTableView.getSelectionModel().getSelectedIndex();
         if(isClientSelected()){
-            clientTableView.getItems().remove(selectedIndex);
+            try {
+                String ID = clientTableView.getSelectionModel().getSelectedItem().getID();
+                String name = clientTableView.getSelectionModel().getSelectedItem().getName();
+                clientBlService.deleteClient(ID);
+
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("删除客户成功");
+                alert.setContentText("客户ID："+ID+System.lineSeparator()+"名字："+name);
+                alert.showAndWait();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除客户失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除客户失败");
+                alert.setContentText("客户不存在");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除客户失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
+            refresh(null);
         }
     }
 
@@ -91,6 +159,7 @@ public class ClientUIController extends CenterUIController {
         if(isClientSelected()){
             ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
         }
+        refresh(null);
     }
 
     @FXML
@@ -108,8 +177,8 @@ public class ClientUIController extends CenterUIController {
             // Nothing selected
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table");
+            alert.setHeaderText("未选中客户");
+            alert.setContentText("请在表中选择客户");
             alert.showAndWait();
             return false;
         }
@@ -137,21 +206,7 @@ public class ClientUIController extends CenterUIController {
 
             ClientUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setClientBlService(null);
-
-            ClientVO c1=new ClientVO("类别：经销商", 3, "名字：陈骁",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-            0, 0, 20, null);
-            c1.setID("123");
-            ClientVO c2=new ClientVO("类别：经销商", 4, "名字：陈骁2",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                    0, 0, 20, null);
-            c2.setID("123");
-
-            ArrayList<ClientVO> list=new ArrayList<>();
-            list.add(c1);
-            list.add(c2);
-            controller.showClientList(list);
+            controller.setClientBlService(ClientBlFactory.getService());
 
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){

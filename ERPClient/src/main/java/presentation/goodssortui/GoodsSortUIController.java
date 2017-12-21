@@ -7,8 +7,12 @@ import javafx.util.Callback;
 import main.java.MainApp;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodssortbl.GoodsSortBl;
+import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
+import main.java.exception.DataException;
+import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.presentation.goodsui.GoodsInfoUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
@@ -30,65 +34,39 @@ public class GoodsSortUIController extends CenterUIController {
      * 设置显示的客户信息以及显示方法
      * */
     public void initialize(){
-        //goodsSortTreeView.setEditable(true);
-
-        /*
-        root = new TreeItem<String>("Root");
-        root.setExpanded(true);
-        goodsSortTreeView.setRoot(root);
-        */
     }
 
     // 设置controller数据的方法*****************************************
 
     public void setGoodsSortBlService(GoodsSortBlService goodsSortBlService) {
         this.goodsSortBlService=goodsSortBlService;
-        //ArrayList<GoodsSortVO> goodsSortList=goodsSortBlService.getGoodsSortList(null);
+        refresh();
 
-        GoodsSortVO c1=new GoodsSortVO();
-        c1.setID("Sort12345");
-        c1.setName("二极管1");
-
-        GoodsSortVO c2=new GoodsSortVO();
-        c2.setID("Sort98085");
-        c2.setName("二极管2");
-
-        GoodsVO g1=new GoodsVO();
-        g1.setID("Sort12345");
-        g1.setName("蓝光LED");
-        ArrayList<GoodsVO> l=new ArrayList<>();
-        l.add(g1);
-        c1.setGoods(l);
-
-        ArrayList<GoodsSortVO> list=new ArrayList<>();
-        list.add(c1);
-        list.add(c2);
-
-        GoodsSortVO b1=new GoodsSortVO();
-        b1.setID("Sort12345");
-        b1.setName("二极管");
-        b1.setChildren(list);
-
-        GoodsSortVO b2=new GoodsSortVO();
-        b2.setID("Sort98085");
-        b2.setName("白炽灯");
-
-        ArrayList<GoodsSortVO> list2=new ArrayList<>();
-        list2.add(b1);
-        list2.add(b2);
-
-        GoodsSortVO a=new GoodsSortVO();
-        a.setID("Sort12345678");
-        a.setName("灯具");
-        a.setChildren(list2);
-
-        showGoodsSort(null,a);
     }
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
         this.goodsBlService=goodsBlService;
     }
 
+
+    private void refresh(){
+        try{
+            GoodsSortVO root= GoodsSortBlFactory.getService().getRoot();
+            showGoodsSort(null,root);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品分类失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品分类失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
+    }
 
     /**
      * 取得客户列表并修改ObservableList的信息
@@ -119,15 +97,70 @@ public class GoodsSortUIController extends CenterUIController {
 
     @FXML
     private void handleAddSort(){
-        GoodsSortInfoUIController.init(goodsSortBlService,new GoodsSortVO(),1,root.getStage());
+        if(isCorrectGoodsSortSelected()){
+            int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+            TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
+            GoodsSortVO sort=sortItem.getValue();
+
+            if(sort.getChildren().size()!=0){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("添加商品分类失败");
+                alert.setContentText("该商品分类下有商品");
+                alert.showAndWait();
+            }
+            else{
+                GoodsSortVO son=new GoodsSortVO();
+                son.setFather(sort);
+                GoodsSortInfoUIController.init(goodsSortBlService,son,1,root.getStage());
+                refresh();
+            }
+        }
     }
 
     @FXML
     private void handleDeleteSort(){
-        int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
-        if(isGoodsSortSelected()){
-           TreeItem<String> item=goodsSortTreeView.getTreeItem(selectedIndex);
-           item.getParent().getChildren().remove(item);
+        if(isCorrectGoodsSortSelected()){
+            try {
+                int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+                TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
+                GoodsSortVO sort=sortItem.getValue();
+
+                String ID = sort.getID();
+                String name = sort.getName();
+                goodsSortBlService.deleteGoodsSort(ID);
+
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("删除商品分类成功");
+                alert.setContentText("分类ID："+ID+System.lineSeparator()+"名字："+name);
+                alert.showAndWait();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品分类失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品分类失败");
+                alert.setContentText("商品分类不存在");
+                alert.showAndWait();
+            }catch(NotNullException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品分类失败");
+                alert.setContentText("商品分类下有子类或商品");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品分类失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
+            refresh();
         }
     }
 
@@ -150,24 +183,28 @@ public class GoodsSortUIController extends CenterUIController {
     private void handleAddGoods() {
     }
 
-    private boolean isGoodsSortSelected(){
+    private boolean isCorrectGoodsSortSelected(){
         int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
-        if(selectedIndex>=0){
-            return true;
-        }else{
+        if(selectedIndex<0){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("No Selection");
             alert.setHeaderText("未选中商品分类");
             alert.setContentText("请在表中选择商品分类");
             alert.showAndWait();
             return false;
+        }else{
+            TreeItem item=goodsSortTreeView.getTreeItem(selectedIndex);
+            if(!item.isExpanded()){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("选中了商品信息");
+                alert.setContentText("请在表中选择商品分类");
+                alert.showAndWait();
+                return false;
+            }
+            return true;
         }
     }
-
-    /*
-    private boolean isClientSelected(){
-    }
-    */
 
     // 加载文件和界面的方法******************************************
 
