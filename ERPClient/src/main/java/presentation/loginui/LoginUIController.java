@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogic.loginbl.LoginBl;
 import main.java.businesslogicfactory.loginblfactory.LoginBlFactory;
 import main.java.exception.DataException;
 import main.java.exception.LoginException;
@@ -41,6 +42,7 @@ public class LoginUIController {
     @FXML
     private void handleLogin(){
         try{
+            LoginBlFactory.getService().logout("User00000002");
             UserVO user= LoginBlFactory.getService().login(usernameField.getText(),passwordField.getText());
 
             stage.close();
@@ -80,7 +82,7 @@ public class LoginUIController {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("登陆失败");
-            alert.setContentText("用户名和密码不匹配");
+            alert.setContentText("用户名或密码错误");
             alert.showAndWait();
         }catch(Exception e){
             e.printStackTrace();

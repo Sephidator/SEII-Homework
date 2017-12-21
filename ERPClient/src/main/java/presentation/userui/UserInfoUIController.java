@@ -124,7 +124,7 @@ public class UserInfoUIController extends InfoUIController{
                     String userName=user.getName();
 
                     Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("SUCCESS");
+                    alert.setTitle("Success");
                     alert.setHeaderText("添加用户成功");
                     alert.setContentText("用户ID："+userID+System.lineSeparator()+"名字："+userName);
                     alert.showAndWait();
@@ -135,7 +135,7 @@ public class UserInfoUIController extends InfoUIController{
                     String userName=user.getName();
 
                     Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("SUCCESS");
+                    alert.setTitle("Success");
                     alert.setHeaderText("编辑用户成功");
                     alert.setContentText("用户ID："+userID+System.lineSeparator()+"名字："+userName);
                     alert.showAndWait();

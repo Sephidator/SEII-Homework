@@ -67,7 +67,7 @@ public class UserUIController extends CenterUIController {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("查找用户失败");
-            alert.setContentText("数据库连接错误");
+            alert.setContentText("数据库错误");
             alert.showAndWait();
         }catch(Exception e){
             Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -113,10 +113,10 @@ public class UserUIController extends CenterUIController {
             try {
                 String ID = userTableView.getSelectionModel().getSelectedItem().getID();
                 String name = userTableView.getSelectionModel().getSelectedItem().getName();
-                UserBlFactory.getService().deleteUser(ID);
+                userBlService.deleteUser(ID);
 
                 Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("SUCCESS");
+                alert.setTitle("Success");
                 alert.setHeaderText("删除用户成功");
                 alert.setContentText("用户ID："+ID+System.lineSeparator()+"名字："+name);
                 alert.showAndWait();

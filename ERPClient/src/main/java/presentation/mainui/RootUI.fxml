@@ -52,7 +52,7 @@
                               </HBox>
                               <HBox spacing="5.0">
                                  <children>
-                                    <Label prefHeight="20.0" prefWidth="45.0" text="工号：" textFill="WHITE">
+                                    <Label prefHeight="20.0" prefWidth="45.0" text="帐号：" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>

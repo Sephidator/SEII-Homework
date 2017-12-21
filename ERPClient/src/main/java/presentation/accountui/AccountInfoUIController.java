@@ -1,22 +1,21 @@
 package main.java.presentation.accountui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.NotExistException;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
-import main.java.vo.user.UserVO;
 
-import java.util.ArrayList;
 
 public class AccountInfoUIController extends InfoUIController{
     private AccountVO account;
@@ -73,6 +72,10 @@ public class AccountInfoUIController extends InfoUIController{
         }
         else if(command==3){
             confirm.setText("确定");
+            ID.setEditable(false);
+            name.setEditable(false);
+            bankAccount.setEditable(false);
+            remaining.setEditable(false);
         }
     }
 
@@ -80,24 +83,111 @@ public class AccountInfoUIController extends InfoUIController{
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("确认添加")){
-            accountBlService.addAccount(account);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("添加")){
+                    String accountID=accountBlService.addAccount(account);
+                    String accountName=account.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("添加账户成功");
+                    alert.setContentText("账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
+                    alert.showAndWait();
+                }
+                else if(text.equals("编辑")){
+                    accountBlService.editAccount(account);
+                    String accountID=account.getID();
+                    String accountName=account.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("编辑账户成功");
+                    alert.setContentText("账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
+                    alert.showAndWait();
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"账户失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"账户失败");
+                alert.setContentText("账户不存在");
+                alert.showAndWait();
+            }catch(ExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"账户失败");
+                alert.setContentText("账号和已有账户重复");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"账户失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
         }
-        else if(text.equals("确认编辑")){
-            accountBlService.editAccount(account);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
     private void handleCancel(){
         dialogStage.close();
     }
+
+    /**
+     * 检查账户信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+
+        String errorMessage = "";
+
+        if (name.getText().length()==0) {
+            errorMessage+=("未选择账户名称。"+System.lineSeparator());
+        }
+        if (bankAccount.getText().length()==0) {
+            errorMessage+=("未输入银行账户。"+System.lineSeparator());
+        }
+        if (remaining.getText().length()==0) {
+            errorMessage+=("未输入账户余额。"+System.lineSeparator());
+        }
+        else {
+            try {
+                double i=Double.parseDouble(remaining.getText());
+                if(i<0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("账户余额必须是非负数。"+System.lineSeparator());
+            }
+        }
+
+        if(errorMessage.length()==0){
+            account.setName(name.getText());
+            account.setBankAccount(bankAccount.getText());
+            account.setRemaining(Double.parseDouble(remaining.getText()));
+
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("账户信息错误");
+            alert.setHeaderText("请检查账户信息的输入");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+
+            return false;
+        }
+    }
+
 
     // 加载文件和界面的方法******************************************
 
@@ -124,7 +214,7 @@ public class AccountInfoUIController extends InfoUIController{
             controller.setDialogStage(dialogStage);
             controller.setPaneFunction(command);
 
-            // Show the dialog and wait until the user closes it.
+            // Show the dialog and wait until the account closes it.
             dialogStage.showAndWait();
 
         }catch(Exception e){

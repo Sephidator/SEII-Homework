@@ -8,12 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import main.java.MainApp;
+import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
+import main.java.exception.DataException;
+import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
 
 import java.util.ArrayList;
@@ -33,6 +38,9 @@ public class AccountUIController extends CenterUIController {
     @FXML
     private TableColumn<AccountVO,String> remainingColumn;
 
+    @FXML
+    private TextField searchInfo;
+
     // 加载文件后调用的方法******************************************
 
     /**
@@ -49,8 +57,29 @@ public class AccountUIController extends CenterUIController {
 
     public void setAccountBlService(AccountBlService accountBlService) {
         this.accountBlService = accountBlService;
-        //ArrayList<AccountVO> accountList=accountBlService.getAccountList(null);
-        //showAccountList(accountList);
+        refresh(null);
+    }
+
+    /**
+     * 刷新界面，取得所有账户的列表，并显示在tableview中
+     * */
+    private void refresh(AccountQueryVO query){
+        try {
+            ArrayList<AccountVO> accountList = accountBlService.getAccountList(query);
+            showAccountList(accountList);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找账户失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找账户失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -58,25 +87,63 @@ public class AccountUIController extends CenterUIController {
      * */
     private void showAccountList(ArrayList<AccountVO> accountList){
         accountObservableList.removeAll();
-
-        for(int i=0;i<accountList.size();i++){
-            accountObservableList.add(accountList.get(i));
-        }
+        accountObservableList.setAll(accountList);
         accountTableView.setItems(accountObservableList);
     }
 
     // 界面之中会用到的方法******************************************
 
     @FXML
+    private void handleSearch(){
+        String text=searchInfo.getText();
+        if(text.equals("")){
+            refresh(null);
+        }
+        else{
+            AccountQueryVO query=new AccountQueryVO(text,text);
+            refresh(query);
+        }
+    }
+
+    @FXML
     private void handleAddAccount(){
         AccountInfoUIController.init(accountBlService,new AccountVO(),1,root.getStage());
+        refresh(null);
     }
 
     @FXML
     private void handleDeleteAccount(){
-        int selectedIndex=accountTableView.getSelectionModel().getSelectedIndex();
         if(isAccountSelected()){
-            accountTableView.getItems().remove(selectedIndex);
+            try {
+                String ID = accountTableView.getSelectionModel().getSelectedItem().getID();
+                String name = accountTableView.getSelectionModel().getSelectedItem().getName();
+                accountBlService.deleteAccount(ID);
+
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("删除账户成功");
+                alert.setContentText("账户ID："+ID+System.lineSeparator()+"名字："+name);
+                alert.showAndWait();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除账户失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除账户失败");
+                alert.setContentText("账户不存在");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除账户失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
+            refresh(null);
         }
     }
 
@@ -85,6 +152,7 @@ public class AccountUIController extends CenterUIController {
         if(isAccountSelected()){
             AccountInfoUIController.init(accountBlService,accountTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
         }
+        refresh(null);
     }
 
     @FXML
@@ -131,17 +199,7 @@ public class AccountUIController extends CenterUIController {
 
             AccountUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setAccountBlService(null);
-
-            AccountVO c1=new AccountVO("23234324","账户A",10000);
-            c1.setID("123");
-            AccountVO c2=new AccountVO("23233424","账户B",10000);
-            c2.setID("234");
-
-            ArrayList<AccountVO> list=new ArrayList<>();
-            list.add(c1);
-            list.add(c2);
-            controller.showAccountList(list);
+            controller.setAccountBlService(AccountBlFactory.getService());
 
             root.setReturnPaneController(new FinancePanelUIController());
         }catch(Exception e){
