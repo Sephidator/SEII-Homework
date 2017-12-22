@@ -6,6 +6,8 @@ import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogic.messagebl.MessageBl;
 import main.java.businesslogic.messagebl.MessageTool;
+import main.java.businesslogic.userbl.UserBl;
+import main.java.businesslogic.userbl.UserTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.datafactory.inventorydatafactory.InventoryGiftBillDataFactory;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
@@ -19,6 +21,8 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 import main.java.vo.message.MessageVO;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
@@ -154,11 +158,16 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
         inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
         /*修改商品信息调用goodsTool*/
+        String messageAlarm="";
         GoodsTool goodsTool = new GoodsBl();
         for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
             GoodsVO goodsVO = giftItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() - giftItemVO.number);
             goodsTool.editGoods(goodsVO);
+            /*库存警报*/
+            if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
+                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
+            }
         }
 
         /*发送message*/
@@ -171,6 +180,17 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
         }
         MessageVO messageVO = new MessageVO(inventoryGiftBillVO.getOperator(), inventoryGiftBillVO.getOperator(), message + "系统消息");
         messageTool.addMessage(messageVO);
+
+        /*给库存人员发送库存报警的message*/
+
+        if(!messageAlarm.equals("")){
+            UserTool userTool = new UserBl();
+            UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
+            ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
+            int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
+            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),inventoryGiftBillVO.getOperator(),messageAlarm);
+            messageTool.addMessage(messageVOAlarm);
+        }
     }
 
     /**

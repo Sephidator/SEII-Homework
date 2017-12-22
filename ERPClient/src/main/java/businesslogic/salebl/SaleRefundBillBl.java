@@ -160,11 +160,16 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
         saleRefundBillDataService.update(saleRefundBillPO);
 
         /*修改商品信息调用goodsTool*/
+        String messageAlarm="";
         GoodsTool goodsTool = new GoodsBl();
         for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
             GoodsVO goodsVO = goodsItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() + goodsItemVO.number);
             goodsTool.editGoods(goodsVO);
+            /*库存警报*/
+            if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
+                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
+            }
         }
 
         /*修改客户应收应付调用ClientTool*/
@@ -187,11 +192,17 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
         MessageVO messageVOToInventory = new MessageVO(userVOS.get(ran), saleRefundBillVO.getOperator(), messageToInventory + "（系统消息）");
         messageTool.addMessage(messageVOToInventory);
 
+        /*给库存人员发送库存报警的message*/
+        if(!messageAlarm.equals("")){
+            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),saleRefundBillVO.getOperator(),messageAlarm);
+            messageTool.addMessage(messageVOAlarm);
+        }
+
         /*给财务人员发送message*/
         String messageToFinance = "客户应收应付调整： 应收：" + clientVO.getReceivable() + " 应付：" + clientVO.getPayable();
         UserQueryVO userQueryVO1 = new UserQueryVO(null, "财务人员");
         ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO);
-        int ran1 = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
+        int ran1 = (int) (1 + Math.random() * (userVOS1.size() - 0 + 1));
         MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), saleRefundBillVO.getOperator(), messageToFinance + "（系统消息）");
 
     }
