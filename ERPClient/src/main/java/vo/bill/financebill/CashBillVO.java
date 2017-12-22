@@ -34,7 +34,7 @@ public class CashBillVO extends FinanceBillVO {
         this.operator = new UserVO();
         this.comment = "";
         this.total=0;
-        this.itemList=new ArrayList<CashItemVO>();
+        this.itemList=new ArrayList<>();
     }
 
     public CashBillVO(AccountVO account, String state, Date time,UserVO operator, String comment, double total,  ArrayList<CashItemVO> itemList) {

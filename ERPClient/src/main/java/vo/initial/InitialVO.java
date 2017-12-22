@@ -26,8 +26,6 @@ public class InitialVO extends VO {
 
     private ArrayList<GoodsVO> goodsList;//每一个商品都有一个ID
 
-    private ArrayList<GoodsSortVO> goodsSortList;//每一个商品分类都有一个ID
-
     private ArrayList<ClientVO> clientList;//每一个客户都有一个ID
 
     private ArrayList<AccountVO> accountList;//每一个账户都有一个ID
@@ -35,15 +33,13 @@ public class InitialVO extends VO {
     public InitialVO() {
         this.year = 0;
         this.goodsList = new ArrayList<>();
-        this.goodsSortList = new ArrayList<>();
         this.clientList = new ArrayList<>();
         this.accountList = new ArrayList<>();
     }
 
-    public InitialVO(int year, ArrayList<GoodsVO> goodsList, ArrayList<GoodsSortVO> goodsSortList, ArrayList<ClientVO> clientList, ArrayList<AccountVO> accountList) {
+    public InitialVO(int year, ArrayList<GoodsVO> goodsList, ArrayList<ClientVO> clientList, ArrayList<AccountVO> accountList) {
         this.year = year;
         this.goodsList = goodsList;
-        this.goodsSortList = goodsSortList;
         this.clientList = clientList;
         this.accountList = accountList;
     }
@@ -54,10 +50,6 @@ public class InitialVO extends VO {
 
     public ArrayList<GoodsVO> getGoodsList() {
         return goodsList;
-    }
-
-    public ArrayList<GoodsSortVO> getGoodsSortList() {
-        return goodsSortList;
     }
 
     public ArrayList<ClientVO> getClientList() {
@@ -74,10 +66,6 @@ public class InitialVO extends VO {
 
     public void setGoodsList(ArrayList<GoodsVO> goodsList) {
         this.goodsList = goodsList;
-    }
-
-    public void setGoodsSortList(ArrayList<GoodsSortVO> goodsSortList) {
-        this.goodsSortList = goodsSortList;
     }
 
     public void setClientList(ArrayList<ClientVO> clientList) {
@@ -114,31 +102,21 @@ public class InitialVO extends VO {
             goodsPOS.add(goodsVO.getGoodsPO());
         initialPO.setGoodsList(goodsPOS);
 
-        /*转换AccountVOList到AccountPOList*/
-        ArrayList<GoodsSortPO> goodsSortPOS = new ArrayList<>();
-        ArrayList<GoodsSortVO> goodsSortVOS = this.getGoodsSortList();
-        for(GoodsSortVO goodsSortVO : goodsSortVOS)
-            goodsSortPOS.add(goodsSortVO.getGoodsSortPO());
-        initialPO.setGoodsSortList(goodsSortPOS);
-
         return initialPO;
     }
 
     /*将PO转换成VO*/
     public InitialVO(InitialPO initialPO)throws Exception{
+
+        //VO的原始信息，可能数据库会增加
+        this.setID(initialPO.getID());
+
         /*得到ArrayList<GoodsVO>*/
         ArrayList<GoodsVO> goodsVOArrayList = new ArrayList<>();
         for(GoodsPO goods : initialPO.getGoodsList()){
             goodsVOArrayList.add(new GoodsVO(goods));
         }
         this.goodsList = goodsVOArrayList;
-
-        /*得到ArrayList<GoodsSortVO>*/
-        ArrayList<GoodsSortVO> goodsSortVOArrayList = new ArrayList<>();
-        for(GoodsSortPO goodsSort : initialPO.getGoodsSortList()){
-            goodsSortVOArrayList.add(new GoodsSortVO(goodsSort));
-        }
-        this.goodsSortList = goodsSortVOArrayList;
 
         /*得到ArrayList<ClientVO>*/
         ArrayList<ClientVO> clientVOArrayList = new ArrayList<>();

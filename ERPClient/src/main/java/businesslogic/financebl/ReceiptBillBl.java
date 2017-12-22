@@ -38,8 +38,8 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
          /*转化*/
         ReceiptBillPO receiptBillPO = ((ReceiptBillVO)bill).getReceiptBillPO();
 
-        /*修改状态*/
-        receiptBillPO.setState("审批通过");
+//        /*修改状态*/
+//        receiptBillPO.setState("审批通过");
         ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
 
         receiptBillDataService.update(receiptBillPO);
@@ -47,7 +47,13 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         /*修改应付数据*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = clientTool.find(receiptBillPO.getClientID());
-        clientVO.setReceivable(clientVO.getPayable() - receiptBillPO.getTotal());//原来的应减付去收款单的总金额
+        clientVO.setPayable(clientVO.getPayable() - receiptBillPO.getTotal());//原来的应付减去收款单的总金额
+        //如果应付修改后小于0，自动转为应收
+        if(clientVO.getPayable() < 0){
+            double delta = clientVO.getPayable();
+            clientVO.setReceivable(clientVO.getReceivable() + delta);
+            clientVO.setPayable(0);
+        }
         clientTool.editClient(clientVO);
 
         /*添加message*/
@@ -59,7 +65,7 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"（系统消息）");
         messageTool.addMessage(messageVO);
 
-        //更改账户余额,对每一个账户加上付款单转账列表的金额
+        //更改账户余额,对每一个账户加上收款单转账列表的金额
         AccountTool accountTool = new AccountBl();
         AccountVO accountVO;
         for(TransItemVO transItemVO : transItemVOS){
@@ -80,8 +86,8 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         /*实现转化*/
         ReceiptBillPO receiptBillPO = ((ReceiptBillVO)bill).getReceiptBillPO();
 
-        /*修改状态*/
-        receiptBillPO.setState("审批未通过");
+//        /*修改状态*/
+//        receiptBillPO.setState("审批未通过");
 
         /*dataService*/
         ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
@@ -148,9 +154,6 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
     public String submit(ReceiptBillVO vo) throws Exception {
         //转换
         ReceiptBillPO receiptBillPO = vo.getReceiptBillPO();
-
-        //修改状态
-        receiptBillPO.setState("待审批");
 
         //调用
         /*dataService*/

@@ -18,6 +18,7 @@ import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.CashBillVO;
+import main.java.vo.bill.financebill.CashItemVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
@@ -37,8 +38,8 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         //转换VO到PO
         CashBillPO cashBillPO = ((CashBillVO) bill).getCashBillPO();
 
-        //修改状态
-        cashBillPO.setState("审批通过");
+//        //修改状态
+//        cashBillPO.setState("审批通过");
 
         //调用dataService.update
         CashBillDataService cashBillDataService = CashBillDataFactory.getService();
@@ -47,13 +48,17 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         //修改账户余额，银行账户减去总额
         CashBillVO cashBillVO = (CashBillVO)bill;
         AccountTool accountTool = new AccountBl();
-        AccountVO accountVO = accountTool.find(cashBillVO.getAccount().getID());
+        AccountVO accountVO = accountTool.find(cashBillVO.getAccount().getID());//找到需要修改的银行账户
         accountVO.setRemaining(accountVO.getRemaining() - cashBillVO.getTotal());
         accountTool.editAccount(accountVO);
 
         //addMessage
         MessageTool messageTool = new MessageBl();
-        MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),"你申请的编号为"+cashBillVO.getID()+"的现金费用单已经审批通过，现在可以从账户"+cashBillVO.getAccount()+"取出"+cashBillVO.getTool()+"元");
+        String itemListInfo = "";
+        ArrayList<CashItemVO> cashItemVOS = cashBillVO.getItemList();
+        for(CashItemVO cashItemVO : cashItemVOS)//列出现金费用单的每一个报销项目
+            itemListInfo += cashItemVO.ItemName + " 报销" + cashItemVO.amount+"元;  ";
+        MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),"你申请的编号为"+cashBillVO.getID()+"的现金费用单【包括："+itemListInfo+"】"+"已经审批通过，现在可以从账户"+cashBillVO.getAccount()+"取出"+cashBillVO.getTotal()+"元。");
         messageTool.addMessage(messageVO);
 
     }
@@ -69,8 +74,8 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         //转换VO到PO
         CashBillPO cashBillPO = ((CashBillVO)bill).getCashBillPO();
 
-        //修改状态为拒绝
-        cashBillPO.setState("审批未通过");
+//        //修改状态为拒绝
+//        cashBillPO.setState("审批未通过");
 
         //调用dataService.update
         CashBillDataService cashBillDataService = CashBillDataFactory.getService();

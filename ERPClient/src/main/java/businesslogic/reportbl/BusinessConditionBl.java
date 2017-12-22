@@ -53,9 +53,9 @@ public class BusinessConditionBl implements BusinessConditionBlService {
      * 意义：  销售成本    商品类支出    总支出    利润
      *
      * 细节理解：
-     * 1、销售收入：销售单毛收入（折让前总额）- 销售退货单毛收入
+     * 1、销售收入：销售单毛收入（折让前总额）- 销售退货单总支出
      * 2、商品类收入：商品报溢收入（库存溢损单中库存比系统记录多的部分）+ 代金券与实际代金券使用金额的差额收入（即代金券未使用完的部分）
-     * 3、折让金额：只算销售单中discount部分
+     * 3、折让金额：销售单中discount部分和amountOfVoucher（实际代金券额度）部分和促销策略带来的折让
      * 4、折让后总收入：销售收入 + 商品类收入 - 折让金额
      * 5、销售成本：进货单总金额 - 进货退货单总金额
      * 6、商品类支出：商品破损（通过损溢单来查找损失的数量乘以单价得到） + 商品赠出（通过库存赠送单计算总额）
@@ -81,13 +81,14 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.getSaleTradeBillList(billQueryVO);
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
-            saleTotalBeforeDiscount += saleTradeBillVO.getTotalBeforeDiscount();
-            saleDiscount += saleTradeBillVO.getDiscount()+saleTradeBillVO.getAmountOfVoucher();
+            saleTotalBeforeDiscount += saleTradeBillVO.getTotalBeforeDiscount();//销售毛收入总和
+            saleDiscount += saleTradeBillVO.getDiscount()+saleTradeBillVO.getAmountOfVoucher()
+                    +saleTradeBillVO.getPromotion().countPromotionDiscount(saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount());
         }
         SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
         ArrayList<SaleRefundBillVO> saleRefundBillVOS = saleRefundBillTool.getSaleRefundBillList(billQueryVO);
         for(SaleRefundBillVO saleRefundBillVO : saleRefundBillVOS){
-            saleTotalBeforeDiscount -= saleRefundBillVO.getTotal();
+            saleTotalBeforeDiscount -= saleRefundBillVO.getTotal();//减去退货支出
         }
 
         /*****************************************************************/
@@ -117,12 +118,11 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         // 代金券与实际代金券差额收入，（销售单promotionID找到发放代金券总额，减去实际上代金券使用金额，求和）
         //实现：通过每一个销售单的PromotionID，拿到PromotionVO，通过type转成相应子类型，拿到代金券代金总额；
         // 然后每一个销售单的代金券是实际使用的钱。总额减去实际使用就是差额收入了
-        double diffVoucherGetTotal = 0;
-        double voucherTotal = 0;
-        double voucherUse = 0;
+        double diffVoucherGetTotal = 0;//代金券差额
+        double voucherTotal = 0;//发的总代金券
+        double voucherUse = 0;//使用的代金券额度
+        PromotionVO promotionVO;
 
-        PromotionTool promotionTool = new PromotionBl();
-        PromotionVO promotionVO = new PromotionVO();
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
             promotionVO = saleTradeBillVO.getPromotion();
             voucherTotal += promotionVO.countVoucher(saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount());
@@ -138,10 +138,13 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         double saleCostTotal = 0;
         double purchaseTotal = 0;
         double purchaseRefundTotal = 0;
+
         PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
         PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
+
         ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS = purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO);
         ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS = purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO);
+
         for(PurchaseTradeBillVO purchaseTradeBillVO : purchaseTradeBillVOS)
             purchaseTotal += purchaseTradeBillVO.getTotal();
         for(PurchaseRefundBillVO purchaseRefundBillVO : purchaseRefundBillVOS)
@@ -170,7 +173,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         for(InventoryGiftBillVO inventoryGiftBillVO : inventoryGiftBillVOS){
             ArrayList<GiftItemVO> giftItemVOS = inventoryGiftBillVO.getGiftList();
             for(GiftItemVO giftItemVO : giftItemVOS)
-                goodsBrokenCost += (giftItemVO.number * giftItemVO.price);
+                goodsPresentCost += (giftItemVO.number * giftItemVO.price);
         }
 
         goodsExpend = goodsBrokenCost + goodsPresentCost;
