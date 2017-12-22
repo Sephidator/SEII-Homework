@@ -7,7 +7,6 @@ import main.java.dataservice.initialdataservice.InitialDataService;
 import main.java.po.account.AccountPO;
 import main.java.po.client.ClientPO;
 import main.java.po.goods.GoodsPO;
-import main.java.po.goods.GoodsSortPO;
 import main.java.po.initial.InitialPO;
 import main.java.po.initial.InitialQueryPO;
 
@@ -55,60 +54,40 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
             ResultSet resultSet = statement.executeQuery(sql);
             ArrayList<GoodsPO> goodsPOS = new ArrayList<>();
             GoodsPO goodsPO;
-            ArrayList<GoodsSortPO> goodsSortPOS = new ArrayList<>();
-            GoodsSortPO goodsSortPO;
             ArrayList<ClientPO> clientPOS = new ArrayList<>();
             ClientPO clientPO;
             ArrayList<AccountPO> accountPOS = new ArrayList<>();
             AccountPO accountPO;
-            ResultSet tempResultSet;
-            Statement tempStatement = connection.createStatement();
             while (resultSet.next()) {
                 String initialID = resultSet.getString("ID");
+                int year = resultSet.getInt("year");
                 sql = "SELECT * FROM GoodsRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = tempStatement.executeQuery(sql);
-                while (tempResultSet.next()) {
-                    goodsPO = new GoodsPO(tempResultSet.getString("name"), tempResultSet.getString("goodsSortID"), tempResultSet.getString("model"),
-                            tempResultSet.getInt("number"), tempResultSet.getDouble("cost"), tempResultSet.getDouble("retail"), tempResultSet.getDouble("latestCost"),
-                            tempResultSet.getDouble("latestRetail"), tempResultSet.getInt("alarmNum"), tempResultSet.getString("comment"));
-                    goodsPO.setID(tempResultSet.getString("ID"));
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    goodsPO = new GoodsPO(resultSet.getString("name"), resultSet.getString("goodsSortID"), resultSet.getString("model"),
+                            resultSet.getInt("number"), resultSet.getDouble("cost"), resultSet.getDouble("retail"), resultSet.getDouble("latestCost"),
+                            resultSet.getDouble("latestRetail"), resultSet.getInt("alarmNum"), resultSet.getString("comment"));
+                    goodsPO.setID(resultSet.getString("ID"));
                     goodsPOS.add(goodsPO);
                 }
-                sql = "SELECT * FROM GoodsSortRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = tempStatement.executeQuery(sql);
-                while (tempResultSet.next()) {
-                    String ID = tempResultSet.getString("ID");
-                    ArrayList<String> childrenID;
-                    sql = "SELECT ID FROM GoodsSortRecord WHERE fatherID='" + ID + "'";
-                    Statement tempStatementOfGoodsSort = connection.createStatement();
-                    ResultSet tempResultSetOfGoodsSort = tempStatementOfGoodsSort.executeQuery(sql);
-                    childrenID = store(tempResultSetOfGoodsSort);
-                    ArrayList<String> goodsList;
-                    sql = "SELECT ID FROM GoodsRecord WHERE goodsSortID='" + ID + "'";
-                    tempResultSetOfGoodsSort = tempStatementOfGoodsSort.executeQuery(sql);
-                    goodsList = store(tempResultSetOfGoodsSort);
-                    goodsSortPO = new GoodsSortPO(tempResultSet.getString("name"), tempResultSet.getString("fatherID"), childrenID, goodsList, tempResultSet.getString("comment"));
-                    goodsSortPO.setID(ID);
-                    goodsSortPOS.add(goodsSortPO);
-                }
                 sql = "SELECT * FROM ClientRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = tempStatement.executeQuery(sql);
-                while (tempResultSet.next()) {
-                    clientPO = new ClientPO(tempResultSet.getString("category"), tempResultSet.getInt("level"), tempResultSet.getString("name"),
-                            tempResultSet.getString("phone"), tempResultSet.getString("address"), tempResultSet.getString("post"),
-                            tempResultSet.getString("email"), tempResultSet.getDouble("receivable"), tempResultSet.getDouble("payable"),
-                            tempResultSet.getDouble("receivableLimit"), tempResultSet.getString("salesmanID"));
-                    clientPO.setID(tempResultSet.getString("ID"));
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    clientPO = new ClientPO(resultSet.getString("category"), resultSet.getInt("level"), resultSet.getString("name"),
+                            resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("post"),
+                            resultSet.getString("email"), resultSet.getDouble("receivable"), resultSet.getDouble("payable"),
+                            resultSet.getDouble("receivableLimit"), resultSet.getString("salesmanID"));
+                    clientPO.setID(resultSet.getString("ID"));
                     clientPOS.add(clientPO);
                 }
                 sql = "SELECT * FROM AccountRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = tempStatement.executeQuery(sql);
-                while (tempResultSet.next()) {
-                    accountPO = new AccountPO(tempResultSet.getString("bankAccount"), tempResultSet.getString("name"), tempResultSet.getDouble("remaining"));
-                    accountPO.setID(tempResultSet.getString("ID"));
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
+                    accountPO.setID(resultSet.getString("ID"));
                     accountPOS.add(accountPO);
                 }
-                list.add(new InitialPO(resultSet.getInt("year"), goodsPOS, goodsSortPOS, clientPOS, accountPOS));
+                list.add(new InitialPO(year, goodsPOS, clientPOS, accountPOS));
             }
         } catch (SQLException e) {
             try {
@@ -118,18 +97,6 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
             throw new DataException();
         }
         return null;
-    }
-
-    /**
-     * @param resultSet
-     * @return 商品分类的子分类或商品
-     * @throws SQLException
-     */
-    private ArrayList<String> store(ResultSet resultSet) throws SQLException {
-        ArrayList<String> list = new ArrayList<>();
-        while (resultSet.next())
-            list.add(resultSet.getString("ID"));
-        return list;
     }
 
     /**
@@ -164,13 +131,6 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
                     sql = "INSERT INTO GoodsRecord VALUES ('" + ID + "','" + goodsPO.getName() + "','" +
                             goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
                             goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
-                    statement.executeUpdate(sql);
-                }
-            ArrayList<GoodsSortPO> goodsSortPOS = po.getGoodsSortList();
-            if (goodsSortPOS != null)
-                for (int i = 0; i < goodsSortPOS.size(); i++) {
-                    GoodsSortPO goodsSortPO = goodsSortPOS.get(i);
-                    sql = "INSERT INTO GoodsSortRecord VALUES ('" + ID + "','" + goodsSortPO.getID() + "','" + goodsSortPO.getName() + "','" + goodsSortPO.getFatherID() + "','" + goodsSortPO.getComment() + "')";
                     statement.executeUpdate(sql);
                 }
             ArrayList<ClientPO> clientPOS = po.getClientList();

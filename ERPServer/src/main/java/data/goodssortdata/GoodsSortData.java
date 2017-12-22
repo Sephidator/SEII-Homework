@@ -62,7 +62,6 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             return goodsSortPO;
         } catch (SQLException e) {
             try {
-                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }
@@ -98,7 +97,6 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             return goodsSortPO;
         } catch (SQLException e) {
             try {
-                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }

@@ -7,6 +7,6 @@ public class ServerRunner {
     public static void main(String[] args) throws Exception {
         new DataHelper();
         new RemoteHelper();
-        System.out.println("Server Start");
+        System.out.println("Link Success");
     }
 }
