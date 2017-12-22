@@ -29,6 +29,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         UserDataService userDataService = this;
         try {
             Naming.rebind("rmi://127.0.0.1:7200/UserDataService", userDataService);
+            init();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -251,6 +252,23 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
             sql = "UPDATE User SET login=FALSE WHERE ID='" + UserID + "'";
             statement.executeUpdate(sql);
             resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+            }
+            throw new DataException();
+        }
+    }
+
+    private void init() throws RemoteException {
+        Connection connection = DataHelper.getConnection();
+
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "UPDATE User SET login=FALSE";
+            statement.executeUpdate(sql);
             statement.close();
         } catch (SQLException e) {
             try {

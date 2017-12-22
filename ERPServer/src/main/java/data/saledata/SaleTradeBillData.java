@@ -62,6 +62,7 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                 sql = "SELECT * FROM SaleTradeBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='审批通过'";
                 sqlOfQuery.add(sql);
             }
+            resultSet.close();
             list = getList(statement, sqlOfQuery);
             statement.close();
             return list;
@@ -87,13 +88,12 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
             Statement statement = connection.createStatement();
             ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
-            ResultSet resultSet;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
                 sql = "SELECT * FROM SaleTradeBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                 sqlOfQuery.add(sql);
             } else {
                 sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
-                resultSet = statement.executeQuery(sql);
+                ResultSet resultSet = statement.executeQuery(sql);
                 while (resultSet.next()) {
                     String operatorID = resultSet.getString("ID");
                     sql = "SELECT * FROM SaleTradeBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";

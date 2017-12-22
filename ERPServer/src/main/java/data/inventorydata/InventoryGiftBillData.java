@@ -72,7 +72,7 @@ public class InventoryGiftBillData extends UnicastRemoteObject implements Invent
                 while (resultSet.next()) {
                     String ID = resultSet.getString("ID");
                     sql = "SELECT * FROM GiftItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
+                    ResultSet temp = connection.createStatement().executeQuery(sql);
                     ArrayList<GiftItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
                         itemPOS.add(new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
