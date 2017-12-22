@@ -4,7 +4,6 @@ import main.java.po.PO;
 import main.java.po.account.AccountPO;
 import main.java.po.client.ClientPO;
 import main.java.po.goods.GoodsPO;
-import main.java.po.goods.GoodsSortPO;
 
 import java.util.ArrayList;
 
@@ -14,8 +13,6 @@ public class InitialPO extends PO {
 
     private ArrayList<GoodsPO> goodsList;//每一个商品都有一个ID
 
-    private ArrayList<GoodsSortPO> goodsSortList;//每一个商品分类都有一个ID
-
     private ArrayList<ClientPO> clientList;//每一个客户都有一个ID
 
     private ArrayList<AccountPO> accountList;//每一个账户都有一个ID
@@ -23,10 +20,9 @@ public class InitialPO extends PO {
     public InitialPO() {
     }
 
-    public InitialPO(int year, ArrayList<GoodsPO> goodsList, ArrayList<GoodsSortPO> goodsSortList, ArrayList<ClientPO> clientList, ArrayList<AccountPO> accountList) {
+    public InitialPO(int year, ArrayList<GoodsPO> goodsList, ArrayList<ClientPO> clientList, ArrayList<AccountPO> accountList) {
         this.year = year;
         this.goodsList = goodsList;
-        this.goodsSortList = goodsSortList;
         this.clientList = clientList;
         this.accountList = accountList;
     }
@@ -45,14 +41,6 @@ public class InitialPO extends PO {
 
     public void setGoodsList(ArrayList<GoodsPO> goodsList) {
         this.goodsList = goodsList;
-    }
-
-    public ArrayList<GoodsSortPO> getGoodsSortList() {
-        return goodsSortList;
-    }
-
-    public void setGoodsSortList(ArrayList<GoodsSortPO> goodsSortList) {
-        this.goodsSortList = goodsSortList;
     }
 
     public ArrayList<ClientPO> getClientList() {

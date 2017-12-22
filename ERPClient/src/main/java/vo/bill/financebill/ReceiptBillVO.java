@@ -109,6 +109,12 @@ public class ReceiptBillVO extends FinanceBillVO {
         this.client = clientVO;
 
         this.visible = receiptBillPO.isVisible();
+        //transListPO到TransListVO
+        ArrayList<TransItemPO> transItemPOS = receiptBillPO.getTransList();
+        ArrayList<TransItemVO> transItemVOS = new ArrayList<>();
+        for(TransItemPO transItemPO : transItemPOS)
+            transItemVOS.add(new TransItemVO(transItemPO));
+        this.setTransList(transItemVOS);
     }
 
     /*getTool*/

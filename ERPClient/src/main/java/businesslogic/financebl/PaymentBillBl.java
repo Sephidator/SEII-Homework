@@ -38,8 +38,8 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*转化*/
         PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
 
-        /*修改状态*/
-        paymentBillPO.setState("审批通过");
+//        /*修改状态*/
+//        paymentBillPO.setState("审批通过");
 
         /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
@@ -49,15 +49,21 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = clientTool.find(paymentBillPO.getClientID());
         clientVO.setReceivable(clientVO.getReceivable() - paymentBillPO.getTotal());//原来的应收减去付款单的总金额
+        //如果应收修改后小于0，自动转为应付
+        if(clientVO.getReceivable() < 0){
+            double delta = clientVO.getReceivable();
+            clientVO.setPayable(clientVO.getPayable() + delta);
+            clientVO.setReceivable(0);
+        }
         clientTool.editClient(clientVO);
 
          /*添加message*/
         MessageTool messageTool = new MessageBl();
-        String message = "";String messOne="从账户";String messTwo="取出";String messThree="元";
+        String message = "";String messOne="从账户";String messTwo="转出";String messThree="元";
         ArrayList<TransItemVO> transItemVOS = ((PaymentBillVO)bill).getTransList();
         for(TransItemVO transItemVO : transItemVOS)
             message += messOne + transItemVO.account + messTwo + transItemVO.transAmount+messThree+", ";
-        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"（系统消息）");
+        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"到客户"+clientVO.getName()+"账上,客户电话号码："+clientVO.getPhone()+"（系统消息）");
         messageTool.addMessage(messageVO);
 
         //更改账户余额,对每一个账户减去付款单转账列表的金额
@@ -82,8 +88,8 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*实现转化*/
         PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
 
-        /*修改状态*/
-        paymentBillPO.setState("审批未通过");
+//        /*修改状态*/
+//        paymentBillPO.setState("审批未通过");
 
         /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();

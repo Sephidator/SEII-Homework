@@ -54,8 +54,6 @@ public class AccountBl implements AccountBlService, AccountTool {
         /*调用AccountDataService.update*/
         AccountDataService accountDataService = AccountDataFactory.getService();
         accountDataService.update(accountPO);
-
-        accountDataService.update(accountPO);
     }
 
     /**
