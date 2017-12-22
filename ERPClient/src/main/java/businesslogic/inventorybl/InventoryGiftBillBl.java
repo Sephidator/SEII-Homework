@@ -158,6 +158,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
         inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
         /*修改商品信息调用goodsTool*/
+        String messageAlarm="";
         GoodsTool goodsTool = new GoodsBl();
         for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
             GoodsVO goodsVO = giftItemVO.goods;
@@ -165,14 +166,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
             goodsTool.editGoods(goodsVO);
             /*库存警报*/
             if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
-                MessageTool messageToolAlarm=new MessageBl();
-                UserTool userToolAlarm = new UserBl();
-                UserQueryVO userQueryVOAlarm = new UserQueryVO(null, "进货人员");
-                ArrayList<UserVO> userVOSAlarm = userToolAlarm.getUserList(userQueryVOAlarm);
-                int ranAlarm = (int) (Math.random() * (userVOSAlarm.size() - 0 + 1));
-                String messageAlarm="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum();
-                MessageVO messageVOAlarm=new MessageVO(userVOSAlarm.get(ranAlarm),inventoryGiftBillVO.getOperator(),messageAlarm);
-                messageToolAlarm.addMessage(messageVOAlarm);
+                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
             }
         }
 
@@ -186,6 +180,17 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
         }
         MessageVO messageVO = new MessageVO(inventoryGiftBillVO.getOperator(), inventoryGiftBillVO.getOperator(), message + "系统消息");
         messageTool.addMessage(messageVO);
+
+        /*给库存人员发送库存报警的message*/
+
+        if(!messageAlarm.equals("")){
+            UserTool userTool = new UserBl();
+            UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
+            ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
+            int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
+            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),inventoryGiftBillVO.getOperator(),messageAlarm);
+            messageTool.addMessage(messageVOAlarm);
+        }
     }
 
     /**

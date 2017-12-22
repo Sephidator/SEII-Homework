@@ -167,6 +167,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
         purchaseTradeBillDataService.update(purchaseTradeBillPO);
 
         /*修改商品信息调用goodsTool*/
+        String messageAlarm="";
         GoodsTool goodsTool = new GoodsBl();
         for (GoodsItemVO goodsItemVO : purchaseTradeBillVO.getPurchaseList()) {
             GoodsVO goodsVO = goodsItemVO.goods;
@@ -174,14 +175,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
             goodsTool.editGoods(goodsVO);
             /*库存警报*/
             if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
-                MessageTool messageToolAlarm=new MessageBl();
-                UserTool userToolAlarm = new UserBl();
-                UserQueryVO userQueryVOAlarm = new UserQueryVO(null, "进货人员");
-                ArrayList<UserVO> userVOSAlarm = userToolAlarm.getUserList(userQueryVOAlarm);
-                int ranAlarm = (int) (Math.random() * (userVOSAlarm.size() - 0 + 1));
-                String messageAlarm="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum();
-                MessageVO messageVOAlarm=new MessageVO(userVOSAlarm.get(ranAlarm),purchaseTradeBillVO.getOperator(),messageAlarm);
-                messageToolAlarm.addMessage(messageVOAlarm);
+                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
             }
         }
 
@@ -205,11 +199,17 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
         MessageVO messageVOToInventory = new MessageVO(userVOS.get(ran), purchaseTradeBillVO.getOperator(), messageToInventory + "（系统消息）");
         messageTool.addMessage(messageVOToInventory);
 
+        /*给库存人员发送库存报警的message*/
+        if(!messageAlarm.equals("")){
+            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),purchaseTradeBillVO.getOperator(),messageAlarm);
+            messageTool.addMessage(messageVOAlarm);
+        }
+
         /*给财务人员发送message*/
         String messageToFinance = "客户应收应付调整： 应收：" + clientVO.getReceivable() + " 应付：" + clientVO.getPayable();
         UserQueryVO userQueryVO1 = new UserQueryVO(null, "财务人员");
         ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO);
-        int ran1 = (int) (Math.random() * (userVOS.size() - 0 + 1));
+        int ran1 = (int) (Math.random() * (userVOS1.size() - 0 + 1));
         MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), purchaseTradeBillVO.getOperator(), messageToFinance + "（系统消息）");
 
     }
