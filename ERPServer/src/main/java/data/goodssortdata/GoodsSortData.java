@@ -93,7 +93,7 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             sql = "SELECT * FROM Goods WHERE goodsSortID='" + ID + "' AND visible=TRUE ";
             temp = statement.executeQuery(sql);
             goodsList = store(temp);
-            goodsSortPO = new GoodsSortPO(resultSet.getString("name"), fatherID, childrenID, goodsList, comment);
+            goodsSortPO = new GoodsSortPO(name, fatherID, childrenID, goodsList, comment);
             goodsSortPO.setID(ID);
             return goodsSortPO;
         } catch (SQLException e) {
@@ -148,7 +148,7 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
-                ID = "GoodsSort" + String.format("%" + 8 + "d", key);
+                ID = "GoodsSort" + String.format("%0" + 8 + "d", key);
                 sql = "UPDATE GoodsSort SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
             }

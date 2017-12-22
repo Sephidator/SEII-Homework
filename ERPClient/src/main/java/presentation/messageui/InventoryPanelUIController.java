@@ -2,19 +2,68 @@ package main.java.presentation.messageui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import main.java.MainApp;
+import main.java.businesslogicfactory.messageblfactory.MessageBlFactory;
+import main.java.businesslogicservice.messageblservice.MessageBlService;
+import main.java.exception.DataException;
 import main.java.presentation.goodssortui.GoodsSortUIController;
 import main.java.presentation.goodsui.GoodsUIController;
 import main.java.presentation.inventoryui.InventoryBillUIController;
 import main.java.presentation.inventoryui.InventoryVerificationUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.message.MessageVO;
+
+import java.util.ArrayList;
 
 
 public class InventoryPanelUIController extends CenterUIController {
+    private MessageBlService service;
+    @FXML
+    private TextArea messageArea;
 
+    // 设置controller数据的方法*****************************************
+
+    public void setService(MessageBlService service){
+        this.service=service;
+        refreshMessage();
+    }
+
+    private void refreshMessage(){
+        try{
+            ArrayList<MessageVO> messageList=service.getMessageList(root.getOperator());
+            String text="";
+
+            for(MessageVO message:messageList){
+                text+="系统消息："+System.lineSeparator();
+                text+=message.getMessage()+System.lineSeparator();
+                text+=System.lineSeparator();
+            }
+            messageArea.setText(text);
+
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("获取系统信息失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("获取系统信息失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
+    }
 
     // 界面之中会用到的方法******************************************
+
+    @FXML
+    private void handleMessage(){
+        refreshMessage();
+    }
 
     @FXML
     private void handleGoodsSort(){
@@ -61,6 +110,7 @@ public class InventoryPanelUIController extends CenterUIController {
             InventoryPanelUIController controller=loader.getController();
             root.showLogoutButton(true);
             controller.setRoot(root);
+            controller.setService(MessageBlFactory.getService());
         }catch(Exception e){
             e.printStackTrace();
         }

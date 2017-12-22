@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -12,6 +13,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GoodsSortVO;
 import main.java.vo.goods.GoodsVO;
@@ -53,10 +58,15 @@ public class GoodsSortInfoUIController extends InfoUIController {
 
     public void setGoodsSort(GoodsSortVO goodsSort) {
         this.goodsSort = goodsSort;
-        ID.setText("123");
+        ID.setText(goodsSort.getID());
         name.setText(goodsSort.getName());
         comment.setText(goodsSort.getComment());
-        father.setText("father"); //goodsSort.getFather().getName()
+        if(goodsSort.getFather()==null){
+            father.setText("");
+        }
+        else{
+            father.setText(goodsSort.getFather().toString());
+        }
 
         String str="";
         for(GoodsSortVO child: goodsSort.getChildren()){
@@ -83,13 +93,19 @@ public class GoodsSortInfoUIController extends InfoUIController {
      * */
     public void setPaneFunction(int command){
         if(command==1){
-            confirm.setText("确认添加");
+            confirm.setText("添加");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("编辑");
         }
         else if(command==3){
             confirm.setText("确定");
+            ID.setEditable(false);
+            name.setEditable(false);
+            father.setEditable(false);
+            comment.setEditable(false);
+            children.setEditable(false);
+            goodsList.setEditable(false);
         }
     }
 
@@ -97,24 +113,100 @@ public class GoodsSortInfoUIController extends InfoUIController {
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("添加")){
-            goodsSortBlService.addGoodsSort(goodsSort);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("添加")){
+                    String sortID=goodsSortBlService.addGoodsSort(goodsSort);
+                    String sortName=goodsSort.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("添加商品分类成功");
+                    alert.setContentText("商品分类ID："+sortID+System.lineSeparator()+"名字："+sortName);
+                    alert.showAndWait();
+                }
+                else if(text.equals("编辑")){
+                    goodsSortBlService.editGoodsSort(goodsSort);
+                    String sortID=goodsSort.getID();
+                    String sortName=goodsSort.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("编辑商品分类成功");
+                    alert.setContentText("商品分类ID："+sortID+System.lineSeparator()+"名字："+sortName);
+                    alert.showAndWait();
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                e.printStackTrace();
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品分类失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }
+            catch(ExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品分类失败");
+                alert.setContentText("和已存在的商品分类重名");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品分类失败");
+                alert.setContentText("商品分类不存在");
+                alert.showAndWait();
+            }
+            catch(NotNullException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品分类失败");
+                alert.setContentText("父分类下有商品");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品分类失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
         }
-        else if(text.equals("编辑")){
-            goodsSortBlService.editGoodsSort(goodsSort);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
     private void handleCancel(){
         dialogStage.close();
     }
+
+    /**
+     * 检查用户信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+        String errorMessage = "";
+
+        if (name.getText().length()==0) {
+            errorMessage+=("未输入商品分类名。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()==0){
+            goodsSort.setName(name.getText());
+            goodsSort.setComment(comment.getText());
+            return true;
+        } else {
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("商品分类信息错误");
+            alert.setHeaderText("请检查商品分类信息的输入");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+            return false;
+        }
+    }
+
 
     // 加载文件和界面的方法******************************************
 
@@ -130,7 +222,7 @@ public class GoodsSortInfoUIController extends InfoUIController {
             // Create the dialog stage
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("客户信息界面");
+            dialogStage.setTitle("商品分类信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));

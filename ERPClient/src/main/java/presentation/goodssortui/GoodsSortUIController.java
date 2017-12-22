@@ -7,6 +7,7 @@ import javafx.util.Callback;
 import main.java.MainApp;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodssortbl.GoodsSortBl;
+import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
@@ -41,7 +42,6 @@ public class GoodsSortUIController extends CenterUIController {
     public void setGoodsSortBlService(GoodsSortBlService goodsSortBlService) {
         this.goodsSortBlService=goodsSortBlService;
         refresh();
-
     }
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
@@ -97,16 +97,16 @@ public class GoodsSortUIController extends CenterUIController {
 
     @FXML
     private void handleAddSort(){
-        if(isCorrectGoodsSortSelected()){
+        if(isGoodsSortSelected()){
             int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
             TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
             GoodsSortVO sort=sortItem.getValue();
 
-            if(sort.getChildren().size()!=0){
+            if(sort.getGoods().size()!=0){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("添加商品分类失败");
-                alert.setContentText("该商品分类下有商品");
+                alert.setContentText("父分类下有商品");
                 alert.showAndWait();
             }
             else{
@@ -120,62 +120,75 @@ public class GoodsSortUIController extends CenterUIController {
 
     @FXML
     private void handleDeleteSort(){
-        if(isCorrectGoodsSortSelected()){
-            try {
-                int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
-                TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
-                GoodsSortVO sort=sortItem.getValue();
+        if(isGoodsSortSelected()){
+            int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+            TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
+            GoodsSortVO sort=sortItem.getValue();
 
-                String ID = sort.getID();
-                String name = sort.getName();
-                goodsSortBlService.deleteGoodsSort(ID);
-
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("删除商品分类成功");
-                alert.setContentText("分类ID："+ID+System.lineSeparator()+"名字："+name);
-                alert.showAndWait();
-            }catch(DataException e){
+            if(!sortItem.isLeaf()){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("删除商品分类失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
-            }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除商品分类失败");
-                alert.setContentText("商品分类不存在");
-                alert.showAndWait();
-            }catch(NotNullException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除商品分类失败");
-                alert.setContentText("商品分类下有子类或商品");
-                alert.showAndWait();
-            }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除商品分类失败");
-                alert.setContentText("RMI连接错误");
+                alert.setContentText("商品分类下有子分类或商品");
                 alert.showAndWait();
             }
-            refresh();
+            else if(selectedIndex==0){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品分类失败");
+                alert.setContentText("不能删除总分类");
+                alert.showAndWait();
+            }
+            else{
+                try {
+                    String ID = sort.getID();
+                    String name = sort.getName();
+                    goodsSortBlService.deleteGoodsSort(ID);
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("删除商品分类成功");
+                    alert.setContentText("分类ID："+ID+System.lineSeparator()+"名字："+name);
+                    alert.showAndWait();
+                }catch(DataException e){
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("删除商品分类失败");
+                    alert.setContentText("数据库错误");
+                    alert.showAndWait();
+                }catch(NotExistException e){
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("删除商品分类失败");
+                    alert.setContentText("商品分类不存在");
+                    alert.showAndWait();
+                }catch(NotNullException e){
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("删除商品分类失败");
+                    alert.setContentText("商品分类下有子类或商品");
+                    alert.showAndWait();
+                }catch(Exception e){
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("删除商品分类失败");
+                    alert.setContentText("RMI连接错误");
+                    alert.showAndWait();
+                }
+                refresh();
+            }
         }
     }
 
     @FXML
     private void handleEditSort(){
-        int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
-        if(goodsSortTreeView.getTreeItem(selectedIndex).isExpanded()){
-            TreeItem<GoodsSortVO> item=goodsSortTreeView.getTreeItem(selectedIndex);
-            GoodsSortVO sort=item.getValue();
+        if(isGoodsSortSelected()){
+            int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+            TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
+            GoodsSortVO sort=sortItem.getValue();
+
             GoodsSortInfoUIController.init(goodsSortBlService,sort,3,root.getStage());
-        }
-        else{
-            TreeItem<GoodsVO> item=goodsSortTreeView.getTreeItem(selectedIndex);
-            GoodsVO goods=item.getValue();
-            GoodsInfoUIController.init(goodsBlService,goods,3,root.getStage());
+            refresh();
         }
     }
 
@@ -183,7 +196,7 @@ public class GoodsSortUIController extends CenterUIController {
     private void handleAddGoods() {
     }
 
-    private boolean isCorrectGoodsSortSelected(){
+    private boolean isGoodsSortSelected(){
         int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
         if(selectedIndex<0){
             Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -228,8 +241,8 @@ public class GoodsSortUIController extends CenterUIController {
 
             GoodsSortUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setGoodsSortBlService(new GoodsSortBl());
-            controller.setGoodsBlService(new GoodsBl());
+            controller.setGoodsSortBlService(GoodsSortBlFactory.getService());
+            controller.setGoodsBlService(GoodsBlFactory.getService());
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

@@ -8,12 +8,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import main.java.MainApp;
+import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
+import main.java.exception.DataException;
+import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
@@ -37,6 +41,9 @@ public class GoodsUIController extends CenterUIController {
     @FXML
     private TableColumn<GoodsVO,String> goodsCommentColumn;
 
+    @FXML
+    private TextField searchInfo;
+
     // 加载文件后调用的方法******************************************
 
     /**
@@ -55,8 +62,29 @@ public class GoodsUIController extends CenterUIController {
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
         this.goodsBlService = goodsBlService;
-        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
-        //showGoodsList(goodsList);
+        refresh(null);
+    }
+
+    /**
+     * 刷新界面，取得所有商品的列表，并显示在tableview中
+     * */
+    private void refresh(GoodsQueryVO query){
+        try {
+            ArrayList<GoodsVO> goodsList = goodsBlService.getGoodsList(query);
+            showGoodsList(goodsList);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -64,21 +92,57 @@ public class GoodsUIController extends CenterUIController {
      * */
     private void showGoodsList(ArrayList<GoodsVO> goodsList){
         goodsObservableList.removeAll();
-
-        for(int i=0;i<goodsList.size();i++){
-            goodsObservableList.add(goodsList.get(i));
-        }
+        goodsObservableList.setAll(goodsList);
         goodsTableView.setItems(goodsObservableList);
     }
 
     // 界面之中会用到的方法******************************************
 
+    @FXML
+    private void handleSearch(){
+        String text=searchInfo.getText();
+        if(text.equals("")){
+            refresh(null);
+        }
+        else{
+            GoodsQueryVO query=new GoodsQueryVO(text,text);
+            refresh(query);
+        }
+    }
 
     @FXML
     private void handleDeleteGoods(){
-        int selectedIndex=goodsTableView.getSelectionModel().getSelectedIndex();
         if(isGoodsSelected()){
-            goodsTableView.getItems().remove(selectedIndex);
+            try {
+                String ID = goodsTableView.getSelectionModel().getSelectedItem().getID();
+                String name = goodsTableView.getSelectionModel().getSelectedItem().getName();
+                goodsBlService.deleteGoods(ID);
+
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("删除商品成功");
+                alert.setContentText("商品ID："+ID+System.lineSeparator()+"名字："+name);
+                alert.showAndWait();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品失败");
+                alert.setContentText("商品不存在");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("删除商品失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
+            refresh(null);
         }
     }
 
@@ -87,6 +151,7 @@ public class GoodsUIController extends CenterUIController {
         if(isGoodsSelected()){
             GoodsInfoUIController.init(goodsBlService,goodsTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
         }
+        refresh(null);
     }
 
     @FXML
@@ -133,18 +198,7 @@ public class GoodsUIController extends CenterUIController {
 
             GoodsUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setGoodsBlService(null);
-
-            GoodsVO c1=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
-            c1.setID("123");
-            GoodsVO c2=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
-            c2.setID("123");
-
-            ArrayList<GoodsVO> list=new ArrayList<>();
-            list.add(c1);
-            list.add(c2);
-
-            controller.showGoodsList(list);
+            controller.setGoodsBlService(GoodsBlFactory.getService());
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

@@ -70,7 +70,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="sort" prefHeight="30.0" prefWidth="175.0">
+                                    <TextField fx:id="sort" editable="false" prefHeight="30.0" prefWidth="175.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -234,7 +234,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="latestCost" prefHeight="30.0" prefWidth="170.0">
+                              <TextField fx:id="latestCost" editable="false" prefHeight="30.0" prefWidth="170.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -254,7 +254,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="latestRetail" prefHeight="30.0" prefWidth="170.0">
+                                    <TextField fx:id="latestRetail" editable="false" prefHeight="30.0" prefWidth="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

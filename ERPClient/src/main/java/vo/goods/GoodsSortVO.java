@@ -64,7 +64,12 @@ public class GoodsSortVO extends VO{
         this.comment=goodsSortPO.getComment();
 
         GoodsSortTool goodsSortTool=new GoodsSortBl();
-        this.father=goodsSortTool.find(goodsSortPO.getFatherID());
+        if(goodsSortPO.getFatherID()!=null){
+            this.father=goodsSortTool.find(goodsSortPO.getFatherID());
+        }
+        else{
+            this.father=null;
+        }
 
         ArrayList<GoodsSortVO> children=new ArrayList<>();
         for(String childrenID:goodsSortPO.getChildrenID()){

@@ -42,7 +42,6 @@ public class LoginUIController {
     @FXML
     private void handleLogin(){
         try{
-            LoginBlFactory.getService().logout("User00000002");
             UserVO user= LoginBlFactory.getService().login(usernameField.getText(),passwordField.getText());
 
             stage.close();

@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
@@ -63,10 +60,10 @@ public class GoodsInfoUIController extends InfoUIController{
 
     public void setGoods(GoodsVO goods) {
         this.goods = goods;
-        ID.setText("123");
+        ID.setText(goods.getID());
         name.setText(goods.getName());
-        sort.setText("sort");
-        model.setText("型号");
+        sort.setText(goods.getGoodsSort().toString());
+        model.setText(goods.getModel());
         number.setText(String.valueOf(goods.getNumber()));
         alarmNum.setText(String.valueOf(goods.getAlarmNum()));
         cost.setText(String.valueOf(goods.getCost()));
@@ -87,13 +84,24 @@ public class GoodsInfoUIController extends InfoUIController{
      * */
     public void setPaneFunction(int command){
         if(command==1){
-            confirm.setText("确认添加");
+            confirm.setText("添加");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("编辑");
         }
         else if(command==3){
             confirm.setText("确定");
+            ID.setEditable(false);
+            name.setEditable(false);
+            sort.setEditable(false);
+            model.setEditable(false);
+            number.setEditable(false);
+            alarmNum.setEditable(false);
+            cost.setEditable(false);
+            retail.setEditable(false);
+            latestCost.setEditable(false);
+            latestRetail.setEditable(false);
+            comment.setEditable(false);
         }
     }
 
@@ -119,6 +127,87 @@ public class GoodsInfoUIController extends InfoUIController{
     private void handleCancel(){
         dialogStage.close();
     }
+
+    /**
+     * 检查用户信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+
+        String errorMessage = "";
+
+        if (name.getText().length()==0) {
+            errorMessage+=("未输入商品名。"+System.lineSeparator());
+        }
+        if (number.getText().length()==0) {
+            errorMessage+=("未输入商品数量。"+System.lineSeparator());
+        }
+        else {
+            try {
+                int i=Integer.parseInt(number.getText());
+                if(i<0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("商品数量必须是非负数。"+System.lineSeparator());
+            }
+        }
+        if (alarmNum.getText().length()==0) {
+            errorMessage+=("未输入商品警戒数量。"+System.lineSeparator());
+        }
+        else {
+            try {
+                int i=Integer.parseInt(alarmNum.getText());
+                if(i<0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("商品警戒数量必须是非负数。"+System.lineSeparator());
+            }
+        }
+        if (cost.getText().length()==0) {
+            errorMessage+=("未输入商品进价。"+System.lineSeparator());
+        }
+        else {
+            try {
+                double i=Double.parseDouble(cost.getText());
+                if(i<0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("商品进价必须是非负数。"+System.lineSeparator());
+            }
+        }
+        if (cost.getText().length()==0) {
+            errorMessage+=("未输入商品零售价。"+System.lineSeparator());
+        }
+        else {
+            try {
+                double i=Double.parseDouble(cost.getText());
+                if(i<0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("商品零售价必须是非负数。"+System.lineSeparator());
+            }
+        }
+
+        if(errorMessage.length()==0){
+            goods.setName(name.getText());
+            goods.setModel(model.getText());
+            goods.setNumber(Integer.parseInt(number.getText()));
+            goods.setAlarmNum(Integer.parseInt(alarmNum.getText()));
+            goods.setCost(Double.parseDouble(cost.getText()));
+
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("用户信息错误");
+            alert.setHeaderText("请检查用户信息的输入");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+
+            return false;
+        }
+    }
+
 
     // 加载文件和界面的方法******************************************
 

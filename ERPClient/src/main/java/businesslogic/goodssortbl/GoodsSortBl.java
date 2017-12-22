@@ -44,6 +44,12 @@ public class GoodsSortBl implements GoodsSortBlService, GoodsSortTool {
         GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
         goodsSortPO = goodsSortDataService.find(goodsSortID);
 
+        System.out.println(goodsSortPO.getID());
+        System.out.println(goodsSortPO.getFatherID()==null?"FatherID:null":(goodsSortPO.getFatherID()));
+        System.out.println(goodsSortPO.getChildrenID().size());
+        System.out.println(goodsSortPO.getGoodsList().size());
+        System.out.println("@"+goodsSortPO.getComment()+"@");
+
        /*GoodsSortPO转换为GoodsSortVO*/
         goodsSortVO = new GoodsSortVO(goodsSortPO);
 

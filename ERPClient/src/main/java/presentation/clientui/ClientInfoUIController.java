@@ -194,7 +194,7 @@ public class ClientInfoUIController extends InfoUIController{
                     Alert alert=new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Success");
                     alert.setHeaderText("编辑客户成功");
-                    alert.setContentText("用户ID："+clientID+System.lineSeparator()+"名字："+clientName);
+                    alert.setContentText("客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
                     alert.showAndWait();
                 }
 

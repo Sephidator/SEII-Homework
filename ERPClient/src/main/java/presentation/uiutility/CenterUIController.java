@@ -5,7 +5,6 @@ import main.java.vo.user.UserVO;
 
 public class CenterUIController {
     protected RootUIController root;
-    protected UserVO operator;
 
     public void setRoot(RootUIController root){
         this.root=root;
@@ -13,14 +12,6 @@ public class CenterUIController {
 
     public RootUIController getRoot() {
         return root;
-    }
-
-    public void setOperator(UserVO operator){
-        this.operator=operator;
-    }
-
-    public UserVO getOperator() {
-        return operator;
     }
 
     public void instanceInit(RootUIController root){
