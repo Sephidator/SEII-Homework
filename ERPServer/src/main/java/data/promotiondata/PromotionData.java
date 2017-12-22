@@ -40,7 +40,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
             String sql = "SELECT * FROM Promotion WHERE ID='" + promotionID + "'";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
-            return getPromotionPO(statement, resultSet, promotionID, resultSet.getString("type"));
+            return getPromotionPO(connection.createStatement(), resultSet, promotionID, resultSet.getString("type"));
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -64,7 +64,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                list.add(getPromotionPO(statement, resultSet, resultSet.getString("ID"), resultSet.getString("type")));
+                list.add(getPromotionPO(connection.createStatement(), resultSet, resultSet.getString("ID"), resultSet.getString("type")));
             }
             resultSet.close();
             statement.close();
@@ -79,6 +79,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
     }
 
     private PromotionPO getPromotionPO(Statement statement, ResultSet resultSet, String promotionID, String type) throws SQLException {
+        ResultSet temp;
         PromotionPO promotionPO;
         String sql;
         try {
@@ -86,7 +87,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                 ArrayList<GiftItemPO> giftList = new ArrayList<>();
                 GiftItemPO giftItem;
                 sql = "SELECT * FROM GiftItem WHERE site_ID='" + promotionID + "'";
-                ResultSet temp = statement.executeQuery(sql);
+                temp = statement.executeQuery(sql);
                 while (temp.next()) {
                     giftItem = new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price"));
                     giftList.add(giftItem);
@@ -96,7 +97,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                 ArrayList<GoodsItemPO> goodsList = new ArrayList<>();
                 GoodsItemPO goodsItem;
                 sql = "SELECT * FROM GoodsItem WHERE site_ID='" + promotionID + "'";
-                ResultSet temp = statement.executeQuery(sql);
+                temp = statement.executeQuery(sql);
                 while (temp.next()) {
                     goodsItem = new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price"));
                     goodsList.add(goodsItem);
@@ -106,7 +107,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                 ArrayList<GiftItemPO> giftList = new ArrayList<>();
                 GiftItemPO giftItem;
                 sql = "SELECT * FROM GiftItem WHERE site_ID='" + promotionID + "'";
-                ResultSet temp = statement.executeQuery(sql);
+                temp = statement.executeQuery(sql);
                 while (temp.next()) {
                     giftItem = new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price"));
                     giftList.add(giftItem);

@@ -71,7 +71,7 @@ public class PaymentBillData extends UnicastRemoteObject implements PaymentBillD
                 while (resultSet.next()) {
                     String ID = resultSet.getString("ID");
                     sql = "SELECT * FROM TransItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
+                    ResultSet temp = connection.createStatement().executeQuery(sql);
                     ArrayList<TransItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
                         itemPOS.add(new TransItemPO(temp.getString("accountID"), temp.getDouble("transAmount"), temp.getString("comment")));

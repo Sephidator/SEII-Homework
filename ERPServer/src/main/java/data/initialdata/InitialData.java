@@ -62,10 +62,11 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
             ArrayList<AccountPO> accountPOS = new ArrayList<>();
             AccountPO accountPO;
             ResultSet tempResultSet;
+            Statement tempStatement = connection.createStatement();
             while (resultSet.next()) {
                 String initialID = resultSet.getString("ID");
                 sql = "SELECT * FROM GoodsRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = statement.executeQuery(sql);
+                tempResultSet = tempStatement.executeQuery(sql);
                 while (tempResultSet.next()) {
                     goodsPO = new GoodsPO(tempResultSet.getString("name"), tempResultSet.getString("goodsSortID"), tempResultSet.getString("model"),
                             tempResultSet.getInt("number"), tempResultSet.getDouble("cost"), tempResultSet.getDouble("retail"), tempResultSet.getDouble("latestCost"),
@@ -74,36 +75,37 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
                     goodsPOS.add(goodsPO);
                 }
                 sql = "SELECT * FROM GoodsSortRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = statement.executeQuery(sql);
+                tempResultSet = tempStatement.executeQuery(sql);
                 while (tempResultSet.next()) {
                     String ID = tempResultSet.getString("ID");
                     ArrayList<String> childrenID;
                     sql = "SELECT ID FROM GoodsSortRecord WHERE fatherID='" + ID + "'";
-                    ResultSet tempResultSetOfGoodsSort = statement.executeQuery(sql);
+                    Statement tempStatementOfGoodsSort = connection.createStatement();
+                    ResultSet tempResultSetOfGoodsSort = tempStatementOfGoodsSort.executeQuery(sql);
                     childrenID = store(tempResultSetOfGoodsSort);
                     ArrayList<String> goodsList;
                     sql = "SELECT ID FROM GoodsRecord WHERE goodsSortID='" + ID + "'";
-                    tempResultSetOfGoodsSort = statement.executeQuery(sql);
+                    tempResultSetOfGoodsSort = tempStatementOfGoodsSort.executeQuery(sql);
                     goodsList = store(tempResultSetOfGoodsSort);
                     goodsSortPO = new GoodsSortPO(tempResultSet.getString("name"), tempResultSet.getString("fatherID"), childrenID, goodsList, tempResultSet.getString("comment"));
                     goodsSortPO.setID(ID);
                     goodsSortPOS.add(goodsSortPO);
                 }
                 sql = "SELECT * FROM ClientRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = statement.executeQuery(sql);
+                tempResultSet = tempStatement.executeQuery(sql);
                 while (tempResultSet.next()) {
                     clientPO = new ClientPO(tempResultSet.getString("category"), tempResultSet.getInt("level"), tempResultSet.getString("name"),
                             tempResultSet.getString("phone"), tempResultSet.getString("address"), tempResultSet.getString("post"),
                             tempResultSet.getString("email"), tempResultSet.getDouble("receivable"), tempResultSet.getDouble("payable"),
                             tempResultSet.getDouble("receivableLimit"), tempResultSet.getString("salesmanID"));
-                    clientPO.setID(resultSet.getString("ID"));
+                    clientPO.setID(tempResultSet.getString("ID"));
                     clientPOS.add(clientPO);
                 }
                 sql = "SELECT * FROM AccountRecord WHERE InitialID='" + initialID + "'";
-                tempResultSet = statement.executeQuery(sql);
+                tempResultSet = tempStatement.executeQuery(sql);
                 while (tempResultSet.next()) {
                     accountPO = new AccountPO(tempResultSet.getString("bankAccount"), tempResultSet.getString("name"), tempResultSet.getDouble("remaining"));
-                    accountPO.setID(resultSet.getString("ID"));
+                    accountPO.setID(tempResultSet.getString("ID"));
                     accountPOS.add(accountPO);
                 }
                 list.add(new InitialPO(resultSet.getInt("year"), goodsPOS, goodsSortPOS, clientPOS, accountPOS));

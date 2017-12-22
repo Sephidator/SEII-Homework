@@ -71,7 +71,7 @@ public class PurchaseRefundBillData extends UnicastRemoteObject implements Purch
                 while (resultSet.next()) {
                     String ID = resultSet.getString("ID");
                     sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
+                    ResultSet temp = connection.createStatement().executeQuery(sql);
                     ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
                         itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));

@@ -47,11 +47,22 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             String sql = "SELECT * FROM GoodsSort WHERE ID='" + goodsSortID + "'";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
-            GoodsSortPO goodsSortPO = getGoodsSortPO(statement, resultSet);
-            goodsSortPO.setVisible(resultSet.getBoolean("visible"));
+            GoodsSortPO goodsSortPO;
+            ArrayList<String> childrenID;
+            String name = resultSet.getString("name"), fatherID = resultSet.getString("fatherID"), comment = resultSet.getString("comment");
+            sql = "SELECT * FROM GoodsSort WHERE fatherID='" + goodsSortID + "' AND visible=TRUE ";
+            ResultSet temp = statement.executeQuery(sql);
+            childrenID = store(temp);
+            ArrayList<String> goodsList;
+            sql = "SELECT * FROM Goods WHERE goodsSortID='" + goodsSortID + "' AND visible=TRUE ";
+            temp = statement.executeQuery(sql);
+            goodsList = store(temp);
+            goodsSortPO = new GoodsSortPO(name, fatherID, childrenID, goodsList, comment);
+            goodsSortPO.setID(goodsSortID);
             return goodsSortPO;
         } catch (SQLException e) {
             try {
+                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }
@@ -71,9 +82,23 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM GoodsSort WHERE visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
-            return getGoodsSortPO(statement, resultSet);
+            resultSet.next();
+            GoodsSortPO goodsSortPO;
+            ArrayList<String> childrenID;
+            String ID = resultSet.getString("ID"), name = resultSet.getString("name"), fatherID = resultSet.getString("fatherID"), comment = resultSet.getString("comment");
+            sql = "SELECT * FROM GoodsSort WHERE fatherID='" + ID + "' AND visible=TRUE ";
+            ResultSet temp = statement.executeQuery(sql);
+            childrenID = store(temp);
+            ArrayList<String> goodsList;
+            sql = "SELECT * FROM Goods WHERE goodsSortID='" + ID + "' AND visible=TRUE ";
+            temp = statement.executeQuery(sql);
+            goodsList = store(temp);
+            goodsSortPO = new GoodsSortPO(resultSet.getString("name"), fatherID, childrenID, goodsList, comment);
+            goodsSortPO.setID(ID);
+            return goodsSortPO;
         } catch (SQLException e) {
             try {
+                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }
@@ -82,38 +107,15 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
     }
 
     /**
-     * @param statement
-     * @param resultSet
-     * @return find及getRoot方法取得商品分类的公共部分
-     * @throws SQLException
-     */
-    private GoodsSortPO getGoodsSortPO(Statement statement, ResultSet resultSet) throws SQLException {
-        GoodsSortPO goodsSortPO;
-        ArrayList<String> childrenID;
-        String ID = resultSet.getString("ID");
-        String sql = "SELECT ID FROM GoodsSort WHERE fatherID='" + ID + "' AND visible=TRUE ";
-        ResultSet temp = statement.executeQuery(sql);
-        childrenID = store(temp);
-        ArrayList<String> goodsList;
-        sql = "SELECT ID FROM Goods WHERE goodsSortID='" + ID + "' AND visible=TRUE ";
-        temp = statement.executeQuery(sql);
-        goodsList = store(temp);
-        goodsSortPO = new GoodsSortPO(resultSet.getString("name"), resultSet.getString("fatherID"), childrenID, goodsList, resultSet.getString("comment"));
-        goodsSortPO.setID(ID);
-        temp.close();
-        return goodsSortPO;
-    }
-
-    /**
-     * @param resultSet
+     * @param temp
      * @return 商品分类对应的子分类或商品
      * @throws SQLException
      */
-    private ArrayList<String> store(ResultSet resultSet) throws SQLException {
+    private ArrayList<String> store(ResultSet temp) throws SQLException {
         ArrayList<String> list = new ArrayList<>();
 
-        while (resultSet.next()) {
-            list.add(resultSet.getString("ID"));
+        while (temp.next()) {
+            list.add(temp.getString("ID"));
         }
         return list;
     }

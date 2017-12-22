@@ -63,7 +63,7 @@ public class InventoryLossOverBillData extends UnicastRemoteObject implements In
                 while (resultSet.next()) {
                     String ID = resultSet.getString("ID");
                     sql = "SELECT * FROM LossOverItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = statement.executeQuery(sql);
+                    ResultSet temp = connection.createStatement().executeQuery(sql);
                     ArrayList<LossOverItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
                         itemPOS.add(new LossOverItemPO(temp.getString("goodsID"), temp.getDouble("price"), temp.getInt("goodsNumber"), temp.getInt("actualNumber")));
