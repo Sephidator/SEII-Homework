@@ -172,6 +172,17 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
             GoodsVO goodsVO = goodsItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() + goodsItemVO.number);
             goodsTool.editGoods(goodsVO);
+            /*库存警报*/
+            if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
+                MessageTool messageToolAlarm=new MessageBl();
+                UserTool userToolAlarm = new UserBl();
+                UserQueryVO userQueryVOAlarm = new UserQueryVO(null, "进货人员");
+                ArrayList<UserVO> userVOSAlarm = userToolAlarm.getUserList(userQueryVOAlarm);
+                int ranAlarm = (int) (Math.random() * (userVOSAlarm.size() - 0 + 1));
+                String messageAlarm="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum();
+                MessageVO messageVOAlarm=new MessageVO(userVOSAlarm.get(ranAlarm),purchaseTradeBillVO.getOperator(),messageAlarm);
+                messageToolAlarm.addMessage(messageVOAlarm);
+            }
         }
 
         /*修改客户应收应付调用ClientTool*/

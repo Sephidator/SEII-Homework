@@ -6,6 +6,8 @@ import main.java.businesslogic.logbl.LogBl;
 import main.java.businesslogic.logbl.LogTool;
 import main.java.businesslogic.messagebl.MessageBl;
 import main.java.businesslogic.messagebl.MessageTool;
+import main.java.businesslogic.userbl.UserBl;
+import main.java.businesslogic.userbl.UserTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.datafactory.inventorydatafactory.InventoryGiftBillDataFactory;
 import main.java.dataservice.inventorydataservice.InventoryGiftBillDataService;
@@ -19,6 +21,8 @@ import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.log.LogVO;
 import main.java.vo.message.MessageVO;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
@@ -159,6 +163,17 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
             GoodsVO goodsVO = giftItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() - giftItemVO.number);
             goodsTool.editGoods(goodsVO);
+            /*库存警报*/
+            if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
+                MessageTool messageToolAlarm=new MessageBl();
+                UserTool userToolAlarm = new UserBl();
+                UserQueryVO userQueryVOAlarm = new UserQueryVO(null, "进货人员");
+                ArrayList<UserVO> userVOSAlarm = userToolAlarm.getUserList(userQueryVOAlarm);
+                int ranAlarm = (int) (Math.random() * (userVOSAlarm.size() - 0 + 1));
+                String messageAlarm="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum();
+                MessageVO messageVOAlarm=new MessageVO(userVOSAlarm.get(ranAlarm),inventoryGiftBillVO.getOperator(),messageAlarm);
+                messageToolAlarm.addMessage(messageVOAlarm);
+            }
         }
 
         /*发送message*/
