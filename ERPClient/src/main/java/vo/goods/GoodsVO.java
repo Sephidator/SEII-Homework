@@ -7,7 +7,7 @@ import main.java.vo.VO;
 
 public class GoodsVO extends VO{
     private String name; //商品名称
-    private GoodsSortVO goodsSort;//商品所在商品分类
+    private String goodsSortID;//商品所在商品分类
     private String model; //商品型号
     private int number; //商品数量
     private double cost; //商品进价
@@ -19,7 +19,7 @@ public class GoodsVO extends VO{
 
     public GoodsVO(){
         this.name = "";
-        this.goodsSort = new GoodsSortVO();
+        this.goodsSortID = "";
         this.model = "";
         this.number = 0;
         this.cost = 0;
@@ -30,9 +30,9 @@ public class GoodsVO extends VO{
         this.comment = "";
     }
 
-    public GoodsVO(String name, GoodsSortVO goodsSort, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment) {
+    public GoodsVO(String name, String goodsSortID, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment) {
         this.name = name;
-        this.goodsSort = goodsSort;
+        this.goodsSortID = goodsSortID;
         this.model = model;
         this.number = number;
         this.cost = cost;
@@ -56,8 +56,7 @@ public class GoodsVO extends VO{
         goodsPO.setLatestRetail(this.latestRetail);
         goodsPO.setAlarmNum(this.alarmNum);
         goodsPO.setComment(this.comment);
-
-        goodsPO.setGoodsSortID(this.goodsSort.getID());
+        goodsPO.setGoodsSortID(this.goodsSortID);
 
         return goodsPO;
     }
@@ -74,10 +73,7 @@ public class GoodsVO extends VO{
         this.latestRetail = goodsPO.getLatestRetail();
         this.alarmNum = goodsPO.getAlarmNum();
         this.comment = goodsPO.getComment();
-
-        GoodsSortTool goodsSortTool=new GoodsSortBl();
-
-        this.goodsSort=goodsSortTool.find(goodsPO.getGoodsSortID());
+        this.goodsSortID=goodsPO.getGoodsSortID();
     }
 
 
@@ -85,8 +81,8 @@ public class GoodsVO extends VO{
         return name;
     }
 
-    public GoodsSortVO getGoodsSort() {
-        return goodsSort;
+    public String getGoodsSortID() {
+        return goodsSortID;
     }
 
     public String getModel() {
@@ -125,8 +121,8 @@ public class GoodsVO extends VO{
         this.name = name;
     }
 
-    public void setGoodsSort(GoodsSortVO goodsSort) {
-        this.goodsSort = goodsSort;
+    public void setGoodsSort(String goodsSortID) {
+        this.goodsSortID = goodsSortID;
     }
 
     public void setModel(String model) {
