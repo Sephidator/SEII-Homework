@@ -295,6 +295,10 @@ public class ClientInfoUIController extends InfoUIController{
             }
         }
 
+        if (salesman.getText()==null) {
+            errorMessage+=("未选择业务员。"+System.lineSeparator());
+        }
+
         if(errorMessage.length()==0){
             client.setCategory(category.getText());
             client.setName(name.getText());
