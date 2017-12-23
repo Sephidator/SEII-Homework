@@ -57,7 +57,6 @@ public class AccountUIController extends CenterUIController {
 
     public void setAccountBlService(AccountBlService accountBlService) {
         this.accountBlService = accountBlService;
-        refresh(null);
     }
 
     /**
@@ -200,7 +199,7 @@ public class AccountUIController extends CenterUIController {
             AccountUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setAccountBlService(AccountBlFactory.getService());
-
+            controller.refresh(null);
             root.setReturnPaneController(new FinancePanelUIController());
         }catch(Exception e){
             e.printStackTrace();

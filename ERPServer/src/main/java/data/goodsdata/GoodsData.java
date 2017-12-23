@@ -131,7 +131,7 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 int key = resultSet.getInt(1);
-                ID = "Goods" + String.format("%" + 8 + "d", key);
+                ID = "Goods" + String.format("%0" + 8 + "d", key);
                 sql = "UPDATE Goods SET ID='" + ID + "' WHERE keyID=" + key;
                 statement.executeUpdate(sql);
             }

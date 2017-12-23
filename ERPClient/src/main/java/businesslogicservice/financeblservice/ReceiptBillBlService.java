@@ -2,6 +2,7 @@ package main.java.businesslogicservice.financeblservice;
 
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
@@ -9,6 +10,8 @@ import main.java.vo.client.ClientVO;
 import java.util.ArrayList;
 
 public interface ReceiptBillBlService {
+
+    public ArrayList<ReceiptBillVO> getReceiptBillList(BillQueryVO query) throws Exception;
 
     public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;//返回客户列表
 

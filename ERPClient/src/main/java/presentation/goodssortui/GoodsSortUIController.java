@@ -41,7 +41,6 @@ public class GoodsSortUIController extends CenterUIController {
 
     public void setGoodsSortBlService(GoodsSortBlService goodsSortBlService) {
         this.goodsSortBlService=goodsSortBlService;
-        refresh();
     }
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
@@ -111,7 +110,7 @@ public class GoodsSortUIController extends CenterUIController {
             }
             else{
                 GoodsSortVO son=new GoodsSortVO();
-                son.setFather(sort);
+                son.setFather(sort.getID());
                 GoodsSortInfoUIController.init(goodsSortBlService,son,1,root.getStage());
                 refresh();
             }
@@ -187,13 +186,34 @@ public class GoodsSortUIController extends CenterUIController {
             TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
             GoodsSortVO sort=sortItem.getValue();
 
-            GoodsSortInfoUIController.init(goodsSortBlService,sort,3,root.getStage());
+            GoodsSortInfoUIController.init(goodsSortBlService,sort,2,root.getStage());
             refresh();
         }
     }
 
     @FXML
     private void handleAddGoods() {
+        if(isGoodsSortSelected()){
+            int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
+            TreeItem<GoodsSortVO> sortItem=goodsSortTreeView.getTreeItem(selectedIndex);
+            GoodsSortVO sort=sortItem.getValue();
+
+            if(sort.getChildren().size()!=0){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("添加商品失败");
+                alert.setContentText("商品分类下有子分类");
+                alert.showAndWait();
+            }
+            else{
+                GoodsVO goods=new GoodsVO();
+                goods.setGoodsSort(sort.getID());
+
+                GoodsInfoUIController.init(goodsBlService,goods,1,root.getStage());
+                refresh();
+            }
+
+        }
     }
 
     private boolean isGoodsSortSelected(){
@@ -243,7 +263,7 @@ public class GoodsSortUIController extends CenterUIController {
             controller.setRoot(root);
             controller.setGoodsSortBlService(GoodsSortBlFactory.getService());
             controller.setGoodsBlService(GoodsBlFactory.getService());
-
+            controller.refresh();
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){
             e.printStackTrace();

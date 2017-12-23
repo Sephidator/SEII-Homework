@@ -62,7 +62,6 @@ public class GoodsUIController extends CenterUIController {
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
         this.goodsBlService = goodsBlService;
-        refresh(null);
     }
 
     /**
@@ -199,7 +198,7 @@ public class GoodsUIController extends CenterUIController {
             GoodsUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setGoodsBlService(GoodsBlFactory.getService());
-
+            controller.refresh(null);
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){
             e.printStackTrace();

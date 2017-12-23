@@ -9,10 +9,14 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GoodsVO;
-import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
@@ -60,16 +64,31 @@ public class GoodsInfoUIController extends InfoUIController{
 
     public void setGoods(GoodsVO goods) {
         this.goods = goods;
-        ID.setText(goods.getID());
-        name.setText(goods.getName());
-        sort.setText(goods.getGoodsSort().toString());
-        model.setText(goods.getModel());
-        number.setText(String.valueOf(goods.getNumber()));
-        alarmNum.setText(String.valueOf(goods.getAlarmNum()));
-        cost.setText(String.valueOf(goods.getCost()));
-        retail.setText(String.valueOf(goods.getRetail()));
-        latestCost.setText(String.valueOf(goods.getLatestCost()));
-        latestRetail.setText(String.valueOf(goods.getLatestRetail()));
+        try {
+            ID.setText(goods.getID());
+            name.setText(goods.getName());
+            sort.setText(GoodsSortBlFactory.getService().find(goods.getGoodsSortID()).getName());
+            model.setText(goods.getModel());
+            number.setText(String.valueOf(goods.getNumber()));
+            alarmNum.setText(String.valueOf(goods.getAlarmNum()));
+            cost.setText(String.valueOf(goods.getCost()));
+            retail.setText(String.valueOf(goods.getRetail()));
+            latestCost.setText(String.valueOf(goods.getLatestCost()));
+            latestRetail.setText(String.valueOf(goods.getLatestRetail()));
+            comment.setText(goods.getComment());
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品分类失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品分类失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
     }
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
@@ -109,18 +128,66 @@ public class GoodsInfoUIController extends InfoUIController{
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("添加")){
-            goodsBlService.addGoods(goods);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("添加")){
+                    String goodsID=goodsBlService.addGoods(goods);
+                    String goodsName=goods.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("添加商品成功");
+                    alert.setContentText("商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
+                    alert.showAndWait();
+                }
+                else if(text.equals("编辑")){
+                    goodsBlService.editGoods(goods);
+                    String goodsID=goods.getID();
+                    String goodsName=goods.getName();
+
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("编辑商品成功");
+                    alert.setContentText("商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
+                    alert.showAndWait();
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品失败");
+                alert.setContentText("数据库错误");
+                alert.showAndWait();
+            }catch(NotExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品失败");
+                alert.setContentText("商品不存在");
+                alert.showAndWait();
+            }catch(NotNullException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品失败");
+                alert.setContentText("商品分类下有子分类");
+                alert.showAndWait();
+            }
+            catch(ExistException e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品失败");
+                alert.setContentText("账号和已有商品重复");
+                alert.showAndWait();
+            }catch(Exception e){
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(text+"商品失败");
+                alert.setContentText("RMI连接错误");
+                alert.showAndWait();
+            }
         }
-        else if(text.equals("编辑")){
-            goodsBlService.editGoods(goods);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
@@ -129,7 +196,7 @@ public class GoodsInfoUIController extends InfoUIController{
     }
 
     /**
-     * 检查用户信息的输入是否完整且合法
+     * 检查商品信息的输入是否完整且合法
      * 完整且合法返回true
      * */
     private boolean isInputValid(){
@@ -175,12 +242,12 @@ public class GoodsInfoUIController extends InfoUIController{
                 errorMessage+=("商品进价必须是非负数。"+System.lineSeparator());
             }
         }
-        if (cost.getText().length()==0) {
+        if (retail.getText().length()==0) {
             errorMessage+=("未输入商品零售价。"+System.lineSeparator());
         }
         else {
             try {
-                double i=Double.parseDouble(cost.getText());
+                double i=Double.parseDouble(retail.getText());
                 if(i<0)
                     throw new NumberFormatException();
             } catch(NumberFormatException e) {
@@ -194,13 +261,15 @@ public class GoodsInfoUIController extends InfoUIController{
             goods.setNumber(Integer.parseInt(number.getText()));
             goods.setAlarmNum(Integer.parseInt(alarmNum.getText()));
             goods.setCost(Double.parseDouble(cost.getText()));
+            goods.setRetail(Double.parseDouble(retail.getText()));
+            goods.setComment(comment.getText());
 
             return true;
         } else {
             // Show the error message.
             Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("用户信息错误");
-            alert.setHeaderText("请检查用户信息的输入");
+            alert.setTitle("商品信息错误");
+            alert.setHeaderText("请检查商品信息的输入");
             alert.setContentText(errorMessage);
             alert.showAndWait();
 
@@ -235,7 +304,7 @@ public class GoodsInfoUIController extends InfoUIController{
             controller.setPaneFunction(command);
 
 
-            // Show the dialog and wait until the user closes it.
+            // Show the dialog and wait until the goods closes it.
             dialogStage.showAndWait();
 
         }catch(Exception e){

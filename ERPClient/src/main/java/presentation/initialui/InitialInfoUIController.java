@@ -10,8 +10,10 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.initialblservice.InitialBlService;
 import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.exception.DataException;
 import main.java.presentation.uiutility.AddGoodsUIController;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
@@ -82,7 +84,14 @@ public class InitialInfoUIController extends InfoUIController {
 
     public void initialize(){
         goodsNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
-        goodsNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getGoodsSort().getName()));
+        goodsNameColumn.setCellValueFactory(cellData -> {
+            try {
+                return new SimpleStringProperty(GoodsSortBlFactory.getService().find(cellData.getValue().getGoodsSortID()).getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
         goodsModelColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getModel()));
         goodsCostColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getCost())));
         goodsRetailColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getRetail())));
@@ -97,7 +106,7 @@ public class InitialInfoUIController extends InfoUIController {
 
         accountNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
         bankAccountColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getBankAccount()));
-        accountRemainingColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getRemaining())));
+
     }
 
     // 设置controller数据的方法*****************************************

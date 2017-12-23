@@ -40,7 +40,7 @@ public class GoodsSortVO extends VO{
         goodsSortPO.setID(this.ID);
         goodsSortPO.setVisible(this.visible);
         goodsSortPO.setName(this.name);
-        goodsSortPO.setComment(this.name);
+        goodsSortPO.setComment(this.comment);
 
         goodsSortPO.setFatherID(this.fatherID);
 

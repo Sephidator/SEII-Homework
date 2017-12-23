@@ -53,7 +53,6 @@ public class UserUIController extends CenterUIController {
 
     public void setUserBlService(UserBlService userBlService) {
         this.userBlService = userBlService;
-        refresh(null);
     }
 
     /**
@@ -196,7 +195,7 @@ public class UserUIController extends CenterUIController {
             UserUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setUserBlService(UserBlFactory.getService());
-
+            controller.refresh(null);
             root.setReturnPaneController(new AdministratorPanelUIController());
         }catch(Exception e){
             e.printStackTrace();

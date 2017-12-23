@@ -2,6 +2,7 @@ package main.java.businesslogicservice.financeblservice;
 
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.financebill.CashBillVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
@@ -9,6 +10,9 @@ import main.java.vo.goods.GoodsVO;
 import java.util.ArrayList;
 
 public interface CashBillBlService {
+
+
+    public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception;
 
     public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;//返回商品列表
 

@@ -64,7 +64,6 @@ public class ClientUIController extends CenterUIController {
 
     public void setClientBlService(ClientBlService clientBlService) {
         this.clientBlService = clientBlService;
-        refresh(null);
     }
 
     /**
@@ -207,7 +206,7 @@ public class ClientUIController extends CenterUIController {
             ClientUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setClientBlService(ClientBlFactory.getService());
-
+            controller.refresh(null);
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){
             e.printStackTrace();

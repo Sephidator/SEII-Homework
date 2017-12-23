@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.logui.LogUIController">
    <children>
-      <HBox alignment="BOTTOM_CENTER" spacing="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <HBox alignment="BOTTOM_CENTER" spacing="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <children>
             <Label styleClass="greyLabel" text="时间区间" />
             <JFXDatePicker editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间起点" styleClass="date-picker" />
@@ -18,7 +18,7 @@
             <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" />
          </children>
       </HBox>
-      <TableView fx:id="goodsTableView" layoutX="45.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
+      <TableView fx:id="goodsTableView" layoutX="45.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0">
          <columns>
             <TableColumn fx:id="goodsIDColumn" prefWidth="75.0" text="商品编号" />
             <TableColumn fx:id="goodsNameColumn" prefWidth="75.0" text="名称" />

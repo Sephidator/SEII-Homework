@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
 import main.java.exception.DataException;
 import main.java.exception.ExistException;
@@ -58,27 +59,42 @@ public class GoodsSortInfoUIController extends InfoUIController {
 
     public void setGoodsSort(GoodsSortVO goodsSort) {
         this.goodsSort = goodsSort;
-        ID.setText(goodsSort.getID());
-        name.setText(goodsSort.getName());
-        comment.setText(goodsSort.getComment());
-        if(goodsSort.getFather()==null){
-            father.setText("");
-        }
-        else{
-            father.setText(goodsSort.getFather().toString());
-        }
 
-        String str="";
-        for(GoodsSortVO child: goodsSort.getChildren()){
-            str+=child.getName()+";";
-        }
-        children.setText(str);
+        try {
+            ID.setText(goodsSort.getID());
+            name.setText(goodsSort.getName());
+            comment.setText(goodsSort.getComment());
+            if(goodsSort.getFatherID()==null){
+                father.setText("");
+            }
+            else{
+                father.setText(GoodsSortBlFactory.getService().find(goodsSort.getFatherID()).getName());
+            }
 
-        str="";
-        for(GoodsVO goods:goodsSort.getGoods()){
-            str+=goods.getName();
+            String str="";
+            for(GoodsSortVO child: goodsSort.getChildren()){
+                str+=child.getName()+";";
+            }
+            children.setText(str);
+
+            str="";
+            for(GoodsVO goods:goodsSort.getGoods()){
+                str+=goods.getName();
+            }
+            goodsList.setText(str);
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品分类失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找商品分类失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
         }
-        goodsList.setText(str);
     }
 
     public void setGoodsSortBlService(GoodsSortBlService goodsSortBlService) {

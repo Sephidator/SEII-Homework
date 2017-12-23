@@ -11,6 +11,7 @@ import main.java.exception.DataException;
 import main.java.presentation.goodssortui.GoodsSortUIController;
 import main.java.presentation.goodsui.GoodsUIController;
 import main.java.presentation.inventoryui.InventoryBillUIController;
+import main.java.presentation.inventoryui.InventoryCheckUIController;
 import main.java.presentation.inventoryui.InventoryVerificationUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.uiutility.CenterUIController;
@@ -85,6 +86,8 @@ public class InventoryPanelUIController extends CenterUIController {
 
     @FXML
     private void handleInventoryCheck(){
+        root.showLogoutButton(false);
+        InventoryCheckUIController.init(root);
     }
 
     @FXML

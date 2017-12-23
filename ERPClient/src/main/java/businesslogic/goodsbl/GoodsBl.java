@@ -86,11 +86,11 @@ public class GoodsBl implements GoodsBlService, GoodsTool {
     @Override
     public GoodsVO find(String goodsID) throws Exception {
         GoodsVO goodsVO;
-        GoodsPO goodsPO = new GoodsPO();
+        GoodsPO goodsPO;
 
          /*调用GoodsDataFactory完成对商品数据的修改*/
         GoodsDataService goodsDataService = GoodsDataFactory.getService();
-        goodsDataService.find(goodsID);
+        goodsPO = goodsDataService.find(goodsID);
 
         /*转换GoodsPO*/
         goodsVO = new GoodsVO(goodsPO);

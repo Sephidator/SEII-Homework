@@ -9,11 +9,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogic.financebl.ReceiptBillBl;
+import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
+import main.java.businesslogicfactory.financeblfactory.PaymentBillBlFactory;
+import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
 import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
 import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
@@ -21,6 +26,8 @@ import main.java.presentation.purchaseui.PurchaseRefundBillUIController;
 import main.java.presentation.purchaseui.PurchaseTradeBillUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.account.AccountVO;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.*;
 import main.java.vo.bill.purchasebill.PurchaseBillVO;
 import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
@@ -73,12 +80,53 @@ public class FinanceBillUIController extends CenterUIController {
         this.cashBillBlService = cashBillBlService;
     }
 
+    public void refresh(){
+        try{
+            ArrayList<FinanceBillVO> financeBillList=new ArrayList<>();
+            BillQueryVO query=new BillQueryVO("草稿",null,null,"收款单",root.getOperator().getID(),null);
+
+            query.type="收款单";
+            ArrayList<ReceiptBillVO> receiptBillList1=receiptBillBlService.getReceiptBillList(query);
+            query.type="付款单";
+            ArrayList<PaymentBillVO> paymentBillList1=paymentBillBlService.getPaymentBillList(query);
+            query.type="现金费用单";
+            ArrayList<CashBillVO> cashBillList1=cashBillBlService.getCashBillList(query);
+
+            query.state="审批不通过";
+            query.type="收款单";
+            ArrayList<ReceiptBillVO> receiptBillList2=receiptBillBlService.getReceiptBillList(query);
+            query.type="付款单";
+            ArrayList<PaymentBillVO> paymentBillList2=paymentBillBlService.getPaymentBillList(query);
+            query.type="现金费用单";
+            ArrayList<CashBillVO> cashBillList2=cashBillBlService.getCashBillList(query);
+
+            financeBillList.addAll(receiptBillList1);
+            financeBillList.addAll(receiptBillList2);
+            financeBillList.addAll(paymentBillList1);
+            financeBillList.addAll(paymentBillList2);
+            financeBillList.addAll(cashBillList1);
+            financeBillList.addAll(cashBillList2);
+
+            showFinanceBillList(financeBillList);
+
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找单据失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找单据失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
+        }
+    }
+
     private void showFinanceBillList(ArrayList<FinanceBillVO> financeBillList){
         financeBillObservableList.removeAll();
-
-        for(int i=0;i<financeBillList.size();i++){
-            financeBillObservableList.add(financeBillList.get(i));
-        }
+        financeBillObservableList.setAll(financeBillList);
         financeBillTableView.setItems(financeBillObservableList);
     }
 
@@ -88,37 +136,40 @@ public class FinanceBillUIController extends CenterUIController {
     private void addReceiptBill(){
         ReceiptBillVO bill=new ReceiptBillVO();
         bill.setOperator(root.getOperator());
-        ReceiptBillUIController.init(null,bill,1,root.getStage());
+        ReceiptBillUIController.init(receiptBillBlService,bill,1,root.getStage());
     }
 
     @FXML
     private void addPaymentBill(){
         PaymentBillVO bill=new PaymentBillVO();
         bill.setOperator(root.getOperator());
-        PaymentBillUIController.init(null,bill,1,root.getStage());
+        PaymentBillUIController.init(paymentBillBlService,bill,1,root.getStage());
     }
 
     @FXML
     private void addCashBill(){
         CashBillVO bill=new CashBillVO();
         bill.setOperator(root.getOperator());
-        CashBillUIController.init(null,bill,1,root.getStage());
+        CashBillUIController.init(cashBillBlService,bill,1,root.getStage());
     }
 
     @FXML
     private void editFinanceBill(){
-        /*
         if(isBillSelected()){
-            if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货单")){
-                PurchaseTradeBillVO bill=(PurchaseTradeBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseTradeBillUIController.init(null,bill,2,root.getStage());
+            FinanceBillVO bill=financeBillTableView.getSelectionModel().getSelectedItem();
+            if(bill.getType().equals("付款单")){
+                PaymentBillVO paymentBill=(PaymentBillVO)bill;
+                PaymentBillUIController.init(paymentBillBlService,paymentBill,2,root.getStage());
             }
-            else if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
-                PurchaseRefundBillVO bill=(PurchaseRefundBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseRefundBillUIController.init(null,bill,2,root.getStage());
+            else if(bill.getType().equals("收款单")){
+                ReceiptBillVO receiptBill=(ReceiptBillVO)bill;
+                ReceiptBillUIController.init(receiptBillBlService,receiptBill,2,root.getStage());
+            }
+            else if(bill.getType().equals("现金费用单")){
+                CashBillVO cashBill=(CashBillVO)bill;
+                CashBillUIController.init(cashBillBlService,cashBill,2,root.getStage());
             }
         }
-        */
     }
 
     private boolean isBillSelected(){
@@ -158,30 +209,10 @@ public class FinanceBillUIController extends CenterUIController {
 
             FinanceBillUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setReceiptBillBlService(null);
-            controller.setPaymentBillBlService(null);
-            controller.setCashBillBlService(null);
-
-            Date date= new SimpleDateFormat("yyyy-MM-dd").parse("2017-1-12");
-            ClientVO client=new ClientVO("类别：经销商", 4, "名字：陈骁2",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                    0, 0, 20, null);
-            AccountVO account = new AccountVO("12344","账户A",10000);
-
-            TransItemVO item=new TransItemVO(account,3,"无备注");
-            ArrayList<TransItemVO> list=new ArrayList<>();
-            list.add(item);
-
-
-            ReceiptBillVO bill1=new ReceiptBillVO("草稿",date,root.getOperator(),"备注", 100,client, list);
-            PaymentBillVO bill2=new PaymentBillVO("审批不通过",date,root.getOperator(),"备注", 100, client, list);
-            bill1.setID("123");
-            bill2.setID("233");
-            ArrayList<FinanceBillVO> plist=new ArrayList<>();
-            plist.add(bill1);
-            plist.add(bill2);
-            controller.showFinanceBillList(plist);
-
+            controller.setReceiptBillBlService(ReceiptBillBlFactory.getService());
+            controller.setPaymentBillBlService(PaymentBillBlFactory.getService());
+            controller.setCashBillBlService(CashBillBlFactory.getService());
+            controller.refresh();
             root.setReturnPaneController(new FinancePanelUIController());
         }catch(Exception e){
             e.printStackTrace();
