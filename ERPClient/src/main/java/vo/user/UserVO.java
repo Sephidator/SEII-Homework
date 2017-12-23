@@ -20,7 +20,12 @@ public class UserVO extends VO{
     private boolean login; //员工是否登录
 
     public UserVO() {
-
+        name = "";
+        type = "";
+        jobName = "";
+        password = "";
+        age = 0;
+        top = false;
     }
 
     public UserVO(String name, String type, String jobName, String password, int age, boolean top) {

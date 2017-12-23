@@ -23,7 +23,7 @@ public class TransItemVO {
 
     /*得到TransItemPO*/
     public TransItemPO getTransItemPO(){
-        TransItemPO transItemPO = new TransItemPO(this.account.getBankAccount(),this.transAmount,this.comment);
+        TransItemPO transItemPO = new TransItemPO(this.account.getID(),this.transAmount,this.comment);
         return transItemPO;
     }
 

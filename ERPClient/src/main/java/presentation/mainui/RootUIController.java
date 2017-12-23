@@ -1,5 +1,6 @@
 package main.java.presentation.mainui;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.java.MainApp;
 import main.java.exception.DataException;
 import main.java.exception.LoginException;
@@ -72,6 +74,10 @@ public class RootUIController {
         exit.setVisible(!state);
     }
 
+    public void setClose(){
+        stage.setOnCloseRequest(event-> handleLogout());
+    }
+
     @FXML
     private void handleLogout(){
         try{
@@ -113,6 +119,7 @@ public class RootUIController {
             controller.setStage(stage);
             controller.setRootPane(rootPane);
             controller.setOperator(operator);
+            controller.setClose();
 
             return controller;
         }catch(Exception e){
