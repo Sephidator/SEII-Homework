@@ -1,5 +1,7 @@
 package main.java.businesslogic.clientbl;
 
+import main.java.businesslogic.messagebl.MessageBl;
+import main.java.businesslogic.messagebl.MessageTool;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
@@ -9,6 +11,7 @@ import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
+import main.java.vo.message.MessageVO;
 import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
 
@@ -99,6 +102,20 @@ public class ClientBl implements ClientBlService, ClientTool {
         /*调用ClientDataFactory完成客户数据的修改*/
         ClientDataService clientDataService = ClientDataFactory.getService();
         clientDataService.update(clientPO);
+
+        //增加：如果应收超过应收额度提醒财务人员去制定付款单还款
+        if(clientPO.getReceivable() >= clientPO.getReceivableLimit()){
+            MessageTool messageTool = new MessageBl();
+            String mess = "当前客户 "+clientPO.getName()+" 应收（"+clientPO.getReceivable()
+                    +"),已经大于或等于应收额度（"+clientPO.getReceivableLimit()+").现请你制定付款单还款，客户联系方式："+clientPO.getPhone()+"（系统消息）";
+            //任意指定一个财务人员
+            UserTool userTool = new UserBl();
+            UserQueryVO userQueryVO = new UserQueryVO(null, "财务人员");
+            ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
+            int ran = (int) (Math.random() * (userVOS.size() - 0 + 1));
+            MessageVO messageVO = new MessageVO(userVOS.get(ran),userVOS.get(ran),mess);
+            messageTool.addMessage(messageVO);
+        }
 
     }
 
