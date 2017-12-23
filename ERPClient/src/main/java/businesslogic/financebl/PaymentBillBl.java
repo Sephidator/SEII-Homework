@@ -107,9 +107,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
 
-        BillQueryPO billQueryPO = null;
-        if(query != null)
-            billQueryPO=query.getBillQueryPO();
+        BillQueryPO billQueryPO =query.getBillQueryPO();
         ArrayList<PaymentBillPO> paymentBillPOS = paymentBillDataService.finds(billQueryPO);
 
         ArrayList<PaymentBillVO> paymentBillVOS = new ArrayList<>();

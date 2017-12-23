@@ -102,36 +102,7 @@ public class ClientInfoUIController extends InfoUIController{
 
     public void setClientBlService(ClientBlService clientBlService) {
         this.clientBlService = clientBlService;
-        refreshSalesmanList();
-    }
-
-    private void refreshSalesmanList(){
-        try{
-            UserQueryVO query=new UserQueryVO(null,"进货销售人员");
-            ArrayList<UserVO> salesmanList= UserBlFactory.getService().getUserList(query);
-
-            ObservableList<String> list=FXCollections.observableArrayList();
-            for(int i=0;i<salesmanList.size();i++){
-                list.add(salesmanList.get(i).getType()+": "+salesmanList.get(i).getName());
-            }
-            salesmanChoiceBox.setItems(list);
-            salesmanChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-                salesman.setText(salesmanList.get(newValue.intValue()).getName());
-                client.setSalesman(salesmanList.get(newValue.intValue()));
-            });
-        }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找业务员失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
-        }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找业务员失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
-        }
+        setSalesmanList();
     }
 
     /**
@@ -165,6 +136,35 @@ public class ClientInfoUIController extends InfoUIController{
             categoryChoiceBox.setDisable(true);
             levelChoiceBox.setDisable(true);
             salesmanChoiceBox.setDisable(true);
+        }
+    }
+
+    private void setSalesmanList(){
+        try{
+            UserQueryVO query=new UserQueryVO(null,"进货销售人员");
+            ArrayList<UserVO> salesmanList= UserBlFactory.getService().getUserList(query);
+
+            ObservableList<String> list=FXCollections.observableArrayList();
+            for(int i=0;i<salesmanList.size();i++){
+                list.add(salesmanList.get(i).getType()+": "+salesmanList.get(i).getName());
+            }
+            salesmanChoiceBox.setItems(list);
+            salesmanChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+                salesman.setText(salesmanList.get(newValue.intValue()).getName());
+                client.setSalesman(salesmanList.get(newValue.intValue()));
+            });
+        }catch(DataException e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找业务员失败");
+            alert.setContentText("数据库错误");
+            alert.showAndWait();
+        }catch(Exception e){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("查找业务员失败");
+            alert.setContentText("RMI连接错误");
+            alert.showAndWait();
         }
     }
 
@@ -295,7 +295,7 @@ public class ClientInfoUIController extends InfoUIController{
             }
         }
 
-        if (salesman.getText()==null) {
+        if (salesman.getText().length()==0) {
             errorMessage+=("未选择业务员。"+System.lineSeparator());
         }
 

@@ -109,6 +109,7 @@ public class FinanceBillUIController extends CenterUIController {
 
             showFinanceBillList(financeBillList);
 
+
         }catch(DataException e){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

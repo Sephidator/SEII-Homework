@@ -50,7 +50,7 @@ public class AddAccountUIController {
 
     public void setAccountList(ArrayList<AccountVO> accountList) {
         this.accountList=accountList;
-        showAccountList(accountList);
+        showAccountList();
     }
 
     public void setTransItemList(ArrayList<TransItemVO> transItemList) {
@@ -62,27 +62,26 @@ public class AddAccountUIController {
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showAccountList(ArrayList<AccountVO> accountList){
-        if(accountList!=null){
-            accountObservableList.removeAll();
-
-            for(int i=0;i<accountList.size();i++){
-                accountObservableList.add(accountList.get(i));
-            }
-            accountTableView.setItems(accountObservableList);
-        }
+    private void showAccountList(){
+        accountObservableList.removeAll();
+        accountObservableList.setAll(accountList);
+        accountTableView.setItems(accountObservableList);
     }
 
     @FXML
     private void handleConfirm(){
         if(isAccountSelected()){
-            if(transItemList!=null){
-                int index=accountTableView.getSelectionModel().getSelectedIndex();
-                TransItemVO transItem=new TransItemVO(accountTableView.getItems().get(index),100, "无备注");
-                transItemList.add(transItem);
+            int index=accountTableView.getSelectionModel().getSelectedIndex();
+            TransItemVO transItem=new TransItemVO(accountTableView.getItems().get(index),100, "无");
+            for(int i=0;i<transItemList.size();i++){
+                if(transItemList.get(i).account.getID().equals(transItem.account.getID())){
+                    dialogStage.close();
+                    return;
+                }
             }
+            transItemList.add(transItem);
+            dialogStage.close();
         }
-        dialogStage.close();
     }
 
     @FXML
@@ -98,7 +97,7 @@ public class AddAccountUIController {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("No Selection");
             alert.setHeaderText("未选择账户");
-            alert.setContentText("请在账户列表中选择商品");
+            alert.setContentText("请在账户列表中选择");
             alert.showAndWait();
             return false;
         }
@@ -117,7 +116,7 @@ public class AddAccountUIController {
 
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("添加商品界面");
+            dialogStage.setTitle("添加账户界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
