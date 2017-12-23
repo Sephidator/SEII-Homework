@@ -6,6 +6,7 @@
 .idea
 *.iml
 *.xml
-out/
+ERPClient/out/
+ERPServer/out/
 gen/
 *.class
