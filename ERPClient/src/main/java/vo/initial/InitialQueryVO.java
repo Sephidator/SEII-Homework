@@ -4,13 +4,11 @@ import main.java.po.initial.InitialQueryPO;
 
 public class InitialQueryVO {
 
-    public int start;//时间起点
-
-    public int end;//时间终点
+    public int year;//查询时间点
 
     /*得到InitialQueryPO*/
     public InitialQueryPO getInitialQueryPO(){
-        InitialQueryPO initialQueryPO = new InitialQueryPO(this.start, this.end);
+        InitialQueryPO initialQueryPO = new InitialQueryPO(this.year);
         return initialQueryPO;
     }
 }
