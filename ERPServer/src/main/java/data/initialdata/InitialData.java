@@ -46,9 +46,9 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
         ArrayList<InitialPO> list = new ArrayList<>();
         String sql;
         if (query == null)
-            sql = "SELECT * FROM Initial WHERE year BETWEEN " + query.start + " AND " + query.end;
-        else
             sql = "SELECT * FROM Initial";
+        else
+            sql = "SELECT * FROM Initial WHERE year =" + query.year;
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
