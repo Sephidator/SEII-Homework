@@ -304,7 +304,7 @@ public class PaymentBillUIController extends InfoUIController {
     private boolean isInputValid(){
         String errorMessage = "";
 
-        if (client.getText().length()==0) {
+        if (client.getText().length()<=1) {
             errorMessage+=("未选择客户。"+System.lineSeparator());
         }
         if (transItemObservableList==null||transItemObservableList.size()==0) {

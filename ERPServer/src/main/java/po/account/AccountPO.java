@@ -10,6 +10,9 @@ public class AccountPO extends PO {
     private double remaining;//账户余额
 
     public AccountPO() {
+        bankAccount="";
+        name="";
+        remaining=0;
     }
 
     public AccountPO(String bankAccount, String name, double remaining) {

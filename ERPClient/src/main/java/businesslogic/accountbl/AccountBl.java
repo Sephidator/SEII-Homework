@@ -64,12 +64,16 @@ public class AccountBl implements AccountBlService, AccountTool {
      */
     @Override
     public AccountVO find(String accountID) throws Exception {
-        /*调用AccountDataService.find*/
-        AccountDataService accountDataService = AccountDataFactory.getService();
-        AccountPO accountPO = accountDataService.find(accountID);
-        AccountVO accountVO = new AccountVO(accountPO);
-
-        return accountVO;
+        if(accountID.equals("")){
+            AccountPO accountPO=new AccountPO();
+            return new AccountVO(accountPO);
+        }
+        else{
+            /*调用AccountDataService.find*/
+            AccountDataService accountDataService = AccountDataFactory.getService();
+            AccountPO accountPO = accountDataService.find(accountID);
+            return new AccountVO(accountPO);
+        }
     }
 
 

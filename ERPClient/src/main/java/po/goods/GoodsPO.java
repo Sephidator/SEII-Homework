@@ -15,6 +15,16 @@ public class GoodsPO extends PO {
     private String comment; //商品的备注
 
     public GoodsPO() {
+        name = "";
+        goodsSortID = "";
+        model = "";
+        number = 0;
+        cost = 0;
+        retail = 0;
+        latestCost = 0;
+        latestRetail = 0;
+        alarmNum = 0;
+        comment = "";
     }
 
     public GoodsPO(String name, String goodsSortID, String model, int number, double cost, double retail, double latestCost, double latestRetail, int alarmNum, String comment) {

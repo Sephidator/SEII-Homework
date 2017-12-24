@@ -1,7 +1,6 @@
 package main.java.po.promotion;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class PromotionQueryPO implements Serializable {
     public String name; //名称

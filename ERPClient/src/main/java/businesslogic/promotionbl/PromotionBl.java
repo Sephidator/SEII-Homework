@@ -47,10 +47,16 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
      */
     @Override
     public PromotionVO find(String promotionID) throws Exception{
-        /*dataService*/
-        PromotionDataService promotionDataService = PromotionDataFactory.getService();
-        PromotionPO promotionPO = promotionDataService.find(promotionID);
-        return new PromotionVO(promotionPO);
+        if(promotionID.equals("")){
+            PromotionPO promotionPO=new PromotionPO();
+            return new PromotionVO(promotionPO);
+        }
+        else{
+            /*dataService*/
+            PromotionDataService promotionDataService = PromotionDataFactory.getService();
+            PromotionPO promotionPO = promotionDataService.find(promotionID);
+            return new PromotionVO(promotionPO);
+        }
     }
 
     @Override
