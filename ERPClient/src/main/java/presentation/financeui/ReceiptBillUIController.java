@@ -10,15 +10,18 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
-import main.java.presentation.uiutility.AddAccountUIController;
-import main.java.presentation.uiutility.AddGoodsUIController;
-import main.java.presentation.uiutility.CheckInput;
-import main.java.presentation.uiutility.InfoUIController;
+import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
+import main.java.exception.DataException;
+import main.java.exception.FullException;
+import main.java.presentation.uiutility.*;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.ReceiptBillVO;
+import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.bill.financebill.TransItemVO;
+import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsVO;
 
@@ -28,7 +31,6 @@ public class ReceiptBillUIController extends InfoUIController {
     private ReceiptBillBlService service;
     private ReceiptBillVO bill;
     private ArrayList<AccountVO> accountList;
-    private ArrayList<TransItemVO> transItemList;
 
     private ObservableList<TransItemVO> transItemObservableList= FXCollections.observableArrayList();
     @FXML
@@ -47,15 +49,25 @@ public class ReceiptBillUIController extends InfoUIController {
     @FXML
     private TextField operator; //操作员
     @FXML
+    private TextField client; //客户
+    @FXML
     private TextArea comment; // 备注
     @FXML
     private TextField inputAmount; // 输入转账金额
     @FXML
     private TextField total; // 总价
     @FXML
+    private ChoiceBox<String> clientChoiceBox;
+    @FXML
     private Button confirm;
     @FXML
     private Button cancel;
+    @FXML
+    private Button addAccount;
+    @FXML
+    private Button deleteAccount;
+    @FXML
+    private Button correct;
 
     // 加载文件后调用的方法******************************************
 
@@ -71,20 +83,20 @@ public class ReceiptBillUIController extends InfoUIController {
         this.bill = bill;
         ID.setText(bill.getID());
         type.setText(bill.getType());
-        operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
+        operator.setText(bill.getOperator().getName());
+        client.setText(bill.getClient().getCategory()+" "+bill.getClient().getName());
         comment.setText(bill.getComment());
+        total.setText(String.valueOf(bill.getTotal()));
+        showTransItemList();
     }
 
     public void setService(ReceiptBillBlService service) {
         this.service=service;
+        setClientList();
     }
 
     public void setAccountList(ArrayList<AccountVO> accountList) {
         this.accountList=accountList;
-    }
-
-    public void setTransItemList(ArrayList<TransItemVO> transItemList) {
-        this.transItemList=transItemList;
     }
 
     /**
@@ -99,87 +111,163 @@ public class ReceiptBillUIController extends InfoUIController {
             cancel.setText("保存草稿");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("提交编辑");
             cancel.setText("保存草稿");
         }
         else if(command==3){
             confirm.setText("确定");
             cancel.setText("取消");
+
+            comment.setEditable(false);
+            inputAmount.setEditable(false);
+            clientChoiceBox.setDisable(true);
+            addAccount.setDisable(true);
+            deleteAccount.setDisable(true);
+            correct.setDisable(true);
+        }
+    }
+
+    private void setClientList(){
+        try{
+            ArrayList<ClientVO> clientList= ClientBlFactory.getService().getClientList(null);
+
+            ObservableList<String> list=FXCollections.observableArrayList();
+            for(int i=0;i<clientList.size();i++){
+                list.add(clientList.get(i).getCategory()+": "+clientList.get(i).getName());
+            }
+            clientChoiceBox.setItems(list);
+            clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+                client.setText(clientList.get(newValue.intValue()).getCategory()+" "+clientList.get(newValue.intValue()).getName());
+                bill.setClient(clientList.get(newValue.intValue()));
+            });
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","RMI连接错误");
         }
     }
 
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showTransItemList(ArrayList<TransItemVO> transItemList){
-        if(transItemList!=null){
-            transItemTableView.getItems().clear();
-            transItemObservableList.removeAll();
+    private void showTransItemList(){
+        ArrayList<TransItemVO> transItemList=bill.getTransList();
+        transItemTableView.getItems().clear();
+        transItemObservableList.setAll(transItemList);
+        transItemTableView.setItems(transItemObservableList);
+    }
 
-            for(int i=0;i<transItemList.size();i++){
-                transItemObservableList.add(transItemList.get(i));
-            }
-            transItemTableView.setItems(transItemObservableList);
-
-            System.out.println("TransItemListSize: "+transItemList.size());
+    private void countTotal(){
+        double totalAmount=0;
+        for(TransItemVO item:bill.getTransList()){
+            totalAmount+=item.transAmount;
         }
+        total.setText(String.valueOf(totalAmount));
+        bill.setTotal(totalAmount);
     }
 
 
     // 界面之中会用到的方法******************************************
 
     @FXML
-    private void addAccount(){
-        AddAccountUIController.init(accountList,transItemList,dialogStage);
-        System.out.println("添加商品了");
-        showTransItemList(transItemList);
+    private void handleAddAccount(){
+        AddAccountUIController.init(accountList,bill.getTransList(),dialogStage);
+        showTransItemList();
+        countTotal();
     }
 
     @FXML
-    private void deleteAccount(){
-        if(isGiftItemSelected()){
+    private void handleDeleteAccount(){
+        if(isAccountSelected()){
             int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
-            transItemTableView.getItems().remove(selectedIndex);
+            bill.getTransList().remove(selectedIndex);
+            showTransItemList();
+            countTotal();
         }
     }
 
     @FXML
     private void handleCorrect(){
-        if(isGiftItemSelected()){
+        if(isAccountSelected()){
             String str=inputAmount.getText();
 
             if(CheckInput.isPositiveNumber(str)){
                 Double number=Double.parseDouble(str);
                 int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
 
-                transItemList.get(selectedIndex).transAmount=number;
-                bill.setTransList(transItemList);
-                showTransItemList(transItemList);
+                bill.getTransList().get(selectedIndex).transAmount=number;
+                inputAmount.setText("");
+                showTransItemList();
+                countTotal();
             }
         }
     }
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("确认添加")){
-            purchaseTradeBlService.addClient(client);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("确认添加")){
+                    bill.setState("待审批");
+                    String billID=service.submit(bill);
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","提交收款单成功", "单据ID："+billID);
+                }
+                else if(text.equals("提交编辑")){
+                    bill.setState("待审批");
+                    service.editReceiptBill(bill);
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑收款单成功", "单据ID："+bill.getID());
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"收款单失败", "数据库错误");
+            }catch(FullException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"收款单失败", "超过单日单据上限（99999张）");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"收款单失败", "RMI连接错误");
+            }
         }
-        else if(text.equals("确认编辑")){
-            purchaseTradeBillBlService.editClient(client);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
     private void handleCancel(){
         String text=cancel.getText();
         if(text.equals("保存草稿")){
-            //service.saveDraft(bill);
+            try{
+                bill.setState("草稿");
+                bill.setComment(comment.getText());
+
+                String billID;
+                if(ID.getText().length()==0){
+                    billID=service.submit(bill);
+                }
+                else{
+                    billID=bill.getID();
+                    service.editReceiptBill(bill);
+                }
+
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","已保存收款单草稿", "单据ID："+billID);
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存收款单草稿失败", "数据库错误");
+            }catch(FullException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error", "保存收款单草稿失败", "超过单日单据上限（99999张）");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存收款单草稿失败", "RMI连接错误");
+            }
             dialogStage.close();
         }
         else if(text.equals("取消")){
@@ -187,21 +275,42 @@ public class ReceiptBillUIController extends InfoUIController {
         }
     }
 
-    private boolean isGiftItemSelected(){
+    private boolean isAccountSelected(){
         int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
         if(selectedIndex>=0){
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择账户");
-            alert.setContentText("请在账户列表中选择账户");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection", "未选择账户", "请在账户列表中选择账户");
             return false;
         }
     }
 
+    /**
+     * 检查单据信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+        String errorMessage = "";
+
+        if (client.getText().length()==0) {
+            errorMessage+=("未选择客户。"+System.lineSeparator());
+        }
+        if (transItemObservableList==null||transItemObservableList.size()==0) {
+            errorMessage+=("未添加转账列表。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()==0){
+            bill.setComment(comment.getText());
+            return true;
+        } else {
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "单据信息错误", "请检查单据信息的输入", errorMessage);
+            return false;
+        }
+    }
+    
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
@@ -229,16 +338,7 @@ public class ReceiptBillUIController extends InfoUIController {
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setBill(bill);
-
-            //controller.setGoodsList(service.getGoodsList(null));
-            ArrayList<AccountVO> list=new ArrayList<>();
-            AccountVO a1=new AccountVO("1234567890","账户A",10000);
-            AccountVO a2=new AccountVO("1000000000","账户B",23400);
-            list.add(a1);
-            list.add(a2);
-
-            controller.setAccountList(list);
-            controller.setTransItemList(bill.getTransList());
+            controller.setAccountList(service.getAccountList(null));
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.

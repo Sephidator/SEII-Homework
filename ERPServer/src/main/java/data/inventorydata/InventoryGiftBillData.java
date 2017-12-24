@@ -115,7 +115,7 @@ public class InventoryGiftBillData extends UnicastRemoteObject implements Invent
             int all = resultSet.getInt(1);
             if (all - before >= 99999)
                 throw new FullException();
-            sql = "INSERT INTO PaymentBill (state, time, operatorID, comment, total, clientID) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
+            sql = "INSERT INTO InventoryGiftBill (state, time, operatorID, comment, total, clientID) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             resultSet = statement.getGeneratedKeys();
             resultSet.next();

@@ -17,6 +17,7 @@ import main.java.exception.NotNullException;
 import main.java.presentation.goodsui.GoodsInfoUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.GoodsSortVO;
 import main.java.vo.goods.GoodsVO;
@@ -53,17 +54,11 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO root= GoodsSortBlFactory.getService().getRoot();
             showGoodsSort(null,root);
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找商品分类失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品分类失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找商品分类失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品分类失败","RMI连接错误");
         }
     }
 
@@ -102,11 +97,8 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO sort=sortItem.getValue();
 
             if(sort.getGoods().size()!=0){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("添加商品分类失败");
-                alert.setContentText("父分类下有商品");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","添加商品分类失败","父分类下有商品");
             }
             else{
                 GoodsSortVO son=new GoodsSortVO();
@@ -125,18 +117,12 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO sort=sortItem.getValue();
 
             if(!sortItem.isLeaf()){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除商品分类失败");
-                alert.setContentText("商品分类下有子分类或商品");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除商品分类失败","商品分类下有子分类或商品");
             }
             else if(selectedIndex==0){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除商品分类失败");
-                alert.setContentText("不能删除总分类");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除商品分类失败","不能删除总分类");
             }
             else{
                 try {
@@ -144,35 +130,21 @@ public class GoodsSortUIController extends CenterUIController {
                     String name = sort.getName();
                     goodsSortBlService.deleteGoodsSort(ID);
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("删除商品分类成功");
-                    alert.setContentText("分类ID："+ID+System.lineSeparator()+"名字："+name);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","删除商品分类成功",
+                            "分类ID："+ID+System.lineSeparator()+"名字："+name);
                 }catch(DataException e){
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("删除商品分类失败");
-                    alert.setContentText("数据库错误");
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品分类失败","数据库错误");
                 }catch(NotExistException e){
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("删除商品分类失败");
-                    alert.setContentText("商品分类不存在");
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品分类失败","商品分类不存在");
                 }catch(NotNullException e){
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("删除商品分类失败");
-                    alert.setContentText("商品分类下有子类或商品");
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品分类失败","商品分类下有子类或商品");
                 }catch(Exception e){
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("删除商品分类失败");
-                    alert.setContentText("RMI连接错误");
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品分类失败","RMI连接错误");
                 }
                 refresh();
             }
@@ -199,11 +171,8 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO sort=sortItem.getValue();
 
             if(sort.getChildren().size()!=0){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("添加商品失败");
-                alert.setContentText("商品分类下有子分类");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","添加商品失败","商品分类下有子分类");
             }
             else{
                 GoodsVO goods=new GoodsVO();
@@ -219,20 +188,14 @@ public class GoodsSortUIController extends CenterUIController {
     private boolean isGoodsSortSelected(){
         int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
         if(selectedIndex<0){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选中商品分类");
-            alert.setContentText("请在表中选择商品分类");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选中商品分类","请在表中选择商品分类");
             return false;
         }else{
             TreeItem item=goodsSortTreeView.getTreeItem(selectedIndex);
             if(!item.isExpanded()){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("选中了商品信息");
-                alert.setContentText("请在表中选择商品分类");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","选中了商品信息","请在表中选择商品分类");
                 return false;
             }
             return true;

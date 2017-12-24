@@ -18,6 +18,7 @@ import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
 import main.java.exception.NotNullException;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GoodsSortVO;
 import main.java.vo.goods.GoodsVO;
@@ -83,17 +84,11 @@ public class GoodsSortInfoUIController extends InfoUIController {
             }
             goodsList.setText(str);
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找商品分类失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品分类失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找商品分类失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品分类失败","RMI连接错误");
         }
     }
 
@@ -137,58 +132,38 @@ public class GoodsSortInfoUIController extends InfoUIController {
                     String sortID=goodsSortBlService.addGoodsSort(goodsSort);
                     String sortName=goodsSort.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("添加商品分类成功");
-                    alert.setContentText("商品分类ID："+sortID+System.lineSeparator()+"名字："+sortName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加商品分类成功",
+                            "商品分类ID："+sortID+System.lineSeparator()+"名字："+sortName);
                 }
                 else if(text.equals("编辑")){
                     goodsSortBlService.editGoodsSort(goodsSort);
                     String sortID=goodsSort.getID();
                     String sortName=goodsSort.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("编辑商品分类成功");
-                    alert.setContentText("商品分类ID："+sortID+System.lineSeparator()+"名字："+sortName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑商品分类成功",
+                            "商品分类ID："+sortID+System.lineSeparator()+"名字："+sortName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                e.printStackTrace();
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品分类失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品分类失败","数据库错误");
             }
             catch(ExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品分类失败");
-                alert.setContentText("和已存在的商品分类重名");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品分类失败","和已存在的商品分类重名");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品分类失败");
-                alert.setContentText("商品分类不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品分类失败","商品分类不存在");
             }
             catch(NotNullException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品分类失败");
-                alert.setContentText("父分类下有商品");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品分类失败","父分类下有商品");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品分类失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品分类失败","RMI连接错误");
             }
         }
     }
@@ -214,11 +189,8 @@ public class GoodsSortInfoUIController extends InfoUIController {
             goodsSort.setComment(comment.getText());
             return true;
         } else {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("商品分类信息错误");
-            alert.setHeaderText("请检查商品分类信息的输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "商品分类信息错误","请检查商品分类信息的输入",errorMessage);
             return false;
         }
     }

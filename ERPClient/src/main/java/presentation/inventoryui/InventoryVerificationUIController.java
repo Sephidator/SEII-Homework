@@ -9,10 +9,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -64,13 +68,22 @@ public class InventoryVerificationUIController extends CenterUIController {
 
     public void setGoodsBlService(GoodsBlService goodsBlService) {
         this.goodsBlService = goodsBlService;
-        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
-        //showGoodsList(goodsList);
     }
 
+    /**
+     * 刷新界面，取得所有商品的列表，并显示在tableview中
+     * */
     private void refresh(){
-        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
-        //showGoodsList(goodsList);
+        try {
+            ArrayList<GoodsVO> goodsList = goodsBlService.getGoodsList(null);
+            showGoodsList(goodsList);
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品失败","RMI连接错误");
+        }
     }
 
     /**
@@ -78,10 +91,7 @@ public class InventoryVerificationUIController extends CenterUIController {
      * */
     private void showGoodsList(ArrayList<GoodsVO> goodsList){
         goodsObservableList.removeAll();
-
-        for(int i=0;i<goodsList.size();i++){
-            goodsObservableList.add(goodsList.get(i));
-        }
+        goodsObservableList.setAll(goodsList);
         goodsTableView.setItems(goodsObservableList);
     }
 
@@ -162,18 +172,8 @@ public class InventoryVerificationUIController extends CenterUIController {
 
             InventoryVerificationUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setGoodsBlService(null);
-
-            GoodsVO c1=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
-            c1.setID("123");
-            GoodsVO c2=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
-            c2.setID("123");
-
-            ArrayList<GoodsVO> list=new ArrayList<>();
-            list.add(c1);
-            list.add(c2);
-
-            controller.showGoodsList(list);
+            controller.setGoodsBlService(GoodsBlFactory.getService());
+            controller.refresh();
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

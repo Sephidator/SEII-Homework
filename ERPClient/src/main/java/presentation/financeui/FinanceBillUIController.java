@@ -24,6 +24,7 @@ import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.purchaseui.PurchaseRefundBillUIController;
 import main.java.presentation.purchaseui.PurchaseTradeBillUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillQueryVO;
@@ -111,17 +112,11 @@ public class FinanceBillUIController extends CenterUIController {
 
 
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找单据失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找单据失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","RMI连接错误");
         }
     }
 
@@ -138,6 +133,7 @@ public class FinanceBillUIController extends CenterUIController {
         ReceiptBillVO bill=new ReceiptBillVO();
         bill.setOperator(root.getOperator());
         ReceiptBillUIController.init(receiptBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
@@ -145,6 +141,7 @@ public class FinanceBillUIController extends CenterUIController {
         PaymentBillVO bill=new PaymentBillVO();
         bill.setOperator(root.getOperator());
         PaymentBillUIController.init(paymentBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
@@ -152,6 +149,7 @@ public class FinanceBillUIController extends CenterUIController {
         CashBillVO bill=new CashBillVO();
         bill.setOperator(root.getOperator());
         CashBillUIController.init(cashBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
@@ -170,6 +168,7 @@ public class FinanceBillUIController extends CenterUIController {
                 CashBillVO cashBill=(CashBillVO)bill;
                 CashBillUIController.init(cashBillBlService,cashBill,2,root.getStage());
             }
+            refresh();
         }
     }
 
@@ -179,11 +178,8 @@ public class FinanceBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择单据");
-            alert.setContentText("请选择要编辑的单据");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }
     }
@@ -214,6 +210,7 @@ public class FinanceBillUIController extends CenterUIController {
             controller.setPaymentBillBlService(PaymentBillBlFactory.getService());
             controller.setCashBillBlService(CashBillBlFactory.getService());
             controller.refresh();
+
             root.setReturnPaneController(new FinancePanelUIController());
         }catch(Exception e){
             e.printStackTrace();

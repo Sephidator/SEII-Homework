@@ -72,7 +72,7 @@ public class AddAccountUIController {
     private void handleConfirm(){
         if(isAccountSelected()){
             int index=accountTableView.getSelectionModel().getSelectedIndex();
-            TransItemVO transItem=new TransItemVO(accountTableView.getItems().get(index),100, "无");
+            TransItemVO transItem=new TransItemVO(accountTableView.getItems().get(index),0, "无");
             for(int i=0;i<transItemList.size();i++){
                 if(transItemList.get(i).account.getID().equals(transItem.account.getID())){
                     dialogStage.close();

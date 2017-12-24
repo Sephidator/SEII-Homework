@@ -17,6 +17,7 @@ import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.account.AccountQueryVO;
 import main.java.vo.account.AccountVO;
@@ -67,17 +68,11 @@ public class AccountUIController extends CenterUIController {
             ArrayList<AccountVO> accountList = accountBlService.getAccountList(query);
             showAccountList(accountList);
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找账户失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找账户失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找账户失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找账户失败","RMI连接错误");
         }
     }
 
@@ -118,29 +113,18 @@ public class AccountUIController extends CenterUIController {
                 String name = accountTableView.getSelectionModel().getSelectedItem().getName();
                 accountBlService.deleteAccount(ID);
 
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("删除账户成功");
-                alert.setContentText("账户ID："+ID+System.lineSeparator()+"名字："+name);
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","删除账户成功",
+                        "账户ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除账户失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除账户失败","数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除账户失败");
-                alert.setContentText("账户不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除账户失败","账户不存在");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除账户失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除账户失败","RMI连接错误");
             }
             refresh(null);
         }
@@ -167,11 +151,8 @@ public class AccountUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选中账户");
-            alert.setContentText("请在表中选择账户");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选中账户","请在表中选择账户");
             return false;
         }
     }

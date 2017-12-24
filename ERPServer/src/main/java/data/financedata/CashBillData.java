@@ -67,7 +67,7 @@ public class CashBillData extends UnicastRemoteObject implements CashBillDataSer
                     ResultSet temp = connection.createStatement().executeQuery(sql);
                     ArrayList<CashItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
-                        itemPOS.add(new CashItemPO(temp.getString("item"), temp.getDouble("amount"), temp.getString("comment")));
+                        itemPOS.add(new CashItemPO(temp.getString("itemName"), temp.getDouble("amount"), temp.getString("comment")));
                     }
                     CashBillPO cashBillPO = new CashBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getDouble("total"), resultSet.getString("accountID"), itemPOS);
                     cashBillPO.setID(ID);

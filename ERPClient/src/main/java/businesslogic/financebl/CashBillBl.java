@@ -93,15 +93,14 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         /*dataService*/
         CashBillDataService cashBillDataService = CashBillDataFactory.getService();
 
-        BillQueryPO billQueryPO = null;
-        if(query != null)
-            billQueryPO=query.getBillQueryPO();
+        BillQueryPO billQueryPO=query.getBillQueryPO();
         ArrayList<CashBillPO> cashBillPOS = cashBillDataService.finds(billQueryPO);
 
         /*转化POS到VOS*/
         ArrayList<CashBillVO> cashBillVOS = new ArrayList<>();
-        for(CashBillPO cashBillPO : cashBillPOS)
+        for(CashBillPO cashBillPO : cashBillPOS){
             cashBillVOS.add(new CashBillVO(cashBillPO));
+        }
 
         return cashBillVOS;
     }

@@ -15,6 +15,7 @@ import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
 import main.java.businesslogicservice.userblservice.UserBlService;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.user.UserVO;
 
@@ -123,49 +124,33 @@ public class UserInfoUIController extends InfoUIController{
                     String userID=userBlService.addUser(user);
                     String userName=user.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("添加用户成功");
-                    alert.setContentText("用户ID："+userID+System.lineSeparator()+"名字："+userName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加用户成功",
+                            "用户ID："+userID+System.lineSeparator()+"名字："+userName);
                 }
                 else if(text.equals("编辑")){
                     userBlService.editUser(user);
                     String userID=user.getID();
                     String userName=user.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("编辑用户成功");
-                    alert.setContentText("用户ID："+userID+System.lineSeparator()+"名字："+userName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑用户成功",
+                            "用户ID："+userID+System.lineSeparator()+"名字："+userName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"用户失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"用户失败", "数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"用户失败");
-                alert.setContentText("用户不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"用户失败","用户不存在");
             }catch(ExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"用户失败");
-                alert.setContentText("账号和已有用户重复");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"用户失败","账号和已有用户重复");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"用户失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"用户失败","RMI连接错误");
             }
         }
     }
@@ -222,12 +207,8 @@ public class UserInfoUIController extends InfoUIController{
             return true;
         } else {
             // Show the error message.
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("用户信息错误");
-            alert.setHeaderText("请检查用户信息的输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
-
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "用户信息错误","请检查用户信息的输入",errorMessage);
             return false;
         }
     }
