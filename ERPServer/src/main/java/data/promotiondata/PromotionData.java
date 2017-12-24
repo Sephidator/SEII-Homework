@@ -50,6 +50,11 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         }
     }
 
+    /**
+     * @param query
+     * @return
+     * @throws RemoteException,DataException
+     */
     @Override
     public ArrayList<PromotionPO> finds(PromotionQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -120,6 +125,11 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         }
     }
 
+    /**
+     * @param po
+     * @return
+     * @throws RemoteException,DataException,ExistException
+     */
     @Override
     public synchronized String insert(PromotionPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -131,9 +141,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
             if (resultSet.next())
                 throw new ExistException();
             sql = "INSERT INTO Promotion (name, type, start, end) VALUE ('" + po.getName() + "','" + po.getType() + "','" + new Timestamp(po.getStart().getTime()) + "','" + new Timestamp(po.getEnd().getTime()) + "') ";
-            resultSet = statement.executeQuery(sql);
-            if (!resultSet.next())
-                throw new NotExistException();
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             String ID = null;
             String type = po.getType();
             resultSet = statement.getGeneratedKeys();
@@ -184,6 +192,10 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         }
     }
 
+    /**
+     * @param promotionID
+     * @throws RemoteException,DataException,NotExistException
+     */
     @Override
     public synchronized void delete(String promotionID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
@@ -207,6 +219,10 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         }
     }
 
+    /**
+     * @param po
+     * @throws RemoteException,DataException,NotExistException,ExistException
+     */
     @Override
     public synchronized void update(PromotionPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
