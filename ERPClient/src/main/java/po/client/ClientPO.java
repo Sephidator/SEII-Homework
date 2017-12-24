@@ -16,7 +16,17 @@ public class ClientPO extends PO {
     private String salesmanID; // 默认业务员
 
     public ClientPO() {
-
+        category = "";
+        level = 0;
+        name = "";
+        phone = "";
+        address = "";
+        post = "";
+        email = "";
+        receivable = 0;
+        payable = 0;
+        receivableLimit = 0;
+        salesmanID = "";
     }
 
     public ClientPO(String category, int level, String name,

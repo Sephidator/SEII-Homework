@@ -55,17 +55,16 @@ public class ClientBl implements ClientBlService, ClientTool {
      */
     @Override
     public ClientVO find(String clientID) throws Exception {
-        ClientVO clientVO;
-        ClientPO clientPO;
-
-        /*调用ClientDataFactory得到ClientPO的客户*/
-        ClientDataService clientDataService = ClientDataFactory.getService();
-        clientPO = clientDataService.find(clientID);
-
-        /*转换ClientPO*/
-        clientVO = new ClientVO(clientPO);
-
-        return clientVO;
+        if(clientID.equals("")){
+            ClientPO clientPO=new ClientPO();
+            return new ClientVO(clientPO);
+        }
+        else{
+            /*调用ClientDataFactory得到ClientPO的客户*/
+            ClientDataService clientDataService = ClientDataFactory.getService();
+            ClientPO clientPO = clientDataService.find(clientID);
+            return new ClientVO(clientPO);
+        }
     }
 
     /**

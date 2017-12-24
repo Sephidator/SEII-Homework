@@ -18,7 +18,12 @@ public class UserPO extends PO {
     private boolean login; //员工是否登录
 
     public UserPO() {
-
+        name = "";
+        type = "";
+        jobName = "";
+        password = "";
+        age = 0;
+        top = false;
     }
 
     public UserPO(String name, String type, String jobName, String password, int age, boolean top) {

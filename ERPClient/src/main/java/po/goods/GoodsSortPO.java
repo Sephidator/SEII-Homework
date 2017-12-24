@@ -15,7 +15,11 @@ public class GoodsSortPO extends PO {
     private String comment; //商品分类备注
 
     public GoodsSortPO() {
-
+        name = "";
+        fatherID = "";
+        childrenID = new ArrayList<>();
+        goodsList = new ArrayList<>();
+        comment = "";
     }
 
     public GoodsSortPO(String name, String fatherID, ArrayList<String> childrenID, ArrayList<String> goodsList, String comment) {

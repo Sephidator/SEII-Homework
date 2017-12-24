@@ -85,17 +85,16 @@ public class GoodsBl implements GoodsBlService, GoodsTool {
      */
     @Override
     public GoodsVO find(String goodsID) throws Exception {
-        GoodsVO goodsVO;
-        GoodsPO goodsPO;
-
-         /*调用GoodsDataFactory完成对商品数据的修改*/
-        GoodsDataService goodsDataService = GoodsDataFactory.getService();
-        goodsPO = goodsDataService.find(goodsID);
-
-        /*转换GoodsPO*/
-        goodsVO = new GoodsVO(goodsPO);
-
-        return goodsVO;
+        if(goodsID.equals("")){
+            GoodsPO goodsPO=new GoodsPO();
+            return new GoodsVO(goodsPO);
+        }
+        else{
+            /*调用GoodsDataFactory完成对商品数据的修改*/
+            GoodsDataService goodsDataService = GoodsDataFactory.getService();
+            GoodsPO goodsPO = goodsDataService.find(goodsID);
+            return new GoodsVO(goodsPO);
+        }
     }
 
     /**

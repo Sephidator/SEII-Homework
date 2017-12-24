@@ -37,17 +37,16 @@ public class GoodsSortBl implements GoodsSortBlService, GoodsSortTool {
      */
     @Override
     public GoodsSortVO find(String goodsSortID) throws Exception {
-        GoodsSortVO goodsSortVO;
-        GoodsSortPO goodsSortPO;
-
-        /*调用GoodsSortDataFactory*/
-        GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
-        goodsSortPO = goodsSortDataService.find(goodsSortID);
-
-       /*GoodsSortPO转换为GoodsSortVO*/
-        goodsSortVO = new GoodsSortVO(goodsSortPO);
-
-        return goodsSortVO;
+        if(goodsSortID.equals("")){
+            GoodsSortPO goodsSortPO=new GoodsSortPO();
+            return new GoodsSortVO(goodsSortPO);
+        }
+        else{
+            /*调用GoodsSortDataFactory*/
+            GoodsSortDataService goodsSortDataService = GoodsSortDataFactory.getService();
+            GoodsSortPO goodsSortPO = goodsSortDataService.find(goodsSortID);
+            return new GoodsSortVO(goodsSortPO);
+        }
     }
 
     /**

@@ -2,8 +2,6 @@ package main.java.po.promotion;
 
 import main.java.po.PO;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PromotionPO extends PO {
@@ -17,7 +15,10 @@ public class PromotionPO extends PO {
 
 
     public PromotionPO() {
-
+        name="";
+        type="";
+        start=new Date();
+        end=new Date();
     }
 
     public String getName() {
