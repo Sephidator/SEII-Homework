@@ -13,6 +13,7 @@ import main.java.businesslogicfactory.userblfactory.UserBlFactory;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
 import main.java.exception.DataException;
 import main.java.exception.NotExistException;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.user.UserQueryVO;
@@ -154,17 +155,11 @@ public class ClientInfoUIController extends InfoUIController{
                 client.setSalesman(salesmanList.get(newValue.intValue()));
             });
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找业务员失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找业务员失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找业务员失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找业务员失败","RMI连接错误");
         }
     }
 
@@ -180,44 +175,30 @@ public class ClientInfoUIController extends InfoUIController{
                     String clientID=clientBlService.addClient(client);
                     String clientName=client.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("添加客户成功");
-                    alert.setContentText("客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加客户成功",
+                            "客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
                 }
                 else if(text.equals("编辑")){
                     clientBlService.editClient(client);
                     String clientID=client.getID();
                     String clientName=client.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("编辑客户成功");
-                    alert.setContentText("客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑客户成功",
+                            "客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                e.printStackTrace();
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"客户失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"客户失败","数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"客户失败");
-                alert.setContentText("客户不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"客户失败","客户不存在");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"客户失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"客户失败","RMI连接错误");
             }
         }
     }
@@ -311,11 +292,8 @@ public class ClientInfoUIController extends InfoUIController{
             client.setReceivableLimit(Double.parseDouble(receivableLimit.getText()));
             return true;
         } else {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("客户信息错误");
-            alert.setHeaderText("请检查客户信息的输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "客户信息错误","请检查客户信息的输入",errorMessage);
             return false;
         }
     }

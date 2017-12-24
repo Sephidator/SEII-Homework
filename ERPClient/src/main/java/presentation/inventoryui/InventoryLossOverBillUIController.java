@@ -11,7 +11,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
+import main.java.exception.DataException;
+import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddGoodsUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
@@ -25,7 +28,6 @@ public class InventoryLossOverBillUIController extends InfoUIController {
     private InventoryLossOverBillBlService service;
     private InventoryLossOverBillVO bill;
     private ArrayList<GoodsVO> goodsList;
-    private ArrayList<LossOverItemVO> lossOverItemList;
 
     private ObservableList<LossOverItemVO> lossOverItemObservableList= FXCollections.observableArrayList();
     @FXML
@@ -54,6 +56,14 @@ public class InventoryLossOverBillUIController extends InfoUIController {
     private Button confirm;
     @FXML
     private Button cancel;
+    @FXML
+    private Button add;
+    @FXML
+    private Button delete;
+    @FXML
+    private Button plus;
+    @FXML
+    private Button minus;
 
 
     // 加载文件后调用的方法******************************************
@@ -73,8 +83,9 @@ public class InventoryLossOverBillUIController extends InfoUIController {
         this.bill = bill;
         ID.setText(bill.getID());
         type.setText(bill.getType());
-        operator.setText(bill.getOperator()==null?"":(bill.getOperator().getID()+":"+bill.getOperator().getName()));
+        operator.setText(bill.getOperator().getName());
         comment.setText(bill.getComment());
+        showLossOverItemList();
     }
 
     public void setService(InventoryLossOverBillBlService service) {
@@ -83,17 +94,6 @@ public class InventoryLossOverBillUIController extends InfoUIController {
 
     public void setGoodsList(ArrayList<GoodsVO> goodsList) {
         this.goodsList=goodsList;
-    }
-
-    public void setLossOverItemList(ArrayList<LossOverItemVO> lossOverItemList) {
-        this.lossOverItemList=lossOverItemList;
-        if(lossOverItemList==null){
-            System.out.println("Null Exception");
-        }
-        else{
-            System.out.println("Not null");
-        }
-        showLossOverItemList(lossOverItemList);
     }
 
     /**
@@ -108,30 +108,29 @@ public class InventoryLossOverBillUIController extends InfoUIController {
             cancel.setText("保存草稿");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("提交编辑");
             cancel.setText("保存草稿");
         }
         else if(command==3){
             confirm.setText("确定");
             cancel.setText("取消");
+            
+            comment.setEditable(false);
+            add.setDisable(true);
+            delete.setDisable(true);
+            minus.setDisable(true);
+            plus.setDisable(true);
         }
     }
 
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showLossOverItemList(ArrayList<LossOverItemVO> lossOverItemList){
-        if(lossOverItemList!=null){
-            lossOverItemTableView.getItems().clear();
-            lossOverItemObservableList.removeAll();
-
-            for(int i=0;i<lossOverItemList.size();i++){
-                lossOverItemObservableList.add(lossOverItemList.get(i));
-            }
-            lossOverItemTableView.setItems(lossOverItemObservableList);
-
-            System.out.println("LossOverItemListSize: "+lossOverItemList.size());
-        }
+    private void showLossOverItemList(){
+        ArrayList<LossOverItemVO> lossOverItemList=bill.getLossOverList();
+        lossOverItemTableView.getItems().clear();
+        lossOverItemObservableList.setAll(lossOverItemList);
+        lossOverItemTableView.setItems(lossOverItemObservableList);
     }
 
 
@@ -139,16 +138,16 @@ public class InventoryLossOverBillUIController extends InfoUIController {
 
     @FXML
     private void addGoods(){
-        AddGoodsUIController.init(goodsList,dialogStage,lossOverItemList);
-        System.out.println("添加商品了");
-        showLossOverItemList(lossOverItemList);
+        AddGoodsUIController.init(goodsList,dialogStage,bill.getLossOverList());
+        showLossOverItemList();
     }
 
     @FXML
     private void deleteGoods(){
         if(isLossOverItemSelected()){
             int selectedIndex=lossOverItemTableView.getSelectionModel().getSelectedIndex();
-            lossOverItemTableView.getItems().remove(selectedIndex);
+            bill.getLossOverList().remove(selectedIndex);
+            showLossOverItemList();
         }
     }
 
@@ -156,9 +155,8 @@ public class InventoryLossOverBillUIController extends InfoUIController {
     private void goodsNumberPlus(){
         if(isLossOverItemSelected()){
             int selectedIndex=lossOverItemTableView.getSelectionModel().getSelectedIndex();
-            lossOverItemList.get(selectedIndex).actualNumber++;
-            bill.setLossOverList(lossOverItemList);
-            showLossOverItemList(lossOverItemList);
+            bill.getLossOverList().get(selectedIndex).actualNumber++;
+            showLossOverItemList();
             lossOverItemTableView.getSelectionModel().select(selectedIndex);
         }
     }
@@ -167,16 +165,14 @@ public class InventoryLossOverBillUIController extends InfoUIController {
     private void goodsNumberMinus(){
         if(isLossOverItemSelected()){
             int selectedIndex=lossOverItemTableView.getSelectionModel().getSelectedIndex();
-            ArrayList<LossOverItemVO> lossOverItemList=bill.getLossOverList();
-            lossOverItemList.get(selectedIndex).actualNumber--;
-            if(lossOverItemList.get(selectedIndex).actualNumber==0){
-                lossOverItemList.remove(selectedIndex);
-                bill.setLossOverList(lossOverItemList);
-                showLossOverItemList(lossOverItemList);
+            bill.getLossOverList().get(selectedIndex).actualNumber--;
+
+            if(bill.getLossOverList().get(selectedIndex).actualNumber==0){
+                bill.getLossOverList().remove(selectedIndex);
+                showLossOverItemList();
             }
             else{
-                bill.setLossOverList(lossOverItemList);
-                showLossOverItemList(lossOverItemList);
+                showLossOverItemList();
                 lossOverItemTableView.getSelectionModel().select(selectedIndex);
             }
         }
@@ -184,25 +180,67 @@ public class InventoryLossOverBillUIController extends InfoUIController {
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("确认添加")){
-            purchaseTradeBlService.addClient(client);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("确认添加")){
+                    bill.setState("待审批");
+                    String billID=service.submit(bill);
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","提交库存溢损单成功", "单据ID："+billID);
+                }
+                else if(text.equals("提交编辑")){
+                    bill.setState("待审批");
+                    service.editInventoryLossOverBill(bill);
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑库存溢损单成功", "单据ID："+bill.getID());
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"库存溢损单失败", "数据库错误");
+            }catch(FullException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"库存溢损单失败", "超过单日单据上限（99999张）");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"库存溢损单失败", "RMI连接错误");
+            }
         }
-        else if(text.equals("确认编辑")){
-            purchaseTradeBillBlService.editClient(client);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
     private void handleCancel(){
         String text=cancel.getText();
         if(text.equals("保存草稿")){
-            //service.saveDraft(bill);
+            try{
+                bill.setState("草稿");
+                bill.setComment(comment.getText());
+
+                String billID;
+                if(ID.getText().length()==0){
+                    billID=service.submit(bill);
+                }
+                else{
+                    billID=bill.getID();
+                    service.editInventoryLossOverBill(bill);
+                }
+
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","已保存库存溢损单草稿", "单据ID："+billID);
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存库存溢损单草稿失败", "数据库错误");
+            }catch(FullException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error", "保存库存溢损单草稿失败", "超过单日单据上限（99999张）");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存库存溢损单草稿失败", "RMI连接错误");
+            }
             dialogStage.close();
         }
         else if(text.equals("取消")){
@@ -216,15 +254,33 @@ public class InventoryLossOverBillUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择商品");
-            alert.setContentText("请在商品列表中选择商品");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择商品","请在商品列表中选择商品");
             return false;
         }
     }
 
+    /**
+     * 检查单据信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+        String errorMessage = "";
+        
+        if (lossOverItemObservableList==null||lossOverItemObservableList.size()==0) {
+            errorMessage+=("库存溢损列表为空。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()==0){
+            bill.setComment(comment.getText());
+            return true;
+        } else {
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "单据信息错误", "请检查单据信息的输入", errorMessage);
+            return false;
+        }
+    }
+    
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
@@ -252,18 +308,7 @@ public class InventoryLossOverBillUIController extends InfoUIController {
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setBill(bill);
-
-            //controller.setGoodsList(service.getGoodsList(null));
-            ArrayList<GoodsVO> list=new ArrayList<GoodsVO>();
-            GoodsVO goods1=new GoodsVO("电灯", null, "大号", 5, 20, 30, 20, 30, 40, "备注");
-            goods1.setID("123");
-            GoodsVO goods2=new GoodsVO("台灯", null, "小号", 5, 30, 60, 30, 60, 40, "备注");
-            goods2.setID("233");
-            list.add(goods1);
-            list.add(goods2);
-
-            controller.setGoodsList(list);
-            controller.setLossOverItemList(bill.getLossOverList());
+            controller.setGoodsList(service.getGoodsList(null));
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.

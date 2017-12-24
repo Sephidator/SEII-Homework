@@ -13,6 +13,7 @@ import main.java.businesslogicservice.accountblservice.AccountBlService;
 import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
 
@@ -91,49 +92,33 @@ public class AccountInfoUIController extends InfoUIController{
                     String accountID=accountBlService.addAccount(account);
                     String accountName=account.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("添加账户成功");
-                    alert.setContentText("账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加账户成功",
+                            "账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
                 }
                 else if(text.equals("编辑")){
                     accountBlService.editAccount(account);
                     String accountID=account.getID();
                     String accountName=account.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("编辑账户成功");
-                    alert.setContentText("账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑账户成功",
+                            "账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"账户失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"账户失败","数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"账户失败");
-                alert.setContentText("账户不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"账户失败","账户不存在");
             }catch(ExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"账户失败");
-                alert.setContentText("账号和已有账户重复");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"账户失败","账号和已有账户重复");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"账户失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"账户失败","RMI连接错误");
             }
         }
     }
@@ -178,12 +163,8 @@ public class AccountInfoUIController extends InfoUIController{
             return true;
         } else {
             // Show the error message.
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("账户信息错误");
-            alert.setHeaderText("请检查账户信息的输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
-
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "账户信息错误","请检查账户信息的输入",errorMessage);
             return false;
         }
     }

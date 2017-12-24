@@ -15,6 +15,7 @@ import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
 import main.java.exception.NotNullException;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GoodsVO;
 
@@ -77,17 +78,11 @@ public class GoodsInfoUIController extends InfoUIController{
             latestRetail.setText(String.valueOf(goods.getLatestRetail()));
             comment.setText(goods.getComment());
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找商品分类失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品分类失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找商品分类失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找商品分类失败", "RMI连接错误");
         }
     }
 
@@ -136,56 +131,37 @@ public class GoodsInfoUIController extends InfoUIController{
                     String goodsID=goodsBlService.addGoods(goods);
                     String goodsName=goods.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("添加商品成功");
-                    alert.setContentText("商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加商品成功",
+                            "商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
                 }
                 else if(text.equals("编辑")){
                     goodsBlService.editGoods(goods);
                     String goodsID=goods.getID();
                     String goodsName=goods.getName();
 
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("编辑商品成功");
-                    alert.setContentText("商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑商品成功",
+                            "商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品失败","数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品失败");
-                alert.setContentText("商品不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品失败","商品不存在");
             }catch(NotNullException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品失败");
-                alert.setContentText("商品分类下有子分类");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品失败","商品分类下有子分类");
             }
             catch(ExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品失败");
-                alert.setContentText("账号和已有商品重复");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品失败","账号和已有商品重复");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"商品失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"商品失败","RMI连接错误");
             }
         }
     }
@@ -267,12 +243,8 @@ public class GoodsInfoUIController extends InfoUIController{
             return true;
         } else {
             // Show the error message.
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("商品信息错误");
-            alert.setHeaderText("请检查商品信息的输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
-
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "商品信息错误","请检查商品信息的输入",errorMessage);
             return false;
         }
     }

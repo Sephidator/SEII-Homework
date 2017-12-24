@@ -104,22 +104,41 @@ public class AddGoodsUIController {
     @FXML
     private void handleConfirm(){
         if(isGoodsSelected()){
-            System.out.println(giftItemList==null);
             if(goodsItemList!=null){
                 int index=goodsTableView.getSelectionModel().getSelectedIndex();
                 GoodsItemVO goodsItem=new GoodsItemVO(goodsTableView.getItems().get(index),1,Double.parseDouble(priceColumn.getCellData(index)));
+
+                for(int i=0;i<goodsItemList.size();i++){
+                    if(goodsItemList.get(i).goods.getID().equals(goodsItem.goods.getID())){
+                        dialogStage.close();
+                        return;
+                    }
+                }
                 goodsItemList.add(goodsItem);
             }
             if(lossOverItemList!=null){
                 GoodsVO goods=goodsTableView.getSelectionModel().getSelectedItem();
                 LossOverItemVO lossOverItem=new LossOverItemVO(goods,goods.getRetail(),goods.getNumber(),goods.getNumber());
+
+                for(int i=0;i<lossOverItemList.size();i++){
+                    if(lossOverItemList.get(i).goods.getID().equals(lossOverItem.goods.getID())){
+                        dialogStage.close();
+                        return;
+                    }
+                }
                 lossOverItemList.add(lossOverItem);
             }
             if(giftItemList!=null){
                 GoodsVO goods=goodsTableView.getSelectionModel().getSelectedItem();
-                GiftItemVO giftItem=new GiftItemVO(goods,1,80);
+                GiftItemVO giftItem=new GiftItemVO(goods,1,goods.getCost());
+
+                for(int i=0;i<giftItemList.size();i++){
+                    if(giftItemList.get(i).goods.getID().equals(giftItem.goods.getID())){
+                        dialogStage.close();
+                        return;
+                    }
+                }
                 giftItemList.add(giftItem);
-                System.out.println("GiftList length: "+giftItemList.size());
             }
         }
         dialogStage.close();

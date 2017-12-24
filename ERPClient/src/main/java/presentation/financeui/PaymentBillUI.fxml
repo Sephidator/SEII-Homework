@@ -72,7 +72,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="client" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="client" editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -95,7 +95,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="type" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="type" editable="false" prefHeight="30.0" prefWidth="145.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -117,7 +117,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="operator" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="operator" editable="false" prefHeight="30.0" prefWidth="145.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -202,7 +202,7 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="48.0" prefWidth="150.0" text="添加账户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button fx:id="addAccount" layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleAddAccount" prefHeight="48.0" prefWidth="150.0" text="添加账户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -224,7 +224,7 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="48.0" prefWidth="150.0" text="删除账户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button fx:id="deleteAccount" layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleDeleteAccount" prefHeight="48.0" prefWidth="150.0" text="删除账户" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -239,7 +239,7 @@
                                              <children>
                                                 <Label styleClass="myLabel" text="转账金额" />
                                                 <TextField fx:id="inputAmount" prefWidth="140.0" />
-                                                <Button mnemonicParsing="false" onAction="#handleCorrect" prefHeight="35.0" prefWidth="35.0" styleClass="correctButton" />
+                                                <Button fx:id="correct" mnemonicParsing="false" onAction="#handleCorrect" prefHeight="35.0" prefWidth="35.0" styleClass="correctButton" />
                                              </children>
                                           </HBox>
                                        </children>

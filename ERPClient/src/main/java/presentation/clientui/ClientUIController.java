@@ -17,6 +17,7 @@ import main.java.exception.DataException;
 import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
@@ -74,17 +75,11 @@ public class ClientUIController extends CenterUIController {
             ArrayList<ClientVO> clientList = clientBlService.getClientList(query);
             showClientList(clientList);
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找客户失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找客户失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","RMI连接错误");
         }
     }
 
@@ -125,29 +120,18 @@ public class ClientUIController extends CenterUIController {
                 String name = clientTableView.getSelectionModel().getSelectedItem().getName();
                 clientBlService.deleteClient(ID);
 
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("删除客户成功");
-                alert.setContentText("客户ID："+ID+System.lineSeparator()+"名字："+name);
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","删除客户成功",
+                        "客户ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除客户失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除客户失败","数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除客户失败");
-                alert.setContentText("客户不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除客户失败","客户不存在");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除客户失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除客户失败","RMI连接错误");
             }
             refresh(null);
         }
@@ -174,11 +158,8 @@ public class ClientUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选中客户");
-            alert.setContentText("请在表中选择客户");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选中客户","请在表中选择客户");
             return false;
         }
     }

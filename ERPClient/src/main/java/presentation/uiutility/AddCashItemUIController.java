@@ -80,11 +80,8 @@ public class AddCashItemUIController {
             return true;
         } else {
             // Show the error message.
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("不正确的输入");
-            alert.setHeaderText("请确认输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "不正确的输入","请确认输入",errorMessage);
             return false;
         }
     }
@@ -95,7 +92,7 @@ public class AddCashItemUIController {
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
 
-    public static void init(ArrayList<CashItemVO> cashItemList,Stage stage){
+    public static void init(ArrayList<CashItemVO> cashItemList, Stage stage){
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/main/java/presentation/uiutility/AddCashItemUI.fxml"));

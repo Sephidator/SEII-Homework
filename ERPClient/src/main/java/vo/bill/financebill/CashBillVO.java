@@ -63,7 +63,7 @@ public class CashBillVO extends FinanceBillVO {
     /*得到CashBillPO*/
     public CashBillPO getCashBillPO(){
         CashBillPO cashBillPO = new CashBillPO();
-        cashBillPO.setAccountID(this.account.getBankAccount());
+        cashBillPO.setAccountID(this.account.getID());
         cashBillPO.setID(this.ID);
         cashBillPO.setState(this.state);
         cashBillPO.setTime(this.time);

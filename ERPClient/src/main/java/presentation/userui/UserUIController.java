@@ -13,6 +13,7 @@ import main.java.businesslogicfactory.userblfactory.UserBlFactory;
 import main.java.businesslogicservice.userblservice.UserBlService;
 import main.java.presentation.messageui.AdministratorPanelUIController;
 import main.java.presentation.mainui.RootUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
@@ -63,17 +64,11 @@ public class UserUIController extends CenterUIController {
             ArrayList<UserVO> userList = userBlService.getUserList(query);
             showUserList(userList);
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找用户失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找用户失败", "数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找用户失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找用户失败","RMI连接错误");
         }
     }
 
@@ -114,29 +109,18 @@ public class UserUIController extends CenterUIController {
                 String name = userTableView.getSelectionModel().getSelectedItem().getName();
                 userBlService.deleteUser(ID);
 
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("删除用户成功");
-                alert.setContentText("用户ID："+ID+System.lineSeparator()+"名字："+name);
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success", "删除用户成功",
+                        "用户ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除用户失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除用户失败","数据库错误");
             }catch(NotExistException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除用户失败");
-                alert.setContentText("用户不存在");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除用户失败","用户不存在");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("删除用户失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除用户失败","RMI连接错误");
             }
             refresh(null);
         }
@@ -163,11 +147,8 @@ public class UserUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选中用户");
-            alert.setContentText("请在表中选择用户");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选中用户","请在表中选择用户");
             return false;
         }
     }

@@ -17,6 +17,7 @@ import main.java.exception.LoginException;
 import main.java.exception.NotExistException;
 import main.java.businesslogicfactory.loginblfactory.LoginBlFactory;
 import main.java.presentation.loginui.LoginUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.user.UserVO;
 
@@ -75,30 +76,28 @@ public class RootUIController {
     }
 
     public void setClose(){
-        stage.setOnCloseRequest(event-> handleLogout());
+        stage.setOnCloseRequest(event-> logout());
+    }
+
+    private void logout(){
+        try{
+            LoginBlFactory.getService().logout(operator.getID());
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","登陆失败","数据库连接错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","登陆失败","RMI连接错误");
+        }
     }
 
     @FXML
     private void handleLogout(){
-        try{
-            LoginBlFactory.getService().logout(operator.getID());
-            stage.close();
-            Stage newStage=new Stage();
-            newStage.setTitle("灯具进销存管理系统");
-            LoginUIController.init(newStage);
-        }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("登陆失败");
-            alert.setContentText("数据库连接错误");
-            alert.showAndWait();
-        }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("登陆失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
-        }
+        logout();
+        stage.close();
+        Stage newStage=new Stage();
+        newStage.setTitle("灯具进销存管理系统");
+        LoginUIController.init(newStage);
     }
 
     @FXML

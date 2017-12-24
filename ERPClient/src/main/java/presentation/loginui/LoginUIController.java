@@ -15,6 +15,7 @@ import main.java.exception.LoginException;
 import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.*;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.vo.user.UserVO;
 
 import java.io.IOException;
@@ -66,30 +67,17 @@ public class LoginUIController {
                 AdministratorPanelUIController.init(root);
             }
         }catch(LoginException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("登陆失败");
-            alert.setContentText("用户已登录");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","登陆失败","用户已登录");
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("登陆失败");
-            alert.setContentText("数据库连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","登陆失败","数据库连接错误");
         }catch(NotExistException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("登陆失败");
-            alert.setContentText("用户名或密码错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","登陆失败","用户名或密码错误");
         }catch(Exception e){
-            e.printStackTrace();
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("登陆失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","登陆失败","RMI连接错误");
         }
     }
 

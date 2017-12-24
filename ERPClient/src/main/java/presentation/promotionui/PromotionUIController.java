@@ -10,14 +10,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.promotion.PromotionClientVO;
-import main.java.vo.promotion.PromotionGoodsVO;
-import main.java.vo.promotion.PromotionTotalVO;
-import main.java.vo.promotion.PromotionVO;
+import main.java.vo.promotion.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,8 +52,22 @@ public class PromotionUIController extends CenterUIController {
 
     public void setPromotionBlService(PromotionBlService promotionBlService) {
         this.promotionBlService = promotionBlService;
-        //ArrayList<PromotionVO> promotionList=promotionBlService.getPromotionList(null);
-        //showPromotionList(promotionList);
+    }
+
+    /**
+     * 刷新界面，取得所有商品的列表，并显示在tableview中
+     * */
+    private void refresh(PromotionQueryVO query){
+        try {
+            ArrayList<PromotionVO> promotionList = promotionBlService.getPromotionList(query);
+            showPromotionList(promotionList);
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找促销策略失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找促销策略失败","RMI连接错误");
+        }
     }
 
     /**

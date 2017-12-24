@@ -17,6 +17,7 @@ import main.java.exception.DataException;
 import main.java.exception.FullException;
 import main.java.exception.NotExistException;
 import main.java.presentation.uiutility.AddAccountUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CheckInput;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
@@ -65,6 +66,12 @@ public class PaymentBillUIController extends InfoUIController {
     private Button confirm;
     @FXML
     private Button cancel;
+    @FXML
+    private Button addAccount;
+    @FXML
+    private Button deleteAccount;
+    @FXML
+    private Button correct;
 
     // 加载文件后调用的方法******************************************
 
@@ -108,12 +115,19 @@ public class PaymentBillUIController extends InfoUIController {
             cancel.setText("保存草稿");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("提交编辑");
             cancel.setText("保存草稿");
         }
         else if(command==3){
             confirm.setText("确定");
             cancel.setText("取消");
+
+            comment.setEditable(false);
+            inputAmount.setEditable(false);
+            clientChoiceBox.setDisable(true);
+            addAccount.setDisable(true);
+            deleteAccount.setDisable(true);
+            correct.setDisable(true);
         }
     }
 
@@ -131,17 +145,11 @@ public class PaymentBillUIController extends InfoUIController {
                 bill.setClient(clientList.get(newValue.intValue()));
             });
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找客户失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("查找客户失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","RMI连接错误");
         }
     }
 
@@ -167,14 +175,14 @@ public class PaymentBillUIController extends InfoUIController {
     // 界面之中会用到的方法******************************************
 
     @FXML
-    private void addAccount(){
+    private void handleAddAccount(){
         AddAccountUIController.init(accountList,bill.getTransList(),dialogStage);
         showTransItemList();
         countTotal();
     }
 
     @FXML
-    private void deleteAccount(){
+    private void handleDeleteAccount(){
         if(isAccountSelected()){
             int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
             bill.getTransList().remove(selectedIndex);
@@ -193,11 +201,8 @@ public class PaymentBillUIController extends InfoUIController {
                 int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
 
                 if(number>bill.getTransList().get(selectedIndex).account.getRemaining()){
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Invalid input");
-                    alert.setHeaderText("输入不正确");
-                    alert.setContentText("输入金额不得大于银行余额");
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                            "Invalid input", "输入不正确", "输入金额不得大于银行余额");
                     return;
                 }
                 else{
@@ -216,46 +221,29 @@ public class PaymentBillUIController extends InfoUIController {
             String text=confirm.getText();
 
             try{
-                if(text.equals("添加")){
+                if(text.equals("确认添加")){
                     bill.setState("待审批");
                     String billID=service.submit(bill);
-
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("提交付款单成功");
-                    alert.setContentText("单据ID："+billID);
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","提交付款单成功", "单据ID："+billID);
                 }
-                else if(text.equals("编辑")){
+                else if(text.equals("提交编辑")){
+                    bill.setState("待审批");
                     service.editPaymentBill(bill);
-
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("编辑付款单成功");
-                    alert.setContentText("单据ID："+bill.getID());
-                    alert.showAndWait();
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑付款单成功", "单据ID："+bill.getID());
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                e.printStackTrace();
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"付款单失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"付款单失败", "数据库错误");
             }catch(FullException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"付款单失败");
-                alert.setContentText("超过单日单据上限（99999张）");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"付款单失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(text+"付款单失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"付款单失败", "RMI连接错误");
             }
         }
     }
@@ -277,32 +265,18 @@ public class PaymentBillUIController extends InfoUIController {
                     service.editPaymentBill(bill);
                 }
 
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("已保存付款单草稿");
-                alert.setContentText("单据ID："+billID);
-                alert.showAndWait();
-
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","已保存付款单草稿", "单据ID："+billID);
                 dialogStage.close();
             }catch(DataException e){
-                e.printStackTrace();
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("保存付款单草稿失败");
-                alert.setContentText("数据库错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存付款单草稿失败", "数据库错误");
             }catch(FullException e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("保存付款单草稿失败");
-                alert.setContentText("超过单日单据上限（99999张）");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error", "保存付款单草稿失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("保存付款单草稿失败");
-                alert.setContentText("RMI连接错误");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存付款单草稿失败", "RMI连接错误");
             }
             dialogStage.close();
         }
@@ -317,11 +291,8 @@ public class PaymentBillUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择账户");
-            alert.setContentText("请在账户列表中选择账户");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection", "未选择账户", "请在账户列表中选择账户");
             return false;
         }
     }
@@ -336,7 +307,7 @@ public class PaymentBillUIController extends InfoUIController {
         if (client.getText().length()==0) {
             errorMessage+=("未选择客户。"+System.lineSeparator());
         }
-        if (Double.parseDouble(total.getText())==0) {
+        if (transItemObservableList==null||transItemObservableList.size()==0) {
             errorMessage+=("未添加转账列表。"+System.lineSeparator());
         }
 
@@ -344,11 +315,8 @@ public class PaymentBillUIController extends InfoUIController {
             bill.setComment(comment.getText());
             return true;
         } else {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("单据信息错误");
-            alert.setHeaderText("请检查单据信息的输入");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "单据信息错误", "请检查单据信息的输入", errorMessage);
             return false;
         }
     }

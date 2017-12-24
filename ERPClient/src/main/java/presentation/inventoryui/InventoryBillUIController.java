@@ -9,11 +9,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
+import main.java.businesslogicfactory.inventoryblfactory.InventoryGiftBillBlFactory;
+import main.java.businesslogicfactory.inventoryblfactory.InventoryLossOverBillBlFactory;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.inventorybill.InventoryBillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
 import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
@@ -55,12 +61,40 @@ public class InventoryBillUIController extends CenterUIController {
         this.inventoryGiftBillBlService=inventoryGiftBillBlService;
     }
 
+    public void refresh(){
+        try{
+            ArrayList<InventoryBillVO> inventoryBillList=new ArrayList<>();
+            BillQueryVO query=new BillQueryVO("草稿",null,null,"库存溢损单",root.getOperator().getID(),null);
+
+            query.type="库存溢损单";
+            ArrayList<InventoryLossOverBillVO> lossOverBillList1=inventoryLossOverBillBlService.getInventoryLossOverBillList(query);
+            query.type="库存赠送单";
+            ArrayList<InventoryGiftBillVO> giftBillList1=inventoryGiftBillBlService.getInventoryGiftBillList(query);
+
+            query.state="审批不通过";
+            query.type="库存溢损单";
+            ArrayList<InventoryLossOverBillVO> lossOverBillList2=inventoryLossOverBillBlService.getInventoryLossOverBillList(query);
+            query.type="库存赠送单";
+            ArrayList<InventoryGiftBillVO> giftBillList2=inventoryGiftBillBlService.getInventoryGiftBillList(query);
+
+            inventoryBillList.addAll(lossOverBillList1);
+            inventoryBillList.addAll(lossOverBillList2);
+            inventoryBillList.addAll(giftBillList1);
+            inventoryBillList.addAll(giftBillList2);
+
+            showInventoryBillList(inventoryBillList);
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","RMI连接错误");
+        }
+    }
+
     private void showInventoryBillList(ArrayList<InventoryBillVO> inventoryBillList){
         inventoryBillObservableList.removeAll();
-
-        for(int i=0;i<inventoryBillList.size();i++){
-            inventoryBillObservableList.add(inventoryBillList.get(i));
-        }
+        inventoryBillObservableList.setAll(inventoryBillList);
         inventoryBillTableView.setItems(inventoryBillObservableList);
     }
 
@@ -70,31 +104,32 @@ public class InventoryBillUIController extends CenterUIController {
     private void addInventoryLossOverBill(){
         InventoryLossOverBillVO bill=new InventoryLossOverBillVO();
         bill.setOperator(root.getOperator());
-        InventoryLossOverBillUIController.init(null,bill,1,root.getStage());
+        InventoryLossOverBillUIController.init(inventoryLossOverBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
     private void addInventoryGiftBill(){
         InventoryGiftBillVO bill=new InventoryGiftBillVO();
         bill.setOperator(root.getOperator());
-        System.out.println(bill.getGiftList()==null);
-        InventoryGiftBillUIController.init(null,bill,1,root.getStage());
+        InventoryGiftBillUIController.init(inventoryGiftBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
     private void editInventoryBill(){
-        /*
         if(isBillSelected()){
-            if(inventoryBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货单")){
-                InventoryLossOverBillVO bill=(InventoryLossOverBillVO) inventoryBillTableView.getSelectionModel().getSelectedItem();
-                InventoryLossOverBillUIController.init(null,bill,2,root.getStage());
+            InventoryBillVO bill=inventoryBillTableView.getSelectionModel().getSelectedItem();
+            if(bill.getType().equals("库存溢损单")){
+                InventoryLossOverBillVO lossOverBill=(InventoryLossOverBillVO) inventoryBillTableView.getSelectionModel().getSelectedItem();
+                InventoryLossOverBillUIController.init(inventoryLossOverBillBlService,lossOverBill,2,root.getStage());
             }
-            else if(inventoryBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
-                InventoryGiftBillVO bill=(InventoryGiftBillVO) inventoryBillTableView.getSelectionModel().getSelectedItem();
-                InventoryGiftBillUIController.init(null,bill,2,root.getStage());
+            else if(inventoryBillTableView.getSelectionModel().getSelectedItem().getType().equals("库存赠送单")){
+                InventoryGiftBillVO giftBill=(InventoryGiftBillVO) inventoryBillTableView.getSelectionModel().getSelectedItem();
+                InventoryGiftBillUIController.init(inventoryGiftBillBlService,giftBill,2,root.getStage());
             }
+            refresh();
         }
-        */
     }
 
     private boolean isBillSelected(){
@@ -103,11 +138,8 @@ public class InventoryBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择单据");
-            alert.setContentText("请选择要编辑的单据");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }
     }
@@ -134,19 +166,9 @@ public class InventoryBillUIController extends CenterUIController {
 
             InventoryBillUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setInventoryLossOverBillBlService(null);
-            controller.setInventoryGiftBillBlService(null);
-
-
-            InventoryLossOverBillVO bill1=new InventoryLossOverBillVO();
-            InventoryGiftBillVO bill2=new InventoryGiftBillVO();
-
-            bill1.setID("123");
-            bill2.setID("123");
-            ArrayList<InventoryBillVO> plist=new ArrayList<>();
-            plist.add(bill1);
-            plist.add(bill2);
-            controller.showInventoryBillList(plist);
+            controller.setInventoryLossOverBillBlService(InventoryLossOverBillBlFactory.getService());
+            controller.setInventoryGiftBillBlService(InventoryGiftBillBlFactory.getService());
+            controller.refresh();
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

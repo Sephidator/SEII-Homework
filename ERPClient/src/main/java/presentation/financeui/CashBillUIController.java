@@ -10,8 +10,13 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
+import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
+import main.java.exception.DataException;
+import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddCashItemUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillVO;
@@ -24,7 +29,6 @@ import java.util.ArrayList;
 public class CashBillUIController extends InfoUIController {
     private CashBillBlService service;
     private CashBillVO bill;
-    private ArrayList<CashItemVO> cashItemList;
 
     private ObservableList<CashItemVO> cashItemObservableList= FXCollections.observableArrayList();
     @FXML
@@ -42,19 +46,22 @@ public class CashBillUIController extends InfoUIController {
     @FXML
     private TextField operator; //操作员
     @FXML
-    private TextField bankAccount; // 总价
+    private TextField account; // 公司账户
     @FXML
     private TextField total; // 总价
     @FXML
     private TextArea comment; // 备注
     @FXML
-    private ChoiceBox<String> bankAccountChoiceBox;
+    private ChoiceBox<String> accountChoiceBox;
     @FXML
     private Button confirm;
     @FXML
     private Button cancel;
-
-
+    @FXML
+    private Button addCashItem;
+    @FXML
+    private Button deleteCashItem;
+    
     // 加载文件后调用的方法******************************************
 
     public void initialize(){
@@ -69,34 +76,16 @@ public class CashBillUIController extends InfoUIController {
         this.bill = bill;
         ID.setText(bill.getID());
         type.setText(bill.getType());
-        total.setText(String.valueOf(bill.getTotal()));
+        operator.setText(bill.getOperator().getName());
+        account.setText(bill.getAccount().getName());
         comment.setText(bill.getComment());
-        operator.setText(bill.getOperator().getID()+":"+bill.getOperator().getName());
+        total.setText(String.valueOf(bill.getTotal()));
+        showCashItemList();
     }
 
     public void setService(CashBillBlService service) {
         this.service=service;
-
-        AccountVO a1 = new AccountVO("12345678","账户A",1000);
-        AccountVO a2 = new AccountVO("12389678","账户B",10000);
-
-        ArrayList<AccountVO> accountList=new ArrayList<>();
-        accountList.add(a1);
-        accountList.add(a2);
-        ObservableList<String> list=FXCollections.observableArrayList();
-        for(int i=0;i<accountList.size();i++){
-            list.add(accountList.get(i).getName()+":"+accountList.get(i).getRemaining()+"元");
-        }
-        bankAccountChoiceBox.setItems(list);
-        bankAccountChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-            bankAccount.setText(accountList.get(newValue.intValue()).getName()+":"+accountList.get(newValue.intValue()).getRemaining()+"元");
-            bill.setAccount(accountList.get(newValue.intValue()));
-        });
-    }
-
-    public void setCashItemList(ArrayList<CashItemVO> cashItemList) {
-        this.cashItemList=cashItemList;
-        showCashItemList(cashItemList);
+        setAccountList();
     }
 
     /**
@@ -111,7 +100,7 @@ public class CashBillUIController extends InfoUIController {
             cancel.setText("保存草稿");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("提交编辑");
             cancel.setText("保存草稿");
         }
         else if(command==3){
@@ -120,61 +109,130 @@ public class CashBillUIController extends InfoUIController {
         }
     }
 
+    private void setAccountList(){
+        try{
+            ArrayList<AccountVO> accountList= AccountBlFactory.getService().getAccountList(null);
+
+            ObservableList<String> list=FXCollections.observableArrayList();
+            for(int i=0;i<accountList.size();i++){
+                list.add(accountList.get(i).getName()+": 余额"+accountList.get(i).getRemaining()+"元");
+            }
+            accountChoiceBox.setItems(list);
+            accountChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+                account.setText(accountList.get(newValue.intValue()).getName());
+                bill.setAccount(accountList.get(newValue.intValue()));
+            });
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找银行账户失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找银行账户失败","RMI连接错误");
+        }
+    }
+
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showCashItemList(ArrayList<CashItemVO> cashItemList){
-        if(cashItemList!=null){
-            cashItemTableView.getItems().clear();
-            cashItemObservableList.removeAll();
+    private void showCashItemList(){
+        ArrayList<CashItemVO> cashItemList=bill.getItemList();
+        cashItemTableView.getItems().clear();
+        cashItemObservableList.setAll(cashItemList);
+        cashItemTableView.setItems(cashItemObservableList);
+    }
 
-            for(int i=0;i<cashItemList.size();i++){
-                cashItemObservableList.add(cashItemList.get(i));
-            }
-            cashItemTableView.setItems(cashItemObservableList);
-
-            System.out.println("CashItemListSize: "+cashItemList.size());
+    private void countTotal(){
+        double totalAmount=0;
+        for(CashItemVO item:bill.getItemList()){
+            totalAmount+=item.amount;
         }
+        total.setText(String.valueOf(totalAmount));
+        bill.setTotal(totalAmount);
     }
 
 
     // 界面之中会用到的方法******************************************
 
     @FXML
-    private void addCashItem(){
-        AddCashItemUIController.init(cashItemList,dialogStage);
-        showCashItemList(cashItemList);
+    private void handleAddCashItem(){
+        AddCashItemUIController.init(bill.getItemList(),dialogStage);
+        showCashItemList();
+        countTotal();
     }
 
     @FXML
-    private void deleteCashItem(){
+    private void handleDeleteCashItem(){
         if(isCashItemSelected()){
             int selectedIndex=cashItemTableView.getSelectionModel().getSelectedIndex();
-            cashItemTableView.getItems().remove(selectedIndex);
+            bill.getItemList().remove(selectedIndex);
+            showCashItemList();
+            countTotal();
         }
     }
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("确认添加")){
-            purchaseTradeBlService.addClient(client);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("确认添加")){
+                    bill.setState("待审批");
+                    String billID=service.submit(bill);
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","提交现金费用单成功", "单据ID："+billID);
+                }
+                else if(text.equals("提交编辑")){
+                    bill.setState("待审批");
+                    service.editCashBill(bill);
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","编辑现金费用单成功", "单据ID："+bill.getID());
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"现金费用单失败", "数据库错误");
+            }catch(FullException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"现金费用单失败", "超过单日单据上限（99999张）");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"现金费用单失败", "RMI连接错误");
+            }
         }
-        else if(text.equals("确认编辑")){
-            purchaseTradeBillBlService.editClient(client);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
     private void handleCancel(){
         String text=cancel.getText();
         if(text.equals("保存草稿")){
-            //service.saveDraft(bill);
+            try{
+                bill.setState("草稿");
+                bill.setComment(comment.getText());
+
+                String billID;
+                if(ID.getText().length()==0){
+                    billID=service.submit(bill);
+                }
+                else{
+                    billID=bill.getID();
+                    service.editCashBill(bill);
+                }
+
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","已保存现金费用单草稿", "单据ID："+billID);
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存现金费用单草稿失败", "数据库错误");
+            }catch(FullException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error", "保存现金费用单草稿失败", "超过单日单据上限（99999张）");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","保存现金费用单草稿失败", "RMI连接错误");
+            }
             dialogStage.close();
         }
         else if(text.equals("取消")){
@@ -197,6 +255,30 @@ public class CashBillUIController extends InfoUIController {
         }
     }
 
+    /**
+     * 检查单据信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+        String errorMessage = "";
+
+        if (account.getText().length()==0) {
+            errorMessage+=("未选择账户。"+System.lineSeparator());
+        }
+        if (cashItemObservableList==null||cashItemObservableList.size()==0) {
+            errorMessage+=("未添加条目清单。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()==0){
+            bill.setComment(comment.getText());
+            return true;
+        } else {
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "单据信息错误", "请检查单据信息的输入", errorMessage);
+            return false;
+        }
+    }
+
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
@@ -215,7 +297,7 @@ public class CashBillUIController extends InfoUIController {
             // Create the dialog stage
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("进货单信息界面");
+            dialogStage.setTitle("现金费用单信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));
@@ -224,16 +306,6 @@ public class CashBillUIController extends InfoUIController {
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setBill(bill);
-
-            ArrayList<CashItemVO> list=new ArrayList<>();
-            CashItemVO cash1=new CashItemVO("条目1",100,"无备注");
-            CashItemVO cash2=new CashItemVO("条目2",50,"备注");
-
-            list.add(cash1);
-            list.add(cash2);
-
-            controller.setCashItemList(list);
-            //controller.setCashItemList(bill.getItemList());
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.
