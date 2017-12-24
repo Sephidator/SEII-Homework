@@ -71,6 +71,7 @@ public class InventoryGiftBillVO extends InventoryBillVO {
         this.state=inventoryGiftBillPO.getState();
         this.time=inventoryGiftBillPO.getTime();
         this.comment=inventoryGiftBillPO.getComment();
+        this.type=inventoryGiftBillPO.getType();
 
         ClientTool clientTool=new ClientBl();
         this.client=clientTool.find(inventoryGiftBillPO.getClientID());
