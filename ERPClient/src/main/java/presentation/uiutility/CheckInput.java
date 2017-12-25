@@ -12,11 +12,8 @@ public class CheckInput {
 
             return true;
         }catch (NumberFormatException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid input");
-            alert.setHeaderText("输入不正确");
-            alert.setContentText("请输入正数");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Invalid input","输入不正确","请输入正数");
             return false;
         }
     }

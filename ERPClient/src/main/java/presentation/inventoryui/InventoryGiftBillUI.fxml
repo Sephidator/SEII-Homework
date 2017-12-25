@@ -43,14 +43,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text=" 编号" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="ID" editable="false" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="ID" editable="false" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -65,14 +65,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="单据类型" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="type" editable="false" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="type" editable="false" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -87,14 +87,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" layoutX="114.0" layoutY="-11.0" prefHeight="89.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="操作员" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="operator" editable="false" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="operator" editable="false" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -107,13 +107,13 @@
                         </AnchorPane>
                      </children>
                   </GridPane>
-                  <HBox alignment="CENTER" layoutX="29.0" layoutY="364.0" prefHeight="60.0" spacing="60.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="28.0">
+                  <HBox alignment="CENTER" layoutX="32.0" layoutY="369.0" prefHeight="60.0" spacing="60.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="31.0">
                      <children>
                         <Button fx:id="confirm" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="60.0" prefWidth="100.0" text="确定" />
                         <Button fx:id="cancel" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="60.0" prefWidth="100.0" text="取消" />
                      </children>
                   </HBox>
-                  <VBox layoutX="17.0" layoutY="241.0" prefWidth="280.0" spacing="5.0" AnchorPane.topAnchor="190.0">
+                  <VBox layoutX="14.0" layoutY="190.0" prefWidth="280.0" spacing="5.0" AnchorPane.topAnchor="190.0">
                      <children>
                         <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="备注" textFill="WHITE" textOverrun="CLIP">
                            <font>

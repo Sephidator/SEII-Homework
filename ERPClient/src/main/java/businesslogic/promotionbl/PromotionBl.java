@@ -5,12 +5,10 @@ import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.datafactory.promotiondatafactory.PromotionDataFactory;
 import main.java.dataservice.promotiondataservice.PromotionDataService;
-import main.java.po.promotion.PromotionPO;
-import main.java.po.promotion.PromotionQueryPO;
+import main.java.po.promotion.*;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
-import main.java.vo.promotion.PromotionQueryVO;
-import main.java.vo.promotion.PromotionVO;
+import main.java.vo.promotion.*;
 
 import java.util.ArrayList;
 
@@ -33,8 +31,9 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
         ArrayList<PromotionPO> promotionPOS = promotionDataService.finds(promotionQueryPO);
 
         ArrayList<PromotionVO> promotionVOS  = new ArrayList<>();//转换至ArrayList<PromotionVO
-        for(PromotionPO promotionPO : promotionPOS)
-            promotionVOS.add(new PromotionVO(promotionPO));
+        for(PromotionPO promotionPO : promotionPOS){
+            promotionVOS.add(getPromotionVO(promotionPO));
+        }
 
         return promotionVOS;
     }
@@ -55,7 +54,7 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
             /*dataService*/
             PromotionDataService promotionDataService = PromotionDataFactory.getService();
             PromotionPO promotionPO = promotionDataService.find(promotionID);
-            return new PromotionVO(promotionPO);
+            return getPromotionVO(promotionPO);
         }
     }
 
@@ -117,5 +116,26 @@ public class PromotionBl implements PromotionBlService, PromotionTool {
         return goodsVOS;
     }
 
-
+    /**
+     * @version: 1
+     * @date: 2017.12.18 23:37
+     * @para: [query]
+     * @function: 为了解决王宁没有根据促销策略类型来生成对应的VO所产生的问题
+     */
+    private PromotionVO getPromotionVO(PromotionPO promotionPO) throws Exception{
+        PromotionVO promotionVO=new PromotionVO();
+        if(promotionPO.getType().equals("客户促销策略")){
+            PromotionClientPO promotionClientPO=(PromotionClientPO)promotionPO;
+            promotionVO=new PromotionClientVO(promotionClientPO);
+        }
+        else if(promotionPO.getType().equals("商品促销策略")){
+            PromotionGoodsPO promotionGoodsPO=(PromotionGoodsPO)promotionPO;
+            promotionVO=new PromotionGoodsVO(promotionGoodsPO);
+        }
+        else if(promotionPO.getType().equals("总价促销策略")){
+            PromotionTotalPO promotionTotalPO=(PromotionTotalPO)promotionPO;
+            promotionVO=new PromotionTotalVO(promotionTotalPO);
+        }
+        return promotionVO;
+    }
 }

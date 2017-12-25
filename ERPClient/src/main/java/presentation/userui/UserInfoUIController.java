@@ -100,6 +100,7 @@ public class UserInfoUIController extends InfoUIController{
         }
         else if(command==3){
             confirm.setText("确定");
+
             ID.setEditable(false);
             type.setEditable(false);
             jobName.setEditable(false);

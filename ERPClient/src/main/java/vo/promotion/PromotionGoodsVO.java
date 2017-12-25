@@ -1,5 +1,7 @@
 package main.java.vo.promotion;
 
+import main.java.po.goods.GoodsItemPO;
+import main.java.po.promotion.PromotionGoodsPO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsItemVO;
@@ -15,20 +17,45 @@ public class PromotionGoodsVO extends PromotionVO {
 
     public PromotionGoodsVO(){
         this.name="";
-        this.type="特价包";
+        this.type="商品促销策略";
         this.start=new Date();
         this.end=new Date();
         this.goodsList = new ArrayList<>();
         this.discount = 0;
     }
 
-    public PromotionGoodsVO(String name, Date start, Date end, double discount,ArrayList<GoodsItemVO> goodsList) {
-        this.name=name;
-        this.type="特价包";
-        this.start=start;
-        this.end=end;
-        this.goodsList = goodsList;
-        this.discount = discount;
+    public PromotionGoodsVO(PromotionGoodsPO promotionGoodsPO) throws Exception{
+        this.ID=promotionGoodsPO.getID();
+        this.name=promotionGoodsPO.getName();
+        this.type="商品促销策略";
+        this.start=promotionGoodsPO.getStart();
+        this.end=promotionGoodsPO.getEnd();
+        this.discount = promotionGoodsPO.getDiscount();
+
+        this.goodsList=new ArrayList<>();
+        for(GoodsItemPO goodsItemPO:promotionGoodsPO.getGoodsList()){
+            goodsList.add(new GoodsItemVO(goodsItemPO));
+        }
+    }
+
+    @Override
+    public PromotionGoodsPO getPromotionPO(){
+        PromotionGoodsPO promotionGoodsPO=new PromotionGoodsPO();
+
+        promotionGoodsPO.setID(ID);
+        promotionGoodsPO.setName(name);
+        promotionGoodsPO.setType("商品促销策略");
+        promotionGoodsPO.setStart(start);
+        promotionGoodsPO.setEnd(end);
+        promotionGoodsPO.setDiscount(discount);
+
+        ArrayList<GoodsItemPO> goodsItemPOList=new ArrayList<>();
+        for(GoodsItemVO goodsItemVO:goodsList){
+            goodsItemPOList.add(goodsItemVO.getGoodsItemPO());
+        }
+        promotionGoodsPO.setGoodsList(goodsItemPOList);
+
+        return promotionGoodsPO;
     }
 
     public ArrayList<GoodsItemVO> getGoodsList() {

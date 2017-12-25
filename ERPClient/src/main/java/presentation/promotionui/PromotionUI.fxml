@@ -25,6 +25,7 @@
                   <TableView fx:id="promotionTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <columns>
                         <TableColumn fx:id="promotionIDColumn" prefWidth="75.0" text="编号" />
+                        <TableColumn fx:id="promotionNameColumn" prefWidth="75.0" text="名称" />
                         <TableColumn fx:id="promotionStartColumn" prefWidth="75.0" text="起始时间" />
                         <TableColumn fx:id="promotionEndColumn" prefWidth="75.0" text="结束时间" />
                         <TableColumn fx:id="promotionTypeColumn" prefWidth="75.0" text="类型" />

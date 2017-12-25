@@ -9,8 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogicfactory.promotionblfactory.PromotionBlFactory;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.exception.DataException;
+import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
@@ -30,6 +32,8 @@ public class PromotionUIController extends CenterUIController {
     @FXML
     private TableColumn<PromotionVO,String> promotionIDColumn;
     @FXML
+    private TableColumn<PromotionVO,String> promotionNameColumn;
+    @FXML
     private TableColumn<PromotionVO,String> promotionStartColumn;
     @FXML
     private TableColumn<PromotionVO,String> promotionEndColumn;
@@ -39,12 +43,13 @@ public class PromotionUIController extends CenterUIController {
     // 加载文件后调用的方法******************************************
 
     /**
-     * 设置显示的客户信息以及显示方法
+     * 设置显示的促销策略信息以及显示方法
      * */
     public void initialize(){
         promotionIDColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getID()));
-        promotionStartColumn.setCellValueFactory(cellData->new SimpleStringProperty(new SimpleDateFormat("yyyy-MM-dd-EE").format(cellData.getValue().getStart())));
-        promotionEndColumn.setCellValueFactory(cellData->new SimpleStringProperty(new SimpleDateFormat("yyyy-MM-dd-EE").format(cellData.getValue().getEnd())));
+        promotionNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
+        promotionStartColumn.setCellValueFactory(cellData->new SimpleStringProperty(new SimpleDateFormat("yyyy-MM-dd").format(cellData.getValue().getStart())));
+        promotionEndColumn.setCellValueFactory(cellData->new SimpleStringProperty(new SimpleDateFormat("yyyy-MM-dd").format(cellData.getValue().getEnd())));
         promotionTypeColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getType()));
     }
 
@@ -71,7 +76,7 @@ public class PromotionUIController extends CenterUIController {
     }
 
     /**
-     * 取得客户列表并修改ObservableList的信息
+     * 取得促销策略列表并修改ObservableList的信息
      * */
     private void showPromotionList(ArrayList<PromotionVO> promotionList){
         promotionObservableList.removeAll();
@@ -84,30 +89,62 @@ public class PromotionUIController extends CenterUIController {
     @FXML
     private void AddPromotionClient(){
         PromotionClientUIController.init(promotionBlService,new PromotionClientVO(),1,root.getStage());
+        refresh(null);
     }
 
     @FXML
     private void AddPromotionTotal(){
         PromotionTotalUIController.init(promotionBlService,new PromotionTotalVO(),1,root.getStage());
+        refresh(null);
     }
 
     @FXML
     private void AddPromotionGoods(){
         PromotionGoodsUIController.init(promotionBlService,new PromotionGoodsVO(),1,root.getStage());
+        refresh(null);
     }
 
     @FXML
     private void handleDeletePromotion(){
-        int selectedIndex=promotionTableView.getSelectionModel().getSelectedIndex();
         if(isPromotionSelected()){
-            promotionTableView.getItems().remove(selectedIndex);
+            try {
+                String ID = promotionTableView.getSelectionModel().getSelectedItem().getID();
+                String name = promotionTableView.getSelectionModel().getSelectedItem().getName();
+                promotionBlService.deletePromotion(ID);
+
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","删除促销策略成功",
+                        "促销策略ID："+ID+System.lineSeparator()+"名字："+name);
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除促销策略失败","数据库错误");
+            }catch(NotExistException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除促销策略失败","促销策略不存在");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","删除促销策略失败","RMI连接错误");
+            }
+            refresh(null);
         }
     }
 
     @FXML
     private void handleCheckPromotion() {
         if(isPromotionSelected()){
-            //PromotionInfoUIController.init(promotionBlService,promotionTableView.getSelectionModel().getSelectedItem(),3,root.getStage());
+            PromotionVO promotion=promotionTableView.getSelectionModel().getSelectedItem();
+            if(promotion.getType().equals("客户促销策略")){
+                PromotionClientVO promotionClient=(PromotionClientVO)promotion;
+                PromotionClientUIController.init(promotionBlService,promotionClient,3,root.getStage());
+            }
+            else if(promotion.getType().equals("商品促销策略")){
+                PromotionGoodsVO promotionGoods=(PromotionGoodsVO)promotion;
+                PromotionGoodsUIController.init(promotionBlService,promotionGoods,3,root.getStage());
+            }
+            else if(promotion.getType().equals("总价促销策略")){
+                PromotionTotalVO promotionTotal=(PromotionTotalVO)promotion;
+                PromotionTotalUIController.init(promotionBlService,promotionTotal,3,root.getStage());
+            }
         }
     }
 
@@ -148,17 +185,8 @@ public class PromotionUIController extends CenterUIController {
 
             PromotionUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setPromotionBlService(null);
-
-            PromotionClientVO c1=new PromotionClientVO();
-            c1.setID("123");
-            PromotionTotalVO c2=new PromotionTotalVO();
-            c2.setID("233");
-
-            ArrayList<PromotionVO> list=new ArrayList<>();
-            list.add(c1);
-            list.add(c2);
-            controller.showPromotionList(list);
+            controller.setPromotionBlService(PromotionBlFactory.getService());
+            controller.refresh(null);
 
             root.setReturnPaneController(new ManagerPanelUIController());
         }catch(Exception e){

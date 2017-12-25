@@ -1,5 +1,8 @@
 package main.java.vo.promotion;
 
+import main.java.po.goods.GiftItemPO;
+import main.java.po.promotion.PromotionClientPO;
+import main.java.po.promotion.PromotionPO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsItemVO;
@@ -27,15 +30,42 @@ public class PromotionClientVO extends PromotionVO {
         this.giftList = new ArrayList<>();
     }
 
-    public PromotionClientVO(String name ,Date start, Date end, int clientLevel, double discount,int voucher, ArrayList<GiftItemVO> giftList) {
-        this.name = name;
-        this.type="客户促销策略";
-        this.start=start;
-        this.end=end;
-        this.clientLevel = clientLevel;
-        this.discount = discount;
-        this.voucher = voucher;
-        this.giftList = giftList;
+    public PromotionClientVO(PromotionClientPO promotionClientPO) throws Exception{
+        this.ID = promotionClientPO.getID();
+        this.name = promotionClientPO.getName();
+        this.type ="客户促销策略";
+        this.start = promotionClientPO.getStart();
+        this.end = promotionClientPO.getEnd();
+        this.clientLevel = promotionClientPO.getClientLevel();
+        this.discount = promotionClientPO.getDiscount();
+        this.voucher = promotionClientPO.getVoucher();
+
+        this.giftList=new ArrayList<>();
+        for(GiftItemPO giftItemPO:promotionClientPO.getGiftList()){
+            giftList.add(new GiftItemVO(giftItemPO));
+        }
+    }
+
+    @Override
+    public PromotionClientPO getPromotionPO(){
+        PromotionClientPO promotionClientPO=new PromotionClientPO();
+
+        promotionClientPO.setID(ID);
+        promotionClientPO.setType("客户促销策略");
+        promotionClientPO.setName(name);
+        promotionClientPO.setStart(start);
+        promotionClientPO.setEnd(end);
+        promotionClientPO.setClientLevel(clientLevel);
+        promotionClientPO.setDiscount(discount);
+        promotionClientPO.setVoucher(voucher);
+
+        ArrayList<GiftItemPO> giftItemPOList=new ArrayList<>();
+        for(GiftItemVO giftItemVO:giftList){
+            giftItemPOList.add(giftItemVO.getGiftItemPO());
+        }
+        promotionClientPO.setGiftList(giftItemPOList);
+
+        return promotionClientPO;
     }
 
     public int getClientLevel() {

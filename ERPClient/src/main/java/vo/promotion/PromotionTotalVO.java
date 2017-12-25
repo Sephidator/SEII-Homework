@@ -1,5 +1,7 @@
 package main.java.vo.promotion;
 
+import main.java.po.goods.GiftItemPO;
+import main.java.po.promotion.PromotionTotalPO;
 import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsItemVO;
@@ -16,6 +18,8 @@ public class PromotionTotalVO extends PromotionVO {
     private ArrayList<GiftItemVO> giftList; // 赠品列表
 
     public PromotionTotalVO(){
+        this.name="";
+        this.type="总价促销策略";
         this.start=new Date();
         this.end=new Date();
         this.total=0;
@@ -23,15 +27,42 @@ public class PromotionTotalVO extends PromotionVO {
         this.giftList=new ArrayList<>();
     }
 
-    public PromotionTotalVO(Date start, Date end, double total, double voucher, ArrayList<GiftItemVO> giftList) {
+    public PromotionTotalVO(PromotionTotalPO promotionTotalPO) throws Exception{
+        this.ID=promotionTotalPO.getID();
+        this.name=promotionTotalPO.getName();
         this.type="总价促销策略";
-        this.start=start;
-        this.end=end;
-        this.total=total;
-        this.voucher=voucher;
-        this.giftList=giftList;
+        this.start=promotionTotalPO.getStart();
+        this.end=promotionTotalPO.getEnd();
+        this.total=promotionTotalPO.getTotal();
+        this.voucher=promotionTotalPO.getVoucher();
+
+        this.giftList=new ArrayList<>();
+        for(GiftItemPO giftItemPO:promotionTotalPO.getGiftList()){
+            giftList.add(new GiftItemVO(giftItemPO));
+        }
     }
 
+    @Override
+    public PromotionTotalPO getPromotionPO(){
+        PromotionTotalPO promotionTotalPO=new PromotionTotalPO();
+
+        promotionTotalPO.setID(ID);
+        promotionTotalPO.setType("总价促销策略");
+        promotionTotalPO.setName(name);
+        promotionTotalPO.setStart(start);
+        promotionTotalPO.setEnd(end);
+        promotionTotalPO.setTotal(total);
+        promotionTotalPO.setVoucher(voucher);
+
+        ArrayList<GiftItemPO> giftItemPOList=new ArrayList<>();
+        for(GiftItemVO giftItemVO:giftList){
+            giftItemPOList.add(giftItemVO.getGiftItemPO());
+        }
+        promotionTotalPO.setGiftList(giftItemPOList);
+
+        return promotionTotalPO;
+    }
+    
     public double getTotal() {
         return total;
     }

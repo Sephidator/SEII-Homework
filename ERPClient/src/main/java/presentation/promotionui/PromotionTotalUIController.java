@@ -12,7 +12,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
+import main.java.exception.DataException;
+import main.java.exception.ExistException;
+import main.java.exception.FullException;
+import main.java.exception.NotExistException;
 import main.java.presentation.uiutility.AddGoodsUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CheckInput;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GiftItemVO;
@@ -21,13 +26,14 @@ import main.java.vo.promotion.PromotionTotalVO;
 import main.java.vo.promotion.PromotionVO;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PromotionTotalUIController extends InfoUIController {
     private PromotionBlService service;
     private PromotionTotalVO promotion;
     private ArrayList<GoodsVO> goodsList;
-    private ArrayList<GiftItemVO> giftItemList;
 
     private ObservableList<GiftItemVO> giftItemObservableList= FXCollections.observableArrayList();
     @FXML
@@ -42,7 +48,9 @@ public class PromotionTotalUIController extends InfoUIController {
     private TableColumn<GiftItemVO,String> numberColumn;
 
     @FXML
-    private TextField ID; // 单据编号
+    private TextField ID; // 促销策略编号
+    @FXML
+    private TextField name; // 促销策略名称
     @FXML
     private JFXDatePicker start; //起始时间
     @FXML
@@ -56,7 +64,14 @@ public class PromotionTotalUIController extends InfoUIController {
     private Button confirm;
     @FXML
     private Button cancel;
-
+    @FXML
+    private Button add;
+    @FXML
+    private Button delete;
+    @FXML
+    private Button plus;
+    @FXML
+    private Button minus;
 
     // 加载文件后调用的方法******************************************
 
@@ -72,10 +87,14 @@ public class PromotionTotalUIController extends InfoUIController {
     public void setPromotion(PromotionTotalVO promotion) {
         this.promotion=promotion;
         ID.setText(promotion.getID());
+        name.setText(promotion.getName());
         start.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(promotion.getStart()));
         end.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(promotion.getEnd()));
         total.setText(String.valueOf(promotion.getTotal()));
         voucher.setText(String.valueOf(promotion.getVoucher()));
+
+        start.setValue(promotion.getStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        end.setValue(promotion.getEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     public void setService(PromotionBlService service) {
@@ -86,11 +105,6 @@ public class PromotionTotalUIController extends InfoUIController {
         this.goodsList=goodsList;
     }
 
-    public void setGiftItemList(ArrayList<GiftItemVO> giftItemList) {
-        this.giftItemList=giftItemList;
-        showGiftItemList(giftItemList);
-    }
-
     /**
      * 根据数字来设置按钮的文字
      * 按钮被点击时，根据不同的文字执行不同的功能
@@ -99,26 +113,34 @@ public class PromotionTotalUIController extends InfoUIController {
      * */
     public void setPaneFunction(int command){
         if(command==1){
-            confirm.setText("确认添加");
+            confirm.setText("添加");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("编辑");
         }
         else if(command==3){
             confirm.setText("确定");
+
+            ID.setEditable(false);
+            name.setEditable(false);
+            total.setEditable(false);
+            voucher.setEditable(false);
+
+            add.setDisable(true);
+            delete.setDisable(true);
+            minus.setDisable(true);
+            plus.setDisable(true);
         }
-        cancel.setText("取消");
     }
 
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showGiftItemList(ArrayList<GiftItemVO> giftItemList){
-        if(giftItemList!=null){
-            giftItemTableView.getItems().clear();
-            giftItemObservableList.setAll(giftItemList);
-            giftItemTableView.setItems(giftItemObservableList);
-        }
+    private void showGiftItemList(){
+        ArrayList<GiftItemVO> giftItemList=promotion.getGiftList();
+        giftItemTableView.getItems().clear();
+        giftItemObservableList.setAll(giftItemList);
+        giftItemTableView.setItems(giftItemObservableList);
     }
 
 
@@ -126,18 +148,16 @@ public class PromotionTotalUIController extends InfoUIController {
 
     @FXML
     private void addGoods(){
-        AddGoodsUIController.init(dialogStage,goodsList,giftItemList);
-        showGiftItemList(giftItemList);
-        promotion.setGiftList(giftItemList);
+        AddGoodsUIController.init(dialogStage,goodsList,promotion.getGiftList());
+        showGiftItemList();
     }
 
     @FXML
     private void deleteGoods(){
         if(isGiftItemSelected()){
             int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
-            giftItemTableView.getItems().remove(selectedIndex);
-            giftItemList.remove(selectedIndex);
-            promotion.setGiftList(giftItemList);
+            promotion.getGiftList().remove(selectedIndex);
+            showGiftItemList();
         }
     }
 
@@ -145,9 +165,8 @@ public class PromotionTotalUIController extends InfoUIController {
     private void goodsNumberPlus(){
         if(isGiftItemSelected()){
             int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
-            giftItemList.get(selectedIndex).number++;
-            promotion.setGiftList(giftItemList);
-            showGiftItemList(giftItemList);
+            promotion.getGiftList().get(selectedIndex).number++;
+            showGiftItemList();
             giftItemTableView.getSelectionModel().select(selectedIndex);
         }
     }
@@ -156,16 +175,14 @@ public class PromotionTotalUIController extends InfoUIController {
     private void goodsNumberMinus(){
         if(isGiftItemSelected()){
             int selectedIndex=giftItemTableView.getSelectionModel().getSelectedIndex();
-            ArrayList<GiftItemVO> giftItemList=promotion.getGiftList();
-            giftItemList.get(selectedIndex).number--;
-            if(giftItemList.get(selectedIndex).number==0){
-                giftItemList.remove(selectedIndex);
-                promotion.setGiftList(giftItemList);
-                showGiftItemList(giftItemList);
+            promotion.getGiftList().get(selectedIndex).number--;
+
+            if(promotion.getGiftList().get(selectedIndex).number==0){
+                promotion.getGiftList().remove(selectedIndex);
+                showGiftItemList();
             }
             else{
-                promotion.setGiftList(giftItemList);
-                showGiftItemList(giftItemList);
+                showGiftItemList();
                 giftItemTableView.getSelectionModel().select(selectedIndex);
             }
         }
@@ -179,11 +196,8 @@ public class PromotionTotalUIController extends InfoUIController {
             Double number=Double.parseDouble(str);
             promotion.setTotal(number);
 
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("折让设置成功");
-            alert.setContentText("促销策略的折让为："+str);
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    "Success","折让设置成功","促销策略的折让为："+str);
         }
     }
 
@@ -195,28 +209,50 @@ public class PromotionTotalUIController extends InfoUIController {
             Double number=Double.parseDouble(str);
             promotion.setVoucher(number);
 
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("代金券金额设置成功");
-            alert.setContentText("促销策略发放的代金券金额为："+str);
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    "Success","代金券金额设置成功","促销策略发放的代金券金额为："+str);
         }
     }
 
     @FXML
     private void handleConfirm(){
-        String text=confirm.getText();
-        /*
-        if(text.equals("确认添加")){
-            purchaseTradeBlService.addClient(client);
+        if(isInputValid()){
+            String text=confirm.getText();
+
+            try{
+                if(text.equals("添加")){
+                    String promotionID=service.addPromotion(promotion);
+                    String promotionName=promotion.getName();
+
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加促销策略成功",
+                            "促销策略ID："+promotionID+System.lineSeparator()+"名字："+promotionName);
+                }
+                else if(text.equals("编辑")){
+                    service.editPromotion(promotion);
+                    String promotionID=promotion.getID();
+                    String promotionName=promotion.getName();
+
+                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","添加促销策略成功",
+                            "促销策略ID："+promotionID+System.lineSeparator()+"名字："+promotionName);
+                }
+
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"促销策略失败", "数据库错误");
+            }catch(NotExistException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"促销策略失败","促销策略不存在");
+            }catch(ExistException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"促销策略失败","账号和已有促销策略重复");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error",text+"促销策略失败","RMI连接错误");
+            }
         }
-        else if(text.equals("确认编辑")){
-            purchaseTradeBillBlService.editClient(client);
-        }
-        else{
-            stage.close();
-        }
-        */
     }
 
     @FXML
@@ -230,11 +266,67 @@ public class PromotionTotalUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择商品");
-            alert.setContentText("请在商品列表中选择商品");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择商品","请在商品列表中选择商品");
+            return false;
+        }
+    }
+
+    /**
+     * 检查单据信息的输入是否完整且合法
+     * 完整且合法返回true
+     * */
+    private boolean isInputValid(){
+        String errorMessage = "";
+
+        if(name.getText().length()==0) {
+            errorMessage+=("未输入促销策略名称。"+System.lineSeparator());
+        }
+
+        if(total.getText().length()==0){
+            errorMessage+=("未输入总价。"+System.lineSeparator());
+        }
+        else{
+            try {
+                double i=Double.parseDouble(total.getText());
+                if(i<=0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("商品总价必须是正数。"+System.lineSeparator());
+            }
+        }
+
+        if(voucher.getText().length()==0){
+            errorMessage+=("未输入发放代金券金额。"+System.lineSeparator());
+        }
+        else{
+            try {
+                double i=Double.parseDouble(voucher.getText());
+                if(i<0)
+                    throw new NumberFormatException();
+            } catch(NumberFormatException e) {
+                errorMessage+=("代金券金额必须是非负数。"+System.lineSeparator());
+            }
+        }
+
+        if((start.getValue().isAfter(end.getValue()))||(start.getValue().isEqual(end.getValue()))){
+            errorMessage+=("起始时间必须早于结束时间。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()==0){
+            promotion.setName(name.getText());
+            promotion.setTotal(Double.parseDouble(total.getText()));
+            promotion.setVoucher(Double.parseDouble(voucher.getText()));
+
+            Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            promotion.setStart(startTime);
+            promotion.setEnd(endTime);
+
+            return true;
+        } else {
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "单据信息错误", "请检查单据信息的输入", errorMessage);
             return false;
         }
     }
@@ -266,18 +358,7 @@ public class PromotionTotalUIController extends InfoUIController {
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setPromotion(promotion);
-
-            //controller.setGoodsList(service.getGoodsList(null));
-            ArrayList<GoodsVO> list=new ArrayList<GoodsVO>();
-            GoodsVO goods1=new GoodsVO("电灯", null, "大号", 5, 20, 30, 20, 30, 40, "备注");
-            goods1.setID("123");
-            GoodsVO goods2=new GoodsVO("台灯", null, "小号", 5, 30, 60, 30, 60, 40, "备注");
-            goods2.setID("233");
-            list.add(goods1);
-            list.add(goods2);
-
-            controller.setGoodsList(list);
-            controller.setGiftItemList(promotion.getGiftList());
+            controller.setGoodsList(service.getGoodsList(null));
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.

@@ -111,16 +111,23 @@ public class PromotionClientUIController extends InfoUIController {
      * */
     public void setPaneFunction(int command){
         if(command==1){
-            confirm.setText("确认添加");
-            cancel.setText("保存草稿");
+            confirm.setText("添加");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
-            cancel.setText("保存草稿");
+            confirm.setText("编辑");
         }
         else if(command==3){
             confirm.setText("确定");
-            cancel.setText("取消");
+
+            ID.setEditable(false);
+            level.setEditable(false);
+            start.getEditor().setEditable(false);
+            start.setVisible(false);
+            end.getEditor().setEditable(false);
+            discount.setEditable(false);
+            voucher.setEditable(false);
+
+            levelChoiceBox.setDisable(true);
         }
     }
 

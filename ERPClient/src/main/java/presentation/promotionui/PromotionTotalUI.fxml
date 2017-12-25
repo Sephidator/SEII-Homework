@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -57,14 +56,14 @@
                      <children>
                         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="270.0" spacing="10.0">
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" spacing="10.0">
                                  <children>
                                     <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="35.0" prefWidth="75.0" styleClass="myLabel" text=" 编号" textFill="WHITE" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="ID" editable="false" prefHeight="35.0" prefWidth="140.0">
+                                    <TextField fx:id="ID" editable="false" prefHeight="35.0" prefWidth="160.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -79,37 +78,14 @@
                      <children>
                         <HBox alignment="BOTTOM_CENTER" layoutX="114.0" layoutY="-11.0" prefHeight="89.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="270.0" spacing="10.0">
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" spacing="10.0">
                                  <children>
                                     <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="起始时间" textFill="WHITE" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXDatePicker fx:id="start" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <children>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="270.0" spacing="10.0">
-                                 <children>
-                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="总价" textFill="WHITE" textOverrun="CLIP">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="total" prefHeight="30.0" prefWidth="140.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </TextField>
-                                    <Button mnemonicParsing="false" onAction="#handleTotalCorrect" prefHeight="35.0" prefWidth="35.0" styleClass="correctButton" />
+                                    <JFXDatePicker fx:id="start" editable="false" prefWidth="160.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -120,23 +96,40 @@
                      <children>
                         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="270.0" spacing="10.0">
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" spacing="10.0">
                                  <children>
-                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" text="代金券" textFill="WHITE" textOverrun="CLIP">
+                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="总价" textFill="WHITE" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
-                                       <styleClass>
-                                          <String fx:value="MyLabel" />
-                                          <String fx:value="myLabel" />
-                                       </styleClass>
                                     </Label>
-                                    <TextField fx:id="voucher" prefHeight="30.0" prefWidth="140.0">
+                                    <TextField fx:id="total" prefHeight="30.0" prefWidth="160.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <Button mnemonicParsing="false" onAction="#handleVoucherCorrect" prefHeight="35.0" prefWidth="35.0" styleClass="correctButton" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel2" text="发放代金券" textFill="WHITE" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="voucher" prefHeight="30.0" prefWidth="160.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
                                  </children>
                               </HBox>
                            </children>
@@ -147,14 +140,36 @@
                      <children>
                         <HBox alignment="BOTTOM_CENTER" layoutX="114.0" layoutY="-11.0" prefHeight="89.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="270.0" spacing="10.0">
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" spacing="10.0">
                                  <children>
-                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="起始时间" textFill="WHITE" textOverrun="CLIP">
+                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="结束时间" textFill="WHITE" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXDatePicker fx:id="end" />
+                                    <JFXDatePicker fx:id="end" editable="false" prefWidth="160.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="35.0" prefWidth="75.0" styleClass="myLabel" text="名称" textFill="WHITE" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="name" prefHeight="35.0" prefWidth="160.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
                                  </children>
                               </HBox>
                            </children>
@@ -215,7 +230,7 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#addGoods" prefHeight="48.0" prefWidth="150.0" text="添加商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button fx:id="add" layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#addGoods" prefHeight="48.0" prefWidth="150.0" text="添加商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -238,7 +253,7 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteGoods" prefHeight="48.0" prefWidth="150.0" text="删除商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button fx:id="delete" layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteGoods" prefHeight="48.0" prefWidth="150.0" text="删除商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -274,7 +289,7 @@
                                                          <children>
                                                             <HBox alignment="CENTER" layoutX="-62.0" layoutY="-36.0" prefHeight="64.0" prefWidth="138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <JFXButton alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberMinus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="-" textFill="WHITE">
+                                                                  <JFXButton fx:id="minus" alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberMinus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="-" textFill="WHITE">
                                                                      <font>
                                                                         <Font name="System Bold" size="18.0" />
                                                                      </font>
@@ -290,7 +305,7 @@
                                                          <children>
                                                             <HBox alignment="CENTER" prefHeight="64.0" prefWidth="138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <JFXButton alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberPlus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="+" textFill="WHITE" textOverrun="CLIP">
+                                                                  <JFXButton fx:id="plus" alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberPlus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="+" textFill="WHITE" textOverrun="CLIP">
                                                                      <font>
                                                                         <Font name="System Bold" size="16.0" />
                                                                      </font>

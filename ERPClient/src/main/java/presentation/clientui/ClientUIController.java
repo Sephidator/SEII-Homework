@@ -188,6 +188,7 @@ public class ClientUIController extends CenterUIController {
             controller.setRoot(root);
             controller.setClientBlService(ClientBlFactory.getService());
             controller.refresh(null);
+
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){
             e.printStackTrace();

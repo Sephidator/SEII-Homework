@@ -17,7 +17,7 @@ public class PromotionGoodsPO extends PromotionPO {
 
     public PromotionGoodsPO(String name, Date start, Date end, double discount, ArrayList<GoodsItemPO> goodsList) {
         this.name = name;
-        type = "特价包";
+        type = "商品促销策略";
         this.start = start;
         this.end = end;
         this.discount = discount;

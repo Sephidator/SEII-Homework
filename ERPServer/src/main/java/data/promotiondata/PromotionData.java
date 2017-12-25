@@ -98,7 +98,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                     giftList.add(giftItem);
                 }
                 promotionPO = new PromotionClientPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getInt("clientLevel"), resultSet.getDouble("discount"), resultSet.getDouble("voucher"), giftList);
-            } else if (type.equals("特价包")) {
+            } else if (type.equals("商品促销策略")) {
                 ArrayList<GoodsItemPO> goodsList = new ArrayList<>();
                 GoodsItemPO goodsItem;
                 sql = "SELECT * FROM GoodsItem WHERE site_ID='" + promotionID + "'";
@@ -119,6 +119,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                 }
                 promotionPO = new PromotionTotalPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getDouble("total"), resultSet.getDouble("voucher"), giftList);
             }
+            promotionPO.setID(promotionID);
             return promotionPO;
         } catch (SQLException e) {
             throw e;
@@ -158,7 +159,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                             sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
                             statement.executeUpdate(sql);
                         }
-                } else if (type.equals("特价包")) {
+                } else if (type.equals("商品促销策略")) {
                     PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
                     sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "'";
                     statement.executeUpdate(sql);
@@ -250,7 +251,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                         sql = "INSERT INTO GiftItem VALUE ('" + promotionClientPO.getID() + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
                         statement.executeUpdate(sql);
                     }
-            } else if (type.equals("特价包")) {
+            } else if (type.equals("商品促销策略")) {
                 PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
                 sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);

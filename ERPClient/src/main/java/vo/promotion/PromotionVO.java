@@ -66,6 +66,7 @@ public class PromotionVO extends VO {
     }
     /*从PromotionPO转至PromotionVO*/
     public PromotionVO(PromotionPO promotionPO){
+        this.setID(promotionPO.getID());
         this.setName(promotionPO.getName());
         this.setEnd(promotionPO.getEnd());
         this.setStart(promotionPO.getStart());
@@ -75,6 +76,7 @@ public class PromotionVO extends VO {
     /*从PromotionVO转至PromotionPO*/
     public PromotionPO getPromotionPO(){
         PromotionPO promotionPO = new PromotionPO();
+        promotionPO.setID(this.getID());
         promotionPO.setName(this.getName());
         promotionPO.setType(this.getType());
         promotionPO.setStart(this.getStart());
