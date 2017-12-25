@@ -15,10 +15,10 @@ public class PromotionPO extends PO {
 
 
     public PromotionPO() {
-        name="";
-        type="";
-        start=new Date();
-        end=new Date();
+        name = "";
+        type = "";
+        start = new Date();
+        end = new Date();
     }
 
     public String getName() {
