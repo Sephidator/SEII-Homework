@@ -156,12 +156,12 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                     ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
                     if (list != null)
                         for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
+                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "','" + list.get(i).price + "')";
                             statement.executeUpdate(sql);
                         }
                 } else if (type.equals("商品促销策略")) {
                     PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
-                    sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "'";
+                    sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "' WHERE keyID=" + key;
                     statement.executeUpdate(sql);
                     ArrayList<GoodsItemPO> list = new ArrayList<>();
                     if (list != null)
@@ -171,12 +171,12 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                         }
                 } else {
                     PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
-                    sql = "UPDATE Promotion SET ID='" + ID + "', total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "'";
+                    sql = "UPDATE Promotion SET ID='" + ID + "', total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE keyID=" + key;
                     statement.executeUpdate(sql);
                     ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
                     if (list != null)
                         for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
+                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "','" + list.get(i).price + "')";
                             statement.executeUpdate(sql);
                         }
                 }
@@ -253,7 +253,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                     }
             } else if (type.equals("商品促销策略")) {
                 PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
-                sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE site_ID='" + po.getID() + "'";
+                sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 sql = "DELETE FROM GoodsItem WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
@@ -265,7 +265,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                     }
             } else {
                 PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
-                sql = "UPDATE Promotion SET total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE site_ID='" + po.getID() + "'";
+                sql = "UPDATE Promotion SET total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
                 sql = "DELETE FROM GiftItem WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
