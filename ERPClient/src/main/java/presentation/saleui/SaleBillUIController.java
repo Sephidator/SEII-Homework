@@ -9,11 +9,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogicfactory.saleblfactory.SaleRefundBillBlFactory;
+import main.java.businesslogicfactory.saleblfactory.SaleTradeBillBlFactory;
 import main.java.businesslogicservice.saleblservice.SaleRefundBillBlService;
 import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.salebill.SaleBillVO;
 import main.java.vo.bill.salebill.SaleRefundBillVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
@@ -60,12 +65,43 @@ public class SaleBillUIController extends CenterUIController {
         this.saleRefundBillBlService = saleRefundBillBlService;
     }
 
+    public void refresh(){
+        try{
+            ArrayList<SaleBillVO> saleBillList=new ArrayList<>();
+            BillQueryVO query=new BillQueryVO("草稿",null,null,"销售单",root.getOperator().getID(),null);
+
+            query.type="销售单";
+            ArrayList<SaleTradeBillVO> saleTradeBillList1=saleTradeBillBlService.getSaleTradeBillList(query);
+            query.type="销售退货单";
+            ArrayList<SaleRefundBillVO> saleRefundBillList1=saleRefundBillBlService.getSaleRefundBillList(query);
+
+            query.state="审批不通过";
+            query.type="销售单";
+            ArrayList<SaleTradeBillVO> saleTradeBillList2=saleTradeBillBlService.getSaleTradeBillList(query);
+            query.type="销售退货单";
+            ArrayList<SaleRefundBillVO> saleRefundBillList2=saleRefundBillBlService.getSaleRefundBillList(query);
+
+            saleBillList.addAll(saleTradeBillList1);
+            saleBillList.addAll(saleRefundBillList1);
+            saleBillList.addAll(saleTradeBillList2);
+            saleBillList.addAll(saleRefundBillList2);
+
+            showSaleBillList(saleBillList);
+
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","数据库错误");
+        }catch(Exception e){
+            e.printStackTrace();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","RMI连接错误");
+        }
+    }
+
+
     private void showSaleBillList(ArrayList<SaleBillVO> saleBillList){
         saleBillObservableList.removeAll();
-
-        for(int i=0;i<saleBillList.size();i++){
-            saleBillObservableList.add(saleBillList.get(i));
-        }
+        saleBillObservableList.setAll(saleBillList);
         saleBillTableView.setItems(saleBillObservableList);
     }
 
@@ -75,34 +111,31 @@ public class SaleBillUIController extends CenterUIController {
     private void addSaleTradeBill(){
         SaleTradeBillVO bill=new SaleTradeBillVO();
         bill.setOperator(root.getOperator());
-        bill.setSaleList(new ArrayList<>());
-        bill.setType("销售单");
-        SaleTradeBillUIController.init(null,bill,1,root.getStage());
+        SaleTradeBillUIController.init(saleTradeBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
     private void addSaleRefundBill(){
         SaleRefundBillVO bill=new SaleRefundBillVO();
         bill.setOperator(root.getOperator());
-        bill.setSaleList(new ArrayList<>());
-        bill.setType("销售退货单");
-        SaleRefundBillUIController.init(null,bill,1,root.getStage());
+        SaleRefundBillUIController.init(saleRefundBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
     private void editSaleBill(){
-        /*
         if(isBillSelected()){
-            if(saleBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货单")){
-                SaleTradeBillVO bill=(SaleTradeBillVO) saleBillTableView.getSelectionModel().getSelectedItem();
-                SaleTradeBillUIController.init(null,bill,2,root.getStage());
+            SaleBillVO bill=saleBillTableView.getSelectionModel().getSelectedItem();
+            if(bill.getType().equals("销售单")){
+                SaleTradeBillVO purchaseTradeBill=(SaleTradeBillVO) bill;
+                SaleTradeBillUIController.init(saleTradeBillBlService,purchaseTradeBill,2,root.getStage());
             }
-            else if(saleBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
-                SaleRefundBillVO bill=(SaleRefundBillVO) saleBillTableView.getSelectionModel().getSelectedItem();
-                SaleRefundBillUIController.init(null,bill,2,root.getStage());
+            else if(bill.getType().equals("销售退货单")){
+                SaleRefundBillVO purchaseRefundBill=(SaleRefundBillVO) bill;
+                SaleRefundBillUIController.init(saleRefundBillBlService,purchaseRefundBill,2,root.getStage());
             }
         }
-        */
     }
 
     private boolean isBillSelected(){
@@ -111,11 +144,8 @@ public class SaleBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择单据");
-            alert.setContentText("请选择要编辑的单据");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }
     }
@@ -142,31 +172,9 @@ public class SaleBillUIController extends CenterUIController {
 
             SaleBillUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setSaleTradeBillBlService(null);
-            controller.setSaleRefundBillBlService(null);
-
-            Date date= new SimpleDateFormat("yyyy-MM-dd").parse("2017-1-12");
-            ClientVO client=new ClientVO("类别：经销商", 4, "名字：陈骁2",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                    0, 0, 20, null);
-            GoodsVO g=new GoodsVO();
-            g.setID("123");
-            g.setName("电灯");
-            g.setModel("大号");
-            g.setCost(5);
-            g.setComment("备注");
-            GoodsItemVO item=new GoodsItemVO(g,3,g.getCost());
-            ArrayList<GoodsItemVO> list=new ArrayList<>();
-            list.add(item);
-
-            SaleTradeBillVO bill1=new SaleTradeBillVO("草稿",date,root.getOperator(),"备注", client,root.getOperator(), list,null, 100,100,100,100);
-            SaleRefundBillVO bill2=new SaleRefundBillVO("审批不通过",date,root.getOperator(),"备注", client, root.getOperator(), list, 100);
-            bill1.setID("123");
-            bill2.setID("123");
-            ArrayList<SaleBillVO> plist=new ArrayList<>();
-            plist.add(bill1);
-            plist.add(bill2);
-            controller.showSaleBillList(plist);
+            controller.setSaleTradeBillBlService(SaleTradeBillBlFactory.getService());
+            controller.setSaleRefundBillBlService(SaleRefundBillBlFactory.getService());
+            controller.refresh();
 
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){

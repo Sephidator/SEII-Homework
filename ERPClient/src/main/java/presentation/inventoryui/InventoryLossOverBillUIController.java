@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.inventoryblfactory.InventoryLossOverBillBlFactory;
 import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
@@ -284,7 +285,7 @@ public class InventoryLossOverBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(InventoryLossOverBillVO)bill,3,stage);
+        init(InventoryLossOverBillBlFactory.getService(),(InventoryLossOverBillVO)bill,3,stage);
     }
 
     /**

@@ -45,14 +45,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text=" 编号" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="ID" editable="false" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="ID" editable="false" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -67,14 +67,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" layoutX="114.0" layoutY="-11.0" prefHeight="89.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="客户" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="client" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="client" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -90,14 +90,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="单据类型" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="type" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="type" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -112,14 +112,14 @@
                            <children>
                               <HBox alignment="BOTTOM_CENTER" layoutX="114.0" layoutY="-11.0" prefHeight="89.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="285.0" spacing="10.0">
                                        <children>
                                           <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="操作员" textFill="WHITE" textOverrun="CLIP">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="operator" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="operator" prefHeight="30.0" prefWidth="155.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -138,7 +138,7 @@
                         <Button fx:id="cancel" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="60.0" prefWidth="100.0" text="取消" />
                      </children>
                   </HBox>
-                  <VBox layoutX="17.0" layoutY="240.0" prefWidth="280.0" spacing="5.0" AnchorPane.topAnchor="240.0">
+                  <VBox layoutX="14.0" layoutY="240.0" prefWidth="285.0" spacing="5.0" AnchorPane.topAnchor="240.0">
                      <children>
                         <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="75.0" styleClass="myLabel" text="备注" textFill="WHITE" textOverrun="CLIP">
                            <font>
@@ -208,7 +208,7 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#addGoods" prefHeight="48.0" prefWidth="150.0" text="添加商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button fx:id="add" layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#addGoods" prefHeight="48.0" prefWidth="150.0" text="添加商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -231,7 +231,7 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteGoods" prefHeight="48.0" prefWidth="150.0" text="删除商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button fx:id="delete" layoutX="75.0" layoutY="13.0" mnemonicParsing="false" onAction="#deleteGoods" prefHeight="48.0" prefWidth="150.0" text="删除商品" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -267,7 +267,7 @@
                                                          <children>
                                                             <HBox alignment="CENTER" layoutX="-62.0" layoutY="-36.0" prefHeight="64.0" prefWidth="138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <JFXButton alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberMinus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="-" textFill="WHITE">
+                                                                  <JFXButton fx:id="minus" alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberMinus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="-" textFill="WHITE">
                                                                      <font>
                                                                         <Font name="System Bold" size="18.0" />
                                                                      </font>
@@ -283,7 +283,7 @@
                                                          <children>
                                                             <HBox alignment="CENTER" prefHeight="64.0" prefWidth="138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <JFXButton alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberPlus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="+" textFill="WHITE" textOverrun="CLIP">
+                                                                  <JFXButton fx:id="plus" alignment="CENTER" buttonType="RAISED" ellipsisString="" onAction="#goodsNumberPlus" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #4885ed; -fx-background-radius: 20; -fx-border-radius: 20;" text="+" textFill="WHITE" textOverrun="CLIP">
                                                                      <font>
                                                                         <Font name="System Bold" size="16.0" />
                                                                      </font>

@@ -31,7 +31,7 @@ public class PurchaseBillVO extends BillVO {
         this.purchaseList = purchaseList;
     }
 
-    public void setTotalAmount(double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

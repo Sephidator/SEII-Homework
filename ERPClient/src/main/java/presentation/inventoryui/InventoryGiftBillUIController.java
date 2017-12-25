@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogicfactory.inventoryblfactory.InventoryGiftBillBlFactory;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
@@ -18,6 +19,7 @@ import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsVO;
 
@@ -47,7 +49,11 @@ public class InventoryGiftBillUIController extends InfoUIController {
     @FXML
     private TextField operator; //操作员
     @FXML
+    private TextField client; //客户
+    @FXML
     private TextArea comment; // 备注
+    @FXML
+    private ChoiceBox<String> clientChoiceBox;
     @FXML
     private Button confirm;
     @FXML
@@ -79,12 +85,14 @@ public class InventoryGiftBillUIController extends InfoUIController {
         ID.setText(bill.getID());
         type.setText(bill.getType());
         operator.setText(bill.getOperator().getName());
+        client.setText(bill.getClient().getCategory()+" "+bill.getClient().getName());
         comment.setText(bill.getComment());
         showGiftItemList();
     }
 
     public void setService(InventoryGiftBillBlService service) {
         this.service=service;
+        setClientList();
     }
 
     public void setGoodsList(ArrayList<GoodsVO> goodsList) {
@@ -111,10 +119,33 @@ public class InventoryGiftBillUIController extends InfoUIController {
             cancel.setText("取消");
 
             comment.setEditable(false);
+            clientChoiceBox.setDisable(true);
             add.setDisable(true);
             delete.setDisable(true);
             minus.setDisable(true);
             plus.setDisable(true);
+        }
+    }
+
+    private void setClientList(){
+        try{
+            ArrayList<ClientVO> clientList= service.getClientList(null);
+
+            ObservableList<String> list=FXCollections.observableArrayList();
+            for(int i=0;i<clientList.size();i++){
+                list.add(clientList.get(i).getCategory()+": "+clientList.get(i).getName());
+            }
+            clientChoiceBox.setItems(list);
+            clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
+                client.setText(list.get(newValue.intValue()));
+                bill.setClient(clientList.get(newValue.intValue()));
+            });
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找客户失败","RMI连接错误");
         }
     }
 
@@ -262,6 +293,9 @@ public class InventoryGiftBillUIController extends InfoUIController {
     private boolean isInputValid(){
         String errorMessage = "";
 
+        if (client.getText().length()<=1) {
+            errorMessage+=("未选择客户。"+System.lineSeparator());
+        }
         if (giftItemObservableList==null||giftItemObservableList.size()==0) {
             errorMessage+=("库存赠送列表为空。"+System.lineSeparator());
         }
@@ -279,7 +313,7 @@ public class InventoryGiftBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(InventoryGiftBillVO)bill,3,stage);
+        init(InventoryGiftBillBlFactory.getService(),(InventoryGiftBillVO)bill,3,stage);
     }
 
     /**

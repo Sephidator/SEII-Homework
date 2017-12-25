@@ -1,5 +1,7 @@
 package main.java.businesslogic.inventorybl;
 
+import main.java.businesslogic.clientbl.ClientBl;
+import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
@@ -16,6 +18,8 @@ import main.java.po.bill.inventorybill.InventoryGiftBillPO;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.client.ClientQueryVO;
+import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
@@ -27,6 +31,23 @@ import main.java.vo.user.UserVO;
 import java.util.ArrayList;
 
 public class InventoryGiftBillBl implements InventoryGiftBillBlService, InventoryGiftBillTool {
+    /**
+     * @version: 1
+     * @date:
+     * @param: [query] 包含待查询信息的客户查询对象
+     * @return: 返回ArrayList<ClientVO>的客户列表
+     */
+    @Override
+    public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception {
+        ArrayList<ClientVO> clientVOS;
+
+        /*调用ClientTool.getClientList*/
+        ClientTool clientTool = new ClientBl();
+        clientVOS = clientTool.getClientList(query);
+
+        return clientVOS;
+    }
+
     /**
      * @version: 1
      * @date:

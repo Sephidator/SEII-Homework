@@ -273,6 +273,10 @@ public class PromotionGoodsUIController extends InfoUIController {
             errorMessage+=("起始时间不得晚于结束时间。"+System.lineSeparator());
         }
 
+        if (goodsItemObservableList==null||goodsItemObservableList.size()==0) {
+            errorMessage+=("未添加组合商品。"+System.lineSeparator());
+        }
+
         if(errorMessage.length()==0){
             promotion.setName(name.getText());
             promotion.setDiscount(Double.parseDouble(discount.getText()));

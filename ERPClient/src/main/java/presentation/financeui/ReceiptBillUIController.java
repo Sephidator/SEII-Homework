@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
+import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.exception.DataException;
@@ -129,7 +130,7 @@ public class ReceiptBillUIController extends InfoUIController {
 
     private void setClientList(){
         try{
-            ArrayList<ClientVO> clientList= ClientBlFactory.getService().getClientList(null);
+            ArrayList<ClientVO> clientList= service.getClientList(null);
 
             ObservableList<String> list=FXCollections.observableArrayList();
             for(int i=0;i<clientList.size();i++){
@@ -137,7 +138,7 @@ public class ReceiptBillUIController extends InfoUIController {
             }
             clientChoiceBox.setItems(list);
             clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-                client.setText(clientList.get(newValue.intValue()).getCategory()+" "+clientList.get(newValue.intValue()).getName());
+                client.setText(list.get(newValue.intValue()));
                 bill.setClient(clientList.get(newValue.intValue()));
             });
         }catch(DataException e){
@@ -314,7 +315,7 @@ public class ReceiptBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(ReceiptBillVO)bill,3,stage);
+        init(ReceiptBillBlFactory.getService(),(ReceiptBillVO)bill,3,stage);
     }
 
     /**

@@ -110,7 +110,6 @@ public class FinanceBillUIController extends CenterUIController {
 
             showFinanceBillList(financeBillList);
 
-
         }catch(DataException e){
             AlertInfo.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","数据库错误");
@@ -157,7 +156,7 @@ public class FinanceBillUIController extends CenterUIController {
         if(isBillSelected()){
             FinanceBillVO bill=financeBillTableView.getSelectionModel().getSelectedItem();
             if(bill.getType().equals("付款单")){
-                PaymentBillVO paymentBill=(PaymentBillVO)bill;
+                PaymentBillVO paymentBill=(PaymentBillVO)financeBillTableView.getSelectionModel().getSelectedItem();
                 PaymentBillUIController.init(paymentBillBlService,paymentBill,2,root.getStage());
             }
             else if(bill.getType().equals("收款单")){

@@ -1,5 +1,6 @@
 package main.java.presentation.loginui;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,7 @@ public class LoginUIController {
     @FXML
     private JFXTextField usernameField;
     @FXML
-    private JFXTextField passwordField;
+    private JFXPasswordField passwordField;
     @FXML
     private Button login;
     @FXML
