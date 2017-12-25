@@ -163,7 +163,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                     PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
                     sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "' WHERE keyID=" + key;
                     statement.executeUpdate(sql);
-                    ArrayList<GoodsItemPO> list = new ArrayList<>();
+                    ArrayList<GoodsItemPO> list = promotionGoodsPO.getGoodsList();
                     if (list != null)
                         for (int i = 0; i < list.size(); i++) {
                             sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
@@ -257,7 +257,7 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
                 statement.executeUpdate(sql);
                 sql = "DELETE FROM GoodsItem WHERE site_ID='" + po.getID() + "'";
                 statement.executeUpdate(sql);
-                ArrayList<GoodsItemPO> list = new ArrayList<>();
+                ArrayList<GoodsItemPO> list = promotionGoodsPO.getGoodsList();
                 if (list != null)
                     for (int i = 0; i < list.size(); i++) {
                         sql = "INSERT INTO GoodsItem VALUES ('" + promotionGoodsPO.getID() + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";

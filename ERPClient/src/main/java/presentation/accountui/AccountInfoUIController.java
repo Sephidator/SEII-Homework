@@ -70,6 +70,7 @@ public class AccountInfoUIController extends InfoUIController{
         }
         else if(command==2){
             confirm.setText("编辑");
+            remaining.setEditable(false);
         }
         else if(command==3){
             confirm.setText("确定");

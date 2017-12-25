@@ -26,8 +26,10 @@ import main.java.vo.promotion.PromotionTotalVO;
 import main.java.vo.promotion.PromotionVO;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class PromotionTotalUIController extends InfoUIController {
@@ -88,13 +90,12 @@ public class PromotionTotalUIController extends InfoUIController {
         this.promotion=promotion;
         ID.setText(promotion.getID());
         name.setText(promotion.getName());
-        start.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(promotion.getStart()));
-        end.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(promotion.getEnd()));
         total.setText(String.valueOf(promotion.getTotal()));
         voucher.setText(String.valueOf(promotion.getVoucher()));
 
         start.setValue(promotion.getStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         end.setValue(promotion.getEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        showGiftItemList();
     }
 
     public void setService(PromotionBlService service) {
@@ -109,7 +110,7 @@ public class PromotionTotalUIController extends InfoUIController {
      * 根据数字来设置按钮的文字
      * 按钮被点击时，根据不同的文字执行不同的功能
      * 好吧这个控制耦合有点蠢，但是做的工作少一点
-     * 1对应新建单据；2对应编辑单据；3对应查看单据
+     * 1对应新建促销策略；2对应编辑促销策略；3对应查看促销策略
      * */
     public void setPaneFunction(int command){
         if(command==1){
@@ -125,6 +126,9 @@ public class PromotionTotalUIController extends InfoUIController {
             name.setEditable(false);
             total.setEditable(false);
             voucher.setEditable(false);
+
+            start.setOnMouseClicked(e -> start.hide());
+            end.setOnMouseClicked(e -> end.hide());
 
             add.setDisable(true);
             delete.setDisable(true);
@@ -189,32 +193,6 @@ public class PromotionTotalUIController extends InfoUIController {
     }
 
     @FXML
-    private void handleTotalCorrect(){
-        String str=total.getText();
-
-        if(CheckInput.isPositiveNumber(str)){
-            Double number=Double.parseDouble(str);
-            promotion.setTotal(number);
-
-            AlertInfo.showAlert(Alert.AlertType.INFORMATION,
-                    "Success","折让设置成功","促销策略的折让为："+str);
-        }
-    }
-
-    @FXML
-    private void handleVoucherCorrect(){
-        String str=voucher.getText();
-
-        if(CheckInput.isPositiveNumber(str)){
-            Double number=Double.parseDouble(str);
-            promotion.setVoucher(number);
-
-            AlertInfo.showAlert(Alert.AlertType.INFORMATION,
-                    "Success","代金券金额设置成功","促销策略发放的代金券金额为："+str);
-        }
-    }
-
-    @FXML
     private void handleConfirm(){
         if(isInputValid()){
             String text=confirm.getText();
@@ -273,7 +251,7 @@ public class PromotionTotalUIController extends InfoUIController {
     }
 
     /**
-     * 检查单据信息的输入是否完整且合法
+     * 检查促销策略信息的输入是否完整且合法
      * 完整且合法返回true
      * */
     private boolean isInputValid(){
@@ -309,8 +287,8 @@ public class PromotionTotalUIController extends InfoUIController {
             }
         }
 
-        if((start.getValue().isAfter(end.getValue()))||(start.getValue().isEqual(end.getValue()))){
-            errorMessage+=("起始时间必须早于结束时间。"+System.lineSeparator());
+        if((start.getValue().isAfter(end.getValue()))){
+            errorMessage+=("起始时间不得晚于结束时间。"+System.lineSeparator());
         }
 
         if(errorMessage.length()==0){
@@ -320,22 +298,24 @@ public class PromotionTotalUIController extends InfoUIController {
 
             Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
             Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            try {
+                endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
             promotion.setStart(startTime);
             promotion.setEnd(endTime);
 
             return true;
         } else {
             AlertInfo.showAlert(Alert.AlertType.ERROR,
-                    "单据信息错误", "请检查单据信息的输入", errorMessage);
+                    "促销策略信息错误", "请检查促销策略信息的输入", errorMessage);
             return false;
         }
     }
 
     // 加载文件和界面的方法******************************************
-
-    public void showInfo(PromotionVO promotion, Stage stage){
-        init(null,(PromotionTotalVO)promotion,3,stage);
-    }
 
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
