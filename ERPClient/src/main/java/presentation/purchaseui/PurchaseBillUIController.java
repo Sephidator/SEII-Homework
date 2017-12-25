@@ -10,11 +10,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogic.purchasebl.PurchaseRefundBillBl;
+import main.java.businesslogicfactory.purchaseblfactory.PurchaseRefundBillBlFactory;
+import main.java.businesslogicfactory.purchaseblfactory.PurchaseTradeBillBlFactory;
 import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
 import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.purchasebill.PurchaseBillVO;
 import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
@@ -61,12 +67,42 @@ public class PurchaseBillUIController extends CenterUIController {
         this.purchaseRefundBillBlService = purchaseRefundBillBlService;
     }
 
+    public void refresh(){
+        try{
+            ArrayList<PurchaseBillVO> purchaseBillList=new ArrayList<>();
+            BillQueryVO query=new BillQueryVO("草稿",null,null,"进货单",root.getOperator().getID(),null);
+
+            query.type="进货单";
+            ArrayList<PurchaseTradeBillVO> purchaseTradeBillList1=purchaseTradeBillBlService.getPurchaseTradeBillList(query);
+            query.type="进货退货单";
+            ArrayList<PurchaseRefundBillVO> purchaseRefundBillList1=purchaseRefundBillBlService.getPurchaseRefundBillList(query);
+
+            query.state="审批不通过";
+            query.type="进货单";
+            ArrayList<PurchaseTradeBillVO> purchaseTradeBillList2=purchaseTradeBillBlService.getPurchaseTradeBillList(query);
+            query.type="进货退货单";
+            ArrayList<PurchaseRefundBillVO> purchaseRefundBillList2=purchaseRefundBillBlService.getPurchaseRefundBillList(query);
+
+            purchaseBillList.addAll(purchaseTradeBillList1);
+            purchaseBillList.addAll(purchaseRefundBillList1);
+            purchaseBillList.addAll(purchaseTradeBillList2);
+            purchaseBillList.addAll(purchaseRefundBillList2);
+
+            showPurchaseBillList(purchaseBillList);
+
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","数据库错误");
+        }catch(Exception e){
+            e.printStackTrace();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","RMI连接错误");
+        }
+    }
+
     private void showPurchaseBillList(ArrayList<PurchaseBillVO> purchaseBillList){
         purchaseBillObservableList.removeAll();
-
-        for(int i=0;i<purchaseBillList.size();i++){
-            purchaseBillObservableList.add(purchaseBillList.get(i));
-        }
+        purchaseBillObservableList.setAll(purchaseBillList);
         purchaseBillTableView.setItems(purchaseBillObservableList);
     }
 
@@ -76,32 +112,31 @@ public class PurchaseBillUIController extends CenterUIController {
     private void addPurchaseTradeBill(){
         PurchaseTradeBillVO bill=new PurchaseTradeBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("进货单");
-        PurchaseTradeBillUIController.init(null,bill,1,root.getStage());
+        PurchaseTradeBillUIController.init(purchaseTradeBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
     private void addPurchaseRefundBill(){
-        System.out.println("不是null");
         PurchaseRefundBillVO bill=new PurchaseRefundBillVO();
         bill.setOperator(root.getOperator());
-        bill.setPurchaseList(new ArrayList<>());
-        bill.setType("进货退货单");
-        PurchaseRefundBillUIController.init(null,bill,1,root.getStage());
+        PurchaseRefundBillUIController.init(purchaseRefundBillBlService,bill,1,root.getStage());
+        refresh();
     }
 
     @FXML
     private void editPurchaseBill(){
         if(isBillSelected()){
-            if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货单")){
-                PurchaseTradeBillVO bill=(PurchaseTradeBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseTradeBillUIController.init(null,bill,2,root.getStage());
+            PurchaseBillVO bill=purchaseBillTableView.getSelectionModel().getSelectedItem();
+            if(bill.getType().equals("进货单")){
+                PurchaseTradeBillVO purchaseTradeBill=(PurchaseTradeBillVO) bill;
+                PurchaseTradeBillUIController.init(purchaseTradeBillBlService,purchaseTradeBill,2,root.getStage());
             }
-            else if(purchaseBillTableView.getSelectionModel().getSelectedItem().getType().equals("进货退货单")){
-                PurchaseRefundBillVO bill=(PurchaseRefundBillVO) purchaseBillTableView.getSelectionModel().getSelectedItem();
-                PurchaseRefundBillUIController.init(null,bill,2,root.getStage());
+            else if(bill.getType().equals("进货退货单")){
+                PurchaseRefundBillVO purchaseRefundBill=(PurchaseRefundBillVO) bill;
+                PurchaseRefundBillUIController.init(purchaseRefundBillBlService,purchaseRefundBill,2,root.getStage());
             }
+            refresh();
         }
     }
 
@@ -111,11 +146,8 @@ public class PurchaseBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择单据");
-            alert.setContentText("请选择要编辑的单据");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }
     }
@@ -142,30 +174,9 @@ public class PurchaseBillUIController extends CenterUIController {
 
             PurchaseBillUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setPurchaseTradeBillBlService(null);
-            controller.setPurchaseRefundBillBlService(null);
-
-            Date date= new SimpleDateFormat("yyyy-MM-dd").parse("2017-1-12");
-            ClientVO client=new ClientVO("类别：经销商", 4, "名字：陈骁2",
-                    "电话：123", "地址：南京大学", "邮编123", "邮件：123",
-                    0, 0, 20, null);
-            GoodsVO g=new GoodsVO();
-            g.setID("123");
-            g.setName("电灯");
-            g.setModel("大号");
-            g.setCost(5);
-            g.setComment("备注");
-            GoodsItemVO item=new GoodsItemVO(g,3,g.getCost());
-            ArrayList<GoodsItemVO> list=new ArrayList<>();
-            list.add(item);
-            PurchaseTradeBillVO bill1=new PurchaseTradeBillVO("草稿",date,root.getOperator(),"备注", client, list,100);
-            PurchaseRefundBillVO bill2=new PurchaseRefundBillVO("审批不通过",date,root.getOperator(),"备注", client, list,100);
-            bill1.setID("123");
-            bill2.setID("123");
-            ArrayList<PurchaseBillVO> plist=new ArrayList<>();
-            plist.add(bill1);
-            plist.add(bill2);
-            controller.showPurchaseBillList(plist);
+            controller.setPurchaseTradeBillBlService(PurchaseTradeBillBlFactory.getService());
+            controller.setPurchaseRefundBillBlService(PurchaseRefundBillBlFactory.getService());
+            controller.refresh();
 
             root.setReturnPaneController(new PurchaseSalePanelUIController());
         }catch(Exception e){

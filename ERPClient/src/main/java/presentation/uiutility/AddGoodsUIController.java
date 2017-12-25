@@ -70,7 +70,7 @@ public class AddGoodsUIController {
 
     public void setGoodsList(ArrayList<GoodsVO> goodsList) {
         this.goodsList=goodsList;
-        showGoodsList(goodsList);
+        showGoodsList();
     }
 
     public void setGoodsItemList(ArrayList<GoodsItemVO> goodsItemList) {
@@ -90,15 +90,10 @@ public class AddGoodsUIController {
     /**
      * 取得商品列表并修改ObservableList的信息
      * */
-    private void showGoodsList(ArrayList<GoodsVO> goodsList){
-        if(goodsList!=null){
-            goodsObservableList.removeAll();
-
-            for(int i=0;i<goodsList.size();i++){
-                goodsObservableList.add(goodsList.get(i));
-            }
-            goodsTableView.setItems(goodsObservableList);
-        }
+    private void showGoodsList(){
+        goodsObservableList.removeAll();
+        goodsObservableList.setAll(goodsList);
+        goodsTableView.setItems(goodsObservableList);
     }
 
     @FXML
@@ -154,11 +149,8 @@ public class AddGoodsUIController {
         if(selectedIndex>=0){
             return true;
         }else{
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择商品");
-            alert.setContentText("请在商品列表中选择商品");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择商品","请在商品列表中选择商品");
             return false;
         }
     }

@@ -112,7 +112,6 @@ public class PaymentBillVO extends FinanceBillVO {
 
         //transListPO到TransListVO
         ArrayList<TransItemPO> transItemPOS = paymentBillPO.getTransList();
-
         ArrayList<TransItemVO> transItemVOS = new ArrayList<>();
         for(TransItemPO transItemPO : transItemPOS)
             transItemVOS.add(new TransItemVO(transItemPO));

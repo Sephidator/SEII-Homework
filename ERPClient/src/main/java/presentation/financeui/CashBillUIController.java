@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
+import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
@@ -106,6 +107,10 @@ public class CashBillUIController extends InfoUIController {
         else if(command==3){
             confirm.setText("确定");
             cancel.setText("取消");
+
+            comment.setEditable(false);
+            addCashItem.setDisable(true);
+            deleteCashItem.setDisable(true);
         }
     }
 
@@ -282,7 +287,7 @@ public class CashBillUIController extends InfoUIController {
     // 加载文件和界面的方法******************************************
 
     public void showInfo(BillVO bill, Stage stage){
-        init(null,(CashBillVO)bill,3,stage);
+        init(CashBillBlFactory.getService(),(CashBillVO)bill,3,stage);
     }
 
     /**
