@@ -38,7 +38,7 @@ public class PromotionTotalVO extends PromotionVO {
 
         this.giftList=new ArrayList<>();
         for(GiftItemPO giftItemPO:promotionTotalPO.getGiftList()){
-            giftList.add(new GiftItemVO(giftItemPO));
+            this.giftList.add(new GiftItemVO(giftItemPO));
         }
     }
 
