@@ -231,6 +231,7 @@ public class SaleRefundBillUIController extends InfoUIController {
             }
             else{
                 showGoodsItemList();
+                countTotal();
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
         }
@@ -328,8 +329,11 @@ public class SaleRefundBillUIController extends InfoUIController {
         if (client.getText().length()<=1) {
             errorMessage+=("未选择客户。"+System.lineSeparator());
         }
+        if (salesman.getText().length()==0) {
+            errorMessage+=("未添加业务员。"+System.lineSeparator());
+        }
         if (goodsItemObservableList==null||goodsItemObservableList.size()==0) {
-            errorMessage+=("未添加销售商品列表。"+System.lineSeparator());
+            errorMessage+=("未添加退货商品清单。"+System.lineSeparator());
         }
 
         if(errorMessage.length()==0){

@@ -204,10 +204,16 @@ public class PurchaseRefundBillUIController extends InfoUIController {
     private void goodsNumberPlus(){
         if(isGoodsItemSelected()){
             int selectedIndex=goodsItemTableView.getSelectionModel().getSelectedIndex();
-            bill.getPurchaseList().get(selectedIndex).number++;
-            showGoodsItemList();
-            countTotal();
-            goodsItemTableView.getSelectionModel().select(selectedIndex);
+            if(bill.getPurchaseList().get(selectedIndex).number<bill.getPurchaseList().get(selectedIndex).goods.getNumber()){
+                bill.getPurchaseList().get(selectedIndex).number++;
+                showGoodsItemList();
+                countTotal();
+                goodsItemTableView.getSelectionModel().select(selectedIndex);
+            }
+            else{
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","增加商品数量失败","超过库存总数");
+            }
         }
     }
 
@@ -224,6 +230,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
             }
             else{
                 showGoodsItemList();
+                countTotal();
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
         }

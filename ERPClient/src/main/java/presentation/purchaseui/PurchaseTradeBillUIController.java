@@ -224,6 +224,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
             }
             else{
                 showGoodsItemList();
+                countTotal();
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
         }
