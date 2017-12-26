@@ -168,9 +168,10 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
             if (all - before >= 99999)
                 throw new FullException();
             sql = "INSERT INTO SaleTradeBill (state, time, operatorID, comment, clientID, salesmanID, promotionID, totalBeforeDiscount, discount, amountOfVoucher, totalAfterDiscount) " +
-                    "VALUES ('" + po.getState() + "', '" + po.getTime() + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getClientID() + "', '" + po.getSalesmanID() + "', '" + po.getPromotionID() + "', '" + po.getTotalBeforeDiscount() + "', '" + po.getDiscount() + "', '" + po.getAmountOfVoucher() + "', '" + po.getTotalAfterDiscount() + "')";
+                    "VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getClientID() + "', '" + po.getSalesmanID() + "', '" + po.getPromotionID() + "', '" + po.getTotalBeforeDiscount() + "', '" + po.getDiscount() + "', '" + po.getAmountOfVoucher() + "', '" + po.getTotalAfterDiscount() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             resultSet = statement.getGeneratedKeys();
+            resultSet.next();
             int key = resultSet.getInt(1);
             String ID = "XSD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
             sql = "UPDATE SaleTradeBill SET ID='" + ID + "' WHERE keyID=" + key;
