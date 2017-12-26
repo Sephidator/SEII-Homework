@@ -49,6 +49,9 @@ public class PaymentBillData extends UnicastRemoteObject implements PaymentBillD
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
                 sql = "SELECT * FROM PaymentBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                 sqlOfQuery.add(sql);
+            } else if (query.operator == null && query.client == null && query.start == null) {
+                sql = "SELECT * FROM paymentbill WHERE state='" + query.state + "'";
+                sqlOfQuery.add(sql);
             } else {
                 sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
                 resultSet = statement.executeQuery(sql);
@@ -83,13 +86,17 @@ public class PaymentBillData extends UnicastRemoteObject implements PaymentBillD
             }
             statement.close();
             return list;
-        } catch (SQLException e) {
+        } catch (
+                SQLException e)
+
+        {
             try {
                 connection.rollback();
             } catch (SQLException e1) {
             }
             throw new DataException();
         }
+
     }
 
     /**

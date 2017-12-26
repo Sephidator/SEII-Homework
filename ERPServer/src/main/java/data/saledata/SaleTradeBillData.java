@@ -48,21 +48,25 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
             String sql;
             ResultSet resultSet;
 
-            sql = "SELECT * FROM User WHERE name='" + query.salesman + "'";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String salesmanID = resultSet.getString("ID");
-                sql = "SELECT * FROM SaleTradeBill WHERE (salesmanID='" + salesmanID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='审批通过'";
+            if (query == null) {
+                sql = "SELECT * FROM saletradebill WHERE state='审批通过'";
                 sqlOfQuery.add(sql);
+            } else {
+                sql = "SELECT * FROM User WHERE name='" + query.salesman + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String salesmanID = resultSet.getString("ID");
+                    sql = "SELECT * FROM SaleTradeBill WHERE (salesmanID='" + salesmanID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='审批通过'";
+                    sqlOfQuery.add(sql);
+                }
+                sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String clientID = resultSet.getString("ID");
+                    sql = "SELECT * FROM SaleTradeBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='审批通过'";
+                    sqlOfQuery.add(sql);
+                }
             }
-            sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                String clientID = resultSet.getString("ID");
-                sql = "SELECT * FROM SaleTradeBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='审批通过'";
-                sqlOfQuery.add(sql);
-            }
-            resultSet.close();
             statement.close();
             list = getList(connection, sqlOfQuery);
             return list;
@@ -90,6 +94,9 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
             String sql;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
                 sql = "SELECT * FROM SaleTradeBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sqlOfQuery.add(sql);
+            } else if (query.start == null && query.operator == null && query.client == null) {
+                sql = "SELECT * FROM saletradebill WHERE state='" + query.state + "'";
                 sqlOfQuery.add(sql);
             } else {
                 sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
