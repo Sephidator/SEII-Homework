@@ -48,6 +48,9 @@ public class InventoryLossOverBillData extends UnicastRemoteObject implements In
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
                 sql = "SELECT * FROM InventoryLossOverBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                 sqlOfQuery.add(sql);
+            } else if (query.start == null && query.operator == null && query.client == null) {
+                sql = "SELECT * FROM inventorylossoverbill WHERE state='" + query.state + "'";
+                sqlOfQuery.add(sql);
             } else {
                 sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
                 resultSet = statement.executeQuery(sql);
