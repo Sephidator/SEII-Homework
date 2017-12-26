@@ -84,7 +84,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
 
         /*调用LogTool*/
         if (purchaseTradeBillVO.getState().equals("待审批")) {
-            LogVO logVO = new LogVO(purchaseTradeBillVO.getOperator(), "提交了一份新的进货单", purchaseTradeBillVO.getTime());
+            LogVO logVO = new LogVO(purchaseTradeBillVO.getOperator(), "提交进货单，ID："+id, purchaseTradeBillVO.getTime());
             LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }

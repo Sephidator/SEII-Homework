@@ -84,7 +84,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
 
         /*调用LogTool*/
         if (inventoryGiftBillVO.getState().equals("待审批")) {
-            LogVO logVO = new LogVO(inventoryGiftBillVO.getOperator(), "提交了一份新的库存赠送单", inventoryGiftBillVO.getTime());
+            LogVO logVO = new LogVO(inventoryGiftBillVO.getOperator(), "提交库存赠送单，ID："+id, inventoryGiftBillVO.getTime());
             LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }

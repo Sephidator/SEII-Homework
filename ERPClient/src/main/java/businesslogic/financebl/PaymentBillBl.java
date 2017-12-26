@@ -165,7 +165,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         //add Log
         if(vo.getState().equals("待审批")){
             LogTool logTool = new LogBl();
-            LogVO logVO = new LogVO(vo.getOperator(),"提交了一份新的付款单",vo.getTime());
+            LogVO logVO = new LogVO(vo.getOperator(),"提交付款单，ID："+id,vo.getTime());
             logTool.addLog(logVO);
         }
 

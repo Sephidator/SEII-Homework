@@ -108,7 +108,7 @@ public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool
 
         /*调用LogTool*/
         if (saleTradeBillVO.getState().equals("待审批")) {
-            LogVO logVO = new LogVO(saleTradeBillVO.getOperator(), "提交了一份新的销售单", saleTradeBillVO.getTime());
+            LogVO logVO = new LogVO(saleTradeBillVO.getOperator(), "提交销售单，ID："+id, saleTradeBillVO.getTime());
             LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }
