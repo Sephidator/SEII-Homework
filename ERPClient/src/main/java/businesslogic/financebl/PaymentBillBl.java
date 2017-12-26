@@ -101,8 +101,8 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*实现转化*/
         PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
 
-//        /*修改状态*/
-//        paymentBillPO.setState("审批未通过");
+        /*修改状态*/
+        paymentBillPO.setState("审批不通过");
 
         /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();

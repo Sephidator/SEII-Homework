@@ -38,8 +38,8 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
          /*转化*/
         ReceiptBillPO receiptBillPO = ((ReceiptBillVO)bill).getReceiptBillPO();
 
-//        /*修改状态*/
-//        receiptBillPO.setState("审批通过");
+        /*修改状态*/
+        receiptBillPO.setState("审批通过");
         ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
 
         receiptBillDataService.update(receiptBillPO);
@@ -56,13 +56,19 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         }
         clientTool.editClient(clientVO);
 
-        /*添加message*/
+        ArrayList<TransItemVO> transItemVOS=((ReceiptBillVO)bill).getTransList();
+
+         /*添加message*/
         MessageTool messageTool = new MessageBl();
-        String message = "";String messOne="确认账户";String messTwo="收到汇款";String messThree="元";
-        ArrayList<TransItemVO> transItemVOS = ((ReceiptBillVO)bill).getTransList();;
-        for(TransItemVO transItemVO : transItemVOS)
-            message += messOne + transItemVO.account + messTwo + transItemVO.transAmount+messThree+",";
-        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"（系统消息）");
+        String message="";
+        message+= "收款列表："+System.lineSeparator();
+        for(TransItemVO transItemVO : transItemVOS){
+            message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
+        }
+        message+= "收款对象："+System.lineSeparator();
+        message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）";
+
+        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
         messageTool.addMessage(messageVO);
 
         //更改账户余额,对每一个账户加上收款单转账列表的金额
@@ -86,8 +92,8 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         /*实现转化*/
         ReceiptBillPO receiptBillPO = ((ReceiptBillVO)bill).getReceiptBillPO();
 
-//        /*修改状态*/
-//        receiptBillPO.setState("审批未通过");
+        /*修改状态*/
+        receiptBillPO.setState("审批不通过");
 
         /*dataService*/
         ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();

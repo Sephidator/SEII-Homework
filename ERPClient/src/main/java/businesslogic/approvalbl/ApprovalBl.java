@@ -121,7 +121,7 @@ public class ApprovalBl implements ApprovalBlService {
 
         /*添加message*/
         MessageTool messageTool = new MessageBl();
-        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,"你的编号为"+billvo.getID()+"的单据被"+sender.getID()+"审批拒绝，附加理由："+reason);
+        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,"你的编号为"+billvo.getID()+"的单据被"+sender.getType()+"("+sender.getID()+"）审批拒绝，附加理由："+reason);
         messageTool.addMessage(messageVO);
     }
 
