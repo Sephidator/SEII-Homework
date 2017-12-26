@@ -11,7 +11,7 @@ import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
 import main.java.businesslogic.salebl.SaleRefundBillBl;
 import main.java.businesslogic.salebl.SaleRefundBillTool;
-import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
 import main.java.vo.bill.BillQueryVO;
@@ -69,7 +69,7 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
             billVOArrayList.addAll(saleRefundBillTool.getSaleRefundBillList(billQueryVO));
         }
         if(billQueryVO == null ||billQueryVO.type.equals("销售出货单")){
-            SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
+            SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
             billVOArrayList.addAll(saleTradeBillTool.getSaleTradeBillList(billQueryVO));
         }
 

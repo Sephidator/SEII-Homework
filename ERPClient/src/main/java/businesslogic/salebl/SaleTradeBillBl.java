@@ -37,7 +37,7 @@ import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
-public class SaleTradBillBl implements SaleTradeBillBlService, SaleTradeBillTool {
+public class SaleTradeBillBl implements SaleTradeBillBlService, SaleTradeBillTool {
     /**
      * @version: 1
      * @date:

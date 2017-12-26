@@ -9,11 +9,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
-import main.java.businesslogicservice.goodsblservice.GoodsBlService;
+import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.goods.GoodsVO;
+import main.java.vo.goods.InventoryCheckItemVO;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -25,25 +27,25 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class InventoryCheckUIController extends CenterUIController {
-    private GoodsBlService goodsBlService;
+    private InventoryCheckBlService service;
 
-    private ObservableList<GoodsVO> goodsObservableList= FXCollections.observableArrayList();
+    private ObservableList<InventoryCheckItemVO> checkObservableList= FXCollections.observableArrayList();
     @FXML
-    private TableView<GoodsVO> goodsTableView;
+    private TableView<InventoryCheckItemVO> checkTableView;
     @FXML
-    private TableColumn<GoodsVO,String> goodsIDColumn;
+    private TableColumn<InventoryCheckItemVO,String> IDColumn;
     @FXML
-    private TableColumn<GoodsVO,String> goodsNameColumn;
+    private TableColumn<InventoryCheckItemVO,String> nameColumn;
     @FXML
-    private TableColumn<GoodsVO,String> goodsModelColumn;
+    private TableColumn<InventoryCheckItemVO,String> purchaseNumberColumn;
     @FXML
-    private TableColumn<GoodsVO,String> goodsCostColumn;
+    private TableColumn<InventoryCheckItemVO,String> purchaseAmountColumn;
     @FXML
-    private TableColumn<GoodsVO,String> goodsRetailColumn;
+    private TableColumn<InventoryCheckItemVO,String> saleNumberColumn;
     @FXML
-    private TableColumn<GoodsVO,String> goodsNumberColumn;
+    private TableColumn<InventoryCheckItemVO,String> saleAmountColumn;
     @FXML
-    private TableColumn<GoodsVO,String> goodsCommentColumn;
+    private TableColumn<InventoryCheckItemVO,String> goodsNumberColumn;
 
     // 加载文件后调用的方法******************************************
 
@@ -51,94 +53,45 @@ public class InventoryCheckUIController extends CenterUIController {
      * 设置显示的客户信息以及显示方法
      * */
     public void initialize(){
-        goodsIDColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getID()));
-        goodsNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
-        goodsModelColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getModel()));
-        goodsCostColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getCost())));
-        goodsRetailColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getRetail())));
-        goodsNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getNumber())));
-        goodsCommentColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getComment()));
+        IDColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goods.getID()));
+        nameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goods.getName()));
+        purchaseNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().purchaseNumber)));
+        purchaseAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().purchaseAmount)));
+        saleNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().saleNumber)));
+        saleAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().saleAmount)));
+        goodsNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getNumber())));
     }
 
     // 设置controller数据的方法*****************************************
 
-    public void setGoodsBlService(GoodsBlService goodsBlService) {
-        this.goodsBlService = goodsBlService;
-        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
-        //showGoodsList(goodsList);
+    public void setService(InventoryCheckBlService service) {
+        this.service = service;
     }
 
-    private void refresh(){
-        //ArrayList<GoodsVO> goodsList=goodsBlService.getGoodsList(null);
-        //showGoodsList(goodsList);
+    public void refresh(){
+        try{
+            ArrayList<InventoryCheckItemVO> checkList=service.getInventoryCheck(null,null);
+            showGoodsList(checkList);
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","RMI连接错误");
+        }
+
     }
 
     /**
      * 取得客户列表并修改ObservableList的信息
      * */
-    private void showGoodsList(ArrayList<GoodsVO> goodsList){
-        goodsObservableList.removeAll();
-
-        for(int i=0;i<goodsList.size();i++){
-            goodsObservableList.add(goodsList.get(i));
-        }
-        goodsTableView.setItems(goodsObservableList);
+    private void showGoodsList(ArrayList<InventoryCheckItemVO> checkList){
+        checkObservableList.removeAll();
+        checkObservableList.setAll(checkList);
+        checkTableView.setItems(checkObservableList);
     }
 
     // 界面之中会用到的方法******************************************
-
-    @FXML
-    private void handleExport(){
-        try {
-            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-            String day=sdf.format(new Date());
-
-            String filename = "C:/导出报表/"+day+"库存盘点"+".xls" ;
-            HSSFWorkbook workbook = new HSSFWorkbook();
-            HSSFSheet sheet = workbook.createSheet("First Sheet");
-
-            HSSFRow rowHead = sheet.createRow((short)0);
-            rowHead.createCell(0).setCellValue("商品编号");
-            rowHead.createCell(1).setCellValue("名称");
-            rowHead.createCell(2).setCellValue("型号");
-            rowHead.createCell(3).setCellValue("进价");
-            rowHead.createCell(4).setCellValue("零售价");
-            rowHead.createCell(5).setCellValue("数量");
-            rowHead.createCell(6).setCellValue("备注");
-
-            ObservableList<GoodsVO> list=goodsTableView.getItems();
-            for(int i=0;i<list.size();i++){
-                HSSFRow row = sheet.createRow((short)(i+1));
-                row.createCell(0).setCellValue(list.get(i).getID());
-                row.createCell(1).setCellValue(list.get(i).getName());
-                row.createCell(2).setCellValue(list.get(i).getModel());
-                row.createCell(3).setCellValue(list.get(i).getCost());
-                row.createCell(4).setCellValue(list.get(i).getRetail());
-                row.createCell(5).setCellValue(list.get(i).getNumber());
-                row.createCell(6).setCellValue(list.get(i).getComment());
-            }
-
-            File file=new File(filename);
-            if(!file.getParentFile().exists()) {
-                //如果目标文件所在的目录不存在，则创建父目录
-                System.out.println("目标文件所在目录不存在，准备创建它！");
-                file.getParentFile().mkdirs();
-            }
-            FileOutputStream fileOut = new FileOutputStream(file);
-            workbook.write(fileOut);
-            fileOut.close();
-
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("导出报表成功");
-            alert.setContentText("文件路径："+filename);
-            alert.showAndWait();
-
-        } catch ( Exception ex ) {
-            System.out.println(ex);
-        }
-    }
-
 
     // 加载文件和界面的方法******************************************
 
@@ -162,18 +115,6 @@ public class InventoryCheckUIController extends CenterUIController {
 
             InventoryCheckUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setGoodsBlService(null);
-
-            GoodsVO c1=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
-            c1.setID("123");
-            GoodsVO c2=new GoodsVO("台灯1", null, "",50,20,30,20,30,10,"备注");
-            c2.setID("123");
-
-            ArrayList<GoodsVO> list=new ArrayList<>();
-            list.add(c1);
-            list.add(c2);
-
-            controller.showGoodsList(list);
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

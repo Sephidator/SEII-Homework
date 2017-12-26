@@ -1,6 +1,6 @@
 package main.java.businesslogic.reportbl;
 
-import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
 import main.java.vo.bill.salebill.SaleTradeBillQueryVO;
@@ -8,7 +8,6 @@ import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.goods.GoodsItemVO;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
-import java.util.Date;
 
 import java.util.ArrayList;
 
@@ -35,7 +34,7 @@ public class SaleDetailBl implements SaleDetailBlService {
         if(query != null)
             saleTradeBillQueryVO = new SaleTradeBillQueryVO(query.start, query.end, query.goodsName,query.client,query.salesman);
 
-        SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
+        SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
         //拿到销售单的单据
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.findsByReport(saleTradeBillQueryVO);
 
