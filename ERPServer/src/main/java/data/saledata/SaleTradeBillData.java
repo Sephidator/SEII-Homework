@@ -63,8 +63,8 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                 sqlOfQuery.add(sql);
             }
             resultSet.close();
-            list = getList(statement, sqlOfQuery);
             statement.close();
+            list = getList(connection, sqlOfQuery);
             return list;
         } catch (SQLException e) {
             try {
@@ -107,8 +107,8 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                     sqlOfQuery.add(sql);
                 }
             }
-            list = getList(statement, sqlOfQuery);
             statement.close();
+            list = getList(connection, sqlOfQuery);
             return list;
         } catch (SQLException e) {
             try {
@@ -120,20 +120,20 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
     }
 
     /**
-     * @param statement
+     * @param connection
      * @param sqlOfQuery [筛选条件List]
      * @return 符合筛选条件的销售单
      * @throws SQLException
      */
-    private ArrayList<SaleTradeBillPO> getList(Statement statement, ArrayList<String> sqlOfQuery) throws SQLException {
+    private ArrayList<SaleTradeBillPO> getList(Connection connection, ArrayList<String> sqlOfQuery) throws SQLException {
         ArrayList<SaleTradeBillPO> list = new ArrayList<>();
         for (int i = 0; i < sqlOfQuery.size(); i++) {
             String sql = sqlOfQuery.get(i);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");
                 sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
-                ResultSet temp = statement.executeQuery(sql);
+                ResultSet temp = connection.createStatement().executeQuery(sql);
                 ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
                 while (temp.next()) {
                     itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
