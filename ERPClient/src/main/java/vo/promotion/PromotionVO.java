@@ -104,4 +104,9 @@ public class PromotionVO extends VO {
     public InfoUIController getInfoUIController() {
         return null;
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

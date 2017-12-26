@@ -229,11 +229,14 @@
 * 修改确认按钮样式的CSS类
 */
 .correctButton{
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
     -fx-background-image: url("/main/resources/pics/commonpics/确认.png");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 25 25;
+    -fx-background-size: 18 18;
     -fx-background-position: center center;
     -fx-background-color: #00CD00; /*-fx-focus-color;*/
+    -fx-font-size: 1;
     -fx-text-fill: #ffffff;
 }
 

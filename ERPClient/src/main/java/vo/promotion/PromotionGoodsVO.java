@@ -86,14 +86,22 @@ public class PromotionGoodsVO extends PromotionVO {
 
     /*计算适用的促销策略的折让部分*/
     public double countPromotionDiscount(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
-        //遍历goodsList，对匹配商品名字的数量n计算策略总价t = n * discount
-        int countGood = 0;
-        for(GoodsItemVO goodsBuying : goodsItemList){
-            for(GoodsItemVO goodsPromotion : this.goodsList){
-                if(goodsPromotion.goods.getName().equals(goodsBuying.goods.getName()))
-                    countGood++;
+        int countGroups = 0; // 计算购买的商品中有几组组合降价商品
+
+        for(GoodsItemVO goodsInPromotion : this.goodsList){
+            boolean exist=false;
+            for(GoodsItemVO goodsItem : goodsItemList){
+                if((goodsInPromotion.goods.getName().equals(goodsItem.goods.getName()))
+                        &&(goodsInPromotion.number<=goodsItem.number)){
+                    exist=true;
+                    int groupNumber=goodsItem.number/goodsInPromotion.number;
+                    countGroups = (countGroups==0) ? groupNumber : Math.min(countGroups,groupNumber);
+                }
+            }
+            if(!exist){
+                return 0;
             }
         }
-        return countGood * this.discount;
+        return countGroups * this.discount;
     }
 }
