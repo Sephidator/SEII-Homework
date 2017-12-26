@@ -78,7 +78,6 @@ public class ApprovalBl implements ApprovalBlService {
             billVOArrayList.addAll(cashBillTool.getCashBillList(query));
         }
 
-        System.out.println(billVOArrayList.size());
         return billVOArrayList;
     }
 

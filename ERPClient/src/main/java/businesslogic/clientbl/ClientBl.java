@@ -102,6 +102,7 @@ public class ClientBl implements ClientBlService, ClientTool {
         ClientDataService clientDataService = ClientDataFactory.getService();
         clientDataService.update(clientPO);
 
+        /*
         //增加：如果应收超过应收额度提醒财务人员去制定付款单还款
         if(clientPO.getReceivable() >= clientPO.getReceivableLimit()){
             MessageTool messageTool = new MessageBl();
@@ -115,7 +116,7 @@ public class ClientBl implements ClientBlService, ClientTool {
             MessageVO messageVO = new MessageVO(userVOS.get(ran),userVOS.get(ran),mess);
             messageTool.addMessage(messageVO);
         }
-
+        */
     }
 
     /**

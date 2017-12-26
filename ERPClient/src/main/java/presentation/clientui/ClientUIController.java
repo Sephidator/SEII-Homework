@@ -108,7 +108,7 @@ public class ClientUIController extends CenterUIController {
 
     @FXML
     private void handleAddClient(){
-        ClientInfoUIController.init(clientBlService,new ClientVO(),1,root.getStage());
+        ClientInfoUIController.init(clientBlService,new ClientVO(),1,root.getStage(),root.getOperator());
         refresh(null);
     }
 
@@ -140,7 +140,7 @@ public class ClientUIController extends CenterUIController {
     @FXML
     private void handleEditClient(){
         if(isClientSelected()){
-            ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
+            ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),2,root.getStage(),root.getOperator());
         }
         refresh(null);
     }
@@ -148,7 +148,7 @@ public class ClientUIController extends CenterUIController {
     @FXML
     private void handleCheckClient() {
         if(isClientSelected()){
-            ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),3,root.getStage());
+            ClientInfoUIController.init(clientBlService,clientTableView.getSelectionModel().getSelectedItem(),3,root.getStage(),root.getOperator());
         }
     }
 
