@@ -38,12 +38,14 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*转化*/
         PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
 
-//        /*修改状态*/
-//        paymentBillPO.setState("审批通过");
+        /*修改状态*/
+        paymentBillPO.setState("审批通过");
 
         /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         paymentBillDataService.update(paymentBillPO);
+
+        System.out.println("A");
 
         /*修改应收数据*/
         ClientTool clientTool = new ClientBl();
@@ -57,14 +59,24 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         }
         clientTool.editClient(clientVO);
 
+        System.out.println("B");
+
+        ArrayList<TransItemVO> transItemVOS=((PaymentBillVO)bill).getTransList();
+
          /*添加message*/
         MessageTool messageTool = new MessageBl();
-        String message = "";String messOne="从账户";String messTwo="转出";String messThree="元";
-        ArrayList<TransItemVO> transItemVOS = ((PaymentBillVO)bill).getTransList();
-        for(TransItemVO transItemVO : transItemVOS)
-            message += messOne + transItemVO.account + messTwo + transItemVO.transAmount+messThree+", ";
-        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message+"到客户"+clientVO.getName()+"账上,客户电话号码："+clientVO.getPhone()+"（系统消息）");
+        String message="";
+        message+= "付款列表："+System.lineSeparator();
+        for(TransItemVO transItemVO : ((PaymentBillVO)bill).getTransList()){
+            message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
+        }
+        message+= "付款对象："+System.lineSeparator();
+        message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）";
+
+        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
         messageTool.addMessage(messageVO);
+
+        System.out.println("C");
 
         //更改账户余额,对每一个账户减去付款单转账列表的金额
         AccountTool accountTool = new AccountBl();
@@ -75,6 +87,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
             accountTool.editAccount(accountVO);
         }
 
+        System.out.println("D");
     }
 
     @Override

@@ -150,7 +150,7 @@ public class SaleRefundBillUIController extends InfoUIController {
 
             ObservableList<String> list=FXCollections.observableArrayList();
             for(int i=0;i<sellerList.size();i++){
-                list.add(sellerList.get(i).getCategory()+": "+sellerList.get(i).getName());
+                list.add(sellerList.get(i).getCategory()+" "+sellerList.get(i).getName());
             }
             clientChoiceBox.setItems(list);
             clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{

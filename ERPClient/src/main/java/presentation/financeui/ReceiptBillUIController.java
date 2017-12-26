@@ -134,7 +134,7 @@ public class ReceiptBillUIController extends InfoUIController {
 
             ObservableList<String> list=FXCollections.observableArrayList();
             for(int i=0;i<clientList.size();i++){
-                list.add(clientList.get(i).getCategory()+": "+clientList.get(i).getName());
+                list.add(clientList.get(i).getCategory()+" "+clientList.get(i).getName());
             }
             clientChoiceBox.setItems(list);
             clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{

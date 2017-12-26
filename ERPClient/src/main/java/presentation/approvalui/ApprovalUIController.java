@@ -77,7 +77,6 @@ public class ApprovalUIController extends CenterUIController {
     }
 
     private void setBillList(String type){
-        System.out.println("Function called");
         ArrayList<BillVO> bills=new ArrayList<>();
         try{
             if(type.equals("所有单据")){
@@ -112,7 +111,7 @@ public class ApprovalUIController extends CenterUIController {
 
     private ArrayList<BillVO> getInventoryBillList() throws Exception{
         ArrayList<BillVO> inventoryBillList=new ArrayList<>();
-        BillQueryVO query=new BillQueryVO("草稿",null,null,"库存溢损单","User00000007",null);
+        BillQueryVO query=new BillQueryVO("待审批",null,null,"库存溢损单","User00000007",null);
 
         query.type="库存溢损单";
         ArrayList<BillVO> lossOverBillList=service.getBillList(query);

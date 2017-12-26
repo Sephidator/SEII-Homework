@@ -97,6 +97,14 @@ public class SaleTradeBillUIController extends InfoUIController {
     private Button confirm;
     @FXML
     private Button cancel;
+    @FXML
+    private Button add;
+    @FXML
+    private Button delete;
+    @FXML
+    private Button plus;
+    @FXML
+    private Button minus;
 
 
     // 加载文件后调用的方法******************************************
@@ -155,12 +163,20 @@ public class SaleTradeBillUIController extends InfoUIController {
             cancel.setText("保存草稿");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("提交编辑");
             cancel.setText("保存草稿");
         }
         else if(command==3){
             confirm.setText("确定");
             cancel.setText("取消");
+
+            comment.setEditable(false);
+            clientChoiceBox.setDisable(true);
+            promotionChoiceBox.setDisable(true);
+            add.setDisable(true);
+            delete.setDisable(true);
+            plus.setDisable(true);
+            minus.setDisable(true);
         }
     }
 
@@ -176,7 +192,7 @@ public class SaleTradeBillUIController extends InfoUIController {
 
             ObservableList<String> list=FXCollections.observableArrayList();
             for(int i=0;i<sellerList.size();i++){
-                list.add(sellerList.get(i).getCategory()+": "+sellerList.get(i).getName());
+                list.add(sellerList.get(i).getCategory()+" "+sellerList.get(i).getName());
             }
             clientChoiceBox.setItems(list);
             clientChoiceBox.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class ClientInfoUIController extends InfoUIController{
     private ClientVO client;
     private ClientBlService clientBlService;
+    private UserVO operator;
 
     @FXML
     private TextField ID; // 客户编号
@@ -106,6 +107,10 @@ public class ClientInfoUIController extends InfoUIController{
         setSalesmanList();
     }
 
+    public void setOperator(UserVO operator) {
+        this.operator=operator;
+    }
+
     /**
      * 根据数字来设置按钮的文字
      * 按钮被点击时，根据不同的文字执行不同的功能
@@ -118,6 +123,10 @@ public class ClientInfoUIController extends InfoUIController{
         }
         else if(command==2){
             confirm.setText("编辑");
+
+            receivable.setEditable(false);
+            payable.setEditable(false);
+            receivableLimit.setEditable(operator.isTop());
         }
         else if(command==3){
             confirm.setText("确定");
@@ -191,12 +200,15 @@ public class ClientInfoUIController extends InfoUIController{
 
                 dialogStage.close();
             }catch(DataException e){
+                e.printStackTrace();
                 AlertInfo.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"客户失败","数据库错误");
             }catch(NotExistException e){
+                e.printStackTrace();
                 AlertInfo.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"客户失败","客户不存在");
             }catch(Exception e){
+                e.printStackTrace();
                 AlertInfo.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"客户失败","RMI连接错误");
             }
@@ -303,7 +315,7 @@ public class ClientInfoUIController extends InfoUIController{
     /**
      * 静态初始化方法，加载相应的FXML文件，并添加一些信息
      * */
-    public static void init(ClientBlService service,ClientVO client, int command,Stage stage){
+    public static void init(ClientBlService service,ClientVO client, int command,Stage stage,UserVO operator){
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
@@ -320,6 +332,7 @@ public class ClientInfoUIController extends InfoUIController{
             ClientInfoUIController controller=loader.getController();
             controller.setClientBlService(service);
             controller.setClient(client);
+            controller.setOperator(operator);
             controller.setDialogStage(dialogStage);
             controller.setPaneFunction(command);
 

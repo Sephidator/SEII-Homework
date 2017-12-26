@@ -40,12 +40,11 @@ public class FinancePanelUIController extends CenterUIController {
     private void refreshMessage(){
         try{
             ArrayList<MessageVO> messageList=service.getMessageList(root.getOperator());
+            String separator=System.lineSeparator()+System.lineSeparator();
             String text="";
 
             for(MessageVO message:messageList){
-                text+="系统消息："+System.lineSeparator();
-                text+=message.getMessage()+System.lineSeparator();
-                text+=System.lineSeparator();
+                text+=message.getMessage()+separator;
             }
             messageArea.setText(text);
 

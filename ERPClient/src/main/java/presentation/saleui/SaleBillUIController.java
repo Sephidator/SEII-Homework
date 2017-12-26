@@ -135,6 +135,7 @@ public class SaleBillUIController extends CenterUIController {
                 SaleRefundBillVO purchaseRefundBill=(SaleRefundBillVO) bill;
                 SaleRefundBillUIController.init(saleRefundBillBlService,purchaseRefundBill,2,root.getStage());
             }
+            refresh();
         }
     }
 
