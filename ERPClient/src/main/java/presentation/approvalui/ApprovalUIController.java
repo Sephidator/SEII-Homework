@@ -14,14 +14,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import main.java.MainApp;
+import main.java.businesslogicfactory.approvalblfactory.ApprovalBlFactory;
 import main.java.businesslogicservice.approvalblservice.ApprovalBlService;
 import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
+import main.java.presentation.uiutility.AlertInfo;
 import main.java.presentation.uiutility.ApprovalRejectUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
+import main.java.vo.bill.inventorybill.InventoryBillVO;
 import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
+import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 
 import java.util.ArrayList;
@@ -59,7 +65,7 @@ public class ApprovalUIController extends CenterUIController {
         String[] typeList=new String[]{"所有单据","库存类单据","进货类单据","销售类单据","财务类单据"};
         typeSelector.setItems(FXCollections.observableArrayList("所有单据","库存类单据","进货类单据","销售类单据","财务类单据"));
         typeSelector.getSelectionModel().selectedIndexProperty().addListener((ov, oldValue, newValue)->{
-            getBillList(typeList[newValue.intValue()]);
+            setBillList(typeList[newValue.intValue()]);
         });
     }
 
@@ -67,25 +73,104 @@ public class ApprovalUIController extends CenterUIController {
 
     public void setApprovalBlService(ApprovalBlService service) {
         this.service = service;
-        //showBillList(service.getBillList(null));
+        typeSelector.setValue("所有单据");
     }
 
-    private void getBillList(String type){
-
-        if(type.equals("所有单据")){
+    private void setBillList(String type){
+        System.out.println("Function called");
+        ArrayList<BillVO> bills=new ArrayList<>();
+        try{
+            if(type.equals("所有单据")){
+                bills.addAll(getInventoryBillList());
+                bills.addAll(getPurchaseBillList());
+                bills.addAll(getSaleBillList());
+                bills.addAll(getFinanceBillList());
+            }
+            else if(type.equals("库存类单据")){
+                bills.addAll(getInventoryBillList());
+            }
+            else if(type.equals("进货类单据")){
+                bills.addAll(getPurchaseBillList());
+            }
+            else if(type.equals("销售类单据")){
+                bills.addAll(getSaleBillList());
+            }
+            else if(type.equals("财务类单据")){
+                bills.addAll(getFinanceBillList());
+            }
+            showBillList(bills);
+        }catch(DataException e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","数据库错误");
+        }catch(Exception e){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找单据失败","RMI连接错误");
         }
-        else if(type.equals("库存类单据")){
 
-        }
-        else if(type.equals("进货类单据")){
+    }
 
-        }
-        else if(type.equals("销售类单据")){
 
-        }
-        else if(type.equals("财务类单据")){
+    private ArrayList<BillVO> getInventoryBillList() throws Exception{
+        ArrayList<BillVO> inventoryBillList=new ArrayList<>();
+        BillQueryVO query=new BillQueryVO("草稿",null,null,"库存溢损单","User00000007",null);
 
-        }
+        query.type="库存溢损单";
+        ArrayList<BillVO> lossOverBillList=service.getBillList(query);
+        query.type="库存赠送单";
+        ArrayList<BillVO> giftBillList=service.getBillList(query);
+
+        inventoryBillList.addAll(lossOverBillList);
+        inventoryBillList.addAll(giftBillList);
+
+        return inventoryBillList;
+    }
+
+    private ArrayList<BillVO> getPurchaseBillList() throws Exception{
+        ArrayList<BillVO> purchaseBillList=new ArrayList<>();
+        BillQueryVO query=new BillQueryVO("待审批",null,null,"进货单",null,null);
+
+        query.type="进货单";
+        ArrayList<BillVO> purchaseTradeBillList=service.getBillList(query);
+        query.type="进货退货单";
+        ArrayList<BillVO> purchaseRefundBillList=service.getBillList(query);
+
+        purchaseBillList.addAll(purchaseTradeBillList);
+        purchaseBillList.addAll(purchaseRefundBillList);
+
+        return purchaseBillList;
+    }
+
+    private ArrayList<BillVO> getSaleBillList() throws Exception{
+        ArrayList<BillVO> saleBillList=new ArrayList<>();
+        BillQueryVO query=new BillQueryVO("待审批",null,null,"销售单",null,null);
+
+        query.type="销售单";
+        ArrayList<BillVO> saleTradeBillList=service.getBillList(query);
+        query.type="销售退货单";
+        ArrayList<BillVO> saleRefundBillList=service.getBillList(query);
+
+        saleBillList.addAll(saleTradeBillList);
+        saleBillList.addAll(saleRefundBillList);
+
+        return saleBillList;
+    }
+
+    private ArrayList<BillVO> getFinanceBillList() throws Exception{
+        ArrayList<BillVO> financeBillList=new ArrayList<>();
+        BillQueryVO query=new BillQueryVO("待审批",null,null,"收款单",null,null);
+
+        query.type="收款单";
+        ArrayList<BillVO> receiptBillList=service.getBillList(query);
+        query.type="付款单";
+        ArrayList<BillVO> paymentBillList=service.getBillList(query);
+        query.type="现金费用单";
+        ArrayList<BillVO> cashBillList=service.getBillList(query);
+
+        financeBillList.addAll(receiptBillList);
+        financeBillList.addAll(paymentBillList);
+        financeBillList.addAll(cashBillList);
+
+        return financeBillList;
     }
 
 
@@ -104,8 +189,17 @@ public class ApprovalUIController extends CenterUIController {
     @FXML
     private void  handlePass(){
         if(isBillSelected()){
-            for(BillVO bill:billTableView.getSelectionModel().getSelectedItems()){
-                //bill.getTool().pass(bill);
+            try{
+                for(BillVO bill:billTableView.getSelectionModel().getSelectedItems()){
+                    bill.getTool().pass(bill);
+                }
+                setBillList(typeSelector.getValue());
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","查找单据失败","数据库错误");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","查找单据失败","RMI连接错误");
             }
         }
     }
@@ -114,15 +208,13 @@ public class ApprovalUIController extends CenterUIController {
     private void  handleReject(){
         if(isBillSelected()){
             if(billTableView.getSelectionModel().getSelectedItems().size()>1){
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Invalid Selection");
-                alert.setHeaderText("请重新选择");
-                alert.setContentText("只能选择一张单据");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Invalid Selection","请重新选择","审批不通过只能选择单张单据");
             }
             else{
                 BillVO bill=billTableView.getSelectionModel().getSelectedItem();
                 ApprovalRejectUIController.init(service,bill, root.getOperator(),root.getStage());
+                setBillList(typeSelector.getValue());
             }
         }
     }
@@ -131,15 +223,13 @@ public class ApprovalUIController extends CenterUIController {
     private void handleCheckBill(){
         if(isBillSelected()){
             if(billTableView.getSelectionModel().getSelectedItems().size()>1){
-                Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Invalid Selection");
-                alert.setHeaderText("请重新选择");
-                alert.setContentText("只能选择一张单据");
-                alert.showAndWait();
+                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                        "Invalid Selection","请重新选择","只能选择单张单据查看");
             }
             else{
                 BillVO bill=billTableView.getSelectionModel().getSelectedItem();
                 bill.getInfoUIController().showInfo(bill,root.getStage());
+                setBillList(typeSelector.getValue());
             }
         }
     }
@@ -150,11 +240,8 @@ public class ApprovalUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择单据");
-            alert.setContentText("请选择要查看的单据");
-            alert.showAndWait();
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择单据","请选择要操作的单据");
             return false;
         }
     }
@@ -173,32 +260,7 @@ public class ApprovalUIController extends CenterUIController {
 
             ApprovalUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setApprovalBlService(null);
-
-
-            PurchaseTradeBillVO bill1=new PurchaseTradeBillVO();
-            bill1.setID("123");
-            bill1.setOperator(root.getOperator());
-
-            InventoryGiftBillVO bill2=new InventoryGiftBillVO();
-            bill2.setID("233");
-            bill2.setOperator(root.getOperator());
-
-            PurchaseTradeBillVO bill3=new PurchaseTradeBillVO();
-            bill3.setID("123");
-            bill3.setOperator(root.getOperator());
-
-            InventoryGiftBillVO bill4=new InventoryGiftBillVO();
-            bill4.setID("233");
-            bill4.setOperator(root.getOperator());
-
-            ArrayList<BillVO> list=new ArrayList<>();
-            list.add(bill1);
-            list.add(bill2);
-            list.add(bill3);
-            list.add(bill4);
-
-            controller.showBillList(list);
+            controller.setApprovalBlService(ApprovalBlFactory.getService());
 
             root.setReturnPaneController(new ManagerPanelUIController());
         }catch(Exception e){

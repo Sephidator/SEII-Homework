@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.approvalblservice.ApprovalBlService;
+import main.java.exception.DataException;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.CashItemVO;
 import main.java.vo.user.UserVO;
@@ -52,13 +53,35 @@ public class ApprovalRejectUIController {
 
     @FXML
     private void handleConfirm(){
-        //service.reject(bill,reason.getText(),manager);
-        dialogStage.close();
+        if(isInputValid()){
+            try{
+                service.reject(bill,reason.getText(),manager);
+                dialogStage.close();
+            }catch(DataException e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","查找单据失败","数据库错误");
+            }catch(Exception e){
+                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                        "Error","查找单据失败","RMI连接错误");
+            }
+        }
     }
 
     @FXML
     private void handleCancel(){
         dialogStage.close();
+    }
+
+    private boolean isInputValid(){
+        if(reason.getText().length()==0){
+            AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    "No Reason","未输入理由",
+                    "请输入审批单据不通过的理由");
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     // 加载文件和界面的方法******************************************

@@ -6,7 +6,7 @@ import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
 import main.java.businesslogic.salebl.SaleRefundBillBl;
 import main.java.businesslogic.salebl.SaleRefundBillTool;
-import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService;
 import main.java.vo.bill.BillQueryVO;
@@ -53,7 +53,7 @@ public class InventoryCheckBl implements InventoryCheckBlService {
         SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
         saleRefundBillVOS = saleRefundBillTool.getSaleRefundBillList(billQueryVO);
 
-        SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
+        SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
         saleTradeBillVOS = saleTradeBillTool.getSaleTradeBillList(billQueryVO);
 
         //寻找相应单据的ArrayList<GoodsItemVO>

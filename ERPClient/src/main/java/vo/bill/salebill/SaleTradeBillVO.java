@@ -4,7 +4,7 @@ import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.promotionbl.PromotionBl;
 import main.java.businesslogic.promotionbl.PromotionTool;
-import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
@@ -98,6 +98,10 @@ public class SaleTradeBillVO extends SaleBillVO {
         this.time=saleTradeBillPO.getTime();
         this.type=saleTradeBillPO.getType();
         this.comment=saleTradeBillPO.getComment();
+        this.totalBeforeDiscount=saleTradeBillPO.getTotalBeforeDiscount();
+        this.discount=saleTradeBillPO.getDiscount();
+        this.amountOfVoucher=saleTradeBillPO.getAmountOfVoucher();
+        this.totalAfterDiscount=saleTradeBillPO.getTotalAfterDiscount();
 
         PromotionTool promotionTool=new PromotionBl();
         this.promotion=promotionTool.find(saleTradeBillPO.getPromotionID());
@@ -158,7 +162,7 @@ public class SaleTradeBillVO extends SaleBillVO {
     }
 
     public SaleTradeBillTool getTool(){
-        SaleTradeBillTool saleTradeBillTool=new SaleTradBillBl();
+        SaleTradeBillTool saleTradeBillTool=new SaleTradeBillBl();
         return saleTradeBillTool;
     }
 

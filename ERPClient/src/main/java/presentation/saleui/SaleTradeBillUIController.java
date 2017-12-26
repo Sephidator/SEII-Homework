@@ -284,7 +284,6 @@ public class SaleTradeBillUIController extends InfoUIController {
         totalAmount-=useVoucherNum;
 
         totalAmount-=promotionDiscountNum;
-        totalAmount-=useVoucherNum;
 
         if(totalAmount<0){
             totalAmount=0;
@@ -401,9 +400,11 @@ public class SaleTradeBillUIController extends InfoUIController {
 
     @FXML
     private void handleConfirm(){
-        if(isInputValid()){
-            String text=confirm.getText();
-
+        String text=confirm.getText();
+        if(text.equals("确定")){
+            dialogStage.close();
+        }
+        else if(isInputValid()){
             try{
                 if(text.equals("确认添加")){
                     bill.setState("待审批");

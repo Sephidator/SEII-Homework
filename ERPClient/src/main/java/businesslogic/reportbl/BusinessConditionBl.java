@@ -4,15 +4,13 @@ import main.java.businesslogic.inventorybl.InventoryGiftBillBl;
 import main.java.businesslogic.inventorybl.InventoryGiftBillTool;
 import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
 import main.java.businesslogic.inventorybl.InventoryLossOverBillTool;
-import main.java.businesslogic.promotionbl.PromotionBl;
-import main.java.businesslogic.promotionbl.PromotionTool;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillBl;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillTool;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
 import main.java.businesslogic.salebl.SaleRefundBillBl;
 import main.java.businesslogic.salebl.SaleRefundBillTool;
-import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.BusinessConditionBlService;
 import main.java.vo.bill.BillQueryVO;
@@ -24,7 +22,6 @@ import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 import main.java.vo.bill.salebill.SaleRefundBillVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.goods.GiftItemVO;
-import main.java.vo.promotion.PromotionTotalVO;
 import main.java.vo.promotion.PromotionVO;
 import main.java.vo.report.BusinessConditionQueryVO;
 
@@ -78,7 +75,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         double saleTotalBeforeDiscount = 0;//折让后销售收入
         double saleDiscount = 0;//折让
 
-        SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
+        SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.getSaleTradeBillList(billQueryVO);
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
             saleTotalBeforeDiscount += saleTradeBillVO.getTotalBeforeDiscount();//销售毛收入总和

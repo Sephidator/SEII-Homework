@@ -15,7 +15,7 @@ import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillTool;
 import main.java.businesslogic.salebl.SaleRefundBillBl;
 import main.java.businesslogic.salebl.SaleRefundBillTool;
-import main.java.businesslogic.salebl.SaleTradBillBl;
+import main.java.businesslogic.salebl.SaleTradeBillBl;
 import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.approvalblservice.ApprovalBlService;
 import main.java.vo.bill.BillQueryVO;
@@ -40,33 +40,45 @@ public class ApprovalBl implements ApprovalBlService {
     public ArrayList<BillVO> getBillList(BillQueryVO query)  throws Exception{
         ArrayList<BillVO> billVOArrayList = new ArrayList<BillVO>();
 
-        /*调用所有单据的getArrayList*/
-        //财务类
-        PaymentBillTool paymentBillTool = new PaymentBillBl();
-        billVOArrayList.addAll(paymentBillTool.getPaymentBillList(query));
-        ReceiptBillTool receiptBillTool = new ReceiptBillBl();
-        billVOArrayList.addAll(receiptBillTool.getReceiptBillList(query));
-        CashBillTool cashBillTool = new CashBillBl();
-        billVOArrayList.addAll(cashBillTool.getCashBillList(query));
+        /*根据单据类型调用getArrayList*/
+        if(query.type.equals("库存赠送单")){
+            InventoryGiftBillTool inventoryGiftBillTool = new InventoryGiftBillBl();
+            billVOArrayList.addAll(inventoryGiftBillTool.getInventoryGiftBillList(query));
+        }
+        else if(query.type.equals("库存溢损单")){
+            InventoryLossOverBillTool inventoryLossOverBillTool = new InventoryLossOverBillBl();
+            billVOArrayList.addAll(inventoryLossOverBillTool.getInventoryLossOverBillList(query));
+        }
+        else if(query.type.equals("进货单")){
+            PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
+            billVOArrayList.addAll(purchaseTradeBillTool.getPurchaseTradeBillList(query));
+        }
+        else if(query.type.equals("进货退货单")){
+            PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
+            billVOArrayList.addAll(purchaseRefundBillTool.getPurchaseRefundBillList(query));
+        }
+        else if(query.type.equals("销售单")){
+            SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
+            billVOArrayList.addAll(saleRefundBillTool.getSaleRefundBillList(query));
+        }
+        else if(query.type.equals("销售退货单")){
+            SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
+            billVOArrayList.addAll(saleTradeBillTool.getSaleTradeBillList(query));
+        }
+        else if(query.type.equals("付款单")){
+            PaymentBillTool paymentBillTool = new PaymentBillBl();
+            billVOArrayList.addAll(paymentBillTool.getPaymentBillList(query));
+        }
+        else if(query.type.equals("收款单")){
+            ReceiptBillTool receiptBillTool = new ReceiptBillBl();
+            billVOArrayList.addAll(receiptBillTool.getReceiptBillList(query));
+        }
+        else if(query.type.equals("现金费用单")){
+            CashBillTool cashBillTool = new CashBillBl();
+            billVOArrayList.addAll(cashBillTool.getCashBillList(query));
+        }
 
-        //销售类
-        SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
-        billVOArrayList.addAll(saleRefundBillTool.getSaleRefundBillList(query));
-        SaleTradeBillTool saleTradeBillTool = new SaleTradBillBl();
-        billVOArrayList.addAll(saleTradeBillTool.getSaleTradeBillList(query));
-
-        //进货类
-        PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
-        billVOArrayList.addAll(purchaseRefundBillTool.getPurchaseRefundBillList(query));
-        PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
-        billVOArrayList.addAll(purchaseTradeBillTool.getPurchaseTradeBillList(query));
-
-        //仓库类
-        InventoryGiftBillTool inventoryGiftBillTool = new InventoryGiftBillBl();
-        billVOArrayList.addAll(inventoryGiftBillTool.getInventoryGiftBillList(query));
-        InventoryLossOverBillTool inventoryLossOverBillTool = new InventoryLossOverBillBl();
-        billVOArrayList.addAll(inventoryLossOverBillTool.getInventoryLossOverBillList(query));
-
+        System.out.println(billVOArrayList.size());
         return billVOArrayList;
     }
 
