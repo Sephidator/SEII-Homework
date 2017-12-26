@@ -62,7 +62,7 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService, 
 
         /*调用LogTool*/
         if (inventoryLossOverBillVO.getState().equals("待审批")) {
-            LogVO logVO = new LogVO(inventoryLossOverBillVO.getOperator(), "提交了一份新的库存溢损单", inventoryLossOverBillPO.getTime());
+            LogVO logVO = new LogVO(inventoryLossOverBillVO.getOperator(), "提交库存溢损单，ID："+id, inventoryLossOverBillPO.getTime());
             LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }

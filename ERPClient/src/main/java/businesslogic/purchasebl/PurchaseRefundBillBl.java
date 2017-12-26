@@ -85,7 +85,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
 
         /*调用LogTool*/
         if (purchaseRefundBillVO.getState().equals("待审批")) {
-            LogVO logVO = new LogVO(purchaseRefundBillVO.getOperator(), "提交了一份新的进货退货单", purchaseRefundBillVO.getTime());
+            LogVO logVO = new LogVO(purchaseRefundBillVO.getOperator(), "提交进货退货单，ID："+id, purchaseRefundBillVO.getTime());
             LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }
