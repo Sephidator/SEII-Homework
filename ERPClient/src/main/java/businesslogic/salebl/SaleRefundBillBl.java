@@ -84,7 +84,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
 
         /*调用LogTool*/
         if (saleRefundBillVO.getState().equals("待审批")) {
-            LogVO logVO = new LogVO(saleRefundBillVO.getOperator(), "提交了一份新的销售退货单", saleRefundBillVO.getTime());
+            LogVO logVO = new LogVO(saleRefundBillVO.getOperator(), "提交销售退货单，ID："+id, saleRefundBillVO.getTime());
             LogTool logTool = new LogBl();
             logTool.addLog(logVO);
         }
