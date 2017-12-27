@@ -14,22 +14,17 @@ import main.java.MainApp;
 import main.java.businesslogicservice.promotionblservice.PromotionBlService;
 import main.java.exception.DataException;
 import main.java.exception.ExistException;
-import main.java.exception.FullException;
 import main.java.exception.NotExistException;
 import main.java.presentation.uiutility.AddGoodsUIController;
-import main.java.presentation.uiutility.AlertInfo;
-import main.java.presentation.uiutility.CheckInput;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsVO;
 import main.java.vo.promotion.PromotionTotalVO;
-import main.java.vo.promotion.PromotionVO;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class PromotionTotalUIController extends InfoUIController {
@@ -202,7 +197,7 @@ public class PromotionTotalUIController extends InfoUIController {
                     String promotionID=service.addPromotion(promotion);
                     String promotionName=promotion.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","添加促销策略成功",
                             "促销策略ID："+promotionID+System.lineSeparator()+"名字："+promotionName);
                 }
@@ -211,23 +206,23 @@ public class PromotionTotalUIController extends InfoUIController {
                     String promotionID=promotion.getID();
                     String promotionName=promotion.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","添加促销策略成功",
                             "促销策略ID："+promotionID+System.lineSeparator()+"名字："+promotionName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"促销策略失败", "数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"促销策略失败","促销策略不存在");
             }catch(ExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"促销策略失败","账号和已有促销策略重复");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"促销策略失败","RMI连接错误");
             }
         }
@@ -244,7 +239,7 @@ public class PromotionTotalUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择商品","请在商品列表中选择商品");
             return false;
         }
@@ -309,7 +304,7 @@ public class PromotionTotalUIController extends InfoUIController {
 
             return true;
         } else {
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "促销策略信息错误", "请检查促销策略信息的输入", errorMessage);
             return false;
         }

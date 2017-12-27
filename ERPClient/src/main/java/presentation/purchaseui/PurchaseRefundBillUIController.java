@@ -15,7 +15,7 @@ import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlServ
 import main.java.exception.DataException;
 import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddGoodsUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
@@ -154,10 +154,10 @@ public class PurchaseRefundBillUIController extends InfoUIController {
                 bill.setClient(supplierList.get(newValue.intValue()));
             });
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","RMI连接错误");
         }
     }
@@ -211,7 +211,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
                 goodsItemTableView.getSelectionModel().select(selectedIndex);
             }
             else{
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","增加商品数量失败","超过库存总数");
             }
         }
@@ -247,25 +247,25 @@ public class PurchaseRefundBillUIController extends InfoUIController {
                 if(text.equals("确认添加")){
                     bill.setState("待审批");
                     String billID=service.submit(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","提交进货退货单成功", "单据ID："+billID);
                 }
                 else if(text.equals("提交编辑")){
                     bill.setState("待审批");
                     service.editPurchaseRefundBill(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑进货退货单成功", "单据ID："+bill.getID());
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"进货退货单失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"进货退货单失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"进货退货单失败", "RMI连接错误");
             }
         }
@@ -288,17 +288,17 @@ public class PurchaseRefundBillUIController extends InfoUIController {
                     service.editPurchaseRefundBill(bill);
                 }
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","已保存进货退货单草稿", "单据ID："+billID);
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存进货退货单草稿失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error", "保存进货退货单草稿失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存进货退货单草稿失败", "RMI连接错误");
             }
             dialogStage.close();
@@ -314,7 +314,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择商品", "请在退货商品列表中选择商品");
             return false;
         }
@@ -338,7 +338,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
             bill.setComment(comment.getText());
             return true;
         } else {
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "单据信息错误", "请检查单据信息的输入", errorMessage);
             return false;
         }

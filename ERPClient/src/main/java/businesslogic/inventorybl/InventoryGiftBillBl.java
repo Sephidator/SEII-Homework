@@ -168,18 +168,15 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
      */
     @Override
     public void pass(BillVO billVO) throws Exception {
-
-        InventoryGiftBillVO inventoryGiftBillVO = (InventoryGiftBillVO) billVO;
-
-        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
-        InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
-
-        /*调用InventoryGiftBillDataFactory*/
+        /*修改状态*/
+        InventoryGiftBillVO inventoryGiftBillVO=(InventoryGiftBillVO)billVO;
+        InventoryGiftBillPO inventoryGiftBillPO = ((InventoryGiftBillVO)billVO).getInventoryGiftBillPO();
+        inventoryGiftBillPO.setState("审批通过");
         InventoryGiftBillDataService inventoryGiftBillDataService=InventoryGiftBillDataFactory.getService();
         inventoryGiftBillDataService.update(inventoryGiftBillPO);
 
         /*修改商品信息调用goodsTool*/
-        String messageAlarm="";
+        String messageAlarm="库存报警："+System.lineSeparator();
         GoodsTool goodsTool = new GoodsBl();
         for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
             GoodsVO goodsVO = giftItemVO.goods;
@@ -187,29 +184,31 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
             goodsTool.editGoods(goodsVO);
             /*库存警报*/
             if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
-                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
+                messageAlarm+="---"+goodsVO.getName()+"的数量: "+goodsVO.getNumber()+"件，低于警戒数量："+goodsVO.getAlarmNum()+"件"+System.lineSeparator();
             }
         }
 
-        /*发送message*/
+        /*发送message的准备*/
         MessageTool messageTool = new MessageBl();
-        String message = "";
-        String messageOne = "赠送商品 ";
-        String messageTwo = " 数量 ";
-        for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
-            message += messageOne + giftItemVO.goods.getID() + messageTwo + giftItemVO.number + ",";
+        ClientVO client=inventoryGiftBillVO.getClient();
+
+        // 发放赠品的message
+        ArrayList<GiftItemVO> giftList=inventoryGiftBillVO.getGiftList();
+        if(giftList.size()>0){
+            String message = "发放赠品："+System.lineSeparator();
+            for (GiftItemVO giftItemVO : inventoryGiftBillVO.getGiftList()) {
+                message += "---" + giftItemVO.goods.getName() + "：" + giftItemVO.number + "件"+System.lineSeparator();
+            }
+            message+= "赠送对象："+System.lineSeparator();
+            message+= "---"+client.getName()+"（"+client.getID()+"）"+System.lineSeparator();
+
+            MessageVO messageVO = new MessageVO(inventoryGiftBillVO.getOperator(), inventoryGiftBillVO.getOperator(), message);
+            messageTool.addMessage(messageVO);
         }
-        MessageVO messageVO = new MessageVO(inventoryGiftBillVO.getOperator(), inventoryGiftBillVO.getOperator(), message + "系统消息");
-        messageTool.addMessage(messageVO);
 
-        /*给库存人员发送库存报警的message*/
-
-        if(!messageAlarm.equals("")){
-            UserTool userTool = new UserBl();
-            UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
-            ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
-            int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
-            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),inventoryGiftBillVO.getOperator(),messageAlarm);
+        // 库存报警的message
+        if(!messageAlarm.equals("库存报警："+System.lineSeparator())){
+            MessageVO messageVOAlarm=new MessageVO(inventoryGiftBillVO.getOperator(),inventoryGiftBillVO.getOperator(),messageAlarm);
             messageTool.addMessage(messageVOAlarm);
         }
     }
@@ -222,14 +221,11 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
      */
     @Override
     public void reject(BillVO billVO) throws Exception {
+        /*修改状态*/
         InventoryGiftBillVO inventoryGiftBillVO = (InventoryGiftBillVO) billVO;
-
-        /*将InventoryGiftBillVO转成InventoryGiftBillPO*/
         InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
-
-        /*调用InventoryGiftBillDataFactory*/
+        inventoryGiftBillPO.setState("审批通过");
         InventoryGiftBillDataService inventoryGiftBillDataService=InventoryGiftBillDataFactory.getService();
         inventoryGiftBillDataService.update(inventoryGiftBillPO);
-
     }
 }

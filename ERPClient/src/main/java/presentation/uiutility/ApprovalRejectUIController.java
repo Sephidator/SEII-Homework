@@ -5,17 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
 import main.java.businesslogicservice.approvalblservice.ApprovalBlService;
 import main.java.exception.DataException;
 import main.java.vo.bill.BillVO;
-import main.java.vo.bill.financebill.CashItemVO;
 import main.java.vo.user.UserVO;
-
-import java.util.ArrayList;
 
 public class ApprovalRejectUIController {
     private Stage dialogStage;
@@ -58,10 +54,10 @@ public class ApprovalRejectUIController {
                 service.reject(bill,reason.getText(),manager);
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","查找单据失败","数据库错误");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","查找单据失败","RMI连接错误");
             }
         }
@@ -74,7 +70,7 @@ public class ApprovalRejectUIController {
 
     private boolean isInputValid(){
         if(reason.getText().length()==0){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Reason","未输入理由",
                     "请输入审批单据不通过的理由");
             return false;

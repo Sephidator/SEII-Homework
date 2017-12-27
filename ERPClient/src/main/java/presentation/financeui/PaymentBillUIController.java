@@ -10,25 +10,19 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicfactory.financeblfactory.PaymentBillBlFactory;
-import main.java.businesslogicfactory.userblfactory.UserBlFactory;
 import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
-import main.java.exception.NotExistException;
 import main.java.presentation.uiutility.AddAccountUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CheckInput;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.PaymentBillVO;
 import main.java.vo.bill.financebill.TransItemVO;
-import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
-import main.java.vo.user.UserQueryVO;
-import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
@@ -146,10 +140,10 @@ public class PaymentBillUIController extends InfoUIController {
                 bill.setClient(clientList.get(newValue.intValue()));
             });
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","RMI连接错误");
         }
     }
@@ -202,7 +196,7 @@ public class PaymentBillUIController extends InfoUIController {
                 int selectedIndex=transItemTableView.getSelectionModel().getSelectedIndex();
 
                 if(number>bill.getTransList().get(selectedIndex).account.getRemaining()){
-                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    UITool.showAlert(Alert.AlertType.ERROR,
                             "Invalid input", "输入不正确", "输入金额不得大于银行余额");
                     return;
                 }
@@ -227,25 +221,25 @@ public class PaymentBillUIController extends InfoUIController {
                 if(text.equals("确认添加")){
                     bill.setState("待审批");
                     String billID=service.submit(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","提交付款单成功", "单据ID："+billID);
                 }
                 else if(text.equals("提交编辑")){
                     bill.setState("待审批");
                     service.editPaymentBill(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑付款单成功", "单据ID："+bill.getID());
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"付款单失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"付款单失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"付款单失败", "RMI连接错误");
             }
         }
@@ -268,17 +262,17 @@ public class PaymentBillUIController extends InfoUIController {
                     service.editPaymentBill(bill);
                 }
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","已保存付款单草稿", "单据ID："+billID);
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存付款单草稿失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error", "保存付款单草稿失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存付款单草稿失败", "RMI连接错误");
             }
             dialogStage.close();
@@ -294,7 +288,7 @@ public class PaymentBillUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection", "未选择账户", "请在账户列表中选择账户");
             return false;
         }
@@ -318,7 +312,7 @@ public class PaymentBillUIController extends InfoUIController {
             bill.setComment(comment.getText());
             return true;
         } else {
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "单据信息错误", "请检查单据信息的输入", errorMessage);
             return false;
         }

@@ -14,9 +14,8 @@ import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -78,10 +77,10 @@ public class InventoryVerificationUIController extends CenterUIController {
             ArrayList<GoodsVO> goodsList = goodsBlService.getGoodsList(null);
             showGoodsList(goodsList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品失败","RMI连接错误");
         }
     }

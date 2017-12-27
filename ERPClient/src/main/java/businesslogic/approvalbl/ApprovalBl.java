@@ -91,20 +91,20 @@ public class ApprovalBl implements ApprovalBlService {
     @Override
     public void pass(BillVO billvo, UserVO sender)  throws Exception{
 
-        /*通过单据*/
-        billvo.getTool().pass(billvo);
-
         /*添加message*/
         MessageTool messageTool = new MessageBl();
-        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,"你的编号为"+billvo.getID()+"的单据被"+sender.getID()+"审批通过（系统消息）");
+        String message="单据审批通过："+System.lineSeparator();
+        message+="编号："+billvo.getID()+System.lineSeparator();
+        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,message);
         messageTool.addMessage(messageVO);
 
         /*记录操作日志*/
         LogTool logTool = new LogBl();
-        LogVO logVO = new LogVO(sender,"通过编号为"+billvo.getID()+"的单据",new Date());
+        LogVO logVO = new LogVO(sender,"单据审批通过："+billvo.getID(),new Date());
         logTool.addLog(logVO);
 
-
+        /*通过单据*/
+        billvo.getTool().pass(billvo);
     }
 
     /**
@@ -121,7 +121,9 @@ public class ApprovalBl implements ApprovalBlService {
 
         /*添加message*/
         MessageTool messageTool = new MessageBl();
-        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,"你的编号为"+billvo.getID()+"的单据被"+sender.getType()+"("+sender.getID()+"）审批拒绝，附加理由："+reason);
+        String message="单据审批不通过："+billvo.getID()+System.lineSeparator();
+        message+="理由："+System.lineSeparator()+reason+System.lineSeparator();
+        MessageVO messageVO = new MessageVO(billvo.getOperator(),sender,message);
         messageTool.addMessage(messageVO);
     }
 

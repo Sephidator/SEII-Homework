@@ -1,34 +1,22 @@
 package main.java.presentation.approvalui;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 import main.java.MainApp;
 import main.java.businesslogicfactory.approvalblfactory.ApprovalBlFactory;
 import main.java.businesslogicservice.approvalblservice.ApprovalBlService;
-import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.ApprovalRejectUIController;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
-import main.java.vo.bill.inventorybill.InventoryBillVO;
-import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
-import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
-import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 
 import java.util.ArrayList;
 
@@ -99,10 +87,10 @@ public class ApprovalUIController extends CenterUIController {
             }
             showBillList(bills);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","RMI连接错误");
         }
 
@@ -190,14 +178,14 @@ public class ApprovalUIController extends CenterUIController {
         if(isBillSelected()){
             try{
                 for(BillVO bill:billTableView.getSelectionModel().getSelectedItems()){
-                    bill.getTool().pass(bill);
+                    service.pass(bill,root.getOperator());
                 }
                 setBillList(typeSelector.getValue());
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","查找单据失败","数据库错误");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","查找单据失败","RMI连接错误");
             }
         }
@@ -207,7 +195,7 @@ public class ApprovalUIController extends CenterUIController {
     private void  handleReject(){
         if(isBillSelected()){
             if(billTableView.getSelectionModel().getSelectedItems().size()>1){
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Invalid Selection","请重新选择","审批不通过只能选择单张单据");
             }
             else{
@@ -222,7 +210,7 @@ public class ApprovalUIController extends CenterUIController {
     private void handleCheckBill(){
         if(isBillSelected()){
             if(billTableView.getSelectionModel().getSelectedItems().size()>1){
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Invalid Selection","请重新选择","只能选择单张单据查看");
             }
             else{
@@ -239,7 +227,7 @@ public class ApprovalUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择单据","请选择要操作的单据");
             return false;
         }

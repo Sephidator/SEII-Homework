@@ -13,18 +13,11 @@ import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.InventoryCheckItemVO;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class InventoryCheckUIController extends CenterUIController {
     private InventoryCheckBlService service;
@@ -73,10 +66,10 @@ public class InventoryCheckUIController extends CenterUIController {
             ArrayList<InventoryCheckItemVO> checkList=service.getInventoryCheck(null,null);
             showGoodsList(checkList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","RMI连接错误");
         }
 

@@ -16,7 +16,7 @@ import main.java.exception.DataException;
 import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.GoodsQueryVO;
 import main.java.vo.goods.GoodsVO;
@@ -73,10 +73,10 @@ public class GoodsUIController extends CenterUIController {
             ArrayList<GoodsVO> goodsList = goodsBlService.getGoodsList(query);
             showGoodsList(goodsList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品失败","RMI连接错误");
         }
     }
@@ -112,17 +112,17 @@ public class GoodsUIController extends CenterUIController {
                 String name = goodsTableView.getSelectionModel().getSelectedItem().getName();
                 goodsBlService.deleteGoods(ID);
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","删除商品成功",
                         "商品ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除商品失败","数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除商品失败","商品不存在");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除商品失败","RMI连接错误");
             }
             refresh(null);
@@ -150,7 +150,7 @@ public class GoodsUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选中商品","请在表中选择商品");
             return false;
         }

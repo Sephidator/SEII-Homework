@@ -9,37 +9,21 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
-import main.java.businesslogic.financebl.ReceiptBillBl;
 import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
 import main.java.businesslogicfactory.financeblfactory.PaymentBillBlFactory;
 import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
 import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
-import main.java.businesslogicservice.purchaseblservice.PurchaseRefundBillBlService;
-import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
-import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import main.java.presentation.purchaseui.PurchaseRefundBillUIController;
-import main.java.presentation.purchaseui.PurchaseTradeBillUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
-import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillQueryVO;
-import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.*;
-import main.java.vo.bill.purchasebill.PurchaseBillVO;
-import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
-import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
-import main.java.vo.client.ClientVO;
-import main.java.vo.goods.GoodsItemVO;
-import main.java.vo.goods.GoodsVO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FinanceBillUIController extends CenterUIController {
     private ReceiptBillBlService receiptBillBlService;
@@ -111,10 +95,10 @@ public class FinanceBillUIController extends CenterUIController {
             showFinanceBillList(financeBillList);
 
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","RMI连接错误");
         }
     }
@@ -177,7 +161,7 @@ public class FinanceBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }

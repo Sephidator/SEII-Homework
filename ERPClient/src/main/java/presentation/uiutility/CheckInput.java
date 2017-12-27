@@ -12,7 +12,7 @@ public class CheckInput {
 
             return true;
         }catch (NumberFormatException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Invalid input","输入不正确","请输入正数");
             return false;
         }

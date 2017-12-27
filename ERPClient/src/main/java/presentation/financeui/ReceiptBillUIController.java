@@ -10,9 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
-import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
@@ -20,11 +18,8 @@ import main.java.presentation.uiutility.*;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.financebill.ReceiptBillVO;
-import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.bill.financebill.TransItemVO;
 import main.java.vo.client.ClientVO;
-import main.java.vo.goods.GiftItemVO;
-import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
 
@@ -142,10 +137,10 @@ public class ReceiptBillUIController extends InfoUIController {
                 bill.setClient(clientList.get(newValue.intValue()));
             });
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","RMI连接错误");
         }
     }
@@ -217,25 +212,25 @@ public class ReceiptBillUIController extends InfoUIController {
                 if(text.equals("确认添加")){
                     bill.setState("待审批");
                     String billID=service.submit(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","提交收款单成功", "单据ID："+billID);
                 }
                 else if(text.equals("提交编辑")){
                     bill.setState("待审批");
                     service.editReceiptBill(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑收款单成功", "单据ID："+bill.getID());
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"收款单失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"收款单失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"收款单失败", "RMI连接错误");
             }
         }
@@ -258,17 +253,17 @@ public class ReceiptBillUIController extends InfoUIController {
                     service.editReceiptBill(bill);
                 }
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","已保存收款单草稿", "单据ID："+billID);
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存收款单草稿失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error", "保存收款单草稿失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存收款单草稿失败", "RMI连接错误");
             }
             dialogStage.close();
@@ -284,7 +279,7 @@ public class ReceiptBillUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection", "未选择账户", "请在账户列表中选择账户");
             return false;
         }
@@ -308,7 +303,7 @@ public class ReceiptBillUIController extends InfoUIController {
             bill.setComment(comment.getText());
             return true;
         } else {
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "单据信息错误", "请检查单据信息的输入", errorMessage);
             return false;
         }

@@ -13,7 +13,7 @@ import main.java.businesslogicservice.accountblservice.AccountBlService;
 import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.account.AccountVO;
 
@@ -93,7 +93,7 @@ public class AccountInfoUIController extends InfoUIController{
                     String accountID=accountBlService.addAccount(account);
                     String accountName=account.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","添加账户成功",
                             "账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
                 }
@@ -102,23 +102,23 @@ public class AccountInfoUIController extends InfoUIController{
                     String accountID=account.getID();
                     String accountName=account.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑账户成功",
                             "账户ID："+accountID+System.lineSeparator()+"名字："+accountName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"账户失败","数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"账户失败","账户不存在");
             }catch(ExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"账户失败","账号和已有账户重复");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"账户失败","RMI连接错误");
             }
         }
@@ -164,7 +164,7 @@ public class AccountInfoUIController extends InfoUIController{
             return true;
         } else {
             // Show the error message.
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "账户信息错误","请检查账户信息的输入",errorMessage);
             return false;
         }

@@ -15,8 +15,7 @@ import main.java.exception.DataException;
 import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
-import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.promotion.*;
 
@@ -67,10 +66,10 @@ public class PromotionUIController extends CenterUIController {
             ArrayList<PromotionVO> promotionList = promotionBlService.getPromotionList(query);
             showPromotionList(promotionList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找促销策略失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找促销策略失败","RMI连接错误");
         }
     }
@@ -112,17 +111,17 @@ public class PromotionUIController extends CenterUIController {
                 String name = promotionTableView.getSelectionModel().getSelectedItem().getName();
                 promotionBlService.deletePromotion(ID);
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","删除促销策略成功",
                         "促销策略ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除促销策略失败","数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除促销策略失败","促销策略不存在");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除促销策略失败","RMI连接错误");
             }
             refresh(null);

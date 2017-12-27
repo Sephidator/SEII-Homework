@@ -16,19 +16,14 @@ import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.salebill.SaleBillVO;
 import main.java.vo.bill.salebill.SaleRefundBillVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
-import main.java.vo.client.ClientVO;
-import main.java.vo.goods.GoodsItemVO;
-import main.java.vo.goods.GoodsVO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SaleBillUIController extends CenterUIController {
     private SaleTradeBillBlService saleTradeBillBlService;
@@ -89,11 +84,11 @@ public class SaleBillUIController extends CenterUIController {
             showSaleBillList(saleBillList);
 
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","数据库错误");
         }catch(Exception e){
             e.printStackTrace();
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","RMI连接错误");
         }
     }
@@ -145,7 +140,7 @@ public class SaleBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }

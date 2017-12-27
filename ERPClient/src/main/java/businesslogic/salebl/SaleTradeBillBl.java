@@ -203,69 +203,89 @@ public class SaleTradeBillBl implements SaleTradeBillBlService, SaleTradeBillToo
      */
     @Override
     public void pass(BillVO billVO) throws Exception {
+        /*修改状态*/
         SaleTradeBillVO saleTradeBillVO = (SaleTradeBillVO) billVO;
-
-        /*将SaleTradeBillVO转成SaleTradeBillPO*/
         SaleTradeBillPO saleTradeBillPO = saleTradeBillVO.getsaleTradeBillPO();
-
-        /*调用SaleTradeBillDataFactory*/
+        saleTradeBillPO.setState("审批通过");
         SaleTradeBillDataService saleTradeBillDataService = SaleTradeBillDataFactory.getService();
         saleTradeBillDataService.update(saleTradeBillPO);
 
         /*修改商品信息调用goodsTool*/
-        String messageAlarm="";
+        String messageAlarm="库存报警："+System.lineSeparator();
         GoodsTool goodsTool = new GoodsBl();
         for (GoodsItemVO goodsItemVO : saleTradeBillVO.getSaleList()) {
             GoodsVO goodsVO = goodsItemVO.goods;
-            goodsVO.setNumber(goodsVO.getNumber() + goodsItemVO.number);
+            goodsVO.setNumber(goodsVO.getNumber() - goodsItemVO.number);
             goodsTool.editGoods(goodsVO);
             /*库存警报*/
             if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
-                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
+                messageAlarm+="---"+goodsVO.getName()+"的数量: "+goodsVO.getNumber()+"件，低于警戒数量："+goodsVO.getAlarmNum()+"件"+System.lineSeparator();
             }
         }
+
 
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleTradeBillVO.getClient();
-        clientVO.setPayable(clientVO.getPayable() + saleTradeBillVO.getTotalAfterDiscount());
+        clientVO.setPayable(clientVO.getReceivable() + saleTradeBillVO.getTotalAfterDiscount());
         clientTool.editClient(clientVO);
 
-        /*发送message*/
+
+        /*发送message的准备*/
         MessageTool messageTool = new MessageBl();
-        /*给库存管理人员发送goods的message*/
-        String messageGoodsToInventory = "";
-        for (GoodsItemVO goodsItemVO : saleTradeBillVO.getSaleList()) {
-            messageGoodsToInventory += "商品： " + goodsItemVO.goods.getID() + " 销售 " + goodsItemVO.number + "，";
-        }
         UserTool userTool = new UserBl();
+
+
+        /*给库存管理人员发送message*/
         UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
         ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
-        int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
-        MessageVO messageVOGoodsToInventory = new MessageVO(userVOS.get(ran), saleTradeBillVO.getOperator(), messageGoodsToInventory + "（系统消息）");
+        int ran = (int) (Math.random() * userVOS.size());
+
+        // 给销售商发货的message
+        String messageGoodsToInventory = "给销售商发货："+System.lineSeparator();
+        for (GoodsItemVO goodsItemVO : saleTradeBillVO.getSaleList()) {
+            messageGoodsToInventory += "---" + goodsItemVO.goods.getName() + "：" + goodsItemVO.number + "件"+System.lineSeparator();
+        }
+        messageGoodsToInventory+= "销售商信息："+System.lineSeparator();
+        messageGoodsToInventory+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
+
+        MessageVO messageVOGoodsToInventory = new MessageVO(userVOS.get(ran), saleTradeBillVO.getOperator(), messageGoodsToInventory);
         messageTool.addMessage(messageVOGoodsToInventory);
 
-        /*给库存人员发送gift的message*/
-        String messageGiftToInventory = "";
-        for (GiftItemVO giftItemVO : saleTradeBillVO.getPromotion().countGiftList(saleTradeBillVO.getSaleList(), saleTradeBillVO.getClient(), saleTradeBillVO.getTotalBeforeDiscount())) {
-            messageGiftToInventory += "商品： " + giftItemVO.goods.getID() + "赠送： " + giftItemVO.number + "，";
-        }
-        MessageVO messageVOGiftToInventory = new MessageVO(userVOS.get(ran), saleTradeBillVO.getOperator(), messageGiftToInventory);
-        messageTool.addMessage(messageVOGiftToInventory);
-
-        /*给库存人员发送库存报警的message*/
-        if(!messageAlarm.equals("")){
+        // 库存报警的message
+        if(!messageAlarm.equals("库存报警："+System.lineSeparator())){
             MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),saleTradeBillVO.getOperator(),messageAlarm);
             messageTool.addMessage(messageVOAlarm);
         }
 
-        /*给财务人员发送message*/
-        String messageToFinance = "客户应收应付调整： 应收：" + clientVO.getReceivable() + " 应付：" + clientVO.getPayable();
-        UserQueryVO userQueryVO1 = new UserQueryVO(null, "财务人员");
-        ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO);
-        int ran1 = (int) (1 + Math.random() * (userVOS1.size() - 0 + 1));
-        MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), saleTradeBillVO.getOperator(), messageToFinance + "（系统消息）");
+        // 制定库存赠送单的message
+        ArrayList<GiftItemVO> giftList=saleTradeBillVO.getPromotion().countGiftList(saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount());
+        if(giftList.size()>0){
+            String messageGiftToInventory = "制定库存赠送单："+System.lineSeparator();
+            for (GiftItemVO giftItemVO : giftList) {
+                messageGiftToInventory += "---" + giftItemVO.goods.getName() + "：" + giftItemVO.number + "件"+System.lineSeparator();
+            }
+            messageGiftToInventory += "赠送对象："+System.lineSeparator();
+            messageGiftToInventory += "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
 
+            MessageVO messageVOGiftToInventory = new MessageVO(userVOS.get(ran), saleTradeBillVO.getOperator(), messageGiftToInventory);
+            messageTool.addMessage(messageVOGiftToInventory);
+        }
+
+
+        /*给财务人员发送message*/
+        UserQueryVO userQueryVO1 = new UserQueryVO(null, "财务人员");
+        ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO1);
+        int ran1 = (int) (Math.random() * userVOS1.size());
+
+        // 制定收款单的message
+        String messageToFinance="制定收款单："+System.lineSeparator();
+        messageToFinance+= "---总额："+saleTradeBillVO.getTotalAfterDiscount()+"元"+System.lineSeparator();
+        messageToFinance+= "收款对象："+System.lineSeparator();
+        messageToFinance+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
+
+        MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), saleTradeBillVO.getOperator(), messageToFinance);
+        messageTool.addMessage(messageVOToFinance);
     }
 
     /**
@@ -276,14 +296,11 @@ public class SaleTradeBillBl implements SaleTradeBillBlService, SaleTradeBillToo
      */
     @Override
     public void reject(BillVO billVO) throws Exception {
+        /*修改状态*/
         SaleTradeBillVO saleTradeBillVO = (SaleTradeBillVO) billVO;
-
-        /*将SaleTradeBillVO转成SaleTradeBillPO*/
         SaleTradeBillPO saleTradeBillPO = saleTradeBillVO.getsaleTradeBillPO();
-
-        /*调用SaleTradeBillDataFactory*/
+        saleTradeBillPO.setState("审批不通过");
         SaleTradeBillDataService saleTradeBillDataService = SaleTradeBillDataFactory.getService();
         saleTradeBillDataService.update(saleTradeBillPO);
-
     }
 }

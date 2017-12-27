@@ -35,32 +35,31 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      */
     @Override
     public void pass(BillVO bill) throws Exception{
-        //转换VO到PO
+        /*修改状态*/
         CashBillPO cashBillPO = ((CashBillVO) bill).getCashBillPO();
-
-        //修改状态
         cashBillPO.setState("审批通过");
-        //System.out.print(cashBillPO.getID()+cashBillPO.getState());
-
-        //调用dataService.update
         CashBillDataService cashBillDataService = CashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
 
-        //修改账户余额，银行账户减去总额
+        /*修改账户余额，银行账户减去总额*/
         CashBillVO cashBillVO = (CashBillVO)bill;
         AccountTool accountTool = new AccountBl();
         AccountVO accountVO = accountTool.find(cashBillVO.getAccount().getID());//找到需要修改的银行账户
         accountVO.setRemaining(accountVO.getRemaining() - cashBillVO.getTotal());
         accountTool.editAccount(accountVO);
 
-        //addMessage
+        /*添加Message*/
         MessageTool messageTool = new MessageBl();
-        String itemListInfo = "";
-        ArrayList<CashItemVO> cashItemVOS = cashBillVO.getItemList();
-        itemListInfo += "条目清单："+System.lineSeparator();
-        for(CashItemVO cashItemVO : cashItemVOS)//列出现金费用单的每一个报销项目
-            itemListInfo += "---"+cashItemVO.ItemName + " : " + cashItemVO.amount+"元."+System.lineSeparator();
-        MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),itemListInfo+"  同意从账户"+cashBillVO.getAccount().getBankAccount()+"报销"+cashBillVO.getTotal()+"元。");
+        String message = "报销条目清单："+System.lineSeparator();
+        double total=0;
+        for(CashItemVO cashItemVO : cashBillVO.getItemList()){ //列出现金费用单的每一个报销项目
+            message += "---"+cashItemVO.ItemName + "：报销" + cashItemVO.amount+"元。"+System.lineSeparator();
+            total+=cashItemVO.amount;
+        }
+        message+="总计："+total+"元。"+System.lineSeparator();
+        message+="使用账户："+cashBillVO.getAccount().getName()+System.lineSeparator();
+
+        MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),message);
         messageTool.addMessage(messageVO);
 
     }
@@ -73,13 +72,9 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
      */
     @Override
     public void reject(BillVO bill) throws Exception{
-        //转换VO到PO
+        /*修改状态*/
         CashBillPO cashBillPO = ((CashBillVO)bill).getCashBillPO();
-
-        //修改状态为拒绝
         cashBillPO.setState("审批不通过");
-
-        //调用dataService.update
         CashBillDataService cashBillDataService = CashBillDataFactory.getService();
         cashBillDataService.update(cashBillPO);
     }

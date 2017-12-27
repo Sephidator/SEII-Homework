@@ -150,61 +150,63 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
      */
     @Override
     public void pass(BillVO billVO) throws Exception {
+        /*修改状态*/
         SaleRefundBillVO saleRefundBillVO = (SaleRefundBillVO) billVO;
-
-        /*将SaleRefundBillVO转成SaleRefundBillPO*/
         SaleRefundBillPO saleRefundBillPO = saleRefundBillVO.getSaleRefundBillPO();
-
-        /*调用SaleRefundBillDataService.update服务*/
+        saleRefundBillPO.setState("审批通过");
         SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
         saleRefundBillDataService.update(saleRefundBillPO);
 
         /*修改商品信息调用goodsTool*/
-        String messageAlarm="";
         GoodsTool goodsTool = new GoodsBl();
         for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
             GoodsVO goodsVO = goodsItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() + goodsItemVO.number);
             goodsTool.editGoods(goodsVO);
-            /*库存警报*/
-            if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
-                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
-            }
         }
 
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleRefundBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable() + saleRefundBillVO.getTotal());
+        clientVO.setReceivable(clientVO.getPayable() + saleRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
+
 
         /*发送message*/
         MessageTool messageTool = new MessageBl();
-        /*给库存管理人员发送message*/
-        String messageToInventory = "";
-        for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
-            messageToInventory += "商品： " + goodsItemVO.goods.getID() + " 销售退货 " + goodsItemVO.number + "，";
-        }
         UserTool userTool = new UserBl();
+
+
+        /*给库存管理人员发送message*/
         UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
         ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
-        int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
-        MessageVO messageVOToInventory = new MessageVO(userVOS.get(ran), saleRefundBillVO.getOperator(), messageToInventory + "（系统消息）");
-        messageTool.addMessage(messageVOToInventory);
+        int ran = (int) (Math.random() * userVOS.size());
 
-        /*给库存人员发送库存报警的message*/
-        if(!messageAlarm.equals("")){
-            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),saleRefundBillVO.getOperator(),messageAlarm);
-            messageTool.addMessage(messageVOAlarm);
+        // 为销售商退货的message
+        String messageGoodsToInventory = "为销售商退货："+System.lineSeparator();
+        for (GoodsItemVO goodsItemVO : saleRefundBillVO.getSaleList()) {
+            messageGoodsToInventory += "---" + goodsItemVO.goods.getName() + "：" + goodsItemVO.number + "件"+System.lineSeparator();
         }
+        messageGoodsToInventory+= "销售商信息："+System.lineSeparator();
+        messageGoodsToInventory+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
 
-        /*给财务人员发送message*/
-        String messageToFinance = "客户应收应付调整： 应收：" + clientVO.getReceivable() + " 应付：" + clientVO.getPayable();
+        MessageVO messageVOGoodsToInventory = new MessageVO(userVOS.get(ran), saleRefundBillVO.getOperator(), messageGoodsToInventory);
+        messageTool.addMessage(messageVOGoodsToInventory);
+
+
+       /*给财务人员发送message*/
         UserQueryVO userQueryVO1 = new UserQueryVO(null, "财务人员");
-        ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO);
-        int ran1 = (int) (1 + Math.random() * (userVOS1.size() - 0 + 1));
-        MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), saleRefundBillVO.getOperator(), messageToFinance + "（系统消息）");
+        ArrayList<UserVO> userVOS1 = userTool.getUserList(userQueryVO1);
+        int ran1 = (int) (Math.random() * userVOS1.size());
 
+        // 制定付款单的message
+        String messageToFinance="制定付款单："+System.lineSeparator();
+        messageToFinance+= "---总额："+saleRefundBillVO.getTotal()+"元"+System.lineSeparator();
+        messageToFinance+= "付款对象："+System.lineSeparator();
+        messageToFinance+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
+
+        MessageVO messageVOToFinance = new MessageVO(userVOS1.get(ran1), saleRefundBillVO.getOperator(), messageToFinance);
+        messageTool.addMessage(messageVOToFinance);
     }
 
     /**
