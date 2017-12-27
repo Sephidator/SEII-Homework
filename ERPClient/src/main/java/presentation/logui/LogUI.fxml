@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.logui.LogUIController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../../../resources/CSS/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.presentation.logui.LogUIController">
    <children>
       <HBox alignment="BOTTOM_CENTER" spacing="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <Label styleClass="greyLabel" text="时间区间" />
-            <JFXDatePicker editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间起点" styleClass="date-picker" />
-            <JFXDatePicker editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间终点" styleClass="date-picker" />
-            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton" />
+            <JFXDatePicker fx:id="start" editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间起点" styleClass="date-picker" />
+            <JFXDatePicker fx:id="end" editable="false" prefHeight="40.0" prefWidth="183.0" promptText="时间终点" styleClass="date-picker" />
+            <JFXButton ellipsisString="" graphicTextGap="0.0" onAction="#handleSearch" prefHeight="40.0" prefWidth="40.0" styleClass="searchButton2" />
          </children>
       </HBox>
       <TableView fx:id="logTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">

@@ -194,7 +194,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = purchaseRefundBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable() + purchaseRefundBillVO.getTotal());
+        clientVO.setPayable(clientVO.getPayable() + purchaseRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
 
 
@@ -249,12 +249,10 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
      */
     @Override
     public void reject(BillVO billVO) throws Exception {
+        /*修改状态*/
         PurchaseRefundBillVO purchaseRefundBillVO = (PurchaseRefundBillVO) billVO;
-
-        /*将PurchaseRefundBillVO转成PurchaseRefundBillPO*/
         PurchaseRefundBillPO purchaseRefundBillPO = purchaseRefundBillVO.getPurchaseRefundBillPO();
-
-        /*调用PurchaseRefundBillDataFactory*/
+        purchaseRefundBillPO.setState("审批不通过");
         PurchaseRefundBillDataService purchaseRefundBillDataService = PurchaseRefundBillDataFactory.getService();
         purchaseRefundBillDataService.update(purchaseRefundBillPO);
 

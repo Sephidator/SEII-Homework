@@ -45,10 +45,10 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*修改应收数据*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = clientTool.find(paymentBillPO.getClientID());
-        clientVO.setPayable(clientVO.getPayable() - paymentBillPO.getTotal());//原来的应付减去付款单的总金额
-        //如果应付修改后小于0，自动转为应收
-        if(clientVO.getPayable() < 0){
-            double delta = clientVO.getPayable();
+        clientVO.setReceivable(clientVO.getReceivable() - paymentBillPO.getTotal());//原来的应收减去收款单的总金额
+        //如果应收修改后小于0，自动转为应付
+        if(clientVO.getReceivable() < 0){
+            double delta = clientVO.getReceivable();
             clientVO.setReceivable(clientVO.getReceivable() - delta);
             clientVO.setPayable(0);
         }

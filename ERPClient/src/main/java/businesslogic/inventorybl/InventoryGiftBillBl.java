@@ -224,7 +224,7 @@ public class InventoryGiftBillBl implements InventoryGiftBillBlService, Inventor
         /*修改状态*/
         InventoryGiftBillVO inventoryGiftBillVO = (InventoryGiftBillVO) billVO;
         InventoryGiftBillPO inventoryGiftBillPO = inventoryGiftBillVO.getInventoryGiftBillPO();
-        inventoryGiftBillPO.setState("审批通过");
+        inventoryGiftBillPO.setState("审批不通过");
         InventoryGiftBillDataService inventoryGiftBillDataService=InventoryGiftBillDataFactory.getService();
         inventoryGiftBillDataService.update(inventoryGiftBillPO);
     }

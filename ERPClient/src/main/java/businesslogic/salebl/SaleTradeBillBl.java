@@ -227,7 +227,7 @@ public class SaleTradeBillBl implements SaleTradeBillBlService, SaleTradeBillToo
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleTradeBillVO.getClient();
-        clientVO.setPayable(clientVO.getReceivable() + saleTradeBillVO.getTotalAfterDiscount());
+        clientVO.setPayable(clientVO.getPayable() + saleTradeBillVO.getTotalAfterDiscount());
         clientTool.editClient(clientVO);
 
 
