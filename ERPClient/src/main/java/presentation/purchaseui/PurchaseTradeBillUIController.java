@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
@@ -82,6 +84,26 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         numberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number)));
         priceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().price)));
         amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number*cellData.getValue().price)));
+
+        goodsItemTableView.setEditable(true);
+        numberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        numberColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<GoodsItemVO, String> t) -> {
+                    try{
+                        int n=Integer.parseInt(t.getNewValue());
+                        if(n<=0){
+                            throw new Exception();
+                        }
+                        else{
+                            (t.getTableView().getItems().get(t.getTablePosition().getRow())).number=n;
+                            showGoodsItemList();
+                            countTotal();
+                        }
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","请检查输入","输入的商品数量必须为正数");
+                    }
+                });
     }
 
     // 设置controller数据的方法*****************************************

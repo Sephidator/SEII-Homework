@@ -216,6 +216,7 @@ public class SaleTradeBillBl implements SaleTradeBillBlService, SaleTradeBillToo
         for (GoodsItemVO goodsItemVO : saleTradeBillVO.getSaleList()) {
             GoodsVO goodsVO = goodsItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() - goodsItemVO.number);
+            goodsVO.setLatestRetail(goodsItemVO.price);
             goodsTool.editGoods(goodsVO);
             /*库存警报*/
             if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
