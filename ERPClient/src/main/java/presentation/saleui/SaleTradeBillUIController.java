@@ -380,10 +380,10 @@ public class SaleTradeBillUIController extends InfoUIController {
                     throw new NumberFormatException();
                 }
                 else{
-                    if(bill.getOperator().isTop()||d>5000){
+                    if(bill.getOperator().isTop() && d>5000){
                         errorMessage+=("销售经理的折让额度不得超过5000元。"+System.lineSeparator());
                     }
-                    else if(bill.getOperator().isTop()||d>1000){
+                    else if(bill.getOperator().isTop() && d>1000){
                         errorMessage+=("销售员的折让额度不得超过1000元。"+System.lineSeparator());
                     }
                 }

@@ -170,6 +170,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
         for (GoodsItemVO goodsItemVO : purchaseTradeBillVO.getPurchaseList()) {
             GoodsVO goodsVO = goodsItemVO.goods;
             goodsVO.setNumber(goodsVO.getNumber() + goodsItemVO.number);
+            goodsVO.setLatestCost(goodsItemVO.price);
             goodsTool.editGoods(goodsVO);
         }
 
