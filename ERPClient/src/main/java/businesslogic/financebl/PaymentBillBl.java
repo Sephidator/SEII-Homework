@@ -35,48 +35,27 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      * @function: 除了正常的通过操作外，需要修改客户的应收数据
      */
     public void pass(BillVO bill)  throws Exception{
-        /*转化*/
-        PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
-
         /*修改状态*/
+        PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
         paymentBillPO.setState("审批通过");
-
-        /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         paymentBillDataService.update(paymentBillPO);
 
-        System.out.println("A");
 
         /*修改应收数据*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = clientTool.find(paymentBillPO.getClientID());
-        clientVO.setReceivable(clientVO.getReceivable() - paymentBillPO.getTotal());//原来的应收减去付款单的总金额
-        //如果应收修改后小于0，自动转为应付
-        if(clientVO.getReceivable() < 0){
-            double delta = clientVO.getReceivable();
-            clientVO.setPayable(clientVO.getPayable() + delta);
-            clientVO.setReceivable(0);
+        clientVO.setPayable(clientVO.getPayable() - paymentBillPO.getTotal());//原来的应付减去付款单的总金额
+        //如果应付修改后小于0，自动转为应收
+        if(clientVO.getPayable() < 0){
+            double delta = clientVO.getPayable();
+            clientVO.setReceivable(clientVO.getReceivable() - delta);
+            clientVO.setPayable(0);
         }
         clientTool.editClient(clientVO);
 
-        System.out.println("B");
 
         ArrayList<TransItemVO> transItemVOS=((PaymentBillVO)bill).getTransList();
-
-         /*添加message*/
-        MessageTool messageTool = new MessageBl();
-        String message="";
-        message+= "付款列表："+System.lineSeparator();
-        for(TransItemVO transItemVO : ((PaymentBillVO)bill).getTransList()){
-            message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
-        }
-        message+= "付款对象："+System.lineSeparator();
-        message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）";
-
-        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
-        messageTool.addMessage(messageVO);
-
-        System.out.println("C");
 
         //更改账户余额,对每一个账户减去付款单转账列表的金额
         AccountTool accountTool = new AccountBl();
@@ -87,7 +66,17 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
             accountTool.editAccount(accountVO);
         }
 
-        System.out.println("D");
+         /*添加message*/
+        MessageTool messageTool = new MessageBl();
+        String message="请从银行账户付款："+System.lineSeparator();
+        for(TransItemVO transItemVO : transItemVOS){
+            message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
+        }
+        message+= "付款对象："+System.lineSeparator();
+        message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
+
+        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
+        messageTool.addMessage(messageVO);
     }
 
     @Override
@@ -98,13 +87,9 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
      * @function: 修改单据状态然后更新即可
      */
     public void reject(BillVO bill)  throws Exception{
-        /*实现转化*/
-        PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
-
         /*修改状态*/
+        PaymentBillPO paymentBillPO = ((PaymentBillVO)bill).getPaymentBillPO();
         paymentBillPO.setState("审批不通过");
-
-        /*dataService*/
         PaymentBillDataService paymentBillDataService = PaymentBillDataFactory.getService();
         paymentBillDataService.update(paymentBillPO);
     }

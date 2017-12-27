@@ -11,6 +11,7 @@ import main.java.businesslogicservice.messageblservice.MessageBlService;
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.userui.UserUIController;
 import main.java.vo.message.MessageVO;
 
@@ -32,27 +33,13 @@ public class AdministratorPanelUIController extends CenterUIController {
     private void refreshMessage(){
         try{
             ArrayList<MessageVO> messageList=service.getMessageList(root.getOperator());
-            String text="";
-
-            for(MessageVO message:messageList){
-                text+="系统消息："+System.lineSeparator();
-                text+=message.getMessage()+System.lineSeparator();
-                text+=System.lineSeparator();
-            }
-            messageArea.setText(text);
-
+            UITool.showMessage(messageArea,messageList);
         }catch(DataException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("获取系统信息失败");
-            alert.setContentText("数据库错误");
-            alert.showAndWait();
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","获取系统信息失败","数据库错误");
         }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("获取系统信息失败");
-            alert.setContentText("RMI连接错误");
-            alert.showAndWait();
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","获取系统信息失败","RMI连接错误");
         }
     }
 

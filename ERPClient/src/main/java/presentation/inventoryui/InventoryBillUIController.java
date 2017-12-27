@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
-import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
 import main.java.businesslogicfactory.inventoryblfactory.InventoryGiftBillBlFactory;
 import main.java.businesslogicfactory.inventoryblfactory.InventoryLossOverBillBlFactory;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
@@ -17,7 +16,7 @@ import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBl
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.inventorybill.InventoryBillVO;
@@ -84,10 +83,10 @@ public class InventoryBillUIController extends CenterUIController {
 
             showInventoryBillList(inventoryBillList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找单据失败","RMI连接错误");
         }
     }
@@ -138,7 +137,7 @@ public class InventoryBillUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }

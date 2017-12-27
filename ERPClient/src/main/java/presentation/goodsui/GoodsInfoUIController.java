@@ -1,7 +1,5 @@
 package main.java.presentation.goodsui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,11 +13,9 @@ import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
 import main.java.exception.NotNullException;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.goods.GoodsVO;
-
-import java.util.ArrayList;
 
 public class GoodsInfoUIController extends InfoUIController{
     private GoodsVO goods;
@@ -78,10 +74,10 @@ public class GoodsInfoUIController extends InfoUIController{
             latestRetail.setText(String.valueOf(goods.getLatestRetail()));
             comment.setText(goods.getComment());
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品分类失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品分类失败", "RMI连接错误");
         }
     }
@@ -131,7 +127,7 @@ public class GoodsInfoUIController extends InfoUIController{
                     String goodsID=goodsBlService.addGoods(goods);
                     String goodsName=goods.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","添加商品成功",
                             "商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
                 }
@@ -140,27 +136,27 @@ public class GoodsInfoUIController extends InfoUIController{
                     String goodsID=goods.getID();
                     String goodsName=goods.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑商品成功",
                             "商品ID："+goodsID+System.lineSeparator()+"名字："+goodsName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"商品失败","数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"商品失败","商品不存在");
             }catch(NotNullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"商品失败","商品分类下有子分类");
             }
             catch(ExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"商品失败","账号和已有商品重复");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"商品失败","RMI连接错误");
             }
         }
@@ -243,7 +239,7 @@ public class GoodsInfoUIController extends InfoUIController{
             return true;
         } else {
             // Show the error message.
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "商品信息错误","请检查商品信息的输入",errorMessage);
             return false;
         }

@@ -15,7 +15,7 @@ import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
 import main.java.businesslogicservice.userblservice.UserBlService;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.user.UserVO;
 
@@ -125,7 +125,7 @@ public class UserInfoUIController extends InfoUIController{
                     String userID=userBlService.addUser(user);
                     String userName=user.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","添加用户成功",
                             "用户ID："+userID+System.lineSeparator()+"名字："+userName);
                 }
@@ -134,23 +134,23 @@ public class UserInfoUIController extends InfoUIController{
                     String userID=user.getID();
                     String userName=user.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑用户成功",
                             "用户ID："+userID+System.lineSeparator()+"名字："+userName);
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"用户失败", "数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"用户失败","用户不存在");
             }catch(ExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"用户失败","账号和已有用户重复");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"用户失败","RMI连接错误");
             }
         }
@@ -208,7 +208,7 @@ public class UserInfoUIController extends InfoUIController{
             return true;
         } else {
             // Show the error message.
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "用户信息错误","请检查用户信息的输入",errorMessage);
             return false;
         }

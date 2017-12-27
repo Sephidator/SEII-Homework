@@ -13,7 +13,7 @@ import main.java.businesslogicfactory.userblfactory.UserBlFactory;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
 import main.java.exception.DataException;
 import main.java.exception.NotExistException;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.client.ClientVO;
 import main.java.vo.user.UserQueryVO;
@@ -164,10 +164,10 @@ public class ClientInfoUIController extends InfoUIController{
                 client.setSalesman(salesmanList.get(newValue.intValue()));
             });
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找业务员失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找业务员失败","RMI连接错误");
         }
     }
@@ -184,7 +184,7 @@ public class ClientInfoUIController extends InfoUIController{
                     String clientID=clientBlService.addClient(client);
                     String clientName=client.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","添加客户成功",
                             "客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
                 }
@@ -193,7 +193,7 @@ public class ClientInfoUIController extends InfoUIController{
                     String clientID=client.getID();
                     String clientName=client.getName();
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑客户成功",
                             "客户ID："+clientID+System.lineSeparator()+"名字："+clientName);
                 }
@@ -201,15 +201,15 @@ public class ClientInfoUIController extends InfoUIController{
                 dialogStage.close();
             }catch(DataException e){
                 e.printStackTrace();
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"客户失败","数据库错误");
             }catch(NotExistException e){
                 e.printStackTrace();
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"客户失败","客户不存在");
             }catch(Exception e){
                 e.printStackTrace();
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"客户失败","RMI连接错误");
             }
         }
@@ -304,7 +304,7 @@ public class ClientInfoUIController extends InfoUIController{
             client.setReceivableLimit(Double.parseDouble(receivableLimit.getText()));
             return true;
         } else {
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "客户信息错误","请检查客户信息的输入",errorMessage);
             return false;
         }

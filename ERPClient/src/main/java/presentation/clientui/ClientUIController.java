@@ -1,6 +1,5 @@
 package main.java.presentation.clientui;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +16,10 @@ import main.java.exception.DataException;
 import main.java.exception.NotExistException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.client.ClientQueryVO;
 import main.java.vo.client.ClientVO;
-import main.java.vo.user.UserQueryVO;
 
 import java.util.ArrayList;
 
@@ -75,10 +73,10 @@ public class ClientUIController extends CenterUIController {
             ArrayList<ClientVO> clientList = clientBlService.getClientList(query);
             showClientList(clientList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找客户失败","RMI连接错误");
         }
     }
@@ -120,17 +118,17 @@ public class ClientUIController extends CenterUIController {
                 String name = clientTableView.getSelectionModel().getSelectedItem().getName();
                 clientBlService.deleteClient(ID);
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","删除客户成功",
                         "客户ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除客户失败","数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除客户失败","客户不存在");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除客户失败","RMI连接错误");
             }
             refresh(null);
@@ -158,7 +156,7 @@ public class ClientUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选中客户","请在表中选择客户");
             return false;
         }

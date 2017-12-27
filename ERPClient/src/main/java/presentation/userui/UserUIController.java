@@ -13,7 +13,7 @@ import main.java.businesslogicfactory.userblfactory.UserBlFactory;
 import main.java.businesslogicservice.userblservice.UserBlService;
 import main.java.presentation.messageui.AdministratorPanelUIController;
 import main.java.presentation.mainui.RootUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.user.UserQueryVO;
 import main.java.vo.user.UserVO;
@@ -64,10 +64,10 @@ public class UserUIController extends CenterUIController {
             ArrayList<UserVO> userList = userBlService.getUserList(query);
             showUserList(userList);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找用户失败", "数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找用户失败","RMI连接错误");
         }
     }
@@ -109,17 +109,17 @@ public class UserUIController extends CenterUIController {
                 String name = userTableView.getSelectionModel().getSelectedItem().getName();
                 userBlService.deleteUser(ID);
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success", "删除用户成功",
                         "用户ID："+ID+System.lineSeparator()+"名字："+name);
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除用户失败","数据库错误");
             }catch(NotExistException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除用户失败","用户不存在");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除用户失败","RMI连接错误");
             }
             refresh(null);
@@ -147,7 +147,7 @@ public class UserUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选中用户","请在表中选择用户");
             return false;
         }

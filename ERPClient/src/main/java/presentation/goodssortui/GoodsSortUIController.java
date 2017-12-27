@@ -3,10 +3,7 @@ package main.java.presentation.goodssortui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import main.java.MainApp;
-import main.java.businesslogic.goodsbl.GoodsBl;
-import main.java.businesslogic.goodssortbl.GoodsSortBl;
 import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
@@ -17,12 +14,10 @@ import main.java.exception.NotNullException;
 import main.java.presentation.goodsui.GoodsInfoUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.GoodsSortVO;
 import main.java.vo.goods.GoodsVO;
-
-import java.util.ArrayList;
 
 public class GoodsSortUIController extends CenterUIController {
     private GoodsSortBlService goodsSortBlService;
@@ -54,10 +49,10 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO root= GoodsSortBlFactory.getService().getRoot();
             showGoodsSort(null,root);
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品分类失败","数据库错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","查找商品分类失败","RMI连接错误");
         }
     }
@@ -97,7 +92,7 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO sort=sortItem.getValue();
 
             if(sort.getGoods().size()!=0){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","添加商品分类失败","父分类下有商品");
             }
             else{
@@ -117,11 +112,11 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO sort=sortItem.getValue();
 
             if(!sortItem.isLeaf()){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除商品分类失败","商品分类下有子分类或商品");
             }
             else if(selectedIndex==0){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","删除商品分类失败","不能删除总分类");
             }
             else{
@@ -130,20 +125,20 @@ public class GoodsSortUIController extends CenterUIController {
                     String name = sort.getName();
                     goodsSortBlService.deleteGoodsSort(ID);
 
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","删除商品分类成功",
                             "分类ID："+ID+System.lineSeparator()+"名字："+name);
                 }catch(DataException e){
-                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除商品分类失败","数据库错误");
                 }catch(NotExistException e){
-                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除商品分类失败","商品分类不存在");
                 }catch(NotNullException e){
-                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除商品分类失败","商品分类下有子类或商品");
                 }catch(Exception e){
-                    AlertInfo.showAlert(Alert.AlertType.ERROR,
+                    UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除商品分类失败","RMI连接错误");
                 }
                 refresh();
@@ -171,7 +166,7 @@ public class GoodsSortUIController extends CenterUIController {
             GoodsSortVO sort=sortItem.getValue();
 
             if(sort.getChildren().size()!=0){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","添加商品失败","商品分类下有子分类");
             }
             else{
@@ -188,13 +183,13 @@ public class GoodsSortUIController extends CenterUIController {
     private boolean isGoodsSortSelected(){
         int selectedIndex=goodsSortTreeView.getSelectionModel().getSelectedIndex();
         if(selectedIndex<0){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选中商品分类","请在表中选择商品分类");
             return false;
         }else{
             TreeItem item=goodsSortTreeView.getTreeItem(selectedIndex);
             if(!item.isExpanded()){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","选中了商品信息","请在表中选择商品分类");
                 return false;
             }

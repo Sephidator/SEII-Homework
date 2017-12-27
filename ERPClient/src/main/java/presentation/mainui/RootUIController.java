@@ -1,6 +1,5 @@
 package main.java.presentation.mainui;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,14 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import main.java.MainApp;
 import main.java.exception.DataException;
-import main.java.exception.LoginException;
-import main.java.exception.NotExistException;
 import main.java.businesslogicfactory.loginblfactory.LoginBlFactory;
 import main.java.presentation.loginui.LoginUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.user.UserVO;
 
@@ -83,10 +79,10 @@ public class RootUIController {
         try{
             LoginBlFactory.getService().logout(operator.getID());
         }catch(DataException e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","登陆失败","数据库连接错误");
         }catch(Exception e){
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "Error","登陆失败","RMI连接错误");
         }
     }

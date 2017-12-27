@@ -15,12 +15,11 @@ import main.java.businesslogicservice.inventoryblservice.InventoryLossOverBillBl
 import main.java.exception.DataException;
 import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddGoodsUIController;
-import main.java.presentation.uiutility.AlertInfo;
+import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.InventoryLossOverBillVO;
 import main.java.vo.bill.inventorybill.LossOverItemVO;
-import main.java.vo.client.ClientVO;
 import main.java.vo.goods.GoodsVO;
 
 import java.util.ArrayList;
@@ -190,25 +189,25 @@ public class InventoryLossOverBillUIController extends InfoUIController {
                 if(text.equals("确认添加")){
                     bill.setState("待审批");
                     String billID=service.submit(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","提交库存溢损单成功", "单据ID："+billID);
                 }
                 else if(text.equals("提交编辑")){
                     bill.setState("待审批");
                     service.editInventoryLossOverBill(bill);
-                    AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success","编辑库存溢损单成功", "单据ID："+bill.getID());
                 }
 
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"库存溢损单失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"库存溢损单失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"库存溢损单失败", "RMI连接错误");
             }
         }
@@ -231,17 +230,17 @@ public class InventoryLossOverBillUIController extends InfoUIController {
                     service.editInventoryLossOverBill(bill);
                 }
 
-                AlertInfo.showAlert(Alert.AlertType.INFORMATION,
+                UITool.showAlert(Alert.AlertType.INFORMATION,
                         "Success","已保存库存溢损单草稿", "单据ID："+billID);
                 dialogStage.close();
             }catch(DataException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存库存溢损单草稿失败", "数据库错误");
             }catch(FullException e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error", "保存库存溢损单草稿失败", "超过单日单据上限（99999张）");
             }catch(Exception e){
-                AlertInfo.showAlert(Alert.AlertType.ERROR,
+                UITool.showAlert(Alert.AlertType.ERROR,
                         "Error","保存库存溢损单草稿失败", "RMI连接错误");
             }
             dialogStage.close();
@@ -257,7 +256,7 @@ public class InventoryLossOverBillUIController extends InfoUIController {
             return true;
         }else{
             // Nothing selected
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择商品","请在商品列表中选择商品");
             return false;
         }
@@ -278,7 +277,7 @@ public class InventoryLossOverBillUIController extends InfoUIController {
             bill.setComment(comment.getText());
             return true;
         } else {
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "单据信息错误", "请检查单据信息的输入", errorMessage);
             return false;
         }

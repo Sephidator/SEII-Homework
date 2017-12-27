@@ -149,17 +149,15 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService, 
      */
     @Override
     public void pass(BillVO billVO) throws Exception {
+        /*修改状态*/
         InventoryLossOverBillVO inventoryLossOverBillVO = (InventoryLossOverBillVO) billVO;
-
-        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
         InventoryLossOverBillPO inventoryLossOverBillPO = inventoryLossOverBillVO.getInventoryLossOverBillPO();
-
-        /*调用InventoryLossOverBillDataFactory*/
+        inventoryLossOverBillPO.setState("审批通过");
         InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
         inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
 
         /*调用goodsTool*/
-        String messageAlarm="";
+        String messageAlarm="库存报警："+System.lineSeparator();
         GoodsTool goodsTool = new GoodsBl();
         for (LossOverItemVO lossOverItemVO : inventoryLossOverBillVO.getLossOverList()) {
             GoodsVO goodsVO = lossOverItemVO.goods;
@@ -167,22 +165,16 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService, 
             goodsTool.editGoods(goodsVO);
             /*库存警报*/
             if(goodsVO.getNumber()<goodsVO.getAlarmNum()){
-                messageAlarm+="商品:"+goodsVO.getID()+" 的数量: "+goodsVO.getNumber()+" 低于警戒数量："+goodsVO.getAlarmNum()+"，";
+                messageAlarm+="---"+goodsVO.getName()+"的数量: "+goodsVO.getNumber()+"件，低于警戒数量："+goodsVO.getAlarmNum()+"件"+System.lineSeparator();
             }
         }
 
         /*给库存人员发送库存报警的message*/
-        if(!messageAlarm.equals("")){
+        if(!messageAlarm.equals("库存报警："+System.lineSeparator())){
             MessageTool messageTool = new MessageBl();
-            UserTool userTool = new UserBl();
-            UserQueryVO userQueryVO = new UserQueryVO(null, "库存管理人员");
-            ArrayList<UserVO> userVOS = userTool.getUserList(userQueryVO);
-            int ran = (int) (1 + Math.random() * (userVOS.size() - 0 + 1));
-            MessageVO messageVOAlarm=new MessageVO(userVOS.get(ran),inventoryLossOverBillVO.getOperator(),messageAlarm);
+            MessageVO messageVOAlarm=new MessageVO(inventoryLossOverBillVO.getOperator(),inventoryLossOverBillVO.getOperator(),messageAlarm);
             messageTool.addMessage(messageVOAlarm);
         }
-
-
     }
 
     /**
@@ -193,14 +185,11 @@ public class InventoryLossOverBillBl implements InventoryLossOverBillBlService, 
      */
     @Override
     public void reject(BillVO billVO) throws Exception {
+        /*修改状态*/
         InventoryLossOverBillVO inventoryLossOverBillVO = (InventoryLossOverBillVO) billVO;
-
-        /*将InventoryLossOverBillVO转成InventoryLossOverBillPO*/
         InventoryLossOverBillPO inventoryLossOverBillPO = inventoryLossOverBillVO.getInventoryLossOverBillPO();
-
-        /*调用InventoryLossOverBillDataService.update服务*/
+        inventoryLossOverBillPO.setState("审批不通过");
         InventoryLossOverBillDataService inventoryLossOverBillDataService = InventoryLossOverBillDataFactory.getService();
         inventoryLossOverBillDataService.update(inventoryLossOverBillPO);
-
     }
 }

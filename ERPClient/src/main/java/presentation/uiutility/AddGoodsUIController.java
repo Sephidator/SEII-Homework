@@ -1,6 +1,5 @@
 package main.java.presentation.uiutility;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,13 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.vo.bill.BillVO;
 import main.java.vo.bill.inventorybill.LossOverItemVO;
 import main.java.vo.goods.GiftItemVO;
 import main.java.vo.goods.GoodsItemVO;
@@ -149,7 +146,7 @@ public class AddGoodsUIController {
         if(selectedIndex>=0){
             return true;
         }else{
-            AlertInfo.showAlert(Alert.AlertType.ERROR,
+            UITool.showAlert(Alert.AlertType.ERROR,
                     "No Selection","未选择商品","请在商品列表中选择商品");
             return false;
         }
