@@ -26,10 +26,10 @@
       <AnchorPane prefHeight="100.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ChoiceBox fx:id="conditionSelector" prefHeight="40.0" prefWidth="40.0" styleClass="choiceBox-resize" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0" />
-            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="450.0" layoutY="35.0" onAction="#handleSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="25.0" />
-            <TextField fx:id="inputInfo" layoutX="79.0" layoutY="40.0" prefHeight="40.0" prefWidth="350.0" styleClass="textField-resize" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="30.0" />
-            <JFXDatePicker fx:id="start" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="起始时间" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0" />
-            <JFXDatePicker fx:id="end" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="结束时间" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="50.0" />
+            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="450.0" layoutY="35.0" onAction="#handleSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" visible="false" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="25.0" />
+            <TextField fx:id="inputInfo" layoutX="79.0" layoutY="40.0" prefHeight="40.0" prefWidth="350.0" styleClass="textField-resize" visible="false" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="30.0" />
+            <JFXDatePicker fx:id="start" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="起始时间" visible="false" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0" />
+            <JFXDatePicker fx:id="end" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="结束时间" visible="false" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="50.0" />
          </children>
       </AnchorPane>
    </children>

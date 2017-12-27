@@ -8,16 +8,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import main.java.MainApp;
+import main.java.businesslogicfactory.reportblfactory.SaleDetailBlFactory;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.presentation.uiutility.UITool;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -58,11 +62,11 @@ public class SaleDetailUIController extends CenterUIController {
      * */
     public void initialize(){
         timeColumn.setCellValueFactory(cellData->new SimpleStringProperty(new SimpleDateFormat("yyyy-MM-dd-EE").format((cellData.getValue().time))));
-        goodsNameColumn.setCellValueFactory(cellData->new SimpleStringProperty("name"));
-        goodsModelColumn.setCellValueFactory(cellData->new SimpleStringProperty("model"));
-        goodsNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty("3"));
-        goodsPriceColumn.setCellValueFactory(cellData->new SimpleStringProperty("20"));
-        goodsAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty("60"));
+        goodsNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goodsItem.goods.getName()));
+        goodsModelColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goodsItem.goods.getModel()));
+        goodsNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goodsItem.number)));
+        goodsPriceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goodsItem.price)));
+        goodsAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goodsItem.number*cellData.getValue().goodsItem.price)));
 
 
         String[] conditionList=new String[]{"所有单据","时间","商品名","客户","业务员"};
@@ -77,13 +81,24 @@ public class SaleDetailUIController extends CenterUIController {
 
     public void setSaleRecordBlService(SaleDetailBlService service) {
         this.service = service;
-        //ArrayList<SaleRecordVO> saleRecordList=saleRecordBlService.getSaleRecordList(null);
-        //showSaleRecordList(saleRecordList);
+    }
+
+    public void refresh(SaleDetailQueryVO query){
+        try{
+            ArrayList<SaleRecordVO> saleRecordList=service.getSaleRecordList(query);
+            showSaleRecordList(saleRecordList);
+        }catch(DataException e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找销售明细失败","数据库错误");
+        }catch(Exception e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找销售明细失败","RMI连接错误");
+        }
     }
 
     private void showInputField(String condition){
-        start.getEditor().setText("");
-        end.getEditor().setText("");
+        start.setValue(null);
+        end.setValue(null);
         inputInfo.setText("");
 
         if(condition.equals("所有单据")){
@@ -91,20 +106,20 @@ public class SaleDetailUIController extends CenterUIController {
             end.setVisible(false);
             inputInfo.setVisible(false);
             search.setVisible(false);
+            refresh(null);
+        }
+        else if(condition.equals("时间")){
+            start.setVisible(true);
+            end.setVisible(true);
+            inputInfo.setVisible(false);
+            search.setVisible(true);
         }
         else{
-            if(condition.equals("时间")){
-                start.setVisible(true);
-                end.setVisible(true);
-                inputInfo.setVisible(false);
-                search.setVisible(true);
-            }
-            else{
-                start.setVisible(false);
-                end.setVisible(false);
-                inputInfo.setVisible(true);
-                search.setVisible(true);
-            }
+            start.setVisible(false);
+            end.setVisible(false);
+            inputInfo.setVisible(true);
+            search.setVisible(true);
+            inputInfo.setPromptText("请输入"+condition);
         }
     }
 
@@ -113,10 +128,7 @@ public class SaleDetailUIController extends CenterUIController {
      * */
     private void showSaleRecordList(ArrayList<SaleRecordVO> saleRecordList){
         saleRecordObservableList.removeAll();
-
-        for(int i=0;i<saleRecordList.size();i++){
-            saleRecordObservableList.add(saleRecordList.get(i));
-        }
+        saleRecordObservableList.setAll(saleRecordList);
         saleRecordTableView.setItems(saleRecordObservableList);
     }
 
@@ -127,66 +139,65 @@ public class SaleDetailUIController extends CenterUIController {
     private void handleSearch(){
         if(conditionSelector.getValue().equals("时间")){
             if(isValidTime()){
-                try{
-                    Date startTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-                    Date endTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-
-                    SaleDetailQueryVO query=new SaleDetailQueryVO(startTime,endTime,null,null,null);
-                    //ArrayList<SaleRecordVO> saleRecordList=service.getSaleRecordList(query);
-                    //showSaleRecordList(saleRecordList);
-                    System.out.println("选择了时间");
+                Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                try {
+                    endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
                 }catch(Exception e){}
+
+                SaleDetailQueryVO query=new SaleDetailQueryVO(startTime,endTime,null,null,null);
+                refresh(query);
             }
         }
         else if(conditionSelector.getValue().equals("商品名")){
             SaleDetailQueryVO query=new SaleDetailQueryVO(null,null,inputInfo.getText(),null,null);
-            System.out.println("选择了商品名");
+            refresh(query);
         }
         else if(conditionSelector.getValue().equals("客户")){
             SaleDetailQueryVO query=new SaleDetailQueryVO(null,null,null,inputInfo.getText(),null);
-            System.out.println("选择了客户");
+            refresh(query);
         }
         else if(conditionSelector.getValue().equals("业务员")){
             SaleDetailQueryVO query=new SaleDetailQueryVO(null,null,null,null,inputInfo.getText());
-            System.out.println("选择了业务员");
+            refresh(query);
+        }
+        else if(conditionSelector.getValue().equals("业务员")){
+            SaleDetailQueryVO query=new SaleDetailQueryVO(null,null,null,null,inputInfo.getText());
+            refresh(query);
         }
     }
 
     private boolean isValidTime(){
         String errorMessage = "";
 
-        try{
-            if (start.getEditor().getText()==null || start.getEditor().getText().length()==0) {
-                errorMessage += ("未输入起始日期。"+System.lineSeparator());
-            }
-            if (end.getEditor().getText()==null || end.getEditor().getText().length()==0) {
-                errorMessage+=("未输入结束日期。"+System.lineSeparator());
-            }
+        if (start.getValue()==null) {
+            errorMessage += ("未输入起始日期。"+System.lineSeparator());
+        }
+        if (end.getValue()==null) {
+            errorMessage+=("未输入结束日期。"+System.lineSeparator());
+        }
 
-            if(errorMessage.length()>0)
-                throw new Exception();
-
-            Date startTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-            Date endTime=new SimpleDateFormat("yyyy-MM-dd").parse(end.getEditor().getText());
-
-
-            if(endTime.before(startTime)){
-                errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
-            }
-
-            if(errorMessage.length()>0)
-                throw new Exception();
-
-            return true;
-        }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("不正确");
-            alert.setHeaderText("请确认筛选条件");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
             return false;
         }
 
+        Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        try {
+            endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
+        }catch(Exception e){}
+
+        if(endTime.before(startTime)){
+            errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
+            return false;
+        }
+
+        return true;
     }
 
     // 加载文件和界面的方法******************************************
@@ -203,10 +214,8 @@ public class SaleDetailUIController extends CenterUIController {
 
             SaleDetailUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setSaleRecordBlService(null);
-            controller.showInputField("所有单据");
-
-            //controller.showSaleRecordList(list);
+            controller.setSaleRecordBlService(SaleDetailBlFactory.getService());
+            controller.refresh(null);
 
             root.setReturnPaneController(isFinance?new FinancePanelUIController():new ManagerPanelUIController());
         }catch(Exception e){

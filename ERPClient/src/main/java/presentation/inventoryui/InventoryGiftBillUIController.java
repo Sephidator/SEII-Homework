@@ -111,7 +111,7 @@ public class InventoryGiftBillUIController extends InfoUIController {
             cancel.setText("保存草稿");
         }
         else if(command==2){
-            confirm.setText("确认编辑");
+            confirm.setText("提交编辑");
             cancel.setText("保存草稿");
         }
         else if(command==3){
