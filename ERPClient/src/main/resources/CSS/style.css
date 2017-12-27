@@ -209,6 +209,21 @@
     -fx-background-color: #2190DD;
 }
 
+.searchButton2{
+    -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25 25;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-background-position: center center;
+    -fx-background-color: #70BAE1; /*-fx-focus-color;*/
+    -fx-text-fill: #ffffff;
+}
+
+.searchButton2:hover {
+    -fx-background-color: #2190DD;
+}
+
 /*
 * 修改导出按钮样式的CSS类
 */

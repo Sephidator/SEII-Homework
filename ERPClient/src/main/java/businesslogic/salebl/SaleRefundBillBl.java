@@ -168,7 +168,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleRefundBillVO.getClient();
-        clientVO.setReceivable(clientVO.getPayable() + saleRefundBillVO.getTotal());
+        clientVO.setReceivable(clientVO.getReceivable() + saleRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
 
 
@@ -217,14 +217,11 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
      */
     @Override
     public void reject(BillVO billVO) throws Exception {
+        /*修改状态*/
         SaleRefundBillVO saleRefundBillVO = (SaleRefundBillVO) billVO;
-
-        /*将SaleRefundBillVO转成SaleRefundBillPO*/
         SaleRefundBillPO saleRefundBillPO = saleRefundBillVO.getSaleRefundBillPO();
-
-        /*调用SaleRefundBillDataFactory*/
+        saleRefundBillPO.setState("审批不通过");
         SaleRefundBillDataService saleRefundBillDataService = SaleRefundBillDataFactory.getService();
         saleRefundBillDataService.update(saleRefundBillPO);
-
     }
 }
