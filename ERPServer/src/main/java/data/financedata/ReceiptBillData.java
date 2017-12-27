@@ -23,6 +23,8 @@ import java.util.ArrayList;
  * @date 2017/12/10
  */
 public class ReceiptBillData extends UnicastRemoteObject implements ReceiptBillDataService {
+    private ArrayList<String> sqlOfQuery;
+
     public ReceiptBillData() throws RemoteException {
         ReceiptBillDataService receiptBillDataService = this;
         try {
@@ -48,25 +50,30 @@ public class ReceiptBillData extends UnicastRemoteObject implements ReceiptBillD
             String sql;
             ResultSet resultSet;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
-                sql = "SELECT * FROM ReceiptBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+                sql = "SELECT * FROM receiptbill WHERE operatorID='" + query.operator + "' ANDF state='" + query.state + "'";
                 sqlOfQuery.add(sql);
-            } else if (query.start == null && query.operator == null && query.client == null) {
-                sql = "SELECT * FROM receiptbill WHERE state='" + query.state + "'";
+            } else if ("待审批".equals(query.state)) {
+                sql = "SELECT * FROM receiptbill WHERE state='待审批'";
                 sqlOfQuery.add(sql);
             } else {
-                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String operatorID = resultSet.getString("ID");
-                    sql = "SELECT * FROM ReceiptBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                if (query.start != null) {
+                    sql = "SELECT * FROM receiptbill WHERE (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "') AND state='审批通过'";
                     sqlOfQuery.add(sql);
-                }
-                sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String clientID = resultSet.getString("ID");
-                    sql = "SELECT * FROM ReceiptBill WHERE (clientID='" + clientID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
-                    sqlOfQuery.add(sql);
+                } else {
+                    sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                    resultSet = statement.executeQuery(sql);
+                    while (resultSet.next()) {
+                        String operatorID = resultSet.getString("ID");
+                        sql = "SELECT * FROM receiptbill WHERE operatorID='" + operatorID + "' AND " + "state = '审批通过'";
+                        sqlOfQuery.add(sql);
+                    }
+                    sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
+                    resultSet = statement.executeQuery(sql);
+                    while (resultSet.next()) {
+                        String clientID = resultSet.getString("ID");
+                        sql = "SELECT * FROM receiptbill WHERE clientID='" + clientID + "' AND state='审批通过'";
+                        sqlOfQuery.add(sql);
+                    }
                 }
             }
             for (int i = 0; i < sqlOfQuery.size(); i++) {

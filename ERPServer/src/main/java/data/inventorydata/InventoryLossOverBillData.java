@@ -45,19 +45,24 @@ public class InventoryLossOverBillData extends UnicastRemoteObject implements In
             ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
             ResultSet resultSet;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
-                sql = "SELECT * FROM InventoryLossOverBill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
+            if("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                sql = "SELECT * FROM inventorylossoverbill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                 sqlOfQuery.add(sql);
-            } else if (query.start == null && query.operator == null && query.client == null) {
-                sql = "SELECT * FROM inventorylossoverbill WHERE state='" + query.state + "'";
+            } else if ("待审批".equals(query.state)) {
+                sql = "SELECT * FROM inventorylossoverbill WHERE state='待审批'";
                 sqlOfQuery.add(sql);
             } else {
-                sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    String operatorID = resultSet.getString("ID");
-                    sql = "SELECT * FROM InventoryLossOverBill WHERE (operatorID='" + operatorID + "'" + (query.start == null ? "" : " OR (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "')") + ") AND state='" + query.state + "'";
+                if (query.start != null) {
+                    sql = "SELECT * FROM inventorylossoverbill WHERE (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "') AND state='审批通过'";
                     sqlOfQuery.add(sql);
+                } else {
+                    sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                    resultSet = statement.executeQuery(sql);
+                    while (resultSet.next()) {
+                        String operatorID = resultSet.getString("ID");
+                        sql = "SELECT * FROM inventorylossoverbill WHERE operatorID='" + operatorID + "' AND " + "state = '审批通过'";
+                        sqlOfQuery.add(sql);
+                    }
                 }
             }
             for (int i = 0; i < sqlOfQuery.size(); i++) {
