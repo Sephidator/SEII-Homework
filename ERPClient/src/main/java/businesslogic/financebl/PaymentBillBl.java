@@ -66,17 +66,19 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
             accountTool.editAccount(accountVO);
         }
 
-         /*添加message*/
-        MessageTool messageTool = new MessageBl();
-        String message="请从银行账户付款："+System.lineSeparator();
-        for(TransItemVO transItemVO : transItemVOS){
-            message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
-        }
-        message+= "付款对象："+System.lineSeparator();
-        message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
+        /*添加message*/
+        if(paymentBillPO.getTotal()>0){
+            MessageTool messageTool = new MessageBl();
+            String message="请从银行账户付款："+System.lineSeparator();
+            for(TransItemVO transItemVO : transItemVOS){
+                message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
+            }
+            message+= "付款对象："+System.lineSeparator();
+            message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
 
-        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
-        messageTool.addMessage(messageVO);
+            MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
+            messageTool.addMessage(messageVO);
+        }
     }
 
     @Override
@@ -129,6 +131,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
 
         return clientVOS;
     }
+
 
     @Override
     /**

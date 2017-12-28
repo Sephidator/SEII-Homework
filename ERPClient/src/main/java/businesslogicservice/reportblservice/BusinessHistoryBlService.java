@@ -1,16 +1,22 @@
 package main.java.businesslogicservice.reportblservice;
 
 import main.java.vo.bill.BillVO;
+import main.java.vo.bill.financebill.CashBillVO;
 import main.java.vo.bill.financebill.PaymentBillVO;
 import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.report.BusinessHistoryQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 
 public interface BusinessHistoryBlService {
     public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query) throws Exception;
 
-    public String reversePaymentBill(PaymentBillVO paymentBillVO) throws Exception;//红冲功能，只允许红冲收款单和付款单，红冲收款单时生成一张付款单并标注
+    //红冲功能，只允许红冲财务单据
+    public String reversePaymentBill(PaymentBillVO paymentBillVO, UserVO operator) throws Exception;
 
-    public String reverseReceiptBill(ReceiptBillVO receiptBillVO) throws Exception;
+    public String reverseReceiptBill(ReceiptBillVO receiptBillVO, UserVO operator) throws Exception;
+
+    public String reverseCashBill (CashBillVO cashBillVO, UserVO operator) throws Exception;
+
 }

@@ -38,4 +38,9 @@ public class CashBillToolMock implements CashBillTool {
         cashBillVOArrayList.add(cashBillVO);
         return cashBillVOArrayList;
     }
+
+    @Override
+    public String submit(CashBillVO bill) throws Exception {
+        return "";
+    }
 }

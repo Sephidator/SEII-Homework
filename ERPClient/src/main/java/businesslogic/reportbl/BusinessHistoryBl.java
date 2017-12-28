@@ -16,9 +16,9 @@ import main.java.businesslogic.salebl.SaleTradeBillTool;
 import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
-import main.java.vo.bill.financebill.PaymentBillVO;
-import main.java.vo.bill.financebill.ReceiptBillVO;
+import main.java.vo.bill.financebill.*;
 import main.java.vo.report.BusinessHistoryQueryVO;
+import main.java.vo.user.UserVO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,7 +94,6 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
             billVOArrayList.addAll(cashBillTool.getCashBillList(billQueryVO));
         }
 
-        System.out.println(billVOArrayList.size());
         return billVOArrayList;
     }
 
@@ -103,23 +102,63 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
      * @version: 1
      * @date: 2017.12.11 14:02
      * @para: [paymentBillVO]
-     * @function: 生成一张数字相同的收款单并自动提交审批
+     * @function: 生成用于红冲的付款单并自动提交审批
      */
-    public String reversePaymentBill(PaymentBillVO paymentBillVO) throws Exception {
+    public String reversePaymentBill(PaymentBillVO paymentBillVO, UserVO operator) throws Exception {
 
+        /*由ReceiptBillVO生成PaymentBillVO*/
+        PaymentBillVO reverseBill = new PaymentBillVO();
+
+        reverseBill.setOperator(operator);
+        reverseBill.setClient(paymentBillVO.getClient());
+        reverseBill.setComment("用于红冲编号为"+paymentBillVO.getID()+"的单据");
+        reverseBill.setTime(new Date());
+        reverseBill.setTotal(-paymentBillVO.getTotal());
+        reverseBill.setState("待审批");
+
+        ArrayList<TransItemVO> transList=new ArrayList<>();
+        for(TransItemVO item: paymentBillVO.getTransList()){
+            TransItemVO newItem=new TransItemVO(item.account,-item.transAmount,item.comment);
+            transList.add(newItem);
+        }
+        reverseBill.setTransList(transList);
+
+        /*提交审批*/
+        PaymentBillTool paymentBillTool = new PaymentBillBl();
+        String id = paymentBillTool.submit(reverseBill);
+
+        return id;
+
+    }
+
+    @Override
+    /**
+     * @version: 1
+     * @date: 2017.12.11 14:02
+     * @para: [receiptBillVO] 
+     * @function: 生成用于红冲的收款单并自动提交审批
+     */
+    public String reverseReceiptBill(ReceiptBillVO receiptBillVO, UserVO operator) throws Exception {
         /*由PaymentBillVO生成ReceiptBillVO*/
-        ReceiptBillVO receiptBillVO = new ReceiptBillVO();
-        receiptBillVO.setOperator(paymentBillVO.getOperator());
-        receiptBillVO.setClient(paymentBillVO.getClient());
-        receiptBillVO.setTransList(paymentBillVO.getTransList());
-        receiptBillVO.setComment("用于红冲编号为"+paymentBillVO.getID()+"的单据");
-        receiptBillVO.setTime(new Date());
-        receiptBillVO.setTotal(paymentBillVO.getTotal());
-        receiptBillVO.setState("待审批");
+        ReceiptBillVO reverseBill = new ReceiptBillVO();
+
+        reverseBill.setOperator(operator);
+        reverseBill.setClient(receiptBillVO.getClient());
+        reverseBill.setComment("用于红冲编号为"+receiptBillVO.getID()+"的单据");
+        reverseBill.setTime(new Date());
+        reverseBill.setTotal(-receiptBillVO.getTotal());
+        reverseBill.setState("待审批");
+
+        ArrayList<TransItemVO> transList=new ArrayList<>();
+        for(TransItemVO item: receiptBillVO.getTransList()){
+            TransItemVO newItem=new TransItemVO(item.account,-item.transAmount,item.comment);
+            transList.add(newItem);
+        }
+        reverseBill.setTransList(transList);
 
         /*提交审批*/
         ReceiptBillTool receiptBillTool = new ReceiptBillBl();
-        String id = receiptBillTool.submit(receiptBillVO);
+        String id = receiptBillTool.submit(reverseBill);
 
         return id;
     }
@@ -128,24 +167,30 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
     /**
      * @version: 1
      * @date: 2017.12.11 14:02
-     * @para: [receiptBillVO] 
-     * @function: 
+     * @para: [receiptBillVO]
+     * @function: 生成用于红冲的现金费用单并自动提交审批
      */
-    public String reverseReceiptBill(ReceiptBillVO receiptBillVO) throws Exception {
+    public String reverseCashBill(CashBillVO cashBillVO, UserVO operator) throws Exception {
+        /*由PaymentBillVO生成ReceiptBillVO*/
+        CashBillVO reverseBill = new CashBillVO();
 
-        /*由ReceiptBillVO生成PaymentBillVO*/
-        PaymentBillVO paymentBillVO = new PaymentBillVO();
-        paymentBillVO.setOperator(receiptBillVO.getOperator());
-        paymentBillVO.setClient(receiptBillVO.getClient());
-        paymentBillVO.setTransList(receiptBillVO.getTransList());
-        paymentBillVO.setComment("用于红冲编号为"+receiptBillVO.getID()+"的单据");
-        paymentBillVO.setTime(new Date());
-        paymentBillVO.setTotal(receiptBillVO.getTotal());
-        paymentBillVO.setState("待审批");
+        reverseBill.setOperator(operator);
+        reverseBill.setAccount(cashBillVO.getAccount());
+        reverseBill.setComment("用于红冲编号为"+cashBillVO.getID()+"的单据");
+        reverseBill.setTime(new Date());
+        reverseBill.setTotal(-cashBillVO.getTotal());
+        reverseBill.setState("待审批");
+
+        ArrayList<CashItemVO> itemList=new ArrayList<>();
+        for(CashItemVO item: cashBillVO.getItemList()){
+            CashItemVO newItem=new CashItemVO(item.ItemName,item.amount,item.comment);
+            itemList.add(newItem);
+        }
+        reverseBill.setItemList(itemList);
 
         /*提交审批*/
-        PaymentBillTool paymentBillTool = new PaymentBillBl();
-        String id = paymentBillTool.submit(paymentBillVO);
+        CashBillTool cashBillTool = new CashBillBl();
+        String id = cashBillTool.submit(reverseBill);
 
         return id;
     }

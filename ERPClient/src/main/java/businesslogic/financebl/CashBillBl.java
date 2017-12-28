@@ -49,19 +49,20 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         accountTool.editAccount(accountVO);
 
         /*添加Message*/
-        MessageTool messageTool = new MessageBl();
-        String message = "报销条目清单："+System.lineSeparator();
-        double total=0;
-        for(CashItemVO cashItemVO : cashBillVO.getItemList()){ //列出现金费用单的每一个报销项目
-            message += "---"+cashItemVO.ItemName + "：报销" + cashItemVO.amount+"元。"+System.lineSeparator();
-            total+=cashItemVO.amount;
+        if(cashBillVO.getTotal()>0){
+            MessageTool messageTool = new MessageBl();
+            String message = "报销条目清单："+System.lineSeparator();
+            double total=0;
+            for(CashItemVO cashItemVO : cashBillVO.getItemList()){ //列出现金费用单的每一个报销项目
+                message += "---"+cashItemVO.ItemName + "：报销" + cashItemVO.amount+"元。"+System.lineSeparator();
+                total+=cashItemVO.amount;
+            }
+            message+="总计："+total+"元。"+System.lineSeparator();
+            message+="使用账户："+cashBillVO.getAccount().getName()+System.lineSeparator();
+
+            MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),message);
+            messageTool.addMessage(messageVO);
         }
-        message+="总计："+total+"元。"+System.lineSeparator();
-        message+="使用账户："+cashBillVO.getAccount().getName()+System.lineSeparator();
-
-        MessageVO messageVO = new MessageVO(cashBillVO.getOperator(),cashBillVO.getOperator(),message);
-        messageTool.addMessage(messageVO);
-
     }
 
     /**

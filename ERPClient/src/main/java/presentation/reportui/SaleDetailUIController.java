@@ -83,19 +83,6 @@ public class SaleDetailUIController extends CenterUIController {
         this.service = service;
     }
 
-    public void refresh(SaleDetailQueryVO query){
-        try{
-            ArrayList<SaleRecordVO> saleRecordList=service.getSaleRecordList(query);
-            showSaleRecordList(saleRecordList);
-        }catch(DataException e){
-            UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找销售明细表失败","数据库错误");
-        }catch(Exception e){
-            UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找销售明细表失败","RMI连接错误");
-        }
-    }
-
     private void showInputField(String condition){
         start.setValue(null);
         end.setValue(null);
@@ -120,6 +107,19 @@ public class SaleDetailUIController extends CenterUIController {
             inputInfo.setVisible(true);
             search.setVisible(true);
             inputInfo.setPromptText("请输入"+condition);
+        }
+    }
+
+    public void refresh(SaleDetailQueryVO query){
+        try{
+            ArrayList<SaleRecordVO> saleRecordList=service.getSaleRecordList(query);
+            showSaleRecordList(saleRecordList);
+        }catch(DataException e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找销售明细表失败","数据库错误");
+        }catch(Exception e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找销售明细表失败","RMI连接错误");
         }
     }
 

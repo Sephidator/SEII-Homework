@@ -172,6 +172,9 @@ public class SaleTradeBillUIController extends InfoUIController {
             cancel.setText("取消");
 
             comment.setEditable(false);
+            discount.setEditable(false);
+            useVoucher.setEditable(false);
+
             clientChoiceBox.setDisable(true);
             promotionChoiceBox.setDisable(true);
             add.setDisable(true);

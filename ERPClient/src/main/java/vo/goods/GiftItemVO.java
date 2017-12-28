@@ -23,7 +23,7 @@ public class GiftItemVO {
 
     public GiftItemVO(GiftItemPO giftItemPO)throws Exception{
         this.number=giftItemPO.number;
-
+        this.price=giftItemPO.price;
         GoodsTool goodsTool=new GoodsBl();
         this.goods=goodsTool.find(giftItemPO.goodsID);
     }

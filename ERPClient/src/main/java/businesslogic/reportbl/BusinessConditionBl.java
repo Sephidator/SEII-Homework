@@ -62,7 +62,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
      */
     public ArrayList<Double> getCondition(BusinessConditionQueryVO query)throws Exception {
 
-        BillQueryVO billQueryVO = null;
+        BillQueryVO billQueryVO = new BillQueryVO("审批通过",null,null,null,null,null);
         if(query != null){
             billQueryVO.start = query.start;
             billQueryVO.end = query.end;
@@ -72,7 +72,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
          * 记录销售出货单的总额减去销售退货单总额，
          * 折让只为销售出货单的discount以及促销策略部分
          * */
-        double saleTotalBeforeDiscount = 0;//折让后销售收入
+        double saleTotalBeforeDiscount = 0;//折让前销售收入
         double saleDiscount = 0;//折让
 
         SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
@@ -91,44 +91,21 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         /*****************************************************************/
 
         /*商品收入
-        * 商品收入应该是以下四个收入的总和
+        * 商品收入的计算简化成商品报溢收入
         * */
         double goodsTotal = 0;//商品收入
 
         //商品报溢收入，从库存溢损单里面取得商品和数量差然后相乘，求和
-        double goodsOverflowTotal = 0;//报溢收入
         InventoryLossOverBillTool inventoryLossOverBillTool = new InventoryLossOverBillBl();
         ArrayList<InventoryLossOverBillVO> inventoryLossOverBillVOS = inventoryLossOverBillTool.getInventoryLossOverBillList(billQueryVO);
         for(InventoryLossOverBillVO inventoryLossOverBillVO : inventoryLossOverBillVOS){
             ArrayList<LossOverItemVO> lossOverItemVOS = inventoryLossOverBillVO.getLossOverList();
-            for(LossOverItemVO lossOverItemVO : lossOverItemVOS)//只能实际数量大于系统数量，下面商品类支出会计算损失的
-                if(lossOverItemVO.actualNumber > lossOverItemVO.goodsNumber)
+            for(LossOverItemVO lossOverItemVO : lossOverItemVOS) { //只能实际数量大于系统数量，下面商品类支出会计算损失的
+                if (lossOverItemVO.actualNumber > lossOverItemVO.goodsNumber)
                     goodsTotal += (lossOverItemVO.price * (lossOverItemVO.actualNumber - lossOverItemVO.goodsNumber));
+            }
         }
 
-//        //成本调价收入，对在库存的所有商品进行统计，目前无法知道所有库存的商品，除非统计所有的进货、退货和销售单还有报溢报损等
-//        double costTotal = 0;
-//
-//        //进货退货差价,需要拿到同一批货的进价和退货的价格，目前无法判断同一批货
-//        double priceDiffTotal = 0;
-
-        // 代金券与实际代金券差额收入，（销售单promotionID找到发放代金券总额，减去实际上代金券使用金额，求和）
-        //实现：通过每一个销售单的PromotionID，拿到PromotionVO，通过type转成相应子类型，拿到代金券代金总额；
-        // 然后每一个销售单的代金券是实际使用的钱。总额减去实际使用就是差额收入了
-        double diffVoucherGetTotal = 0;//代金券差额
-        double voucherTotal = 0;//发的总代金券
-        double voucherUse = 0;//使用的代金券额度
-        PromotionVO promotionVO;
-
-        for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
-            promotionVO = saleTradeBillVO.getPromotion();
-            voucherTotal += promotionVO.countVoucher(saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount());
-            voucherUse += saleTradeBillVO.getAmountOfVoucher();
-        }
-
-        diffVoucherGetTotal = voucherTotal - voucherUse;
-
-        goodsTotal = goodsOverflowTotal + diffVoucherGetTotal;
 
         /*销售成本*/
         //进货单总金额 - 进货退货单总金额
@@ -160,17 +137,19 @@ public class BusinessConditionBl implements BusinessConditionBlService {
             ArrayList<LossOverItemVO> lossOverItemVOS = inventoryLossOverBillVO.getLossOverList();
             for(LossOverItemVO lossOverItemVO : lossOverItemVOS)//只能实际数量小于系统数量，即商品处在破损状态
                 if(lossOverItemVO.actualNumber < lossOverItemVO.goodsNumber)
-                    goodsBrokenCost += (lossOverItemVO.price * (lossOverItemVO.actualNumber - lossOverItemVO.goodsNumber));
+                    goodsBrokenCost += (lossOverItemVO.price * (lossOverItemVO.goodsNumber-lossOverItemVO.actualNumber));
         }
 
         //商品赠出,通过库存赠送单计算总额
         double goodsPresentCost = 0;
         InventoryGiftBillTool inventoryGiftBillTool = new InventoryGiftBillBl();
         ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS = inventoryGiftBillTool.getInventoryGiftBillList(billQueryVO);
+        System.out.println("number:@"+inventoryGiftBillVOS.size()+"@");
         for(InventoryGiftBillVO inventoryGiftBillVO : inventoryGiftBillVOS){
             ArrayList<GiftItemVO> giftItemVOS = inventoryGiftBillVO.getGiftList();
-            for(GiftItemVO giftItemVO : giftItemVOS)
+            for(GiftItemVO giftItemVO : giftItemVOS) {
                 goodsPresentCost += (giftItemVO.number * giftItemVO.price);
+            }
         }
 
         goodsExpend = goodsBrokenCost + goodsPresentCost;
@@ -178,20 +157,26 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         /*****************************************************************/
 
         /* 折让后总收入：销售收入 + 商品类收入 - 折让金额 */
-        double totalAfterDisocunt = saleTotalBeforeDiscount + goodsTotal -saleDiscount;
+        double totalAfterDisocunt = saleTotalBeforeDiscount + goodsTotal - saleDiscount;
 
         /* 总支出：销售成本 + 商品类支出 */
         double totalExpend = saleCostTotal + goodsExpend;
 
-        /* 利润：总支出 - 折让后总收入 */
-        double profit = totalExpend - totalAfterDisocunt;
+        /* 利润：折让后总收入 - 总支出 */
+        double profit = totalAfterDisocunt - totalExpend ;
 
 
 
         //按顺序加入list，每一行是一类
         ArrayList<Double> resultList = new ArrayList<>();
-        resultList.add(saleTotalBeforeDiscount);resultList.add(goodsTotal);resultList.add(saleDiscount);resultList.add(totalAfterDisocunt);
-        resultList.add(saleCostTotal);resultList.add(goodsExpend);resultList.add(totalExpend);resultList.add(profit);
+        resultList.add(saleTotalBeforeDiscount);
+        resultList.add(goodsTotal);
+        resultList.add(saleDiscount);
+        resultList.add(totalAfterDisocunt);
+        resultList.add(saleCostTotal);
+        resultList.add(goodsExpend);
+        resultList.add(totalExpend);
+        resultList.add(profit);
 
         return resultList;
     }

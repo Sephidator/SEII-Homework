@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import main.java.MainApp;
 import main.java.businesslogic.financebl.PaymentBillBl;
+import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
 import main.java.businesslogicfactory.financeblfactory.PaymentBillBlFactory;
 import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
 import main.java.businesslogicfactory.reportblfactory.BusinessHistoryBlFactory;
@@ -17,6 +18,7 @@ import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
 import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
+import main.java.presentation.financeui.CashBillUIController;
 import main.java.presentation.financeui.PaymentBillUIController;
 import main.java.presentation.financeui.ReceiptBillUIController;
 import main.java.presentation.mainui.RootUIController;
@@ -26,6 +28,7 @@ import main.java.presentation.uiutility.CenterUIController;
 import main.java.presentation.uiutility.UITool;
 import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
+import main.java.vo.bill.financebill.CashBillVO;
 import main.java.vo.bill.financebill.PaymentBillVO;
 import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.report.BusinessHistoryQueryVO;
@@ -94,20 +97,6 @@ public class BusinessHistoryUIController extends CenterUIController {
         this.service = service;
     }
 
-    public void refresh(BusinessHistoryQueryVO query){
-        try{
-            ArrayList<BillVO> billList=service.getBillList(query);
-            showBillList(billList);
-        }catch(DataException e){
-            UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找经营历程表失败","数据库错误");
-        }catch(Exception e){
-            e.printStackTrace();
-            UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找经营历程表失败","RMI连接错误");
-        }
-    }
-
     private void showInputField(String condition){
         start.setValue(null);
         end.setValue(null);
@@ -133,6 +122,20 @@ public class BusinessHistoryUIController extends CenterUIController {
                 inputInfo.setVisible(true);
                 search.setVisible(true);
             }
+        }
+    }
+
+    public void refresh(BusinessHistoryQueryVO query){
+        try{
+            ArrayList<BillVO> billList=service.getBillList(query);
+            showBillList(billList);
+        }catch(DataException e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找经营历程表失败","数据库错误");
+        }catch(Exception e){
+            e.printStackTrace();
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找经营历程表失败","RMI连接错误");
         }
     }
 
@@ -182,7 +185,7 @@ public class BusinessHistoryUIController extends CenterUIController {
             BillVO bill=billTableView.getSelectionModel().getSelectedItem();
             if(bill.getType().equals("收款单")){
                 try {
-                    String billID = service.reverseReceiptBill((ReceiptBillVO) bill);
+                    String billID = service.reverseReceiptBill((ReceiptBillVO) bill, root.getOperator());
                     UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success", "红冲收款单成功", "红冲单据ID：" + billID);
                 }catch(DataException e){
@@ -198,7 +201,7 @@ public class BusinessHistoryUIController extends CenterUIController {
             }
             else if(bill.getType().equals("付款单")){
                 try {
-                    String billID = service.reverseReceiptBill((ReceiptBillVO) bill);
+                    String billID = service.reversePaymentBill((PaymentBillVO) bill, root.getOperator());
                     UITool.showAlert(Alert.AlertType.INFORMATION,
                             "Success", "红冲付款单成功", "红冲单据ID：" + billID);
                 }catch(DataException e){
@@ -212,9 +215,25 @@ public class BusinessHistoryUIController extends CenterUIController {
                             "Error","红冲付款单失败", "RMI连接错误");
                 }
             }
+            else if(bill.getType().equals("现金费用单")){
+                try {
+                    String billID = service.reverseCashBill((CashBillVO) bill, root.getOperator());
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
+                            "Success", "红冲现金费用单成功", "红冲单据ID：" + billID);
+                }catch(DataException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲现金费用单失败", "数据库错误");
+                }catch(FullException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲现金费用单失败", "超过单日单据上限（99999张）");
+                }catch(Exception e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲现金费用单失败", "RMI连接错误");
+                }
+            }
             else{
                 UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","红冲单据失败", "只能对收付款单进行红冲");
+                        "Error","红冲单据失败", "只能对财务单据进行红冲");
             }
         }
     }
@@ -228,7 +247,7 @@ public class BusinessHistoryUIController extends CenterUIController {
                 ReceiptBillVO receiptBillVO=(ReceiptBillVO)bill;
 
                 ReceiptBillVO newBill = new ReceiptBillVO();
-                newBill.setOperator(receiptBillVO.getOperator());
+                newBill.setOperator(root.getOperator());
                 newBill.setClient(receiptBillVO.getClient());
                 newBill.setTransList(receiptBillVO.getTransList());
                 newBill.setComment(receiptBillVO.getComment());
@@ -243,19 +262,34 @@ public class BusinessHistoryUIController extends CenterUIController {
                 PaymentBillVO paymentBillVO=(PaymentBillVO)bill;
 
                 PaymentBillVO newBill = new PaymentBillVO();
-                newBill.setOperator(paymentBillVO.getOperator());
+                newBill.setOperator(root.getOperator());
                 newBill.setClient(paymentBillVO.getClient());
                 newBill.setTransList(paymentBillVO.getTransList());
                 newBill.setComment(paymentBillVO.getComment());
-                newBill.setTime(paymentBillVO.getTime());
+                newBill.setTime(new Date());
                 newBill.setTotal(paymentBillVO.getTotal());
                 newBill.setState("待审批");
 
                 PaymentBillUIController.init(PaymentBillBlFactory.getService(),newBill,1,root.getStage());
             }
+            else if(bill.getType().equals("现金费用单")){
+                handleReverse();
+                CashBillVO cashBillVO=(CashBillVO)bill;
+
+                CashBillVO newBill = new CashBillVO();
+                newBill.setOperator(root.getOperator());
+                newBill.setAccount(cashBillVO.getAccount());
+                newBill.setItemList(cashBillVO.getItemList());
+                newBill.setComment(cashBillVO.getComment());
+                newBill.setTime(new Date());
+                newBill.setTotal(cashBillVO.getTotal());
+                newBill.setState("待审批");
+
+                CashBillUIController.init(CashBillBlFactory.getService(),newBill,1,root.getStage());
+            }
             else{
                 UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","红冲单据失败", "只能对收付款单进行红冲");
+                        "Error","红冲单据失败", "只能对财务单据进行红冲");
             }
         }
     }

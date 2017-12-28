@@ -10,16 +10,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.util.Pair;
 import main.java.MainApp;
+import main.java.businesslogicfactory.reportblfactory.BusinessConditionBlFactory;
 import main.java.businesslogicservice.reportblservice.BusinessConditionBlService;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
+import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.presentation.uiutility.UITool;
+import main.java.vo.report.BusinessConditionQueryVO;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,6 +40,8 @@ public class BusinessConditionUIController extends CenterUIController {
     @FXML
     private TableColumn<Pair<String,Double>,String> amountColumn;
 
+    @FXML
+    private ChoiceBox<String> conditionSelector;
     @FXML
     private JFXDatePicker start;
     @FXML
@@ -56,8 +63,20 @@ public class BusinessConditionUIController extends CenterUIController {
 
     public void setBusinessConditionBlService(BusinessConditionBlService service) {
         this.service = service;
-        //ArrayList<SaleRecordVO> saleRecordList=saleRecordBlService.getSaleRecordList(null);
-        showBusinessConditionList(null);
+    }
+
+    private void refresh(BusinessConditionQueryVO query){
+        try{
+            ArrayList<Double> amountList=service.getCondition(query);
+            showBusinessConditionList(amountList);
+        }catch(DataException e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找经营历程表失败","数据库错误");
+        }catch(Exception e){
+            e.printStackTrace();
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找经营历程表失败","RMI连接错误");
+        }
     }
 
     /**
@@ -96,53 +115,48 @@ public class BusinessConditionUIController extends CenterUIController {
     @FXML
     private void handleSearch(){
         if(isValidTime()){
-            try{
-                Date startTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-                Date endTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-
-                SaleDetailQueryVO query=new SaleDetailQueryVO(startTime,endTime,null,null,null);
-                //ArrayList<SaleRecordVO> saleRecordList=service.getSaleRecordList(query);
-                //showSaleRecordList(saleRecordList);
-                System.out.println("选择了时间");
+            Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            try {
+                endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
             }catch(Exception e){}
+
+            BusinessConditionQueryVO query=new BusinessConditionQueryVO(startTime,endTime);
+            refresh(query);
         }
     }
 
     private boolean isValidTime(){
         String errorMessage = "";
 
-        try{
-            if (start.getEditor().getText()==null || start.getEditor().getText().length()==0) {
-                errorMessage += ("未输入起始日期。"+System.lineSeparator());
-            }
-            if (end.getEditor().getText()==null || end.getEditor().getText().length()==0) {
-                errorMessage+=("未输入结束日期。"+System.lineSeparator());
-            }
+        if (start.getValue()==null) {
+            errorMessage += ("未输入起始日期。"+System.lineSeparator());
+        }
+        if (end.getValue()==null) {
+            errorMessage+=("未输入结束日期。"+System.lineSeparator());
+        }
 
-            if(errorMessage.length()>0)
-                throw new Exception();
-
-            Date startTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-            Date endTime=new SimpleDateFormat("yyyy-MM-dd").parse(end.getEditor().getText());
-
-
-            if(endTime.before(startTime)){
-                errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
-            }
-
-            if(errorMessage.length()>0)
-                throw new Exception();
-
-            return true;
-        }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("不正确");
-            alert.setHeaderText("请确认筛选条件");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
             return false;
         }
 
+        Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        try {
+            endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
+        }catch(Exception e){}
+
+        if(endTime.before(startTime)){
+            errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
+            return false;
+        }
+
+        return true;
     }
 
     // 加载文件和界面的方法******************************************
@@ -159,9 +173,7 @@ public class BusinessConditionUIController extends CenterUIController {
 
             BusinessConditionUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setBusinessConditionBlService(null);
-
-            //controller.showSaleRecordList(list);
+            controller.setBusinessConditionBlService(BusinessConditionBlFactory.getService());
 
             root.setReturnPaneController(isFinance?new FinancePanelUIController():new ManagerPanelUIController());
         }catch(Exception e){

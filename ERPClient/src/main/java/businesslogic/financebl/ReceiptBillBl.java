@@ -66,17 +66,19 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
             accountTool.editAccount(accountVO);
         }
 
-         /*添加message*/
-        MessageTool messageTool = new MessageBl();
-        String message="请收款到银行账户："+System.lineSeparator();
-        for(TransItemVO transItemVO : transItemVOS){
-            message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
-        }
-        message+= "收款对象："+System.lineSeparator();
-        message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
+        /*添加message*/
+        if(receiptBillPO.getTotal()>0){
+            MessageTool messageTool = new MessageBl();
+            String message="请收款到银行账户："+System.lineSeparator();
+            for(TransItemVO transItemVO : transItemVOS){
+                message += "---"+transItemVO.account.getName() + "：" + transItemVO.transAmount + "元。"+System.lineSeparator();
+            }
+            message+= "收款对象："+System.lineSeparator();
+            message+= "---"+clientVO.getName()+"（"+clientVO.getID()+"）"+System.lineSeparator();
 
-        MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
-        messageTool.addMessage(messageVO);
+            MessageVO messageVO = new MessageVO(bill.getOperator(),bill.getOperator(),message);
+            messageTool.addMessage(messageVO);
+        }
     }
 
     @Override
