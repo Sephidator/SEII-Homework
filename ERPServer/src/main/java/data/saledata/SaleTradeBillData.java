@@ -118,7 +118,10 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                 sql = "SELECT * FROM saletradebill WHERE state='待审批'";
                 sqlOfQuery.add(sql);
             } else {
-                if (query.start != null) {
+                if (query.start == null && query.operator == null && query.client == null) {
+                    sql = "SELECT * FROM saletradebill WHERE state='审批通过'";
+                    sqlOfQuery.add(sql);
+                } else if (query.start != null) {
                     sql = "SELECT * FROM saletradebill WHERE (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "') AND state='审批通过'";
                     sqlOfQuery.add(sql);
                 } else {

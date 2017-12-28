@@ -53,6 +53,10 @@ public class SaleRefundBillData extends UnicastRemoteObject implements SaleRefun
                 sql = "SELECT * FROM salerefundbill WHERE state='待审批'";
                 sqlOfQuery.add(sql);
             } else {
+                if (query.start == null && query.operator == null && query.client == null) {
+                    sql = "SELECT * FROM salerefundbill WHERE state='审批通过'";
+                    sqlOfQuery.add(sql);
+                } else
                 if (query.start != null) {
                     sql = "SELECT * FROM salerefundbill WHERE (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "') AND state='审批通过'";
                     sqlOfQuery.add(sql);
