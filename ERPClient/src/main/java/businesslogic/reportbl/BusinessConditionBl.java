@@ -144,7 +144,6 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         double goodsPresentCost = 0;
         InventoryGiftBillTool inventoryGiftBillTool = new InventoryGiftBillBl();
         ArrayList<InventoryGiftBillVO> inventoryGiftBillVOS = inventoryGiftBillTool.getInventoryGiftBillList(billQueryVO);
-        System.out.println("number:@"+inventoryGiftBillVOS.size()+"@");
         for(InventoryGiftBillVO inventoryGiftBillVO : inventoryGiftBillVOS){
             ArrayList<GiftItemVO> giftItemVOS = inventoryGiftBillVO.getGiftList();
             for(GiftItemVO giftItemVO : giftItemVOS) {

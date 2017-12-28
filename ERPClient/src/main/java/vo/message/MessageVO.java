@@ -3,23 +3,31 @@ package main.java.vo.message;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.message.MessagePO;
+import main.java.vo.VO;
 import main.java.vo.user.UserVO;
 
-public class MessageVO {
+import java.util.Date;
+
+public class MessageVO extends VO {
     private UserVO receiver;
     private UserVO sender;
     private String message;
+    private Date time;
 
     public MessageVO() {
-        this.receiver = new UserVO();
-        this.sender = new UserVO();
-        this.message = "";
+        receiver = new UserVO();
+        sender = new UserVO();
+        message = "";
+        time=new Date();
+        visible=true;
     }
 
     public MessageVO(UserVO receiver, UserVO sender, String message) {
         this.receiver = receiver;
         this.sender = sender;
         this.message = message;
+        time = new Date();
+        visible = true;
     }
 
     public UserVO getReceiver() {
@@ -34,6 +42,10 @@ public class MessageVO {
         return message;
     }
 
+    public Date getTime() {
+        return time;
+    }
+    
     public void setReceiver(UserVO receiver) {
         this.receiver = receiver;
     }
@@ -46,23 +58,33 @@ public class MessageVO {
         this.message = message;
     }
 
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+
     /*get MessagePO*/
-    public MessagePO getMessagePO()throws Exception{
+    public MessagePO getMessagePO() throws Exception{
         MessagePO messagePO = new MessagePO();
-        messagePO.setMessage(this.getMessage());
-        messagePO.setReceiverID(this.getReceiver().getID());
-        messagePO.setSenderID(this.getSender().getID());
+        
+        messagePO.setMessage(message);
+        messagePO.setReceiverID(receiver.getID());
+        messagePO.setSenderID(sender.getID());
+        messagePO.setTime(time);
+        messagePO.setVisible(visible);
 
         return messagePO;
     }
 
     /*从MessageVO得到MessageVO*/
     public MessageVO(MessagePO messagePO)throws Exception{
-        this.setMessage(messagePO.getMessage());
+        message=messagePO.getMessage();
+        time=messagePO.getTime();
+        visible=messagePO.isVisible();
 
         UserTool userTool = new UserBl();
-        this.setSender(userTool.find(messagePO.getSenderID()));
-        this.setReceiver(userTool.find(messagePO.getReceiverID()));
+        sender=userTool.find(messagePO.getSenderID());
+        receiver=userTool.find(messagePO.getReceiverID());
     }
 }
 
