@@ -102,6 +102,8 @@ public class PurchaseTradeBillUIController extends InfoUIController {
                     }catch(Exception e){
                         UITool.showAlert(Alert.AlertType.ERROR,
                                 "Error","请检查输入","输入的商品数量必须为正数");
+                        showGoodsItemList();
+                        countTotal();
                     }
                 });
     }

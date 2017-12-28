@@ -89,10 +89,10 @@ public class SaleDetailUIController extends CenterUIController {
             showSaleRecordList(saleRecordList);
         }catch(DataException e){
             UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找销售明细失败","数据库错误");
+                    "Error","查找销售明细表失败","数据库错误");
         }catch(Exception e){
             UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找销售明细失败","RMI连接错误");
+                    "Error","查找销售明细表失败","RMI连接错误");
         }
     }
 
@@ -155,10 +155,6 @@ public class SaleDetailUIController extends CenterUIController {
         }
         else if(conditionSelector.getValue().equals("客户")){
             SaleDetailQueryVO query=new SaleDetailQueryVO(null,null,null,inputInfo.getText(),null);
-            refresh(query);
-        }
-        else if(conditionSelector.getValue().equals("业务员")){
-            SaleDetailQueryVO query=new SaleDetailQueryVO(null,null,null,null,inputInfo.getText());
             refresh(query);
         }
         else if(conditionSelector.getValue().equals("业务员")){

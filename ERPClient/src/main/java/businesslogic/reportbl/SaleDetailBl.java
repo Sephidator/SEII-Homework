@@ -43,8 +43,17 @@ public class SaleDetailBl implements SaleDetailBlService {
         ArrayList<GoodsItemVO> goodsItemVOS;
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
             goodsItemVOS = saleTradeBillVO.getSaleList();
-            for(GoodsItemVO goodsItemVO : goodsItemVOS)
-                saleRecordVOS.add(new SaleRecordVO(saleTradeBillVO.getTime(), goodsItemVO));
+            for(GoodsItemVO goodsItemVO : goodsItemVOS){
+                if(query!=null && query.goodsName!=null){
+                    if(query.goodsName.equals(goodsItemVO.goods.getName())){
+                        saleRecordVOS.add(new SaleRecordVO(saleTradeBillVO.getTime(), goodsItemVO));
+                    }
+                }
+                else{
+                    saleRecordVOS.add(new SaleRecordVO(saleTradeBillVO.getTime(), goodsItemVO));
+                }
+            }
+
         }
         return saleRecordVOS;
     }

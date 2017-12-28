@@ -42,57 +42,59 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
     public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query)throws Exception {
 
         /*将BusinessHistoryQueryVO转为BillQueryVO*/
-        BillQueryVO billQueryVO = null;
+        BillQueryVO billQueryVO = new BillQueryVO("审批通过",null,null,null,null,null);
         if(query != null){
             billQueryVO = new BillQueryVO("审批通过",query.start,query.end,query.type,query.operator,query.client);
         }
 
+
         ArrayList<BillVO> billVOArrayList = new ArrayList<>();
         /*调用相应单据的getArrayList*/
-        //财务类
-        if(billQueryVO == null ||billQueryVO.type.equals("付款单")){
-            PaymentBillTool paymentBillTool = new PaymentBillBl();
-            billVOArrayList.addAll(paymentBillTool.getPaymentBillList(billQueryVO));
-        }
-        if(billQueryVO == null ||billQueryVO.type.equals("收款单")){
-            ReceiptBillTool receiptBillTool = new ReceiptBillBl();
-            billVOArrayList.addAll(receiptBillTool.getReceiptBillList(billQueryVO));
-        }
-        if(billQueryVO == null ||billQueryVO.type.equals("现金费用单")){
-            CashBillTool cashBillTool = new CashBillBl();
-            billVOArrayList.addAll(cashBillTool.getCashBillList(billQueryVO));
-        }
-
-        //销售类
-        if(billQueryVO == null ||billQueryVO.type.equals("销售退货单")){
-            SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
-            billVOArrayList.addAll(saleRefundBillTool.getSaleRefundBillList(billQueryVO));
-        }
-        if(billQueryVO == null ||billQueryVO.type.equals("销售出货单")){
-            SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
-            billVOArrayList.addAll(saleTradeBillTool.getSaleTradeBillList(billQueryVO));
-        }
-
-        //进货类
-        if(billQueryVO == null ||billQueryVO.type.equals("进货退货单")){
-            PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
-            billVOArrayList.addAll(purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO));
-        }
-        if(billQueryVO == null ||billQueryVO.type.equals("进货单")){
-            PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
-            billVOArrayList.addAll(purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO));
-        }
-
         //仓库类
-        if(billQueryVO == null ||billQueryVO.type.equals("库存溢损单")){
+        if(billQueryVO.type==null || billQueryVO.type.equals("库存溢损单")){
             InventoryLossOverBillTool inventoryLossOverBillTool = new InventoryLossOverBillBl();
             billVOArrayList.addAll(inventoryLossOverBillTool.getInventoryLossOverBillList(billQueryVO));
         }
-        if(billQueryVO == null ||billQueryVO.type.equals("库存赠送单")){
+        if(billQueryVO.type==null || billQueryVO.type.equals("库存赠送单")){
             InventoryGiftBillTool inventoryGiftBillTool = new InventoryGiftBillBl();
             billVOArrayList.addAll(inventoryGiftBillTool.getInventoryGiftBillList(billQueryVO));
         }
 
+        //进货类
+        if(billQueryVO.type==null || billQueryVO.type.equals("进货退货单")){
+            PurchaseRefundBillTool purchaseRefundBillTool = new PurchaseRefundBillBl();
+            billVOArrayList.addAll(purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO));
+        }
+        if(billQueryVO.type==null || billQueryVO.type.equals("进货单")){
+            PurchaseTradeBillTool purchaseTradeBillTool = new PurchaseTradeBillBl();
+            billVOArrayList.addAll(purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO));
+        }
+
+        //销售类
+        if(billQueryVO.type==null || billQueryVO.type.equals("销售单")){
+            SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
+            billVOArrayList.addAll(saleTradeBillTool.getSaleTradeBillList(billQueryVO));
+        }
+        if(billQueryVO.type==null || billQueryVO.type.equals("销售退货单")){
+            SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
+            billVOArrayList.addAll(saleRefundBillTool.getSaleRefundBillList(billQueryVO));
+        }
+
+        //财务类
+        if(billQueryVO.type==null || billQueryVO.type.equals("付款单")){
+            PaymentBillTool paymentBillTool = new PaymentBillBl();
+            billVOArrayList.addAll(paymentBillTool.getPaymentBillList(billQueryVO));
+        }
+        if(billQueryVO.type==null || billQueryVO.type.equals("收款单")){
+            ReceiptBillTool receiptBillTool = new ReceiptBillBl();
+            billVOArrayList.addAll(receiptBillTool.getReceiptBillList(billQueryVO));
+        }
+        if(billQueryVO.type==null || billQueryVO.type.equals("现金费用单")){
+            CashBillTool cashBillTool = new CashBillBl();
+            billVOArrayList.addAll(cashBillTool.getCashBillList(billQueryVO));
+        }
+
+        System.out.println(billVOArrayList.size());
         return billVOArrayList;
     }
 
@@ -110,7 +112,7 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
         receiptBillVO.setOperator(paymentBillVO.getOperator());
         receiptBillVO.setClient(paymentBillVO.getClient());
         receiptBillVO.setTransList(paymentBillVO.getTransList());
-        receiptBillVO.setComment(paymentBillVO.getComment()+System.lineSeparator()+"这张单据是为了红冲编号为"+paymentBillVO.getID()+"的单据而生成的（系统）");
+        receiptBillVO.setComment("用于红冲编号为"+paymentBillVO.getID()+"的单据");
         receiptBillVO.setTime(new Date());
         receiptBillVO.setTotal(paymentBillVO.getTotal());
         receiptBillVO.setState("待审批");
@@ -136,7 +138,7 @@ public class BusinessHistoryBl implements BusinessHistoryBlService {
         paymentBillVO.setOperator(receiptBillVO.getOperator());
         paymentBillVO.setClient(receiptBillVO.getClient());
         paymentBillVO.setTransList(receiptBillVO.getTransList());
-        paymentBillVO.setComment(receiptBillVO.getComment()+System.lineSeparator()+"这张单据是为了红冲编号为"+receiptBillVO.getID()+"的单据而生成的（系统）");
+        paymentBillVO.setComment("用于红冲编号为"+receiptBillVO.getID()+"的单据");
         paymentBillVO.setTime(new Date());
         paymentBillVO.setTotal(receiptBillVO.getTotal());
         paymentBillVO.setState("待审批");
