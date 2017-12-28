@@ -70,12 +70,17 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                         sql = "SELECT * FROM saletradebill WHERE clientID='" + clientID + "' AND state='审批通过'";
                         sqlOfQuery.add(sql);
                     }
-                    sql = "SELECT * FROM goodsitem WHERE name='" + query.goodsName + "' AND site_ID LIKE '%XSD%'";
+                    sql = "SELECT * FROM goods WHERE name='" + query.goodsName + "'";
                     resultSet = statement.executeQuery(sql);
                     while (resultSet.next()) {
-                        String ID = resultSet.getString("site_ID");
-                        sql = "SELECT * FROM saletradebill WHERE ID='" + ID + "' AND state='审批通过'";
-                        sqlOfQuery.add(sql);
+                        String goodsID = resultSet.getString("ID");
+                        sql = "SELECT * FROM goodsitem WHERE goodsID='" + goodsID + "' AND site_ID LIKE '%XSD%'";
+                        ResultSet temp = connection.createStatement().executeQuery(sql);
+                        while (temp.next()) {
+                            String ID = temp.getString("site_ID");
+                            sql = "SELECT * FROM saletradebill WHERE ID='" + ID + "' AND state='审批通过'";
+                            sqlOfQuery.add(sql);
+                        }
                     }
                 }
             }
@@ -84,6 +89,7 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
             return list;
         } catch (SQLException e) {
             try {
+                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
             }
