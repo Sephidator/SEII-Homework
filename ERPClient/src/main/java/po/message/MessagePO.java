@@ -1,10 +1,8 @@
 package main.java.po.message;
 
-import main.java.po.PO;
-
 import java.util.Date;
 
-public class MessagePO extends PO {
+public class MessagePO {
     private String receiverID;
     private String senderID;
     private String message;
@@ -12,15 +10,13 @@ public class MessagePO extends PO {
 
     public MessagePO() {
         time=new Date();
-        visible=true;
     }
 
-    public MessagePO(String receiverID, String senderID, String message, Date time, boolean visible) {
+    public MessagePO(String receiverID, String senderID, String message, Date time) {
         this.receiverID = receiverID;
         this.senderID = senderID;
         this.message = message;
         this.time=time;
-        this.visible=visible;
     }
 
     public String getReceiverID() {
@@ -38,7 +34,7 @@ public class MessagePO extends PO {
     public Date getTime() {
         return time;
     }
-    
+
     public void setReceiverID(String receiverID) {
         this.receiverID = receiverID;
     }
