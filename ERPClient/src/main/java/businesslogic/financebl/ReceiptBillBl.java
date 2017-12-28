@@ -105,9 +105,7 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         /*dataService*/
         ReceiptBillDataService receiptBillDataService = ReceiptBillDataFactory.getService();
 
-        BillQueryPO billQueryPO = null;
-        if(query != null)
-            billQueryPO = query.getBillQueryPO();
+        BillQueryPO billQueryPO = query.getBillQueryPO();
         ArrayList<ReceiptBillPO> receiptBillPOS = receiptBillDataService.finds(billQueryPO);
 
         ArrayList<ReceiptBillVO> receiptBillVOS = new ArrayList<>();

@@ -8,18 +8,32 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import main.java.MainApp;
+import main.java.businesslogic.financebl.PaymentBillBl;
+import main.java.businesslogicfactory.financeblfactory.PaymentBillBlFactory;
+import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
+import main.java.businesslogicfactory.reportblfactory.BusinessHistoryBlFactory;
+import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
-import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
+import main.java.businesslogicservice.reportblservice.BusinessHistoryBlService;
+import main.java.exception.DataException;
+import main.java.exception.FullException;
+import main.java.presentation.financeui.PaymentBillUIController;
+import main.java.presentation.financeui.ReceiptBillUIController;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.messageui.ManagerPanelUIController;
 import main.java.presentation.uiutility.CenterUIController;
+import main.java.presentation.uiutility.UITool;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.BillVO;
+import main.java.vo.bill.financebill.PaymentBillVO;
+import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.report.BusinessHistoryQueryVO;
-import main.java.vo.report.SaleDetailQueryVO;
+import main.java.vo.report.BusinessHistoryQueryVO;
 import main.java.vo.report.SaleRecordVO;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -78,13 +92,25 @@ public class BusinessHistoryUIController extends CenterUIController {
 
     public void setBusinessHistoryBlService(BusinessHistoryBlService service) {
         this.service = service;
-        //ArrayList<SaleRecordVO> saleRecordList=saleRecordBlService.getSaleRecordList(null);
-        //showSaleRecordList(saleRecordList);
+    }
+
+    public void refresh(BusinessHistoryQueryVO query){
+        try{
+            ArrayList<BillVO> billList=service.getBillList(query);
+            showBillList(billList);
+        }catch(DataException e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找经营历程表失败","数据库错误");
+        }catch(Exception e){
+            e.printStackTrace();
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","查找经营历程表失败","RMI连接错误");
+        }
     }
 
     private void showInputField(String condition){
-        start.getEditor().setText("");
-        end.getEditor().setText("");
+        start.setValue(null);
+        end.setValue(null);
         inputInfo.setText("");
 
         if(condition.equals("所有单据")){
@@ -92,6 +118,7 @@ public class BusinessHistoryUIController extends CenterUIController {
             end.setVisible(false);
             inputInfo.setVisible(false);
             search.setVisible(false);
+            refresh(null);
         }
         else{
             if(condition.equals("时间")){
@@ -114,10 +141,7 @@ public class BusinessHistoryUIController extends CenterUIController {
      * */
     private void showBillList(ArrayList<BillVO> billList){
         billObservableList.removeAll();
-
-        for(int i=0;i<billList.size();i++){
-            billObservableList.add(billList.get(i));
-        }
+        billObservableList.setAll(billList);
         billTableView.setItems(billObservableList);
     }
 
@@ -128,73 +152,111 @@ public class BusinessHistoryUIController extends CenterUIController {
     private void handleSearch(){
         if(conditionSelector.getValue().equals("时间")){
             if(isValidTime()){
-                try{
-                    Date startTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-                    Date endTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-
-                    BusinessHistoryQueryVO query=new BusinessHistoryQueryVO(startTime,endTime,null,null,null);
-                    //ArrayList<SaleRecordVO> saleRecordList=service.getSaleRecordList(query);
-                    //showSaleRecordList(saleRecordList);
-                    System.out.println("选择了时间");
+                Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                try {
+                    endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
                 }catch(Exception e){}
+
+                BusinessHistoryQueryVO query=new BusinessHistoryQueryVO(startTime,endTime,null,null,null);
+                refresh(query);
             }
         }
         else if(conditionSelector.getValue().equals("单据类型")){
             BusinessHistoryQueryVO query=new BusinessHistoryQueryVO(null,null,inputInfo.getText(),null,null);
-            System.out.println("选择了单据类型");
+            refresh(query);
         }
         else if(conditionSelector.getValue().equals("客户")){
             BusinessHistoryQueryVO query=new BusinessHistoryQueryVO(null,null,null,inputInfo.getText(),null);
-            System.out.println("选择了客户");
+            refresh(query);
         }
         else if(conditionSelector.getValue().equals("操作员")){
             BusinessHistoryQueryVO query=new BusinessHistoryQueryVO(null,null,null,null,inputInfo.getText());
-            System.out.println("选择了业务员");
+            refresh(query);
         }
     }
 
     @FXML
     private void  handleReverse(){
-
+        if(isBillSelected()){
+            BillVO bill=billTableView.getSelectionModel().getSelectedItem();
+            if(bill.getType().equals("收款单")){
+                try {
+                    String billID = service.reverseReceiptBill((ReceiptBillVO) bill);
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
+                            "Success", "红冲收款单成功", "红冲单据ID：" + billID);
+                }catch(DataException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲收款单失败", "数据库错误");
+                }catch(FullException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲收款单失败", "超过单日单据上限（99999张）");
+                }catch(Exception e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲收款单失败", "RMI连接错误");
+                }
+            }
+            else if(bill.getType().equals("付款单")){
+                try {
+                    String billID = service.reverseReceiptBill((ReceiptBillVO) bill);
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
+                            "Success", "红冲付款单成功", "红冲单据ID：" + billID);
+                }catch(DataException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲付款单失败", "数据库错误");
+                }catch(FullException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲付款单失败", "超过单日单据上限（99999张）");
+                }catch(Exception e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","红冲付款单失败", "RMI连接错误");
+                }
+            }
+            else{
+                UITool.showAlert(Alert.AlertType.ERROR,
+                        "Error","红冲单据失败", "只能对收付款单进行红冲");
+            }
+        }
     }
 
     @FXML
     private void  handleReverseAndCopy(){
+        if(isBillSelected()){
+            BillVO bill=billTableView.getSelectionModel().getSelectedItem();
+            if(bill.getType().equals("收款单")){
+                handleReverse();
+                ReceiptBillVO receiptBillVO=(ReceiptBillVO)bill;
 
-    }
+                ReceiptBillVO newBill = new ReceiptBillVO();
+                newBill.setOperator(receiptBillVO.getOperator());
+                newBill.setClient(receiptBillVO.getClient());
+                newBill.setTransList(receiptBillVO.getTransList());
+                newBill.setComment(receiptBillVO.getComment());
+                newBill.setTime(receiptBillVO.getTime());
+                newBill.setTotal(receiptBillVO.getTotal());
+                newBill.setState("待审批");
 
-    private boolean isValidTime(){
-        String errorMessage = "";
-        try{
-            if (start.getEditor().getText()==null || start.getEditor().getText().length()==0) {
-                errorMessage += ("未输入起始日期。"+System.lineSeparator());
+                ReceiptBillUIController.init(ReceiptBillBlFactory.getService(),newBill,1,root.getStage());
             }
-            if (end.getEditor().getText()==null || end.getEditor().getText().length()==0) {
-                errorMessage+=("未输入结束日期。"+System.lineSeparator());
+            else if(bill.getType().equals("付款单")){
+                handleReverse();
+                PaymentBillVO paymentBillVO=(PaymentBillVO)bill;
+
+                PaymentBillVO newBill = new PaymentBillVO();
+                newBill.setOperator(paymentBillVO.getOperator());
+                newBill.setClient(paymentBillVO.getClient());
+                newBill.setTransList(paymentBillVO.getTransList());
+                newBill.setComment(paymentBillVO.getComment());
+                newBill.setTime(paymentBillVO.getTime());
+                newBill.setTotal(paymentBillVO.getTotal());
+                newBill.setState("待审批");
+
+                PaymentBillUIController.init(PaymentBillBlFactory.getService(),newBill,1,root.getStage());
             }
-
-            if(errorMessage.length()>0)
-                throw new Exception();
-
-            Date startTime=new SimpleDateFormat("yyyy-MM-dd").parse(start.getEditor().getText());
-            Date endTime=new SimpleDateFormat("yyyy-MM-dd").parse(end.getEditor().getText());
-
-
-            if(endTime.before(startTime)){
-                errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
+            else{
+                UITool.showAlert(Alert.AlertType.ERROR,
+                        "Error","红冲单据失败", "只能对收付款单进行红冲");
             }
-
-            if(errorMessage.length()>0)
-                throw new Exception();
-
-            return true;
-        }catch(Exception e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("不正确");
-            alert.setHeaderText("请确认筛选条件");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
-            return false;
         }
     }
 
@@ -212,13 +274,43 @@ public class BusinessHistoryUIController extends CenterUIController {
             return true;
         }else{
             // Nothing selected
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("未选择单据");
-            alert.setContentText("请选择要编辑的单据");
-            alert.showAndWait();
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "No Selection","未选择单据","请选择要编辑的单据");
             return false;
         }
+    }
+
+    private boolean isValidTime(){
+        String errorMessage = "";
+
+        if (start.getValue()==null) {
+            errorMessage += ("未输入起始日期。"+System.lineSeparator());
+        }
+        if (end.getValue()==null) {
+            errorMessage+=("未输入结束日期。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
+            return false;
+        }
+
+        Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        try {
+            endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
+        }catch(Exception e){}
+
+        if(endTime.before(startTime)){
+            errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
+            return false;
+        }
+
+        return true;
     }
 
     // 加载文件和界面的方法******************************************
@@ -235,9 +327,8 @@ public class BusinessHistoryUIController extends CenterUIController {
 
             BusinessHistoryUIController controller=loader.getController();
             controller.setRoot(root);
-            controller.setBusinessHistoryBlService(null);
-            controller.showInputField("所有单据");
-            //controller.showSaleRecordList(list);
+            controller.setBusinessHistoryBlService(BusinessHistoryBlFactory.getService());
+            controller.refresh(null);
 
             if(isFinance){
                 root.setReturnPaneController(new FinancePanelUIController());

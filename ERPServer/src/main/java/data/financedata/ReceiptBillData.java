@@ -50,7 +50,7 @@ public class ReceiptBillData extends UnicastRemoteObject implements ReceiptBillD
             String sql;
             ResultSet resultSet;
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
-                sql = "SELECT * FROM receiptbill WHERE operatorID='" + query.operator + "' ANDF state='" + query.state + "'";
+                sql = "SELECT * FROM receiptbill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                 sqlOfQuery.add(sql);
             } else if ("待审批".equals(query.state)) {
                 sql = "SELECT * FROM receiptbill WHERE state='待审批'";
