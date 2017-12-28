@@ -3,12 +3,11 @@ package main.java.vo.message;
 import main.java.businesslogic.userbl.UserBl;
 import main.java.businesslogic.userbl.UserTool;
 import main.java.po.message.MessagePO;
-import main.java.vo.VO;
 import main.java.vo.user.UserVO;
 
 import java.util.Date;
 
-public class MessageVO extends VO {
+public class MessageVO {
     private UserVO receiver;
     private UserVO sender;
     private String message;
@@ -19,7 +18,6 @@ public class MessageVO extends VO {
         sender = new UserVO();
         message = "";
         time=new Date();
-        visible=true;
     }
 
     public MessageVO(UserVO receiver, UserVO sender, String message) {
@@ -27,7 +25,6 @@ public class MessageVO extends VO {
         this.sender = sender;
         this.message = message;
         time = new Date();
-        visible = true;
     }
 
     public UserVO getReceiver() {
@@ -71,7 +68,6 @@ public class MessageVO extends VO {
         messagePO.setReceiverID(receiver.getID());
         messagePO.setSenderID(sender.getID());
         messagePO.setTime(time);
-        messagePO.setVisible(visible);
 
         return messagePO;
     }
@@ -80,7 +76,6 @@ public class MessageVO extends VO {
     public MessageVO(MessagePO messagePO)throws Exception{
         message=messagePO.getMessage();
         time=messagePO.getTime();
-        visible=messagePO.isVisible();
 
         UserTool userTool = new UserBl();
         sender=userTool.find(messagePO.getSenderID());
