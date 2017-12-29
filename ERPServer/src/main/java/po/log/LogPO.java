@@ -1,10 +1,9 @@
 package main.java.po.log;
 
-import main.java.po.PO;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class LogPO extends PO {
+public class LogPO implements Serializable {
 
     private String operatorID;//执行动作的操作人
 

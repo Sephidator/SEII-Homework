@@ -1,8 +1,9 @@
 package main.java.po.message;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MessagePO {
+public class MessagePO implements Serializable {
     private String receiverID;
     private String senderID;
     private String message;

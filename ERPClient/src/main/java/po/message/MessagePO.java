@@ -1,22 +1,23 @@
 package main.java.po.message;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MessagePO {
+public class MessagePO implements Serializable {
     private String receiverID;
     private String senderID;
     private String message;
     private Date time;
 
     public MessagePO() {
-        time=new Date();
+        time = new Date();
     }
 
     public MessagePO(String receiverID, String senderID, String message, Date time) {
         this.receiverID = receiverID;
         this.senderID = senderID;
         this.message = message;
-        this.time=time;
+        this.time = time;
     }
 
     public String getReceiverID() {
@@ -48,7 +49,7 @@ public class MessagePO {
     }
 
     public void setTime(Date time) {
-        this.time=time;
+        this.time = time;
     }
 
 }
