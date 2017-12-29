@@ -43,7 +43,7 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
             ResultSet resultSet = statement.executeQuery(sql);
             MessagePO messagePO;
             while (resultSet.next()) {
-                messagePO = new MessagePO(resultSet.getString("receiverID"), resultSet.getString("senderID"), resultSet.getString("message"), resultSet.getTimestamp("date"));
+                messagePO = new MessagePO(resultSet.getString("receiverID"), resultSet.getString("senderID"), resultSet.getString("message"), resultSet.getTimestamp("time"));
                 list.add(messagePO);
             }
             resultSet.close();
