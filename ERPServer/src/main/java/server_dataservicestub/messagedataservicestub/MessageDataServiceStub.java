@@ -19,4 +19,10 @@ public class MessageDataServiceStub implements MessageDataService {
     public void insert(MessagePO message) {
 
     }
+
+    @Override
+    public void delete(String receiverID, int number) {
+
+    }
+
 }

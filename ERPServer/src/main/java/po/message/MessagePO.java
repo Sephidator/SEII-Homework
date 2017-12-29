@@ -9,14 +9,14 @@ public class MessagePO {
     private Date time;
 
     public MessagePO() {
-        time=new Date();
+        time = new Date();
     }
 
     public MessagePO(String receiverID, String senderID, String message, Date time) {
         this.receiverID = receiverID;
         this.senderID = senderID;
         this.message = message;
-        this.time=time;
+        this.time = time;
     }
 
     public String getReceiverID() {
@@ -48,7 +48,7 @@ public class MessagePO {
     }
 
     public void setTime(Date time) {
-        this.time=time;
+        this.time = time;
     }
 
 }
