@@ -50,7 +50,6 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
             statement.close();
             return list;
         } catch (SQLException e) {
-            e.printStackTrace();
             try {
                 connection.rollback();
             } catch (SQLException e1) {
@@ -69,7 +68,7 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
 
         try {
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO Message VALUES ('" + message.getReceiverID() + "','" + message.getSenderID() + "','" + message.getMessage() + "','" + new Timestamp(message.getTime().getTime()) + "')";
+            String sql = "INSERT INTO Message (receiverID, senderID, message, time) VALUES ('" + message.getReceiverID() + "','" + message.getSenderID() + "','" + message.getMessage() + "','" + new Timestamp(message.getTime().getTime()) + "')";
             statement.executeUpdate(sql);
             statement.close();
         } catch (SQLException e) {
