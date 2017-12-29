@@ -76,7 +76,7 @@ public class UserUIController extends CenterUIController {
      * 取得用户列表并修改ObservableList的信息
      * */
     private void showUserList(ArrayList<UserVO> userList){
-        userObservableList.removeAll();
+        userObservableList.clear();
         userObservableList.setAll(userList);
         userTableView.setItems(userObservableList);
     }

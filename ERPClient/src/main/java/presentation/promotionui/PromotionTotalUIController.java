@@ -137,7 +137,7 @@ public class PromotionTotalUIController extends InfoUIController {
      * */
     private void showGiftItemList(){
         ArrayList<GiftItemVO> giftItemList=promotion.getGiftList();
-        giftItemTableView.getItems().clear();
+        giftItemObservableList.clear();
         giftItemObservableList.setAll(giftItemList);
         giftItemTableView.setItems(giftItemObservableList);
     }

@@ -139,7 +139,7 @@ public class CashBillUIController extends InfoUIController {
      * */
     private void showCashItemList(){
         ArrayList<CashItemVO> cashItemList=bill.getItemList();
-        cashItemTableView.getItems().clear();
+        cashItemObservableList.clear();
         cashItemObservableList.setAll(cashItemList);
         cashItemTableView.setItems(cashItemObservableList);
     }

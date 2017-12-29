@@ -128,7 +128,7 @@ public class InventoryLossOverBillUIController extends InfoUIController {
      * */
     private void showLossOverItemList(){
         ArrayList<LossOverItemVO> lossOverItemList=bill.getLossOverList();
-        lossOverItemTableView.getItems().clear();
+        lossOverItemObservableList.clear();
         lossOverItemObservableList.setAll(lossOverItemList);
         lossOverItemTableView.setItems(lossOverItemObservableList);
     }

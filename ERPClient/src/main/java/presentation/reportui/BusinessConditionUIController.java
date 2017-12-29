@@ -41,13 +41,9 @@ public class BusinessConditionUIController extends CenterUIController {
     private TableColumn<Pair<String,Double>,String> amountColumn;
 
     @FXML
-    private ChoiceBox<String> conditionSelector;
-    @FXML
     private JFXDatePicker start;
     @FXML
     private JFXDatePicker end;
-    @FXML
-    private Button search;
 
     // 加载文件后调用的方法******************************************
 
@@ -83,7 +79,7 @@ public class BusinessConditionUIController extends CenterUIController {
      * 取得客户列表并修改ObservableList的信息
      * */
     private void showBusinessConditionList(ArrayList<Double> amountList){
-        businessConditionObservableList.removeAll();
+        businessConditionObservableList.clear();
 
         if(amountList==null||amountList.size()<8){
             businessConditionObservableList.add(new Pair("销售收入",0));

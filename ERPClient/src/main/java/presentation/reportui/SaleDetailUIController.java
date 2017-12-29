@@ -127,7 +127,7 @@ public class SaleDetailUIController extends CenterUIController {
      * 取得客户列表并修改ObservableList的信息
      * */
     private void showSaleRecordList(ArrayList<SaleRecordVO> saleRecordList){
-        saleRecordObservableList.removeAll();
+        saleRecordObservableList.clear();
         saleRecordObservableList.setAll(saleRecordList);
         saleRecordTableView.setItems(saleRecordObservableList);
     }

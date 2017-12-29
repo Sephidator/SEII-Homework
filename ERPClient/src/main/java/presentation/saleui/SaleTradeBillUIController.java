@@ -251,7 +251,7 @@ public class SaleTradeBillUIController extends InfoUIController {
      * */
     private void showGoodsItemList(){
         ArrayList<GoodsItemVO> goodsItemList=bill.getSaleList();
-        goodsItemTableView.getItems().clear();
+        goodsItemObservableList.clear();
         goodsItemObservableList.setAll(goodsItemList);
         goodsItemTableView.setItems(goodsItemObservableList);
     }
@@ -260,7 +260,7 @@ public class SaleTradeBillUIController extends InfoUIController {
      * 取得赠品列表并修改ObservableList的信息
      * */
     private void showGiftItemList(ArrayList<GiftItemVO> giftItemList){
-        giftItemTableView.getItems().clear();
+        giftItemObservableList.clear();
         giftItemObservableList.setAll(giftItemList);
         giftItemTableView.setItems(giftItemObservableList);
     }

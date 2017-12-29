@@ -64,6 +64,7 @@ public class InitialUIController extends CenterUIController {
         yearSelector.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
             String text=list[newValue.intValue()];
             yearField.setText(text.equals("所有年份")?"":text);
+            refresh(yearField.getText());
         });
 
     }
@@ -98,24 +99,17 @@ public class InitialUIController extends CenterUIController {
      * 取得期初信息列表并修改ObservableList的信息
      * */
     private void showInitialList(ArrayList<InitialVO> initialList){
-        initialObservableList.removeAll();
+        initialObservableList.clear();
         initialObservableList.setAll(initialList);
         initialTableView.setItems(initialObservableList);
     }
 
     // 界面之中会用到的方法******************************************
 
-
-    @FXML
-    private void handleSearch(){
-        String searchInfo=yearField.getText();
-        refresh(searchInfo);
-    }
-
     @FXML
     private void establishInitial(){
         try{
-            int year= Calendar.getInstance().get(Calendar.YEAR)-1;
+            int year= Calendar.getInstance().get(Calendar.YEAR);
             ArrayList<InitialVO> list=service.getInitial(new InitialQueryVO(year));
             if(list.size()==0){
                 InitialVO initial=new InitialVO(
@@ -124,6 +118,7 @@ public class InitialUIController extends CenterUIController {
                         service.getClientList(null),
                         service.getAccountList(null));
                 InitialInfoUIController.init(service,initial,1,root.getStage());
+                refresh("");
             }
             else{
                 UITool.showAlert(Alert.AlertType.ERROR,
