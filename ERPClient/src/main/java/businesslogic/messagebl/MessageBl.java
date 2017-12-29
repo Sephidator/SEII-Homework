@@ -37,4 +37,17 @@ public class MessageBl implements MessageBlService,MessageTool{
         MessageDataService messageDataService = MessageDataFactory.getService();
         messageDataService.insert(message.getMessagePO());
     }
+
+    /**
+     * @version: 1
+     * @date: 2017.12.09 23:10
+     * @para: [receiverID, number]
+     * @function: 删除ID为receiverID某个用户的前number条系统消息
+     */
+    @Override
+    public void deleteMessage(String receiverID,int number)throws Exception {
+        /*dataService*/
+        MessageDataService messageDataService = MessageDataFactory.getService();
+        messageDataService.delete(receiverID,number);
+    }
 }

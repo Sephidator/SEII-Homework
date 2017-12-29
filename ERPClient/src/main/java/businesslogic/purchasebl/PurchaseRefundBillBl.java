@@ -194,7 +194,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = purchaseRefundBillVO.getClient();
-        clientVO.setPayable(clientVO.getPayable() + purchaseRefundBillVO.getTotal());
+        clientVO.setReceivable(clientVO.getReceivable() + purchaseRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
 
 

@@ -86,7 +86,7 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
      * @throws RemoteException,DataException
      */
     @Override
-    public void delete(String receiverID, int number) {
+    public void delete(String receiverID, int number) throws RemoteException {
         Connection connection = DataHelper.getConnection();
 
         try {

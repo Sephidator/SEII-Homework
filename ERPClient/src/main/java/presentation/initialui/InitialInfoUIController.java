@@ -14,8 +14,10 @@ import main.java.businesslogicfactory.goodssortblfactory.GoodsSortBlFactory;
 import main.java.businesslogicservice.initialblservice.InitialBlService;
 import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
 import main.java.exception.DataException;
+import main.java.exception.NotExistException;
 import main.java.presentation.uiutility.AddGoodsUIController;
 import main.java.presentation.uiutility.InfoUIController;
+import main.java.presentation.uiutility.UITool;
 import main.java.vo.account.AccountVO;
 import main.java.vo.bill.BillVO;
 import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
@@ -84,7 +86,7 @@ public class InitialInfoUIController extends InfoUIController {
 
     public void initialize(){
         goodsNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
-        goodsNameColumn.setCellValueFactory(cellData -> {
+        goodsSortColumn.setCellValueFactory(cellData -> {
             try {
                 return new SimpleStringProperty(GoodsSortBlFactory.getService().find(cellData.getValue().getGoodsSortID()).getName());
             } catch (Exception e) {
@@ -106,7 +108,7 @@ public class InitialInfoUIController extends InfoUIController {
 
         accountNameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getName()));
         bankAccountColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getBankAccount()));
-
+        accountRemainingColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getRemaining())));
     }
 
     // 设置controller数据的方法*****************************************
@@ -119,6 +121,9 @@ public class InitialInfoUIController extends InfoUIController {
     public void setInitial(InitialVO initial) {
         this.initial=initial;
         year.setText(String.valueOf(initial.getYear()));
+        showClientList(initial.getClientList());
+        showAccountList(initial.getAccountList());
+        showGoodsList(initial.getGoodsList());
     }
 
     /**
@@ -142,7 +147,7 @@ public class InitialInfoUIController extends InfoUIController {
      * 取得商品列表并修改ObservableList的信息
      * */
     private void showGoodsList(ArrayList<GoodsVO> goodsList){
-        goodsTableView.getItems().clear();
+        goodsObservableList.removeAll();
         goodsObservableList.setAll(goodsList);
         goodsTableView.setItems(goodsObservableList);
     }
@@ -172,8 +177,22 @@ public class InitialInfoUIController extends InfoUIController {
     private void handleConfirm(){
         String text=confirm.getText();
 
-        if(text.equals("期初建账")){
-            //
+        try{
+            if(text.equals("期初建账")){
+                service.establishInitial(initial);
+
+                UITool.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","添加期初信息成功",
+                        "年份："+initial.getYear());
+            }
+
+            dialogStage.close();
+        }catch(DataException e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","期初建账失败","数据库错误");
+        }catch(Exception e){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","期初建账失败","RMI连接错误");
         }
 
         dialogStage.close();
@@ -209,9 +228,6 @@ public class InitialInfoUIController extends InfoUIController {
             controller.setDialogStage(dialogStage);
             controller.setService(service);
             controller.setInitial(initial);
-            controller.showGoodsList(new ArrayList<>());
-            controller.showClientList(new ArrayList<>());
-            controller.showAccountList(new ArrayList<>());
             controller.setPaneFunction(command);
 
             // Show the dialog and wait until the user closes it.

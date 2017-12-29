@@ -54,7 +54,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
             String message = "报销条目清单："+System.lineSeparator();
             double total=0;
             for(CashItemVO cashItemVO : cashBillVO.getItemList()){ //列出现金费用单的每一个报销项目
-                message += "---"+cashItemVO.ItemName + "：报销" + cashItemVO.amount+"元。"+System.lineSeparator();
+                message += "---"+cashItemVO.ItemName + "：" + cashItemVO.amount+"元。"+System.lineSeparator();
                 total+=cashItemVO.amount;
             }
             message+="总计："+total+"元。"+System.lineSeparator();

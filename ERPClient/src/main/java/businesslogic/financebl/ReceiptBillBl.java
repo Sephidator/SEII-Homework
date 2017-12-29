@@ -42,15 +42,15 @@ public class ReceiptBillBl implements ReceiptBillBlService,ReceiptBillTool{
         receiptBillDataService.update(receiptBillPO);
 
 
-         /*修改应付数据*/
+         /*修改应收数据*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = clientTool.find(receiptBillPO.getClientID());
-        clientVO.setPayable(clientVO.getPayable() - receiptBillPO.getTotal());//原来的应付减去付款单的总金额
-        //如果应付修改后小于0，自动转为应收
-        if(clientVO.getPayable() < 0){
+        clientVO.setReceivable(clientVO.getReceivable() - receiptBillPO.getTotal());//原来的应付减去付款单的总金额
+        //如果应收修改后小于0，自动转为应付
+        if(clientVO.getReceivable() < 0){
             double delta = clientVO.getPayable();
-            clientVO.setReceivable(clientVO.getReceivable() - delta);
-            clientVO.setPayable(0);
+            clientVO.setPayable(clientVO.getPayable() - delta);
+            clientVO.setReceivable(0);
         }
         clientTool.editClient(clientVO);
 

@@ -89,6 +89,7 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
                 }
                 list.add(new InitialPO(year, goodsPOS, clientPOS, accountPOS));
             }
+            return list;
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -96,13 +97,12 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
             }
             throw new DataException();
         }
-        return null;
     }
 
     /**
      * @param po [期初建帐]
      * @return 新建期初建帐的ID
-     * @throws RemoteException,DataException
+     * @throws RemoteException,DataException,ExistException
      */
     @Override
     public synchronized String insert(InitialPO po) throws RemoteException {
@@ -128,7 +128,7 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
             if (goodsPOS != null)
                 for (int i = 0; i < goodsPOS.size(); i++) {
                     GoodsPO goodsPO = goodsPOS.get(i);
-                    sql = "INSERT INTO GoodsRecord VALUES ('" + ID + "','" + goodsPO.getName() + "','" +
+                    sql = "INSERT INTO GoodsRecord VALUES ('" + ID + "','" + goodsPO.getID() + "','" + goodsPO.getName() + "','" +
                             goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
                             goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
                     statement.executeUpdate(sql);

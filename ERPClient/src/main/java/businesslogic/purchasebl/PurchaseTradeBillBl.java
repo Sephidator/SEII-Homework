@@ -178,7 +178,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = purchaseTradeBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable() + purchaseTradeBillVO.getTotal());
+        clientVO.setPayable(clientVO.getPayable() + purchaseTradeBillVO.getTotal());
         clientTool.editClient(clientVO);
 
 
