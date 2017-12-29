@@ -47,7 +47,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="40.0" prefHeight="40.0" prefWidth="80.0" styleClass="myLabel-resize" text="选择年份" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="40.0" prefHeight="40.0" prefWidth="70.0" styleClass="myLabel-resize" text="选择年份" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
       <HBox layoutX="701.0" layoutY="26.0" spacing="20.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
          <children>
             <Button mnemonicParsing="false" onAction="#establishInitial" prefHeight="60.0" prefWidth="120.0" text="期初建账" />

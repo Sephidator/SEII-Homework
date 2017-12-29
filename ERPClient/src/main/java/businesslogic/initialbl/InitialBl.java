@@ -86,15 +86,19 @@ public class InitialBl implements InitialBlService{
      */
     public ArrayList<InitialVO> getInitial(InitialQueryVO query)throws Exception {
         InitialQueryPO initialQueryPO = null;
-        if(query != null)initialQueryPO = query.getInitialQueryPO();
+        if(query != null) {
+            initialQueryPO = query.getInitialQueryPO();
+        }
 
         /*dataService*/
         InitialDataService initialDataService = InitialDataFactory.getService();
         ArrayList<InitialPO> initialPOS = initialDataService.finds(initialQueryPO);
+
         //转换为ArrayList<InitialVO>
         ArrayList<InitialVO> initialVOS = new ArrayList<>();
-        for(InitialPO initialPO : initialPOS)
+        for(InitialPO initialPO : initialPOS){
             initialVOS.add(new InitialVO(initialPO));
+        }
 
         return initialVOS;
     }

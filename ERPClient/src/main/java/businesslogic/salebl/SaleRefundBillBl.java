@@ -168,7 +168,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleRefundBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable() + saleRefundBillVO.getTotal());
+        clientVO.setPayable(clientVO.getPayable() + saleRefundBillVO.getTotal());
         clientTool.editClient(clientVO);
 
 

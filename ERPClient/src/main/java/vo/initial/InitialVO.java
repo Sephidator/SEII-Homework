@@ -108,28 +108,28 @@ public class InitialVO extends VO {
     /*将PO转换成VO*/
     public InitialVO(InitialPO initialPO)throws Exception{
 
-        //VO的原始信息，可能数据库会增加
-        this.setID(initialPO.getID());
+        ID=initialPO.getID();
+        year=initialPO.getYear();
 
         /*得到ArrayList<GoodsVO>*/
         ArrayList<GoodsVO> goodsVOArrayList = new ArrayList<>();
         for(GoodsPO goods : initialPO.getGoodsList()){
             goodsVOArrayList.add(new GoodsVO(goods));
         }
-        this.goodsList = goodsVOArrayList;
+        goodsList = goodsVOArrayList;
 
         /*得到ArrayList<ClientVO>*/
         ArrayList<ClientVO> clientVOArrayList = new ArrayList<>();
         for(ClientPO client : initialPO.getClientList()){
             clientVOArrayList.add(new ClientVO(client));
         }
-        this.clientList = clientVOArrayList;
+        clientList = clientVOArrayList;
 
         /*得到ArrayList<AccountVO>*/
         ArrayList<AccountVO> accountVOArrayList = new ArrayList<>();
         for(AccountPO account : initialPO.getAccountList()){
             accountVOArrayList.add(new AccountVO(account));
         }
-        this.accountList = accountVOArrayList;
+        accountList = accountVOArrayList;
     }
 }

@@ -10,4 +10,6 @@ public interface MessageDataService extends Remote {
     ArrayList<MessagePO> finds(String receiverID) throws RemoteException;
 
     void insert(MessagePO message) throws RemoteException;
+
+    void delete(String receiverID, int number) throws RemoteException;
 }
