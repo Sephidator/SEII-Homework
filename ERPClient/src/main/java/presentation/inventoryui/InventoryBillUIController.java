@@ -92,7 +92,7 @@ public class InventoryBillUIController extends CenterUIController {
     }
 
     private void showInventoryBillList(ArrayList<InventoryBillVO> inventoryBillList){
-        inventoryBillObservableList.removeAll();
+        inventoryBillObservableList.clear();
         inventoryBillObservableList.setAll(inventoryBillList);
         inventoryBillTableView.setItems(inventoryBillObservableList);
     }

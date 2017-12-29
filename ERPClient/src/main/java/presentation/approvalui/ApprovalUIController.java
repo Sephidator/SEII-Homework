@@ -165,7 +165,7 @@ public class ApprovalUIController extends CenterUIController {
      * 取得客户列表并修改ObservableList的信息
      **/
     private void showBillList(ArrayList<BillVO> billList){
-        billTableView.getItems().clear();
+        billObservableList.clear();
         billObservableList.setAll(billList);
         billTableView.setItems(billObservableList);
     }

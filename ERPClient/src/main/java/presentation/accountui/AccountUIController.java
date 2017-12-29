@@ -79,7 +79,7 @@ public class AccountUIController extends CenterUIController {
      * 取得客户列表并修改ObservableList的信息
      * */
     private void showAccountList(ArrayList<AccountVO> accountList){
-        accountObservableList.removeAll();
+        accountObservableList.clear();
         accountObservableList.setAll(accountList);
         accountTableView.setItems(accountObservableList);
     }

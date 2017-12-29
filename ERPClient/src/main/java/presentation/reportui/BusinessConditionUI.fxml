@@ -19,7 +19,7 @@
       </TableView>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="search" ellipsisString="" graphicTextGap="0.0" layoutX="450.0" layoutY="35.0" onAction="#handleSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton ellipsisString="" graphicTextGap="0.0" layoutX="450.0" layoutY="35.0" onAction="#handleSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="25.0" />
             <JFXDatePicker fx:id="start" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="起始时间" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="10.0" />
             <JFXDatePicker fx:id="end" editable="false" prefHeight="35.0" prefWidth="320.0" promptText="结束时间" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="50.0" />
          </children>

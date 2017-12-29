@@ -104,7 +104,7 @@ public class FinanceBillUIController extends CenterUIController {
     }
 
     private void showFinanceBillList(ArrayList<FinanceBillVO> financeBillList){
-        financeBillObservableList.removeAll();
+        financeBillObservableList.clear();
         financeBillObservableList.setAll(financeBillList);
         financeBillTableView.setItems(financeBillObservableList);
     }

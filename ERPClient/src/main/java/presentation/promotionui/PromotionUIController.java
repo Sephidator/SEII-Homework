@@ -78,7 +78,7 @@ public class PromotionUIController extends CenterUIController {
      * 取得促销策略列表并修改ObservableList的信息
      * */
     private void showPromotionList(ArrayList<PromotionVO> promotionList){
-        promotionObservableList.removeAll();
+        promotionObservableList.clear();
         promotionObservableList.setAll(promotionList);
         promotionTableView.setItems(promotionObservableList);
     }

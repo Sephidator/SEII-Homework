@@ -95,7 +95,7 @@ public class SaleBillUIController extends CenterUIController {
 
 
     private void showSaleBillList(ArrayList<SaleBillVO> saleBillList){
-        saleBillObservableList.removeAll();
+        saleBillObservableList.clear();
         saleBillObservableList.setAll(saleBillList);
         saleBillTableView.setItems(saleBillObservableList);
     }

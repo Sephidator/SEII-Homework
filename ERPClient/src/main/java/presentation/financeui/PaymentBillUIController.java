@@ -153,7 +153,7 @@ public class PaymentBillUIController extends InfoUIController {
      * */
     private void showTransItemList(){
         ArrayList<TransItemVO> transItemList=bill.getTransList();
-        transItemTableView.getItems().clear();
+        transItemObservableList.clear();
         transItemObservableList.setAll(transItemList);
         transItemTableView.setItems(transItemObservableList);
     }

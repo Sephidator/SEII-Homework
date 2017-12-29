@@ -133,7 +133,7 @@ public class PromotionGoodsUIController extends InfoUIController {
      * */
     private void showGoodsItemList(){
         ArrayList<GoodsItemVO> goodsItemList=promotion.getGoodsList();
-        goodsItemTableView.getItems().clear();
+        goodsItemObservableList.clear();
         goodsItemObservableList.setAll(goodsItemList);
         goodsItemTableView.setItems(goodsItemObservableList);
     }

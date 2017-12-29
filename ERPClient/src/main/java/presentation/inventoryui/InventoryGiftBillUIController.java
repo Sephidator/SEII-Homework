@@ -154,7 +154,7 @@ public class InventoryGiftBillUIController extends InfoUIController {
      * */
     private void showGiftItemList(){
         ArrayList<GiftItemVO> giftItemList=bill.getGiftList();
-        giftItemTableView.getItems().clear();
+        giftItemObservableList.clear();
         giftItemObservableList.setAll(giftItemList);
         giftItemTableView.setItems(giftItemObservableList);
     }

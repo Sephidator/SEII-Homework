@@ -1,5 +1,6 @@
 package main.java.presentation.inventoryui;
 
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
+import main.java.businesslogicfactory.inventoryblfactory.InventoryCheckBlFactory;
 import main.java.businesslogicservice.inventoryblservice.InventoryCheckBlService;
 import main.java.exception.DataException;
 import main.java.presentation.mainui.RootUIController;
@@ -16,8 +18,12 @@ import main.java.presentation.messageui.InventoryPanelUIController;
 import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.CenterUIController;
 import main.java.vo.goods.InventoryCheckItemVO;
+import main.java.vo.report.BusinessConditionQueryVO;
 
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class InventoryCheckUIController extends CenterUIController {
     private InventoryCheckBlService service;
@@ -40,6 +46,11 @@ public class InventoryCheckUIController extends CenterUIController {
     @FXML
     private TableColumn<InventoryCheckItemVO,String> goodsNumberColumn;
 
+    @FXML
+    private JFXDatePicker start;
+    @FXML
+    private JFXDatePicker end;
+
     // 加载文件后调用的方法******************************************
 
     /**
@@ -61,16 +72,17 @@ public class InventoryCheckUIController extends CenterUIController {
         this.service = service;
     }
 
-    public void refresh(){
+    public void refresh(Date startTime, Date endTime){
         try{
-            ArrayList<InventoryCheckItemVO> checkList=service.getInventoryCheck(null,null);
-            showGoodsList(checkList);
+            ArrayList<InventoryCheckItemVO> checkList=service.getInventoryCheck(startTime,endTime);
+            showCheckList(checkList);
         }catch(DataException e){
             UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找单据失败","数据库错误");
+                    "Error","库存查看失败","数据库错误");
         }catch(Exception e){
+            e.printStackTrace();
             UITool.showAlert(Alert.AlertType.ERROR,
-                    "Error","查找单据失败","RMI连接错误");
+                    "Error","库存查看失败","RMI连接错误");
         }
 
     }
@@ -78,13 +90,59 @@ public class InventoryCheckUIController extends CenterUIController {
     /**
      * 取得客户列表并修改ObservableList的信息
      * */
-    private void showGoodsList(ArrayList<InventoryCheckItemVO> checkList){
-        checkObservableList.removeAll();
+    private void showCheckList(ArrayList<InventoryCheckItemVO> checkList){
+        checkObservableList.clear();
         checkObservableList.setAll(checkList);
         checkTableView.setItems(checkObservableList);
     }
 
     // 界面之中会用到的方法******************************************
+
+    @FXML
+    private void handleSearch(){
+        if(isValidTime()){
+            Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            try {
+                endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
+            }catch(Exception e){}
+
+            refresh(startTime,endTime);
+        }
+    }
+
+    private boolean isValidTime(){
+        String errorMessage = "";
+
+        if (start.getValue()==null) {
+            errorMessage += ("未输入起始日期。"+System.lineSeparator());
+        }
+        if (end.getValue()==null) {
+            errorMessage+=("未输入结束日期。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
+            return false;
+        }
+
+        Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        try {
+            endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
+        }catch(Exception e){}
+
+        if(endTime.before(startTime)){
+            errorMessage+=("结束时间早于起始时间。"+System.lineSeparator());
+        }
+
+        if(errorMessage.length()>0){
+            UITool.showAlert(Alert.AlertType.ERROR, "不正确","请确认筛选条件",errorMessage);
+            return false;
+        }
+
+        return true;
+    }
 
     // 加载文件和界面的方法******************************************
 
@@ -103,11 +161,12 @@ public class InventoryCheckUIController extends CenterUIController {
         try{
             // 加载登陆界面
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/main/java/presentation/inventoryui/InventoryVerificationUI.fxml"));
+            loader.setLocation(MainApp.class.getResource("/main/java/presentation/inventoryui/InventoryCheckUI.fxml"));
             root.setCenterPane(loader.load());
 
             InventoryCheckUIController controller=loader.getController();
             controller.setRoot(root);
+            controller.setService(InventoryCheckBlFactory.getService());
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){

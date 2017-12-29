@@ -75,7 +75,7 @@ public class LogUIController extends CenterUIController {
     }
 
     private void showLogList(ArrayList<LogVO> logList){
-        logObservableList.removeAll();
+        logObservableList.clear();
         logObservableList.setAll(logList);
         logTableView.setItems(logObservableList);
     }

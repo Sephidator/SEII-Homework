@@ -174,7 +174,7 @@ public class SaleRefundBillUIController extends InfoUIController {
      * */
     private void showGoodsItemList(){
         ArrayList<GoodsItemVO> goodsItemList=bill.getSaleList();
-        goodsItemTableView.getItems().clear();
+        goodsItemObservableList.clear();
         goodsItemObservableList.setAll(goodsItemList);
         goodsItemTableView.setItems(goodsItemObservableList);
     }

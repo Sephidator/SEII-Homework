@@ -167,7 +167,7 @@ public class PurchaseRefundBillUIController extends InfoUIController {
      * */
     private void showGoodsItemList(){
         ArrayList<GoodsItemVO> goodsItemList=bill.getPurchaseList();
-        goodsItemTableView.getItems().clear();
+        goodsItemObservableList.clear();
         goodsItemObservableList.setAll(goodsItemList);
         goodsItemTableView.setItems(goodsItemObservableList);
     }

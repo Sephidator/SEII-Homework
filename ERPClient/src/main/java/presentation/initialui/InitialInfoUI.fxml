@@ -108,7 +108,7 @@
             <HBox alignment="BOTTOM_LEFT" layoutX="-14.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label alignment="CENTER" styleClass="myLabel" text="年份" />
-                  <TextField fx:id="year" prefWidth="300.0" />
+                  <TextField fx:id="year" editable="false" prefWidth="300.0" />
                </children>
             </HBox>
          </children>

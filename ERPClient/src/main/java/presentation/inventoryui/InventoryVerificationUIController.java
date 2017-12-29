@@ -89,7 +89,7 @@ public class InventoryVerificationUIController extends CenterUIController {
      * 取得客户列表并修改ObservableList的信息
      * */
     private void showGoodsList(ArrayList<GoodsVO> goodsList){
-        goodsObservableList.removeAll();
+        goodsObservableList.clear();
         goodsObservableList.setAll(goodsList);
         goodsTableView.setItems(goodsObservableList);
     }

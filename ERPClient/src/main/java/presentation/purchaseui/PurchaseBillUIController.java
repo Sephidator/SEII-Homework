@@ -94,7 +94,7 @@ public class PurchaseBillUIController extends CenterUIController {
     }
 
     private void showPurchaseBillList(ArrayList<PurchaseBillVO> purchaseBillList){
-        purchaseBillObservableList.removeAll();
+        purchaseBillObservableList.clear();
         purchaseBillObservableList.setAll(purchaseBillList);
         purchaseBillTableView.setItems(purchaseBillObservableList);
     }
