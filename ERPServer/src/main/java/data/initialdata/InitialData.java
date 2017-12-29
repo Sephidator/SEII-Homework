@@ -62,29 +62,29 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
                 String initialID = resultSet.getString("ID");
                 int year = resultSet.getInt("year");
                 sql = "SELECT * FROM GoodsRecord WHERE InitialID='" + initialID + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    goodsPO = new GoodsPO(resultSet.getString("name"), resultSet.getString("goodsSortID"), resultSet.getString("model"),
-                            resultSet.getInt("number"), resultSet.getDouble("cost"), resultSet.getDouble("retail"), resultSet.getDouble("latestCost"),
-                            resultSet.getDouble("latestRetail"), resultSet.getInt("alarmNum"), resultSet.getString("comment"));
-                    goodsPO.setID(resultSet.getString("ID"));
+                ResultSet temp = connection.createStatement().executeQuery(sql);
+                while (temp.next()) {
+                    goodsPO = new GoodsPO(temp.getString("name"), temp.getString("goodsSortID"), temp.getString("model"),
+                            temp.getInt("number"), temp.getDouble("cost"), temp.getDouble("retail"), temp.getDouble("latestCost"),
+                            temp.getDouble("latestRetail"), temp.getInt("alarmNum"), temp.getString("comment"));
+                    goodsPO.setID(temp.getString("ID"));
                     goodsPOS.add(goodsPO);
                 }
                 sql = "SELECT * FROM ClientRecord WHERE InitialID='" + initialID + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    clientPO = new ClientPO(resultSet.getString("category"), resultSet.getInt("level"), resultSet.getString("name"),
-                            resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("post"),
-                            resultSet.getString("email"), resultSet.getDouble("receivable"), resultSet.getDouble("payable"),
-                            resultSet.getDouble("receivableLimit"), resultSet.getString("salesmanID"));
-                    clientPO.setID(resultSet.getString("ID"));
+                temp = connection.createStatement().executeQuery(sql);
+                while (temp.next()) {
+                    clientPO = new ClientPO(temp.getString("category"), temp.getInt("level"), temp.getString("name"),
+                            temp.getString("phone"), temp.getString("address"), temp.getString("post"),
+                            temp.getString("email"), temp.getDouble("receivable"), temp.getDouble("payable"),
+                            temp.getDouble("receivableLimit"), temp.getString("salesmanID"));
+                    clientPO.setID(temp.getString("ID"));
                     clientPOS.add(clientPO);
                 }
                 sql = "SELECT * FROM AccountRecord WHERE InitialID='" + initialID + "'";
-                resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
-                    accountPO.setID(resultSet.getString("ID"));
+                temp = connection.createStatement().executeQuery(sql);
+                while (temp.next()) {
+                    accountPO = new AccountPO(temp.getString("bankAccount"), temp.getString("name"), temp.getDouble("remaining"));
+                    accountPO.setID(temp.getString("ID"));
                     accountPOS.add(accountPO);
                 }
                 list.add(new InitialPO(year, goodsPOS, clientPOS, accountPOS));
