@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.util.Pair;
 import main.java.MainApp;
 import main.java.businesslogicfactory.reportblfactory.BusinessConditionBlFactory;
@@ -22,7 +23,12 @@ import main.java.presentation.uiutility.UITool;
 import main.java.vo.report.BusinessConditionQueryVO;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -31,6 +37,8 @@ import java.util.HashMap;
 
 public class BusinessConditionUIController extends CenterUIController {
     private BusinessConditionBlService service;
+    private Date startTime;
+    private Date endTime;
 
     private ObservableList<Pair<String,Double>> businessConditionObservableList= FXCollections.observableArrayList();
     @FXML
@@ -53,6 +61,15 @@ public class BusinessConditionUIController extends CenterUIController {
     public void initialize(){
         nameColumn.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getKey()));
         amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getValue())));
+
+        try {
+            String day=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(day + " 00:00:00");
+            endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(day + " 23:59:59");
+        }catch(Exception e){}
+
+        start.setValue(startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        end.setValue(endTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     // 设置controller数据的方法*****************************************
@@ -61,7 +78,8 @@ public class BusinessConditionUIController extends CenterUIController {
         this.service = service;
     }
 
-    private void refresh(BusinessConditionQueryVO query){
+    private void refresh(){
+        BusinessConditionQueryVO query=new BusinessConditionQueryVO(startTime,endTime);
         try{
             ArrayList<Double> amountList=service.getCondition(query);
             showBusinessConditionList(amountList);
@@ -107,18 +125,58 @@ public class BusinessConditionUIController extends CenterUIController {
 
     // 界面之中会用到的方法******************************************
 
+    @FXML
+    private void handleExport(){
+        try {
+            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+            String startDay=sdf.format(startTime);
+            String endDay=sdf.format(endTime);
+            String fileName="经营情况表（"+startDay+"至"+endDay+"）";
+
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("First Sheet");
+
+            HSSFRow rowHead = sheet.createRow((short)0);
+            rowHead.createCell(0).setCellValue("名称");
+            rowHead.createCell(1).setCellValue("金额");
+
+            for(int i=0;i<businessConditionObservableList.size();i++){
+                HSSFRow row = sheet.createRow((short)(i+1));
+                row.createCell(0).setCellValue(nameColumn.getCellData(i));
+                row.createCell(1).setCellValue(amountColumn.getCellData(i));
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls");
+            fileChooser.getExtensionFilters().add(extFilter);
+            fileChooser.setInitialFileName(fileName);
+            File file = fileChooser.showSaveDialog(root.getStage());
+
+            if(file!=null){
+                FileOutputStream fileOut = new FileOutputStream(file);
+                workbook.write(fileOut);
+                fileOut.close();
+
+                UITool.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","导出经营情况表成功",
+                        "文件路径："+file.getAbsolutePath());
+            }
+
+        } catch ( Exception ex ) {
+            System.out.println(ex);
+        }
+    }
 
     @FXML
     private void handleSearch(){
         if(isValidTime()){
-            Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-            Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
             try {
                 endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
             }catch(Exception e){}
 
-            BusinessConditionQueryVO query=new BusinessConditionQueryVO(startTime,endTime);
-            refresh(query);
+            refresh();
         }
     }
 
@@ -170,6 +228,7 @@ public class BusinessConditionUIController extends CenterUIController {
             BusinessConditionUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setBusinessConditionBlService(BusinessConditionBlFactory.getService());
+            controller.refresh();
 
             root.setReturnPaneController(isFinance?new FinancePanelUIController():new ManagerPanelUIController());
         }catch(Exception e){

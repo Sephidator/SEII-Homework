@@ -27,6 +27,8 @@ import java.util.Date;
 
 public class InventoryCheckUIController extends CenterUIController {
     private InventoryCheckBlService service;
+    private Date startTime;
+    private Date endTime;
 
     private ObservableList<InventoryCheckItemVO> checkObservableList= FXCollections.observableArrayList();
     @FXML
@@ -64,6 +66,15 @@ public class InventoryCheckUIController extends CenterUIController {
         saleNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().saleNumber)));
         saleAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().saleAmount)));
         goodsNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getNumber())));
+
+        try {
+            String day=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(day + " 00:00:00");
+            endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(day + " 23:59:59");
+        }catch(Exception e){}
+
+        start.setValue(startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        end.setValue(endTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     // 设置controller数据的方法*****************************************
@@ -72,7 +83,7 @@ public class InventoryCheckUIController extends CenterUIController {
         this.service = service;
     }
 
-    public void refresh(Date startTime, Date endTime){
+    public void refresh(){
         try{
             ArrayList<InventoryCheckItemVO> checkList=service.getInventoryCheck(startTime,endTime);
             showCheckList(checkList);
@@ -101,13 +112,13 @@ public class InventoryCheckUIController extends CenterUIController {
     @FXML
     private void handleSearch(){
         if(isValidTime()){
-            Date startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-            Date endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            startTime=Date.from(start.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            endTime=Date.from(end.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
             try {
                 endTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(end.getEditor().getText() + " 23:59:59");
             }catch(Exception e){}
 
-            refresh(startTime,endTime);
+            refresh();
         }
     }
 
@@ -167,6 +178,7 @@ public class InventoryCheckUIController extends CenterUIController {
             InventoryCheckUIController controller=loader.getController();
             controller.setRoot(root);
             controller.setService(InventoryCheckBlFactory.getService());
+            controller.refresh();
 
             root.setReturnPaneController(new InventoryPanelUIController());
         }catch(Exception e){
