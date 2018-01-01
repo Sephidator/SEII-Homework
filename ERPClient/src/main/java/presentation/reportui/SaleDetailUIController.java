@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import main.java.MainApp;
 import main.java.businesslogicfactory.reportblfactory.SaleDetailBlFactory;
 import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
@@ -19,7 +20,12 @@ import main.java.presentation.uiutility.CenterUIController;
 import main.java.presentation.uiutility.UITool;
 import main.java.vo.report.SaleDetailQueryVO;
 import main.java.vo.report.SaleRecordVO;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -134,6 +140,52 @@ public class SaleDetailUIController extends CenterUIController {
 
     // 界面之中会用到的方法******************************************
 
+    @FXML
+    private void handleExport(){
+        try {
+            String fileName="销售明细表";
+
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("First Sheet");
+
+            HSSFRow rowHead = sheet.createRow((short)0);
+            rowHead.createCell(0).setCellValue("时间");
+            rowHead.createCell(1).setCellValue("商品名");
+            rowHead.createCell(2).setCellValue("型号");
+            rowHead.createCell(3).setCellValue("数量");
+            rowHead.createCell(4).setCellValue("单价");
+            rowHead.createCell(5).setCellValue("总额");
+
+            for(int i=0;i<saleRecordObservableList.size();i++){
+                HSSFRow row = sheet.createRow((short)(i+1));
+                row.createCell(0).setCellValue(timeColumn.getCellData(i));
+                row.createCell(1).setCellValue(goodsNameColumn.getCellData(i));
+                row.createCell(2).setCellValue(goodsModelColumn.getCellData(i));
+                row.createCell(3).setCellValue(goodsNumberColumn.getCellData(i));
+                row.createCell(4).setCellValue(goodsPriceColumn.getCellData(i));
+                row.createCell(5).setCellValue(goodsAmountColumn.getCellData(i));
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls");
+            fileChooser.getExtensionFilters().add(extFilter);
+            fileChooser.setInitialFileName(fileName);
+            File file = fileChooser.showSaveDialog(root.getStage());
+
+            if(file!=null){
+                FileOutputStream fileOut = new FileOutputStream(file);
+                workbook.write(fileOut);
+                fileOut.close();
+
+                UITool.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","导出经营历程表成功",
+                        "文件路径："+file.getAbsolutePath());
+            }
+
+        } catch ( Exception ex ) {
+            System.out.println(ex);
+        }
+    }
 
     @FXML
     private void handleSearch(){

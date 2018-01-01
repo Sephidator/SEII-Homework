@@ -197,9 +197,7 @@
 .searchButton{
     -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30 30;
-    -fx-pref-width: 50;
-    -fx-pref-height: 50;
+    -fx-background-size: 60% 60%;
     -fx-background-position: center center;
     -fx-background-color: #70BAE1; /*-fx-focus-color;*/
     -fx-text-fill: #ffffff;
@@ -230,7 +228,7 @@
 .exportButton{
     -fx-background-image: url("/main/resources/pics/commonpics/导出.png");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 25 25;
+    -fx-background-size: 60% 60%;
     -fx-background-position: center center;
     -fx-background-color: #00CD00; /*-fx-focus-color;*/
     -fx-text-fill: #ffffff;
@@ -239,6 +237,7 @@
 .exportButton:hover {
     -fx-background-color: #00EE00;
 }
+
 
 /*
 * 修改确认按钮样式的CSS类

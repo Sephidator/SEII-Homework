@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import main.java.MainApp;
 import main.java.businesslogic.financebl.PaymentBillBl;
 import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
@@ -34,7 +35,12 @@ import main.java.vo.bill.financebill.ReceiptBillVO;
 import main.java.vo.report.BusinessHistoryQueryVO;
 import main.java.vo.report.BusinessHistoryQueryVO;
 import main.java.vo.report.SaleRecordVO;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -150,6 +156,46 @@ public class BusinessHistoryUIController extends CenterUIController {
 
     // 界面之中会用到的方法******************************************
 
+    @FXML
+    private void handleExport(){
+        try {
+            String fileName="经营历程表";
+
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("First Sheet");
+
+            HSSFRow rowHead = sheet.createRow((short)0);
+            rowHead.createCell(0).setCellValue("单据编号");
+            rowHead.createCell(1).setCellValue("类型");
+            rowHead.createCell(2).setCellValue("操作员");
+
+            for(int i=0;i<billObservableList.size();i++){
+                HSSFRow row = sheet.createRow((short)(i+1));
+                row.createCell(0).setCellValue(IDColumn.getCellData(i));
+                row.createCell(1).setCellValue(typeColumn.getCellData(i));
+                row.createCell(2).setCellValue(operatorColumn.getCellData(i));
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls");
+            fileChooser.getExtensionFilters().add(extFilter);
+            fileChooser.setInitialFileName(fileName);
+            File file = fileChooser.showSaveDialog(root.getStage());
+
+            if(file!=null){
+                FileOutputStream fileOut = new FileOutputStream(file);
+                workbook.write(fileOut);
+                fileOut.close();
+
+                UITool.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","导出经营历程表成功",
+                        "文件路径："+file.getAbsolutePath());
+            }
+
+        } catch ( Exception ex ) {
+            System.out.println(ex);
+        }
+    }
 
     @FXML
     private void handleSearch(){

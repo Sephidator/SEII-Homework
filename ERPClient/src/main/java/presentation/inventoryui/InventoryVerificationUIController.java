@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
 import main.java.MainApp;
 import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class InventoryVerificationUIController extends CenterUIController {
@@ -101,8 +103,8 @@ public class InventoryVerificationUIController extends CenterUIController {
         try {
             SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
             String day=sdf.format(new Date());
+            String fileName="库存盘点（"+day+"）";
 
-            String filename = "C:/导出报表/"+day+"库存盘点"+".xls" ;
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = workbook.createSheet("First Sheet");
 
@@ -118,30 +120,30 @@ public class InventoryVerificationUIController extends CenterUIController {
             ObservableList<GoodsVO> list=goodsTableView.getItems();
             for(int i=0;i<list.size();i++){
                 HSSFRow row = sheet.createRow((short)(i+1));
-                row.createCell(0).setCellValue(list.get(i).getID());
-                row.createCell(1).setCellValue(list.get(i).getName());
-                row.createCell(2).setCellValue(list.get(i).getModel());
-                row.createCell(3).setCellValue(list.get(i).getCost());
-                row.createCell(4).setCellValue(list.get(i).getRetail());
-                row.createCell(5).setCellValue(list.get(i).getNumber());
-                row.createCell(6).setCellValue(list.get(i).getComment());
+                row.createCell(0).setCellValue(goodsIDColumn.getCellData(i));
+                row.createCell(1).setCellValue(goodsNameColumn.getCellData(i));
+                row.createCell(2).setCellValue(goodsModelColumn.getCellData(i));
+                row.createCell(3).setCellValue(goodsCostColumn.getCellData(i));
+                row.createCell(4).setCellValue(goodsRetailColumn.getCellData(i));
+                row.createCell(5).setCellValue(goodsNumberColumn.getCellData(i));
+                row.createCell(6).setCellValue(goodsCommentColumn.getCellData(i));
             }
 
-            File file=new File(filename);
-            if(!file.getParentFile().exists()) {
-                //如果目标文件所在的目录不存在，则创建父目录
-                System.out.println("目标文件所在目录不存在，准备创建它！");
-                file.getParentFile().mkdirs();
-            }
-            FileOutputStream fileOut = new FileOutputStream(file);
-            workbook.write(fileOut);
-            fileOut.close();
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls");
+            fileChooser.getExtensionFilters().add(extFilter);
+            fileChooser.setInitialFileName(fileName);
+            File file = fileChooser.showSaveDialog(root.getStage());
 
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("导出报表成功");
-            alert.setContentText("文件路径："+filename);
-            alert.showAndWait();
+            if(file!=null){
+                FileOutputStream fileOut = new FileOutputStream(file);
+                workbook.write(fileOut);
+                fileOut.close();
+
+                UITool.showAlert(Alert.AlertType.INFORMATION,
+                        "Success","导出报表成功",
+                        "文件路径："+file.getAbsolutePath());
+            }
 
         } catch ( Exception ex ) {
             System.out.println(ex);
