@@ -2,6 +2,7 @@ package main.java.businesslogic.financebl;
 
 import main.java.businesslogic.accountbl.AccountBl;
 import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;
@@ -45,7 +46,7 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         CashBillVO cashBillVO = (CashBillVO)bill;
         AccountTool accountTool = new AccountBl();
         AccountVO accountVO = accountTool.find(cashBillVO.getAccount().getID());//找到需要修改的银行账户
-        accountVO.setRemaining(accountVO.getRemaining() - cashBillVO.getTotal());
+        accountVO.setRemaining(Arith.sub(accountVO.getRemaining(), cashBillVO.getTotal()));
         accountTool.editAccount(accountVO);
 
         /*添加Message*/

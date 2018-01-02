@@ -1,5 +1,6 @@
 package main.java.vo.promotion;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.po.goods.GoodsItemPO;
 import main.java.po.promotion.PromotionGoodsPO;
 import main.java.vo.client.ClientVO;
@@ -102,6 +103,6 @@ public class PromotionGoodsVO extends PromotionVO {
                 return 0;
             }
         }
-        return countGroups * this.discount;
+        return Arith.mul(countGroups, this.discount);
     }
 }

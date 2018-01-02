@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
@@ -147,7 +148,7 @@ public class CashBillUIController extends InfoUIController {
     private void countTotal(){
         double totalAmount=0;
         for(CashItemVO item:bill.getItemList()){
-            totalAmount+=item.amount;
+            totalAmount = Arith.add(totalAmount, item.amount);
         }
         total.setText(String.valueOf(totalAmount));
         bill.setTotal(totalAmount);

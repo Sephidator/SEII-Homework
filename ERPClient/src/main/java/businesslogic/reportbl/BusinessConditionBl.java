@@ -1,5 +1,6 @@
 package main.java.businesslogic.reportbl;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.inventorybl.InventoryGiftBillBl;
 import main.java.businesslogic.inventorybl.InventoryGiftBillTool;
 import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
@@ -78,14 +79,16 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         SaleTradeBillTool saleTradeBillTool = new SaleTradeBillBl();
         ArrayList<SaleTradeBillVO> saleTradeBillVOS = saleTradeBillTool.getSaleTradeBillList(billQueryVO);
         for(SaleTradeBillVO saleTradeBillVO : saleTradeBillVOS){
-            saleTotalBeforeDiscount += saleTradeBillVO.getTotalBeforeDiscount();//销售毛收入总和
-            saleDiscount += saleTradeBillVO.getDiscount()+saleTradeBillVO.getAmountOfVoucher()
-                    +saleTradeBillVO.getPromotion().countPromotionDiscount(saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount());
+            saleTotalBeforeDiscount = Arith.add(saleTotalBeforeDiscount, saleTradeBillVO.getTotalBeforeDiscount());//销售毛收入总和
+            saleDiscount = Arith.add(saleDiscount, saleTradeBillVO.getDiscount());
+            saleDiscount = Arith.add(saleDiscount, saleTradeBillVO.getAmountOfVoucher());
+            saleDiscount = Arith.add(saleDiscount, saleTradeBillVO.getPromotion().countPromotionDiscount
+                    (saleTradeBillVO.getSaleList(),saleTradeBillVO.getClient(),saleTradeBillVO.getTotalBeforeDiscount()));
         }
         SaleRefundBillTool saleRefundBillTool = new SaleRefundBillBl();
         ArrayList<SaleRefundBillVO> saleRefundBillVOS = saleRefundBillTool.getSaleRefundBillList(billQueryVO);
         for(SaleRefundBillVO saleRefundBillVO : saleRefundBillVOS){
-            saleTotalBeforeDiscount -= saleRefundBillVO.getTotal();//减去退货支出
+            saleTotalBeforeDiscount = Arith.sub(saleTotalBeforeDiscount, saleRefundBillVO.getTotal());//减去退货支出
         }
 
         /*****************************************************************/
@@ -101,8 +104,10 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         for(InventoryLossOverBillVO inventoryLossOverBillVO : inventoryLossOverBillVOS){
             ArrayList<LossOverItemVO> lossOverItemVOS = inventoryLossOverBillVO.getLossOverList();
             for(LossOverItemVO lossOverItemVO : lossOverItemVOS) { //只能实际数量大于系统数量，下面商品类支出会计算损失的
-                if (lossOverItemVO.actualNumber > lossOverItemVO.goodsNumber)
-                    goodsTotal += (lossOverItemVO.price * (lossOverItemVO.actualNumber - lossOverItemVO.goodsNumber));
+                if (lossOverItemVO.actualNumber > lossOverItemVO.goodsNumber){
+                    double totalForOne = Arith.mul(lossOverItemVO.price, Arith.sub(lossOverItemVO.actualNumber, lossOverItemVO.goodsNumber));
+                    goodsTotal = Arith.add(goodsTotal, totalForOne);
+                }
             }
         }
 
@@ -119,12 +124,14 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         ArrayList<PurchaseTradeBillVO> purchaseTradeBillVOS = purchaseTradeBillTool.getPurchaseTradeBillList(billQueryVO);
         ArrayList<PurchaseRefundBillVO> purchaseRefundBillVOS = purchaseRefundBillTool.getPurchaseRefundBillList(billQueryVO);
 
-        for(PurchaseTradeBillVO purchaseTradeBillVO : purchaseTradeBillVOS)
-            purchaseTotal += purchaseTradeBillVO.getTotal();
-        for(PurchaseRefundBillVO purchaseRefundBillVO : purchaseRefundBillVOS)
-            purchaseRefundTotal += purchaseRefundBillVO.getTotal();
+        for(PurchaseTradeBillVO purchaseTradeBillVO : purchaseTradeBillVOS){
+            purchaseTotal = Arith.add(purchaseTotal, purchaseTradeBillVO.getTotal());
+        }
+        for(PurchaseRefundBillVO purchaseRefundBillVO : purchaseRefundBillVOS) {
+            purchaseRefundTotal = Arith.add(purchaseRefundTotal, purchaseRefundBillVO.getTotal());
+        }
 
-        saleCostTotal = purchaseTotal - purchaseRefundTotal;
+        saleCostTotal = Arith.sub(purchaseTotal, purchaseRefundTotal);
 
 
         /*****************************************************************/
@@ -135,9 +142,11 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         double goodsBrokenCost = 0;
         for(InventoryLossOverBillVO inventoryLossOverBillVO : inventoryLossOverBillVOS){
             ArrayList<LossOverItemVO> lossOverItemVOS = inventoryLossOverBillVO.getLossOverList();
-            for(LossOverItemVO lossOverItemVO : lossOverItemVOS)//只能实际数量小于系统数量，即商品处在破损状态
-                if(lossOverItemVO.actualNumber < lossOverItemVO.goodsNumber)
-                    goodsBrokenCost += (lossOverItemVO.price * (lossOverItemVO.goodsNumber-lossOverItemVO.actualNumber));
+            for(LossOverItemVO lossOverItemVO : lossOverItemVOS) {//只能实际数量小于系统数量，即商品处在破损状态
+                if (lossOverItemVO.actualNumber < lossOverItemVO.goodsNumber) {
+                    goodsBrokenCost = Arith.mul(lossOverItemVO.price, Arith.sub(lossOverItemVO.goodsNumber, lossOverItemVO.actualNumber));
+                }
+            }
         }
 
         //商品赠出,通过库存赠送单计算总额
@@ -147,23 +156,25 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         for(InventoryGiftBillVO inventoryGiftBillVO : inventoryGiftBillVOS){
             ArrayList<GiftItemVO> giftItemVOS = inventoryGiftBillVO.getGiftList();
             for(GiftItemVO giftItemVO : giftItemVOS) {
-                goodsPresentCost += (giftItemVO.number * giftItemVO.price);
+                goodsPresentCost = Arith.add(goodsPresentCost, Arith.mul(giftItemVO.number, giftItemVO.price));
             }
         }
 
-        goodsExpend = goodsBrokenCost + goodsPresentCost;
+        goodsExpend = Arith.add(goodsBrokenCost, goodsPresentCost);
 
         /*****************************************************************/
 
         /* 折让后总收入：销售收入 + 商品类收入 - 折让金额 */
-        double totalAfterDisocunt = saleTotalBeforeDiscount + goodsTotal - saleDiscount;
+        double totalAfterDiscount=0;
+        totalAfterDiscount = Arith.add(totalAfterDiscount, saleTotalBeforeDiscount);
+        totalAfterDiscount = Arith.add(totalAfterDiscount, goodsTotal);
+        totalAfterDiscount = Arith.sub(totalAfterDiscount, saleDiscount);
 
         /* 总支出：销售成本 + 商品类支出 */
-        double totalExpend = saleCostTotal + goodsExpend;
+        double totalExpend = Arith.add(saleCostTotal, goodsExpend);
 
         /* 利润：折让后总收入 - 总支出 */
-        double profit = totalAfterDisocunt - totalExpend ;
-
+        double profit = Arith.sub(totalAfterDiscount, totalExpend);
 
 
         //按顺序加入list，每一行是一类
@@ -171,7 +182,7 @@ public class BusinessConditionBl implements BusinessConditionBlService {
         resultList.add(saleTotalBeforeDiscount);
         resultList.add(goodsTotal);
         resultList.add(saleDiscount);
-        resultList.add(totalAfterDisocunt);
+        resultList.add(totalAfterDiscount);
         resultList.add(saleCostTotal);
         resultList.add(goodsExpend);
         resultList.add(totalExpend);

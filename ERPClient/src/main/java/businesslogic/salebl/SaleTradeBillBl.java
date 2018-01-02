@@ -1,5 +1,6 @@
 package main.java.businesslogic.salebl;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
@@ -228,7 +229,7 @@ public class SaleTradeBillBl implements SaleTradeBillBlService, SaleTradeBillToo
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleTradeBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable() + saleTradeBillVO.getTotalAfterDiscount());
+        clientVO.setReceivable(Arith.add(clientVO.getReceivable(), saleTradeBillVO.getTotalAfterDiscount()));
         clientTool.editClient(clientVO);
 
 

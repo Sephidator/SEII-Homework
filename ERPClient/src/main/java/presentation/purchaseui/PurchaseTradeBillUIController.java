@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,6 +16,7 @@ import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlServi
 import main.java.exception.DataException;
 import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddGoodsUIController;
+import main.java.businesslogic.blutility.Arith;
 import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
@@ -83,7 +83,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
         modelColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getModel())));
         numberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number)));
         priceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().price)));
-        amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number*cellData.getValue().price)));
+        amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(Arith.mul(cellData.getValue().number, cellData.getValue().price))));
 
         goodsItemTableView.setEditable(true);
         numberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -95,7 +95,7 @@ public class PurchaseTradeBillUIController extends InfoUIController {
                             throw new Exception();
                         }
                         else{
-                            (t.getTableView().getItems().get(t.getTablePosition().getRow())).number=n;
+                            bill.getPurchaseList().get(t.getTablePosition().getRow()).number=n;
                             showGoodsItemList();
                             countTotal();
                         }
@@ -199,7 +199,8 @@ public class PurchaseTradeBillUIController extends InfoUIController {
     private void countTotal(){
         double totalAmount=0;
         for(GoodsItemVO item:bill.getPurchaseList()){
-            totalAmount+=item.number*item.price;
+            double amountForOne = Arith.mul(item.number, item.price);
+            totalAmount = Arith.add(totalAmount, amountForOne);
         }
         total.setText(String.valueOf(totalAmount));
         bill.setTotal(totalAmount);

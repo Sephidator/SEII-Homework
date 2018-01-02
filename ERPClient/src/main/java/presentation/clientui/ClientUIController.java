@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import main.java.MainApp;
 import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
@@ -113,25 +110,29 @@ public class ClientUIController extends CenterUIController {
     @FXML
     private void handleDeleteClient(){
         if(isClientSelected()){
-            try {
-                String ID = clientTableView.getSelectionModel().getSelectedItem().getID();
-                String name = clientTableView.getSelectionModel().getSelectedItem().getName();
-                clientBlService.deleteClient(ID);
+            ButtonType buttonType=UITool.showAlert(Alert.AlertType.CONFIRMATION,
+                    "确认", "是否删除客户？","此操作无法撤回");
+            if(buttonType.equals(ButtonType.OK)){
+                try {
+                    String ID = clientTableView.getSelectionModel().getSelectedItem().getID();
+                    String name = clientTableView.getSelectionModel().getSelectedItem().getName();
+                    clientBlService.deleteClient(ID);
 
-                UITool.showAlert(Alert.AlertType.INFORMATION,
-                        "Success","删除客户成功",
-                        "客户ID："+ID+System.lineSeparator()+"名字："+name);
-            }catch(DataException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除客户失败","数据库错误");
-            }catch(NotExistException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除客户失败","客户不存在");
-            }catch(Exception e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除客户失败","RMI连接错误");
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","删除客户成功",
+                            "客户ID："+ID+System.lineSeparator()+"名字："+name);
+                }catch(DataException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除客户失败","数据库错误");
+                }catch(NotExistException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除客户失败","客户不存在");
+                }catch(Exception e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除客户失败","RMI连接错误");
+                }
+                refresh(null);
             }
-            refresh(null);
         }
     }
 
