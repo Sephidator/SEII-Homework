@@ -1,5 +1,6 @@
 package main.java.businesslogic.inventorybl;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillBl;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillTool;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;
@@ -85,12 +86,12 @@ public class InventoryCheckBl implements InventoryCheckBlService {
                 if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
                     judge = 1;
                     inventoryCheckItemVO.purchaseNumber = inventoryCheckItemVO.purchaseNumber - goodsItemVO.number;
-                    inventoryCheckItemVO.purchaseAmount = inventoryCheckItemVO.purchaseAmount - goodsItemVO.price * goodsItemVO.number;
+                    inventoryCheckItemVO.purchaseAmount = Arith.sub(inventoryCheckItemVO.purchaseAmount, Arith.mul(goodsItemVO.price, goodsItemVO.number));
                     break;
                 }
             }
             if (judge == 0) {
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0 - goodsItemVO.number, 0 - goodsItemVO.number * goodsItemVO.price, 0, 0));
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods,  -goodsItemVO.number, -Arith.mul(goodsItemVO.number, goodsItemVO.price), 0, 0));
             }
         }
 
@@ -100,12 +101,12 @@ public class InventoryCheckBl implements InventoryCheckBlService {
                 if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
                     judge = 1;
                     inventoryCheckItemVO.purchaseNumber = inventoryCheckItemVO.purchaseNumber + goodsItemVO.number;
-                    inventoryCheckItemVO.purchaseAmount = inventoryCheckItemVO.purchaseAmount + goodsItemVO.price * goodsItemVO.number;
+                    inventoryCheckItemVO.purchaseAmount = Arith.add(inventoryCheckItemVO.purchaseAmount, Arith.mul(goodsItemVO.price, goodsItemVO.number));
                     break;
                 }
             }
             if (judge == 0) {
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, goodsItemVO.number, goodsItemVO.number * goodsItemVO.price, 0, 0));
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, goodsItemVO.number, Arith.mul(goodsItemVO.number, goodsItemVO.price), 0, 0));
             }
         }
 
@@ -115,12 +116,12 @@ public class InventoryCheckBl implements InventoryCheckBlService {
                 if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
                     judge = 1;
                     inventoryCheckItemVO.saleNumber = inventoryCheckItemVO.saleNumber - goodsItemVO.number;
-                    inventoryCheckItemVO.saleAmount = inventoryCheckItemVO.saleAmount - goodsItemVO.price * goodsItemVO.number;
+                    inventoryCheckItemVO.saleAmount = Arith.sub(inventoryCheckItemVO.saleAmount, Arith.mul(goodsItemVO.price, goodsItemVO.number));
                     break;
                 }
             }
             if (judge == 0) {
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0, 0, 0 - goodsItemVO.number, 0 - goodsItemVO.price * goodsItemVO.number));
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0, 0, -goodsItemVO.number, -Arith.mul(goodsItemVO.price, goodsItemVO.number)));
             }
         }
 
@@ -130,12 +131,12 @@ public class InventoryCheckBl implements InventoryCheckBlService {
                 if (inventoryCheckItemVO.goods.getID().equals(goodsItemVO.goods.getID())) {
                     judge = 1;
                     inventoryCheckItemVO.saleNumber = inventoryCheckItemVO.saleNumber + goodsItemVO.number;
-                    inventoryCheckItemVO.saleAmount = inventoryCheckItemVO.saleAmount + goodsItemVO.price * goodsItemVO.number;
+                    inventoryCheckItemVO.saleAmount = Arith.add(inventoryCheckItemVO.saleAmount, Arith.mul(goodsItemVO.price, goodsItemVO.number));
                     break;
                 }
             }
             if (judge == 0) {
-                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0, 0, goodsItemVO.number, goodsItemVO.price * goodsItemVO.number));
+                inventoryCheckItemVOS.add(new InventoryCheckItemVO(goodsItemVO.goods, 0, 0, goodsItemVO.number, Arith.mul(goodsItemVO.price, goodsItemVO.number)));
             }
         }
 

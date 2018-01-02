@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
@@ -15,6 +16,7 @@ import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddGoodsUIController;
+import main.java.businesslogic.blutility.Arith;
 import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;
@@ -116,12 +118,40 @@ public class SaleTradeBillUIController extends InfoUIController {
         modelColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getModel())));
         numberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number)));
         priceColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().price)));
-        amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number*cellData.getValue().price)));
+        amountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(Arith.mul(cellData.getValue().number, cellData.getValue().price))));
 
         IDColumn2.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goods.getID()));
         nameColumn2.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().goods.getName()));
         modelColumn2.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goods.getModel())));
         numberColumn2.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().number)));
+
+        goodsItemTableView.setEditable(true);
+        numberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        numberColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<GoodsItemVO, String> t) -> {
+                    try{
+                        int n=Integer.parseInt(t.getNewValue());
+                        if(n<=0){
+                            throw new Exception();
+                        }
+                        else{
+                            if(n< bill.getSaleList().get(t.getTablePosition().getRow()).goods.getNumber()){
+                                bill.getSaleList().get(t.getTablePosition().getRow()).number=n;
+                                showGoodsItemList();
+                                countTotalAndGift();
+                            }
+                            else{
+                                UITool.showAlert(Alert.AlertType.ERROR,
+                                        "Error","修改商品数量失败","超过库存总数");
+                            }
+                        }
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","请检查输入","输入的商品数量必须为正数");
+                        showGoodsItemList();
+                        countTotalAndGift();
+                    }
+                });
     }
 
     // 设置controller数据的方法*****************************************
@@ -270,7 +300,8 @@ public class SaleTradeBillUIController extends InfoUIController {
 
         double totalAmount=0;
         for(GoodsItemVO item:bill.getSaleList()){
-            totalAmount+=item.number*item.price;
+            double amountForOne = Arith.mul(item.number, item.price);
+            totalAmount = Arith.add(totalAmount, amountForOne);
         }
         totalBeforeDiscount.setText(String.valueOf(totalAmount));
         bill.setTotalBeforeDiscount(totalAmount);
@@ -299,12 +330,12 @@ public class SaleTradeBillUIController extends InfoUIController {
         // 计算折让后总价
 
         Double discountNum=Double.parseDouble(discount.getText());
-        totalAmount-=discountNum;
+        totalAmount = Arith.sub(totalAmount, discountNum);
 
         Double useVoucherNum=Double.parseDouble(useVoucher.getText());
-        totalAmount-=useVoucherNum;
+        totalAmount = Arith.sub(totalAmount, useVoucherNum);
 
-        totalAmount-=promotionDiscountNum;
+        totalAmount = Arith.sub(totalAmount, promotionDiscountNum);
 
         if(totalAmount<0){
             totalAmount=0;

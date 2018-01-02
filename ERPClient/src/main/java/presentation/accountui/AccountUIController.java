@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import main.java.MainApp;
 import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
@@ -100,47 +97,75 @@ public class AccountUIController extends CenterUIController {
 
     @FXML
     private void handleAddAccount(){
-        AccountInfoUIController.init(accountBlService,new AccountVO(),1,root.getStage());
-        refresh(null);
+        if(!root.getOperator().isTop()){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","权限错误","只有最高权限可以添加账户");
+        }
+        else{
+            AccountInfoUIController.init(accountBlService,new AccountVO(),1,root.getStage());
+            refresh(null);
+        }
     }
 
     @FXML
     private void handleDeleteAccount(){
-        if(isAccountSelected()){
-            try {
-                String ID = accountTableView.getSelectionModel().getSelectedItem().getID();
-                String name = accountTableView.getSelectionModel().getSelectedItem().getName();
-                accountBlService.deleteAccount(ID);
+        if(!root.getOperator().isTop()){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","权限错误","只有最高权限可以删除账户");
+        }
+        else{
+            if(isAccountSelected()){
+                ButtonType buttonType=UITool.showAlert(Alert.AlertType.CONFIRMATION,
+                        "确认", "是否删除商品分类？","此操作无法撤回");
+                if(buttonType.equals(ButtonType.OK)){
+                    try {
+                        String ID = accountTableView.getSelectionModel().getSelectedItem().getID();
+                        String name = accountTableView.getSelectionModel().getSelectedItem().getName();
+                        accountBlService.deleteAccount(ID);
 
-                UITool.showAlert(Alert.AlertType.INFORMATION,
-                        "Success","删除账户成功",
-                        "账户ID："+ID+System.lineSeparator()+"名字："+name);
-            }catch(DataException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除账户失败","数据库错误");
-            }catch(NotExistException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除账户失败","账户不存在");
-            }catch(Exception e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除账户失败","RMI连接错误");
+                        UITool.showAlert(Alert.AlertType.INFORMATION,
+                                "Success","删除账户成功",
+                                "账户ID："+ID+System.lineSeparator()+"名字："+name);
+                    }catch(DataException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除账户失败","数据库错误");
+                    }catch(NotExistException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除账户失败","账户不存在");
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除账户失败","RMI连接错误");
+                    }
+                    refresh(null);
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void handleEditAccount(){
+        if(!root.getOperator().isTop()){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","权限错误","只有最高权限可以编辑账户");
+        }
+        else{
+            if(isAccountSelected()){
+                AccountInfoUIController.init(accountBlService,accountTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
             }
             refresh(null);
         }
     }
 
     @FXML
-    private void handleEditAccount(){
-        if(isAccountSelected()){
-            AccountInfoUIController.init(accountBlService,accountTableView.getSelectionModel().getSelectedItem(),2,root.getStage());
-        }
-        refresh(null);
-    }
-
-    @FXML
     private void handleCheckAccount() {
-        if(isAccountSelected()){
-           AccountInfoUIController.init(accountBlService,accountTableView.getSelectionModel().getSelectedItem(),3,root.getStage());
+        if(!root.getOperator().isTop()){
+            UITool.showAlert(Alert.AlertType.ERROR,
+                    "Error","权限错误","只有最高权限可以查看账户");
+        }
+        else{
+            if(isAccountSelected()){
+                AccountInfoUIController.init(accountBlService,accountTableView.getSelectionModel().getSelectedItem(),3,root.getStage());
+            }
         }
     }
 

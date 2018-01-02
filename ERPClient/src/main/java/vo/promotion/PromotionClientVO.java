@@ -103,7 +103,7 @@ public class PromotionClientVO extends PromotionVO {
     /*计算适用的促销策略的赠品列表*/
     public ArrayList<GiftItemVO> countGiftList(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
         if(client.getLevel() >= this.getClientLevel())
-            return this.getGiftList();
+            return giftList;
         else
             return new ArrayList<>();
     }
@@ -111,7 +111,7 @@ public class PromotionClientVO extends PromotionVO {
     /*计算适用的促销策略的代金券总额*/
     public double countVoucher(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
         if(client.getLevel() >= this.getClientLevel())
-            return this.getVoucher();
+            return voucher;
         else
             return 0;
     }
@@ -119,7 +119,7 @@ public class PromotionClientVO extends PromotionVO {
     /*计算适用的促销策略的折让部分*/
     public double countPromotionDiscount(ArrayList<GoodsItemVO> goodsItemList, ClientVO client, double total){
         if(client.getLevel() >= this.getClientLevel())
-            return this.getDiscount();
+            return discount;
         else
             return 0;
     }

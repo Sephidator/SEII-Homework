@@ -120,28 +120,32 @@ public class GoodsSortUIController extends CenterUIController {
                         "Error","删除商品分类失败","不能删除总分类");
             }
             else{
-                try {
-                    String ID = sort.getID();
-                    String name = sort.getName();
-                    goodsSortBlService.deleteGoodsSort(ID);
+                ButtonType buttonType=UITool.showAlert(Alert.AlertType.CONFIRMATION,
+                        "确认", "是否删除商品分类？","此操作无法撤回");
+                if(buttonType.equals(ButtonType.OK)){
+                    try {
+                        String ID = sort.getID();
+                        String name = sort.getName();
+                        goodsSortBlService.deleteGoodsSort(ID);
 
-                    UITool.showAlert(Alert.AlertType.INFORMATION,
-                            "Success","删除商品分类成功",
-                            "分类ID："+ID+System.lineSeparator()+"名字："+name);
-                }catch(DataException e){
-                    UITool.showAlert(Alert.AlertType.ERROR,
-                            "Error","删除商品分类失败","数据库错误");
-                }catch(NotExistException e){
-                    UITool.showAlert(Alert.AlertType.ERROR,
-                            "Error","删除商品分类失败","商品分类不存在");
-                }catch(NotNullException e){
-                    UITool.showAlert(Alert.AlertType.ERROR,
-                            "Error","删除商品分类失败","商品分类下有子类或商品");
-                }catch(Exception e){
-                    UITool.showAlert(Alert.AlertType.ERROR,
-                            "Error","删除商品分类失败","RMI连接错误");
+                        UITool.showAlert(Alert.AlertType.INFORMATION,
+                                "Success","删除商品分类成功",
+                                "分类ID："+ID+System.lineSeparator()+"名字："+name);
+                    }catch(DataException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除商品分类失败","数据库错误");
+                    }catch(NotExistException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除商品分类失败","商品分类不存在");
+                    }catch(NotNullException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除商品分类失败","商品分类下有子类或商品");
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除商品分类失败","RMI连接错误");
+                    }
+                    refresh();
                 }
-                refresh();
             }
         }
     }

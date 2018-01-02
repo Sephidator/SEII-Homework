@@ -2,6 +2,7 @@ package main.java.businesslogic.financebl;
 
 import main.java.businesslogic.accountbl.AccountBl;
 import main.java.businesslogic.accountbl.AccountTool;
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.logbl.LogBl;
@@ -45,11 +46,11 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         /*修改应付数据*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = clientTool.find(paymentBillPO.getClientID());
-        clientVO.setPayable(clientVO.getPayable() - paymentBillPO.getTotal());//原来的应收减去收款单的总金额
+        clientVO.setPayable(Arith.sub(clientVO.getPayable(), paymentBillPO.getTotal()));//原来的应收减去收款单的总金额
         //如果应付修改后小于0，自动转为应收
         if(clientVO.getPayable() < 0){
             double delta = clientVO.getPayable();
-            clientVO.setReceivable(clientVO.getReceivable() - delta);
+            clientVO.setReceivable(Arith.sub(clientVO.getReceivable(), delta));
             clientVO.setPayable(0);
         }
         clientTool.editClient(clientVO);
@@ -62,7 +63,7 @@ public class PaymentBillBl implements PaymentBillBlService,PaymentBillTool{
         AccountVO accountVO;
         for(TransItemVO transItemVO : transItemVOS){
             accountVO = accountTool.find(transItemVO.account.getID());//取得银行账户
-            accountVO.setRemaining(accountVO.getRemaining() - transItemVO.transAmount);
+            accountVO.setRemaining(Arith.sub(accountVO.getRemaining(), transItemVO.transAmount));
             accountTool.editAccount(accountVO);
         }
 

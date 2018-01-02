@@ -1,5 +1,6 @@
 package main.java.businesslogic.purchasebl;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
@@ -178,7 +179,7 @@ public class PurchaseTradeBillBl implements PurchaseTradeBillBlService, Purchase
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = purchaseTradeBillVO.getClient();
-        clientVO.setPayable(clientVO.getPayable() + purchaseTradeBillVO.getTotal());
+        clientVO.setPayable(Arith.add(clientVO.getPayable(), purchaseTradeBillVO.getTotal()));
         clientTool.editClient(clientVO);
 
 

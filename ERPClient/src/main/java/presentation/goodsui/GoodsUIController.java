@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import main.java.MainApp;
 import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
@@ -107,25 +104,29 @@ public class GoodsUIController extends CenterUIController {
     @FXML
     private void handleDeleteGoods(){
         if(isGoodsSelected()){
-            try {
-                String ID = goodsTableView.getSelectionModel().getSelectedItem().getID();
-                String name = goodsTableView.getSelectionModel().getSelectedItem().getName();
-                goodsBlService.deleteGoods(ID);
+            ButtonType buttonType=UITool.showAlert(Alert.AlertType.CONFIRMATION,
+                    "确认", "是否删除商品？","此操作无法撤回");
+            if(buttonType.equals(ButtonType.OK)){
+                try {
+                    String ID = goodsTableView.getSelectionModel().getSelectedItem().getID();
+                    String name = goodsTableView.getSelectionModel().getSelectedItem().getName();
+                    goodsBlService.deleteGoods(ID);
 
-                UITool.showAlert(Alert.AlertType.INFORMATION,
-                        "Success","删除商品成功",
-                        "商品ID："+ID+System.lineSeparator()+"名字："+name);
-            }catch(DataException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除商品失败","数据库错误");
-            }catch(NotExistException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除商品失败","商品不存在");
-            }catch(Exception e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除商品失败","RMI连接错误");
+                    UITool.showAlert(Alert.AlertType.INFORMATION,
+                            "Success","删除商品成功",
+                            "商品ID："+ID+System.lineSeparator()+"名字："+name);
+                }catch(DataException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品失败","数据库错误");
+                }catch(NotExistException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品失败","商品不存在");
+                }catch(Exception e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品失败","RMI连接错误");
+                }
+                refresh(null);
             }
-            refresh(null);
         }
     }
 

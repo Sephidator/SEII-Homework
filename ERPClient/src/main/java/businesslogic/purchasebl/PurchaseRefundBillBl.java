@@ -1,5 +1,6 @@
 package main.java.businesslogic.purchasebl;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
@@ -40,7 +41,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
      */
     @Override
     public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) throws Exception {
-        ArrayList<ClientVO> clientVOS = new ArrayList<>();
+        ArrayList<ClientVO> clientVOS;
 
         /*调用ClientTool.getClientList*/
         ClientTool clientTool = new ClientBl();
@@ -194,7 +195,7 @@ public class PurchaseRefundBillBl implements PurchaseRefundBillBlService, Purcha
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = purchaseRefundBillVO.getClient();
-        clientVO.setReceivable(clientVO.getReceivable() + purchaseRefundBillVO.getTotal());
+        clientVO.setReceivable(Arith.add(clientVO.getReceivable(), purchaseRefundBillVO.getTotal()));
         clientTool.editClient(clientVO);
 
 

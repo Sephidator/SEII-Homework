@@ -1,5 +1,6 @@
 package main.java.businesslogic.salebl;
 
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;
@@ -168,7 +169,7 @@ public class SaleRefundBillBl implements SaleRefundBillBlService, SaleRefundBill
         /*修改客户应收应付调用ClientTool*/
         ClientTool clientTool = new ClientBl();
         ClientVO clientVO = saleRefundBillVO.getClient();
-        clientVO.setPayable(clientVO.getPayable() + saleRefundBillVO.getTotal());
+        clientVO.setPayable(Arith.add(clientVO.getPayable(), saleRefundBillVO.getTotal()));
         clientTool.editClient(clientVO);
 
 

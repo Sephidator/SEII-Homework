@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
+import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogicfactory.financeblfactory.PaymentBillBlFactory;
 import main.java.businesslogicservice.financeblservice.PaymentBillBlService;
 import main.java.exception.DataException;
@@ -161,7 +162,7 @@ public class PaymentBillUIController extends InfoUIController {
     private void countTotal(){
         double totalAmount=0;
         for(TransItemVO item:bill.getTransList()){
-            totalAmount+=item.transAmount;
+            totalAmount = Arith.add(totalAmount, item.transAmount);
         }
         total.setText(String.valueOf(totalAmount));
         bill.setTotal(totalAmount);
