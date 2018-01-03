@@ -7,5 +7,5 @@ import java.util.Date;
 
 public interface InventoryCheckBlService {
 
-    public ArrayList<InventoryCheckItemVO> getInventoryCheck(Date start,Date end) throws Exception;
+    ArrayList<InventoryCheckItemVO> getInventoryCheck(Date start,Date end) throws Exception;
 }

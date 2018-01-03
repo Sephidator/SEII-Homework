@@ -10,13 +10,13 @@ import main.java.vo.user.UserVO;
 import java.util.ArrayList;
 
 public interface BusinessHistoryBlService {
-    public ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query) throws Exception;
+    ArrayList<BillVO> getBillList(BusinessHistoryQueryVO query) throws Exception;
 
     //红冲功能，只允许红冲财务单据
-    public String reversePaymentBill(PaymentBillVO paymentBillVO, UserVO operator) throws Exception;
+    String reversePaymentBill(PaymentBillVO paymentBillVO, UserVO operator) throws Exception;
 
-    public String reverseReceiptBill(ReceiptBillVO receiptBillVO, UserVO operator) throws Exception;
+    String reverseReceiptBill(ReceiptBillVO receiptBillVO, UserVO operator) throws Exception;
 
-    public String reverseCashBill (CashBillVO cashBillVO, UserVO operator) throws Exception;
+    String reverseCashBill (CashBillVO cashBillVO, UserVO operator) throws Exception;
 
 }

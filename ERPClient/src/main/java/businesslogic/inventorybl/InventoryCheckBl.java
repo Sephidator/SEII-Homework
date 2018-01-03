@@ -1,6 +1,6 @@
 package main.java.businesslogic.inventorybl;
 
-import main.java.businesslogic.blutility.Arith;
+import main.java.arith.Arith;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillBl;
 import main.java.businesslogic.purchasebl.PurchaseRefundBillTool;
 import main.java.businesslogic.purchasebl.PurchaseTradeBillBl;

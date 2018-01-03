@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 public interface SaleTradeBillBlService {
 
-    public ArrayList<ClientVO> getSellerList(ClientQueryVO query) throws Exception;
+    ArrayList<ClientVO> getSellerList(ClientQueryVO query) throws Exception;
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
+    ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    public ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) throws Exception;
+    ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) throws Exception;
 
-    public String submit(SaleTradeBillVO bill) throws Exception;
+    String submit(SaleTradeBillVO bill) throws Exception;
 
     //public void saveDraft(SaleTradeBillVO bill) throws Exception;
 
-    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) throws Exception;
+    ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) throws Exception;
 
-    public void editSaleTradeBill(SaleTradeBillVO saleTradeBillVO) throws Exception;
+    void editSaleTradeBill(SaleTradeBillVO saleTradeBillVO) throws Exception;
 }

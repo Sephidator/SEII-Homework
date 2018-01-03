@@ -11,17 +11,16 @@ import java.util.ArrayList;
 
 public interface CashBillBlService {
 
+    ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception;
 
-    public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception;
+    ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;//返回商品列表
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;//返回商品列表
+    ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception;//返回账户列表
 
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception;//返回账户列表
-
-    public String submit(CashBillVO vo) throws Exception;//更新并提交现金费用单，持久化更新涉及的对象的数据，成功返回ID
+    String submit(CashBillVO vo) throws Exception;//更新并提交现金费用单，持久化更新涉及的对象的数据，成功返回ID
 
     //public String saveDraft(CashBillVO vo) throws Exception;//保存单据草稿
 
-    public void editCashBill(CashBillVO vo) throws Exception;//编辑现金费用单
+    void editCashBill(CashBillVO vo) throws Exception;//编辑现金费用单
 
 }

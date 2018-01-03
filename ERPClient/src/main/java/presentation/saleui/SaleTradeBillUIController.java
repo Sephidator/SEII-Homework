@@ -16,7 +16,7 @@ import main.java.businesslogicservice.saleblservice.SaleTradeBillBlService;
 import main.java.exception.DataException;
 import main.java.exception.FullException;
 import main.java.presentation.uiutility.AddGoodsUIController;
-import main.java.businesslogic.blutility.Arith;
+import main.java.arith.Arith;
 import main.java.presentation.uiutility.UITool;
 import main.java.presentation.uiutility.InfoUIController;
 import main.java.vo.bill.BillVO;

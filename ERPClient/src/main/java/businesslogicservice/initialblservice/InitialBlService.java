@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 public interface InitialBlService {
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;//返回上一年的持久化商品对象
+    ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;//返回上一年的持久化商品对象
 
-    public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;//返回上一年的持久化客户对象
+    ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;//返回上一年的持久化客户对象
 
-    public ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception;//返回上一年的持久化账户对象
+    ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception;//返回上一年的持久化账户对象
 
-    public String establishInitial(InitialVO initial) throws Exception;//保存期初信息，持久化更新涉及的对象的数据
+    String establishInitial(InitialVO initial) throws Exception;//保存期初信息，持久化更新涉及的对象的数据
 
-    public ArrayList<InitialVO> getInitial(InitialQueryVO query) throws Exception;//返回期初信息列表
+    ArrayList<InitialVO> getInitial(InitialQueryVO query) throws Exception;//返回期初信息列表
 
 }

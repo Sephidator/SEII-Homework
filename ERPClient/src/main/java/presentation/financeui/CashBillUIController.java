@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.MainApp;
-import main.java.businesslogic.blutility.Arith;
+import main.java.arith.Arith;
 import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicfactory.financeblfactory.CashBillBlFactory;
 import main.java.businesslogicservice.financeblservice.CashBillBlService;
