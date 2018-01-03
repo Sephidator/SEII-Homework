@@ -1,6 +1,6 @@
 package main.java.businesslogic.salebl;
 
-import main.java.businesslogic.blutility.Arith;
+import main.java.arith.Arith;
 import main.java.businesslogic.clientbl.ClientBl;
 import main.java.businesslogic.clientbl.ClientTool;
 import main.java.businesslogic.goodsbl.GoodsBl;

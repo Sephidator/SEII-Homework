@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface InventoryVerificationBlService {
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
+    ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 }

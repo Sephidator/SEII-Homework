@@ -1,6 +1,6 @@
 package main.java.vo.promotion;
 
-import main.java.businesslogic.blutility.Arith;
+import main.java.arith.Arith;
 import main.java.po.goods.GoodsItemPO;
 import main.java.po.promotion.PromotionGoodsPO;
 import main.java.vo.client.ClientVO;

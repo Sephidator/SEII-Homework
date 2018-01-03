@@ -1,6 +1,6 @@
 package main.java.businesslogic.reportbl;
 
-import main.java.businesslogic.blutility.Arith;
+import main.java.arith.Arith;
 import main.java.businesslogic.inventorybl.InventoryGiftBillBl;
 import main.java.businesslogic.inventorybl.InventoryGiftBillTool;
 import main.java.businesslogic.inventorybl.InventoryLossOverBillBl;
@@ -23,7 +23,6 @@ import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 import main.java.vo.bill.salebill.SaleRefundBillVO;
 import main.java.vo.bill.salebill.SaleTradeBillVO;
 import main.java.vo.goods.GiftItemVO;
-import main.java.vo.promotion.PromotionVO;
 import main.java.vo.report.BusinessConditionQueryVO;
 
 import java.util.ArrayList;

@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public interface InventoryGiftBillBlService {
 
-    public ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;
+    ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
+    ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    public String submit(InventoryGiftBillVO bill) throws Exception;
+    String submit(InventoryGiftBillVO bill) throws Exception;
 
     //public void saveDraft(InventoryGiftBillVO bill) throws Exception;
 
-    public ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception;
+    ArrayList<InventoryGiftBillVO> getInventoryGiftBillList(BillQueryVO query) throws Exception;
 
-    public void editInventoryGiftBill(InventoryGiftBillVO inventoryGiftBillVO) throws Exception;
+    void editInventoryGiftBill(InventoryGiftBillVO inventoryGiftBillVO) throws Exception;
 }

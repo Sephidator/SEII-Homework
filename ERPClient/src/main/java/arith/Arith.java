@@ -1,4 +1,4 @@
-package main.java.businesslogic.blutility;
+package main.java.arith;
 import java.math.BigDecimal;
 
 /**

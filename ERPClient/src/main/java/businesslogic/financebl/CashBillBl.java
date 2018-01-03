@@ -1,8 +1,8 @@
 package main.java.businesslogic.financebl;
 
+import main.java.arith.Arith;
 import main.java.businesslogic.accountbl.AccountBl;
 import main.java.businesslogic.accountbl.AccountTool;
-import main.java.businesslogic.blutility.Arith;
 import main.java.businesslogic.goodsbl.GoodsBl;
 import main.java.businesslogic.goodsbl.GoodsTool;
 import main.java.businesslogic.logbl.LogBl;

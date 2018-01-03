@@ -11,15 +11,15 @@ import java.util.ArrayList;
 
 public interface PurchaseTradeBillBlService {
 
-    public ArrayList<ClientVO> getSupplierList(ClientQueryVO query) throws Exception;
+    ArrayList<ClientVO> getSupplierList(ClientQueryVO query) throws Exception;
 
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
+    ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    public String submit(PurchaseTradeBillVO bill) throws Exception;
+    String submit(PurchaseTradeBillVO bill) throws Exception;
 
     //public void saveDraft(PurchaseTradeBillVO bill) throws Exception;
 
-    public ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query) throws Exception;
+    ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query) throws Exception;
 
-    public void editPurchaseTradeBill(PurchaseTradeBillVO purchaseTradeBillVO) throws Exception;
+    void editPurchaseTradeBill(PurchaseTradeBillVO purchaseTradeBillVO) throws Exception;
 }
