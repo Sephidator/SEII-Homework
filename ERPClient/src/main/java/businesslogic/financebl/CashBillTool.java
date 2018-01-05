@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public interface CashBillTool extends BillTool{
 
-    public void pass(BillVO bill) throws Exception;//更新更改账户信息，修改单据状态
+    void pass(BillVO bill) throws Exception;//更新更改账户信息，修改单据状态
 
-    public void reject(BillVO bill) throws Exception;//修改单据状态为不通过
+    void reject(BillVO bill) throws Exception;//修改单据状态为不通过
 
-    public ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception;//取得现金费用单列表
+    ArrayList<CashBillVO> getCashBillList(BillQueryVO query) throws Exception;//取得现金费用单列表
 
-    public String submit(CashBillVO vo) throws Exception; //红冲使用
+    String submit(CashBillVO vo) throws Exception; //红冲使用
 }

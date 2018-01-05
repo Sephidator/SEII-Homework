@@ -19,8 +19,6 @@ public interface ReceiptBillBlService {
 
     String submit(ReceiptBillVO vo) throws Exception;//更新并提交收款单，持久化更新涉及的对象的数据，成功返回ID
 
-    //public String saveDraft(ReceiptBillVO vo) throws Exception;//保存单据草稿，
-
     void editReceiptBill(ReceiptBillVO vo) throws Exception;//编辑收款单
 
 }

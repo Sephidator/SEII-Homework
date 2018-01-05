@@ -15,9 +15,7 @@ public interface PurchaseRefundBillBlService {
 
     ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    String submit(PurchaseRefundBillVO bill) throws Exception;
-
-    //public void saveDraft(PurchaseRefundBillVO bill) throws Exception;
+    String submit(PurchaseRefundBillVO purchaseRefundBillVO) throws Exception;
 
     ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query) throws Exception;
 

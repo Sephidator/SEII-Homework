@@ -1,30 +1,30 @@
 package main.java.client_blservicestub.userblservicestub;
 
-//public class UserBlServiceStub implements UserBlService {
-//    @Override
-//    public ArrayList<UserVO> getUserList(UserQueryVO query) {
-//        ArrayList<UserVO> list = new ArrayList<>();
-//        list.add(new UserVO());
-//        return list;
-//    }
-//
-//    @Override
-//    public ResultMessage addUser(UserVO vo) {
-//        return ResultMessage.success;
-//    }
-//
-//    @Override
-//    public ResultMessage editUser(UserVO vo) {
-//        return ResultMessage.success;
-//    }
-//
-//    @Override
-//    public ResultMessage deleteUser(UserVO vo) {
-//        return ResultMessage.success;
-//    }
-//
-//    @Override
-//    public String getID() {
-//        return "678910";
-//    }
-//}
+import main.java.businesslogicservice.userblservice.UserBlService;
+import main.java.vo.user.UserQueryVO;
+import main.java.vo.user.UserVO;
+
+import java.util.ArrayList;
+
+public class UserBlServiceStub implements UserBlService {
+
+    @Override
+    public ArrayList<UserVO> getUserList(UserQueryVO query) throws Exception {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public String addUser(UserVO vo) throws Exception {
+        return "";
+    }
+
+    @Override
+    public void editUser(UserVO vo) throws Exception {
+
+    }
+
+    @Override
+    public void deleteUser(String UserID) throws Exception {
+
+    }
+}

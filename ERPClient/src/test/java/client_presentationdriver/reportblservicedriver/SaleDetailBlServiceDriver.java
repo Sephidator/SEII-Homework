@@ -1,10 +1,17 @@
 package test.java.client_presentationdriver.reportblservicedriver;
 
-//public class SaleDetailBlServiceDriver {
-//    @Test
-//    public void getSaleRecordList() throws Exception {
-//        SaleDetailBlService service = new SaleDetailBlServiceStub();
-//        assertEquals(service.getSaleRecordList(new SaleDetailQueryVO()).size(), 1);
-//    }
-//
-//}
+import main.java.businesslogicservice.reportblservice.SaleDetailBlService;
+import main.java.client_blservicestub.reportblservicestub.SaleDetailBlServiceStub;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class SaleDetailBlServiceDriver {
+    SaleDetailBlService service=new SaleDetailBlServiceStub();
+
+    @Test
+    public void getSaleRecordList() throws Exception {
+        assertEquals(0,service.getSaleRecordList(null).size());
+    }
+
+}

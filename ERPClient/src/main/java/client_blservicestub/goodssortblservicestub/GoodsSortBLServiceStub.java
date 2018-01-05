@@ -1,30 +1,32 @@
 package main.java.client_blservicestub.goodssortblservicestub;
 
-//public class GoodsSortBLServiceStub implements GoodsSortBLService {
-//    @Override
-//    public ArrayList<GoodsSortVO> getGoodsSortList(GoodsSortQueryVO query) {
-//        ArrayList<GoodsSortVO> goodsSortVO=new ArrayList<GoodsSortVO>();
-//        goodsSortVO.add(null);
-//        return goodsSortVO;
-//    }
-//
-//    @Override
-//    public ResultMessage addGoodsSort(GoodsSortVO goodsSort) {
-//        return ResultMessage.success;
-//    }
-//
-//    @Override
-//    public ResultMessage deleteGoodsSort(GoodsSortVO goodsSort) {
-//        return ResultMessage.success;
-//    }
-//
-//    @Override
-//    public ResultMessage editGoodsSort(GoodsSortVO goodsSort) {
-//        return ResultMessage.success;
-//    }
-//
-//    @Override
-//    public String getID() {
-//        return "C0002";
-//    }
-//}
+import main.java.businesslogicservice.goodssortblservice.GoodsSortBlService;
+import main.java.vo.goods.GoodsSortVO;
+
+public class GoodsSortBlServiceStub implements GoodsSortBlService {
+
+    @Override
+    public GoodsSortVO getRoot() throws Exception {
+        return new GoodsSortVO();
+    }
+
+    @Override
+    public GoodsSortVO find(String goodsSortID) throws Exception {
+        return new GoodsSortVO();
+    }
+
+    @Override
+    public String addGoodsSort(GoodsSortVO goodsSort) throws Exception {
+        return "";
+    }
+
+    @Override
+    public void deleteGoodsSort(String goodsSortID) throws Exception {
+
+    }
+
+    @Override
+    public void editGoodsSort(GoodsSortVO goodsSort) throws Exception {
+
+    }
+}

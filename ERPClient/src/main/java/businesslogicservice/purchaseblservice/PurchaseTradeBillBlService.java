@@ -15,9 +15,7 @@ public interface PurchaseTradeBillBlService {
 
     ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception;
 
-    String submit(PurchaseTradeBillVO bill) throws Exception;
-
-    //public void saveDraft(PurchaseTradeBillVO bill) throws Exception;
+    String submit(PurchaseTradeBillVO purchaseTradeBillVO) throws Exception;
 
     ArrayList<PurchaseTradeBillVO> getPurchaseTradeBillList(BillQueryVO query) throws Exception;
 

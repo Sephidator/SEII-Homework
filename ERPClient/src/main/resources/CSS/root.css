@@ -5,7 +5,7 @@
     -fx-border-radius: 20;
     -fx-background-radius: 20;
 
-    -fx-background-image: url("/main/resources/pics/mainui/返回.png");
+    -fx-background-image: url("../pics/mainui/exit.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 35 35;
     -fx-background-position: center center;
@@ -22,7 +22,7 @@
     -fx-border-radius: 20;
     -fx-background-radius: 20;
 
-    -fx-background-image: url("/main/resources/pics/mainui/退出登录.png");
+    -fx-background-image: url("../pics/mainui/logout.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30 30;
     -fx-background-position: center center;

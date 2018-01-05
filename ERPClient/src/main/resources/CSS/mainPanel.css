@@ -1,5 +1,5 @@
 .background {
-    -fx-background-image: url('/main/resources/pics/commonpics/背景.png');
+    -fx-background-image: url('../pics/commonpics/background.png');
     -fx-background-repeat: stretch;
     -fx-background-size: stretch;
     -fx-background-position: center center;
@@ -43,7 +43,7 @@
     -fx-background-color: #EC3025;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
-    -fx-background-image: url("/main/resources/pics/messageui/清空.png");
+    -fx-background-image: url("../pics/messageui/clear.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30 30;
     -fx-background-position: center center;

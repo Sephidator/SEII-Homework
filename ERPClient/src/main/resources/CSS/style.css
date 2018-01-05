@@ -2,7 +2,7 @@
 * 修改pane样式的CSS类
 */
 .background {
-    -fx-background-image: url("/main/resources/pics/commonpics/背景.png");
+    -fx-background-image: url("../pics/commonpics/background.png");
     -fx-background-repeat: stretch;
     -fx-background-size: stretch;
     -fx-background-position: center center;
@@ -195,7 +195,7 @@
 * 修改搜索按钮样式的CSS类
 */
 .searchButton{
-    -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
+    -fx-background-image: url("../pics/commonpics/search.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 60% 60%;
     -fx-background-position: center center;
@@ -208,7 +208,7 @@
 }
 
 .searchButton2{
-    -fx-background-image: url("/main/resources/pics/commonpics/搜索.png");
+    -fx-background-image: url("../pics/commonpics/search.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 25 25;
     -fx-pref-width: 40;
@@ -226,7 +226,7 @@
 * 修改导出按钮样式的CSS类
 */
 .exportButton{
-    -fx-background-image: url("/main/resources/pics/commonpics/导出.png");
+    -fx-background-image: url("../pics/commonpics/export.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 60% 60%;
     -fx-background-position: center center;
@@ -245,7 +245,7 @@
 .correctButton{
     -fx-pref-width: 30;
     -fx-pref-height: 30;
-    -fx-background-image: url("/main/resources/pics/commonpics/确认.png");
+    -fx-background-image: url("../pics/commonpics/confirm.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 18 18;
     -fx-background-position: center center;

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public interface PaymentBillBlService {
 
-
     ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception;
 
     ArrayList<ClientVO> getClientList(ClientQueryVO query) throws Exception;//返回客户列表
@@ -19,8 +18,6 @@ public interface PaymentBillBlService {
     ArrayList<AccountVO> getAccountList(AccountQueryVO query) throws Exception;//返回账户列表
 
     String submit(PaymentBillVO vo) throws Exception;//更新并提交付款单，持久化更新涉及的对象的数据，成功返回ID
-
-    //public String saveDraft(PaymentBillVO vo) throws Exception;//保存单据草稿
 
     void editPaymentBill(PaymentBillVO vo) throws Exception;//编辑付款单
 }

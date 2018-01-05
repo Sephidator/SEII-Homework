@@ -9,8 +9,8 @@ import main.java.vo.bill.salebill.SaleTradeBillVO;
 import java.util.ArrayList;
 
 public interface SaleTradeBillTool extends BillTool{
-    public ArrayList<SaleTradeBillVO> findsByReport(SaleTradeBillQueryVO query) throws Exception;
-    public void pass(BillVO billVO)throws Exception;
-    public void reject(BillVO billVO)throws Exception;
-    public ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query)throws Exception;
+    ArrayList<SaleTradeBillVO> findsByReport(SaleTradeBillQueryVO query) throws Exception;
+    void pass(BillVO billVO)throws Exception;
+    void reject(BillVO billVO)throws Exception;
+    ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query)throws Exception;
 }

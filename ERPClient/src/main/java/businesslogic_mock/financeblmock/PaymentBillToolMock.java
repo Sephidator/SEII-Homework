@@ -11,21 +11,21 @@ public class PaymentBillToolMock implements PaymentBillTool {
 
     @Override
     public void pass(BillVO bill) throws Exception {
-        bill.setState("审批通过");
+
     }
 
     @Override
     public void reject(BillVO bill) throws Exception {
-        bill.setState("审批不通过");
+
     }
 
     @Override
     public ArrayList<PaymentBillVO> getPaymentBillList(BillQueryVO query) throws Exception {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public String submit(PaymentBillVO vo) throws Exception {
-        return "测试ID";
+        return "";
     }
 }
