@@ -31,7 +31,7 @@
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <image>
-                              <Image url="@../../../resources/pics/mainui/工作卡.png" />
+                              <Image url="@../../../resources/pics/mainui/workCard.png" />
                            </image>
                         </ImageView>
                         <VBox layoutX="-21.0" layoutY="-5.0" prefHeight="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="0.0">

@@ -152,6 +152,27 @@ public class SaleTradeBillUIController extends InfoUIController {
                         countTotalAndGift();
                     }
                 });
+
+        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        priceColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<GoodsItemVO, String> t) -> {
+                    try{
+                        double n=Double.parseDouble(t.getNewValue());
+                        if(n<=0){
+                            throw new Exception();
+                        }
+                        else{
+                            bill.getSaleList().get(t.getTablePosition().getRow()).price=n;
+                            showGoodsItemList();
+                            countTotalAndGift();
+                        }
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","请检查输入","输入的商品价格必须为正数");
+                        showGoodsItemList();
+                        countTotalAndGift();
+                    }
+                });
     }
 
     // 设置controller数据的方法*****************************************

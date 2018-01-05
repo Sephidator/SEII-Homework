@@ -1,17 +1,31 @@
-//package test.java.businesslogic_mocktester.userblmocktester;
-//
-//import main.java.businesslogic.userbl.UserTool;
-//import main.java.businesslogic_mock.userblmock.UserToolMock;
-//import org.junit.Test;
-//import main.java.vo.user.UserQueryVO;
-//
-//import static org.junit.Assert.*;
-//
-//public class UserToolMockTester {
-//    @Test
-//    public void getUserList() throws Exception {
-//        UserTool tool = new UserToolMock();
-//        assertEquals(tool.getUserList(new UserQueryVO("","","")).size(), 2);
-//    }
-//
-//}
+package test.java.businesslogic_mocktester.userblmocktester;
+
+import main.java.businesslogic.userbl.UserTool;
+import main.java.businesslogic_mock.userblmock.UserToolMock;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class UserToolMockTester {
+    UserTool tool=new UserToolMock();
+
+    @Test
+    public void getUserList() throws Exception {
+        assertEquals(0,tool.getUserList(null).size());
+    }
+
+    @Test
+    public void find() throws Exception {
+        assertEquals("",tool.find(null).getID());
+    }
+
+    @Test
+    public void login() throws Exception {
+        assertEquals("",tool.login(null,null).getID());
+    }
+
+    @Test
+    public void logout() throws Exception {
+    }
+
+}

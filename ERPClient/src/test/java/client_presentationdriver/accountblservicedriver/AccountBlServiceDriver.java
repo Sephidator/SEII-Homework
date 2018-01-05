@@ -1,21 +1,30 @@
-//package test.java.client_presentationdriver.accountblservicedriver;
-//
-//import main.java.businesslogicservice.accountblservice.AccountBlService;
-//import main.java.client_blservicestub.accountblservicestub.AccountBlServiceStub;
-//
-//public class AccountBlServiceDriver {
-//    AccountBlService accountBlService= new AccountBlServiceStub();
+package test.java.client_presentationdriver.accountblservicedriver;
 
-//    @org.junit.Test
-//    public void addAccount() throws Exception {
-//        AccountVO accountVO = new AccountVO();
-//        assertEquals("",accountBlService.addAccount(accountVO));
-//    }
+import main.java.businesslogicservice.accountblservice.AccountBlService;
+import main.java.client_blservicestub.accountblservicestub.AccountBlServiceStub;
+import org.junit.Test;
 
-//    @org.junit.Test
-//    public void deleteAccount() throws Exception {
-//        AccountVO accountVO = new AccountVO();
-//        assertEquals(ResultMessage.success,accountBlService.deleteAccount(accountVO));
-//    }
-//
-//}
+import static org.junit.Assert.*;
+
+public class AccountBlServiceDriver {
+    AccountBlService service=new AccountBlServiceStub();
+
+    @Test
+    public void getAccountList() throws Exception {
+        assertEquals(0,service.getAccountList(null).size());
+    }
+
+    @Test
+    public void addAccount() throws Exception {
+        assertEquals("",service.addAccount(null));
+    }
+
+    @Test
+    public void deleteAccount() throws Exception {
+    }
+
+    @Test
+    public void editAccount() throws Exception {
+    }
+
+}

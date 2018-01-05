@@ -106,6 +106,27 @@ public class PurchaseTradeBillUIController extends InfoUIController {
                         countTotal();
                     }
                 });
+
+        priceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        priceColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<GoodsItemVO, String> t) -> {
+                    try{
+                        double n=Double.parseDouble(t.getNewValue());
+                        if(n<=0){
+                            throw new Exception();
+                        }
+                        else{
+                            bill.getPurchaseList().get(t.getTablePosition().getRow()).price=n;
+                            showGoodsItemList();
+                            countTotal();
+                        }
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","请检查输入","输入的商品价格必须为正数");
+                        showGoodsItemList();
+                        countTotal();
+                    }
+                });
     }
 
     // 设置controller数据的方法*****************************************

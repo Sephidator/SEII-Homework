@@ -8,7 +8,7 @@ import main.java.vo.bill.purchasebill.PurchaseRefundBillVO;
 import java.util.ArrayList;
 
 public interface PurchaseRefundBillTool extends BillTool{
-    public void pass(BillVO billVO)throws Exception;
-    public void reject(BillVO billVO)throws Exception;
-    public ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query)throws Exception;
+    void pass(BillVO billVO)throws Exception;
+    void reject(BillVO billVO)throws Exception;
+    ArrayList<PurchaseRefundBillVO> getPurchaseRefundBillList(BillQueryVO query)throws Exception;
 }

@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="40.0" fitWidth="40.0">
                <image>
-                  <Image url="@../../../resources/pics/loginui/用户.png" />
+                  <Image url="@../../../resources/pics/loginui/user.png" />
                </image>
             </ImageView>
             <JFXTextField fx:id="usernameField" prefHeight="40.0" prefWidth="240.0" />
@@ -26,7 +26,7 @@
          <children>
             <ImageView fitHeight="40.0" fitWidth="40.0">
                <image>
-                  <Image url="@../../../resources/pics/loginui/密码.png" />
+                  <Image url="@../../../resources/pics/loginui/password.png" />
                </image>
             </ImageView>
             <JFXPasswordField fx:id="passwordField" prefWidth="240.0" />

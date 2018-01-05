@@ -1,26 +1,31 @@
-//package test.java.businesslogic_mocktester.financeblmocktester;
-//
-//import main.java.businesslogic.financebl.CashBillTool;
-//import main.java.businesslogic_mock.financeblmock.CashBillToolMock;
-//import org.junit.Test;
-//
-//import static org.junit.Assert.assertEquals;
-//
-//public class CashBillToolMockTester {
-//    CashBillTool cashBillTool = new CashBillToolMock();
-//    @Test
-//    public void pass() throws Exception {
-//        assertEquals(ResultMessage.success,cashBillTool.pass(null));
-//    }
+package test.java.businesslogic_mocktester.financeblmocktester;
 
-//    @Test
-//    public void reject() throws Exception {
-//        assertEquals(ResultMessage.success,cashBillTool.reject(null));
-//    }
+import main.java.businesslogic.financebl.CashBillBl;
+import main.java.businesslogic.financebl.CashBillTool;
+import main.java.businesslogic_mock.financeblmock.CashBillToolMock;
+import org.junit.Test;
 
-//    @Test
-//    public void getCashBillList() throws Exception {
-//        assertEquals(1,cashBillTool.getCashBillList(null).size());
-//    }
-//
-//}
+import static org.junit.Assert.*;
+
+public class CashBillToolMockTester {
+    CashBillTool tool=new CashBillToolMock();
+
+    @Test
+    public void pass() throws Exception {
+    }
+
+    @Test
+    public void reject() throws Exception {
+    }
+
+    @Test
+    public void getCashBillList() throws Exception {
+        assertEquals(0,tool.getCashBillList(null).size());
+    }
+
+    @Test
+    public void submit() throws Exception {
+        assertEquals("",tool.submit(null));
+    }
+
+}

@@ -104,20 +104,6 @@ public class CashBillBl implements CashBillBlService,CashBillTool{
         return cashBillVOS;
     }
 
-
-    /**
-     * @version: 1
-     * @date: 2017.11.26 21:42
-     * @para: [query] 查询条目清单中商品信息
-     * @function: 调用GoodsTool.getGoodsList
-     */
-    @Override
-    public ArrayList<GoodsVO> getGoodsList(GoodsQueryVO query) throws Exception{
-        GoodsTool goodsTool = new GoodsBl();
-        ArrayList<GoodsVO> goodsVOArrayList = goodsTool.getGoodsList(query);
-        return goodsVOArrayList;
-    }
-
     /**
      * @version: 1
      * @date: 2017.11.26 21:45

@@ -1,37 +1,30 @@
 package test.java.client_presentationdriver.goodsblservicedriver;
 
-//public class GoodsBLServiceDriver {
-//
-//    GoodsBLService goodsBLService=new GoodsBLServiceStub();
-//    GoodsVO goodsVO=new GoodsVO();
-//    GoodsQueryVO goodsQueryVO=new GoodsQueryVO();
-//
-//
-//    @Test
-//    public void getGoodsList() throws Exception {
-//        ArrayList<GoodsVO> goodsVOS=new ArrayList<GoodsVO>();
-//        goodsVOS.add(null);
-//        assertEquals(goodsVOS,goodsBLService.getGoodsList(goodsQueryVO));
-//    }
-//
-//    @Test
-//    public void addGoods() throws Exception {
-//        assertEquals(ResultMessage.success,goodsBLService.addGoods(goodsVO));
-//    }
-//
-//    @Test
-//    public void editGoods() throws Exception {
-//        assertEquals(ResultMessage.success,goodsBLService.addGoods(goodsVO));
-//    }
-//
-//    @Test
-//    public void deleteGoods() throws Exception {
-//        assertEquals(ResultMessage.success,goodsBLService.addGoods(goodsVO));
-//    }
-//
-//    @Test
-//    public void getGoodsID() throws Exception {
-//        assertEquals("C0002",goodsBLService.getGoodsID());
-//    }
-//
-//}
+import main.java.businesslogicservice.goodsblservice.GoodsBlService;
+import main.java.client_blservicestub.goodsblservicestub.GoodsBlServiceStub;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class GoodsBlServiceDriver {
+    GoodsBlService service=new GoodsBlServiceStub();
+
+    @Test
+    public void getGoodsList() throws Exception {
+        assertEquals(0,service.getGoodsList(null).size());
+    }
+
+    @Test
+    public void addGoods() throws Exception {
+        assertEquals("",service.addGoods(null));
+    }
+
+    @Test
+    public void editGoods() throws Exception {
+    }
+
+    @Test
+    public void deleteGoods() throws Exception {
+    }
+
+}

@@ -4,5 +4,5 @@ import main.java.vo.goods.GoodsSortVO;
 
 public interface GoodsSortTool {
 
-    public GoodsSortVO find(String goodsSortID) throws Exception;//通过goodsSortID查找某个商品分类
+    GoodsSortVO find(String goodsSortID) throws Exception;//通过goodsSortID查找某个商品分类
 }

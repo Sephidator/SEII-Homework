@@ -1,28 +1,36 @@
 package test.java.client_presentationdriver.financeblservicedriver;
 
-//public class ReceiptBillBlServiceDriver {
-//    ReceiptBillBlService receiptBillBlService = new ReceiptBillBlServiceStub();
-//
-//    @Test
-//    public void getClientList() throws Exception {
-//        ClientQueryVO clientQueryVO = new ClientQueryVO();
-//        assertEquals("Client-20171106-00001",receiptBillBlService.getClientList(clientQueryVO).get(0).getID());
-//    }
-//
-//    @Test
-//    public void getAccountList() throws Exception {
-//        AccountQueryVO accountQueryVO =  new AccountQueryVO();
-//        assertEquals("Account-20171106-00001",receiptBillBlService.getAccountList(accountQueryVO).get(0).getID());
-//    }
-//
-//    @Test
-//    public void submit() throws Exception {
-//        assertEquals(ResultMessage.success,receiptBillBlService.submit(new ReceiptBillVO()));
-//    }
-//
-//    @Test
-//    public void saveDraft() throws Exception {
-//        assertEquals(ResultMessage.success,receiptBillBlService.submit(new ReceiptBillVO()));
-//    }
-//
-//}
+import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
+import main.java.client_blservicestub.financeblservicestub.ReceiptBillBlServiceStub;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class ReceiptBillBlServiceDriver {
+    ReceiptBillBlService service=new ReceiptBillBlServiceStub();
+
+    @Test
+    public void getReceiptBillList() throws Exception {
+        assertEquals(0,service.getReceiptBillList(null).size());
+    }
+
+    @Test
+    public void getClientList() throws Exception {
+        assertEquals(0,service.getClientList(null).size());
+    }
+
+    @Test
+    public void getAccountList() throws Exception {
+        assertEquals(0,service.getAccountList(null).size());
+    }
+
+    @Test
+    public void submit() throws Exception {
+        assertEquals("",service.submit(null));
+    }
+
+    @Test
+    public void editReceiptBill() throws Exception {
+    }
+
+}

@@ -19,9 +19,7 @@ public interface SaleTradeBillBlService {
 
     ArrayList<PromotionVO> getPromotionList(PromotionQueryVO query) throws Exception;
 
-    String submit(SaleTradeBillVO bill) throws Exception;
-
-    //public void saveDraft(SaleTradeBillVO bill) throws Exception;
+    String submit(SaleTradeBillVO saleTradeBillVO) throws Exception;
 
     ArrayList<SaleTradeBillVO> getSaleTradeBillList(BillQueryVO query) throws Exception;
 
