@@ -284,7 +284,7 @@ public class PromotionClientUIController extends InfoUIController {
                 if(i<0)
                     throw new NumberFormatException();
             } catch(NumberFormatException e) {
-                errorMessage+=("折让金额金额必须是非负数。"+System.lineSeparator());
+                errorMessage+=("折让金额必须是非负数。"+System.lineSeparator());
             }
         }
 
@@ -355,6 +355,13 @@ public class PromotionClientUIController extends InfoUIController {
             controller.setPromotion(promotion);
             controller.setGoodsList(service.getGoodsList(null));
             controller.setPaneFunction(command);
+
+            Date now=new Date();
+            if(command==2 && now.after(promotion.getStart())){
+                UITool.showAlert(Alert.AlertType.INFORMATION,
+                        "无法编辑","不允许修改促销策略","促销策略已经开始实施");
+                controller.setPaneFunction(3);
+            }
 
             // Show the dialog and wait until the user closes it.
             dialogStage.showAndWait();
