@@ -129,20 +129,20 @@ public class PromotionUIController extends CenterUIController {
     }
 
     @FXML
-    private void handleCheckPromotion() {
+    private void handleEditPromotion() {
         if(isPromotionSelected()){
             PromotionVO promotion=promotionTableView.getSelectionModel().getSelectedItem();
             if(promotion.getType().equals("客户促销策略")){
                 PromotionClientVO promotionClient=(PromotionClientVO)promotion;
-                PromotionClientUIController.init(promotionBlService,promotionClient,3,root.getStage());
+                PromotionClientUIController.init(promotionBlService,promotionClient,2,root.getStage());
             }
             else if(promotion.getType().equals("商品促销策略")){
                 PromotionGoodsVO promotionGoods=(PromotionGoodsVO)promotion;
-                PromotionGoodsUIController.init(promotionBlService,promotionGoods,3,root.getStage());
+                PromotionGoodsUIController.init(promotionBlService,promotionGoods,2,root.getStage());
             }
             else if(promotion.getType().equals("总价促销策略")){
                 PromotionTotalVO promotionTotal=(PromotionTotalVO)promotion;
-                PromotionTotalUIController.init(promotionBlService,promotionTotal,3,root.getStage());
+                PromotionTotalUIController.init(promotionBlService,promotionTotal,2,root.getStage());
             }
         }
     }

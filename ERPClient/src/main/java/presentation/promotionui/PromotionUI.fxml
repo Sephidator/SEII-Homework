@@ -133,7 +133,7 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Button layoutX="3.0" mnemonicParsing="false" onAction="#handleCheckPromotion" prefHeight="48.0" prefWidth="95.0" text="查看促销" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Button layoutX="3.0" mnemonicParsing="false" onAction="#handleEditPromotion" prefHeight="48.0" prefWidth="95.0" text="编辑促销" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
