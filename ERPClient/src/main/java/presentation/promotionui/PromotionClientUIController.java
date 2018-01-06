@@ -226,7 +226,7 @@ public class PromotionClientUIController extends InfoUIController {
                         "Error",text+"促销策略失败","促销策略不存在");
             }catch(ExistException e){
                 UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error",text+"促销策略失败","账号和已有促销策略重复");
+                        "Error",text+"促销策略失败","名称和已有促销策略重复");
             }catch(Exception e){
                 UITool.showAlert(Alert.AlertType.ERROR,
                         "Error",text+"促销策略失败","RMI连接错误");
