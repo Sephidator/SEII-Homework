@@ -75,8 +75,8 @@ public class SaleDetailUIController extends CenterUIController {
         goodsAmountColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().goodsItem.number*cellData.getValue().goodsItem.price)));
 
 
-        String[] conditionList=new String[]{"所有单据","时间","商品名","客户","业务员"};
-        conditionSelector.setItems(FXCollections.observableArrayList("所有单据","时间","商品名","客户","业务员"));
+        String[] conditionList=new String[]{"所有","时间","商品名","客户","业务员"};
+        conditionSelector.setItems(FXCollections.observableArrayList("所有","时间","商品名","客户","业务员"));
         conditionSelector.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
             showInputField(conditionList[newValue.intValue()]);
         });
@@ -94,7 +94,7 @@ public class SaleDetailUIController extends CenterUIController {
         end.setValue(null);
         inputInfo.setText("");
 
-        if(condition.equals("所有单据")){
+        if(condition.equals("所有")){
             start.setVisible(false);
             end.setVisible(false);
             inputInfo.setVisible(false);

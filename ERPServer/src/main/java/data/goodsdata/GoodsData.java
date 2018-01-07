@@ -78,7 +78,7 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
         if (query == null)
             sql = "SELECT * FROM Goods WHERE visible=TRUE ";
         else
-            sql = "SELECT * FROM Goods WHERE (name='" + query.name + "' OR goodsSortID='" + query.goodsSortID + "') AND visible=TRUE ";
+            sql = "SELECT * FROM Goods WHERE (name='" + query.name + "' OR ID='" + query.goodsID + "') AND visible=TRUE ";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
