@@ -109,8 +109,6 @@ public class LogUIController extends CenterUIController {
             }
             LogQueryVO query=new LogQueryVO(startTime,endTime);
             refresh(query);
-            start.setValue(null);
-            end.setValue(null);
         }
     }
 

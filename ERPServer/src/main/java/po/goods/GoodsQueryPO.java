@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class GoodsQueryPO implements Serializable {
     public String name; //商品名称
-    public String goodsSortID;//商品所在商品分类
+    public String goodsID;//商品编号
 
-    public GoodsQueryPO(String name, String goodsSortID) {
+    public GoodsQueryPO(String name, String goodsID) {
         this.name = name;
-        this.goodsSortID = goodsSortID;
+        this.goodsID = goodsID;
     }
 }

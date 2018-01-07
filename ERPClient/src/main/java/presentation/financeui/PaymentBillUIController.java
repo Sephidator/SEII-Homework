@@ -337,7 +337,7 @@ public class PaymentBillUIController extends InfoUIController {
             // Create the dialog stage
             Stage dialogStage=new Stage();
             dialogStage.setResizable(false);
-            dialogStage.setTitle("收款单信息界面");
+            dialogStage.setTitle("付款单信息界面");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(stage);
             dialogStage.setScene(new Scene(loader.load()));

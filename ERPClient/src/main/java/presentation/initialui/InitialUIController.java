@@ -59,10 +59,15 @@ public class InitialUIController extends CenterUIController {
         clientNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getClientList().size())));
         accountNumberColumn.setCellValueFactory(cellData->new SimpleStringProperty(String.valueOf(cellData.getValue().getAccountList().size())));
 
-        String[] list={"所有年份","2017","2016","2015","2014","2013","2012","2011","2010"};
+        ArrayList<String> list = new ArrayList<>();
+        list.add("所有年份");
+        int year= Calendar.getInstance().get(Calendar.YEAR);
+        for(int i=0;i<9;i++){
+            list.add(""+(year-i));
+        }
         yearSelector.setItems(FXCollections.observableArrayList(list));
         yearSelector.getSelectionModel().selectedIndexProperty().addListener((ov,oldValue,newValue)->{
-            String text=list[newValue.intValue()];
+            String text= list.get(newValue.intValue());
             yearField.setText(text.equals("所有年份")?"":text);
             refresh(yearField.getText());
         });

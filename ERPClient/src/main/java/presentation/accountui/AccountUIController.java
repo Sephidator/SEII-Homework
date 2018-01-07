@@ -116,7 +116,7 @@ public class AccountUIController extends CenterUIController {
         else{
             if(isAccountSelected()){
                 ButtonType buttonType=UITool.showAlert(Alert.AlertType.CONFIRMATION,
-                        "确认", "是否删除商品分类？","此操作无法撤回");
+                        "确认", "是否删除账户？","此操作无法撤回");
                 if(buttonType.equals(ButtonType.OK)){
                     try {
                         String ID = accountTableView.getSelectionModel().getSelectedItem().getID();

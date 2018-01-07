@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.MainApp;
@@ -21,6 +22,7 @@ import main.java.vo.promotion.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PromotionUIController extends CenterUIController {
     private PromotionBlService promotionBlService;
@@ -106,25 +108,37 @@ public class PromotionUIController extends CenterUIController {
     @FXML
     private void handleDeletePromotion(){
         if(isPromotionSelected()){
-            try {
-                String ID = promotionTableView.getSelectionModel().getSelectedItem().getID();
-                String name = promotionTableView.getSelectionModel().getSelectedItem().getName();
-                promotionBlService.deletePromotion(ID);
-
-                UITool.showAlert(Alert.AlertType.INFORMATION,
-                        "Success","删除促销策略成功",
-                        "促销策略ID："+ID+System.lineSeparator()+"名字："+name);
-            }catch(DataException e){
+            Date startTime = promotionTableView.getSelectionModel().getSelectedItem().getStart();
+            if(startTime.after(new Date())){
                 UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除促销策略失败","数据库错误");
-            }catch(NotExistException e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除促销策略失败","促销策略不存在");
-            }catch(Exception e){
-                UITool.showAlert(Alert.AlertType.ERROR,
-                        "Error","删除促销策略失败","RMI连接错误");
+                        "Error","删除促销策略失败",
+                        "促销策略已经开始实施");
             }
-            refresh(null);
+            else{
+                ButtonType buttonType=UITool.showAlert(Alert.AlertType.CONFIRMATION,
+                        "确认", "是否删除促销策略？","此操作无法撤回");
+                if(buttonType.equals(ButtonType.OK)){
+                    try {
+                        String ID = promotionTableView.getSelectionModel().getSelectedItem().getID();
+                        String name = promotionTableView.getSelectionModel().getSelectedItem().getName();
+                        promotionBlService.deletePromotion(ID);
+
+                        UITool.showAlert(Alert.AlertType.INFORMATION,
+                                "Success","删除促销策略成功",
+                                "促销策略ID："+ID+System.lineSeparator()+"名字："+name);
+                    }catch(DataException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除促销策略失败","数据库错误");
+                    }catch(NotExistException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除促销策略失败","促销策略不存在");
+                    }catch(Exception e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                                "Error","删除促销策略失败","RMI连接错误");
+                    }
+                    refresh(null);
+                }
+            }
         }
     }
 
