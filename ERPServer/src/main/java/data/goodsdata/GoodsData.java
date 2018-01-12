@@ -149,7 +149,7 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
 
     /**
      * @param goodsID [删除商品ID]
-     * @throws RemoteException,DataException,NotExistException
+     * @throws RemoteException,DataException,NotExistException,NotNullException
      */
     @Override
     public synchronized void delete(String goodsID) throws RemoteException {
@@ -160,6 +160,9 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+            int number = resultSet.getInt("number");
+            if (number != 0)
+                throw new NotNullException();
             sql = "UPDATE Goods SET visible=FALSE WHERE ID='" + goodsID + "'";
             statement.executeUpdate(sql);
             resultSet.close();
