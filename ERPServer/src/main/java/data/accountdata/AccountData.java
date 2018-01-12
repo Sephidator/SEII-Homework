@@ -5,6 +5,7 @@ import main.java.exception.DataException;
 import main.java.exception.ExistException;
 import main.java.exception.NotExistException;
 import main.java.dataservice.accountdataservice.AccountDataService;
+import main.java.exception.NotNullException;
 import main.java.po.account.AccountPO;
 import main.java.po.account.AccountQueryPO;
 
@@ -140,7 +141,7 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
 
     /**
      * @param accountID [删除账户的ID]
-     * @throws RemoteException,DataException,NotExistException
+     * @throws RemoteException,DataException,NotExistException,NotNullException
      */
     @Override
     public synchronized void delete(String accountID) throws RemoteException {
@@ -152,6 +153,9 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+            Double remaining = resultSet.getDouble("remaining");
+            if (remaining != 0)
+                throw new NotNullException();
             sql = "UPDATE Account SET visible=FALSE WHERE ID='" + accountID + "'";
             statement.executeUpdate(sql);
             resultSet.close();

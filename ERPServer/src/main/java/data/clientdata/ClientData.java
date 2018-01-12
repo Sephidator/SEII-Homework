@@ -4,6 +4,7 @@ import main.java.data.DataHelper;
 import main.java.exception.DataException;
 import main.java.exception.NotExistException;
 import main.java.dataservice.clientdataservice.ClientDataService;
+import main.java.exception.NotNullException;
 import main.java.po.client.ClientPO;
 import main.java.po.client.ClientQueryPO;
 
@@ -139,7 +140,7 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
 
     /**
      * @param clientID [删除客户ID]
-     * @throws RemoteException,DataException,NotExistException
+     * @throws RemoteException,DataException,NotExistException,NotNullException
      */
     @Override
     public synchronized void delete(String clientID) throws RemoteException {
@@ -150,6 +151,9 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+            Double receivable = resultSet.getDouble("receivable"), payable = resultSet.getDouble("payable");
+            if (receivable != 0 || payable != 0)
+                throw new NotNullException();
             sql = "UPDATE Client SET visible=FALSE WHERE ID='" + clientID + "'";
             statement.executeUpdate(sql);
             resultSet.close();
