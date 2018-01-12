@@ -11,6 +11,7 @@ import main.java.businesslogicfactory.clientblfactory.ClientBlFactory;
 import main.java.businesslogicservice.clientblservice.ClientBlService;
 import main.java.exception.DataException;
 import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.PurchaseSalePanelUIController;
 import main.java.presentation.uiutility.UITool;
@@ -127,6 +128,9 @@ public class ClientUIController extends CenterUIController {
                 }catch(NotExistException e){
                     UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除客户失败","客户不存在");
+                }catch(NotNullException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除客户失败","客户应收应付不为0");
                 }catch(Exception e){
                     UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除客户失败","RMI连接错误");
