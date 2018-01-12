@@ -11,6 +11,7 @@ import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
 import main.java.exception.DataException;
 import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.FinancePanelUIController;
 import main.java.presentation.uiutility.UITool;
@@ -132,6 +133,9 @@ public class AccountUIController extends CenterUIController {
                     }catch(NotExistException e){
                         UITool.showAlert(Alert.AlertType.ERROR,
                                 "Error","删除账户失败","账户不存在");
+                    }catch(NotNullException e){
+                        UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除账户失败","账户余额不为0");
                     }catch(Exception e){
                         UITool.showAlert(Alert.AlertType.ERROR,
                                 "Error","删除账户失败","RMI连接错误");

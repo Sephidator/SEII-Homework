@@ -11,6 +11,7 @@ import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.exception.DataException;
 import main.java.exception.NotExistException;
+import main.java.exception.NotNullException;
 import main.java.presentation.mainui.RootUIController;
 import main.java.presentation.messageui.InventoryPanelUIController;
 import main.java.presentation.uiutility.UITool;
@@ -121,6 +122,9 @@ public class GoodsUIController extends CenterUIController {
                 }catch(NotExistException e){
                     UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除商品失败","商品不存在");
+                }catch(NotNullException e){
+                    UITool.showAlert(Alert.AlertType.ERROR,
+                            "Error","删除商品失败","商品数量不为0");
                 }catch(Exception e){
                     UITool.showAlert(Alert.AlertType.ERROR,
                             "Error","删除商品失败","RMI连接错误");
