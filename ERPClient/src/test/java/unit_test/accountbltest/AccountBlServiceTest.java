@@ -3,6 +3,7 @@ package test.java.unit_test.accountbltest;
 import main.java.businesslogicfactory.accountblfactory.AccountBlFactory;
 import main.java.businesslogicservice.accountblservice.AccountBlService;
 import main.java.client_blservicestub.accountblservicestub.AccountBlServiceStub;
+import main.java.exception.ExistException;
 import main.java.vo.account.AccountVO;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class AccountBlServiceTest {
         assertEquals(true,service.getAccountList(null).size()>=0);
     }
 
-    @Test
+    @Test(expected = ExistException.class)
     public void addAccount() throws Exception {
         assertEquals("Account",service.addAccount(new AccountVO()).substring(0,7));
     }

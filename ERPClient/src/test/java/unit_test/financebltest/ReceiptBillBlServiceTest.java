@@ -3,6 +3,7 @@ package test.java.unit_test.financebltest;
 import main.java.businesslogicfactory.financeblfactory.ReceiptBillBlFactory;
 import main.java.businesslogicservice.financeblservice.ReceiptBillBlService;
 import main.java.client_blservicestub.financeblservicestub.ReceiptBillBlServiceStub;
+import main.java.vo.bill.BillQueryVO;
 import main.java.vo.bill.financebill.ReceiptBillVO;
 import org.junit.Test;
 
@@ -13,7 +14,8 @@ public class ReceiptBillBlServiceTest {
 
     @Test
     public void getReceiptBillList() throws Exception {
-        assertEquals(true,service.getReceiptBillList(null).size()>=0);
+        assertEquals(true,service.getReceiptBillList(
+                new BillQueryVO("审批通过",null,null,"收款单",null,null)).size()>=0);
     }
 
     @Test

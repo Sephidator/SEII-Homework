@@ -1,14 +1,16 @@
 package test.java.unit_test.initialbltest;
 
+import main.java.businesslogicfactory.initialblfactory.InitialBlFactory;
 import main.java.businesslogicservice.initialblservice.InitialBlService;
 import main.java.client_blservicestub.initialblservicestub.InitialBlServiceStub;
+import main.java.exception.ExistException;
 import main.java.vo.initial.InitialVO;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class InitialBlServiceTest {
-    InitialBlService service=new InitialBlServiceStub();
+    InitialBlService service= InitialBlFactory.getService();
 
     @Test
     public void getGoodsList() throws Exception {
@@ -25,7 +27,7 @@ public class InitialBlServiceTest {
         assertEquals(true,service.getAccountList(null).size()>=0);
     }
 
-    @Test
+    @Test(expected = ExistException.class)
     public void establishInitial() throws Exception {
         assertEquals("Initial",service.establishInitial(new InitialVO()).substring(0,7));
     }
