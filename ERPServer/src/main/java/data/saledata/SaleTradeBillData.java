@@ -43,9 +43,9 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
         ArrayList<SaleTradeBillPO> list;
 
         try {
-            Statement statement = connection.createStatement();
             ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
+            Statement statement = connection.createStatement();
             ResultSet resultSet;
 
             if (query == null) {
@@ -58,11 +58,13 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                 } else {
                     sql = "SELECT * FROM User WHERE name='" + query.salesman + "'";
                     resultSet = statement.executeQuery(sql);
+
                     while (resultSet.next()) {
                         String operatorID = resultSet.getString("ID");
                         sql = "SELECT * FROM saletradebill WHERE operatorID='" + operatorID + "' AND " + "state = '审批通过'";
                         sqlOfQuery.add(sql);
                     }
+
                     sql = "SELECT * FROM Client WHERE name='" + query.client + "'";
                     resultSet = statement.executeQuery(sql);
                     while (resultSet.next()) {
@@ -70,6 +72,7 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                         sql = "SELECT * FROM saletradebill WHERE clientID='" + clientID + "' AND state='审批通过'";
                         sqlOfQuery.add(sql);
                     }
+
                     sql = "SELECT * FROM goods WHERE name='" + query.goodsName + "'";
                     resultSet = statement.executeQuery(sql);
                     while (resultSet.next()) {
@@ -84,8 +87,9 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                     }
                 }
             }
+
+            list = getList(sqlOfQuery);
             statement.close();
-            list = getList(connection, sqlOfQuery);
             return list;
         } catch (SQLException e) {
             try {
@@ -105,7 +109,7 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
     @Override
     public ArrayList<SaleTradeBillPO> findsByBill(BillQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<SaleTradeBillPO> list;
+
         try {
             Statement statement = connection.createStatement();
             ArrayList<String> sqlOfQuery = new ArrayList<>();
@@ -141,8 +145,9 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
                     }
                 }
             }
+
+            ArrayList<SaleTradeBillPO> list = getList(sqlOfQuery);
             statement.close();
-            list = getList(connection, sqlOfQuery);
             return list;
         } catch (SQLException e) {
             try {
@@ -154,24 +159,28 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
     }
 
     /**
-     * @param connection
      * @param sqlOfQuery [筛选条件List]
      * @return 符合筛选条件的销售单
      * @throws SQLException
      */
-    private ArrayList<SaleTradeBillPO> getList(Connection connection, ArrayList<String> sqlOfQuery) throws SQLException {
+    private ArrayList<SaleTradeBillPO> getList(ArrayList<String> sqlOfQuery) throws SQLException {
+        Connection connection = DataHelper.getConnection();
+        Statement statement = connection.createStatement();
+
         ArrayList<SaleTradeBillPO> list = new ArrayList<>();
         for (int i = 0; i < sqlOfQuery.size(); i++) {
             String sql = sqlOfQuery.get(i);
-            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 String ID = resultSet.getString("ID");
                 sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
                 ResultSet temp = connection.createStatement().executeQuery(sql);
+
                 ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
                 while (temp.next()) {
                     itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
                 }
+
                 SaleTradeBillPO saleTradeBillPO = new SaleTradeBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), resultSet.getString("salesmanID"), itemPOS, resultSet.getString("promotionID"), resultSet.getDouble("totalBeforeDiscount"), resultSet.getDouble("discount"), resultSet.getDouble("amountOfVoucher"), resultSet.getDouble("totalAfterDiscount"));
                 saleTradeBillPO.setID(ID);
                 list.add(saleTradeBillPO);
@@ -190,26 +199,31 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT SaleTradeBill FROM DataHelper";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
             int before = resultSet.getInt(1);
+
             sql = "SELECT COUNT(keyID) FROM SaleTradeBill";
             resultSet = statement.executeQuery(sql);
             resultSet.next();
             int all = resultSet.getInt(1);
+
             if (all - before >= 99999)
                 throw new FullException();
             sql = "INSERT INTO SaleTradeBill (state, time, operatorID, comment, clientID, salesmanID, promotionID, totalBeforeDiscount, discount, amountOfVoucher, totalAfterDiscount) " +
                     "VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getClientID() + "', '" + po.getSalesmanID() + "', '" + po.getPromotionID() + "', '" + po.getTotalBeforeDiscount() + "', '" + po.getDiscount() + "', '" + po.getAmountOfVoucher() + "', '" + po.getTotalAfterDiscount() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
             resultSet = statement.getGeneratedKeys();
             resultSet.next();
             int key = resultSet.getInt(1);
             String ID = "XSD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
+
             sql = "UPDATE SaleTradeBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+
             ArrayList<GoodsItemPO> list = po.getSaleList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
@@ -234,10 +248,11 @@ public class SaleTradeBillData extends UnicastRemoteObject implements SaleTradeB
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String ID = po.getID();
             String sql = "UPDATE SaleTradeBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', promotionID='" + po.getPromotionID() + "', clientID='" + po.getClientID() + "', salesmanID='" + po.getSalesmanID() + "', totalBeforeDiscount='" + po.getTotalBeforeDiscount() + "', discount='" + po.getDiscount() + "', amountOfVoucher='" + po.getAmountOfVoucher() + "', totalAfterDiscount='" + po.getTotalAfterDiscount() + "' WHERE ID='" + ID + "'";
+            Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+
             sql = "DELETE FROM GoodsItem WHERE site_ID='" + ID + "'";
             statement.executeUpdate(sql);
             ArrayList<GoodsItemPO> list = po.getSaleList();

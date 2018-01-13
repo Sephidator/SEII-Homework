@@ -25,6 +25,9 @@ import java.util.ArrayList;
  * @date 2017/12/04
  */
 public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
+    /**
+     * rmi
+     **/
     public GoodsData() throws RemoteException {
         GoodsDataService goodsDataService = this;
         try {
@@ -44,15 +47,17 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Goods WHERE ID='" + goodsID + "'";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
+
             GoodsPO goodsPO = new GoodsPO(resultSet.getString("name"), resultSet.getString("goodsSortID"), resultSet.getString("model"),
                     resultSet.getInt("number"), resultSet.getDouble("cost"), resultSet.getDouble("retail"), resultSet.getDouble("latestCost"),
                     resultSet.getDouble("latestRetail"), resultSet.getInt("alarmNum"), resultSet.getString("comment"));
             goodsPO.setID(resultSet.getString("ID"));
             goodsPO.setVisible(resultSet.getBoolean("visible"));
+
             resultSet.close();
             statement.close();
             return goodsPO;
@@ -73,23 +78,24 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
     @Override
     public ArrayList<GoodsPO> finds(GoodsQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<GoodsPO> list = new ArrayList<>();
-        String sql;
-        if (query == null)
-            sql = "SELECT * FROM Goods WHERE visible=TRUE ";
-        else
-            sql = "SELECT * FROM Goods WHERE (name='" + query.name + "' OR ID='" + query.goodsID + "') AND visible=TRUE ";
+
         try {
+            String sql = (query == null) ?
+                    "SELECT * FROM Goods WHERE visible=TRUE " :
+                    "SELECT * FROM Goods WHERE (name='" + query.name + "' OR ID='" + query.goodsID + "') AND visible=TRUE ";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            GoodsPO goodsPO;
+
+            ArrayList<GoodsPO> list = new ArrayList<>();
             while (resultSet.next()) {
-                goodsPO = new GoodsPO(resultSet.getString("name"), resultSet.getString("goodsSortID"), resultSet.getString("model"),
+                GoodsPO goodsPO = new GoodsPO(resultSet.getString("name"), resultSet.getString("goodsSortID"), resultSet.getString("model"),
                         resultSet.getInt("number"), resultSet.getDouble("cost"), resultSet.getDouble("retail"), resultSet.getDouble("latestCost"),
                         resultSet.getDouble("latestRetail"), resultSet.getInt("alarmNum"), resultSet.getString("comment"));
                 goodsPO.setID(resultSet.getString("ID"));
+                goodsPO.setVisible(resultSet.getBoolean("visible"));
                 list.add(goodsPO);
             }
+
             resultSet.close();
             statement.close();
             return list;
@@ -110,41 +116,51 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
     @Override
     public synchronized String insert(GoodsPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
+
         try {
             Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Goods WHERE name='" + po.getName() + "' AND model='" + po.getModel() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getGoodsSortID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE fatherID='" + po.getGoodsSortID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
+
             sql = "INSERT INTO Goods (name, goodsSortID, model, number, cost, retail, latestCost, latestRetail, alarmNum, comment) VALUES ('" + po.getName() + "','" + po.getGoodsSortID() + "','" + po.getModel() + "','"
                     + po.getNumber() + "','" + po.getCost() + "','" + po.getRetail() + "','" + po.getLatestCost() + "','" + po.getLatestRetail() + "','" + po.getAlarmNum() + "','" + po.getComment() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            String ID = null;
+
+
             resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                int key = resultSet.getInt(1);
-                ID = "Goods" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Goods SET ID='" + ID + "' WHERE keyID=" + key;
-                statement.executeUpdate(sql);
-            }
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "Goods" + String.format("%0" + 8 + "d", key);
+
+            sql = "UPDATE Goods SET ID='" + ID + "' WHERE keyID=" + key;
+            statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
             return ID;
-        } catch (SQLException e) {
+        } catch (
+                SQLException e)
+
+        {
             try {
                 connection.rollback();
             } catch (SQLException e1) {
             }
             throw new DataException();
         }
+
     }
 
     /**
@@ -154,17 +170,21 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
     @Override
     public synchronized void delete(String goodsID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
+
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Goods WHERE ID='" + goodsID + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             int number = resultSet.getInt("number");
             if (number != 0)
                 throw new NotNullException();
+
             sql = "UPDATE Goods SET visible=FALSE WHERE ID='" + goodsID + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
@@ -185,25 +205,30 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Goods WHERE ID='" + po.getID() + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getGoodsSortID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "SELECT * FROM Goods WHERE ID<>'" + po.getID() + "' AND name='" + po.getName() + "' AND model='" + po.getModel() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE fatherID='" + po.getGoodsSortID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
+
             sql = "UPDATE Goods SET name='" + po.getName() + "', goodsSortID='" + po.getGoodsSortID() + "', model='" + po.getModel() + "', number='" + po.getNumber() + "', cost='" + po.getCost() + "', retail='" + po.getRetail() + "', latestCost='" + po.getLatestCost() + "', latestRetail='" + po.getLatestRetail() + "', alarmNum='" + po.getAlarmNum() + "', comment='" + po.getComment() + "' WHERE ID = '" + po.getID() + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {

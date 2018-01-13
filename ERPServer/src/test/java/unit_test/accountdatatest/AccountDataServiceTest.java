@@ -1,13 +1,12 @@
 package test.java.unit_test.accountdatatest;
 
-import main.java.data.accountdata.AccountData;
 import main.java.dataservice.accountdataservice.AccountDataService;
+import main.java.exception.ExistException;
 import main.java.po.account.AccountPO;
 import org.junit.Test;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,12 +29,11 @@ public class AccountDataServiceTest {
     }
 
     @Test
-    public void insert() throws RemoteException {
-        ArrayList<AccountPO> list = service.finds(null);
-        AccountPO accountPO = list.get(list.size() - 1);
+    public void insert() throws Exception {
+        try {
+            assertEquals("Account", service.insert(new AccountPO("1234324235689", "户234523", 20000)).substring(0, 7));
+        } catch (ExistException e) {
 
-        accountPO.setBankAccount(accountPO.getBankAccount() + "0");
-        accountPO.setName(accountPO.getName() + "0");
-        assertEquals("Account", service.insert(accountPO).substring(0, 7));
+        }
     }
 }

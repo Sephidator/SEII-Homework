@@ -38,52 +38,59 @@ public class InventoryLossOverBillData extends UnicastRemoteObject implements In
     @Override
     public ArrayList<InventoryLossOverBillPO> finds(BillQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<InventoryLossOverBillPO> list = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
             ArrayList<String> sqlOfQuery = new ArrayList<>();
-            String sql;
             ResultSet resultSet;
-            if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
-                sql = "SELECT * FROM inventorylossoverbill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
-                sqlOfQuery.add(sql);
-            } else if ("待审批".equals(query.state)) {
-                sql = "SELECT * FROM inventorylossoverbill WHERE state='待审批'";
-                sqlOfQuery.add(sql);
-            } else {
-                if (query.start == null && query.operator == null && query.client == null) {
-                    sql = "SELECT * FROM inventorylossoverbill WHERE state='审批通过'";
+
+            {
+                String sql;
+                if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
+                    sql = "SELECT * FROM inventorylossoverbill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                     sqlOfQuery.add(sql);
-                } else if (query.start != null) {
-                    sql = "SELECT * FROM inventorylossoverbill WHERE (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "') AND state='审批通过'";
+                } else if ("待审批".equals(query.state)) {
+                    sql = "SELECT * FROM inventorylossoverbill WHERE state='待审批'";
                     sqlOfQuery.add(sql);
                 } else {
-                    sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
-                    resultSet = statement.executeQuery(sql);
-                    while (resultSet.next()) {
-                        String operatorID = resultSet.getString("ID");
-                        sql = "SELECT * FROM inventorylossoverbill WHERE operatorID='" + operatorID + "' AND " + "state = '审批通过'";
+                    if (query.start == null && query.operator == null && query.client == null) {
+                        sql = "SELECT * FROM inventorylossoverbill WHERE state='审批通过'";
                         sqlOfQuery.add(sql);
+                    } else if (query.start != null) {
+                        sql = "SELECT * FROM inventorylossoverbill WHERE (time BETWEEN '" + new Timestamp(query.start.getTime()) + "' AND '" + new Timestamp(query.end.getTime()) + "') AND state='审批通过'";
+                        sqlOfQuery.add(sql);
+                    } else {
+                        sql = "SELECT * FROM User WHERE name='" + query.operator + "'";
+                        resultSet = statement.executeQuery(sql);
+                        while (resultSet.next()) {
+                            String operatorID = resultSet.getString("ID");
+                            sql = "SELECT * FROM inventorylossoverbill WHERE operatorID='" + operatorID + "' AND " + "state = '审批通过'";
+                            sqlOfQuery.add(sql);
+                        }
                     }
                 }
             }
-            for (int i = 0; i < sqlOfQuery.size(); i++) {
-                sql = sqlOfQuery.get(i);
+
+            ArrayList<InventoryLossOverBillPO> list = new ArrayList<>();
+            for (String sql : sqlOfQuery) {
                 resultSet = statement.executeQuery(sql);
+
                 while (resultSet.next()) {
                     String ID = resultSet.getString("ID");
-                    sql = "SELECT * FROM LossOverItem WHERE site_ID='" + ID + "'";
-                    ResultSet temp = connection.createStatement().executeQuery(sql);
+                    String tempSql = "SELECT * FROM LossOverItem WHERE site_ID='" + ID + "'";
+                    ResultSet tempResult = connection.createStatement().executeQuery(tempSql);
+
                     ArrayList<LossOverItemPO> itemPOS = new ArrayList<>();
-                    while (temp.next()) {
-                        itemPOS.add(new LossOverItemPO(temp.getString("goodsID"), temp.getDouble("price"), temp.getInt("goodsNumber"), temp.getInt("actualNumber")));
+                    while (tempResult.next()) {
+                        itemPOS.add(new LossOverItemPO(tempResult.getString("goodsID"), tempResult.getDouble("price"), tempResult.getInt("goodsNumber"), tempResult.getInt("actualNumber")));
                     }
+
                     InventoryLossOverBillPO inventoryLossOverBillPO = new InventoryLossOverBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), itemPOS);
                     inventoryLossOverBillPO.setID(ID);
                     list.add(inventoryLossOverBillPO);
                 }
             }
+
             statement.close();
             return list;
         } catch (SQLException e) {
@@ -105,28 +112,34 @@ public class InventoryLossOverBillData extends UnicastRemoteObject implements In
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT InventoryLossOverBill FROM DataHelper";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
             int before = resultSet.getInt(1);
+
             sql = "SELECT COUNT(keyID) FROM InventoryLossOverBill";
             resultSet = statement.executeQuery(sql);
             resultSet.next();
             int all = resultSet.getInt(1);
+
             if (all - before >= 99999)
                 throw new FullException();
+
             sql = "INSERT INTO InventoryLossOverBill (state, time, operatorID, comment) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
             resultSet = statement.getGeneratedKeys();
             resultSet.next();
             int key = resultSet.getInt(1);
             String ID = "KCYSD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
+
             sql = "UPDATE InventoryLossOverBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+
             ArrayList<LossOverItemPO> list = po.getLossOverList();
-            for (int i = 0; i < list.size(); i++) {
-                sql = "INSERT INTO LossOverItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).price + "', '" + list.get(i).goodsNumber + "', '" + list.get(i).actualNumber + "')";
+            for (LossOverItemPO lossOverItemPO : list) {
+                sql = "INSERT INTO LossOverItem VALUES ('" + ID + "', '" + lossOverItemPO.goodsID + "', '" + lossOverItemPO.price + "', '" + lossOverItemPO.goodsNumber + "', '" + lossOverItemPO.actualNumber + "')";
                 statement.executeUpdate(sql);
             }
             resultSet.close();
@@ -150,17 +163,19 @@ public class InventoryLossOverBillData extends UnicastRemoteObject implements In
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String ID = po.getID();
             String sql = "UPDATE InventoryLossOverBill SET state='" + po.getState() + "', comment='" + po.getComment() + "' WHERE ID='" + ID + "'";
+            Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+
             sql = "DELETE FROM LossOverItem WHERE site_ID='" + ID + "'";
             statement.executeUpdate(sql);
             ArrayList<LossOverItemPO> list = po.getLossOverList();
-            for (int i = 0; i < list.size(); i++) {
-                sql = "INSERT INTO LossOverItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).price + "', '" + list.get(i).goodsNumber + "', '" + list.get(i).actualNumber + "')";
+            for (LossOverItemPO lossOverItemPO : list) {
+                sql = "INSERT INTO LossOverItem VALUES ('" + ID + "', '" + lossOverItemPO.goodsID + "', '" + lossOverItemPO.price + "', '" + lossOverItemPO.goodsNumber + "', '" + lossOverItemPO.actualNumber + "')";
                 statement.executeUpdate(sql);
             }
+
             statement.close();
         } catch (SQLException e) {
             try {

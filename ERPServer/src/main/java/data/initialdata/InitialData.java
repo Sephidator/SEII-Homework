@@ -43,52 +43,63 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
     @Override
     public ArrayList<InitialPO> finds(InitialQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<InitialPO> list = new ArrayList<>();
-        String sql;
-        if (query == null)
-            sql = "SELECT * FROM Initial";
-        else
-            sql = "SELECT * FROM Initial WHERE year =" + query.year;
+
         try {
+            String sql = (query == null)
+                    ? "SELECT * FROM Initial"
+                    : "SELECT * FROM Initial WHERE year =" + query.year;
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            ArrayList<GoodsPO> goodsPOS = new ArrayList<>();
-            GoodsPO goodsPO;
-            ArrayList<ClientPO> clientPOS = new ArrayList<>();
-            ClientPO clientPO;
-            ArrayList<AccountPO> accountPOS = new ArrayList<>();
-            AccountPO accountPO;
+
+
+            ArrayList<InitialPO> list = new ArrayList<>();
             while (resultSet.next()) {
                 String initialID = resultSet.getString("ID");
-                int year = resultSet.getInt("year");
+                Statement tempStatement = connection.createStatement();
+                ResultSet tempResult;
+
                 sql = "SELECT * FROM GoodsRecord WHERE InitialID='" + initialID + "'";
-                ResultSet temp = connection.createStatement().executeQuery(sql);
-                while (temp.next()) {
-                    goodsPO = new GoodsPO(temp.getString("name"), temp.getString("goodsSortID"), temp.getString("model"),
-                            temp.getInt("number"), temp.getDouble("cost"), temp.getDouble("retail"), temp.getDouble("latestCost"),
-                            temp.getDouble("latestRetail"), temp.getInt("alarmNum"), temp.getString("comment"));
-                    goodsPO.setID(temp.getString("ID"));
+                tempResult = tempStatement.executeQuery(sql);
+
+                ArrayList<GoodsPO> goodsPOS = new ArrayList<>();
+                while (tempResult.next()) {
+                    GoodsPO goodsPO = new GoodsPO(tempResult.getString("name"), tempResult.getString("goodsSortID"), tempResult.getString("model"),
+                            tempResult.getInt("number"), tempResult.getDouble("cost"), tempResult.getDouble("retail"), tempResult.getDouble("latestCost"),
+                            tempResult.getDouble("latestRetail"), tempResult.getInt("alarmNum"), tempResult.getString("comment"));
+                    goodsPO.setID(tempResult.getString("ID"));
                     goodsPOS.add(goodsPO);
                 }
+
                 sql = "SELECT * FROM ClientRecord WHERE InitialID='" + initialID + "'";
-                temp = connection.createStatement().executeQuery(sql);
-                while (temp.next()) {
-                    clientPO = new ClientPO(temp.getString("category"), temp.getInt("level"), temp.getString("name"),
-                            temp.getString("phone"), temp.getString("address"), temp.getString("post"),
-                            temp.getString("email"), temp.getDouble("receivable"), temp.getDouble("payable"),
-                            temp.getDouble("receivableLimit"), temp.getString("salesmanID"));
-                    clientPO.setID(temp.getString("ID"));
+                tempResult = tempStatement.executeQuery(sql);
+
+                ArrayList<ClientPO> clientPOS = new ArrayList<>();
+                while (tempResult.next()) {
+                    ClientPO clientPO = new ClientPO(tempResult.getString("category"), tempResult.getInt("level"), tempResult.getString("name"),
+                            tempResult.getString("phone"), tempResult.getString("address"), tempResult.getString("post"),
+                            tempResult.getString("email"), tempResult.getDouble("receivable"), tempResult.getDouble("payable"),
+                            tempResult.getDouble("receivableLimit"), tempResult.getString("salesmanID"));
+                    clientPO.setID(tempResult.getString("ID"));
                     clientPOS.add(clientPO);
                 }
+
                 sql = "SELECT * FROM AccountRecord WHERE InitialID='" + initialID + "'";
-                temp = connection.createStatement().executeQuery(sql);
-                while (temp.next()) {
-                    accountPO = new AccountPO(temp.getString("bankAccount"), temp.getString("name"), temp.getDouble("remaining"));
-                    accountPO.setID(temp.getString("ID"));
+                tempResult = tempStatement.executeQuery(sql);
+
+                ArrayList<AccountPO> accountPOS = new ArrayList<>();
+                while (tempResult.next()) {
+                    AccountPO accountPO = new AccountPO(tempResult.getString("bankAccount"), tempResult.getString("name"), tempResult.getDouble("remaining"));
+                    accountPO.setID(tempResult.getString("ID"));
                     accountPOS.add(accountPO);
                 }
-                list.add(new InitialPO(year, goodsPOS, clientPOS, accountPOS));
+
+                InitialPO initialPO = new InitialPO(resultSet.getInt("year"), goodsPOS, clientPOS, accountPOS);
+                initialPO.setID(initialID);
+                list.add(initialPO);
             }
+
+            resultSet.close();
+            statement.close();
             return list;
         } catch (SQLException e) {
             try {
@@ -109,53 +120,51 @@ public class InitialData extends UnicastRemoteObject implements InitialDataServi
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Initial WHERE year=" + po.getYear();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             sql = "INSERT INTO Initial (year) VALUE (" + po.getYear() + ")";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
             resultSet = statement.getGeneratedKeys();
-            String ID = null;
-            if (resultSet.next()) {
-                int key = resultSet.getInt(1);
-                ID = "Initial" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Initial SET ID='" + ID + "' WHERE keyID =" + key;
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "Initial" + String.format("%0" + 8 + "d", key);
+
+            sql = "UPDATE Initial SET ID='" + ID + "' WHERE keyID =" + key;
+            statement.executeUpdate(sql);
+
+            ArrayList<GoodsPO> goodsPOS = po.getGoodsList();
+            for (GoodsPO goodsPO : goodsPOS) {
+                sql = "INSERT INTO GoodsRecord VALUES ('" + ID + "','" + goodsPO.getID() + "','" + goodsPO.getName() + "','" +
+                        goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
+                        goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
                 statement.executeUpdate(sql);
             }
-            ArrayList<GoodsPO> goodsPOS = po.getGoodsList();
-            if (goodsPOS != null)
-                for (int i = 0; i < goodsPOS.size(); i++) {
-                    GoodsPO goodsPO = goodsPOS.get(i);
-                    sql = "INSERT INTO GoodsRecord VALUES ('" + ID + "','" + goodsPO.getID() + "','" + goodsPO.getName() + "','" +
-                            goodsPO.getGoodsSortID() + "','" + goodsPO.getModel() + "','" + goodsPO.getNumber() + "','" + goodsPO.getCost() + "','" + goodsPO.getRetail() + "','" +
-                            goodsPO.getLatestCost() + "','" + goodsPO.getLatestRetail() + "','" + goodsPO.getAlarmNum() + "','" + goodsPO.getComment() + "')";
-                    statement.executeUpdate(sql);
-                }
+
             ArrayList<ClientPO> clientPOS = po.getClientList();
-            if (clientPOS != null)
-                for (int i = 0; i < clientPOS.size(); i++) {
-                    ClientPO clientPO = clientPOS.get(i);
-                    sql = "INSERT INTO ClientRecord VALUES ('" + ID + "','" + clientPO.getID() + "','" + clientPO.getCategory() + "'," + clientPO.getLevel() + ",'" + clientPO.getName()
-                            + "','" + clientPO.getPhone() + "','" + clientPO.getAddress() + "','" + clientPO.getPost() + "','" + clientPO.getEmail() + "',"
-                            + clientPO.getReceivable() + "," + clientPO.getPayable() + "," + clientPO.getReceivableLimit() + ",'" + clientPO.getSalesmanID() + "')";
-                    statement.executeUpdate(sql);
-                }
+            for (ClientPO clientPO : clientPOS) {
+                sql = "INSERT INTO ClientRecord VALUES ('" + ID + "','" + clientPO.getID() + "','" + clientPO.getCategory() + "'," + clientPO.getLevel() + ",'" + clientPO.getName()
+                        + "','" + clientPO.getPhone() + "','" + clientPO.getAddress() + "','" + clientPO.getPost() + "','" + clientPO.getEmail() + "',"
+                        + clientPO.getReceivable() + "," + clientPO.getPayable() + "," + clientPO.getReceivableLimit() + ",'" + clientPO.getSalesmanID() + "')";
+                statement.executeUpdate(sql);
+            }
+
             ArrayList<AccountPO> accountPOS = po.getAccountList();
-            if (accountPOS != null)
-                for (int i = 0; i < accountPOS.size(); i++) {
-                    AccountPO accountPO = accountPOS.get(i);
-                    sql = "INSERT INTO AccountRecord VALUES ('" + ID + "','" + accountPO.getID() + "','" + accountPO.getBankAccount() + "','" + accountPO.getName() + "','" + accountPO.getRemaining() + "')";
-                    statement.executeUpdate(sql);
-                }
+            for (AccountPO accountPO : accountPOS) {
+                sql = "INSERT INTO AccountRecord VALUES ('" + ID + "','" + accountPO.getID() + "','" + accountPO.getBankAccount() + "','" + accountPO.getName() + "','" + accountPO.getRemaining() + "')";
+                statement.executeUpdate(sql);
+            }
+
             return ID;
         } catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException e1) {
             }
-            e.printStackTrace();
             throw new DataException();
         }
     }

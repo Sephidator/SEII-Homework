@@ -1,6 +1,7 @@
 package test.java.unit_test.initialdatatest;
 
 import main.java.dataservice.initialdataservice.InitialDataService;
+import main.java.exception.ExistException;
 import main.java.po.initial.InitialPO;
 import org.junit.Test;
 
@@ -21,12 +22,10 @@ public class InitialDataServiceTest {
         assertEquals(true, service.finds(null).size() >= 0);
     }
 
-    @Test
+    @Test(expected = ExistException.class)
     public void insert() throws Exception {
-        ArrayList<InitialPO> list = service.finds(null);
-        InitialPO initialPO = list.get(list.size() - 1);
 
-        assertEquals("Initial", service.insert(new InitialPO(initialPO.getYear() + 1, new ArrayList<>(), new ArrayList<>(), new ArrayList<>())).substring(0, 7));
+        assertEquals("Initial", service.insert(new InitialPO(2017, new ArrayList<>(), new ArrayList<>(), new ArrayList<>())).substring(0, 7));
     }
 
 }

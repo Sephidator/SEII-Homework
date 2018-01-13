@@ -1,11 +1,15 @@
 package test.java.unit_test.promotiondatatest;
 
 import main.java.dataservice.promotiondataservice.PromotionDataService;
+import main.java.exception.ExistException;
+import main.java.po.promotion.PromotionGoodsPO;
 import main.java.po.promotion.PromotionPO;
+import main.java.po.promotion.PromotionTotalPO;
 import org.junit.Test;
 
 import java.rmi.Naming;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,10 +27,10 @@ public class PromotionDataServiceTest {
 
     @Test
     public void insert() throws Exception {
-        ArrayList<PromotionPO> list = service.finds(null);
-        PromotionPO promotionPO = list.get(list.size() - 1);
-        promotionPO.setName(promotionPO.getName() + "0");
+        try {
+            assertEquals("Promotion", service.insert(new PromotionTotalPO("促销策略", new Date(), new Date(), 10000, 200, new ArrayList<>())).substring(0, 9));
+        } catch (Exception e) {
 
-        assertEquals("Promotion", service.insert(promotionPO).substring(0, 9));
+        }
     }
 }

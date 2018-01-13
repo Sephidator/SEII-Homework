@@ -26,6 +26,9 @@ import java.util.ArrayList;
  */
 
 public class AccountData extends UnicastRemoteObject implements AccountDataService {
+    /**
+     * @description rmi
+     **/
     public AccountData() throws RemoteException {
         AccountDataService accountDataService = this;
         try {
@@ -45,16 +48,20 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
+            /**筛选**/
             String sql = "SELECT * FROM Account WHERE ID='" + accountID + "'";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
+
+            /**构建AccountPO**/
             AccountPO accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
             accountPO.setID(resultSet.getString("ID"));
-            accountPO.setVisible(resultSet.
-                    getBoolean("visible"));
+            accountPO.setVisible(resultSet.getBoolean("visible"));
+
             resultSet.close();
             statement.close();
+
             return accountPO;
         } catch (SQLException e) {
             try {
@@ -73,23 +80,27 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
     @Override
     public ArrayList<AccountPO> finds(AccountQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<AccountPO> list = new ArrayList<>();
-        String sql;
-        if (query == null)
-            sql = "SELECT * FROM Account WHERE visible=TRUE ";
-        else
-            sql = "SELECT * FROM Account WHERE (name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
+
         try {
+            /**筛选**/
+            String sql = (query == null)
+                    ? "SELECT * FROM Account WHERE visible=TRUE "
+                    : "SELECT * FROM Account WHERE (name='" + query.name + "' OR bankAccount='" + query.bankAccount + "') AND visible=TRUE";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            AccountPO accountPO;
+
+            /**构建ArrayList<AccountPO>**/
+            ArrayList<AccountPO> list = new ArrayList<>();
             while (resultSet.next()) {
-                accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
+                AccountPO accountPO = new AccountPO(resultSet.getString("bankAccount"), resultSet.getString("name"), resultSet.getDouble("remaining"));
                 accountPO.setID(resultSet.getString("ID"));
+                accountPO.setVisible(resultSet.getBoolean("visible"));
                 list.add(accountPO);
             }
+
             resultSet.close();
             statement.close();
+
             return list;
         } catch (SQLException e) {
             try {
@@ -110,24 +121,31 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
+            /**检查是否有相同的账户（名称或银行账号相同）**/
             String sql = "SELECT * FROM Account WHERE visible=TRUE AND (bankAccount='" + po.getBankAccount() + "' OR name='" + po.getName() + "')";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 throw new ExistException();
             }
+
+            /**插入**/
             sql = "INSERT INTO Account (bankAccount, name, remaining) VALUES ('" + po.getBankAccount() + "','" + po.getName() + "','" + po.getRemaining() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            String ID = null;
+
+            /**构造ID**/
             resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                int key = resultSet.getInt(1);
-                ID = "Account" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Account SET ID='" + ID + "' WHERE keyID =" + key;
-                statement.executeUpdate(sql);
-            }
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "Account" + String.format("%0" + 8 + "d", key);
+
+            /**更新ID**/
+            sql = "UPDATE Account SET ID='" + ID + "' WHERE keyID =" + key;
+            statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
+
             return ID;
         } catch (SQLException e) {
             try {
@@ -148,16 +166,22 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Account WHERE ID='" + accountID + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
+            /**检查账户是否还存在**/
             if (!resultSet.next())
                 throw new NotExistException();
+
+            /**检查账户余额是否为0**/
             Double remaining = resultSet.getDouble("remaining");
             if (remaining != 0)
                 throw new NotNullException();
+
+            /**删除**/
             sql = "UPDATE Account SET visible=FALSE WHERE ID='" + accountID + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
@@ -176,18 +200,25 @@ public class AccountData extends UnicastRemoteObject implements AccountDataServi
     @Override
     public synchronized void update(AccountPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
+
         try {
-            Statement statement = connection.createStatement();
+            /**检查账户是否还存在**/
             String sql = "SELECT * FROM Account WHERE ID='" + po.getID() + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
+            /**检查是否有相同的账户（名称或银行账号相同）**/
             sql = "SELECT * FROM Account WHERE ID<>'" + po.getID() + "' AND (bankAccount = '" + po.getBankAccount() + "' OR name = '" + po.getName() + "') AND visible = TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
+            /**更新**/
             sql = "UPDATE Account SET bankAccount='" + po.getBankAccount() + "', name='" + po.getName() + "', remaining='" + po.getRemaining() + "' WHERE ID='" + po.getID() + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
