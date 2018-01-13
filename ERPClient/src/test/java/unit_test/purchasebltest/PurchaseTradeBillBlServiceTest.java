@@ -1,36 +1,36 @@
 package test.java.unit_test.purchasebltest;
 
+import main.java.businesslogicfactory.purchaseblfactory.PurchaseTradeBillBlFactory;
 import main.java.businesslogicservice.purchaseblservice.PurchaseTradeBillBlService;
 import main.java.client_blservicestub.purchaseblservicestub.PurchaseTradeBillBlServiceStub;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.purchasebill.PurchaseTradeBillVO;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class PurchaseTradeBillBlServiceTest {
-    PurchaseTradeBillBlService service=new PurchaseTradeBillBlServiceStub();
+    PurchaseTradeBillBlService service= PurchaseTradeBillBlFactory.getService();
 
     @Test
     public void getSupplierList() throws Exception {
-        assertEquals(0,service.getSupplierList(null).size());
+        assertEquals(true,service.getSupplierList(null).size()>=0);
     }
 
     @Test
     public void getGoodsList() throws Exception {
-        assertEquals(0,service.getGoodsList(null).size());
+        assertEquals(true,service.getGoodsList(null).size()>=0);
     }
 
     @Test
     public void submit() throws Exception {
-        assertEquals("",service.submit(null));
+        assertEquals("JHD",service.submit(new PurchaseTradeBillVO()).substring(0,3));
     }
 
     @Test
     public void getPurchaseTradeBillList() throws Exception {
-        assertEquals(0,service.getPurchaseTradeBillList(null).size());
-    }
-
-    @Test
-    public void editPurchaseTradeBill() throws Exception {
+        assertEquals(true,service.getPurchaseTradeBillList(
+                new BillQueryVO("审批通过",null,null,"进货单",null,null)).size()>=0);
     }
 
 }

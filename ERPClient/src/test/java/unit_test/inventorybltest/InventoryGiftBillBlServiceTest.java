@@ -1,36 +1,35 @@
-package test.java.unit_test.client_presentationdriver.inventoryblservicedriver;
+package test.java.unit_test.inventorybltest;
 
+import main.java.businesslogicfactory.inventoryblfactory.InventoryGiftBillBlFactory;
 import main.java.businesslogicservice.inventoryblservice.InventoryGiftBillBlService;
-import main.java.client_blservicestub.inventoryblservicestub.InventoryGiftBillBlServiceStub;
+import main.java.vo.bill.BillQueryVO;
+import main.java.vo.bill.inventorybill.InventoryGiftBillVO;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class InventoryGiftBillBlServiceTest {
-    InventoryGiftBillBlService service=new InventoryGiftBillBlServiceStub();
+    InventoryGiftBillBlService service= InventoryGiftBillBlFactory.getService();
 
     @Test
     public void getClientList() throws Exception {
-        assertEquals(0,service.getClientList(null).size());
+        assertEquals(true,service.getClientList(null).size()>=0);
     }
 
     @Test
     public void getGoodsList() throws Exception {
-        assertEquals(0,service.getGoodsList(null).size());
+        assertEquals(true,service.getGoodsList(null).size()>=0);
     }
 
     @Test
     public void submit() throws Exception {
-        assertEquals("",service.submit(null));
+        assertEquals("KCZSD",service.submit(new InventoryGiftBillVO()).substring(0,5));
     }
 
     @Test
     public void getInventoryGiftBillList() throws Exception {
-        assertEquals(0,service.getInventoryGiftBillList(null).size());
-    }
-
-    @Test
-    public void editInventoryGiftBill() throws Exception {
+        assertEquals(true,service.getInventoryGiftBillList(
+                new BillQueryVO("审批通过",null,null,"库存赠送单",null,null)).size()>=0);
     }
 
 }

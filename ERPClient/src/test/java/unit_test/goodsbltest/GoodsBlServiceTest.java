@@ -3,6 +3,7 @@ package test.java.unit_test.goodsbltest;
 import main.java.businesslogicfactory.goodsblfactory.GoodsBlFactory;
 import main.java.businesslogicservice.goodsblservice.GoodsBlService;
 import main.java.client_blservicestub.goodsblservicestub.GoodsBlServiceStub;
+import main.java.exception.NotExistException;
 import main.java.vo.goods.GoodsVO;
 import org.junit.Test;
 
@@ -16,9 +17,9 @@ public class GoodsBlServiceTest {
         assertEquals(true,service.getGoodsList(null).size()>=0);
     }
 
-    @Test
+    @Test(expected = NotExistException.class)
     public void addGoods() throws Exception {
-        assertEquals("Goods",service.addGoods(new GoodsVO()).substring(0,4));
+        assertEquals("Goods",service.addGoods(new GoodsVO()).substring(0,5));
     }
 
 }
