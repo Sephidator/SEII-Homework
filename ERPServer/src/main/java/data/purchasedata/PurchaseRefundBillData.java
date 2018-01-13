@@ -39,13 +39,13 @@ public class PurchaseRefundBillData extends UnicastRemoteObject implements Purch
     @Override
     public ArrayList<PurchaseRefundBillPO> finds(BillQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<PurchaseRefundBillPO> list = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
             ArrayList<String> sqlOfQuery = new ArrayList<>();
             String sql;
             ResultSet resultSet;
+
             if ("审批不通过".equals(query.state) || "草稿".equals(query.state)) {
                 sql = "SELECT * FROM purchaserefundbill WHERE operatorID='" + query.operator + "' AND state='" + query.state + "'";
                 sqlOfQuery.add(sql);
@@ -76,6 +76,8 @@ public class PurchaseRefundBillData extends UnicastRemoteObject implements Purch
                     }
                 }
             }
+
+            ArrayList<PurchaseRefundBillPO> list = new ArrayList<>();
             for (int i = 0; i < sqlOfQuery.size(); i++) {
                 sql = sqlOfQuery.get(i);
                 resultSet = statement.executeQuery(sql);
@@ -83,11 +85,12 @@ public class PurchaseRefundBillData extends UnicastRemoteObject implements Purch
                     String ID = resultSet.getString("ID");
                     sql = "SELECT * FROM GoodsItem WHERE site_ID='" + ID + "'";
                     ResultSet temp = connection.createStatement().executeQuery(sql);
+
                     ArrayList<GoodsItemPO> itemPOS = new ArrayList<>();
                     while (temp.next()) {
                         itemPOS.add(new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price")));
                     }
-                    temp.close();
+
                     PurchaseRefundBillPO purchaseRefundBillPO = new PurchaseRefundBillPO(resultSet.getString("state"), resultSet.getTimestamp("time"), resultSet.getString("operatorID"), resultSet.getString("comment"), resultSet.getString("clientID"), itemPOS, resultSet.getDouble("total"));
                     purchaseRefundBillPO.setID(ID);
                     list.add(purchaseRefundBillPO);
@@ -115,30 +118,37 @@ public class PurchaseRefundBillData extends UnicastRemoteObject implements Purch
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT PurchaseRefundBill FROM DataHelper";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
             int before = resultSet.getInt(1);
+
             sql = "SELECT COUNT(keyID) FROM PurchaseRefundBill";
             resultSet = statement.executeQuery(sql);
             resultSet.next();
             int all = resultSet.getInt(1);
+
             if (all - before >= 99999)
                 throw new FullException();
+
             sql = "INSERT INTO PurchaseRefundBill (state, time, operatorID, comment, total, clientID) VALUES ('" + po.getState() + "', '" + new Timestamp(po.getTime().getTime()) + "', '" + po.getOperatorID() + "', '" + po.getComment() + "', '" + po.getTotal() + "', '" + po.getClientID() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
             resultSet = statement.getGeneratedKeys();
             resultSet.next();
             int key = resultSet.getInt(1);
             String ID = "JHTHD-" + new SimpleDateFormat("yyyyMMdd-").format(po.getTime()) + String.format("%0" + 5 + "d", key - before);
+
             sql = "UPDATE PurchaseRefundBill SET ID='" + ID + "' WHERE keyID=" + key;
             statement.executeUpdate(sql);
+
             ArrayList<GoodsItemPO> list = po.getPurchaseList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                 statement.executeUpdate(sql);
             }
+
             resultSet.close();
             statement.close();
             return ID;
@@ -160,17 +170,20 @@ public class PurchaseRefundBillData extends UnicastRemoteObject implements Purch
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String ID = po.getID();
             String sql = "UPDATE PurchaseRefundBill SET state='" + po.getState() + "', comment='" + po.getComment() + "', total='" + po.getTotal() + "', clientID='" + po.getClientID() + "' WHERE ID='" + ID + "'";
+            Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+
             sql = "DELETE FROM GoodsItem WHERE site_ID='" + ID + "'";
             statement.executeUpdate(sql);
+
             ArrayList<GoodsItemPO> list = po.getPurchaseList();
             for (int i = 0; i < list.size(); i++) {
                 sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
                 statement.executeUpdate(sql);
             }
+
             statement.close();
         } catch (SQLException e) {
             try {

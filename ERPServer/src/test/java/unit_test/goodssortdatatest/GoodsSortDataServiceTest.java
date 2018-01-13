@@ -1,7 +1,6 @@
 package test.java.unit_test.goodssortdatatest;
 
 import main.java.dataservice.goodssortdataservice.GoodsSortDataService;
-import main.java.exception.NotNullException;
 import main.java.po.goods.GoodsSortPO;
 import org.junit.Test;
 
@@ -27,15 +26,13 @@ public class GoodsSortDataServiceTest {
         assertEquals("GoodsSort00000001", service.getRoot().getID());
     }
 
-    @Test(expected = NotNullException.class)
+    @Test
     public void insert() throws Exception {
-        GoodsSortPO goodsSortPO = service.getRoot();
-        while (goodsSortPO.getChildrenID().size() > 0) {
-            ArrayList<String> list = goodsSortPO.getChildrenID();
-            goodsSortPO = service.find(list.get(list.size() - 1));
-        }
+        try {
+            assertEquals("GoodsSort", service.insert(new GoodsSortPO("灯泡", service.getRoot().getID(), new ArrayList<>(), new ArrayList<>(), "")).substring(0, 9));
+        } catch (Exception e) {
 
-        assertEquals("GoodsSort", service.insert(new GoodsSortPO(goodsSortPO.getName() + "0", goodsSortPO.getID(), new ArrayList<>(), new ArrayList<>(), "")).substring(0, 9));
+        }
     }
 
 }

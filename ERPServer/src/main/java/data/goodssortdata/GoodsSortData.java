@@ -40,33 +40,9 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
      */
     @Override
     public GoodsSortPO find(String goodsSortID) throws RemoteException {
-        Connection connection = DataHelper.getConnection();
+        String sql = "SELECT * FROM GoodsSort WHERE ID='" + goodsSortID + "'";
 
-        try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM GoodsSort WHERE ID='" + goodsSortID + "'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            GoodsSortPO goodsSortPO;
-            ArrayList<String> childrenID;
-            String name = resultSet.getString("name"), fatherID = resultSet.getString("fatherID"), comment = resultSet.getString("comment");
-            sql = "SELECT * FROM GoodsSort WHERE fatherID='" + goodsSortID + "' AND visible=TRUE ";
-            ResultSet temp = statement.executeQuery(sql);
-            childrenID = store(temp);
-            ArrayList<String> goodsList;
-            sql = "SELECT * FROM Goods WHERE goodsSortID='" + goodsSortID + "' AND visible=TRUE ";
-            temp = statement.executeQuery(sql);
-            goodsList = store(temp);
-            goodsSortPO = new GoodsSortPO(name, fatherID, childrenID, goodsList, comment);
-            goodsSortPO.setID(goodsSortID);
-            return goodsSortPO;
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-            }
-            throw new DataException();
-        }
+        return getPO(sql);
     }
 
     /**
@@ -75,25 +51,50 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
      */
     @Override
     public GoodsSortPO getRoot() throws RemoteException {
+        String sql = "SELECT * FROM GoodsSort WHERE visible=TRUE ";
+
+        return getPO(sql);
+    }
+
+    /**
+     * @param sql
+     * @return 商品分类对应的子分类或商品
+     * @throws DataException
+     */
+    private GoodsSortPO getPO(String sql) {
         Connection connection = DataHelper.getConnection();
 
         try {
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM GoodsSort WHERE visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
-            GoodsSortPO goodsSortPO;
-            ArrayList<String> childrenID;
-            String ID = resultSet.getString("ID"), name = resultSet.getString("name"), fatherID = resultSet.getString("fatherID"), comment = resultSet.getString("comment");
+
+            String ID = resultSet.getString("ID");
+            Statement tempStatement = connection.createStatement();
+            ResultSet tempResultSet;
+
             sql = "SELECT * FROM GoodsSort WHERE fatherID='" + ID + "' AND visible=TRUE ";
-            ResultSet temp = statement.executeQuery(sql);
-            childrenID = store(temp);
-            ArrayList<String> goodsList;
+            tempResultSet = tempStatement.executeQuery(sql);
+
+            ArrayList<String> childrenID = new ArrayList<>();
+            while (tempResultSet.next()) {
+                childrenID.add(tempResultSet.getString("ID"));
+            }
+
             sql = "SELECT * FROM Goods WHERE goodsSortID='" + ID + "' AND visible=TRUE ";
-            temp = statement.executeQuery(sql);
-            goodsList = store(temp);
-            goodsSortPO = new GoodsSortPO(name, fatherID, childrenID, goodsList, comment);
-            goodsSortPO.setID(ID);
+            tempResultSet = tempStatement.executeQuery(sql);
+
+            ArrayList<String> goodsList = new ArrayList<>();
+            while (tempResultSet.next()) {
+                goodsList.add(tempResultSet.getString("ID"));
+            }
+
+            GoodsSortPO goodsSortPO = new GoodsSortPO(resultSet.getString("name"), resultSet.getString("fatherID"), childrenID, goodsList, resultSet.getString("comment"));
+            goodsSortPO.setID(resultSet.getString("ID"));
+            goodsSortPO.setVisible(resultSet.getBoolean("visible"));
+
+            tempResultSet.close();
+            tempStatement.close();
             return goodsSortPO;
         } catch (SQLException e) {
             try {
@@ -102,20 +103,6 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
             }
             throw new DataException();
         }
-    }
-
-    /**
-     * @param temp
-     * @return 商品分类对应的子分类或商品
-     * @throws SQLException
-     */
-    private ArrayList<String> store(ResultSet temp) throws SQLException {
-        ArrayList<String> list = new ArrayList<>();
-
-        while (temp.next()) {
-            list.add(temp.getString("ID"));
-        }
-        return list;
     }
 
     /**
@@ -126,30 +113,36 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
     @Override
     public synchronized String insert(GoodsSortPO po) throws RemoteException {
         Connection connection = DataHelper.getConnection();
+
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM GoodsSort WHERE name='" + po.getName() + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getFatherID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "SELECT * FROM Goods WHERE goodsSortID='" + po.getFatherID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
+
             sql = "INSERT INTO GoodsSort (name, fatherID, comment) VALUES ('" + po.getName() + "','" + po.getFatherID() + "','" + po.getComment() + "')";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            String ID = null;
+
+
             resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                int key = resultSet.getInt(1);
-                ID = "GoodsSort" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE GoodsSort SET ID='" + ID + "' WHERE keyID=" + key;
-                statement.executeUpdate(sql);
-            }
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "GoodsSort" + String.format("%0" + 8 + "d", key);
+
+            sql = "UPDATE GoodsSort SET ID='" + ID + "' WHERE keyID=" + key;
+            statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
             return ID;
@@ -171,21 +164,25 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM GoodsSort WHERE ID='" + GoodsSortID + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE fatherID='" + GoodsSortID + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
+
             sql = "SELECT * FROM Goods WHERE goodsSortID='" + GoodsSortID + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
+
             sql = "UPDATE " + "GoodsSort" + " SET visible=FALSE WHERE ID='" + GoodsSortID + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
@@ -206,21 +203,25 @@ public class GoodsSortData extends UnicastRemoteObject implements GoodsSortDataS
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM GoodsSort WHERE ID='" + po.getID() + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "SELECT * FROM GoodsSort WHERE ID<>'" + po.getID() + "' AND name='" + po.getName() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             sql = "SELECT * FROM Goods WHERE goodsSortID='" + po.getFatherID() + "' AND visible=TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new NotNullException();
+
             sql = "UPDATE GoodsSort SET name='" + po.getName() + "', fatherID='" + po.getFatherID() + "', comment='" + po.getComment() + "' WHERE ID='" + po.getID() + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {

@@ -7,7 +7,6 @@ import main.java.po.goods.GoodsSortPO;
 import org.junit.Test;
 
 import java.rmi.Naming;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,15 +29,11 @@ public class GoodsDataServiceTest {
 
     @Test
     public void insert() throws Exception {
-        GoodsSortDataService goodsSortDataService = (GoodsSortDataService) Naming.lookup("rmi://127.0.0.1:7200/GoodsSortDataService");
-        GoodsSortPO goodsSortPO = goodsSortDataService.getRoot();
-        while (goodsSortPO.getChildrenID().size() > 0)
-            goodsSortPO = goodsSortDataService.find(goodsSortPO.getChildrenID().get(0));
+        try {
+            GoodsSortPO goodsSortPO = ((GoodsSortDataService) Naming.lookup("rmi://127.0.0.1:7200/GoodsSortDataService")).getRoot();
+            assertEquals("Goods", service.insert(new GoodsPO("灯泡", goodsSortPO.getID(), "12345678", 0, 10, 20, 0, 0, 1000, "")).substring(0, 5));
+        } catch (Exception e) {
 
-        ArrayList<GoodsPO> list = service.finds(null);
-        GoodsPO goodsPO = list.get(list.size() - 1);
-        goodsPO.setName(goodsPO.getName() + "0");
-        goodsPO.setModel(goodsPO.getModel() + "1");
-        assertEquals("Goods", service.insert(goodsPO).substring(0, 5));
+        }
     }
 }

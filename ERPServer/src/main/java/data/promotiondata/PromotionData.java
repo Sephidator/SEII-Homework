@@ -36,11 +36,12 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Promotion WHERE ID='" + promotionID + "'";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
-            return getPromotionPO(connection.createStatement(), resultSet, promotionID, resultSet.getString("type"));
+
+            return getPromotionPO(resultSet);
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -58,19 +59,19 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
     @Override
     public ArrayList<PromotionPO> finds(PromotionQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<PromotionPO> list = new ArrayList<>();
-        String sql;
-        if (query == null)
-            sql = "SELECT * FROM Promotion WHERE visible=TRUE ";
-        else
-            sql = "SELECT * FROM Promotion WHERE (name='" + query.name + "' OR type='" + query.type + "') AND visible=TRUE ";
 
         try {
+            String sql = (query == null)
+                    ? "SELECT * FROM Promotion WHERE visible=TRUE "
+                    : "SELECT * FROM Promotion WHERE (name='" + query.name + "' OR type='" + query.type + "') AND visible=TRUE ";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
+
+            ArrayList<PromotionPO> list = new ArrayList<>();
             while (resultSet.next()) {
-                list.add(getPromotionPO(connection.createStatement(), resultSet, resultSet.getString("ID"), resultSet.getString("type")));
+                list.add(getPromotionPO(resultSet));
             }
+
             resultSet.close();
             statement.close();
             return list;
@@ -83,43 +84,51 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         }
     }
 
-    private PromotionPO getPromotionPO(Statement statement, ResultSet resultSet, String promotionID, String type) throws SQLException {
-        ResultSet temp;
-        PromotionPO promotionPO;
-        String sql;
+    private PromotionPO getPromotionPO(ResultSet resultSet) throws SQLException {
+        Connection connection = DataHelper.getConnection();
         try {
+            String sql;
+            Statement tempStatement = connection.createStatement();
+            ResultSet tempResult;
+
+            String promotionID = resultSet.getString("ID"), type = resultSet.getString("type");
+            PromotionPO promotionPO;
+
             if (type.equals("客户促销策略")) {
-                ArrayList<GiftItemPO> giftList = new ArrayList<>();
-                GiftItemPO giftItem;
                 sql = "SELECT * FROM GiftItem WHERE site_ID='" + promotionID + "'";
-                temp = statement.executeQuery(sql);
-                while (temp.next()) {
-                    giftItem = new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price"));
+                tempResult = tempStatement.executeQuery(sql);
+
+                ArrayList<GiftItemPO> giftList = new ArrayList<>();
+                while (tempResult.next()) {
+                    GiftItemPO giftItem = new GiftItemPO(tempResult.getString("goodsID"), tempResult.getInt("number"), tempResult.getDouble("price"));
                     giftList.add(giftItem);
                 }
                 promotionPO = new PromotionClientPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getInt("clientLevel"), resultSet.getDouble("discount"), resultSet.getDouble("voucher"), giftList);
             } else if (type.equals("商品促销策略")) {
-                ArrayList<GoodsItemPO> goodsList = new ArrayList<>();
-                GoodsItemPO goodsItem;
                 sql = "SELECT * FROM GoodsItem WHERE site_ID='" + promotionID + "'";
-                temp = statement.executeQuery(sql);
-                while (temp.next()) {
-                    goodsItem = new GoodsItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price"));
+                tempResult = tempStatement.executeQuery(sql);
+
+                ArrayList<GoodsItemPO> goodsList = new ArrayList<>();
+                while (tempResult.next()) {
+                    GoodsItemPO goodsItem = new GoodsItemPO(tempResult.getString("goodsID"), tempResult.getInt("number"), tempResult.getDouble("price"));
                     goodsList.add(goodsItem);
                 }
                 promotionPO = new PromotionGoodsPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getDouble("discount"), goodsList);
             } else {
-                ArrayList<GiftItemPO> giftList = new ArrayList<>();
-                GiftItemPO giftItem;
                 sql = "SELECT * FROM GiftItem WHERE site_ID='" + promotionID + "'";
-                temp = statement.executeQuery(sql);
-                while (temp.next()) {
-                    giftItem = new GiftItemPO(temp.getString("goodsID"), temp.getInt("number"), temp.getDouble("price"));
+                tempResult = tempStatement.executeQuery(sql);
+
+                ArrayList<GiftItemPO> giftList = new ArrayList<>();
+                while (tempResult.next()) {
+                    GiftItemPO giftItem = new GiftItemPO(tempResult.getString("goodsID"), tempResult.getInt("number"), tempResult.getDouble("price"));
                     giftList.add(giftItem);
                 }
                 promotionPO = new PromotionTotalPO(resultSet.getString("name"), resultSet.getTimestamp("start"), resultSet.getTimestamp("end"), resultSet.getDouble("total"), resultSet.getDouble("voucher"), giftList);
             }
+
             promotionPO.setID(promotionID);
+            promotionPO.setVisible(resultSet.getBoolean("visible"));
+
             return promotionPO;
         } catch (SQLException e) {
             throw e;
@@ -136,53 +145,56 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Promotion WHERE name='" + po.getName() + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             sql = "INSERT INTO Promotion (name, type, start, end) VALUE ('" + po.getName() + "','" + po.getType() + "','" + new Timestamp(po.getStart().getTime()) + "','" + new Timestamp(po.getEnd().getTime()) + "') ";
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            String ID = null;
-            String type = po.getType();
+
             resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                int key = resultSet.getInt(1);
-                ID = "Promotion" + String.format("%0" + 8 + "d", key);
-                if (type.equals("客户促销策略")) {
-                    PromotionClientPO promotionClientPO = (PromotionClientPO) po;
-                    sql = "UPDATE Promotion SET ID='" + ID + "', clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE keyID =" + key;
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "Promotion" + String.format("%0" + 8 + "d", key);
+
+            String type = po.getType();
+            if (type.equals("客户促销策略")) {
+                PromotionClientPO promotionClientPO = (PromotionClientPO) po;
+                sql = "UPDATE Promotion SET ID='" + ID + "', clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE keyID =" + key;
+                statement.executeUpdate(sql);
+
+                ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
+                for (GiftItemPO giftItemPO : list) {
+                    sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + giftItemPO.goodsID + "','" + giftItemPO.number + "','" + giftItemPO.price + "')";
                     statement.executeUpdate(sql);
-                    ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
-                    if (list != null)
-                        for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "','" + list.get(i).price + "')";
-                            statement.executeUpdate(sql);
-                        }
-                } else if (type.equals("商品促销策略")) {
-                    PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
-                    sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "' WHERE keyID=" + key;
+                }
+            } else if (type.equals("商品促销策略")) {
+                PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
+                sql = "UPDATE Promotion SET ID='" + ID + "', discount='" + promotionGoodsPO.getDiscount() + "' WHERE keyID=" + key;
+                statement.executeUpdate(sql);
+
+                ArrayList<GoodsItemPO> list = promotionGoodsPO.getGoodsList();
+                for (GoodsItemPO goodsItemPO : list) {
+                    sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + goodsItemPO.goodsID + "', '" + goodsItemPO.number + "', '" + goodsItemPO.price + "')";
                     statement.executeUpdate(sql);
-                    ArrayList<GoodsItemPO> list = promotionGoodsPO.getGoodsList();
-                    if (list != null)
-                        for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
-                            statement.executeUpdate(sql);
-                        }
-                } else {
-                    PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
-                    sql = "UPDATE Promotion SET ID='" + ID + "', total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE keyID=" + key;
+                }
+            } else {
+                PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
+                sql = "UPDATE Promotion SET ID='" + ID + "', total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE keyID=" + key;
+                statement.executeUpdate(sql);
+
+                ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
+                for (GiftItemPO giftItemPO : list) {
+                    sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + giftItemPO.goodsID + "','" + giftItemPO.number + "','" + giftItemPO.price + "')";
                     statement.executeUpdate(sql);
-                    ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
-                    if (list != null)
-                        for (int i = 0; i < list.size(); i++) {
-                            sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + list.get(i).goodsID + "','" + list.get(i).number + "','" + list.get(i).price + "')";
-                            statement.executeUpdate(sql);
-                        }
                 }
             }
+
             resultSet.close();
             statement.close();
+
             return ID;
         } catch (SQLException e) {
             try {
@@ -202,13 +214,15 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM Promotion WHERE ID='" + promotionID + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
             sql = "UPDATE Promotion SET visible=FALSE WHERE ID='" + promotionID + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
@@ -229,53 +243,58 @@ public class PromotionData extends UnicastRemoteObject implements PromotionDataS
         Connection connection = DataHelper.getConnection();
 
         try {
+            String ID = po.getID();
+            String sql = "SELECT * FROM Promotion WHERE ID='" + ID + "' AND visible=TRUE ";
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM Promotion WHERE ID='" + po.getID() + "' AND visible=TRUE ";
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
-            sql = "SELECT * FROM Promotion WHERE ID<>'" + po.getID() + "' AND name = '" + po.getName() + "' AND visible = TRUE ";
+
+            sql = "SELECT * FROM Promotion WHERE ID<>'" + ID + "' AND name = '" + po.getName() + "' AND visible = TRUE ";
             resultSet = statement.executeQuery(sql);
             if (resultSet.next())
                 throw new ExistException();
+
             String type = po.getType();
+
             if (type.equals("客户促销策略")) {
                 PromotionClientPO promotionClientPO = (PromotionClientPO) po;
-                sql = "UPDATE Promotion SET clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE ID ='" + po.getID() + "'";
+                sql = "UPDATE Promotion SET clientLevel='" + promotionClientPO.getClientLevel() + "', discount='" + promotionClientPO.getDiscount() + "', voucher='" + promotionClientPO.getVoucher() + "' WHERE ID ='" + ID + "'";
                 statement.executeUpdate(sql);
-                sql = "DELETE FROM GiftItem WHERE site_ID='" + po.getID() + "'";
+
+                sql = "DELETE FROM GiftItem WHERE site_ID='" + ID + "'";
                 statement.executeUpdate(sql);
                 ArrayList<GiftItemPO> list = promotionClientPO.getGiftList();
-                if (list != null)
-                    for (int i = 0; i < list.size(); i++) {
-                        sql = "INSERT INTO GiftItem VALUE ('" + promotionClientPO.getID() + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
-                        statement.executeUpdate(sql);
-                    }
+                for (GiftItemPO giftItemPO : list) {
+                    sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + giftItemPO.goodsID + "','" + giftItemPO.number + "','" + giftItemPO.price + "')";
+                    statement.executeUpdate(sql);
+                }
             } else if (type.equals("商品促销策略")) {
                 PromotionGoodsPO promotionGoodsPO = (PromotionGoodsPO) po;
-                sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE ID='" + po.getID() + "'";
+                sql = "UPDATE Promotion SET discount='" + promotionGoodsPO.getDiscount() + "' WHERE ID='" + ID + "'";
                 statement.executeUpdate(sql);
-                sql = "DELETE FROM GoodsItem WHERE site_ID='" + po.getID() + "'";
+
+                sql = "DELETE FROM GoodsItem WHERE site_ID='" + ID + "'";
                 statement.executeUpdate(sql);
                 ArrayList<GoodsItemPO> list = promotionGoodsPO.getGoodsList();
-                if (list != null)
-                    for (int i = 0; i < list.size(); i++) {
-                        sql = "INSERT INTO GoodsItem VALUES ('" + promotionGoodsPO.getID() + "', '" + list.get(i).goodsID + "', '" + list.get(i).number + "', '" + list.get(i).price + "')";
-                        statement.executeUpdate(sql);
-                    }
+                for (GoodsItemPO goodsItemPO : list) {
+                    sql = "INSERT INTO GoodsItem VALUES ('" + ID + "', '" + goodsItemPO.goodsID + "', '" + goodsItemPO.number + "', '" + goodsItemPO.price + "')";
+                    statement.executeUpdate(sql);
+                }
             } else {
                 PromotionTotalPO promotionTotalPO = (PromotionTotalPO) po;
-                sql = "UPDATE Promotion SET total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE ID='" + po.getID() + "'";
+                sql = "UPDATE Promotion SET total='" + promotionTotalPO.getTotal() + "', voucher='" + promotionTotalPO.getVoucher() + "' WHERE ID='" + ID + "'";
                 statement.executeUpdate(sql);
-                sql = "DELETE FROM GiftItem WHERE site_ID='" + po.getID() + "'";
+
+                sql = "DELETE FROM GiftItem WHERE site_ID='" + ID + "'";
                 statement.executeUpdate(sql);
                 ArrayList<GiftItemPO> list = promotionTotalPO.getGiftList();
-                if (list != null)
-                    for (int i = 0; i < list.size(); i++) {
-                        sql = "INSERT INTO GiftItem VALUE ('" + promotionTotalPO.getID() + "','" + list.get(i).goodsID + "','" + list.get(i).number + "')";
-                        statement.executeUpdate(sql);
-                    }
+                for (GiftItemPO giftItemPO : list) {
+                    sql = "INSERT INTO GiftItem VALUE ('" + ID + "','" + giftItemPO.goodsID + "','" + giftItemPO.number + "','" + giftItemPO.price + "')";
+                    statement.executeUpdate(sql);
+                }
             }
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {

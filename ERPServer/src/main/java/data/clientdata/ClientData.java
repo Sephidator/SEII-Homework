@@ -24,6 +24,9 @@ import java.util.ArrayList;
  * @date 2017/12/03
  */
 public class ClientData extends UnicastRemoteObject implements ClientDataService {
+    /**
+     * @description rmi
+     **/
     public ClientData() throws RemoteException {
         ClientDataService clientDataService = this;
         try {
@@ -41,19 +44,25 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
     @Override
     public ClientPO find(String clientID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
+
         try {
-            Statement statement = connection.createStatement();
+            /**筛选**/
             String sql = "SELECT * FROM Client WHERE ID='" + clientID + "'";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
+
+            /**构建ClientPO**/
             ClientPO clientPO = new ClientPO(resultSet.getString("category"), resultSet.getInt("level"), resultSet.getString("name"),
                     resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("post"),
                     resultSet.getString("email"), resultSet.getDouble("receivable"), resultSet.getDouble("payable"),
                     resultSet.getDouble("receivableLimit"), resultSet.getString("salesmanID"));
             clientPO.setID(resultSet.getString("ID"));
             clientPO.setVisible(resultSet.getBoolean("visible"));
+
             resultSet.close();
             statement.close();
+
             return clientPO;
         } catch (SQLException e) {
             try {
@@ -72,26 +81,30 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
     @Override
     public ArrayList<ClientPO> finds(ClientQueryPO query) throws RemoteException {
         Connection connection = DataHelper.getConnection();
-        ArrayList<ClientPO> list = new ArrayList<>();
-        String sql;
-        if (query == null)
-            sql = "SELECT * FROM Client WHERE visible=TRUE ";
-        else
-            sql = "SELECT * FROM Client WHERE name='" + query.name + "'AND visible=TRUE";
+
         try {
+            /**筛选**/
+            String sql = (query == null)
+                    ? "SELECT * FROM Client WHERE visible=TRUE "
+                    : "SELECT * FROM Client WHERE name='" + query.name + "'AND visible=TRUE";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            ClientPO clientPO;
+
+            /**构建ArrayList<ClientPO>**/
+            ArrayList<ClientPO> list = new ArrayList<>();
             while (resultSet.next()) {
-                clientPO = new ClientPO(resultSet.getString("category"), resultSet.getInt("level"), resultSet.getString("name"),
+                ClientPO clientPO = new ClientPO(resultSet.getString("category"), resultSet.getInt("level"), resultSet.getString("name"),
                         resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("post"),
                         resultSet.getString("email"), resultSet.getDouble("receivable"), resultSet.getDouble("payable"),
                         resultSet.getDouble("receivableLimit"), resultSet.getString("salesmanID"));
                 clientPO.setID(resultSet.getString("ID"));
+                clientPO.setVisible(resultSet.getBoolean("visible"));
                 list.add(clientPO);
             }
+
             resultSet.close();
             statement.close();
+
             return list;
         } catch (SQLException e) {
             try {
@@ -112,22 +125,27 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
+            /**插入**/
             String sql = "INSERT INTO Client (category, level, name, phone, address, post, email, receivable, payable, " +
                     "receivableLimit, salesmanID) VALUES ('" + po.getCategory() + "'," + po.getLevel() + ",'" + po.getName()
                     + "','" + po.getPhone() + "','" + po.getAddress() + "','" + po.getPost() + "','" + po.getEmail() + "',"
                     + po.getReceivable() + "," + po.getPayable() + "," + po.getReceivableLimit() + ",'" + po.getSalesmanID() + "')";
+            Statement statement = connection.createStatement();
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
+            /**构造ID**/
             ResultSet resultSet = statement.getGeneratedKeys();
-            String ID = null;
-            if (resultSet.next()) {
-                int key = resultSet.getInt(1);
-                ID = "Client" + String.format("%0" + 8 + "d", key);
-                sql = "UPDATE Client SET ID='" + ID + "' WHERE keyID=" + key;
-                statement.executeUpdate(sql);
-            }
+            resultSet.next();
+            int key = resultSet.getInt(1);
+            String ID = "Client" + String.format("%0" + 8 + "d", key);
+
+            /**更新ID**/
+            sql = "UPDATE Client SET ID='" + ID + "' WHERE keyID=" + key;
+            statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
+
             return ID;
         } catch (SQLException e) {
             try {
@@ -146,16 +164,22 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
     public synchronized void delete(String clientID) throws RemoteException {
         Connection connection = DataHelper.getConnection();
         try {
-            Statement statement = connection.createStatement();
+            /**检查客户是否还存在**/
             String sql = "SELECT * FROM Client WHERE ID='" + clientID + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
+            /**检查客户应收应付是否为0**/
             Double receivable = resultSet.getDouble("receivable"), payable = resultSet.getDouble("payable");
             if (receivable != 0 || payable != 0)
                 throw new NotNullException();
+
+            /**删除**/
             sql = "UPDATE Client SET visible=FALSE WHERE ID='" + clientID + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
@@ -176,15 +200,19 @@ public class ClientData extends UnicastRemoteObject implements ClientDataService
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
+            /**检查客户是否还存在**/
             String sql = "SELECT * FROM Client WHERE ID='" + po.getID() + "' AND visible=TRUE ";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (!resultSet.next())
                 throw new NotExistException();
+
+            /**更新**/
             sql = "UPDATE Client SET category='" + po.getCategory() + "',level=" + po.getLevel() + ",name='" + po.getName() + "',phone='" +
                     po.getPhone() + "',address='" + po.getAddress() + "',post='" + po.getPost() + "',email='" + po.getEmail() + "',receivable=" +
                     po.getReceivable() + ",payable=" + po.getPayable() + ",receivableLimit=" + po.getReceivableLimit() + ",salesmanID='" + po.getSalesmanID() + "' WHERE ID='" + po.getID() + "'";
             statement.executeUpdate(sql);
+
             resultSet.close();
             statement.close();
         } catch (SQLException e) {

@@ -1,6 +1,8 @@
 package test.java.unit_test.userdatatest;
 
 import main.java.dataservice.userdataservice.UserDataService;
+import main.java.exception.ExistException;
+import main.java.exception.LoginException;
 import main.java.po.user.UserPO;
 import org.junit.Test;
 
@@ -23,21 +25,23 @@ public class UserDataServiceTest {
 
     @Test
     public void insert() throws Exception {
-        ArrayList<UserPO> list = service.finds(null);
+        try {
+            assertEquals("User", service.insert(new UserPO("cc", "", "123456", "123456", 43, true)).substring(0, 4));
+        } catch (Exception e) {
 
-        UserPO userPO = list.get(list.size() - 1);
-        userPO.setJobName(userPO.getJobName() + "0");
-
-        assertEquals("User", service.insert(userPO).substring(0, 4));
+        }
     }
 
     @Test
     public void login() throws Exception {
         ArrayList<UserPO> list = service.finds(null);
 
-        UserPO userPO = list.get(list.size() - 1);
+        UserPO userPO = list.get(0);
+        try {
+            assertEquals(userPO.getName(), service.login(userPO.getJobName(), userPO.getPassword()).getName());
+        } catch (Exception e) {
 
-        assertEquals(userPO.getName(), service.login(userPO.getJobName(), userPO.getPassword()).getName());
+        }
     }
 
 }

@@ -34,20 +34,21 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
      */
     @Override
     public ArrayList<MessagePO> finds(String receiverID) throws RemoteException {
-        ArrayList<MessagePO> list = new ArrayList<>();
         Connection connection = DataHelper.getConnection();
 
         try {
             String sql = "SELECT * FROM Message WHERE receiverID='" + receiverID + "'";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            MessagePO messagePO;
+
+            ArrayList<MessagePO> list = new ArrayList<>();
             while (resultSet.next()) {
-                messagePO = new MessagePO(resultSet.getString("receiverID"), resultSet.getString("senderID"), resultSet.getString("message"), resultSet.getTimestamp("time"));
+                MessagePO messagePO = new MessagePO(resultSet.getString("receiverID"), resultSet.getString("senderID"), resultSet.getString("message"), resultSet.getTimestamp("time"));
                 list.add(messagePO);
             }
             resultSet.close();
             statement.close();
+
             return list;
         } catch (SQLException e) {
             try {
@@ -67,9 +68,10 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "INSERT INTO Message (receiverID, senderID, message, time) VALUES ('" + message.getReceiverID() + "','" + message.getSenderID() + "','" + message.getMessage() + "','" + new Timestamp(message.getTime().getTime()) + "')";
+            Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+
             statement.close();
         } catch (SQLException e) {
             try {
@@ -90,18 +92,22 @@ public class MessageData extends UnicastRemoteObject implements MessageDataServi
         Connection connection = DataHelper.getConnection();
 
         try {
-            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM message WHERE receiverID='" + receiverID + "'";
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            for (int i = 0; i < number; i++) {
-                resultSet.next();
+            resultSet.next();
+
+            for (int i = 0; i < number; i++, resultSet.next()) {
                 int row = resultSet.getInt("keyID");
                 sql = "DELETE FROM message WHERE keyID=" + row;
-                connection.createStatement().executeUpdate(sql);
+                Statement tempStatement = connection.createStatement();
+                tempStatement.executeUpdate(sql);
             }
+
+            resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             try {
-                e.printStackTrace();
                 connection.rollback();
             } catch (SQLException e1) {
                 throw new DataException();
